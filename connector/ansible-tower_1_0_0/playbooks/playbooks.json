@@ -1,0 +1,481 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Ansible Tower - 1.0.0",
+      "description": "Sample playbooks for \"Ansible Tower\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Job Status",
+          "description": "Retrieve the job status of specified job ID",
+          "collection": "/api/3/workflow_collections/32621511-e8d9-4bba-b895-26f7380dd0d2",
+          "tag": "#Ansible Tower",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/18bdec6e-e091-46a5-97e7-8de636453e97",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Job Status",
+              "description": null,
+              "arguments": {
+                "name": "Ansible Tower",
+                "params": {
+                  "pk": "86"
+                },
+                "version": "1.0.0",
+                "connector": "ansible-tower",
+                "operation": "get_job_status",
+                "operationTitle": "Get Job Status",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "100",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "67d3f64c-66f1-4497-8114-cc4455301a87"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Results",
+              "description": null,
+              "arguments": {
+                "results": "{{vars.steps.Get_Job_Status.data}}"
+              },
+              "status": null,
+              "left": "100",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "5234a3c6-cafd-4933-98ee-bba168ec90b7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "7f83d3ec-1db6-4767-935a-b8e297abde6b",
+                "title": "Ansible Tower: Get Job Status",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "100",
+              "top": "6",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "18bdec6e-e091-46a5-97e7-8de636453e97"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "81d64f87-3ea8-4add-8a51-6bb3d268060d",
+              "name": "Get Job Status -> Results",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/5234a3c6-cafd-4933-98ee-bba168ec90b7",
+              "sourceStep": "/api/3/workflow_steps/67d3f64c-66f1-4497-8114-cc4455301a87"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2fd06b44-c2be-4f94-bd28-eb8aca3b67d1",
+              "name": "Start -> Get Job Status",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/67d3f64c-66f1-4497-8114-cc4455301a87",
+              "sourceStep": "/api/3/workflow_steps/18bdec6e-e091-46a5-97e7-8de636453e97"
+            }
+          ],
+          "uuid": "b8b87bb4-e4a4-48ba-8f75-160c92f79f5f"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch a Job",
+          "description": "Launch a new job based on a job template name.",
+          "collection": "/api/3/workflow_collections/32621511-e8d9-4bba-b895-26f7380dd0d2",
+          "tag": "#Ansible Tower",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/040e69e0-2e64-40a2-8158-0a82fc2af95d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Job",
+              "description": null,
+              "arguments": {
+                "name": "Ansible Tower",
+                "params": {
+                  "template_name": "Example Job Template"
+                },
+                "version": "1.0.0",
+                "connector": "ansible-tower",
+                "operation": "launch_job",
+                "operationTitle": "Launch a Job",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "226",
+              "top": "129",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "9daf32c4-721e-4503-bf4c-c7c1d26ce850"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Results",
+              "description": null,
+              "arguments": {
+                "Results": "{{vars.steps.Launch_a_Job.data}}"
+              },
+              "status": null,
+              "left": "226",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "fb30d45a-fb46-4c88-a53f-7fcfcc6033ba"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "489e59f4-d947-4ba7-b016-2b27b7b21315",
+                "title": "Ansible Tower: Launch Job",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "226",
+              "top": "8",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "040e69e0-2e64-40a2-8158-0a82fc2af95d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5897ba08-e189-4891-b017-16ebe5f264e1",
+              "name": "Launch a Job -> Results",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/fb30d45a-fb46-4c88-a53f-7fcfcc6033ba",
+              "sourceStep": "/api/3/workflow_steps/9daf32c4-721e-4503-bf4c-c7c1d26ce850"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7910ec08-16a5-428a-bfd4-8f63a0e28343",
+              "name": "Start -> Launch a Job",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/9daf32c4-721e-4503-bf4c-c7c1d26ce850",
+              "sourceStep": "/api/3/workflow_steps/040e69e0-2e64-40a2-8158-0a82fc2af95d"
+            }
+          ],
+          "uuid": "8434b905-59e1-4d92-9ccc-cf090d95ba5b"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Job Templates",
+          "description": "Retrieve a list of job templates from Ansible Tower.",
+          "collection": "/api/3/workflow_collections/32621511-e8d9-4bba-b895-26f7380dd0d2",
+          "tag": "#Ansible Tower",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0a5b0d6d-9572-425c-a68a-26b6539a1a25",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Job Templates",
+              "description": null,
+              "arguments": {
+                "name": "Ansible Tower",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "ansible-tower",
+                "operation": "list_job_templates",
+                "operationTitle": "List Job Templates",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "127",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "28fe6c0d-816a-4b05-9e62-3daa77d12b65"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Results",
+              "description": null,
+              "arguments": {
+                "results": "{{vars.steps.List_Job_Templates.data}}"
+              },
+              "status": null,
+              "left": "126",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "d9ae7903-a29c-44a2-bf45-9a38162db01c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "5cee085c-3d07-4bd2-a420-a3918cd05591",
+                "title": "Ansible Tower: List Job Templates",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "127",
+              "top": "8",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "0a5b0d6d-9572-425c-a68a-26b6539a1a25"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "31ce4a47-f563-4742-827a-781b8a249d16",
+              "name": "List Job Templates -> Results",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/d9ae7903-a29c-44a2-bf45-9a38162db01c",
+              "sourceStep": "/api/3/workflow_steps/28fe6c0d-816a-4b05-9e62-3daa77d12b65"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "6f35d179-fa3d-4c23-a383-0dac8457f065",
+              "name": "Start -> List Job Templates",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/28fe6c0d-816a-4b05-9e62-3daa77d12b65",
+              "sourceStep": "/api/3/workflow_steps/0a5b0d6d-9572-425c-a68a-26b6539a1a25"
+            }
+          ],
+          "uuid": "46f83481-951b-4930-98d0-3143b494c6c3"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Users",
+          "description": "Retrieve a list of users from Ansible Tower .",
+          "collection": "/api/3/workflow_collections/32621511-e8d9-4bba-b895-26f7380dd0d2",
+          "tag": "#Ansible Tower",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2126090e-7718-4b8e-9a86-a297f9e06d7e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Users",
+              "description": null,
+              "arguments": {
+                "name": "Ansible Tower",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "ansible-tower",
+                "operation": "list_users",
+                "operationTitle": "List Users",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "90",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b2194539-1fa6-44fe-b8e3-15042b79a45f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Results",
+              "description": null,
+              "arguments": {
+                "results": "{{vars.steps.List_Users.data}}"
+              },
+              "status": null,
+              "left": "90",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "4d76c7f9-b6ea-4239-bb90-f2a04de9883d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6b88aeb5-3375-4daf-a996-cd3bead1a297",
+                "title": "Ansible Tower: List Users",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "90",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "2126090e-7718-4b8e-9a86-a297f9e06d7e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8162095f-123f-456b-b32d-4b6740ca82d9",
+              "name": "List Users -> Results",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/4d76c7f9-b6ea-4239-bb90-f2a04de9883d",
+              "sourceStep": "/api/3/workflow_steps/b2194539-1fa6-44fe-b8e3-15042b79a45f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0339290d-8b8f-4720-b9c8-85d95cf01ae8",
+              "name": "Start -> List Users",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b2194539-1fa6-44fe-b8e3-15042b79a45f",
+              "sourceStep": "/api/3/workflow_steps/2126090e-7718-4b8e-9a86-a297f9e06d7e"
+            }
+          ],
+          "uuid": "01372d37-fa13-46c2-81b8-b1d40cc115f9"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Search Job Templates",
+          "description": "Search for a specific job template by name",
+          "collection": "/api/3/workflow_collections/32621511-e8d9-4bba-b895-26f7380dd0d2",
+          "tag": "#Ansible Tower",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2186cc9d-1fe2-4e36-8922-b8407c0ef642",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Job Templates",
+              "description": null,
+              "arguments": {
+                "name": "Ansible Tower",
+                "params": {
+                  "name": "Sample Job Template"
+                },
+                "version": "1.0.0",
+                "connector": "ansible-tower",
+                "operation": "search_job_templates",
+                "operationTitle": "Search Job Templates",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "140",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "886c04c6-d6f8-4266-a8e2-30d78143f731"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Results",
+              "description": null,
+              "arguments": {
+                "results": "{{vars.steps.Search_Job_Templates.data}}"
+              },
+              "status": null,
+              "left": "140",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "692387ab-c879-4ef9-bcec-e5eb6f1ac1d3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "84457e41-2c7e-4e92-a4a4-4a64058ef057",
+                "title": "Ansible Tower: Search Job Templates",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "140",
+              "top": "12",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "2186cc9d-1fe2-4e36-8922-b8407c0ef642"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3eae5ea7-56b1-40df-aaeb-4226aaed9039",
+              "name": "Search Job Templates -> Results",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/692387ab-c879-4ef9-bcec-e5eb6f1ac1d3",
+              "sourceStep": "/api/3/workflow_steps/886c04c6-d6f8-4266-a8e2-30d78143f731"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0a55d9d4-7531-4de9-9e11-aa848622f15b",
+              "name": "Start -> Search Job Templates",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/886c04c6-d6f8-4266-a8e2-30d78143f731",
+              "sourceStep": "/api/3/workflow_steps/2186cc9d-1fe2-4e36-8922-b8407c0ef642"
+            }
+          ],
+          "uuid": "7cd4381f-29c6-4757-a784-ac37ac8587d2"
+        }
+      ],
+      "uuid": "32621511-e8d9-4bba-b895-26f7380dd0d2"
+    }
+  ]
+}

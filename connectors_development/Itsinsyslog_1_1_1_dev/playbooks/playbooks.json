@@ -1,0 +1,709 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - ItsinSyslog - 1.1.1",
+      "description": "Sample playbooks for \"Syslog\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "syslog_medium.png",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Parse RFC 3164 formatted message",
+          "description": null,
+          "collection": "/api/3/workflow_collections/b967adad-f4dc-4d48-8f63-8e1aa4c023b7",
+          "tag": "#syslog",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/4f480f77-8ca2-4b25-9f4b-a87db4f87afa",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "syslog1234",
+                "authentication_methods": [
+                  ""
+                ]
+              },
+              "status": null,
+              "left": "214",
+              "top": "40",
+              "stepType": "/api/3/workflow_step_types/df26c7a2-4166-4ca5-91e5-548e24c01b5f",
+              "uuid": "4f480f77-8ca2-4b25-9f4b-a87db4f87afa"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Parse Syslog Message",
+              "description": null,
+              "arguments": {
+                "name": "Syslog",
+                "config": "032c5a32-f408-4bee-8db3-754e950a0ea9",
+                "params": {
+                  "rfc": "3164",
+                  "message": "{{vars.request.data}}"
+                },
+                "version": "1.1.1",
+                "connector": "Itsinsyslog",
+                "operation": "parse",
+                "operationTitle": "Parse Message",
+                "operationOutput": {
+                  "header": "",
+                  "message": ""
+                }
+              },
+              "status": null,
+              "left": "206",
+              "top": "160",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "a7b8a120-e984-4b7e-96b5-2e8f6325473a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Alert",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "id": null,
+                  "name": "Syslog Alert",
+                  "type": null,
+                  "origin": null,
+                  "source": "Syslog",
+                  "status": null,
+                  "dueDate": null,
+                  "severity": null,
+                  "sourceId": "Syslog",
+                  "assignedTo": null,
+                  "createDate": null,
+                  "createUser": null,
+                  "modifyDate": null,
+                  "modifyUser": null,
+                  "description": "<p>Message Details</p>\n<p>{% for key,value in vars.result.data.items() %}</p>\n<table class=\"table\">\n<tbody>\n<tr>\n<td style=\"width: 150px;\">{{ key }}</td>\n<td>{{ value }}</td>\n</tr>\n</tbody>\n</table>\n<p>{% endfor %}</p>",
+                  "systemAssignedQueue": null
+                },
+                "_showJson": false,
+                "collection": "/api/3/alerts"
+              },
+              "status": null,
+              "left": "211",
+              "top": "290",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "uuid": "f967a64b-42ee-41d4-9df1-6f1187a1d075"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "bceb7b33-c7bd-4b55-ba3a-fd5fce231fe2",
+              "name": "Start -> Parse Syslog Message",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/a7b8a120-e984-4b7e-96b5-2e8f6325473a",
+              "sourceStep": "/api/3/workflow_steps/4f480f77-8ca2-4b25-9f4b-a87db4f87afa"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a69c0a56-2952-42b3-b15a-a9c10192f76a",
+              "name": "Parse Syslog Message -> Create Alert",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f967a64b-42ee-41d4-9df1-6f1187a1d075",
+              "sourceStep": "/api/3/workflow_steps/a7b8a120-e984-4b7e-96b5-2e8f6325473a"
+            }
+          ],
+          "versions": null,
+          "uuid": "0c5b0a3b-480c-4347-84b5-fbde3f196706",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Parse RFC 5424 formatted message",
+          "description": null,
+          "collection": "/api/3/workflow_collections/b967adad-f4dc-4d48-8f63-8e1aa4c023b7",
+          "tag": "#syslog",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/10d5f5b1-5510-44b6-bd7b-d56616820db5",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Alert With Syslog Data",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "id": null,
+                  "name": "Syslog Alert",
+                  "type": null,
+                  "origin": "{{ vars.result.data.header.hostname }}",
+                  "source": "Syslog",
+                  "status": null,
+                  "dueDate": null,
+                  "severity": null,
+                  "sourceId": "Syslog",
+                  "assignedTo": null,
+                  "createDate": null,
+                  "createUser": null,
+                  "modifyDate": null,
+                  "modifyUser": null,
+                  "description": "<p>Message Details</p>\n<p>{% for key,value in vars.result.data.items() %}</p>\n<table class=\"table\">\n<tbody>\n<tr>\n<td style=\"width: 150px;\">{{ key }}</td>\n<td>{{ value }}</td>\n</tr>\n</tbody>\n</table>\n<p>{% endfor %}</p>",
+                  "systemAssignedQueue": null
+                },
+                "_showJson": false,
+                "collection": "/api/3/alerts"
+              },
+              "status": null,
+              "left": "249",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "uuid": "4b78b490-9a2b-43f9-8e1f-988fac463223"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "syslog5424",
+                "authentication_methods": [
+                  ""
+                ]
+              },
+              "status": null,
+              "left": "248",
+              "top": "0",
+              "stepType": "/api/3/workflow_step_types/df26c7a2-4166-4ca5-91e5-548e24c01b5f",
+              "uuid": "10d5f5b1-5510-44b6-bd7b-d56616820db5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Parse Message",
+              "description": null,
+              "arguments": {
+                "name": "Syslog",
+                "config": "fdc9b8ac-645d-41f5-96e2-9252d722b9b5",
+                "params": {
+                  "rfc": "5424",
+                  "message": "{{vars.request.data}}"
+                },
+                "version": "1.0.1",
+                "connector": "syslog",
+                "operation": "parse",
+                "operationTitle": "Parse Message",
+                "operationOutput": {
+                  "header": "",
+                  "message": ""
+                }
+              },
+              "status": null,
+              "left": "248",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "0b8ef900-feb3-4567-93c3-71b4d97632bd"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a9552677-86df-4f36-ba35-0f792158dd0d",
+              "name": "Start -> Parse Message",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/0b8ef900-feb3-4567-93c3-71b4d97632bd",
+              "sourceStep": "/api/3/workflow_steps/10d5f5b1-5510-44b6-bd7b-d56616820db5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5af8c440-0254-4495-9b7f-27865f305820",
+              "name": "Parse Message -> Create Alert With Syslog Data",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/4b78b490-9a2b-43f9-8e1f-988fac463223",
+              "sourceStep": "/api/3/workflow_steps/0b8ef900-feb3-4567-93c3-71b4d97632bd"
+            }
+          ],
+          "versions": null,
+          "uuid": "26e9b4a8-b309-456a-86b4-ada1201473db",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Stop Start Listener for a Configuration",
+          "description": null,
+          "collection": "/api/3/workflow_collections/b967adad-f4dc-4d48-8f63-8e1aa4c023b7",
+          "tag": "#syslog",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f43c9209-cf81-4bdc-8364-98330e92556f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "deb28eae-547f-47d9-b61b-1fe187953bc9",
+                "resources": [
+                  "tasks"
+                ],
+                "inputVariables": []
+              },
+              "status": null,
+              "left": "300",
+              "top": "12",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "f43c9209-cf81-4bdc-8364-98330e92556f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Stop Listener",
+              "description": null,
+              "arguments": {
+                "name": "Syslog",
+                "config": "fdc9b8ac-645d-41f5-96e2-9252d722b9b5",
+                "params": [],
+                "version": "1.0.1",
+                "connector": "syslog",
+                "operation": "stop",
+                "operationTitle": "Stop Listener",
+                "step_variables": [],
+                "operationOutput": {
+                  "status": 0,
+                  "message": ""
+                }
+              },
+              "status": null,
+              "left": "300",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "2c16dbdd-d69e-4d74-bfc1-19f335dcf752"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start Listener",
+              "description": null,
+              "arguments": {
+                "name": "Syslog",
+                "config": "fdc9b8ac-645d-41f5-96e2-9252d722b9b5",
+                "params": [],
+                "version": "1.0.1",
+                "connector": "syslog",
+                "operation": "start",
+                "operationTitle": "Start Listener",
+                "operationOutput": {
+                  "status": 0,
+                  "message": ""
+                }
+              },
+              "status": null,
+              "left": "307",
+              "top": "367",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "6f85104f-51a0-4296-98c2-571104041f55"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Sleep for 10 seconds",
+              "description": null,
+              "arguments": {
+                "delay": {
+                  "days": 0,
+                  "hours": 0,
+                  "weeks": 0,
+                  "minutes": 0,
+                  "seconds": 10
+                }
+              },
+              "status": null,
+              "left": "300",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/6832e556-b9c7-497a-babe-feda3bd27dbf",
+              "uuid": "d52bc674-1375-4710-bac2-f55b4dd8af71"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "81be19d2-c209-4109-b97c-c3dfc71c322f",
+              "name": "Start -> Stop Listener",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/2c16dbdd-d69e-4d74-bfc1-19f335dcf752",
+              "sourceStep": "/api/3/workflow_steps/f43c9209-cf81-4bdc-8364-98330e92556f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "998cf368-6481-4e96-95fd-ded78f7df769",
+              "name": "Stop Listener -> Sleep for 10 seconds",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/d52bc674-1375-4710-bac2-f55b4dd8af71",
+              "sourceStep": "/api/3/workflow_steps/2c16dbdd-d69e-4d74-bfc1-19f335dcf752"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "499b993b-2c6f-46b0-b47d-bd3d8c318292",
+              "name": "Sleep for 10 seconds -> Start Listener",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6f85104f-51a0-4296-98c2-571104041f55",
+              "sourceStep": "/api/3/workflow_steps/d52bc674-1375-4710-bac2-f55b4dd8af71"
+            }
+          ],
+          "versions": null,
+          "uuid": "5b466108-ee0f-477d-85f1-70b61bc6dec6",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Syslog > Fetch",
+          "description": "",
+          "collection": "/api/3/workflow_collections/b967adad-f4dc-4d48-8f63-8e1aa4c023b7",
+          "tag": "#syslog #fetch #dataingestion",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1338318e-cde4-4772-be81-0d63a0da6b41",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "1338318e-cde4-4772-be81-0d63a0da6b41"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "message_samples": "CEF:0|Symantec|DataLossPrevention|11.5|Policy123|Policy123|5|cs1Label=Sender cs1=sender123 cs2Label=Recipient cs2=recepient123 msg=rule123 cn1=1 cn1Label=MatchCount cs3Label=IncidentSnapshot cs3=123 cs4Label=DLPSeverity cs4=1 suid=123\nCEF:0|Symantec|DataLossPrevention|11.5|Policy456|Policy456|5|cs1Label=Sender cs1=sender456 cs2Label=Recipient cs2=recepient456 msg=rule456 cn1=1 cn1Label=MatchCount cs3Label=IncidentSnapshot cs3=456 cs4Label=DLPSeverity cs4=1 suid=456"
+              },
+              "status": null,
+              "left": "172",
+              "top": "131",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "f39779da-2495-4fa5-83f3-39dd33d114e2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get list of messages",
+              "description": null,
+              "arguments": {
+                "messages_list": "{{vars.message_samples.split(\"\\n\")}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "017ae75d-cbdc-42e6-9a4c-7dd69b79befe"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Parse CEF",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "cef_input": "{{ vars.item }}"
+                },
+                "version": "2.4.1",
+                "for_each": {
+                  "item": "{{vars.messages_list}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "connector": "cyops_utilities",
+                "operation": "parse_cef",
+                "operationTitle": "CyOPs: Parse CEF String to JSON.",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "500",
+              "top": "360",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "486dca55-29cb-49be-820d-076accc52f32"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Result",
+              "description": null,
+              "arguments": {
+                "data": "{{vars.steps.Parse_CEF | json_query(\"[*].data\") }}"
+              },
+              "status": null,
+              "left": "795",
+              "top": "460",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "ac486fc2-282e-4827-841f-6d278ce84346"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1a613914-c090-499e-8078-7a29139014a5",
+              "name": "Start -> Configuration",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f39779da-2495-4fa5-83f3-39dd33d114e2",
+              "sourceStep": "/api/3/workflow_steps/1338318e-cde4-4772-be81-0d63a0da6b41"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "f497a766-9195-4deb-8a00-eca853bbd6ea",
+              "name": "Configuration -> Get List of messages",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/017ae75d-cbdc-42e6-9a4c-7dd69b79befe",
+              "sourceStep": "/api/3/workflow_steps/f39779da-2495-4fa5-83f3-39dd33d114e2"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "db013c0e-cfe3-4475-b61d-7d46d0ff02db",
+              "name": "Get List of messages -> Parse CEF",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/486dca55-29cb-49be-820d-076accc52f32",
+              "sourceStep": "/api/3/workflow_steps/017ae75d-cbdc-42e6-9a4c-7dd69b79befe"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "95fea80a-363f-4402-9e84-8d0773d03c3c",
+              "name": "Parse CEF -> Set Result",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ac486fc2-282e-4827-841f-6d278ce84346",
+              "sourceStep": "/api/3/workflow_steps/486dca55-29cb-49be-820d-076accc52f32"
+            }
+          ],
+          "versions": null,
+          "uuid": "237a86db-0435-40cc-8a04-7c128dcf0f18",
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Syslog > Ingest",
+          "description": null,
+          "collection": "/api/3/workflow_collections/b967adad-f4dc-4d48-8f63-8e1aa4c023b7",
+          "tag": "#syslog #create #ingest #dataingestion",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d4f4bbff-754e-4eed-87f0-6411c409231e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "name": "Syslog event",
+                  "type": null,
+                  "dueBy": null,
+                  "hunts": null,
+                  "notes": null,
+                  "tasks": null,
+                  "users": null,
+                  "alerts": null,
+                  "assets": null,
+                  "emails": null,
+                  "events": null,
+                  "owners": null,
+                  "source": null,
+                  "status": null,
+                  "emailCc": null,
+                  "emailTo": null,
+                  "metrics": null,
+                  "persons": null,
+                  "subject": null,
+                  "comments": null,
+                  "filePath": null,
+                  "filehash": null,
+                  "reporter": null,
+                  "severity": null,
+                  "sourceIP": null,
+                  "sourceId": null,
+                  "userName": null,
+                  "companies": null,
+                  "deviceUID": null,
+                  "dllloaded": null,
+                  "emailBody": null,
+                  "emailFrom": null,
+                  "epochTime": null,
+                  "eventtime": null,
+                  "fileNames": null,
+                  "incidents": null,
+                  "processid": null,
+                  "assignedTo": null,
+                  "indicators": null,
+                  "returnPath": null,
+                  "sourcePort": null,
+                  "sourceTool": null,
+                  "sourcedata": "{{ vars.sourcedata | toJSON }}",
+                  "attachments": null,
+                  "commandline": null,
+                  "description": null,
+                  "processName": null,
+                  "processTree": null,
+                  "targetAsset": null,
+                  "userDetails": null,
+                  "assigneddate": null,
+                  "computerName": null,
+                  "emailHeaders": null,
+                  "emailSubject": null,
+                  "offenseCrtDt": null,
+                  "resolveddate": null,
+                  "senderDomain": null,
+                  "closurereason": null,
+                  "destinationIP": null,
+                  "relatedEvents": null,
+                  "sourceProcess": null,
+                  "targetProcess": null,
+                  "killchainphase": null,
+                  "mitreTechnique": null,
+                  "destinationPort": null,
+                  "parentprocessid": null,
+                  "vulnerabilities": null,
+                  "correlationGraph": null,
+                  "escalationreason": null,
+                  "parentProcessName": null,
+                  "reporterEmailBody": null,
+                  "senderEmailAddress": null,
+                  "escalatedtoincident": null,
+                  "systemAssignedQueue": null,
+                  "parentprocesscmdline": null,
+                  "recipientEmailAddress": null
+                },
+                "_showJson": false,
+                "collection": "/api/3/alerts",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "640",
+              "top": "320",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "uuid": "2b284e03-26d2-486f-8429-67ae1864ddcd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "syslog",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "api_body": "{{vars.request.data}}",
+                      "sourcedata": "{{ vars.sourcedata }}"
+                    }
+                  }
+                },
+                "authentication_methods": [
+                  ""
+                ]
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/df26c7a2-4166-4ca5-91e5-548e24c01b5f",
+              "uuid": "d4f4bbff-754e-4eed-87f0-6411c409231e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Parse CEF",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "cef_input": "{{vars.input.params['api_body']}}"
+                },
+                "version": "2.4.1",
+                "connector": "cyops_utilities",
+                "operation": "parse_cef",
+                "operationTitle": "CyOPs: Parse CEF String to JSON.",
+                "step_variables": {
+                  "sourcedata": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "347",
+              "top": "232",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "4e87c786-73fd-430f-8695-0d4ab428911f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": [],
+              "status": null,
+              "left": "180",
+              "top": "114",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "2fe17d32-dac7-4076-875f-ddc0a260c8e7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "60cc0958-c59d-40f0-95b8-7ae3d093b4fb",
+              "name": "Parse CEF -> Create Record",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/2b284e03-26d2-486f-8429-67ae1864ddcd",
+              "sourceStep": "/api/3/workflow_steps/4e87c786-73fd-430f-8695-0d4ab428911f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "9e45ce63-1fbe-4f02-a6e4-c1121c531a9e",
+              "name": "Start -> Configuration",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/2fe17d32-dac7-4076-875f-ddc0a260c8e7",
+              "sourceStep": "/api/3/workflow_steps/d4f4bbff-754e-4eed-87f0-6411c409231e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a89c8319-669c-434c-8f4c-d9721fd0ab31",
+              "name": "Configuration -> Parse CEF",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/4e87c786-73fd-430f-8695-0d4ab428911f",
+              "sourceStep": "/api/3/workflow_steps/2fe17d32-dac7-4076-875f-ddc0a260c8e7"
+            }
+          ],
+          "versions": null,
+          "uuid": "ead4aad5-b3bc-477a-a099-bc7fd9843b69",
+          "isPrivate": false,
+          "owners": []
+        }
+      ],
+      "uuid": "b967adad-f4dc-4d48-8f63-8e1aa4c023b7"
+    }
+  ]
+}

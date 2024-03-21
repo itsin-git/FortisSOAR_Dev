@@ -1,0 +1,214 @@
+{
+    "name": "phishing-classifier",
+    "label": "Phishing Classifier",
+    "description": "Classify emails into phishing and non-phishing using machine learning",
+    "publisher": "Fortinet",
+    "cs_approved": true,
+    "cs_compatible": true,
+    "version": "1.1.0",
+    "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/phishing-classifier-connector/453/phishing-classifier-connector-v1-1-0",
+    "category": "Machine Learning",
+    "tags": [
+        "classifier"
+    ],
+    "icon_small_name": "machine_learning_small.png",
+    "icon_large_name": "machine_learning_large.png",
+    "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/phishing-classifier-connector/453/phishing-classifier-connector-v1-1-0",
+    "ingestion_modes": [
+        "notification"
+    ],
+    "configuration": {
+        "fields": [
+            {
+                "title": "Data Source",
+                "name": "type_of_training_data",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "tooltip": "Data source for training the ml model",
+                "options": [
+                    "Pre-Trained",
+                    "FortiSOAR Module"
+                ],
+                "onchange": {
+                    "FortiSOAR Module": [
+                        {
+                            "title": "Module to train for",
+                            "name": "fsr_module",
+                            "required": true,
+                            "editable": true,
+                            "visible": true,
+                            "type": "select",
+                            "value": "Alerts",
+                            "apiOperation": "get_modules"
+                        },
+                        {
+                            "title": "Filters",
+                            "name": "filters",
+                            "editable": true,
+                            "visible": false,
+                            "type": "json"
+                        },
+                        {
+                            "title": "Feature Mapping",
+                            "name": "feature_mapping",
+                            "type": "json",
+                            "visible": true,
+                            "editable": true,
+                            "required": true,
+                            "tooltip": "Map the fields of the selected module with the ML model's feature set."
+                        },
+                        {
+                            "title": "Verdict Field",
+                            "name": "verdict_field",
+                            "type": "select",
+                            "apiOperation": "get_verdict_set",
+                            "visible": true,
+                            "editable": true,
+                            "required": true,
+                            "tooltip": "Select the verdict field"
+                        },
+                        {
+                            "title": "Verdict Field Value Mapping",
+                            "name": "verdict_field_value_mapping",
+                            "type": "json",
+                            "visible": true,
+                            "editable": true,
+                            "required": true,
+                            "tooltip": "Map a field of the selected module to ML model's verdict"
+                        },
+                        {
+                            "title": "Date Range",
+                            "name": "date_range",
+                            "required": true,
+                            "editable": true,
+                            "visible": true,
+                            "type": "select",
+                            "tooltip": "Timeframe of records to populate the training set",
+                            "options": [
+                                "Last month",
+                                "Last 6 months",
+                                "Last year",
+                                "Last 2 years",
+                                "Last 5 years",
+                                "Custom"
+                            ],
+                            "onchange": {
+                                "Custom": [
+                                    {
+                                        "title": "Last X Days",
+                                        "name": "custom_value",
+                                        "type": "integer",
+                                        "visible": true,
+                                        "editable": true,
+                                        "required": true,
+                                        "placeholder": 365
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "title": "Training Set Size",
+                            "name": "train_size",
+                            "required": false,
+                            "editable": true,
+                            "visible": true,
+                            "type": "integer",
+                            "tooltip": "Size of the training set.",
+                            "placeholder": 1000
+                        }
+                    ]
+                }
+            },
+            {
+                "title": "Hold API usable names for module and attributes",
+                "name": "translated_config",
+                "required": false,
+                "editable": true,
+                "visible": false,
+                "type": "json"
+            }
+        ]
+    },
+    "operations": [
+        {
+            "operation": "predict",
+            "title": "Predict",
+            "description": "Provide verdict for the specified record",
+            "parameters": [
+                {
+                    "title": "Record",
+                    "name": "record",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "placeholder": "Record IRI/JSON or Email body",
+                    "tooltip": "Record IRI / Email body / Record JSON for prediction. In case of json input, mandatory keys are - emailFrom, emailSubject and emailBody"
+                },
+                {
+                    "title": "Module",
+                    "name": "module",
+                    "required": false,
+                    "editable": true,
+                    "visible": false,
+                    "type": "text",
+                    "placeholder": "alerts",
+                    "tooltip": "module"
+                }
+            ],
+            "enabled": true,
+            "annotation": "predict",
+            "category": "investigation",
+            "output_schema": {},
+            "response_from_primary": true
+        },
+        {
+            "operation": "train",
+            "title": "Train",
+            "description": "Train the dataset with specified parameters from connector config",
+            "parameters": [],
+            "enabled": true,
+            "annotation": "ml_train",
+            "category": "investigation",
+            "output_schema": "",
+            "response_from_primary": true
+        },
+        {
+            "operation": "get_training_results",
+            "title": "Get Training Results",
+            "description": "Retrieve the training results",
+            "parameters": [],
+            "enabled": true,
+            "annotation": "ml_train",
+            "category": "investigation",
+            "output_schema": "",
+            "response_from_primary": true 
+        },
+        {
+            "operation": "get_verdict_set",
+            "title": "Get Verdict Set",
+            "description": "Get available fields of a module only picklists for verdict",
+            "enabled": true,
+            "visible": false,
+            "annotation": "get_verdict_set",
+            "category": "investigation",
+            "parameters": [],
+            "output_schema": {},
+            "is_config_required": false
+        },
+        {
+            "operation": "get_modules",
+            "title": "Get Modules",
+            "description": "Get available modules",
+            "enabled": true,
+            "visible": false,
+            "annotation": "get_modules",
+            "category": "investigation",
+            "parameters": [],
+            "output_schema": {},
+            "is_config_required": false
+        }
+    ]
+}

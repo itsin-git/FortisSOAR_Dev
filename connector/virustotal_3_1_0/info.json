@@ -1,0 +1,573 @@
+{
+  "name": "virustotal",
+  "label": "VirusTotal",
+  "version": "3.1.0",
+  "description": "VirusTotal provides a service that analyzes suspicious files and URLs and facilitates the quick detection of viruses, worms, trojans, and all kinds of malware. This connector facilitates automated operations such as scanning and analyzing suspicious files and URLs and retrieving reports from VirusTotal for files, IP addresses, and domains.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "tags": [
+    "Enrichment",
+    "IP_Enrichment",
+    "FileHash_Enrichment",
+    "URL_Enrichment",
+    "Domain_Enrichment",
+    "File_Enrichment"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/3.1.0/virustotal/577/virustotal-v3-1-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "type": "text",
+        "name": "server",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "value": "www.virustotal.com",
+        "description": "URL of the VirusTotal endpoint server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "API Key",
+        "type": "password",
+        "name": "api_key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "description": "API key to access the VirusTotal endpoint to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_widget_rendering_url",
+      "title": "Get Widget Rendering URL",
+      "description": "Retrieves a URL from VirusTotal that renders a widget within an iframe and is valid for three days.",
+      "category": "investigation",
+      "annotation": "get_widget_rendering_url",
+      "enabled": true,
+      "output_schema": {
+        "data": {
+          "url": "",
+          "found": "",
+          "detection_ratio": {
+            "detections": "",
+            "total": ""
+          },
+          "type": "",
+          "id": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Indicator",
+          "tooltip": "Specify the file hash (md5, sha1 or sha256), URL, IP address or a Domain",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query",
+          "description": "Specify the indicator value based on which you want to retrieve the widget rendering URL from VirusTotal."
+        },
+        {
+          "title": "Foreground Color",
+          "tooltip": "Specify the primary foreground color in hex notation",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "fg1",
+          "description": "Specify the primary foreground color in hex notation",
+          "placeholder": "For ex. 4d4d4d"
+        },
+        {
+          "title": "Primary Background Color",
+          "tooltip": "Specify the primary background color in hex notation",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "bg1",
+          "description": "Specify the primary background color in hex notation",
+          "placeholder": "For ex. ffffff"
+        },
+        {
+          "title": "Secondary Background Color",
+          "tooltip": "Specify the secondary background color in hex notation",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "bg2",
+          "description": "Specify the secondary background color in hex notation",
+          "placeholder": "For ex. f9f9f9"
+        },
+        {
+          "title": "Border Color",
+          "tooltip": "Specify the border color in hex notation",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "bd1",
+          "description": "Specify the border color in hex notation",
+          "placeholder": "For ex. e6e6e6"
+        }
+      ]
+    },
+    {
+      "operation": "get_widget_html_content",
+      "title": "Get Widget HTML Content",
+      "description": "Retrieves the actual HTML content of the widget report for a given observable.",
+      "category": "investigation",
+      "annotation": "get_widget_html_content",
+      "enabled": true,
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Token",
+          "tooltip": "Specify the token provided by the Get Widget Rendering URL operation response.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "token",
+          "description": "Specify the token provided by the Get Widget Rendering URL operation response."
+        }
+      ]
+    },
+    {
+      "operation": "upload_sample",
+      "title": "Submit File",
+      "description": "Scans and analyzes files submitted to VirusTotal from FortiSOAR™ to determine if it is suspicious based on the Attachment ID or File IRI you have specified.",
+      "category": "investigation",
+      "annotation": "submit_sample",
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "type": ""
+      },
+      "parameters": [
+        {
+          "name": "input",
+          "title": "Type",
+          "type": "select",
+          "options": [
+            "Attachment ID",
+            "File IRI"
+          ],
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Type of file that you want to submit to VirusTotal for analysis. Type can be an Attachment ID or a File IRI."
+        },
+        {
+          "name": "value",
+          "title": "Reference ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Reference ID that is used to access the attachment metadata from the FortiSOAR™ Attachments module.\nIn the playbook, this defaults to the{{vars.attachment_id}} value or the {{vars.file_iri}} value."
+        }
+      ]
+    },
+    {
+      "operation": "scan_url",
+      "title": "Submit URL for scanning",
+      "description": "Scans and analyzes the URL submitted to VirusTotal to determine if it is suspicious based on the URL you have specified.",
+      "category": "investigation",
+      "annotation": "submit_url",
+      "enabled": true,
+      "output_schema": {
+        "type": "",
+        "id": ""
+      },
+      "parameters": [
+        {
+          "title": "URL",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "url",
+          "description": "Specify the URL that you want to submit to VirusTotal for scanning."
+        }
+      ]
+    },
+    {
+      "operation": "query_ip",
+      "title": "Get IP Reputation",
+      "description": "Retrieves a report from VirusTotal for the IP address submitted to determine if it is suspicious based on the IP address you have specified.",
+      "category": "investigation",
+      "api_output_schema": "get_output_schema_ip",
+      "annotation": "ip_reputation",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IP",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip",
+          "description": "Specify the IP address for which you want to retrieve a VirusTotal report."
+        },
+        {
+          "title": "Relationships to Include",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "name": "relationships",
+          "description": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "tooltip": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "options": [
+            "Comments",
+            "Historical SSL Certificates",
+            "Graphs",
+            "Historical Whois",
+            "Referrer Files",
+            "Resolutions",
+            "Votes",
+            "Related Comments"
+          ]
+        }
+      ]
+    },
+    {
+      "operation": "query_domain",
+      "title": "Get Domain Reputation",
+      "api_output_schema": "get_output_schema_domain",
+      "description": "Retrieves a report from VirusTotal for the domain submitted to determine if it is suspicious based on the domain name you have specified.",
+      "category": "investigation",
+      "annotation": "domain_reputation",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Domain",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "domain",
+          "description": "Specify the domain name for which you want to retrieve a VirusTotal report."
+        },
+        {
+          "title": "Relationships to Include",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "name": "relationships",
+          "description": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "tooltip": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "options": [
+            "Historical Whois",
+            "Subdomains",
+            "Comments",
+            "Graphs",
+            "Historical SSL Certificates",
+            "Immediate Parent",
+            "Parent",
+            "Referrer Files",
+            "Related Comments",
+            "Resolutions",
+            "Siblings",
+            "URLs",
+            "Votes"
+          ]
+        }
+      ]
+    },
+    {
+      "operation": "query_url",
+      "title": "Get URL Reputation",
+      "api_output_schema": "get_output_schema_url",
+      "description": "Retrieves a report from VirusTotal for the URL submitted to determine if it is suspicious based on the URL you have specified.",
+      "category": "investigation",
+      "annotation": "url_reputation",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "URL",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "url",
+          "description": "Specify the URL for which you want to retrieve a VirusTotal report."
+        },
+        {
+          "title": "Relationships to Include",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "name": "relationships",
+          "description": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "tooltip": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "options": [
+            "Comments",
+            "Graphs",
+            "Last Serving IP Address",
+            "Network Location",
+            "Related Comments",
+            "Votes"
+          ]
+        }
+      ]
+    },
+    {
+      "operation": "file_reputation",
+      "title": "Get File Reputation",
+      "api_output_schema": "get_output_schema_file",
+      "description": "Retrieves a report from VirusTotal for the file that you have submitted to determine if it is suspicious based on the file hash value you have specified.",
+      "category": "investigation",
+      "annotation": "file_reputation",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "File Hash",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_hash",
+          "description": "Specify the File Hash of the file for which you want to retrieve a VirusTotal report."
+        },
+        {
+          "title": "Relationships to Include",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "name": "relationships",
+          "description": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "tooltip": "(Optional) Select the relationships such as Comments, Graphs, etc. that you want to include in the output of this operation.",
+          "options": [
+            "Behaviours",
+            "Bundled Files",
+            "Comments",
+            "Contacted Domains",
+            "Contacted IPs",
+            "Contacted URLs",
+            "Dropped Files",
+            "Execution Parents",
+            "PE Resource Children",
+            "PE Resource Parents",
+            "Screenshots",
+            "Votes",
+            "Graphs"
+          ]
+        }
+      ]
+    },
+    {
+      "operation": "analysis_file",
+      "title": "Get Analysis Details",
+      "description": "Retrieves details of a File or URL analysis from VirusTotal for the File or URL that you had submitted for scanning and analysis to VirusTotal using the \"Submit File\" or \"Submit URL for scanning\" action.",
+      "category": "investigation",
+      "annotation": "analysis_file",
+      "enabled": true,
+      "conditional_output_schema": [
+        {
+          "condition": "{{type === 'File'}}",
+          "output_schema": {
+            "meta": {
+              "file_info": {
+                "size": "",
+                "sha1": "",
+                "sha256": "",
+                "md5": ""
+              }
+            },
+            "data": {
+              "attributes": {
+                "date": "",
+                "status": "",
+                "stats": {
+                  "harmless": "",
+                  "type-unsupported": "",
+                  "suspicious": "",
+                  "confirmed-timeout": "",
+                  "timeout": "",
+                  "failure": "",
+                  "malicious": "",
+                  "undetected": ""
+                },
+                "results": {}
+              },
+              "type": "",
+              "id": "",
+              "links": {
+                "item": "",
+                "self": ""
+              }
+            }
+          }
+        },
+        {
+          "condition": "{{type === 'URL'}}",
+          "output_schema": {
+            "meta": {
+              "url_info": {
+                "url": "",
+                "id": ""
+              }
+            },
+            "data": {
+              "attributes": {
+                "date": "",
+                "status": "",
+                "stats": {
+                  "harmless": "",
+                  "malicious": "",
+                  "suspicious": "",
+                  "undetected": "",
+                  "timeout": ""
+                },
+                "results": {}
+              },
+              "type": "",
+              "id": "",
+              "links": {
+                "item": "",
+                "self": ""
+              }
+            }
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "type",
+          "description": "Select the type, either File or URL, whose analysis details you want to retrieve from VirusTotal.",
+          "tooltip": "Select the type, either File or URL, whose analysis details you want to retrieve from VirusTotal.",
+          "options": [
+            "File",
+            "URL"
+          ]
+        },
+        {
+          "title": "Analysis ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "analysis_id",
+          "tooltip": "Specify the ID of the File or URL analysis whose details you want to retrieve from VirusTotal.\nNote: To retrieve the analysis ID, you can use the \"Submit File\" or \"Submit URL for scanning\" operation.",
+          "description": "Specify the ID of the File or URL analysis whose details you want to retrieve from VirusTotal.\nNote: To retrieve the analysis ID, you can use the \"Submit File\" or \"Submit URL for scanning\" operation."
+        }
+      ]
+    },
+    {
+      "operation": "custom_endpoint",
+      "title": "Custom API Endpoint",
+      "description": "Allows querying a custom API endpoint in VirusTotal based on the endpoint and request you have specified.",
+      "category": "query",
+      "annotation": "custom_endpoint",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "API Endpoint",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "endpoint",
+          "placeholder": "/api/v3/urls",
+          "description": "API Endpoint for VirusTotal that can start with /api/v3/ or https://virustotal.com/api/v3/, using which you want to make the API call.",
+          "tooltip": "API Endpoint for VirusTotal that can start with /api/v3/ or https://virustotal.com/api/v3/, using which you want to make the API call."
+        },
+        {
+          "title": "HTTP method",
+          "name": "method",
+          "description": "Select the HTTP method to be used for the API call. You can choose between GET or POST.",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": "GET",
+          "options": [
+            "GET",
+            "POST"
+          ]
+        },
+        {
+          "title": "Request Body",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "body",
+          "placeholder": "{}",
+          "description": "(Optional) GET/POST request body that you want to send with the API call request."
+        }
+      ]
+    },
+    {
+      "operation": "get_output_schema_ip",
+      "annotation": "get_output_schema_ip",
+      "description": "Gives the output schema based on the inputs",
+      "title": "Get Output Schema for IP Reputation",
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_output_schema_domain",
+      "annotation": "get_output_schema_domain",
+      "description": "Gives the output schema based on the inputs",
+      "title": "Get Output Schema for Domain Reputation",
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_output_schema_url",
+      "annotation": "get_output_schema_url",
+      "description": "Gives the output schema based on the inputs",
+      "title": "Get Output Schema for URL Reputation",
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_output_schema_file",
+      "annotation": "get_output_schema_file",
+      "description": "Gives the output schema based on the inputs",
+      "title": "Get Output Schema for File Reputation",
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": {}
+    }
+  ]
+}

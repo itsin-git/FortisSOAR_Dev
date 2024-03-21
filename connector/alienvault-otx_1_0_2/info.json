@@ -1,0 +1,1514 @@
+{
+  "name": "alienvault-otx",
+  "label": "AlienVault-OTX",
+  "version": "1.0.2",
+  "description": "AlienVault-OTX is an open source of Indicators of Compromise (IOCs) supported by the community.This connector provides actions Get IP Reputation, Create Pulse, Get Domain Reputation, etc",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.2/alienvault-otx/482/alienvault-otx-v1-0-2",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server Address",
+        "tooltip": "Address of the AlienVault-OTX server",
+        "placeholder": "e.g https://otx.alienvault.com",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "url",
+        "value": "https://otx.alienvault.com",
+        "description": "Address of the AlienVault-OTX server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "API Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_key",
+        "description": "API key configured for your account to access the AlienVault-OTX server."
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "create_pulse",
+      "title": "Create Pulse",
+      "category": "investigation",
+      "annotation": "create_pulse",
+      "description": "Create new pulse which contains a collection of IOCs targeted at a particular area.",
+      "output_schema": {
+        "subscribers_count": "",
+        "indicators": [
+          {
+            "access_type": "",
+            "content": "",
+            "access_groups": [],
+            "access_reason": "",
+            "is_active": "",
+            "title": "",
+            "type": "",
+            "description": "",
+            "expiration": "",
+            "indicator": "",
+            "role": ""
+          }
+        ],
+        "name": "",
+        "group_ids": [],
+        "description": "",
+        "author_id": "",
+        "votes_count": "",
+        "subscribers": [],
+        "cloned_from": "",
+        "locked": "",
+        "references_count": "",
+        "validators_count": "",
+        "upvotes": [],
+        "downvotes": [],
+        "pulse_name": "",
+        "TLP": "",
+        "upvotes_count": "",
+        "validators": [],
+        "author_name": "",
+        "tags_count": "",
+        "active": "",
+        "followers_count": "",
+        "pulse_source": "",
+        "public": "",
+        "downvotes_count": "",
+        "comments_count": "",
+        "exported_by": [],
+        "extract_source": [],
+        "indicators_count": "",
+        "followers": [],
+        "references": [],
+        "export_count": "",
+        "industries": [],
+        "created": "",
+        "targeted_countries": [],
+        "revision": "",
+        "tags": [],
+        "modified": "",
+        "unsubscribed_users": [],
+        "adversary": "",
+        "id": ""
+      },
+      "parameters": [
+        {
+          "title": "Name",
+          "tooltip": "Name of the pulse that you want to create.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pulse_name",
+          "description": "Name of the pulse that you want to create."
+        },
+        {
+          "title": "Description",
+          "tooltip": "Brief description of the pulse that you want to create",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pulse_des",
+          "description": "(Optional) Brief description of the pulse that you want to create and the threat it addresses."
+        },
+        {
+          "title": "Indicators",
+          "tooltip": "List of indicators that must be in the dict(dictionary format) e.g {'type':'' , 'indicator': '', 'description': ''}",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "indicator_list",
+          "description": "(Optional) List of indicators that must be in the dict(dictionary format) and have a Key-Valuepair. Every object in the list must have at least the following three fields:{type: , indicator: , description: }"
+        },
+        {
+          "title": "Tags",
+          "tooltip": "List of tags that categorize the pulse in CSV/List Format",
+          "description": "(Optional) List of tags that categorize the pulse that you want to create. For example, malware, phishing, hacking, etc. ",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "tag"
+        },
+        {
+          "title": "References",
+          "tooltip": "List of external references to associate with the pulse in CSV/List Format",
+          "description": "(Optional) List of external references to associate with the pulse that you want to create.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "references"
+        },
+        {
+          "title": "Public",
+          "tooltip": "Allow other users to see or subscribe to the pulse that you want to create",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "public",
+          "value": true,
+          "description": "Select this field to allow other users to see or subscribe to the pulse that you want to create.By default, this option is set as True."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_ip_reputation",
+      "title": "Get IP Reputation",
+      "category": "investigation",
+      "annotation": "get_ip_reputation",
+      "description": "Retrieves the reputation for a specified IP based on parameters such as, the IP address that you have specified.",
+      "output_schema": {
+        "reputation": {
+          "reputation_val": "",
+          "country": "",
+          "city": "",
+          "reputation_rel_checked": "",
+          "reputation_rel": "",
+          "status": "",
+          "matched_wl": [],
+          "domains": [],
+          "_id": {
+            "$id": ""
+          },
+          "threat_score": "",
+          "last_seen": "",
+          "counts": {
+            "Malware Domain": "",
+            "Malware IP": ""
+          },
+          "address": "",
+          "server_type": "",
+          "activities": [
+            {
+              "data": {
+                "md5": "",
+                "file": "",
+                "url": "",
+                "domain": "",
+                "vt": {
+                  "Signature": ""
+                }
+              },
+              "first_date": "",
+              "name": "",
+              "md5": "",
+              "visible": "",
+              "domain": "",
+              "vt": "",
+              "last_date": "",
+              "status": "",
+              "url": "",
+              "source": "",
+              "file": "",
+              "data_key": ""
+            }
+          ],
+          "first_seen": "",
+          "lat": "",
+          "up": "",
+          "matched_bl": [],
+          "date_added": {
+            "sec": "",
+            "usec": ""
+          },
+          "as": "",
+          "allow_ping": "",
+          "state": "",
+          "lon": "",
+          "reputation_val_checked": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "IPv4",
+            "IPv6"
+          ],
+          "name": "indicator_type",
+          "value": "IPv4",
+          "description": "Type of IP for which you want to retrieve reputation from AlienVault-OTX. Choose between IPv4 or IPv6."
+        },
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip_address",
+          "description": "IP address for which you want to retrieve reputation from AlienVault-OTX."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_domain_reputation",
+      "title": "Get Domain Reputation",
+      "category": "investigation",
+      "annotation": "get_domain_reputation",
+      "description": "Retrieves the reputation for a specified domain based on parameters such as, the domain name that you have specified.",
+      "output_schema": {
+        "malware": {
+          "count": "",
+          "previous": "",
+          "data": [
+            {
+              "datetime_int": "",
+              "_id": "",
+              "hash": ""
+            }
+          ],
+          "size": "",
+          "next": ""
+        },
+        "general": {
+          "indicator": "",
+          "alexa": "",
+          "whois": "",
+          "type": "",
+          "pulse_info": {
+            "count": "",
+            "references": [],
+            "pulses": []
+          },
+          "base_indicator": {},
+          "validation": [
+            {
+              "source": "",
+              "message": "",
+              "name": ""
+            }
+          ],
+          "sections": []
+        },
+        "geo": {
+          "flag_url": "",
+          "city_data": "",
+          "city": "",
+          "region": "",
+          "charset": "",
+          "area_code": "",
+          "continent_code": "",
+          "country_code3": "",
+          "latitude": "",
+          "postal_code": "",
+          "longitude": "",
+          "country_code": "",
+          "country_name": "",
+          "asn": "",
+          "dma_code": "",
+          "flag_title": ""
+        },
+        "url_list": {
+          "has_next": "",
+          "actual_size": "",
+          "url_list": [
+            {
+              "date": "",
+              "url": "",
+              "domain": "",
+              "hostname": "",
+              "encoded": ""
+            }
+          ],
+          "page_num": "",
+          "limit": "",
+          "full_size": "",
+          "paged": ""
+        },
+        "passive_dns": {
+          "passive_dns": [
+            {
+              "last": "",
+              "indicator_link": "",
+              "hostname": "",
+              "address": "",
+              "flag_url": "",
+              "flag_title": "",
+              "asset_type": "",
+              "first": ""
+            }
+          ],
+          "count": ""
+        },
+        "whois": {
+          "count": "",
+          "data": [
+            {
+              "value": "",
+              "name": "",
+              "key": ""
+            }
+          ],
+          "related": [
+            {
+              "related_type": "",
+              "domain": "",
+              "related": ""
+            }
+          ]
+        }
+      },
+      "parameters": [
+        {
+          "title": "Domain",
+          "tooltip": "Name of the domain",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "domain",
+          "description": "Name of the domain for which you want to retrieve reputation from AlienVault-OTX."
+        },
+        {
+          "title": "Section",
+          "tooltip": "Section of the indicator to get its details",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "General",
+            "Geo",
+            "Malware",
+            "URL List",
+            "Passive DNS",
+            "Whois"
+          ],
+          "name": "section",
+          "value": "General",
+          "description": "(Optional) Section of the indicator, domain in this case, whose details you want to retrieve from AlienVault-OTX.Choose from the following sections: General, Geo, Malware, URL List, Passive DNS, or Whois. For more information of the sections option, see https://otx.alienvault.com/api."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_url_reputation",
+      "title": "Get URL Reputation",
+      "category": "investigation",
+      "annotation": "get_url_reputation",
+      "description": "Retrieves the reputation for a specified URL based on the URL that you have specified.",
+      "output_schema": {
+        "url_list": {
+          "flag_url": "",
+          "city_data": "",
+          "city": "",
+          "url_list": [
+            {
+              "url": "",
+              "httpcode": "",
+              "secs": "",
+              "params": {},
+              "result": {
+                "urlworker": {
+                  "has_file_analysis": "",
+                  "url": "",
+                  "ip": "",
+                  "filemagic": "",
+                  "http_response": {
+                    "CONTENT-LENGTH": "",
+                    "ACCEPT-RANGES": "",
+                    "VARY": "",
+                    "SERVER": "",
+                    "LAST-MODIFIED": "",
+                    "CONNECTION": "",
+                    "ETAG": "",
+                    "DATE": "",
+                    "CONTENT-TYPE": ""
+                  },
+                  "md5": ""
+                }
+              },
+              "date": "",
+              "deep_analysis": ""
+            }
+          ],
+          "charset": "",
+          "area_code": "",
+          "continent_code": "",
+          "country_code3": "",
+          "latitude": "",
+          "postal_code": "",
+          "longitude": "",
+          "country_code": "",
+          "country_name": "",
+          "net_loc": "",
+          "region": "",
+          "dma_code": "",
+          "flag_title": ""
+        },
+        "general": {
+          "indicator": "",
+          "alexa": "",
+          "whois": "",
+          "sections": [],
+          "hostname": "",
+          "pulse_info": {
+            "count": "",
+            "references": [],
+            "pulses": []
+          },
+          "domain": "",
+          "base_indicator": {
+            "indicator": "",
+            "description": "",
+            "title": "",
+            "access_reason": "",
+            "access_type": "",
+            "content": "",
+            "type": "",
+            "id": ""
+          },
+          "type": "",
+          "type_title": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "URL",
+          "tooltip": "URL for which you want to retrieve reputation",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "url",
+          "description": "URL for which you want to retrieve reputation from AlienVault-OTX."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_file_reputation",
+      "title": "Get File Reputation",
+      "category": "investigation",
+      "annotation": "get_file_reputation",
+      "description": "Retrieves the reputation for a specified file based on parameters such as, the filehash that you have specified.",
+      "output_schema": {
+        "analysis": {
+          "malware": {},
+          "page_type": "",
+          "analysis": {
+            "info": {
+              "results": {
+                "sha1": "",
+                "file_class": "",
+                "file_type": "",
+                "filesize": "",
+                "ssdeep": "",
+                "sha256": "",
+                "md5": ""
+              }
+            },
+            "hash": "",
+            "plugins": {
+              "cuckoo": {
+                "result": {
+                  "signatures": [
+                    {
+                      "new_data": [],
+                      "confidence": "",
+                      "families": [],
+                      "severity": "",
+                      "weight": "",
+                      "name": "",
+                      "alert": "",
+                      "references": [],
+                      "data": [],
+                      "description": ""
+                    }
+                  ],
+                  "network": {
+                    "udp": [],
+                    "icmp": [],
+                    "http": [],
+                    "smtp": [],
+                    "tcp": [],
+                    "hosts": [],
+                    "pcap_sha256": "",
+                    "dns": [
+                      {
+                        "request": "",
+                        "type": "",
+                        "answers": [
+                          {
+                            "type": "",
+                            "data": ""
+                          }
+                        ]
+                      }
+                    ],
+                    "domains": [],
+                    "sorted_pcap_sha256": "",
+                    "irc": []
+                  },
+                  "suricata": {},
+                  "hostname": "",
+                  "dropped": [
+                    {
+                      "yara": [],
+                      "sha1": "",
+                      "name": "",
+                      "sha512": "",
+                      "type": "",
+                      "clamav": "",
+                      "guest_paths": [],
+                      "crc32": "",
+                      "path": "",
+                      "ssdeep": "",
+                      "sha256": "",
+                      "data": "",
+                      "md5": "",
+                      "size": ""
+                    },
+                    {
+                      "yara": [],
+                      "sha1": "",
+                      "name": "",
+                      "sha512": "",
+                      "clamav": "",
+                      "guest_paths": [
+                        ""
+                      ],
+                      "crc32": "",
+                      "path": "",
+                      "ssdeep": "",
+                      "sha256": "",
+                      "type": "",
+                      "md5": "",
+                      "size": ""
+                    }
+                  ],
+                  "behavior": {
+                    "files": [],
+                    "write_keys": [],
+                    "keys": [],
+                    "write_files": [],
+                    "read_keys": [],
+                    "delete_keys": [],
+                    "read_files": [],
+                    "mutexes": [],
+                    "resolved_apis": [],
+                    "delete_files": [],
+                    "executed_commands": [],
+                    "started_services": [],
+                    "created_services": []
+                  },
+                  "sha256": "",
+                  "virustotal": {
+                    "scans": {},
+                    "scan_id": "",
+                    "sha1": "",
+                    "resource": "",
+                    "response_code": "",
+                    "scan_date": "",
+                    "results": [
+                      {
+                        "vendor": "",
+                        "sig": ""
+                      }
+                    ],
+                    "verbose_msg": "",
+                    "permalink": "",
+                    "total": "",
+                    "positives": "",
+                    "sha256": "",
+                    "md5": ""
+                  }
+                }
+              },
+              "pe32info": {
+                "process_time": "",
+                "results": {
+                  "pdbinfo": [],
+                  "exports": [],
+                  "richhash": "",
+                  "imports": [
+                    {
+                      "address": "",
+                      "name": "",
+                      "dll": ""
+                    }
+                  ],
+                  "signed": "0",
+                  "resource_strings": [],
+                  "version_information": [
+                    {
+                      "name": "",
+                      "value": ""
+                    }
+                  ],
+                  "pehash": "",
+                  "certs": [],
+                  "imphash": "",
+                  "sections": [
+                    {
+                      "SizeOfRawData": "",
+                      "entropy": "",
+                      "Name": "",
+                      "Misc_VirtualSize": "",
+                      "VirtualAddress": ""
+                    }
+                  ],
+                  "packers": [
+                    ""
+                  ]
+                }
+              },
+              "adobemalwareclassifier": {
+                "process_time": "",
+                "results": {
+                  "alerts": []
+                }
+              },
+              "exiftool": {
+                "process_time": "",
+                "results": {
+                  "Linker_Version": "",
+                  "Product_Version_Number": "",
+                  "Product_Version": "",
+                  "Language_Code": "",
+                  "PE_Type": "",
+                  "File_Version": "",
+                  "Legal_Copyright": "",
+                  "File_Subtype": "",
+                  "Company_Name": "",
+                  "Original_Filename": "",
+                  "Object_File_Type": "",
+                  "File_Version_Number": "",
+                  "Code_Size": "",
+                  "Product_Name": "",
+                  "OS_Version": "",
+                  "Entry_Point": "",
+                  "File_Description": "",
+                  "Machine_Type": "",
+                  "Uninitialized_Data_Size": "",
+                  "Character_Set": "",
+                  "MIME_Type": "",
+                  "Subsystem": "",
+                  "Subsystem_Version": "",
+                  "Image_Version": "",
+                  "File_OS": "",
+                  "File_Inode_Change_Date/Time": "",
+                  "Internal_Name": "",
+                  "Time_Stamp": "",
+                  "Initialized_Data_Size": "",
+                  "File_Flags": "",
+                  "File_Flags_Mask": ""
+                }
+              },
+              "clamav": {
+                "process_time": "",
+                "results": {}
+              },
+              "yarad": {
+                "process_time": "",
+                "results": {
+                  "detection": []
+                }
+              },
+              "disa_entrypoint": {
+                "process_time": "",
+                "results": {
+                  "error_disa": "",
+                  "instructions": []
+                }
+              },
+              "peanomal": {
+                "process_time": "",
+                "results": {
+                  "detection": [
+                    {
+                      "name": "",
+                      "value": ""
+                    }
+                  ],
+                  "anomalies": ""
+                }
+              },
+              "avg": {
+                "process_time": "",
+                "results": {}
+              }
+            },
+            "datetime_int": "",
+            "_id": "",
+            "metadata": {}
+          }
+        },
+        "general": {
+          "indicator": "",
+          "sections": [],
+          "pulse_info": {
+            "count": "",
+            "references": [],
+            "pulses": []
+          },
+          "base_indicator": {},
+          "validation": [],
+          "type": "",
+          "type_title": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Filehash",
+          "tooltip": "Enter SHA1/MD5/SHA256 of file to get its reputation",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_hash",
+          "description": "Value of the filehash for which you want to retrieve reputation from AlienVault-OTX."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_hostname_reputation",
+      "title": "Get Hostname Reputation",
+      "category": "investigation",
+      "annotation": "get_hostname_reputation",
+      "description": "Retrieves the reputation for a specified host based on parameters such as, the hostname that you have specified.",
+      "output_schema": {
+        "geo": {
+          "flag_url": "",
+          "city_data": "",
+          "city": "",
+          "region": "",
+          "charset": "",
+          "area_code": "",
+          "continent_code": "",
+          "country_code3": "",
+          "latitude": "",
+          "postal_code": "",
+          "longitude": "",
+          "country_code": "",
+          "country_name": "",
+          "asn": "",
+          "dma_code": "",
+          "flag_title": ""
+        },
+        "malware": {
+          "count": "",
+          "previous": "",
+          "data": [
+            {
+              "datetime_int": "",
+              "_id": "",
+              "hash": ""
+            }
+          ],
+          "size": "",
+          "next": ""
+        },
+        "general": {
+          "indicator": "",
+          "alexa": "",
+          "whois": "",
+          "type_title": "",
+          "base_indicator": {
+            "indicator": "",
+            "description": "",
+            "title": "",
+            "access_reason": "",
+            "access_type": "",
+            "content": "",
+            "type": "",
+            "id": ""
+          },
+          "pulse_info": {
+            "count": "",
+            "references": [],
+            "pulses": []
+          },
+          "domain": "",
+          "type": "",
+          "validation": [],
+          "sections": []
+        },
+        "url_list": {
+          "has_next": "",
+          "actual_size": "",
+          "url_list": [
+            {
+              "date": "",
+              "url": "",
+              "domain": "",
+              "hostname": "",
+              "encoded": ""
+            }
+          ],
+          "page_num": "",
+          "limit": "",
+          "full_size": "",
+          "paged": ""
+        },
+        "passive_dns": {
+          "passive_dns": [
+            {
+              "last": "",
+              "indicator_link": "",
+              "hostname": "",
+              "address": "",
+              "flag_url": "",
+              "flag_title": "",
+              "asset_type": "",
+              "first": ""
+            }
+          ],
+          "count": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Hostname",
+          "tooltip": "Name of the host for which you want to retrieve reputation",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "hostname",
+          "description": "Name of the host for which you want to retrieve reputation from AlienVault-OTX."
+        },
+        {
+          "title": "Section",
+          "tooltip": "Section of the indicator to get in response",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "General",
+            "Geo",
+            "Malware",
+            "URL List",
+            "Passive DNS"
+          ],
+          "name": "section",
+          "value": "General",
+          "description": "(Optional) Section of the indicator, the hostname in this case, whose details you want to retrieve from AlienVault-OTX.Choose from the following sections: General, Geo, Malware, URL List, or Passive DNS. For more information about the sections option, see https://otx.alienvault.com/api."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_all_indicators",
+      "title": "Get All Indicators",
+      "category": "investigation",
+      "annotation": "get_indicators",
+      "description": "Retrieves a list of all indicators based on various parameters such as indicator type and value that you have specified.",
+      "conditional_output_schema": [
+        {
+          "condition": "{{export_json === true}}",
+          "output_schema": {
+            "id": "",
+            "@id": "",
+            "file": {
+              "id": "",
+              "@id": "",
+              "file": [],
+              "size": "",
+              "@type": "",
+              "@context": "",
+              "filename": "",
+              "metadata": [],
+              "mimeType": "",
+              "thumbnail": "",
+              "uploadDate": ""
+            },
+            "name": "",
+            "type": "",
+            "@type": "",
+            "@context": "",
+            "createDate": "",
+            "createUser": {
+              "id": "",
+              "@id": "",
+              "name": "",
+              "@type": "",
+              "avatar": "",
+              "userId": "",
+              "userType": "",
+              "@settings": "",
+              "createDate": "",
+              "createUser": "",
+              "modifyDate": "",
+              "modifyUser": ""
+            },
+            "modifyDate": "",
+            "modifyUser": {
+              "id": "",
+              "@id": "",
+              "name": "",
+              "@type": "",
+              "avatar": "",
+              "userId": "",
+              "userType": "",
+              "@settings": "",
+              "createDate": "",
+              "createUser": "",
+              "modifyDate": "",
+              "modifyUser": ""
+            },
+            "recordTags": "",
+            "description": ""
+          }
+        },
+        {
+          "condition": "{{export_json === false}}",
+          "output_schema": {
+            "next": "",
+            "count": "",
+            "results": [
+              {
+                "id": "",
+                "type": "",
+                "title": "",
+                "content": "",
+                "indicator": "",
+                "description": ""
+              }
+            ],
+            "previous": ""
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Indicator Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "name": "indicator_type",
+          "options": [
+            "IPv4",
+            "IPv6",
+            "CIDR",
+            "Domain",
+            "Hostname",
+            "URL",
+            "URI",
+            "Email",
+            "CVE",
+            "FileHash-MD5",
+            "FileHash-SHA1",
+            "FileHash-SHA256",
+            "FileHash-IMPHASH",
+            "FileHash-PEHASH",
+            "FilePath",
+            "Mutex"
+          ],
+          "value": "IPv4",
+          "description": "(Optional) Type of indicator whose details you want to retrieve from AlienVault-OTX.Choose from the following indicator types: IPv4, IPv6, CIDR, Domain, Hostname, URL, URI, Email, CVE, FileHash-MD5, FileHash-SHA1, FileHash-SHA256, FileHash-IMPHASH, FileHash-PEHASH, FilePath, or Mutex."
+        },
+        {
+          "title": "Number of Records",
+          "description": "(Optional) Number of records that the operation should include per page.",
+          "tooltip": "Number of records to include in response",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 20
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page",
+          "value": 1,
+          "description": "(Optional) Page number from which you want to retrieve records."
+        },
+        {
+          "title": "From",
+          "tooltip": "Datetime from which you want to retrieve indicators. Note: to avoid 'Exceeded maximum number of retries' error use latest date",
+          "description": "(Optional) Datetime from which you want to retrieve indicators. The datetime must be in the ISO format (UTC). If you specify the datetime then only those indicators that are created or modified later then the specified datetime are retrieved. ",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "from_time"
+        },
+        {
+          "title": "Export In JSON",
+          "tooltip": "Export the complete result in the JSON format and save the result in the Attachment module in FortiSOAR",
+          "description": "Select this option to export the complete result in the JSON format and save the result in the Attachment module in FortiSOAR™.By default, this option is set as True.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "export_json",
+          "value": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_pulse_indicators",
+      "title": "Get Pulse Indicators",
+      "category": "investigation",
+      "annotation": "get_indicators",
+      "description": "Retrieves a list of all indicators based on the pulse ID that you have specified.",
+      "output_schema": [
+        {
+          "description": "",
+          "content": "",
+          "type": "",
+          "title": "",
+          "created": "",
+          "indicator": "",
+          "id": "",
+          "slug": "",
+          "pulse_key": ""
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Pulse ID",
+          "tooltip": "ID of the pulse to get its indicators",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pulse_id",
+          "description": "ID of the pulse based on which you want to retrieve the list of all indicators from AlienVault-OTX."
+        },
+        {
+          "title": "Include Inactive",
+          "tooltip": "Select this box if you wants to include inactive indicators into the response",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "value": false,
+          "name": "include_inactive",
+          "description": "Select this box if you wants to include inactive indicators into the response. Default is set to False"
+        },
+        {
+          "title": "Limit",
+          "tooltip": "Number of items to include in the response",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 1000,
+          "description": "Number of items to include in the response. Default limit is 1000"
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page",
+          "value": 1,
+          "description": "(Optional) Page number from which you want to retrieve records."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_pulse_details",
+      "title": "Get Pulse Details",
+      "category": "investigation",
+      "annotation": "get_pulse",
+      "description": "Retrieves details about a pulse based on the pulse ID that you have specified.",
+      "output_schema": {
+        "public": "",
+        "modified": "",
+        "name": "",
+        "author_name": "",
+        "created": "",
+        "tags": [],
+        "references": [],
+        "id": "",
+        "TLP": "",
+        "description": "",
+        "targeted_countries": [],
+        "revision": "",
+        "adversary": "",
+        "industries": [],
+        "indicators": [
+          {
+            "description": "",
+            "access_groups": [],
+            "created": "",
+            "expiration": "",
+            "id": "",
+            "indicator": "",
+            "content": "",
+            "role": "",
+            "access_type": "",
+            "observations": "",
+            "title": "",
+            "is_active": "",
+            "type": "",
+            "access_reason": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Pulse ID",
+          "tooltip": "ID of pulse whose details you want to retrieve",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pulse_id",
+          "description": "ID of pulse whose details you want to retrieve from AlienVault-OTX."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_shared_indicator_pulses",
+      "title": "Get Related Pulses",
+      "category": "investigation",
+      "annotation": "get_pulses",
+      "description": "Retrieves a list of pulses that share an indicator with the pulse that you have specified using the pulse ID.",
+      "output_schema": {
+        "count": "",
+        "previous": "",
+        "next": "",
+        "results": [
+          {
+            "public": "",
+            "id": "",
+            "industries": [],
+            "name": "",
+            "adversary": "",
+            "TLP": "",
+            "description": "",
+            "created": "",
+            "indicators": [
+              {
+                "id": "",
+                "description": "",
+                "created": "",
+                "content": "",
+                "indicator": "",
+                "type": "",
+                "title": ""
+              }
+            ],
+            "author_name": "",
+            "references": [],
+            "tags": [],
+            "revision": "",
+            "targeted_countries": [],
+            "modified": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Pulse ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pulse_id",
+          "description": "ID of pulse based on which you want to retrieve related pulses, i.e. pulses that share an indicator, from AlienVault-OTX."
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page_number",
+          "value": 1,
+          "description": "(Optional) Page number from which you want to retrieve records."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "get_subscribed_pulses",
+      "title": "Get Subscribed Pulses",
+      "category": "investigation",
+      "annotation": "get_pulses",
+      "description": "Retrieves a list of all subscribed pulses based on various parameters such as datetime that you have specified..",
+      "output_schema": {
+        "previous": "",
+        "count": "",
+        "next": "",
+        "results": [
+          {
+            "id": "",
+            "created": "",
+            "industries": [],
+            "targeted_countries": [],
+            "adversary": "",
+            "indicators": [
+              {
+                "id": "",
+                "type": "",
+                "created": "",
+                "description": "",
+                "content": "",
+                "title": "",
+                "indicator": ""
+              }
+            ],
+            "public": "",
+            "author_name": "",
+            "tlp": "",
+            "references": [],
+            "modified": "",
+            "description": "",
+            "extract_source": [],
+            "revision": "",
+            "tags": [],
+            "name": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Number of Records",
+          "tooltip": "Number of records to include per page, max value is 50 per page",
+          "description": "Number of records that the operation should include per page. Maximum value is 50",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 20
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page",
+          "value": 1,
+          "description": "(Optional) Page number from which you want to retrieve records."
+        },
+        {
+          "title": "From",
+          "tooltip": "Datetime from which you want to retrieve pulses.",
+          "description": "(Optional) Datetime from which you want to retrieve pulses. The datetime must be in the ISO format (UTC). If you specify the datetime then only those pulses that are created or modified later then the specified datetime are retrieved.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "from_time"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "run_query",
+      "title": "Run Query",
+      "category": "investigation",
+      "annotation": "run_query",
+      "description": "Runs a query that you have specified and fetches data from your AlienVault-OTX instance, based on the input filters.",
+      "output_schema": "",
+      "parameters": [
+        {
+          "title": "URL",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query_url",
+          "description": "URL of the input query.For example, https://otx.alienvault.com/api/v1/indicators/export?types=IPv6&limit=10&page=1.For more information, see the API document at https://otx.alienvault.com/api."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "search_pulses",
+      "title": "Search Pulses",
+      "description": "Searches for pulses that match the text that you have specified in the input parameters.",
+      "category": "investigation",
+      "annotation": "search_pulse",
+      "output_schema": {
+        "exact_match": "",
+        "next": "",
+        "results": [
+          {
+            "created": "",
+            "TLP": "",
+            "author_name": "",
+            "industries": [],
+            "revision": "",
+            "id": "",
+            "tags": [],
+            "indicators": [
+              {
+                "created": "",
+                "indicator": "",
+                "type": "",
+                "content": "",
+                "id": "",
+                "title": "",
+                "description": ""
+              }
+            ],
+            "description": "",
+            "name": "",
+            "modified": "",
+            "references": [],
+            "public": "",
+            "adversary": "",
+            "targeted_countries": []
+          }
+        ],
+        "count": "",
+        "previous": ""
+      },
+      "parameters": [
+        {
+          "title": "Text",
+          "tooltip": "Input text for pulses that you want to search for",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "user_text",
+          "description": "Pulses that you want to search for on AlienVault-OTX"
+        },
+        {
+          "title": "Number of Records",
+          "tooltip": "Number of records to return in response. Default set to 50 and max value is 100 per page",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "description": "(Optional) Number of records that the operation should include per page. Default set to 50 and max value is 100 per page"
+        },
+        {
+          "title": "Page Number",
+          "tooltip": "Page number from which you want to retrieve records",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "page",
+          "value": 1,
+          "description": "(Optional) Page number from which you want to retrieve records."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "subscribe_pulse",
+      "title": "Subscribe to Pulse",
+      "category": "investigation",
+      "annotation": "subscribe_pulse",
+      "description": "Subscribes to a particular pulse based on the pulse ID that you have specified.",
+      "output_schema": {
+        "status": "",
+        "subscriber_count": ""
+      },
+      "parameters": [
+        {
+          "title": "Pulse ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pulse_id",
+          "description": "ID of pulse to which you want to subscribe."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "unsubscribe_pulse",
+      "title": "Unsubscribe from Pulse",
+      "category": "investigation",
+      "annotation": "unsubscribe_pulse",
+      "description": "Unsubscribes from a particular pulse based on the pulse ID that you have specified.",
+      "output_schema": {
+        "status": "",
+        "subscriber_count": ""
+      },
+      "parameters": [
+        {
+          "title": "Pulse ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pulse_id",
+          "description": "ID of pulse from which you want to unsubscribe."
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "user_action",
+      "title": "User Actions",
+      "description": "Allows you to perform actions, such as follow, subscribe, etc for a specified user on the AlienVault-OTX server based on the username that you have specified.",
+      "output_schema": {
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Username",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "username",
+          "description": "Name of the user on whom you want to perform the selected action."
+        },
+        {
+          "title": "Action",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "user_action",
+          "options": [
+            "Subscribe",
+            "Unsubscribe",
+            "Follow",
+            "Unfollow"
+          ],
+          "description": "Action that you want to perform on the select user. Choose from the following actions: Subscribe, Unsubscribe, Follow, or Unfollow."
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,298 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - AbuseIPDB - 2.0.0",
+      "description": "Sample playbooks for \"AbuseIPDB\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "/api/3/images/317e831c-4495-48ac-8a6c-b60fff509597",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Report IP",
+          "aliasName": null,
+          "description": "Report about a IP",
+          "collection": "/api/3/workflow_collections/3c6463e1-e876-4dc6-85cd-c3e527def69a",
+          "tag": "#AbuseIPDB",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/8618e07b-d049-4f36-a69f-cb827c20e211",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "98cccb47-c369-4b15-976c-ad7eda174b79",
+                "title": "AbuseIPDB: Report IP",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "125",
+              "top": "30",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "8618e07b-d049-4f36-a69f-cb827c20e211"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Report IP",
+              "description": null,
+              "arguments": {
+                "name": "AbuseIPDB",
+                "config": "",
+                "params": {
+                  "ip": "185.53.178.22",
+                  "comment": "",
+                  "categories": "Web Spam"
+                },
+                "version": "2.0.0",
+                "connector": "abuseipdb",
+                "operation": "report_ip",
+                "operationTitle": "Report IP to AbuseIPB",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "125",
+              "top": "165",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "3825cc67-7563-4a39-adec-2106e6020660"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3d8d5d43-4adc-46fe-86e9-283b99b44581",
+              "name": "Start -> Report IP",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/3825cc67-7563-4a39-adec-2106e6020660",
+              "sourceStep": "/api/3/workflow_steps/8618e07b-d049-4f36-a69f-cb827c20e211"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1583312140,
+          "uuid": "149300f9-6e97-4844-b627-1323705668b2",
+          "recordTags": [
+            "/api/3/tags/abuseipdb"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "IP Lookup",
+          "aliasName": null,
+          "description": "Get Info about a IP",
+          "collection": "/api/3/workflow_collections/3c6463e1-e876-4dc6-85cd-c3e527def69a",
+          "tag": "#AbuseIPDB",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/bdd26168-a263-4815-8d8c-ed74362b5402",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a1b65a2f-0180-4042-8d82-ee3c9cdd56a3",
+                "title": "AbuseIPDB: Lookup IP",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "125",
+              "top": "30",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "bdd26168-a263-4815-8d8c-ed74362b5402"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "IP Lookup",
+              "description": null,
+              "arguments": {
+                "name": "AbuseIPDB",
+                "config": "",
+                "params": {
+                  "ip": "183.82.121.81",
+                  "days": 10
+                },
+                "version": "2.0.0",
+                "connector": "abuseipdb",
+                "operation": "ip_lookup",
+                "operationTitle": "IP Lookup",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "125",
+              "top": "165",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e4fdd491-05e0-4cdf-a4aa-56786144b9c7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b4d46e75-310a-4c5d-b95a-3b0679cf43e9",
+              "name": "Start -> Lookup IP",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e4fdd491-05e0-4cdf-a4aa-56786144b9c7",
+              "sourceStep": "/api/3/workflow_steps/bdd26168-a263-4815-8d8c-ed74362b5402"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1583312057,
+          "uuid": "9fbe251e-7a48-41c3-bf42-9b84afc5bd36",
+          "recordTags": [
+            "/api/3/tags/abuseipdb"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get IP Backlist",
+          "aliasName": null,
+          "description": "Retrieves list of the reported IP address in AbuseIPDB",
+          "collection": "/api/3/workflow_collections/3c6463e1-e876-4dc6-85cd-c3e527def69a",
+          "tag": "#AbuseIPDB",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/72e710fa-2b9b-4a17-9169-0605a30e9440",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "aa2c43a0-0052-4f71-81d3-85067e6b0ebb",
+                "title": "AbuseIPDB: Get IP Backlist",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "125",
+              "top": "30",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "72e710fa-2b9b-4a17-9169-0605a30e9440"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get IP Blacklist",
+              "description": null,
+              "arguments": {
+                "name": "AbuseIPDB",
+                "config": "",
+                "params": {
+                  "confidenceMinimum": ""
+                },
+                "version": "2.0.0",
+                "connector": "abuseipdb",
+                "operation": "get_ip_blacklist",
+                "operationTitle": "Get IP Blacklist",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "125",
+              "top": "165",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "22795fd4-acee-48c2-a381-48e4423c0c07"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ae177b34-8ddd-43f4-9fad-ac0f57c16150",
+              "name": "Start -> Get IP Blacklist",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/22795fd4-acee-48c2-a381-48e4423c0c07",
+              "sourceStep": "/api/3/workflow_steps/72e710fa-2b9b-4a17-9169-0605a30e9440"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1583312214,
+          "uuid": "f50d4940-508f-4109-9412-402130c41ee8",
+          "recordTags": [
+            "/api/3/tags/abuseipdb"
+          ],
+          "isPrivate": false,
+          "owners": []
+        }
+      ],
+      "uuid": "3c6463e1-e876-4dc6-85cd-c3e527def69a",
+      "recordTags": []
+    }
+  ],
+  "exported_tags": [
+    "abuseipdb"
+  ]
+}

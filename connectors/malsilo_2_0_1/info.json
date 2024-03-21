@@ -1,0 +1,173 @@
+{
+  "name": "malsilo",
+  "label": "MalSilo",
+  "description": "Ingest Threat Intel Feeds from MalSilo Gitlab. <br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "2.0.1",
+  "category": "ThreatIntel",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.1/malsilo/340/malsilo-v2-0-1",
+  "ingestion_supported": true,
+  "tags": [
+    "ThreatIntel"
+  ],
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "ingestion_preferences": {
+    "modules": ["threat_intel_feeds", "indicators"]
+  },
+  "configuration": {
+    "fields": [
+      {
+        "title": "IPv4 List URL",
+        "name": "ipv4_url",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "value": "https://malsilo.gitlab.io/feeds/dumps/ip_list.txt",
+        "tooltip": "URL to pull the IPv4 type feeds from",
+        "description": "URL to pull the IPv4 type feeds from"
+      },
+      {
+        "title": "URL List URL",
+        "name": "url_url",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "value": "https://malsilo.gitlab.io/feeds/dumps/url_list.txt",
+        "tooltip": "URL to pull the URL type feeds from",
+        "description": "URL to pull the URL type feeds from"
+      },
+      {
+        "title": "Domain List URL",
+        "name": "domain_url",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "value": "https://malsilo.gitlab.io/feeds/dumps/domain_list.txt",
+        "tooltip": "URL to pull the Domain type feeds from",
+        "description": "URL to pull the Domain type feeds from"
+      },
+      {
+        "type": "checkbox",
+        "editable": true,
+        "title": " Verify SSL",
+        "name": "verify_ssl",
+        "visible": true,
+        "required": false,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_ipv4_feed",
+      "title": "Get IPv4 Feeds",
+      "description": "Fetches the threat intelligence feeds of type IPv4 from Malsilo.",
+      "enabled": true,
+      "annotation": "get_ipv4_feed",
+      "category": "get_feed",
+      "parameters": [
+        {
+          "title": "Last Pull Time",
+          "description": "Last time the feeds were pulled",
+          "type": "text",
+          "name": "last_pull_time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Time when feeds where pulled",
+          "placeholder": "yyyy-mm-dd hh:mm:ss"
+        }
+      ],
+      "output_schema": {
+        "generatedAt": "",
+        "feed": [
+          {
+            "value": "",
+            "type": "",
+            "tags ": "",
+            "threat": "",
+            "Lastseen": "",
+            "Firstseen": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_url_feed",
+      "title": "Get URL Feeds",
+      "description": "Fetches the threat intelligence feeds of type URL from Malsilo.",
+      "enabled": true,
+      "annotation": "get_url_feed",
+      "category": "get_feed",
+      "parameters": [
+        {
+          "title": "Last Pull Time",
+          "description": "Last time the feeds were pulled",
+          "type": "text",
+          "name": "last_pull_time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Time when feeds where pulled",
+          "placeholder": "yyyy-mm-dd hh:mm:ss"
+        }
+      ],
+      "output_schema": {
+        "generatedAt": "",
+        "feed": [
+          {
+            "value": "",
+            "type": "",
+            "tags ": "",
+            "threat": "",
+            "Lastseen": "",
+            "Firstseen": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "get_domain_feed",
+      "title": "Get Domain Feeds",
+      "description": "Fetches the threat intelligence feeds of type Domain from Malsilo.",
+      "enabled": true,
+      "annotation": "get_domain_feed",
+      "category": "get_feed",
+      "parameters": [
+        {
+          "title": "Last Pull Time",
+          "description": "Last time the feeds were pulled",
+          "type": "text",
+          "name": "last_pull_time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Time when feeds where pulled",
+          "placeholder": "yyyy-mm-dd hh:mm:ss"
+        }
+      ],
+      "output_schema": {
+        "generatedAt": "",
+        "feed": [
+          {
+            "value": "",
+            "type": "",
+            "tags ": "",
+            "threat": "",
+            "Lastseen": "",
+            "Firstseen": ""
+          }
+        ]
+      }
+    }
+  ]
+}

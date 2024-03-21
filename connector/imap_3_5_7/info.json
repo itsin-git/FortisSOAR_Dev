@@ -1,0 +1,278 @@
+{
+  "name": "imap",
+  "version": "3.5.7",
+  "label": "IMAP",
+  "description": "Steps related to fetching and parsing email",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "utilities",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/3.5.7/imap-connector/401/imap-connector-v3-5-7",
+  "icon_small_name": "imap_small.png",
+  "icon_large_name": "imap_large.png",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "notification",
+    "scheduled"
+  ],
+  "configuration": {
+    "fields": [
+      {
+        "title": "HOST",
+        "name": "host",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "PORT",
+        "name": "port",
+        "type": "text",
+        "value": "993",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Username",
+        "name": "username",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Password",
+        "name": "password",
+        "type": "password",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Use TLS",
+        "name": "ssl",
+        "type": "checkbox",
+        "visible": true,
+        "editable": true,
+        "required": false,
+        "value": true
+      },
+      {
+        "title": "Email Source",
+        "name": "source",
+        "value": "INBOX",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Email destination",
+        "name": "destination",
+        "value": "PROCESSED",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify",
+        "type": "checkbox",
+        "visible": true,
+        "editable": true,
+        "required": false,
+        "value": true
+      },
+      {
+        "title": "Enable Email Notification Service",
+        "name": "notification_service",
+        "description": "Boolean to indicate whether to notify for new mail",
+        "type": "checkbox",
+        "tooltip": "It will set up a listener that would instantly notify FortiSOAR when a new email arrives in the mailbox.",
+        "visible": true,
+        "required": false,
+        "editable": true,
+        "onchange": {
+          "true": [
+            {
+              "title": "Listener Port",
+              "name": "listener_port",
+              "type": "integer",
+              "value": 10010,
+              "visible": true,
+              "editable": true,
+              "required": true
+            },
+            {
+              "title": "Playbook Trigger",
+              "name": "trigger",
+              "type": "text",
+              "value": "fetch_emails_imap",
+              "visible": true,
+              "editable": true,
+              "required": false
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "fetch_email",
+      "annotation": "fetch_email",
+      "description": "A task for fetching email from an inbox and breaks apart the various sections of an email. Returns a dictionary with parts of the email as keys",
+      "title": "Fetch Email(s) Deprecated",
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": [
+        {
+          "raw": "",
+          "file": "",
+          "headers": "",
+          "preamble": "",
+          "body": {
+            "text": "",
+            "html": "",
+            "json": ""
+          },
+          "attachment_files": [],
+          "attachments": [
+            {
+              "file": "",
+              "file-type": "",
+              "text": "",
+              "json": "",
+              "ExplodedEmailFile":{
+                  "body": {
+                    "content": "",
+                    "indicators": {
+                      "value": "",
+                      "picklist_iri": "",
+                      "type": ""
+                    }
+                  },
+                  "header": {
+                    "from": "",
+                    "to": [],
+                    "cc": [],
+                    "bcc": [],
+                    "subject": "",
+                    "messageid": [],
+                    "date": "",
+                    "recieved": []
+                  },
+                  "metadata": {}
+              },
+              "metadata": {}
+            }
+          ],
+          "epilogue": ""
+        }
+      ]
+    },
+    {
+      "operation": "fetch_email_new",
+      "annotation": "fetch_email",
+      "description": "A task for fetching email from an inbox and breaks apart the various sections of an email. Returns a dictionary with parts of the email as keys",
+      "title": "Fetch Email(s)",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Maximum number of emails to fetch",
+          "name": "limit_count",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": 30
+        },
+        {
+          "title": "Parse inline images",
+          "tooltip": "Inline images with 'cid' tag in the email body will be replaced with the corresponding base64 encoded content for rendering in a rich text editor",
+          "name": "parse_inline_image",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": true
+        }
+      ],
+      "output_schema": [
+        {
+          "raw": "",
+          "file": "",
+          "headers": "",
+          "preamble": "",
+          "body": {
+            "text": "",
+            "html": "",
+            "json": ""
+          },
+          "attachment_files": [],
+          "attachments": [
+            {
+              "file": "",
+              "file-type": "",
+              "text": "",
+              "json": "",
+              "ExplodedEmailFile": {
+                "body": {
+                  "content": "",
+                  "indicators": {
+                    "value": "",
+                    "picklist_iri": "",
+                    "type": ""
+                  }
+                },
+                "headers": {
+                  "from": "",
+                  "to": [],
+                  "cc": [],
+                  "bcc": [],
+                  "subject": "",
+                  "messageid": [],
+                  "date": "",
+                  "recieved": []
+                },
+                "attachments":[],
+                "metadata": {}
+              },
+              "metadata": {}
+            }
+          ],
+          "parsed_attachment_data": [
+            {
+              "body": {
+                "content": "",
+                "indicators": {
+                  "value": "",
+                  "picklist_iri": "",
+                  "type": ""
+                }
+              },
+              "headers": {
+                "from": "",
+                "to": [],
+                "cc": [],
+                "bcc": [],
+                "subject": "",
+                "messageid": [],
+                "date": "",
+                "recieved": []
+              },
+              "attachments":[],
+              "metadata": {}
+            }
+          ],
+          "total_unread_emails":"",
+          "epilogue": ""
+        }
+      ]
+    }
+  ]
+}

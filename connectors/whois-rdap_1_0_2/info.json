@@ -1,0 +1,133 @@
+{
+  "name": "whois-rdap",
+  "label": "Whois RDAP",
+  "version": "1.0.2",
+  "description": "Whois RDAP is a service that enables you to retrieve information about the location of IP addresses, servers, or websites. You can find out the owner of the Internet resource and their contact details. using this connector we can retrieving whois information for given IP Address.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "small-whois.png",
+  "icon_large_name": "large-whois.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.2/whois-rdap/413/whois-rdap-v1-0-2",
+  "tags": [
+    "Enrichment",
+    "IP_Enrichment"
+  ],
+  "configuration": {
+    "fields": [
+    ]
+  },
+  "operations": [
+    {
+      "operation": "whois_ip",
+      "title": "Whois IP",
+      "description": "Retrieves the Whois data from the Whois RDAP service based on the IP address you have specified.",
+      "category": "investigation",
+      "annotation": "whois_ip",
+      "output_schema": {
+        "query": "",
+        "entities": [],
+        "asn_cidr": "",
+        "asn_description": "",
+        "asn": "",
+        "asn_date": "",
+        "raw": "",
+        "asn_registry": "",
+        "objects": [
+          {
+            "raw": "",
+            "contact": {
+              "phone": null,
+              "role": null,
+              "email": null,
+              "name": "",
+              "title": null,
+              "kind": "",
+              "address": [
+                {
+                  "value": "",
+                  "type": null
+                }
+              ]
+            },
+            "roles": [],
+            "entities": [],
+            "remarks": null,
+            "handle": "",
+            "events_actor": null,
+            "events": [
+              {
+                "timestamp": "",
+                "action": "",
+                "actor": null
+              },
+              {
+                "timestamp": "",
+                "action": "",
+                "actor": null
+              }
+            ],
+            "notices": null,
+            "status": null,
+            "links": []
+          }
+        ],
+        "asn_country_code": "",
+        "nir": null,
+        "network": {
+          "ip_version": "",
+          "cidr": "",
+          "notices": [
+            {
+              "description": "",
+              "links": [],
+              "title": ""
+            },
+            {
+              "description": "",
+              "links": [],
+              "title": ""
+            }
+          ],
+          "status": null,
+          "links": [],
+          "raw": null,
+          "end_address": "",
+          "type": null,
+          "country": null,
+          "remarks": null,
+          "handle": "",
+          "name": "",
+          "start_address": "",
+          "parent_handle": "",
+          "events": [
+            {
+              "timestamp": "",
+              "action": "",
+              "actor": null
+            },
+            {
+              "timestamp": "",
+              "action": "",
+              "actor": null
+            }
+          ]
+        }
+      },
+      "parameters": [
+        {
+          "title": "IP Address",
+          "name": "ip",
+          "type": "text",
+          "tooltip": "Specify the IPv4 or IPv6 address for which you want to retrieve Whois data.",
+          "description": "Specify the IPv4 or IPv6 address for which you want to retrieve Whois data.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

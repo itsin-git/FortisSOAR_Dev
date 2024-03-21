@@ -1,0 +1,861 @@
+{
+  "name": "fortinet-forticlient-ems",
+  "label": "Fortinet FortiClient EMS",
+  "version": "1.1.0",
+  "description": "FortiClient Enterprise Management Server (FortiClient EMS) is a security management solution that enables scalable and centralized management of multiple endpoints (computers).This connector provides operations related to quarantine/unquarantine endpoints, get endpoint details, etc",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Endpoint Security",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/fortinet-forticlient-ems/493/fortinet-forticlient-ems-v1-1-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "description": "The URL of the FortiClient EMS server to which you will connect and perform automated operations.",
+        "type": "text",
+        "name": "server"
+      },
+      {
+        "title": "Username",
+        "tooltip": "Username of EMS server or Type domain name\\domain user name or domain netbios name\\domain user name to log in via a domain",
+        "required": true,
+        "editable": true,
+        "description": "The username used to access the FortiClient EMS server to which you will connect and perform the automated operations.",
+        "visible": true,
+        "type": "text",
+        "name": "username"
+      },
+      {
+        "title": "Password",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "description": "The Password used to access the FortiClient EMS server to which you will connect and perform the automated operations.",
+        "type": "password",
+        "name": "password"
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_endpoints",
+      "title": "Get All Endpoints",
+      "description": "Retrieves a list of all the endpoints or the specific endpoints connected to the specified Fortinet FortiClient EMS server based on the input parameters you have specified.",
+      "enabled": true,
+      "annotation": "get_endpoints",
+      "category": "investigation",
+      "output_schema": {
+        "result": {
+          "retval": "",
+          "message": ""
+        },
+        "data": {
+          "endpoints": [
+            {
+              "device_id": "",
+              "name": "",
+              "ip_addr": "",
+              "os_version": "",
+              "group_id": "",
+              "group_name": "",
+              "group_path": "",
+              "orig_group_name": "",
+              "domain_id": "",
+              "installer_name": "",
+              "deployment_state": "",
+              "fgt_sn": "",
+              "forticlient_id": "",
+              "uid": "",
+              "fct_version": "",
+              "diskenc": "",
+              "av_product": "",
+              "is_installed": "",
+              "is_managed": "",
+              "is_migrating": "",
+              "is_ems_registered": "",
+              "is_ems_online": "",
+              "is_ems_onnet": "",
+              "is_excluded": "",
+              "is_quarantined": "",
+              "quarantine_access_code": "",
+              "comparable_fct_version": "",
+              "last_seen": "",
+              "last_seen_fct_user_id": "",
+              "endpoint_policy_name": "",
+              "endpoint_policy_id": "",
+              "ip_list_name": "",
+              "av_enabled": "",
+              "rtp_enabled": "",
+              "ae_enabled": "",
+              "cs_enabled": "",
+              "rm_enabled": "",
+              "fw_enabled": "",
+              "wf_enabled": "",
+              "vpn_enabled": "",
+              "vuln_enabled": "",
+              "ssoma_enabled": "",
+              "sb_enabled": "",
+              "sb_cloud_enabled": "",
+              "rs_enabled": "",
+              "onboarding_supported": "",
+              "client_version_up_to_date": "",
+              "client_av_sig_version_up_to_date": "",
+              "client_policy_synced": "",
+              "client_policy_primary_synced": "",
+              "client_policy_offnet_synced": "",
+              "client_policy_iplist_synced": "",
+              "client_policy_onnet_rule_synced": "",
+              "client_policy_verification_rule_synced": "",
+              "client_policy_certs_synced": "",
+              "av_events_count": "",
+              "wf_events_count": "",
+              "fw_events_count": "",
+              "sb_events_count": "",
+              "ae_events_count": "",
+              "rm_events_count": "",
+              "cs_events_count": "",
+              "unreg_events_count": "",
+              "rs_events_count": "",
+              "vuln_events_count": "",
+              "vuln_events_max_severity": "",
+              "profile_components": {
+                "vpn": {
+                  "id": "",
+                  "name": ""
+                },
+                "ztna": {
+                  "id": "",
+                  "name": ""
+                },
+                "webfilter": {
+                  "id": "",
+                  "name": "",
+                  "fp_name": ""
+                },
+                "vulnerability_scan": {
+                  "id": "",
+                  "name": ""
+                },
+                "malware": {
+                  "id": "",
+                  "name": ""
+                },
+                "sandbox": {
+                  "id": "",
+                  "name": ""
+                },
+                "firewall": {
+                  "id": "",
+                  "name": ""
+                },
+                "system": {
+                  "id": "",
+                  "name": ""
+                }
+              },
+              "off_net_profile_components": {
+                "vpn": {
+                  "id": "",
+                  "name": ""
+                },
+                "ztna": {
+                  "id": "",
+                  "name": ""
+                },
+                "webfilter": {
+                  "id": "",
+                  "name": "",
+                  "fp_name": ""
+                },
+                "vulnerability_scan": {
+                  "id": "",
+                  "name": ""
+                },
+                "malware": {
+                  "id": "",
+                  "name": ""
+                },
+                "sandbox": {
+                  "id": "",
+                  "name": ""
+                },
+                "firewall": {
+                  "id": "",
+                  "name": ""
+                },
+                "system": {
+                  "id": "",
+                  "name": ""
+                }
+              },
+              "fct_users": [
+                {
+                  "auth_user_name": "",
+                  "machine_user_name": "",
+                  "auth_user_id": "",
+                  "machine_user_id": "",
+                  "auth_domain": "",
+                  "machine_domain": "",
+                  "avatar": "",
+                  "fct_user_id": "",
+                  "client_id": "",
+                  "last_seen": "",
+                  "is_authenticated": "",
+                  "user_email": "",
+                  "user_phone": "",
+                  "row_no": ""
+                }
+              ]
+            }
+          ],
+          "total": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Device ID",
+          "tooltip": "Specify the ID of the device for which you want to retrieve endpoints from FortiClient EMS.",
+          "type": "integer",
+          "name": "device_id",
+          "description": "Specify the ID of the device for which you want to retrieve endpoints from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Group ID",
+          "tooltip": "Specify the ID of the group for which you want to retrieve endpoints from FortiClient EMS.",
+          "type": "integer",
+          "name": "group_id",
+          "description": "Specify the ID of the group for which you want to retrieve endpoints from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Client ID",
+          "tooltip": "Specify the ID of the client for which you want to retrieve endpoints from FortiClient EMS.",
+          "type": "integer",
+          "name": "client_id",
+          "description": "Specify the ID of the client for which you want to retrieve endpoints from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Client OS",
+          "tooltip": "Specify the OS of the client for which you want to retrieve endpoints from FortiClient EMS.",
+          "type": "text",
+          "name": "client_os",
+          "description": "Specify the OS of the client for which you want to retrieve endpoints from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Client Version",
+          "tooltip": "Specify the version of the client for which you want to retrieve endpoints from FortiClient EMS.",
+          "type": "text",
+          "name": "client_version",
+          "description": "Specify the version of the client for which you want to retrieve endpoints from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Activity",
+          "tooltip": "Select the activity based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: EMS On Net, EMS Off Net, or Total.",
+          "type": "select",
+          "name": "activity",
+          "description": "Select the activity based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: EMS On Net, EMS Off Net, or Total.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "EMS On Net",
+            "EMS Off Net",
+            "Total"
+          ]
+        },
+        {
+          "title": "Connection",
+          "tooltip": "Select the connection based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: Online, OfflineLong, OfflineNominal, OfflineRecent, or Total.",
+          "type": "select",
+          "name": "connection",
+          "description": "Select the connection based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: Online, OfflineLong, OfflineNominal, OfflineRecent, or Total.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Online",
+            "OfflineLong",
+            "OfflineNominal",
+            "OfflineRecent",
+            "Total"
+          ]
+        },
+        {
+          "title": "Event Type",
+          "tooltip": "Select the type of event based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the options such as Antivirus, AntiRansomware, AntiExploit, CloudScan, RemovableMedia, etc.",
+          "type": "select",
+          "name": "event_type",
+          "description": "Select the type of event based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the options such as Antivirus, AntiRansomware, AntiExploit, CloudScan, RemovableMedia, etc.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Antivirus",
+            "AntiRansomware",
+            "AntiExploit",
+            "CloudScan",
+            "RemovableMedia",
+            "Sandbox",
+            "Firewall",
+            "WebFilter",
+            "Vulnerability",
+            "Vulnerability Critical High",
+            "System",
+            "Antivirus Unprotected",
+            "Software OOD",
+            "Signature OOD",
+            "Policy OOS",
+            "Quarantined"
+          ]
+        },
+        {
+          "title": "Management",
+          "tooltip": "Select the management based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: Managed, Unmanaged, or Total.",
+          "type": "select",
+          "name": "management",
+          "description": "Select the management based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: Managed, Unmanaged, or Total.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Managed",
+            "Unmanaged",
+            "Total"
+          ]
+        },
+        {
+          "title": "Status",
+          "tooltip": "Select the status based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the options such as Not Installed, Unregistered, OutOfSync, SecurityRisk, etc.",
+          "type": "select",
+          "name": "status",
+          "description": "Select the status based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the options such as Not Installed, Unregistered, OutOfSync, SecurityRisk, etc.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Not Installed",
+            "Unregistered",
+            "OutOfSync",
+            "SecurityRisk",
+            "Quarantined",
+            "UnVerified",
+            "Verification Unsupported"
+          ]
+        },
+        {
+          "title": "View Type",
+          "tooltip": "Select the view type based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: ALL, Device, or User.",
+          "type": "select",
+          "name": "view_type",
+          "description": "Select the view type based on which you want to filter the endpoints retrieved from FortiClient EMS. You can choose from the following options: ALL, Device, or User.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "ALL",
+            "Device",
+            "User"
+          ]
+        },
+        {
+          "title": "Verification",
+          "tooltip": "Specify the verification, in the JSON format, based on which you want to filter the endpoints retrieved from FortiClient EMS.",
+          "type": "json",
+          "name": "verification",
+          "description": "Specify the verification, in the JSON format, based on which you want to filter the endpoints retrieved from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Filters",
+          "tooltip": "Specify the filters, in the JSON format, using which you want to filter the endpoints retrieved from FortiClient EMS.",
+          "type": "json",
+          "name": "filters",
+          "description": "Specify the filters, in the JSON format, using which you want to filter the endpoints retrieved from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Order By",
+          "tooltip": "Specify the option based on which you want to order the endpoints retrieved from FortiClient EMS. For e.g device, name, deviceGroup, deviceOS, fctVersion, fctUid, deploymentName, etc",
+          "type": "text",
+          "name": "order_by",
+          "description": "Specify the option based on which you want to order the endpoints retrieved from FortiClient EMS.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": "name",
+          "placeholder": "e.g device, name, deviceGroup, deviceOS, fctVersion, fctUid, deploymentName, etc"
+        },
+        {
+          "title": "Sort Order",
+          "tooltip": "Select the checkbox (by default it is selected) to sort the endpoints retrieved from FortiClient EMS in an 'ascending' order.",
+          "type": "checkbox",
+          "name": "order_asc",
+          "description": "Select the checkbox (by default it is selected) to sort the endpoints retrieved from FortiClient EMS in an 'ascending' order.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": true
+        },
+        {
+          "title": "Count",
+          "tooltip": "Specify the maximum number of results, per page, that this operation should return in its response.",
+          "type": "integer",
+          "name": "count",
+          "description": "Specify the maximum number of results, per page, that this operation should return in its response.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 50
+        },
+        {
+          "title": "Offset",
+          "tooltip": "Specify the index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say endpoints starting from the 10th endpoint. By default, this is set as 0.",
+          "type": "integer",
+          "name": "offset",
+          "description": "Specify the index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say endpoints starting from the 10th endpoint. By default, this is set as 0.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 0
+        },
+        {
+          "title": "Custom Properties",
+          "name": "custom_attributes",
+          "type": "json",
+          "description": "Additional properties (fields), in the JSON format, that you want to associate with the endpoint retrieved from FortiClient EMS.",
+          "tooltip": "Additional properties (fields), in the JSON format, that you want to associate with the endpoint retrieved from FortiClient EMS.",
+          "visible": true,
+          "required": false,
+          "editable": true
+        }
+      ]
+    },
+    {
+      "operation": "get_endpoint_details",
+      "title": "Get Endpoint Details",
+      "description": "Retrieves details for a specific endpoint from the Fortinet FortiClient EMS server based on the device ID you have specified.",
+      "enabled": true,
+      "annotation": "get_endpoints",
+      "category": "investigation",
+      "output_schema": {
+        "result": {
+          "retval": "",
+          "message": ""
+        },
+        "data": {
+          "endpoints": [
+            {
+              "device_id": "",
+              "name": "",
+              "ip_addr": "",
+              "os_version": "",
+              "group_id": "",
+              "group_name": "",
+              "group_path": "",
+              "orig_group_name": "",
+              "domain_id": "",
+              "installer_name": "",
+              "deployment_state": "",
+              "fgt_sn": "",
+              "forticlient_id": "",
+              "uid": "",
+              "fct_version": "",
+              "diskenc": "",
+              "av_product": "",
+              "is_installed": "",
+              "is_managed": "",
+              "is_migrating": "",
+              "is_ems_registered": "",
+              "is_ems_online": "",
+              "is_ems_onnet": "",
+              "is_excluded": "",
+              "is_quarantined": "",
+              "quarantine_access_code": "",
+              "comparable_fct_version": "",
+              "last_seen": "",
+              "last_seen_fct_user_id": "",
+              "endpoint_policy_name": "",
+              "endpoint_policy_id": "",
+              "ip_list_name": "",
+              "av_enabled": "",
+              "rtp_enabled": "",
+              "ae_enabled": "",
+              "cs_enabled": "",
+              "rm_enabled": "",
+              "fw_enabled": "",
+              "wf_enabled": "",
+              "vpn_enabled": "",
+              "vuln_enabled": "",
+              "ssoma_enabled": "",
+              "sb_enabled": "",
+              "sb_cloud_enabled": "",
+              "rs_enabled": "",
+              "onboarding_supported": "",
+              "client_version_up_to_date": "",
+              "client_av_sig_version_up_to_date": "",
+              "client_policy_synced": "",
+              "client_policy_primary_synced": "",
+              "client_policy_offnet_synced": "",
+              "client_policy_iplist_synced": "",
+              "client_policy_onnet_rule_synced": "",
+              "client_policy_verification_rule_synced": "",
+              "client_policy_certs_synced": "",
+              "av_events_count": "",
+              "wf_events_count": "",
+              "fw_events_count": "",
+              "sb_events_count": "",
+              "ae_events_count": "",
+              "rm_events_count": "",
+              "cs_events_count": "",
+              "unreg_events_count": "",
+              "rs_events_count": "",
+              "vuln_events_count": "",
+              "vuln_events_max_severity": "",
+              "profile_components": {
+                "vpn": {
+                  "id": "",
+                  "name": ""
+                },
+                "ztna": {
+                  "id": "",
+                  "name": ""
+                },
+                "webfilter": {
+                  "id": "",
+                  "name": "",
+                  "fp_name": ""
+                },
+                "vulnerability_scan": {
+                  "id": "",
+                  "name": ""
+                },
+                "malware": {
+                  "id": "",
+                  "name": ""
+                },
+                "sandbox": {
+                  "id": "",
+                  "name": ""
+                },
+                "firewall": {
+                  "id": "",
+                  "name": ""
+                },
+                "system": {
+                  "id": "",
+                  "name": ""
+                }
+              },
+              "off_net_profile_components": {
+                "vpn": {
+                  "id": "",
+                  "name": ""
+                },
+                "ztna": {
+                  "id": "",
+                  "name": ""
+                },
+                "webfilter": {
+                  "id": "",
+                  "name": "",
+                  "fp_name": ""
+                },
+                "vulnerability_scan": {
+                  "id": "",
+                  "name": ""
+                },
+                "malware": {
+                  "id": "",
+                  "name": ""
+                },
+                "sandbox": {
+                  "id": "",
+                  "name": ""
+                },
+                "firewall": {
+                  "id": "",
+                  "name": ""
+                },
+                "system": {
+                  "id": "",
+                  "name": ""
+                }
+              },
+              "fct_users": [
+                {
+                  "auth_user_name": "",
+                  "machine_user_name": "",
+                  "auth_user_id": "",
+                  "machine_user_id": "",
+                  "auth_domain": "",
+                  "machine_domain": "",
+                  "avatar": "",
+                  "fct_user_id": "",
+                  "client_id": "",
+                  "last_seen": "",
+                  "is_authenticated": "",
+                  "user_email": "",
+                  "user_phone": "",
+                  "row_no": ""
+                }
+              ]
+            }
+          ],
+          "total": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Device ID",
+          "tooltip": "Specify the ID of the device whose details you want to retrieve from the Fortinet FortiClient EMS server.",
+          "type": "integer",
+          "name": "device_id",
+          "description": "Specify the ID of the device whose details you want to retrieve from the Fortinet FortiClient EMS server.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "operation": "get_zero_trust_rule_sets",
+      "title": "Get Zero Trust Rule Sets List",
+      "description": "Retrieves a list of all zero trust rule sets or specific zero trust rule sets from the FortiClient EMS server based on the input parameters you have specified.",
+      "enabled": true,
+      "annotation": "get_zero_trust_rule_sets",
+      "category": "investigation",
+      "output_schema": {
+        "result": {
+          "retval": "",
+          "message": ""
+        },
+        "data": {
+          "rule_sets": [
+            {
+              "id": "",
+              "name": "",
+              "status": "",
+              "comments": "",
+              "tag_name": "",
+              "tag": "",
+              "tag_detection_type": ""
+            }
+          ],
+          "total": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Filters",
+          "tooltip": "Specify the filters, in the JSON format, using which you want to filter the zero trust rule sets retrieved from FortiClient EMS",
+          "type": "json",
+          "name": "filters",
+          "description": "Specify the filters, in the JSON format, using which you want to filter the zero trust rule sets retrieved from FortiClient EMS",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Order By",
+          "tooltip": "Specify the field based on which you want to order the zero trust rule sets retrieved from FortiClient EMS. You can choose from Name or Priority.",
+          "type": "select",
+          "name": "sort_col",
+          "description": "Specify the field based on which you want to order the zero trust rule sets retrieved from FortiClient EMS. You can choose from Name or Priority.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": "Name",
+          "options": [
+            "Name",
+            "Priority"
+          ]
+        },
+        {
+          "title": "Sort Order",
+          "tooltip": "Select the order based on which you want to sort the zero trust rule sets retrieved from FortiClient EMS. You can choose from Ascending or Descending.",
+          "type": "select",
+          "name": "sort_ord",
+          "description": "Select the order based on which you want to sort the zero trust rule sets retrieved from FortiClient EMS. You can choose from Ascending or Descending.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": "Ascending",
+          "options": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        {
+          "title": "Count",
+          "tooltip": "Specify the maximum number of results, per page, that this operation should return in its response.",
+          "type": "integer",
+          "name": "count",
+          "description": "Specify the maximum number of results, per page, that this operation should return in its response.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 50
+        },
+        {
+          "title": "Offset",
+          "tooltip": "Specify the index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say zero trust rule sets starting from the 10th zero trust rule set. By default, this is set as 0",
+          "type": "integer",
+          "name": "offset",
+          "description": "Specify the index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say zero trust rule sets starting from the 10th zero trust rule set. By default, this is set as 0",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": 0
+        },
+        {
+          "title": "Custom Properties",
+          "name": "custom_attributes",
+          "type": "json",
+          "description": "Additional properties (fields), in the JSON format, that you want to associate with the zero trust rule sets retrieved from FortiClient EMS.",
+          "tooltip": "Additional properties (fields), in the JSON format, that you want to associate with the zero trust rule sets retrieved from FortiClient EMS.",
+          "visible": true,
+          "required": false,
+          "editable": true
+        }
+      ]
+    },
+    {
+      "operation": "get_zero_trust_rule_tags",
+      "title": "Get Zero Trust Rule Tags List",
+      "description": "Retrieves a list of all zero trust rule tags from the FortiClient EMS server.",
+      "enabled": true,
+      "annotation": "get_zero_trust_rule_tags",
+      "category": "investigation",
+      "output_schema": {
+        "result": {
+          "retval": "",
+          "message": ""
+        },
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "description": "",
+            "rule_sets": [
+              {
+                "name": ""
+              }
+            ]
+          }
+        ]
+      },
+      "parameters": []
+    },
+    {
+      "operation": "quarantine_endpoints",
+      "title": "Quarantine Endpoints",
+      "description": "Quarantines the specified endpoints on the Fortinet FortiClient EMS server based on the endpoint IDs you have specified.",
+      "enabled": true,
+      "annotation": "quarantine_endpoints",
+      "category": "investigation",
+      "output_schema": {
+        "result": {
+          "retval": "",
+          "message": ""
+        },
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "full_host": "",
+            "host": "",
+            "ip_addr": "",
+            "uid": "",
+            "retval": "",
+            "message": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Endpoint IDs",
+          "tooltip": "Specify the IDs of the endpoints to quarantine on the Fortinet FortiClient EMS server.",
+          "type": "text",
+          "name": "ids",
+          "description": "Specify the IDs of the endpoints to quarantine on the Fortinet FortiClient EMS server.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "operation": "unquarantine_endpoints",
+      "title": "Unquarantine Endpoints",
+      "description": "Unquarantines the specified endpoints on the Fortinet FortiClient EMS server based on the endpoint IDs you have specified.",
+      "enabled": true,
+      "annotation": "unquarantine_endpoints",
+      "category": "investigation",
+      "output_schema": {
+        "result": {
+          "retval": "",
+          "message": ""
+        },
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "full_host": "",
+            "host": "",
+            "ip_addr": "",
+            "uid": "",
+            "retval": "",
+            "message": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Endpoint IDs",
+          "tooltip": "Specify the IDs of the endpoints to unquarantine on the Fortinet FortiClient EMS server.",
+          "type": "text",
+          "name": "ids",
+          "description": "Specify the IDs of the endpoints to unquarantine on the Fortinet FortiClient EMS server.",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,179 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "9a8dc8cc-ee12-4bd5-9369-09f6cf6d92c6",
+      "@type": "WorkflowCollection",
+      "name": "Sample - SLA Calculator - 2.0.0",
+      "description": "Calculates SLA due date based on locale and work hours. This connector needs soar framework solution pack for supporting playbooks and module changes",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "Slacalculator",
+        "slacalculator"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "797e913c-c628-4299-9695-88fbe1f84f6e",
+          "collection": "/api/3/workflow_collections/9a8dc8cc-ee12-4bd5-9369-09f6cf6d92c6",
+          "triggerLimit": null,
+          "description": "This operation will calculate and return SLA time based on inputs",
+          "name": "Calculate SLA",
+          "tag": "#SLA Calculator",
+          "recordTags": [
+            "Slacalculator",
+            "slacalculator"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0b66173a-1859-4d58-a75e-2bc812ca5fed",
+          "steps": [
+            {
+              "uuid": "0b66173a-1859-4d58-a75e-2bc812ca5fed",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "ea073d68-decd-4c13-9976-7c4ad9a0b83f",
+                "title": "SLA Calculator: Calculate SLA",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "3627fc4f-4727-4e7c-9a04-fc32459fed15",
+              "@type": "WorkflowStep",
+              "name": "Calculate SLA",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "SLA Calculator",
+                "config": "''",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "slacalculator",
+                "operation": "calculateSLA",
+                "operationTitle": "Calculate SLA",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a2db0b68-efce-4bfa-a191-405700cafec8",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Calculate SLA",
+              "sourceStep": "/api/3/workflow_steps/0b66173a-1859-4d58-a75e-2bc812ca5fed",
+              "targetStep": "/api/3/workflow_steps/3627fc4f-4727-4e7c-9a04-fc32459fed15"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b2380b26-1019-4844-85a6-8b2a820b0055",
+          "collection": "/api/3/workflow_collections/9a8dc8cc-ee12-4bd5-9369-09f6cf6d92c6",
+          "triggerLimit": null,
+          "description": "This operation will calculate and return elapsed SLA duration between the specified start and end time taking into consideration the work hours and holidays in the given interval for advance configuration.",
+          "name": "Calculate Elapsed SLA Time",
+          "tag": "#SLA Calculator",
+          "recordTags": [
+            "Slacalculator",
+            "slacalculator"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1095beb6-33d3-4177-afb2-0fa498ac27d0",
+          "steps": [
+            {
+              "uuid": "1095beb6-33d3-4177-afb2-0fa498ac27d0",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "41935462-698a-482c-87ab-ed1fbdba0b06",
+                "title": "SLA Calculator: Calculate Elapsed SLA Time",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "4ad3a3d8-1af2-461d-9b15-fa99daf3f813",
+              "@type": "WorkflowStep",
+              "name": "Calculate Elapsed SLA Time",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "SLA Calculator",
+                "config": "''",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "slacalculator",
+                "operation": "calculate_elapsed_time",
+                "operationTitle": "Calculate Elapsed SLA Time",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "50835b4d-7c03-417a-bb8a-1337dce8db28",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Calculate Elapsed SLA Time",
+              "sourceStep": "/api/3/workflow_steps/1095beb6-33d3-4177-afb2-0fa498ac27d0",
+              "targetStep": "/api/3/workflow_steps/4ad3a3d8-1af2-461d-9b15-fa99daf3f813"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

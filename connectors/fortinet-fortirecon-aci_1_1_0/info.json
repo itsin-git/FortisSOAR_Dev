@@ -1,0 +1,792 @@
+{
+  "name": "fortinet-fortirecon-aci",
+  "label": "Fortinet FortiRecon ACI",
+  "version": "1.1.0",
+  "description": "FortiRecon is a Digital Risk Protection Service (DRPS) product that provides an outside-the-network view to the risks posed to your enterprise.The Adversary Centric Intelligence (ACI) module leverages FortiGuard Threat Analysts to provide comprehensive coverage of dark web, open source, and technical threat intelligence, including threat actor insights. This information enables administrators to proactively assess risks, respond faster to incidents, better understand their attackers, and protect assets. This connector facilitates the automated operations related to ACI. <br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Attack Surface Management",
+  "icon_small_name": "small_icon.png",
+  "icon_large_name": "large_icon.png",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "ingestion_preferences": {
+    "modules": [
+      "threat_intel_reports"
+    ]
+  },
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/fortinet-fortirecon-aci/601/fortinet-fortirecon-aci-v1-1-0",
+  "configuration": {
+    "fields": [
+      {
+        "name": "server_url",
+        "title": "Server URL",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "Specify the URL or IP address of the FortiRecon server to which you will connect and perform the automated operations.",
+        "value": "https://api.fortirecon.forticloud.com/"
+      },
+      {
+        "name": "api_key",
+        "title": "API Key",
+        "type": "password",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "Specify the API key configured for your account for using the Fortinet FortiRecon ACI APIs."
+      },
+      {
+        "name": "org_id",
+        "title": "Organization ID",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "placeholder": "org_id",
+        "tooltip": "Enter ID",
+        "description": "Specify the organization ID for which you will fetch the records using the Fortinet FortiRecon ACI connector."
+      },
+      {
+        "name": "verify_ssl",
+        "title": "Verify SSL",
+        "type": "checkbox",
+        "editable": true,
+        "visible": true,
+        "required": false,
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. \nBy default, this option is set as True. "
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_iocs",
+      "title": "Get IOCs",
+      "annotation": "get_iocs",
+      "description": "Retrieves a list of all IOCs or specific IOCs published in ACI reporting for the given organization ID and other input parameters you have specified.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "report_id",
+          "title": "Report ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: 2019091459522,2019090116811",
+          "description": "Specify a comma-separated list of report IDs from which you want to fetch the IOCs."
+        },
+        {
+          "name": "ioc_type",
+          "title": "IOC Type",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: cve,IP-REPUTATION",
+          "description": "Specify a comma-separated string or single string of the type of IOCs you want to retrieve from Fortinet FortiRecon ACI. For example, cve,IP-REPUTATION"
+        },
+        {
+          "name": "start_date",
+          "title": "Start Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Now - 6 months (YYYY-MM-DD)",
+          "description": "Specify the date from when you want to retrieve IOCs from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months (YYYY-MM-DD)."
+        },
+        {
+          "name": "end_date",
+          "title": "End Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Current Date (YYYY-MM-DD)",
+          "description": "Specify the date till when you want to retrieve IOCs from Fortinet FortiRecon ACI. By default, this is set to Current Date (YYYY-MM-DD)."
+        },
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Page number from which you want to retrieve records.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 10,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records.",
+          "description": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+            "ioc": "",
+            "ioc_type": "",
+            "report_id": "",
+            "report_title": ""
+          },
+          {
+            "ioc": "",
+            "ioc_type": "",
+            "report_id": "",
+            "report_title": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    },
+    {
+      "operation": "get_leaked_cards",
+      "title": "Get Leaked Cards",
+      "annotation": "get_leaked_cards",
+      "description": "Retrieves a list of all leaked cards or specific leaked cards found for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "type",
+          "title": "Type",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "example: DEBIT,CREDIT",
+          "description": "Specify the type of leaked card you want to retrieve from Fortinet FortiRecon ACI."
+        },
+        {
+          "name": "bin",
+          "title": "Bin",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "example: 123456,654321",
+          "description": "Specify the bin associated with the leaked card you want to retrieve from Fortinet FortiRecon ACI. For example, 123456,654321"
+        },
+        {
+          "name": "start_date",
+          "title": "Start Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Now - 6 months (YYYY-MM-DD)",
+          "description": "Specify the date from when you want to retrieve leaked cards from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months (YYYY-MM-DD)."
+        },
+        {
+          "name": "end_date",
+          "title": "End Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Current Date (YYYY-MM-DD)",
+          "description": "Specify the date till when you want to retrieve leaked cards from Fortinet FortiRecon ACI. By default, this is set to Current Date (YYYY-MM-DD)."
+        },
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Page number from which you want to retrieve records.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "value": 10,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records.",
+          "description": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+            "bank_name": "",
+            "base_name": "",
+            "bg_code": "",
+            "bin": "",
+            "brand_name": "",
+            "category": "",
+            "city": "",
+            "country": "",
+            "expiry": "",
+            "holder_name": "",
+            "index_ts": "",
+            "org_id": "",
+            "price": "",
+            "shop_name": "",
+            "state": "",
+            "type": "",
+            "unique_id": "",
+            "zip": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    },
+    {
+      "operation": "get_widgets",
+      "title": "Get Widgets",
+      "annotation": "get_widgets",
+      "description": "Retrieves a list of all widgets or specific widgets for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Page number from which you want to retrieve records.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "value": 10,
+          "required": false,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records.",
+          "description": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+            "id": "",
+            "name": ""
+          },
+          {
+            "id": "",
+            "name": ""
+          },
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    },
+    {
+      "operation": "get_osint_feeds",
+      "title": "Get OSINT Feeds",
+      "annotation": "get_osint_feeds",
+      "description": "Retrieves a list of all OSINT feeds or specific OSINT feeds for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "widget_id",
+          "title": "Widget ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "example:cae33d66-66yi-4fda-vc55-678c1ee23f88",
+          "description": "Specify the Widget ID using which you want to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI."
+        },
+        {
+          "name": "keyword",
+          "title": "Keyword",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "example:breach",
+          "description": "Specify the keyword using which you want to filter the OSINT feeds retrieved from Fortinet FortiRecon ACI. "
+        },
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Page number from which you want to retrieve records.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "value": 10,
+          "visible": true,
+          "required": false,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records.",
+          "description": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+            "content_snippet": "",
+            "is_latest": "",
+            "link": "",
+            "publish_date": "",
+            "tags": [
+              "",
+              ""
+            ],
+            "title": "",
+            "widget_id": "",
+            "widget_name": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    },
+    {
+      "operation": "get_reports",
+      "title": "Get Reports",
+      "annotation": "get_reports",
+      "description": "Retrieves a list of all reports or specific reports for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.\nThe data returned by this operation contains a list of all the filtered reports with title, summary, report URL, and the metadata related to the reports. Note that IOCs are not included in the returned data.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "relevance_rating",
+          "title": "Relevance Rating",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example:Medium,High,Low",
+          "description": "Specify a comma-separated string or single string of the relevance ratings of the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Medium,High,Low"
+        },
+        {
+          "name": "tags",
+          "title": "Tags",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example:Data Breach,Cyber Crime",
+          "description": "Specify a comma-separated string or single string of the tags associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Data Breach,Cyber Crime"
+        },
+        {
+          "name": "adversary",
+          "title": "Adversary",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example:Databases,APT 34",
+          "description": "Specify a comma-separated string or single string of the adversary associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Databases,APT 34"
+        },
+        {
+          "name": "source_category",
+          "title": "Source Category",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: OSINT,Darknet",
+          "description": "Specify a comma-separated string or single string of the source category associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, OSINT,Darknet"
+        },
+        {
+          "name": "report_type",
+          "title": "Report Type",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: Flash Report,Flash Alert",
+          "description": "Specify a comma-separated string or single string of the type of reports you want to retrieve from Fortinet FortiRecon ACI. For example, Flash Report,Flash Alert"
+        },
+        {
+          "name": "industry",
+          "title": "Industry",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: All Sectors,Technology",
+          "description": "Specify a comma-separated string or single string of the industry associated with the reports you want to retrieve from Fortinet FortiRecon ACI. For example, All Sectors,Technology"
+        },
+        {
+          "name": "geography",
+          "title": "Geography",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: Western Europe,South East Asia",
+          "description": "Specify a comma-separated string or single string of the geography of the reports you want to retrieve from Fortinet FortiRecon ACI. For example, Western Europe,South East Asia"
+        },
+        {
+          "name": "keyword",
+          "title": "Keyword",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "keyword",
+          "description": "Specify the keyword using which you want to filter the reports retrieved from Fortinet FortiRecon ACI. "
+        },
+        {
+          "name": "source_reliability",
+          "title": "Source Reliability",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "source_reliability",
+          "description": "Specify the source reliability of the reports you want to retrieve from Fortinet FortiRecon ACI."
+        },
+        {
+          "name": "information_reliability",
+          "title": "Information Reliability",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "information_reliability",
+          "description": "Specify the information reliability of the reports you want to retrieve from Fortinet FortiRecon ACI."
+        },
+        {
+          "name": "start_date",
+          "title": "Start Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Now - 6 months (YYYY-MM-DD)",
+          "description": "Specify the date from when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months (YYYY-MM-DD)."
+        },
+        {
+          "name": "end_date",
+          "title": "End Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Current Date (YYYY-MM-DD)",
+          "description": "Specify the date till when you want to retrieve reports from Fortinet FortiRecon ACI. By default, this is set to Current Date (YYYY-MM-DD)."
+        },
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Page number from which you want to retrieve records.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "value": 10,
+          "required": false,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records.",
+          "description": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+            "adversary": [
+              ""
+            ],
+            "geography": [
+              ""
+            ],
+            "industry_tags": [
+              ""
+            ],
+            "information_date": "",
+            "information_reliability": "",
+            "motivation": "",
+            "publish_date": "",
+            "relevance_rating": "",
+            "report_id": "",
+            "report_title": "",
+            "report_type": "",
+            "source_category": "",
+            "source_name": "",
+            "source_reliability": "",
+            "status": "",
+            "summary": "",
+            "threat": [
+              "",
+              ""
+            ],
+            "tlp": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    },
+    {
+      "operation": "get_reports_with_iocs",
+      "title": "Get Reports With IOCs",
+      "annotation": "get_reports_with_iocs",
+      "description": "Retrieves details, including IOCs, for a specific report for the given organization ID and the report ID you have specified from Fortinet FortiRecon ACI.\nThe data returned by this operation contains a list of all the filtered reports with title, summary, report URL, IOCs, and the metadata related to the reports.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "id",
+          "title": "ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "placeholder": " specify id",
+          "tooltip": "Specify the Report ID",
+          "description": "Specify the ID of the report whose details, including IOCs, you want to retrieve from Fortinet FortiRecon ACI."
+        }
+      ],
+      "output_schema": {
+        "adversary": [
+          ""
+        ],
+        "category": "",
+        "customer_tag": "",
+        "geography": [
+          ""
+        ],
+        "industry_tags": [
+          ""
+        ],
+        "information_date": "",
+        "information_reliability": "",
+        "ioc": [],
+        "motivation": "",
+        "publish_date": "",
+        "relevance_rating": "",
+        "report_id": "",
+        "report_title": "",
+        "source_name": "",
+        "source_reliability": "",
+        "status": "",
+        "summary": "",
+        "tags": [
+          "",
+          ""
+        ],
+        "tlp": "",
+        "type": ""
+      }
+    },
+    {
+      "operation": "get_stealers_log",
+      "title": "Get Stealers Log",
+      "annotation": "get_stealers_log",
+      "description": "Retrieves a list of all stealer log infections or specific stealer log infections for the given organization ID and other input parameters you have specified from Fortinet FortiRecon ACI.",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "stealer_name",
+          "title": "Stealer Name",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: Redline,Redline1",
+          "description": "Specify a comma-separated string or single string of the names of the stealers associated with the steal log infections you want to retrieve from Fortinet FortiRecon ACI. For example, Redline,Redline1"
+        },
+        {
+          "name": "domain",
+          "title": "Domain",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: domain1.com,domain2.com",
+          "description": "Specify a comma-separated string or single string of the domains associated with the steal log infections you want to retrieve from Fortinet FortiRecon ACI. For example, domain1.com,domain2.com"
+        },
+        {
+          "name": "country",
+          "title": "Country",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: India,Dubai",
+          "description": "Specify a comma-separated string or single string of the countries associated with the steal log infections you want to retrieve from Fortinet FortiRecon ACI. For example, India,Dubai"
+        },
+        {
+          "name": "state",
+          "title": "State",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: Haryana,Telangana",
+          "description": "Specify a comma-separated string or single string of the states associated with the steal log infections you want to retrieve from Fortinet FortiRecon ACI. For example, Haryana,Telangana"
+        },
+        {
+          "name": "isp",
+          "title": "ISP",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: Hutchison Max Telecom Limited",
+          "description": "Specify a comma-separated string or single string of the ISPs associated with the steal log infections you want to retrieve from Fortinet FortiRecon ACI. For example, Hutchison Max Telecom Limited"
+        },
+        {
+          "name": "marketplace",
+          "title": "Marketplace",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be comma separated string or single string.",
+          "placeholder": "example: russian-market,russian-market2",
+          "description": "Specify a comma-separated string or single string of the marketplaces associated with the steal log infections you want to retrieve from Fortinet FortiRecon ACI. For example, russian-market,russian-market2"
+        },
+        {
+          "name": "keyword",
+          "title": "Keyword",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "placeholder": "keyword",
+          "description": "Specify the keyword using which you want to filter the steal log infections retrieved from Fortinet FortiRecon ACI."
+        },
+        {
+          "name": "start_date",
+          "title": "Start Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Now - 6 months (YYYY-MM-DD)",
+          "description": "Specify the date from when you want to retrieve steal log infections from Fortinet FortiRecon ACI. By default, this is set to Now - 6 months (YYYY-MM-DD)."
+        },
+        {
+          "name": "end_date",
+          "title": "End Date",
+          "type": "datetime",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Should be Date or Default is Current Date (YYYY-MM-DD)",
+          "description": "Specify the date till when you want to retrieve steal log infections from Fortinet FortiRecon ACI. By default, this is set to Current Date (YYYY-MM-DD)."
+        },
+        {
+          "name": "page",
+          "title": "Page",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Page number from which you want to retrieve records.",
+          "description": "Specify the page number from which to retrieve results."
+        },
+        {
+          "name": "size",
+          "title": "Size",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "value": 10,
+          "required": false,
+          "placeholder": "Must be greater 0 and less than or equal to 500.",
+          "tooltip": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records.",
+          "description": "Specify the maximum number of records that this operation should return for the specified page. By default, it retrieves 10 records. Must be greater 0 and less than or equal to 500."
+        }
+      ],
+      "output_schema": {
+        "hits": [
+          {
+            "affiliated_domains": "",
+            "country": "",
+            "discovery_date": "",
+            "isp": "",
+            "last_updated": "",
+            "marketplace": "",
+            "org_id": "",
+            "price": "",
+            "sites": "",
+            "state": "",
+            "stealer_name": "",
+            "vendor": ""
+          }
+        ],
+        "page": "",
+        "size": "",
+        "total": ""
+      }
+    }
+  ]
+}

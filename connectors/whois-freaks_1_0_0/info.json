@@ -1,0 +1,436 @@
+{
+  "name": "whois-freaks",
+  "label": "WhoisFreaks",
+  "version": "1.0.0",
+  "description": "WhoisFreaks provide well-parsed and structured domain WHOIS data for all domain names, registrars, countries and TLDs since the birth of internet. The carefully crawled current and historical domain data is available in the form of REST APIs, lookup tools, and downloadable database",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": false,
+  "category": "Threat Intelligence",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/whoisfreaks/628/whoisfreaks-v1-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "value": "https://api.whoisfreaks.com",
+        "description": "Specify the URL of the WhoisFreaks server to connect and perform automated operations"
+      },
+      {
+        "name": "api_key",
+        "title": "API Key",
+        "type": "password",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "Specify the API key configured for your account using the WhoisFreaks."
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "description": "Specifies whether the SSL certificate for the server is to be verified.By default, this option is set to True",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified.By default, this option is set to True",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "whois_lookup",
+      "title": "Get Whois Lookup",
+      "description": "Gives users access to complete historical WHOIS records, including domain ownership and registrar information over time",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "whois_lookup",
+      "output_schema": {
+        "status": "",
+        "domain_name": "",
+        "query_time": "",
+        "whois_server": "",
+        "domain_registered": "",
+        "create_date": "",
+        "update_date": "",
+        "expiry_date": "",
+        "domain_registrar": {
+          "iana_id": "",
+          "registrar_name": "",
+          "whois_server": "",
+          "website_url": "",
+          "email_address": "",
+          "phone_number": ""
+        },
+        "registrant_contact": {
+          "name": "",
+          "company": "",
+          "street": "",
+          "city": "",
+          "state": "",
+          "zip_code": "",
+          "country_name": "",
+          "country_code": "",
+          "email_address": "",
+          "phone": ""
+        },
+        "administrative_contact": {
+          "name": "",
+          "company": "",
+          "street": "",
+          "city": "",
+          "state": "",
+          "zip_code": "",
+          "country_name": "",
+          "country_code": "",
+          "email_address": "",
+          "phone": ""
+        },
+        "technical_contact": {
+          "name": "",
+          "company": "",
+          "street": "",
+          "city": "",
+          "state": "",
+          "zip_code": "",
+          "country_name": "",
+          "country_code": "",
+          "email_address": "",
+          "phone": ""
+        },
+        "name_servers": [
+        ],
+        "domain_status": [
+        ],
+        "whois_raw_domain": "",
+        "registry_data": {
+          "domain_name": "",
+          "query_time": "",
+          "whois_server": "",
+          "domain_registered": "",
+          "domain_registrar": {
+            "iana_id": "",
+            "registrar_name": "",
+            "whois_server": "",
+            "website_url": "",
+            "email_address": "",
+            "phone_number": ""
+          },
+          "name_servers": [
+          ],
+          "domain_status": [
+          ],
+          "whois_raw_registery": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Domain Name",
+          "name": "domainName",
+          "type": "text",
+          "description": "Specify the domain for which live WHOIS data is requested",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Whois Type",
+          "name": "whois",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Live",
+            "Historical",
+            "Reverse"
+          ],
+          "onchange": {
+            "Reverse": [
+              {
+                "title": "Keyword",
+                "name": "keyword",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "placeholder": "youtube",
+                "tooltip": "Specify the domain to retrieve its details",
+                "description": "Specify the domain to retrieve its details"
+              },
+              {
+                "title": "Email Address",
+                "name": "email",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "placeholder": "abc@gmail.com",
+                "tooltip": "Specify the email address to retrieve its domain",
+                "description": "Specify the email address to retrieve its domain"
+              },
+              {
+                "title": "Owner",
+                "name": "owner",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "placeholder": "michal",
+                "tooltip": "Specify the domain to retrieve its owner",
+                "description": "Specify the domain to retrieve its owner"
+              },
+              {
+                "title": "Company",
+                "name": "company",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "placeholder": "michal",
+                "tooltip": "Specify the company to retrieve its associated domain",
+                "description": "Specify the company to retrieve its associated domain"
+              },
+              {
+                "title": "Mode",
+                "name": "mode",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "Mini",
+                  "Default"
+                ],
+                "value": "Mini",
+                "tooltip": "Select a mode to query the reverse Whois lookup API. You can select from the following options. 1. Default Mode. 2. Mini Mode.",
+                "description": "Select a mode to query the reverse Whois lookup API. You can select from the following options. 1. Default Mode. 2. Mini Mode."
+              },
+              {
+                "title": "Page Number",
+                "name": "page",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "type": "text",
+                "tooltip": "Specify the page number from which to get the whois information",
+                "description": "Specify the page number from which to get the whois information"
+              }
+            ]
+          },
+          "tooltip": "Select the Whois type from following options: Live - results in getting the latest WHOIS record even if it's incomplete, Historical - results in getting the historical WHOIS record and Reverse - results in getting the reverse WHOIS records",
+          "description": "Select the Whois type from following options: Live - results in getting the latest WHOIS record even if it's incomplete, Historical - results in getting the historical WHOIS record and Reverse - results in getting the reverse WHOIS records"
+        }
+      ]
+    },
+    {
+      "operation": "dns_lookup",
+      "title": "Get DNS Lookup",
+      "category": "investigation",
+      "annotation": "dns_lookup",
+      "enabled": true,
+      "description": "Retrieves DNS Lookup for a specified domain name from WhoisFreaks. A DNS lookup provides a domain's corresponding IP address from its 'A' record as well as the domain's mail server (MX record), NameServer (NS record), SPF (TXT record), and more records",
+      "output_schema": {
+        "domainName": "",
+        "queryTime": "",
+        "dnsTypes": {
+        },
+        "dnsRecords": [
+          {
+            "type": "",
+            "dnsType": "",
+            "name": "",
+            "ttl": "",
+            "rRsetType": "",
+            "rawText": "",
+            "address": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Domain Name",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "domainName",
+          "tooltip": "Specify the name of the domain to retrieve its DNS Lookup information from WhoisFreaks",
+          "description": "Name of the domain whose DNS Lookup information you want to retrieve from WhoisFreaks."
+        },
+        {
+          "title": "DNS Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "name": "type",
+          "tooltip": "Select Multiple Types to retrieve records ",
+          "description": "Select the lookup type to retrieve its records from WhoisFreaks. Select all to retrieve all DNS types",
+          "value": "all",
+          "options": [
+            "all",
+            "A",
+            "NS",
+            "MD",
+            "MF",
+            "CNAME",
+            "SOA",
+            "MB",
+            "MG",
+            "MR",
+            "NULL",
+            "WKS",
+            "PTR",
+            "HINFO",
+            "MINFO",
+            "MX",
+            "TXT",
+            "RP",
+            "AFSDB",
+            "X25",
+            "ISDN",
+            "RT",
+            "NSAP",
+            "NSAP_PTR",
+            "SIG",
+            "KEY",
+            "PX",
+            "GPOS",
+            "AAAA",
+            "LOC",
+            "NXT",
+            "EID",
+            "NIMLOC",
+            "SRV",
+            "ATMA",
+            "NAPTR",
+            "KX",
+            "CERT",
+            "A6",
+            "DNAME",
+            "APL",
+            "DS",
+            "SSHFP",
+            "IPSECKEY",
+            "RRSIG",
+            "NSEC",
+            "DNSKEY",
+            "DHCID",
+            "NSEC3",
+            "NSEC3PARAM",
+            "TLSA",
+            "ANY",
+            "DLV"
+          ]
+        }
+      ]
+    },
+    {
+      "operation": "ssl_certificates",
+      "title": "Get SSL Certificates",
+      "description": "Obtains a domain name's Secure Sockets Layer (SSL) certificate and trace its complete SSL certificate chain to reveal potential inconsistencies and misconfigurations that may translate to exploitable vulnerabilities. A single SSL Certificate Chain API query provides details that can ease your security enrichment efforts, allowing you to know which domains are trustworthy and which are not",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "ssl_certificates",
+      "output_schema": {
+        "domainName": "",
+        "queryTime": "",
+        "sslCertificates": [
+          {
+            "chainOrder": "",
+            "authenticationType": "",
+            "validityStartDate": "",
+            "validityEndDate": "",
+            "serialNumber": "",
+            "signatureAlgorithm": "",
+            "subject": {
+              "commonName": ""
+            },
+            "issuer": {
+              "commonName": "",
+              "organization": "",
+              "country": ""
+            },
+            "publicKey": {
+              "keySize": "",
+              "keyAlgorithm": "",
+              "pemRaw": ""
+            },
+            "extensions": {
+              "authorityKeyIdentifier": "",
+              "subjectKeyIdentifier": "",
+              "keyUsages": [
+              ],
+              "extendedKeyUsages": [
+              ],
+              "authorityInfoAccess": {
+                "issuers": [
+                ],
+                "ocsp": [
+                ]
+              },
+              "subjectAlternativeNames": {
+                "dnsNames": [
+                ]
+              },
+              "certificatePolicies": [
+                {
+                  "policyId": ""
+                },
+                {
+                  "policyId": "",
+                  "policyQualifier": {
+                    "oid": "",
+                    "cpsUri": ""
+                  }
+                }
+              ]
+            },
+            "pemRaw": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Domain Name",
+          "name": "domainName",
+          "type": "text",
+          "description": "Specify the domain for which SSL certificate is requested",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "With Chain",
+          "name": "chain",
+          "type": "checkbox",
+          "description": "Select to get all domain certificates sorted from the end-user to the root",
+          "tooltip": "Select to get all domain certificates sorted from the end-user to the root",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false
+        },
+        {
+          "title": "SSL Raw",
+          "name": "SSLRaw",
+          "type": "checkbox",
+          "description": "Select to get the raw OpenSSL response of the domain. Default value is false.",
+          "tooltip": "Select to get the raw OpenSSL response of the domain. Default value is false.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false
+        }
+      ]
+    }
+  ]
+}

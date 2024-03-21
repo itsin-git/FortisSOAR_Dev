@@ -1,0 +1,5117 @@
+{
+  "name": "threatstream",
+  "label": "Anomali ThreatStream",
+  "version": "2.3.2",
+  "description": "Anomali ThreatStream offers the most comprehensive Threat Intelligence Platform, allowing organizations to access all intelligence feeds and integrate it seamlessly with internal security and IT systems. This connector facilitates automated operations to to pull threat intelligence from the ThreatStream platform, import observables into ThreatStream from any source, manage threat model entities and investigations, and so on.",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "ingestion_supported": true,
+  "tags": [
+    "Enrichment",
+    "IP_Enrichment",
+    "FileHash_Enrichment",
+    "URL_Enrichment",
+    "Domain_Enrichment",
+    "Email_Enrichment"
+  ],
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.3.2/anomali-threatstream/566/anomali-threatstream-v2-3-2",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "base_url",
+        "value": "https://api.threatstream.com",
+        "description": "IP address or the hostname URL of the ThreatStream server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "Username",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "api_username",
+        "description": "Registered username for ThreatStream."
+      },
+      {
+        "title": "API Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_key",
+        "description": "API key configured for your account for using the ThreatStream API."
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Verify SSL connection to the Threat Stream API. Defaults to True"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "domain_reputation",
+      "title": "Get Domain Reputation",
+      "description": "Retrieves the reputation of the specified domain based on the filter criteria such as the domain name and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "domain_reputation",
+      "endpoint": "/api/v2/intelligence/",
+      "http_method": "GET",
+      "handler_method": false,
+      "output_schema": {
+        "objects": [
+          {
+            "update_id": "",
+            "value": "",
+            "status": "",
+            "ip": "",
+            "id": "",
+            "threat_type": "",
+            "confidence": "",
+            "itype": "",
+            "is_public": "",
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "created_ts": "",
+            "modified_ts": "",
+            "tlp": "",
+            "retina_confidence": "",
+            "source_reported_confidence": "",
+            "threatscore": "",
+            "asn": "",
+            "owner_organization_id": "",
+            "org": "",
+            "rdns": "",
+            "type": "",
+            "trusted_circle_ids": [],
+            "expiration_ts": "",
+            "longitude": "",
+            "latitude": "",
+            "source": "",
+            "is_anonymous": "",
+            "feed_id": "",
+            "is_editable": "",
+            "resource_uri": "",
+            "country": "",
+            "import_session_id": "",
+            "uuid": "",
+            "workgroups": [],
+            "description": "",
+            "meta": {
+              "media_type": "",
+              "detail": "",
+              "media": "",
+              "severity": "",
+              "maltype": "",
+              "detail2": ""
+            }
+          }
+        ],
+        "meta": {
+          "limit": "",
+          "offset": "",
+          "took": "",
+          "next": "",
+          "total_count": "",
+          "previous": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Domain Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "Name of the domain for which you want to retrieve reputation information."
+        },
+        {
+          "title": "Filter Options",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Filter options supported by ThreatStream.Filter options supported by ThreatStream are Exact, Startswith, Contains, Regex, and Regexp. If you select Exact, then you can select the Validate Input checkbox, if you want to validate the input you have provided, IP Address in this case.By default, this option is set as False.",
+          "name": "filter_option",
+          "options": [
+            "Exact",
+            "Startswith",
+            "Contains",
+            "Regex",
+            "Regexp"
+          ],
+          "value": "Exact",
+          "onchange": {
+            "Exact": [
+              {
+                "title": "Validate Input",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "name": "validation",
+                "value": false,
+                "tooltip": "Select to validate the input",
+                "description": "Select this checkbox, if you want to validate the input you have provided, URL in this case. Note: This option is effective only if you set the Filter Options to exact. By default, this option is set as False."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of domains to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "email_reputation",
+      "title": "Get Email ID Reputation",
+      "description": "Retrieves the reputation of the specified Email address based on the filter criteria such as the email address and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "email_reputation",
+      "endpoint": "/api/v2/intelligence/",
+      "http_method": "GET",
+      "handler_method": false,
+      "output_schema": {
+        "objects": [
+          {
+            "update_id": "",
+            "value": "",
+            "status": "",
+            "ip": "",
+            "id": "",
+            "threat_type": "",
+            "confidence": "",
+            "itype": "",
+            "is_public": "",
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "created_ts": "",
+            "modified_ts": "",
+            "tlp": "",
+            "retina_confidence": "",
+            "source_reported_confidence": "",
+            "threatscore": "",
+            "asn": "",
+            "owner_organization_id": "",
+            "org": "",
+            "rdns": "",
+            "type": "",
+            "trusted_circle_ids": [],
+            "expiration_ts": "",
+            "longitude": "",
+            "latitude": "",
+            "source": "",
+            "is_anonymous": "",
+            "feed_id": "",
+            "is_editable": "",
+            "resource_uri": "",
+            "country": "",
+            "import_session_id": "",
+            "uuid": "",
+            "workgroups": [],
+            "description": "",
+            "meta": {
+              "media_type": "",
+              "detail": "",
+              "media": "",
+              "severity": "",
+              "maltype": "",
+              "detail2": ""
+            }
+          }
+        ],
+        "meta": {
+          "limit": "",
+          "offset": "",
+          "took": "",
+          "next": "",
+          "total_count": "",
+          "previous": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Email ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "Email ID for which you want to retrieve reputation information."
+        },
+        {
+          "title": "Filter Options",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Filter options supported by ThreatStream.Filter options supported by ThreatStream are Exact, Startswith, Contains, Regex, and Regexp. If you select Exact, then you can select the Validate Input checkbox, if you want to validate the input you have provided, IP Address in this case.By default, this option is set as False.",
+          "name": "filter_option",
+          "options": [
+            "Exact",
+            "Startswith",
+            "Contains",
+            "Regex",
+            "Regexp"
+          ],
+          "value": "Exact",
+          "onchange": {
+            "Exact": [
+              {
+                "title": "Validate Input",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "name": "validation",
+                "value": false,
+                "tooltip": "Select to validate the input",
+                "description": "Select this checkbox, if you want to validate the input you have provided, URL in this case. Note: This option is effective only if you set the Filter Options to exact. By default, this option is set as False."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "ip_reputation",
+      "title": "Get IP Reputation",
+      "description": "Retrieves the reputation of the specified IP address based on the filter criteria such as the IP address and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "ip_reputation",
+      "output_schema": {
+        "objects": [
+          {
+            "update_id": "",
+            "value": "",
+            "status": "",
+            "ip": "",
+            "id": "",
+            "threat_type": "",
+            "confidence": "",
+            "itype": "",
+            "is_public": "",
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "created_ts": "",
+            "modified_ts": "",
+            "tlp": "",
+            "retina_confidence": "",
+            "source_reported_confidence": "",
+            "threatscore": "",
+            "asn": "",
+            "owner_organization_id": "",
+            "org": "",
+            "rdns": "",
+            "type": "",
+            "trusted_circle_ids": [],
+            "expiration_ts": "",
+            "longitude": "",
+            "latitude": "",
+            "source": "",
+            "is_anonymous": "",
+            "feed_id": "",
+            "is_editable": "",
+            "resource_uri": "",
+            "country": "",
+            "import_session_id": "",
+            "uuid": "",
+            "workgroups": [],
+            "description": "",
+            "meta": {
+              "media_type": "",
+              "detail": "",
+              "media": "",
+              "severity": "",
+              "maltype": "",
+              "detail2": ""
+            }
+          }
+        ],
+        "meta": {
+          "limit": "",
+          "offset": "",
+          "took": "",
+          "next": "",
+          "total_count": "",
+          "previous": ""
+        }
+      },
+      "endpoint": "/api/v2/intelligence/",
+      "http_method": "GET",
+      "handler_method": false,
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "IP address for which you want to retrieve reputation information."
+        },
+        {
+          "title": "Filter Options",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Filter options supported by ThreatStream.Filter options supported by ThreatStream are Exact, Startswith, Contains, Regex, and Regexp. If you select Exact, then you can select the Validate Input checkbox, if you want to validate the input you have provided, IP Address in this case.By default, this option is set as False.",
+          "name": "filter_option",
+          "options": [
+            "Exact",
+            "Startswith",
+            "Contains",
+            "Regex",
+            "Regexp"
+          ],
+          "value": "Exact",
+          "onchange": {
+            "Exact": [
+              {
+                "title": "Validate Input",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "name": "validation",
+                "value": false,
+                "tooltip": "Select to validate the input",
+                "description": "Select this checkbox, if you want to validate the input you have provided, URL in this case. Note: This option is effective only if you set the Filter Options to exact. By default, this option is set as False."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "file_reputation",
+      "title": "Get File Reputation",
+      "description": "Retrieves the reputation of the specified FileHash based on the filter criteria such as the filehash and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "file_reputation",
+      "endpoint": "/api/v2/intelligence/",
+      "http_method": "GET",
+      "handler_method": false,
+      "output_schema": {
+        "objects": [
+          {
+            "update_id": "",
+            "value": "",
+            "status": "",
+            "ip": "",
+            "id": "",
+            "threat_type": "",
+            "confidence": "",
+            "itype": "",
+            "is_public": "",
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "created_ts": "",
+            "modified_ts": "",
+            "tlp": "",
+            "retina_confidence": "",
+            "source_reported_confidence": "",
+            "threatscore": "",
+            "asn": "",
+            "owner_organization_id": "",
+            "org": "",
+            "rdns": "",
+            "type": "",
+            "trusted_circle_ids": [],
+            "expiration_ts": "",
+            "longitude": "",
+            "latitude": "",
+            "source": "",
+            "is_anonymous": "",
+            "feed_id": "",
+            "is_editable": "",
+            "resource_uri": "",
+            "country": "",
+            "import_session_id": "",
+            "uuid": "",
+            "workgroups": [],
+            "description": "",
+            "meta": {
+              "media_type": "",
+              "detail": "",
+              "media": "",
+              "severity": "",
+              "maltype": "",
+              "detail2": ""
+            }
+          }
+        ],
+        "meta": {
+          "limit": "",
+          "offset": "",
+          "took": "",
+          "next": "",
+          "total_count": "",
+          "previous": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filehash",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "placeholder": "Only MD5",
+          "description": "FileHash for which you want to retrieve reputation information."
+        },
+        {
+          "title": "Filter Options",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Filter options supported by ThreatStream.Filter options supported by ThreatStream are Exact, Startswith, Contains, Regex, and Regexp. If you select Exact, then you can select the Validate Input checkbox, if you want to validate the input you have provided, IP Address in this case.By default, this option is set as False.",
+          "name": "filter_option",
+          "options": [
+            "Exact",
+            "Startswith",
+            "Contains",
+            "Regex",
+            "Regexp"
+          ],
+          "value": "Exact",
+          "onchange": {
+            "Exact": [
+              {
+                "title": "Validate Input",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "name": "validation",
+                "value": false,
+                "tooltip": "Select to validate the input",
+                "description": "Select this checkbox, if you want to validate the input you have provided, URL in this case. Note: This option is effective only if you set the Filter Options to exact. By default, this option is set as False."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "url_reputation",
+      "title": "Get URL Reputation",
+      "description": "Retrieves the reputation of the specified URL based on the filter criteria such as the URL and other input parameters that you have specified",
+      "category": "investigation",
+      "annotation": "url_reputation",
+      "endpoint": "/api/v2/intelligence/",
+      "http_method": "GET",
+      "handler_method": false,
+      "output_schema": {
+        "objects": [
+          {
+            "update_id": "",
+            "value": "",
+            "status": "",
+            "ip": "",
+            "id": "",
+            "threat_type": "",
+            "confidence": "",
+            "itype": "",
+            "is_public": "",
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "created_ts": "",
+            "modified_ts": "",
+            "tlp": "",
+            "retina_confidence": "",
+            "source_reported_confidence": "",
+            "threatscore": "",
+            "asn": "",
+            "owner_organization_id": "",
+            "org": "",
+            "rdns": "",
+            "type": "",
+            "trusted_circle_ids": [],
+            "expiration_ts": "",
+            "longitude": "",
+            "latitude": "",
+            "source": "",
+            "is_anonymous": "",
+            "feed_id": "",
+            "is_editable": "",
+            "resource_uri": "",
+            "country": "",
+            "import_session_id": "",
+            "uuid": "",
+            "workgroups": [],
+            "description": "",
+            "meta": {
+              "media_type": "",
+              "detail": "",
+              "media": "",
+              "severity": "",
+              "maltype": "",
+              "detail2": ""
+            }
+          }
+        ],
+        "meta": {
+          "limit": "",
+          "offset": "",
+          "took": "",
+          "next": "",
+          "total_count": "",
+          "previous": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "URL",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "URL for which you want to retrieve reputation information."
+        },
+        {
+          "title": "Filter Options",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Filter options supported by ThreatStream.Filter options supported by ThreatStream are Exact, Startswith, Contains, Regex, and Regexp. If you select Exact, then you can select the Validate Input checkbox, if you want to validate the input you have provided, IP Address in this case.By default, this option is set as False.",
+          "name": "filter_option",
+          "options": [
+            "Exact",
+            "Startswith",
+            "Contains",
+            "Regex",
+            "Regexp"
+          ],
+          "value": "Exact",
+          "onchange": {
+            "Exact": [
+              {
+                "title": "Validate Input",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "name": "validation",
+                "value": false,
+                "tooltip": "Select to validate the input",
+                "description": "Select this checkbox, if you want to validate the input you have provided, URL in this case. Note: This option is effective only if you set the Filter Options to exact. By default, this option is set as False."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "whois_domain",
+      "title": "Get Whois Domain Information",
+      "description": "Executes a WhoIs lookup on the specified domain name and retrieves a list of domains based on the domain name that you have specified.",
+      "category": "investigation",
+      "annotation": "whois_domain",
+      "endpoint": "/api/v1/inteldetails/whois/{value}/",
+      "http_method": "GET",
+      "handler_method": false,
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Domain Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "Name of the domain for which you want to retrieve information from Whois."
+        }
+      ]
+    },
+    {
+      "operation": "whois_ip",
+      "title": "Get Whois IP Information",
+      "description": "Executes a WhoIs lookup on the specified IP address and retrieves a list of IP addresses based on the IP address that you have specified.",
+      "category": "investigation",
+      "annotation": "whois_ip",
+      "handler_method": false,
+      "endpoint": "/api/v1/inteldetails/whois/{value}/",
+      "http_method": "GET",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "IP address for which you want to retrieve information from Whois."
+        }
+      ]
+    },
+    {
+      "operation": "filter_language_query",
+      "title": "Run Filter Language Query",
+      "description": "Runs a search query using ThreatStream’s Filter Language Query grammar.",
+      "category": "investigation",
+      "annotation": "search_query",
+      "endpoint": "/api/v2/intelligence/?q={value}",
+      "http_method": "GET",
+      "handler_method": false,
+      "output_schema": {
+        "objects": [
+          {
+            "update_id": "",
+            "value": "",
+            "status": "",
+            "ip": "",
+            "id": "",
+            "threat_type": "",
+            "confidence": "",
+            "itype": "",
+            "is_public": "",
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "created_ts": "",
+            "modified_ts": "",
+            "tlp": "",
+            "retina_confidence": "",
+            "source_reported_confidence": "",
+            "threatscore": "",
+            "asn": "",
+            "owner_organization_id": "",
+            "org": "",
+            "rdns": "",
+            "type": "",
+            "trusted_circle_ids": [],
+            "expiration_ts": "",
+            "longitude": "",
+            "latitude": "",
+            "source": "",
+            "is_anonymous": "",
+            "feed_id": "",
+            "is_editable": "",
+            "resource_uri": "",
+            "country": "",
+            "import_session_id": "",
+            "uuid": "",
+            "workgroups": [],
+            "description": "",
+            "meta": {
+              "media_type": "",
+              "detail": "",
+              "media": "",
+              "severity": "",
+              "maltype": "",
+              "detail2": ""
+            }
+          }
+        ],
+        "meta": {
+          "limit": "",
+          "offset": "",
+          "took": "",
+          "next": "",
+          "total_count": "",
+          "previous": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filter Query",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "tooltip": "(confidence>=90+AND+(itype=\"apt_ip\"+OR+itype=\"bot_ ip\"+OR+itype=\"c2_ip\"))",
+          "placeholder": "e.g. (confidence>=90+AND+(itype=\"apt_ip\"+OR+itype=\"bot_ ip\"+OR+itype=\"c2_ip\"))",
+          "description": "Valid query to be run on the ThreatStream server. The query must conform to ThreatStream’s Filter Language Query grammar."
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "advance_query",
+      "title": "Run Advanced Search",
+      "description": "Runs an advanced search query using ThreatStream’s Query grammar.",
+      "category": "investigation",
+      "annotation": "search_query",
+      "endpoint": "/api/v2/intelligence/?{value}",
+      "http_method": "GET",
+      "handler_method": false,
+      "output_schema": {
+        "objects": [
+          {
+            "update_id": "",
+            "value": "",
+            "status": "",
+            "ip": "",
+            "id": "",
+            "threat_type": "",
+            "confidence": "",
+            "itype": "",
+            "is_public": "",
+            "tags": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "created_ts": "",
+            "modified_ts": "",
+            "tlp": "",
+            "retina_confidence": "",
+            "source_reported_confidence": "",
+            "threatscore": "",
+            "asn": "",
+            "owner_organization_id": "",
+            "org": "",
+            "rdns": "",
+            "type": "",
+            "trusted_circle_ids": [],
+            "expiration_ts": "",
+            "longitude": "",
+            "latitude": "",
+            "source": "",
+            "is_anonymous": "",
+            "feed_id": "",
+            "is_editable": "",
+            "resource_uri": "",
+            "country": "",
+            "import_session_id": "",
+            "uuid": "",
+            "workgroups": [],
+            "description": "",
+            "meta": {
+              "media_type": "",
+              "detail": "",
+              "media": "",
+              "severity": "",
+              "maltype": "",
+              "detail2": ""
+            }
+          }
+        ],
+        "meta": {
+          "limit": "",
+          "offset": "",
+          "took": "",
+          "next": "",
+          "total_count": "",
+          "previous": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Advanced Query",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "placeholder": "e.g confidence__gt=80",
+          "description": "Valid query to be run on the ThreatStream server. The query must conform to ThreatStream’s Query grammar."
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "submit_observables",
+      "title": "Submit Observables",
+      "description": "Imports threat data (indicators) into ThreatStream and requires the approval of the imported data through the ThreatStream UI.",
+      "category": "investigation",
+      "annotation": "submit_sample",
+      "handler_method": true,
+      "enabled": true,
+      "output_schema": {
+        "job_id": "",
+        "success": "",
+        "import_session_id": ""
+      },
+      "parameters": [
+        {
+          "title": "CyOPs Attachment IRI",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "reference_id",
+          "placeholder": "e.g /api/3/attachments/d3587eaf-f4e3-4061-8a2b-b6af23a3c132",
+          "tooltip": "Upload observables from CyOPs attachment. Allowed file formats are CSV, HTML, IOC, JSON, PDF, TXT",
+          "description": "(Optional) Attachment IRI that is used to access the file directly from the CyOPs™ Attachments module. This should be the file from which you want to import observables into Threatstream. You can import observables from the following file types: CSV, HTML, IOC, JSON, PDF, or TXT."
+        },
+        {
+          "title": "Observable data",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "data",
+          "tooltip": "Enter observable data manually",
+          "placeholder": "e.g. Url www.example.com phish_url",
+          "description": "(Optional) Enter the observable data that you want to import into Threatstream."
+        },
+        {
+          "title": "Confidence",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "confidence",
+          "tooltip": "Possible values: 0 - 100",
+          "description": "Confidence value that you want to assign to the observables that you want to import into Threatstream. You can specify values between 0 to 100."
+        },
+        {
+          "title": "Source Confidence Weight",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "source_confidence_weight",
+          "tooltip": "Specifies the ratio between the amount of the source confidence of each indicator and the ThreatStream confidence",
+          "placeholder": "e.g 30",
+          "description": "(Optional) Specifies the ratio between the amount of the source confidence of each indicator and the ThreatStream confidence."
+        },
+        {
+          "title": "Severity",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Severity value that you want to assign to the observables that you want to import into Threatstream. You can choose from the following options: Low, Medium, High, or Very High.",
+          "options": [
+            "Low",
+            "Medium",
+            "High",
+            "Very High"
+          ],
+          "name": "severity",
+          "value": "Low"
+        },
+        {
+          "title": "Classification",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Public",
+            "Private"
+          ],
+          "name": "classification",
+          "description": "Classification that you want to assign to the observables that you want to import into Threatstream. You can choose from the following options: Private or Public."
+        },
+        {
+          "title": "Expiration Time Stamp",
+          "description": "Duration after which the observables will expire on Threatstream. You can choose from the following options: 90 days, 60 days, 30 days, Never, or Custom. By default, it set to 90 days from the current date.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "expiration_ts",
+          "options": [
+            "90 days",
+            "60 days",
+            "30 days",
+            "Never",
+            "Custom"
+          ],
+          "value": "90 days",
+          "tooltip": "By default, set to 90 days from the current date",
+          "onchange": {
+            "Custom": [
+              {
+                "title": "Days",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "custom_days",
+                "tooltip": "Enter number of days",
+                "placeholder": "e.g 50"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Tags",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "notes",
+          "placeholder": "e.g. First Tag, Second Tag",
+          "description": "(Optional) Tags that you want to assign to the observables that you want to import into Threatstream."
+        },
+        {
+          "title": "IP Indicator Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip_mapping",
+          "description": "Global setting that applies to any imported IP-type indicator, when you do not specify an explicit itype for the IP-type indicator.",
+          "tooltip": "This is a global setting that applies to any imported IP-type indicator when an explicit itype is not specified for it"
+        },
+        {
+          "title": "Domain Indicator Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "domain_mapping",
+          "description": "Global setting that applies to any imported domain-type indicator, when you do not specify an explicit itype for the domain-type indicator.",
+          "tooltip": "This is a global setting that applies to any imported domain-type indicator when an explicit itype is not specified for it"
+        },
+        {
+          "title": "URL Indicator Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "url_mapping",
+          "description": "Global setting that applies to any imported URL-type indicator, when you do not specify an explicit itype for the URL-type indicator.",
+          "tooltip": "This is a global setting that applies to any imported URL-type indicator when an explicit itype is not specified for it"
+        },
+        {
+          "title": "Email Indicator Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "email_mapping",
+          "description": "Global setting that applies to any imported email-type indicator, when you do not specify an explicit itype for the email-type indicator.",
+          "tooltip": "This is a global setting that applies to any imported email-type indicator when an explicit itype is not specified for it"
+        },
+        {
+          "title": "MD5 Indicator Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "md5_mapping",
+          "description": "Global setting that applies to any imported MD5-type indicator, when you do not specify an explicit itype for the MD5-type indicator.",
+          "tooltip": "This is a global setting that applies to any imported email-type indicator when an explicit itype is not specified for it"
+        },
+        {
+          "title": "Trusted Circle IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "trusted_circles",
+          "placeholder": "e.g. 1, 2, 3",
+          "tooltip": "Enter ID of the trusted circle",
+          "description": "(Optional) IDs of the trusted circle."
+        }
+      ]
+    },
+    {
+      "operation": "get_import_job_status",
+      "title": "Get Import Job Status",
+      "description": "Retrieves the status of a submitted observable from ThreatStream based on the import ID that was returned in the response of the Submit Observables operation.",
+      "category": "investigation",
+      "annotation": "get_import_job_status",
+      "handler_method": false,
+      "endpoint": "/api/v1/importsession/{value}",
+      "http_method": "GET",
+      "output_schema": {
+        "id": "",
+        "processed_ts": "",
+        "status": "",
+        "approved_by": {
+          "email": "",
+          "is_active": "",
+          "avatar_s3_url": "",
+          "name": "",
+          "organization": {
+            "resource_uri": "",
+            "id": "",
+            "name": ""
+          },
+          "id": "",
+          "resource_uri": "",
+          "must_change_password": "",
+          "can_share_intelligence": "",
+          "nickname": ""
+        },
+        "tags": [],
+        "name": "",
+        "date": "",
+        "user_id": "",
+        "confidence": "",
+        "numIndicators": "",
+        "num_private": "",
+        "intelligence_source": "",
+        "email": "",
+        "default_comment": "",
+        "organization": {
+          "resource_uri": "",
+          "id": "",
+          "name": ""
+        },
+        "trusted_circles": [],
+        "is_anonymous": "",
+        "num_public": "",
+        "notes": "",
+        "date_modified": "",
+        "numRejected": "",
+        "approved_by_id": "",
+        "fileName": "",
+        "associations": {
+          "tip_reports": [],
+          "ttps": [],
+          "incidents": [],
+          "actors": [],
+          "campaigns": []
+        },
+        "orginal_intelligence": "",
+        "workgroups": [],
+        "visibleForReview": "",
+        "sandbox_submit": "",
+        "is_public": "",
+        "jobID": "",
+        "tlp": "",
+        "fileType": "",
+        "messages": "",
+        "resource_uri": "",
+        "source_confidence_weight": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Import Session ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "tooltip": "The identifier that was returned in the response of the Submit Observables call",
+          "description": "ID of the import session for which you want to retrieve the submitted observable status from ThreatStream. The import session ID is returned in the response of the Submit Observables operation."
+        }
+      ]
+    },
+    {
+      "operation": "get_import_jobs",
+      "title": "Get Import Job Details",
+      "description": "Retrieves the details of import jobs from ThreatStream based on search query that you have specified.",
+      "category": "investigation",
+      "annotation": "get_import_job",
+      "handler_method": false,
+      "endpoint": "/api/v1/importsession/?{value}",
+      "http_method": "GET",
+      "output_schema": {
+        "meta": {
+          "limit": "",
+          "next": "",
+          "previous": "",
+          "offset": "",
+          "total_count": ""
+        },
+        "objects": [
+          {
+            "jobID": "",
+            "num_private": "",
+            "source_confidence_weight": "",
+            "approved_by": {
+              "name": "",
+              "is_active": "",
+              "id": "",
+              "nickname": "",
+              "can_share_intelligence": "",
+              "email": "",
+              "avatar_s3_url": "",
+              "must_change_password": "",
+              "organization": {
+                "name": "",
+                "id": "",
+                "resource_uri": ""
+              },
+              "resource_uri": ""
+            },
+            "visibleForReview": "",
+            "is_public": "",
+            "processed_ts": "",
+            "tlp": "",
+            "num_public": "",
+            "trusted_circles": [],
+            "fileType": "",
+            "tags": [
+              {
+                "name": "",
+                "org_id": "",
+                "id": "",
+                "tlp": ""
+              }
+            ],
+            "intelligence_source": "",
+            "email": "",
+            "date": "",
+            "resource_uri": "",
+            "numRejected": "",
+            "approved_by_id": "",
+            "messages": "",
+            "id": "",
+            "status": "",
+            "workgroups": [],
+            "user_id": "",
+            "date_modified": "",
+            "organization": {
+              "name": "",
+              "id": "",
+              "resource_uri": ""
+            },
+            "name": "",
+            "is_anonymous": "",
+            "confidence": "",
+            "orginal_intelligence": "",
+            "fileName": "",
+            "sandbox_submit": "",
+            "default_comment": "",
+            "notes": "",
+            "numIndicators": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Search Query",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "Valid query to be run on the ThreatStream server based on which you want to retrieve details of import jobs.",
+          "placeholder": "e.g date_modified__gte=2019-05-01T00:00:00.000Z&status__in=approved"
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of import jobs to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "approve_import_job",
+      "title": "Approved IOC By Import ID",
+      "description": "Approves the specific import job in ThreatStream based on the import ID you have specified. ",
+      "category": "investigation",
+      "annotation": "approve_import_job",
+      "output_schema": {},
+      "endpoint": "/api/v1/importsession/{value}/approve_all",
+      "http_method": "PATCH",
+      "handler_method": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Job ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "ID of the import job that you want to approve in ThreatStream. "
+        }
+      ]
+    },
+    {
+      "operation": "reject_import_job",
+      "title": "Reject IOC By Import ID",
+      "description": "Rejects the specific import job, after it has been verified as 'ready for review' in ThreatStream based on the import ID you have specified.",
+      "category": "investigation",
+      "annotation": "reject_import_job",
+      "output_schema": {},
+      "endpoint": "/api/v1/importsession/{value}",
+      "http_method": "DELETE",
+      "handler_method": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Job ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "description": "ID of the import job that you want to reject in ThreatStream. You can reject import jobs after it has been verified as 'ready for review'."
+        }
+      ]
+    },
+    {
+      "operation": "create_incident",
+      "title": "Create Incident",
+      "description": "Creates an incident in ThreatStream based on the name, tags, and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "create_incidents",
+      "handler_method": true,
+      "output_schema": {
+        "watched_total_count": "",
+        "organization": {
+          "resource_uri": "",
+          "id": "",
+          "name": ""
+        },
+        "publication_status": "",
+        "modified_ts": "",
+        "starred_by_me": "",
+        "feed_id": "",
+        "sandbox_reports": [],
+        "is_anonymous": "",
+        "logo_s3_url": "",
+        "end_date": "",
+        "external_references": [],
+        "id": "",
+        "watched_by_me": "",
+        "status": {
+          "display_name": "",
+          "resource_uri": "",
+          "id": ""
+        },
+        "organization_id": "",
+        "created_ts": "",
+        "status_desc": "",
+        "intended_effects": [],
+        "resource_uri": "",
+        "parent": "",
+        "published_ts": "",
+        "tlp": "",
+        "assignee_user": "",
+        "body_content_type": "",
+        "description": "",
+        "start_date": "",
+        "is_cloneable": "",
+        "workgroups": [],
+        "starred_total_count": "",
+        "is_public": "",
+        "victims": [],
+        "circles": [],
+        "activity_dates": [],
+        "owner_user": {
+          "email": "",
+          "resource_uri": "",
+          "id": "",
+          "name": ""
+        },
+        "name": "",
+        "votes": {
+          "total": "",
+          "me": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "tooltip": "Name to give the incident.",
+          "description": "Name of the incident that you want to create in ThreatStream. The incident name is associated with your organization. Therefore, the name that you specify must be unique within your organization."
+        },
+        {
+          "title": "Is Incident Public or Private",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "is_public",
+          "value": true,
+          "tooltip": "Enable to create the incident as public",
+          "description": "Select whether the incident that you want to create in ThreatStream is Public or Private (including belonging to a trusted circle). Select this option, i.e., set it to True, if you want to create the incident as a Public incident. This is the default value. Clear this option, i.e., set it to False, if you want to create the incident as a Private incident or an incident that belongs to a Trusted Circle."
+        },
+        {
+          "title": "Tags",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "tags",
+          "placeholder": "e.g. First Tag, Second Tag",
+          "tooltip": "Tags assigned to the incident",
+          "description": "(Optional) Tags assigned to the incident that you want to create in ThreatStream. A tag is a meaningful name or any other string value assigned to identify the information. For example, spear phishing, exploitation."
+        },
+        {
+          "title": "Intelligence",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "intelligence",
+          "tooltip": "Comma separated list of intelligence IDs to associate with the incident",
+          "description": "Indicators associated with the Incident on the ThreatStream platform. Multiple intelligence IDs are comma separated."
+        },
+        {
+          "title": "TLP",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "tlp",
+          "options": [
+            "Red",
+            "Amber",
+            "Green",
+            "White"
+          ],
+          "description": "(Optional) Traffic Light Protocol (TLP) designation for the incident that you want to create in ThreatStream. You can choose from the following options: Red, Amber, Green, or White."
+        },
+        {
+          "title": "Fields to Include with the Incident",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "fields",
+          "description": "(Optional) Specify other fields that you want to include with the incident that you want to create in ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "fetch_incidents",
+      "title": "Get Incident List",
+      "description": "Retrieves a list of all incidents based on the search query and other input parameters that you have specified.",
+      "handler_method": true,
+      "category": "investigation",
+      "annotation": "get_incident_list",
+      "output_schema": {
+        "meta": {
+          "limit": "",
+          "next": "",
+          "previous": "",
+          "offset": "",
+          "total_count": ""
+        },
+        "objects": [
+          {
+            "tags_v2": [
+              {
+                "name": "",
+                "id": ""
+              }
+            ],
+            "is_cloneable": "",
+            "is_public": "",
+            "organization_id": "",
+            "tlp": "",
+            "resource_uri": "",
+            "workgroups": [],
+            "start_date": "",
+            "feed_id": "",
+            "watched_by_me": "",
+            "end_date": "",
+            "tags": [],
+            "starred_total_count": "",
+            "publication_status": "",
+            "id": "",
+            "votes": {
+              "total": "",
+              "me": ""
+            },
+            "status": {
+              "display_name": "",
+              "id": "",
+              "resource_uri": ""
+            },
+            "watched_total_count": "",
+            "created_ts": "",
+            "name": "",
+            "is_anonymous": "",
+            "circles": [
+              {
+                "name": "",
+                "id": "",
+                "resource_uri": ""
+              }
+            ],
+            "starred_by_me": "",
+            "published_ts": "",
+            "modified_ts": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Search Query",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "placeholder": "created_ts__gte=2019-01-28T21:04:14&status=new",
+          "description": "Valid search query to filter out the incidents."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 0,
+          "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+          "description": "Maximum number of results that this operation should return."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "description": "0 based index of the page that this operation should return."
+        }
+      ]
+    },
+    {
+      "operation": "list_incidents_by_indicator",
+      "title": "Get Incident List By Indicator",
+      "description": "Retrieves a list of all incidents based on the intelligence value and other input parameters that you have specified.",
+      "handler_method": false,
+      "endpoint": "/api/v1/incident/associated_with_intelligence/",
+      "http_method": "GET",
+      "category": "investigation",
+      "annotation": "get_incident_list",
+      "output_schema": {
+        "meta": {
+          "limit": "",
+          "next": "",
+          "previous": "",
+          "offset": "",
+          "total_count": ""
+        },
+        "objects": [
+          {
+            "tags_v2": [
+              {
+                "name": "",
+                "id": ""
+              }
+            ],
+            "is_cloneable": "",
+            "is_public": "",
+            "organization_id": "",
+            "tlp": "",
+            "resource_uri": "",
+            "workgroups": [],
+            "start_date": "",
+            "feed_id": "",
+            "watched_by_me": "",
+            "end_date": "",
+            "tags": [],
+            "starred_total_count": "",
+            "publication_status": "",
+            "id": "",
+            "votes": {
+              "total": "",
+              "me": ""
+            },
+            "status": {
+              "display_name": "",
+              "id": "",
+              "resource_uri": ""
+            },
+            "watched_total_count": "",
+            "created_ts": "",
+            "name": "",
+            "is_anonymous": "",
+            "circles": [
+              {
+                "name": "",
+                "id": "",
+                "resource_uri": ""
+              }
+            ],
+            "starred_by_me": "",
+            "published_ts": "",
+            "modified_ts": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Intelligence value to filter",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "tooltip": "e.g. example.com returns all Incidents that are associated with example.com.",
+          "description": "Intelligence value based on which you want to filter incidents to be retrieved from ThreatStream. For example google.com returns all Incidents that are associated with google.com."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 0,
+          "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+          "description": "Maximum number of results that this operation should return."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "description": "0 based index of the page that this operation should return."
+        }
+      ]
+    },
+    {
+      "operation": "get_incident",
+      "title": "Get Incident",
+      "description": "Collects and retrieves generated incidents from ThreatStream based on the incident ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_incident",
+      "handler_method": false,
+      "endpoint": "/api/v1/incident/{value}",
+      "http_method": "GET",
+      "output_schema": {
+        "status": {
+          "id": "",
+          "display_name": "",
+          "resource_uri": ""
+        },
+        "tags": [
+          ""
+        ],
+        "name": "",
+        "organization": {
+          "resource_uri": "",
+          "id": "",
+          "name": ""
+        },
+        "is_anonymous": "",
+        "id": "",
+        "workgroups": [],
+        "is_public": "",
+        "tlp": "",
+        "resource_uri": "",
+        "logo_s3_url": "",
+        "external_references": [
+          {
+            "s3_url": "",
+            "filename": "",
+            "url": "",
+            "id": "",
+            "title": "",
+            "r_type": "",
+            "resource_uri": ""
+          }
+        ],
+        "created_ts": "",
+        "body_content_type": "",
+        "publication_status": "",
+        "watched_total_count": "",
+        "tags_v2": [
+          {
+            "id": "",
+            "name": ""
+          }
+        ],
+        "ttps": [],
+        "signatures": [],
+        "victims": [],
+        "starred_by_me": "",
+        "end_date": "",
+        "owner_user": {
+          "email": "",
+          "id": "",
+          "name": "",
+          "resource_uri": ""
+        },
+        "organization_id": "",
+        "watched_by_me": "",
+        "modified_ts": "",
+        "tipreports": [],
+        "votes": {
+          "total": "",
+          "me": ""
+        },
+        "intended_effects": [],
+        "starred_total_count": "",
+        "start_date": "",
+        "feed_id": "",
+        "circles": [
+          {
+            "id": "",
+            "name": "",
+            "resource_uri": ""
+          }
+        ],
+        "activity_dates": [],
+        "incidents": [],
+        "sandbox_reports": [],
+        "description": "",
+        "parent": "",
+        "intelligence": [],
+        "is_cloneable": "",
+        "published_ts": "",
+        "status_desc": "",
+        "actors": [],
+        "campaigns": []
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "value",
+          "description": "ID of the generated incident whose details you want to retrieve from ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "update_incident",
+      "title": "Update Incident",
+      "description": "Updates an incident in ThreatStream based on the incident ID and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "update_incident",
+      "handler_method": true,
+      "output_schema": {
+        "watched_total_count": "",
+        "organization": {
+          "resource_uri": "",
+          "id": "",
+          "name": ""
+        },
+        "publication_status": "",
+        "modified_ts": "",
+        "starred_by_me": "",
+        "feed_id": "",
+        "sandbox_reports": [],
+        "is_anonymous": "",
+        "logo_s3_url": "",
+        "end_date": "",
+        "external_references": [],
+        "id": "",
+        "watched_by_me": "",
+        "status": {
+          "display_name": "",
+          "resource_uri": "",
+          "id": ""
+        },
+        "organization_id": "",
+        "created_ts": "",
+        "status_desc": "",
+        "intended_effects": [],
+        "resource_uri": "",
+        "parent": "",
+        "published_ts": "",
+        "tlp": "",
+        "assignee_user": "",
+        "body_content_type": "",
+        "description": "",
+        "start_date": "",
+        "is_cloneable": "",
+        "workgroups": [],
+        "starred_total_count": "",
+        "is_public": "",
+        "victims": [],
+        "circles": [],
+        "activity_dates": [],
+        "owner_user": {
+          "email": "",
+          "resource_uri": "",
+          "id": "",
+          "name": ""
+        },
+        "name": "",
+        "votes": {
+          "total": "",
+          "me": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "value",
+          "description": "ID of the incident that you want to update on ThreatStream."
+        },
+        {
+          "title": "Incident Name",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "description": "Name of the incident that you want to update on ThreatStream."
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "status",
+          "apiOperation": "get_status",
+          "tooltip": "Status of the Incident.",
+          "description": "(Optional) Select the status of the incident that you want to update on ThreatStream. You can choose from the following options: New, Open, Stalled, Containment Achieved, Restoration Achieved, Incident Reported, Closed, Rejected, or Deleted. Note: This parameter will make an API call named \"get_status\" to dynamically populate its dropdown selections."
+        },
+        {
+          "title": "Status Description",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "status_desc",
+          "description": "(Optional) Description associated with the status of the incident that you want to update on ThreatStream."
+        },
+        {
+          "title": "Fields to Update on Incident",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "fields",
+          "description": "(Optional) Specify other fields that you want to include with the incident that you want to update in ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "delete_incident",
+      "title": "Delete Incident",
+      "description": "Deletes an incident from ThreatStream based on the incident ID that you have specified.",
+      "category": "investigation",
+      "annotation": "delete_incident",
+      "handler_method": false,
+      "endpoint": "/api/v1/incident/{value}",
+      "http_method": "DELETE",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "value",
+          "description": "ID of the incident that you want to delete from ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "get_status",
+      "title": "Get Status",
+      "description": "Get a list of Incident statuses",
+      "handler_method": true,
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": {}
+    },
+    {
+      "operation": "create_threat_bulletin",
+      "title": "Create Threat Bulletin",
+      "description": "Creates a threat bulletin in ThreatStream based on the name, tags, and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "create_threat_bulletin",
+      "handler_method": true,
+      "conditional_output_schema": [
+        {
+          "condition": "{{reference_id === ''}}",
+          "output_schema": {
+            "starred_total_count": "",
+            "status": "",
+            "tlp": "",
+            "starred_by_me": "",
+            "comments": [],
+            "owner_org": {
+              "id": "",
+              "name": "",
+              "resource_uri": ""
+            },
+            "ttp": "",
+            "owner_user_name": "",
+            "circles": [],
+            "campaign": "",
+            "id": "",
+            "is_cloneable": "",
+            "assignee_org_name": "",
+            "is_editable": true,
+            "workgroups": [],
+            "assignee_user_name": "",
+            "is_public": false,
+            "assignee_user_id": "",
+            "original_source_id": "",
+            "sandbox_reports": [],
+            "owner_org_id": "",
+            "owner_user": {
+              "resource_uri": "",
+              "id": "",
+              "name": "",
+              "email": "",
+              "nickname": "",
+              "organization": {
+                "id": "",
+                "name": "",
+                "resource_uri": ""
+              },
+              "is_readonly": "",
+              "avatar_s3_url": "",
+              "is_active": true,
+              "must_change_password": "",
+              "can_share_intelligence": ""
+            },
+            "owner_user_id": "",
+            "attachments": [
+              {
+                "signed_url": "",
+                "s3_url": "",
+                "id": "",
+                "s3_thumbnail_url": "",
+                "signed_thumbnail_url": "",
+                "filename": "",
+                "modified_ts": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": "",
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "tip_report": "",
+                "content_type": "",
+                "created_ts": ""
+              }
+            ],
+            "watched_total_count": "",
+            "name": "",
+            "body_content_type": "",
+            "assignee_org": "",
+            "history": [
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": " ",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": " ",
+                    "resource_uri": " "
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              }
+            ],
+            "logo_s3_url": "",
+            "embedded_content_url": "",
+            "votes": {
+              "me": "",
+              "total": ""
+            },
+            "is_email": "",
+            "assignee_user": {
+              "resource_uri": "",
+              "id": "",
+              "name": "",
+              "email": "",
+              "nickname": "",
+              "organization": {
+                "id": "",
+                "name": "",
+                "resource_uri": ""
+              },
+              "is_readonly": "",
+              "avatar_s3_url": "",
+              "is_active": "",
+              "must_change_password": "",
+              "can_share_intelligence": ""
+            },
+            "import_sessions": [
+              {
+                "status": "",
+                "tlp": "",
+                "messages": "",
+                "name": "",
+                "numIndicators": "",
+                "visibleForReview": "",
+                "source_confidence_weight": "",
+                "date_modified": "",
+                "workgroups": [],
+                "notes": "",
+                "id": "",
+                "fileType": "",
+                "approved_by": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "num_private": "",
+                "sandbox_submit": "",
+                "intelligence_source": "",
+                "numRejected": "",
+                "num_public": "",
+                "is_anonymous": "",
+                "is_public": "",
+                "resource_uri": "",
+                "organization": {
+                  "id": "",
+                  "name": "",
+                  "resource_uri": ""
+                },
+                "date": "",
+                "default_comment": "",
+                "approved_by_id": "",
+                "trusted_circles": [],
+                "orginal_intelligence": "[]",
+                "email": "",
+                "fileName": "",
+                "processed_ts": "",
+                "confidence": "",
+                "user_id": "",
+                "jobID": "",
+                "tags": []
+              }
+            ],
+            "body": "",
+            "feed_id": "",
+            "assignee_org_id": "",
+            "is_anonymous": "",
+            "owner_org_name": "",
+            "resource_uri": "",
+            "all_circles_visible": "",
+            "modified_ts": "",
+            "parent": "",
+            "original_source": "",
+            "created_ts": "",
+            "watched_by_me": "",
+            "published_ts": "",
+            "embedded_content_type": "",
+            "private_status_id": "",
+            "threat_actor": "",
+            "source": ""
+          }
+        },
+        {
+          "condition": "{{reference_id !== ''}}",
+          "output_schema": {
+            "attachment": {
+              "s3_url": "",
+              "signed_thumbnail_url": "",
+              "modified_ts": "",
+              "id": "",
+              "filename": "",
+              "s3_thumbnail_url": "",
+              "content_type": "",
+              "user": {
+                "organization": {
+                  "id": "",
+                  "name": "",
+                  "resource_uri": ""
+                },
+                "is_readonly": "",
+                "avatar_s3_url": "",
+                "name": "",
+                "is_active": "",
+                "nickname": "",
+                "resource_uri": "",
+                "id": "",
+                "email": "",
+                "can_share_intelligence": "",
+                "must_change_password": ""
+              },
+              "signed_url": "",
+              "created_ts": "",
+              "tip_report": ""
+            },
+            "threat_bulletin": {
+              "is_anonymous": "",
+              "private_status_id": "",
+              "assignee_user_id": "",
+              "source": "",
+              "history": [
+                {
+                  "detail": "",
+                  "quantity": "",
+                  "ts": "",
+                  "id": "",
+                  "action": "",
+                  "tip_report": "",
+                  "user": {
+                    "resource_uri": "",
+                    "email": "",
+                    "nickname": "",
+                    "can_share_intelligence": "",
+                    "is_readonly": "",
+                    "must_change_password": "",
+                    "id": "",
+                    "avatar_s3_url": "",
+                    "organization": {
+                      "id": "",
+                      "resource_uri": "",
+                      "name": ""
+                    },
+                    "is_active": "",
+                    "name": ""
+                  }
+                }
+              ],
+              "sandbox_reports": [],
+              "votes": {
+                "me": "",
+                "total": ""
+              },
+              "is_email": "",
+              "resource_uri": "",
+              "watched_total_count": "",
+              "is_public": "",
+              "created_ts": "",
+              "starred_total_count": "",
+              "assignee_user": "",
+              "feed_id": "",
+              "embedded_content_url": "",
+              "logo_s3_url": "",
+              "name": "",
+              "embedded_content_type": "",
+              "status": "",
+              "owner_org_name": "",
+              "attachments": [],
+              "original_source_id": "",
+              "owner_user_name": "",
+              "is_cloneable": "",
+              "watched_by_me": "",
+              "assignee_org": "",
+              "starred_by_me": "",
+              "body_content_type": "",
+              "owner_user_id": "",
+              "comments": [],
+              "owner_org": {
+                "id": "",
+                "resource_uri": "",
+                "name": ""
+              },
+              "published_ts": "",
+              "owner_org_id": "",
+              "is_editable": "",
+              "campaign": "",
+              "id": "",
+              "modified_ts": "",
+              "assignee_user_name": "",
+              "import_sessions": [],
+              "circles": [],
+              "workgroups": [],
+              "body": "",
+              "parent": "",
+              "ttp": "",
+              "threat_actor": "",
+              "assignee_org_name": "",
+              "owner_user": {
+                "resource_uri": "",
+                "email": "",
+                "nickname": "",
+                "can_share_intelligence": "",
+                "is_readonly": "",
+                "must_change_password": "",
+                "id": "",
+                "avatar_s3_url": "",
+                "organization": {
+                  "id": "",
+                  "resource_uri": "",
+                  "name": ""
+                },
+                "is_active": "",
+                "name": ""
+              },
+              "tlp": "",
+              "assignee_org_id": "",
+              "original_source": "",
+              "all_circles_visible": ""
+            }
+          }
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "tooltip": "Threat bulletin name.",
+          "description": "Name of the threat bulletin that you want to create in ThreatStream."
+        },
+        {
+          "title": "Format Used for Description",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Richtext",
+            "Markdown"
+          ],
+          "name": "body_content_type",
+          "value": "Markdown",
+          "tooltip": "Format used for the body text of the threat bulletin.",
+          "description": "Optional) Format that will be used for the body text of the threat bulletin. You can choose between Markdown (Default) or Richtext."
+        },
+        {
+          "title": "Description",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "body",
+          "tooltip": "Add description of the threat bulletin",
+          "description": "(Optional) Complete text of the threat bulletin that you want to create in ThreatStream."
+        },
+        {
+          "title": "Is Threat Bulletin Public or Private",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "is_public",
+          "value": false,
+          "tooltip": "Enable to create the threat bulletin as a public.",
+          "description": "Select this checkbox, if you want to create the threat bulletin as a Public Threat Bulletin. Clear this checkbox, if you want to create the threat bulletin as a Private Threat Bulletin (including belonging to a trusted circle). By default, the threat bulletin is created as Private, i.e., this checkbox is cleared."
+        },
+        {
+          "title": "TLP",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "tlp",
+          "options": [
+            "Red",
+            "Amber",
+            "Green",
+            "White"
+          ],
+          "tooltip": "Traffic Light Protocol designation for the threat bulletin.",
+          "description": "(Optional) Traffic Light Protocol (TLP) that you want to designate to the threat bulletin that you want to create in ThreatStream. You can choose from the following options: Red, Amber, Green, or White."
+        },
+        {
+          "title": "Add an Attachment",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "tooltip": "Select the file from CyOPs attachment module to add an attachment to Threat Bulletin.",
+          "description": "Specify the IRI of the file from the CyOPs™ 'Attachment' module that you want to add an attachment to Threat Bulletin.",
+          "name": "reference_id",
+          "placeholder": "/api/3/attachments/3c7f8df7-1205-44c7-8a9e-ed7a3d3dd5aa"
+        },
+        {
+          "title": "Fields to Include with the Threat Bulletin",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "fields",
+          "description": "(Optional) Fields that you want to include with the threat bulletin that you want to create in ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "update_threat_bulletin",
+      "title": "Update Threat Bulletin",
+      "description": "Updates a threat bulletin in ThreatStream based on the incident ID and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "update_threat_bulletin",
+      "handler_method": true,
+      "conditional_output_schema": [
+        {
+          "condition": "{{reference_id === ''}}",
+          "output_schema": {
+            "starred_total_count": "",
+            "status": "",
+            "tlp": "",
+            "starred_by_me": "",
+            "comments": [],
+            "owner_org": {
+              "id": "",
+              "name": "",
+              "resource_uri": ""
+            },
+            "ttp": "",
+            "owner_user_name": "",
+            "circles": [],
+            "campaign": "",
+            "id": "",
+            "is_cloneable": "",
+            "assignee_org_name": "",
+            "is_editable": true,
+            "workgroups": [],
+            "assignee_user_name": "",
+            "is_public": false,
+            "assignee_user_id": "",
+            "original_source_id": "",
+            "sandbox_reports": [],
+            "owner_org_id": "",
+            "owner_user": {
+              "resource_uri": "",
+              "id": "",
+              "name": "",
+              "email": "",
+              "nickname": "",
+              "organization": {
+                "id": "",
+                "name": "",
+                "resource_uri": ""
+              },
+              "is_readonly": "",
+              "avatar_s3_url": "",
+              "is_active": true,
+              "must_change_password": "",
+              "can_share_intelligence": ""
+            },
+            "owner_user_id": "",
+            "attachments": [
+              {
+                "signed_url": "",
+                "s3_url": "",
+                "id": "",
+                "s3_thumbnail_url": "",
+                "signed_thumbnail_url": "",
+                "filename": "",
+                "modified_ts": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": "",
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "tip_report": "",
+                "content_type": "",
+                "created_ts": ""
+              }
+            ],
+            "watched_total_count": "",
+            "name": "",
+            "body_content_type": "",
+            "assignee_org": "",
+            "history": [
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": " ",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": " ",
+                    "resource_uri": " "
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              },
+              {
+                "detail": "",
+                "id": "",
+                "user": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "quantity": "",
+                "tip_report": "",
+                "ts": "",
+                "action": ""
+              }
+            ],
+            "logo_s3_url": "",
+            "embedded_content_url": "",
+            "votes": {
+              "me": "",
+              "total": ""
+            },
+            "is_email": "",
+            "assignee_user": {
+              "resource_uri": "",
+              "id": "",
+              "name": "",
+              "email": "",
+              "nickname": "",
+              "organization": {
+                "id": "",
+                "name": "",
+                "resource_uri": ""
+              },
+              "is_readonly": "",
+              "avatar_s3_url": "",
+              "is_active": "",
+              "must_change_password": "",
+              "can_share_intelligence": ""
+            },
+            "import_sessions": [
+              {
+                "status": "",
+                "tlp": "",
+                "messages": "",
+                "name": "",
+                "numIndicators": "",
+                "visibleForReview": "",
+                "source_confidence_weight": "",
+                "date_modified": "",
+                "workgroups": [],
+                "notes": "",
+                "id": "",
+                "fileType": "",
+                "approved_by": {
+                  "resource_uri": "",
+                  "id": "",
+                  "name": "",
+                  "email": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "is_readonly": "",
+                  "avatar_s3_url": "",
+                  "is_active": true,
+                  "must_change_password": "",
+                  "can_share_intelligence": ""
+                },
+                "num_private": "",
+                "sandbox_submit": "",
+                "intelligence_source": "",
+                "numRejected": "",
+                "num_public": "",
+                "is_anonymous": "",
+                "is_public": "",
+                "resource_uri": "",
+                "organization": {
+                  "id": "",
+                  "name": "",
+                  "resource_uri": ""
+                },
+                "date": "",
+                "default_comment": "",
+                "approved_by_id": "",
+                "trusted_circles": [],
+                "orginal_intelligence": "[]",
+                "email": "",
+                "fileName": "",
+                "processed_ts": "",
+                "confidence": "",
+                "user_id": "",
+                "jobID": "",
+                "tags": []
+              }
+            ],
+            "body": "",
+            "feed_id": "",
+            "assignee_org_id": "",
+            "is_anonymous": "",
+            "owner_org_name": "",
+            "resource_uri": "",
+            "all_circles_visible": "",
+            "modified_ts": "",
+            "parent": "",
+            "original_source": "",
+            "created_ts": "",
+            "watched_by_me": "",
+            "published_ts": "",
+            "embedded_content_type": "",
+            "private_status_id": "",
+            "threat_actor": "",
+            "source": ""
+          }
+        },
+        {
+          "condition": "{{reference_id !== ''}}",
+          "output_schema": {
+            "attachment": {
+              "s3_url": "",
+              "signed_thumbnail_url": "",
+              "modified_ts": "",
+              "id": "",
+              "filename": "",
+              "s3_thumbnail_url": "",
+              "content_type": "",
+              "user": {
+                "organization": {
+                  "id": "",
+                  "name": "",
+                  "resource_uri": ""
+                },
+                "is_readonly": "",
+                "avatar_s3_url": "",
+                "name": "",
+                "is_active": "",
+                "nickname": "",
+                "resource_uri": "",
+                "id": "",
+                "email": "",
+                "can_share_intelligence": "",
+                "must_change_password": ""
+              },
+              "signed_url": "",
+              "created_ts": "",
+              "tip_report": ""
+            },
+            "threat_bulletin": {
+              "starred_total_count": "",
+              "status": "",
+              "tlp": "",
+              "starred_by_me": "",
+              "comments": [],
+              "owner_org": {
+                "id": "",
+                "name": "",
+                "resource_uri": ""
+              },
+              "ttp": "",
+              "owner_user_name": "",
+              "circles": [],
+              "campaign": "",
+              "id": "",
+              "is_cloneable": "",
+              "assignee_org_name": "",
+              "is_editable": true,
+              "workgroups": [],
+              "assignee_user_name": "",
+              "is_public": false,
+              "assignee_user_id": "",
+              "original_source_id": "",
+              "sandbox_reports": [],
+              "owner_org_id": "",
+              "owner_user": {
+                "resource_uri": "",
+                "id": "",
+                "name": "",
+                "email": "",
+                "nickname": "",
+                "organization": {
+                  "id": "",
+                  "name": "",
+                  "resource_uri": ""
+                },
+                "is_readonly": "",
+                "avatar_s3_url": "",
+                "is_active": true,
+                "must_change_password": "",
+                "can_share_intelligence": ""
+              },
+              "owner_user_id": "",
+              "attachments": [
+                {
+                  "signed_url": "",
+                  "s3_url": "",
+                  "id": "",
+                  "s3_thumbnail_url": "",
+                  "signed_thumbnail_url": "",
+                  "filename": "",
+                  "modified_ts": "",
+                  "user": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": "",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": "",
+                      "resource_uri": ""
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": "",
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "tip_report": "",
+                  "content_type": "",
+                  "created_ts": ""
+                }
+              ],
+              "watched_total_count": "",
+              "name": "",
+              "body_content_type": "",
+              "assignee_org": "",
+              "history": [
+                {
+                  "detail": "",
+                  "id": "",
+                  "user": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": "",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": "",
+                      "resource_uri": ""
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": true,
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "quantity": "",
+                  "tip_report": "",
+                  "ts": "",
+                  "action": ""
+                },
+                {
+                  "detail": "",
+                  "id": "",
+                  "user": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": " ",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": " ",
+                      "resource_uri": " "
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": true,
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "quantity": "",
+                  "tip_report": "",
+                  "ts": "",
+                  "action": ""
+                },
+                {
+                  "detail": "",
+                  "id": "",
+                  "user": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": "",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": "",
+                      "resource_uri": ""
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": true,
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "quantity": "",
+                  "tip_report": "",
+                  "ts": "",
+                  "action": ""
+                },
+                {
+                  "detail": "",
+                  "id": "",
+                  "user": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": "",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": "",
+                      "resource_uri": ""
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": true,
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "quantity": "",
+                  "tip_report": "",
+                  "ts": "",
+                  "action": ""
+                },
+                {
+                  "detail": "",
+                  "id": "",
+                  "user": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": "",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": "",
+                      "resource_uri": ""
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": true,
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "quantity": "",
+                  "tip_report": "",
+                  "ts": "",
+                  "action": ""
+                },
+                {
+                  "detail": "",
+                  "id": "",
+                  "user": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": "",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": "",
+                      "resource_uri": ""
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": true,
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "quantity": "",
+                  "tip_report": "",
+                  "ts": "",
+                  "action": ""
+                }
+              ],
+              "logo_s3_url": "",
+              "embedded_content_url": "",
+              "votes": {
+                "me": "",
+                "total": ""
+              },
+              "is_email": "",
+              "assignee_user": {
+                "resource_uri": "",
+                "id": "",
+                "name": "",
+                "email": "",
+                "nickname": "",
+                "organization": {
+                  "id": "",
+                  "name": "",
+                  "resource_uri": ""
+                },
+                "is_readonly": "",
+                "avatar_s3_url": "",
+                "is_active": "",
+                "must_change_password": "",
+                "can_share_intelligence": ""
+              },
+              "import_sessions": [
+                {
+                  "status": "",
+                  "tlp": "",
+                  "messages": "",
+                  "name": "",
+                  "numIndicators": "",
+                  "visibleForReview": "",
+                  "source_confidence_weight": "",
+                  "date_modified": "",
+                  "workgroups": [],
+                  "notes": "",
+                  "id": "",
+                  "fileType": "",
+                  "approved_by": {
+                    "resource_uri": "",
+                    "id": "",
+                    "name": "",
+                    "email": "",
+                    "nickname": "",
+                    "organization": {
+                      "id": "",
+                      "name": "",
+                      "resource_uri": ""
+                    },
+                    "is_readonly": "",
+                    "avatar_s3_url": "",
+                    "is_active": true,
+                    "must_change_password": "",
+                    "can_share_intelligence": ""
+                  },
+                  "num_private": "",
+                  "sandbox_submit": "",
+                  "intelligence_source": "",
+                  "numRejected": "",
+                  "num_public": "",
+                  "is_anonymous": "",
+                  "is_public": "",
+                  "resource_uri": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "date": "",
+                  "default_comment": "",
+                  "approved_by_id": "",
+                  "trusted_circles": [],
+                  "orginal_intelligence": "[]",
+                  "email": "",
+                  "fileName": "",
+                  "processed_ts": "",
+                  "confidence": "",
+                  "user_id": "",
+                  "jobID": "",
+                  "tags": []
+                }
+              ],
+              "body": "",
+              "feed_id": "",
+              "assignee_org_id": "",
+              "is_anonymous": "",
+              "owner_org_name": "",
+              "resource_uri": "",
+              "all_circles_visible": "",
+              "modified_ts": "",
+              "parent": "",
+              "original_source": "",
+              "created_ts": "",
+              "watched_by_me": "",
+              "published_ts": "",
+              "embedded_content_type": "",
+              "private_status_id": "",
+              "threat_actor": "",
+              "source": ""
+            }
+          }
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Threat Bulletin ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "tb_id",
+          "description": "ID of the threat bulletin that you want to update on ThreatStream."
+        },
+        {
+          "title": "Threat Bulletin Name",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "description": "(Optional) Name of the threat bulletin that you want to update on ThreatStream."
+        },
+        {
+          "title": "Publication Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "status",
+          "options": [
+            "Published",
+            "Reviewed",
+            "Review Requested",
+            "Pending Review"
+          ],
+          "tooltip": "Status of the Threat Bulletin.",
+          "description": "(Optional) Publication status that you want to set for the threat bulletin that you want to update on ThreatStream. You can choose from the following options: Published, Reviewed, Review Request, or Pending Review."
+        },
+        {
+          "title": "Add an Attachment",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "tooltip": "Select the file from CyOPs attachment module to add an attachment to Threat Bulletin",
+          "description": "Specify the IRI of the file from the CyOPs™ 'Attachment' module that you want to add as an attachment to the threat bulletin that you want to update in ThreatStream.",
+          "name": "reference_id",
+          "placeholder": "/api/3/attachments/3c7f8df7-1205-44c7-8a9e-ed7a3d3dd5aa"
+        },
+        {
+          "title": "Fields to Update on Threat Bulletin",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "fields",
+          "description": "(Optional) Fields that you want to include with the incident that you want to update in ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "list_threat_bulletins",
+      "title": "Get Threat Bulletin List",
+      "description": "Retrieves a list of all threat bulletins or specific threat bulletins based on the search query and other input parameters that you have specified.",
+      "endpoint": "/api/v1/tipreport/",
+      "http_method": "GET",
+      "handler_method": true,
+      "category": "investigation",
+      "annotation": "get_threat_bulletin_list",
+      "output_schema": {
+        "objects": [
+          {
+            "assignee_org_id": "",
+            "status": "",
+            "assignee_user_name": "",
+            "owner_user_id": "",
+            "name": "",
+            "id": "",
+            "is_email": "",
+            "is_public": "",
+            "campaign": "",
+            "starred_by_me": "",
+            "published_ts": "",
+            "assignee_user": "",
+            "owner_org": {
+              "resource_uri": "",
+              "id": "",
+              "name": ""
+            },
+            "votes": {
+              "total": "",
+              "me": ""
+            },
+            "owner_user": {
+              "organization": {
+                "resource_uri": "",
+                "id": "",
+                "name": ""
+              },
+              "is_readonly": "",
+              "id": "",
+              "can_share_intelligence": "",
+              "must_change_password": "",
+              "is_active": "",
+              "nickname": "",
+              "resource_uri": "",
+              "name": "",
+              "avatar_s3_url": "",
+              "email": ""
+            },
+            "threat_actor": "",
+            "original_source": "",
+            "is_anonymous": "",
+            "tlp": "",
+            "original_source_id": "",
+            "circles": [
+              {
+                "validate_subscriptions": "",
+                "num_administrators": "",
+                "restricted_publishing": "",
+                "name": "",
+                "is_freemium": "",
+                "member": "",
+                "pending": "",
+                "id": "",
+                "public": "",
+                "openinvite": "",
+                "can_edit": "",
+                "description": "",
+                "can_invite": "",
+                "anonymous_sharing": "",
+                "num_members": "",
+                "can_override_confidence": "",
+                "resource_uri": ""
+              }
+            ],
+            "owner_org_id": "",
+            "assignee_user_id": "",
+            "assignee_org": "",
+            "body_content_type": "",
+            "owner_user_name": "",
+            "watched_by_me": "",
+            "resource_uri": "",
+            "tags": [],
+            "created_ts": "",
+            "starred_total_count": "",
+            "parent": "",
+            "assignee_org_name": "",
+            "all_circles_visible": "",
+            "modified_ts": "",
+            "is_cloneable": "",
+            "source": "",
+            "tags_v2": [
+              {
+                "id": "",
+                "name": ""
+              }
+            ],
+            "feed_id": "",
+            "is_editable": "",
+            "workgroups": [],
+            "owner_org_name": "",
+            "ttp": "",
+            "watched_total_count": ""
+          }
+        ],
+        "meta": {
+          "next": "",
+          "total_count": "",
+          "limit": "",
+          "offset": "",
+          "previous": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Search Query",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query",
+          "tooltip": "Valid ThreatStream query to search Threat Bulletin",
+          "placeholder": "e.g created_ts__gte=2014-10-02T20:44:35",
+          "description": "Valid query to be run on the ThreatStream server based on which you want to retrieve the list of threat bulletins. For example, created_ts__gte=2014-10-02T20:44:35"
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "list_threat_model_entity",
+      "title": "Get Threat Bulletin Entities",
+      "description": "Retrieves a list of all threat model entities associated with a specific threat bulletin based on the threat bulletin ID and other input parameters that you have specified.",
+      "endpoint": "/api/v1/tipreport/{id}/<entity_type>/",
+      "http_method": "GET",
+      "handler_method": true,
+      "category": "investigation",
+      "annotation": "get_threat_model",
+      "conditional_output_schema": [
+        {
+          "condition": "{{entity_type === 'Actor'}}",
+          "output_schema": {
+            "objects": [
+              {
+                "aliases": [
+                  {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  }
+                ],
+                "assignee_user": "",
+                "circles": [
+                  {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  }
+                ],
+                "created_ts": "",
+                "feed_id": "",
+                "id": "",
+                "is_anonymous": "",
+                "is_cloneable": "",
+                "is_public": "",
+                "is_team": "",
+                "modified_ts": "",
+                "name": "",
+                "organization_id": "",
+                "publication_status": "",
+                "published_ts": "",
+                "resource_uri": "",
+                "starred_by_me": "",
+                "starred_total_count": "",
+                "start_date": "",
+                "tags": [],
+                "tags_v2": [
+                  {
+                    "id": "",
+                    "name": ""
+                  }
+                ],
+                "tlp": "",
+                "votes": {
+                  "me": "",
+                  "total": ""
+                },
+                "watched_by_me": "",
+                "watched_total_count": "",
+                "workgroups": []
+              }
+            ],
+            "meta": {
+              "limit": "",
+              "next": "",
+              "offset": "",
+              "previous": "",
+              "total_count": ""
+            }
+          }
+        },
+        {
+          "condition": "{{entity_type === 'Campaign'}}",
+          "output_schema": {
+            "objects": [
+              {
+                "assignee_user": "",
+                "circles": [
+                  {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  }
+                ],
+                "created_ts": "",
+                "end_date": "",
+                "feed_id": "",
+                "id": "",
+                "is_anonymous": "",
+                "is_cloneable": "",
+                "is_public": "",
+                "modified_ts": "",
+                "name": "",
+                "organization_id": "",
+                "publication_status": "",
+                "published_ts": "",
+                "resource_uri": "",
+                "starred_by_me": "",
+                "starred_total_count": "",
+                "start_date": "",
+                "status": {
+                  "display_name": "",
+                  "id": "",
+                  "resource_uri": ""
+                },
+                "tags": [],
+                "tags_v2": [
+                  {
+                    "id": "",
+                    "name": ""
+                  }
+                ],
+                "tlp": "",
+                "votes": {
+                  "me": "",
+                  "total": ""
+                },
+                "watched_by_me": "",
+                "watched_total_count": "",
+                "workgroups": []
+              }
+            ],
+            "meta": {
+              "limit": "",
+              "next": "",
+              "offset": "",
+              "previous": "",
+              "total_count": ""
+            }
+          }
+        },
+        {
+          "condition": "{{entity_type === 'Incident'}}",
+          "output_schema": {
+            "objects": [
+              {
+                "tags_v2": [
+                  {
+                    "name": "",
+                    "id": ""
+                  }
+                ],
+                "is_cloneable": "",
+                "is_public": "",
+                "organization_id": "",
+                "tlp": "",
+                "resource_uri": "",
+                "workgroups": [],
+                "start_date": "",
+                "feed_id": "",
+                "watched_by_me": "",
+                "end_date": "",
+                "tags": [],
+                "starred_total_count": "",
+                "publication_status": "",
+                "id": "",
+                "votes": {
+                  "total": "",
+                  "me": ""
+                },
+                "status": {
+                  "display_name": "",
+                  "id": "",
+                  "resource_uri": ""
+                },
+                "watched_total_count": "",
+                "created_ts": "",
+                "name": "",
+                "is_anonymous": "",
+                "circles": [
+                  {
+                    "name": "",
+                    "id": "",
+                    "resource_uri": ""
+                  }
+                ],
+                "starred_by_me": "",
+                "published_ts": "",
+                "modified_ts": ""
+              }
+            ],
+            "meta": {
+              "limit": "",
+              "next": "",
+              "previous": "",
+              "offset": "",
+              "total_count": ""
+            }
+          }
+        },
+        {
+          "condition": "{{entity_type === 'Signature'}}",
+          "output_schema": {
+            "objects": [
+              {
+                "assignee_user": "",
+                "circles": [
+                  {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  }
+                ],
+                "created_ts": "",
+                "feed_id": "",
+                "id": "",
+                "is_anonymous": "",
+                "is_cloneable": "",
+                "is_public": "",
+                "modified_ts": "",
+                "name": "",
+                "organization_id": "",
+                "publication_status": "",
+                "published_ts": "",
+                "resource_uri": "",
+                "s_type": "",
+                "starred_by_me": "",
+                "starred_total_count": "",
+                "tags": [],
+                "tags_v2": [
+                  {
+                    "id": "",
+                    "name": ""
+                  }
+                ],
+                "tlp": "",
+                "votes": {
+                  "me": "",
+                  "total": ""
+                },
+                "watched_by_me": "",
+                "watched_total_count": "",
+                "workgroups": []
+              }
+            ],
+            "meta": {
+              "limit": "",
+              "next": "",
+              "offset": "",
+              "previous": "",
+              "total_count": ""
+            }
+          }
+        },
+        {
+          "condition": "{{entity_type === 'Tipreport'}}",
+          "output_schema": {
+            "objects": [
+              {
+                "all_circles_visible": "",
+                "assignee_org": "",
+                "assignee_org_id": "",
+                "assignee_org_name": "",
+                "assignee_user": "",
+                "assignee_user_id": "",
+                "assignee_user_name": "",
+                "body_content_type": "",
+                "campaign": "",
+                "circles": [
+                  {
+                    "anonymous_sharing": "",
+                    "can_edit": "",
+                    "can_invite": "",
+                    "can_override_confidence": "",
+                    "description": "",
+                    "id": "",
+                    "is_freemium": "",
+                    "member": "",
+                    "name": "",
+                    "num_administrators": "",
+                    "num_members": "",
+                    "openinvite": "",
+                    "pending": "",
+                    "public": "",
+                    "resource_uri": "",
+                    "restricted_publishing": "",
+                    "validate_subscriptions": ""
+                  }
+                ],
+                "created_ts": "",
+                "feed_id": "",
+                "id": "",
+                "is_anonymous": "",
+                "is_cloneable": "",
+                "is_editable": "",
+                "is_email": "",
+                "is_public": "",
+                "modified_ts": "",
+                "name": "",
+                "original_source": "",
+                "original_source_id": "",
+                "owner_org": {
+                  "id": "",
+                  "name": "",
+                  "resource_uri": ""
+                },
+                "owner_org_id": "",
+                "owner_org_name": "",
+                "owner_user": {
+                  "avatar_s3_url": "",
+                  "can_share_intelligence": "",
+                  "email": "",
+                  "id": "",
+                  "is_active": "",
+                  "is_readonly": "",
+                  "must_change_password": "",
+                  "name": "",
+                  "nickname": "",
+                  "organization": {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  },
+                  "resource_uri": ""
+                },
+                "owner_user_id": "",
+                "owner_user_name": "",
+                "parent": "",
+                "published_ts": "",
+                "resource_uri": "",
+                "source": "",
+                "starred_by_me": "",
+                "starred_total_count": "",
+                "status": "",
+                "tags": [],
+                "tags_v2": [
+                  {
+                    "id": "",
+                    "name": ""
+                  }
+                ],
+                "threat_actor": "",
+                "tlp": "",
+                "ttp": "",
+                "votes": {
+                  "me": "",
+                  "total": ""
+                },
+                "watched_by_me": "",
+                "watched_total_count": "",
+                "workgroups": []
+              }
+            ],
+            "meta": {
+              "limit": "",
+              "next": "",
+              "offset": "",
+              "previous": "",
+              "total_count": ""
+            }
+          }
+        },
+        {
+          "condition": "{{entity_type === 'TTP'}}",
+          "output_schema": {
+            "objects": [
+              {
+                "assignee_user": "",
+                "children": [],
+                "circles": [
+                  {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  }
+                ],
+                "created_ts": "",
+                "feed_id": "",
+                "id": "",
+                "is_anonymous": "",
+                "is_category": "",
+                "is_cloneable": "",
+                "is_public": "",
+                "modified_ts": "",
+                "name": "",
+                "organization_id": "",
+                "publication_status": "",
+                "published_ts": "",
+                "resource_uri": "",
+                "starred_by_me": "",
+                "starred_total_count": "",
+                "tags": [],
+                "tags_v2": [
+                  {
+                    "id": "",
+                    "name": ""
+                  }
+                ],
+                "tlp": "",
+                "votes": {
+                  "me": "",
+                  "total": ""
+                },
+                "watched_by_me": "",
+                "watched_total_count": "",
+                "workgroups": []
+              }
+            ],
+            "meta": {
+              "limit": "",
+              "next": "",
+              "offset": "",
+              "previous": "",
+              "total_count": ""
+            }
+          }
+        },
+        {
+          "condition": "{{entity_type === 'Vulnerability'}}",
+          "output_schema": {
+            "objects": [
+              {
+                "assignee_user": "",
+                "circles": [
+                  {
+                    "id": "",
+                    "name": "",
+                    "resource_uri": ""
+                  }
+                ],
+                "created_ts": "",
+                "feed_id": "",
+                "id": "",
+                "is_anonymous": "",
+                "is_cloneable": "",
+                "is_public": "",
+                "is_system": "",
+                "modified_ts": "",
+                "name": "",
+                "organization_id": "",
+                "publication_status": "",
+                "published_ts": "",
+                "resource_uri": "",
+                "source": "",
+                "tags": [],
+                "tags_v2": [
+                  {
+                    "id": "",
+                    "name": ""
+                  }
+                ],
+                "tlp": "",
+                "update_id": "",
+                "workgroups": []
+              }
+            ],
+            "meta": {
+              "limit": "",
+              "next": "",
+              "offset": "",
+              "previous": "",
+              "total_count": ""
+            }
+          }
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Threat Bulletin ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "id",
+          "tooltip": "ID of the Threat Bulletin whose associated Threat Model entities you want to return.",
+          "description": "ID of the Threat Bulletin whose associated Threat Model entities you want to return."
+        },
+        {
+          "title": "Entity Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "entity_type",
+          "options": [
+            "Actor",
+            "Campaign",
+            "Incident",
+            "Signature",
+            "Tipreport",
+            "TTP",
+            "Vulnerability"
+          ],
+          "tooltip": "The type of associated Threat Model entity you want to return",
+          "description": "Type of the threat model entity that is associated with the specified threat bulletin that you want to retrieve from ThreatStream. You can choose from the following types: Actor, Campaign, Incident, Signature, Tipreport, TTP, or vulnerability."
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "list_observables_associated_threat_bulletin",
+      "title": "Get Threat Bulletin Observables",
+      "description": "Retrieves a list of all observables associated with a specific threat bulletin based on the threat bulletin ID and other input parameters that you have specified.",
+      "endpoint": "/api/v1/tipreport/{value}/intelligence/",
+      "http_method": "GET",
+      "handler_method": false,
+      "category": "investigation",
+      "annotation": "get_observables_associated_threat_bulletin",
+      "output_schema": {
+        "meta": {
+          "next": "",
+          "total_count": "",
+          "previous": "",
+          "limit": "",
+          "offset": ""
+        },
+        "objects": [
+          {
+            "source": "",
+            "import_session_id": "",
+            "ip": "",
+            "org": "",
+            "itype": "",
+            "threatscore": "",
+            "asn": "",
+            "longitude": "",
+            "source_reported_confidence": "",
+            "confidence": "",
+            "type": "",
+            "is_anonymous": "",
+            "modified_ts": "",
+            "retina_confidence": "",
+            "meta": {
+              "detail": "",
+              "detail2": "",
+              "severity": ""
+            },
+            "workgroups": [],
+            "comments": [
+              {
+                "user": {
+                  "name": "",
+                  "organization": {
+                    "name": "",
+                    "resource_uri": "",
+                    "id": ""
+                  },
+                  "nickname": "",
+                  "is_active": "",
+                  "must_change_password": "",
+                  "resource_uri": "",
+                  "avatar_s3_url": "",
+                  "is_readonly": "",
+                  "email": "",
+                  "id": "",
+                  "can_share_intelligence": ""
+                },
+                "id": "",
+                "tlp": "",
+                "comment": "",
+                "ip_address": "",
+                "created_ts": ""
+              }
+            ],
+            "status": "",
+            "country": "",
+            "update_id": "",
+            "is_public": "",
+            "feed_id": "",
+            "owner_organization_id": "",
+            "threat_type": "",
+            "id": "",
+            "tags": [
+              {
+                "name": "",
+                "id": ""
+              }
+            ],
+            "latitude": "",
+            "expiration_ts": "",
+            "uuid": "",
+            "trusted_circles_ids": [],
+            "tlp": "",
+            "value": "",
+            "created_ts": "",
+            "trusted_circle_ids": [],
+            "rdns": "",
+            "resource_uri": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Threat Bulletin ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "value",
+          "description": "ID of the threat bulletin whose associated observables that you want to retrieve from ThreatStream."
+        },
+        {
+          "title": "Number of Records to Return",
+          "description": "Select whether you want this operation to Fetch Limited Records or Fetch All Records. If you select Fetch Limited Records, then you must specify the following additional parameters: Limit: Maximum number of results that this operation should return. Offset: 0 based index of the page that this operation should return.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Fetch All Records",
+            "Fetch Limited Records"
+          ],
+          "name": "record_number",
+          "value": "Fetch Limited Records",
+          "onchange": {
+            "Fetch All Records": [],
+            "Fetch Limited Records": [
+              {
+                "title": "Limit",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "limit",
+                "value": 20,
+                "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+                "description": "Number of records to return"
+              },
+              {
+                "title": "Offset",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "integer",
+                "name": "offset",
+                "value": 0,
+                "description": "A record offset to retrieve the record from specified number."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "submit_urls_files",
+      "title": "Submit URLs or Files to Sandbox",
+      "description": "Submit files or URLs to a specific ThreatStream-hosted sandbox based on the sandbox name, URLs/files, tags and other input parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "submit_sample",
+      "handler_method": true,
+      "enabled": true,
+      "output_schema": {
+        "reports": {
+          "WINDOWS7": {
+            "detail": "",
+            "status": "",
+            "id": ""
+          },
+          "WINDOWSXP": {
+            "id": "",
+            "detail": "",
+            "status": ""
+          }
+        },
+        "success": ""
+      },
+      "parameters": [
+        {
+          "title": "Classification of the Sandbox Submission",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Public",
+            "Private"
+          ],
+          "name": "classification",
+          "description": "Classify the files or URLs that you are submitting to the ThreatStream Sandbox submission as Public or Private."
+        },
+        {
+          "title": "Sandbox",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "sandbox_type",
+          "description": "Select the sandbox type and the respective platform on which you want to run the submitted URL or file. You can choose from the following sandbox options: ThreatStream Sandbox, ThreatStream Joe Sandbox, or Joe Sandbox via an individual subscription.",
+          "options": [
+            "ThreatStream Sandbox",
+            "ThreatStream Joe Sandbox",
+            "Joe Sandbox via an individual subscription"
+          ],
+          "value": "ThreatStream Sandbox",
+          "onchange": {
+            "ThreatStream Sandbox": [
+              {
+                "title": "Supported Platforms",
+                "description": "Select the platform from the list of supported platforms, based on the sandbox type you have chosen on which you want to run the submitted URL or file.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "ALL",
+                  "WINDOWSXP",
+                  "WINDOWS7"
+                ],
+                "name": "platform"
+              }
+            ],
+            "ThreatStream Joe Sandbox": [
+              {
+                "title": "Supported Platforms",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "MACOSX",
+                  "WINDOWS7",
+                  "WINDOWS7OFFICE2010",
+                  "WINDOWS10x64"
+                ],
+                "name": "platform"
+              }
+            ],
+            "Joe Sandbox via an individual subscription": [
+              {
+                "title": "Supported Platforms",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "ANDROID4.4",
+                  "ANDROID5.1",
+                  "ANDROID6.0",
+                  "MACOSX",
+                  "WINDOWSXP",
+                  "WINDOWSXPNATIVE",
+                  "WINDOWS7",
+                  "WINDOWS7NATIVE",
+                  "WINDOWS7OFFICE2010",
+                  "WINDOWS7OFFICE2013",
+                  "WINDOWS10",
+                  "WINDOWS10x64"
+                ],
+                "name": "platform"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Sample type",
+          "description": "Type of sample that you want to submit to ThreatStream. You can choose between URL or File.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "URL",
+            "File"
+          ],
+          "onchange": {
+            "URL": [
+              {
+                "title": "URL",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "description": "If you choose URL, then in the URL field specify the URL that you want to submit to ThreatStream.",
+                "name": "radio_url"
+              }
+            ],
+            "File": [
+              {
+                "title": "CyOPs Attachment IRI",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "description": "If you choose File, then in the CyOPs Attachment IRI field specify the IRI of the file from the CyOPs™ 'Attachment' module that you want to submit to ThreatStream.",
+                "name": "reference_id",
+                "placeholder": "e.g /api/3/attachments/d3587eaf-f4e3-4061-8a2b-b6af23a3c132"
+              }
+            ]
+          },
+          "name": "sample_type"
+        },
+        {
+          "title": "Tags",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Comma-separated list of tags that provide additional details of the indicator that you want to submit to ThreatStream",
+          "placeholder": "e.g. Credential-Exposure,compromised_email",
+          "tooltip": "Comma-separated list that provides additional details for the indicator.",
+          "name": "detail"
+        },
+        {
+          "title": "Use Premium Sandbox",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "description": "Select this checkbox, i.e., set it as true, if you want to use a premium sandbox for the file that you are submitting to ThreatStream.",
+          "name": "use_premium_sandbox",
+          "value": false
+        },
+        {
+          "title": "Trusted Circle IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "trusted_circles",
+          "description": "(Optional) ID of the trusted circle with which you want to associate the sandbox data. If you want to specify multiple trusted circles, enter a list of comma-separated Trusted Circle IDs.",
+          "placeholder": "e.g. 1, 2, 3",
+          "tooltip": "Comma-separated lis of the trusted circle"
+        }
+      ]
+    },
+    {
+      "operation": "get_submit_url_status",
+      "title": "Get Sandbox Status of Submitted URL/File",
+      "description": "Retrieves the sandbox status of files or URLs that you have submitted to ThreatStream based on the report ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_import_job_status",
+      "handler_method": false,
+      "endpoint": "/api/v1/submit/{value}/",
+      "http_method": "GET",
+      "output_schema": {
+        "circles": [],
+        "classification": "",
+        "comments": [],
+        "confidence": "",
+        "date_added": "",
+        "detail": "",
+        "file": "",
+        "html_report": "",
+        "id": "",
+        "import_indicators": "",
+        "jobID": "",
+        "maec_report": "",
+        "md5": "",
+        "message": "",
+        "misc_info": "",
+        "notes": "",
+        "pdf_generated": "",
+        "platform": "",
+        "platform_label": "",
+        "priority": "",
+        "reportid": "",
+        "resource_uri": "",
+        "sha1": "",
+        "sha256": "",
+        "starred_by_me": "",
+        "starred_total_count": "",
+        "status": "",
+        "url": "",
+        "user": {
+          "id": "",
+          "username": ""
+        },
+        "user_id": "",
+        "verdict": "",
+        "virustotal": "",
+        "votes": {
+          "me": "",
+          "total": ""
+        },
+        "watched_by_me": "",
+        "watched_total_count": "",
+        "yara": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Report ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "value",
+          "description": "ID of the sandbox report whose sandbox status for submitted URLs or Files you want to retrieve from ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "get_submitted_url_report",
+      "title": "Get Sandbox Report of Submitted URL/File",
+      "description": "Retrieves the sandbox analysis report of files or URLs that you have submitted to ThreatStream based on the report ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_report",
+      "handler_method": false,
+      "endpoint": "/api/v1/submit/{value}/report",
+      "http_method": "GET",
+      "output_schema": {
+        "pcap": "",
+        "screenshots": [],
+        "results": {
+          "info": {
+            "category": "",
+            "package": "",
+            "started": "",
+            "custom": "",
+            "machine": {
+              "shutdown_on": "",
+              "started_on": "",
+              "manager": "",
+              "label": "",
+              "id": "",
+              "name": ""
+            },
+            "ended": "",
+            "version": "",
+            "duration": "",
+            "id": ""
+          },
+          "signatures": [],
+          "target": {
+            "category": "",
+            "file": {
+              "yara": [],
+              "sha1": "",
+              "name": "",
+              "sha512": "",
+              "crc32": "",
+              "path": "",
+              "ssdeep": "",
+              "sha256": "",
+              "type": "",
+              "md5": "",
+              "size": ""
+            }
+          },
+          "procmemory": [],
+          "static": {
+            "pe_imphash": "",
+            "peid_signatures": "",
+            "pe_timestamp": "",
+            "pe_exports": [],
+            "imported_dll_count": "",
+            "pe_imports": [
+              {
+                "imports": [
+                  {
+                    "name": "",
+                    "address": ""
+                  }
+                ],
+                "dll": ""
+              },
+              {
+                "imports": [
+                  {
+                    "name": "",
+                    "address": ""
+                  }
+                ],
+                "dll": ""
+              }
+            ],
+            "pe_resources": [],
+            "pe_versioninfo": [],
+            "pe_sections": [
+              {
+                "size_of_data": "",
+                "virtual_address": "",
+                "entropy": "",
+                "name": "",
+                "virtual_size": ""
+              }
+            ]
+          },
+          "dropped": [],
+          "behavior": {
+            "anomaly": [],
+            "processes": [
+              {
+                "parent_id": "",
+                "process_id": "",
+                "process_name": "",
+                "first_seen": "",
+                "calls": [
+                  {
+                    "category": "",
+                    "status": "",
+                    "return": "",
+                    "timestamp": "",
+                    "thread_id": "",
+                    "repeated": "",
+                    "api": "",
+                    "arguments": [
+                      {
+                        "name": "",
+                        "value": ""
+                      }
+                    ],
+                    "id": ""
+                  }
+                ]
+              }
+            ],
+            "processtree": [
+              {
+                "parent_id": "",
+                "pid": "",
+                "children": [],
+                "name": ""
+              }
+            ],
+            "enhanced": [
+              {
+                "timestamp": "",
+                "object": "",
+                "data": {
+                  "file": "",
+                  "pathtofile": "",
+                  "moduleaddress": ""
+                },
+                "event": "",
+                "eid": ""
+              },
+              {
+                "timestamp": "",
+                "object": "",
+                "data": {
+                  "file": "",
+                  "pathtofile": "",
+                  "moduleaddress": ""
+                },
+                "event": "",
+                "eid": ""
+              },
+              {
+                "timestamp": "",
+                "object": "",
+                "data": {
+                  "content": "",
+                  "object": "",
+                  "regkey": ""
+                },
+                "event": "",
+                "eid": ""
+              },
+              {
+                "timestamp": "",
+                "object": "",
+                "data": {
+                  "file": "",
+                  "pathtofile": "",
+                  "moduleaddress": ""
+                },
+                "event": "",
+                "eid": ""
+              }
+            ],
+            "summary": {
+              "files": [],
+              "keys": [],
+              "mutexes": []
+            }
+          },
+          "debug": {
+            "errors": [],
+            "log": ""
+          },
+          "network": {
+            "udp": [
+              {
+                "src": "",
+                "dst": "",
+                "offset": "",
+                "time": "",
+                "dport": "",
+                "sport": ""
+              }
+            ],
+            "icmp": [],
+            "http": [],
+            "smtp": [],
+            "tcp": [],
+            "hosts": [],
+            "pcap_sha256": "",
+            "dns": [],
+            "domains": [],
+            "sorted_pcap_sha256": "",
+            "irc": []
+          }
+        },
+        "success": true
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sandbox Report ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "value",
+          "description": "ID of the sandbox report whose sandbox report for submitted URLs or Files you want to retrieve from ThreatStream."
+        }
+      ]
+    },
+    {
+      "operation": "intelligence_enrichments",
+      "title": "Get Intelligence Enrichments",
+      "description": "Retrieves the enrichment data for the given observable.",
+      "category": "investigation",
+      "annotation": "get_intelligence_enrichments",
+      "handler_method": true,
+      "conditional_output_schema": [
+        {
+          "condition": "{{services === 'Passive DNS'}}",
+          "output_schema": {
+            "cached": "",
+            "results": [
+              {
+                "domain": "",
+                "ip": "",
+                "rrtype": "",
+                "source": "",
+                "first_seen": "",
+                "last_seen": ""
+              }
+            ]
+          }
+        },
+        {
+          "condition": "{{services === 'Recorded Future'}}",
+          "output_schema": {
+            "cached": "",
+            "results": [
+              {
+                "hits": "",
+                "dateLast": "",
+                "dateFirst": "",
+                "recordedFutureUrl": "",
+                "relatedEntities": "",
+                "sources": "",
+                "criticalityLable": "",
+                "evidenceDetails": "",
+                "riskScore": ""
+              }
+            ]
+          }
+        },
+        {
+          "condition": "{{services === 'Risk IQ'}}",
+          "output_schema": {
+            "results": [
+              {
+                "issue_date": "",
+                "issuer_org_name": "",
+                "expiration_date": "",
+                "subject_name": "",
+                "source": "",
+                "sha1": "",
+                "link": "",
+                "subject_country": "",
+                "first_seen": "",
+                "last_seen": ""
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Third Party TI",
+          "description": "To retrieve enrichment data for observable you can select from the following services:",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "services",
+          "options": [
+            "Passive DNS",
+            "Recorded Future",
+            "Risk IQ"
+          ],
+          "onchange": {
+            "Passive DNS": [
+              {
+                "title": "Observable Type",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "Domain",
+                  "IP"
+                ],
+                "name": "itype",
+                "onchange": {
+                  "Domain": [
+                    {
+                      "title": "Domain value",
+                      "required": true,
+                      "editable": true,
+                      "visible": true,
+                      "type": "text",
+                      "name": "value",
+                      "placeholder": "e.g example.com",
+                      "description": "Specify the Domain for which you want to return Passive DNS enrichment data."
+                    }
+                  ],
+                  "IP": [
+                    {
+                      "title": "IP Address",
+                      "required": true,
+                      "editable": true,
+                      "visible": true,
+                      "type": "text",
+                      "name": "value",
+                      "description": "Specify the IP address for which you want to return Passive DNS enrichment data."
+                    }
+                  ]
+                },
+                "description": "Passive DNS returns enrichment data for domain, IP observables."
+              }
+            ],
+            "Recorded Future": [
+              {
+                "title": "Observable Type",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "Domain",
+                  "IP",
+                  "MD5"
+                ],
+                "name": "itype",
+                "onchange": {
+                  "Domain": [
+                    {
+                      "title": "Domain value",
+                      "required": true,
+                      "editable": true,
+                      "visible": true,
+                      "type": "text",
+                      "name": "value",
+                      "placeholder": "e.g. example.com",
+                      "description": "Specify the Domain for which you want to return Recorded Future enrichment data."
+                    }
+                  ],
+                  "IP": [
+                    {
+                      "title": "IP Address",
+                      "required": true,
+                      "editable": true,
+                      "visible": true,
+                      "type": "text",
+                      "name": "value",
+                      "description": "Specify the IP for which you want to return Recorded Future enrichment data."
+                    }
+                  ],
+                  "MD5": [
+                    {
+                      "title": "Filehash",
+                      "required": true,
+                      "editable": true,
+                      "visible": true,
+                      "type": "text",
+                      "name": "value",
+                      "placeholder": "Only MD5",
+                      "description": "Specify the IP for which you want to return Recorded Future enrichment data."
+                    }
+                  ]
+                },
+                "description": "Recorded Future returns enrichment data for Domain, IP and MD5."
+              }
+            ],
+            "Risk IQ": [
+              {
+                "title": "IP Address",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "value",
+                "description": "Specify the IP address for which you want to return Risk IQ enrichment data."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "list_incidents",
+      "title": "Get Incidents List",
+      "description": "Retrieves a list of all incidents or specific incidents based on the filter criteria such as the intelligence value to filter and other input parameters that you have specified.",
+      "handler_method": true,
+      "category": "investigation",
+      "annotation": "get_incident_list",
+      "output_schema": {
+        "meta": {
+          "limit": "",
+          "next": "",
+          "previous": "",
+          "offset": "",
+          "total_count": ""
+        },
+        "objects": [
+          {
+            "tags_v2": [
+              {
+                "name": "",
+                "id": ""
+              }
+            ],
+            "is_cloneable": "",
+            "is_public": "",
+            "organization_id": "",
+            "tlp": "",
+            "resource_uri": "",
+            "workgroups": [],
+            "start_date": "",
+            "feed_id": "",
+            "watched_by_me": "",
+            "end_date": "",
+            "tags": [],
+            "starred_total_count": "",
+            "publication_status": "",
+            "id": "",
+            "votes": {
+              "total": "",
+              "me": ""
+            },
+            "status": {
+              "display_name": "",
+              "id": "",
+              "resource_uri": ""
+            },
+            "watched_total_count": "",
+            "created_ts": "",
+            "name": "",
+            "is_anonymous": "",
+            "circles": [
+              {
+                "name": "",
+                "id": "",
+                "resource_uri": ""
+              }
+            ],
+            "starred_by_me": "",
+            "published_ts": "",
+            "modified_ts": ""
+          }
+        ]
+      },
+      "enabled": false,
+      "visible": false,
+      "parameters": [
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 0,
+          "tooltip": "Specifying 0 will return up to a maximum of 1000 results (if available). Max limit is 1000",
+          "description": "Maximum number of results that this operation should return."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "description": "0 based index of the page that this operation should return."
+        },
+        {
+          "title": "Intelligence value to filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "tooltip": "e.g. example.com returns all Incidents that are associated with example.com.",
+          "description": "Intelligence value based on which you want to filter incidents to be retrieved from ThreatStream. For example google.com returns all Incidents that are associated with google.com."
+        }
+      ]
+    }
+  ]
+}

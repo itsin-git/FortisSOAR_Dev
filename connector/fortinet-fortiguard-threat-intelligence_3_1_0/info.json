@@ -1,0 +1,355 @@
+{
+  "name": "fortinet-fortiguard-threat-intelligence",
+  "label": "Fortinet FortiGuard Threat Intelligence",
+  "version": "3.1.0",
+  "description": "FortiGuard Threat Intelligence is the global threat intelligence and research organization at Fortinet. This connector facilitates automated operations to check IP, URL, Domain and File Hash Lookup\u2019s and ingestion of daily threat feeds.<br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "tags": [
+    "ThreatIntel",
+    "Enrichment",
+    "IP_Enrichment",
+    "FileHash_Enrichment",
+    "URL_Enrichment",
+    "Domain_Enrichment"
+  ],
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "ingestion_preferences": {
+    "modules": [
+      "threat_intel_feeds",
+      "indicators"
+    ]
+  },
+  "help_online": "https://docs.fortinet.com/document/fortisoar/3.1.0/fortinet-fortiguard-threat-intelligence/424/fortinet-fortiguard-threat-intelligence-v3-1-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server Name",
+        "description": "URL of the FortiGuard Threat Intelligence API server to which you will connect and perform automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "value": "https://productapi.fortinet.com"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "threat_intel_search",
+      "title": "Threat Intel Search",
+      "description": "Retrieves information about a threat from Fortiguard Threat Intelligence based on the indicator you have specified.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "threat_intel_search",
+      "parameters": [
+        {
+          "title": "Indicator",
+          "description": "Indicator of the threat whose information you want to retrieve from the FortiGuard Threat Intelligence server.",
+          "type": "text",
+          "name": "indicator",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Indicator should be File Hash, Domain, URL or IP."
+        }
+      ],
+      "output_schema": {
+        "reference_url": "",
+        "ioc_cate": "",
+        "confidence": "",
+        "wf_cate": "",
+        "spam_cates": [],
+        "ioc_tags": [],
+        "av_cate": ""
+      }
+    },
+    {
+      "operation": "get_threat_categories",
+      "title": "Get Threat Categories",
+      "description": "Retrieves a static list of threat types and names from FortiGuard Threat Intelligence based on the title that you have specified.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_threat_categories",
+      "parameters": [
+        {
+          "title": "Title",
+          "description": "Title of the threat whose associated threat types and names you want to retrieve from FortiGuard Threat Intelligence server.",
+          "type": "text",
+          "name": "title",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "placeholder": "e.g Malware.",
+          "tooltip": "Title should be one of this value: Malware, Mobile_CnC, APTAttack, etc"
+        }
+      ],
+      "output_schema": [
+        {
+          "ctype": "",
+          "title": "",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_encyclopedia_lookup",
+      "title": "Get Encyclopedia Lookup",
+      "description": "Retrieves a lookup from FortiGuard Threat Intelligence based on the threat source and the associated encyclopedia lookup ID you have specified.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_encyclopedia_lookup",
+      "parameters": [
+        {
+          "title": "Source",
+          "description": "Source of the lookup, for example, viruses, botnet, etc., whose information you want to retrieve from FortiGuard Threat Intelligence server.",
+          "type": "select",
+          "name": "source",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Viruses",
+            "Intrusion Prevention",
+            "Botnet",
+            "Endpoint Vulnerabilities",
+            "Mobile",
+            "Application",
+            "Internet Services"
+          ]
+        },
+        {
+          "title": "ID",
+          "description": "ID of the encyclopedia lookup whose information you want to retrieve from the FortiGuard Threat Intelligence server.",
+          "type": "text",
+          "name": "id",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ],
+      "conditional_output_schema": [
+        {
+          "condition": "{{source === 'Viruses'}}",
+          "output_schema": {
+            "Type": "",
+            "ID": "",
+            "Name": "",
+            "Aliases": "",
+            "Symptoms": "",
+            "Analysis": "",
+            "Action": "",
+            "SecurityRefs": [],
+            "DetectionAvailability": [
+              {
+                "product": "",
+                "sigdb": "",
+                "status": ""
+              }
+            ],
+            "Discovered": "",
+            "Created": "",
+            "Updated": ""
+          }
+        },
+        {
+          "condition": "{{source === 'Intrusion Prevention'}}",
+          "output_schema": {
+            "Type": "",
+            "ID": "",
+            "Name": "",
+            "isActive": "",
+            "Risk": "",
+            "Summary": "",
+            "Symptoms": "",
+            "Analysis": "",
+            "Action": "",
+            "DefaultAction": "",
+            "BehaviorList": [],
+            "os_list": [],
+            "app_list": [],
+            "SecurityRefs": [],
+            "DetectionAvailability": [
+              {
+                "product": "",
+                "sigdb": "",
+                "status": ""
+              }
+            ],
+            "Released": "",
+            "Created": "",
+            "Updated": ""
+          }
+        },
+        {
+          "condition": "{{source === 'Botnet'}}",
+          "output_schema": {
+            "Type": "",
+            "ID": "",
+            "Name": "",
+            "Aliases": "",
+            "Summary": "",
+            "Symptoms": "",
+            "Analysis": "",
+            "Action": "",
+            "Platform": "",
+            "Created": "",
+            "Updated": ""
+          }
+        },
+        {
+          "condition": "{{source === 'Endpoint Vulnerabilities'}}",
+          "output_schema": {
+            "Type": "",
+            "ID": "",
+            "Name": "",
+            "Risk": "",
+            "Summary": "",
+            "Analysis": "",
+            "Products": [],
+            "SecurityRefs": [
+              {
+                "reftype": "",
+                "refid": "",
+                "url": ""
+              }
+            ],
+            "DetectionAvailability": [
+              {
+                "product": "",
+                "sigdb": "",
+                "status": ""
+              }
+            ],
+            "Created": "",
+            "Updated": ""
+          }
+        },
+        {
+          "condition": "{{source === 'Mobile'}}",
+          "output_schema": {
+            "Type": "",
+            "ID": "",
+            "Name": "",
+            "Aliases": "",
+            "Symptoms": "",
+            "Analysis": "",
+            "Action": "",
+            "SecurityRefs": [],
+            "DetectionAvailability": [
+              {
+                "product": "",
+                "sigdb": "",
+                "status": ""
+              }
+            ],
+            "Discovered": "",
+            "Created": "",
+            "Updated": ""
+          }
+        },
+        {
+          "condition": "{{source === 'Application'}}",
+          "output_schema": {
+            "Type": "",
+            "ID": "",
+            "Name": "",
+            "Category": "",
+            "Risk": "",
+            "RiskID": "",
+            "Popularity": "",
+            "Summary": "",
+            "Symptoms": "",
+            "Analysis": "",
+            "Action": "",
+            "DefaultAction": "",
+            "BehaviorList": [],
+            "AppPort": "",
+            "References": [],
+            "DeepAppCtrl": "",
+            "Vendor": "",
+            "Deprecated": "",
+            "Language": "",
+            "Technology": [],
+            "os_list": [],
+            "app_list": [],
+            "Released": "",
+            "Created": "",
+            "Updated": "",
+            "RequireApp": []
+          }
+        },
+        {
+          "condition": "{{source === 'Internet Services'}}",
+          "output_schema": {
+            "Type": "",
+            "ID": "",
+            "Name": "",
+            "Analysis": ""
+          }
+        }
+      ]
+    },
+    {
+      "operation": "ingest_feeds",
+      "title": "Fetch Threat Intel Feeds",
+      "description": "Download the FortiGuard Threat Intel Feeds",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "threat_intel_feeds",
+      "parameters": [
+        {
+          "title": "Fetch feeds created after",
+          "description": "To be used in scheduled data ingestion to fetch feeds incrementally since the last successful pull",
+          "tooltip": "To be used in scheduled data ingestion to fetch feeds incrementally since the last successful pull",
+          "type": "datetime",
+          "name": "modified_after",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Process Response As",
+          "name": "output_mode",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Create as Feed Records in FortiSOAR",
+            "Save to File"
+          ],
+          "value": "Create as Feed Records in FortiSOAR",
+          "tooltip": "Select the method of returning the Feed Data information",
+          "description": "Select the method of returning the Feed Data information. You can choose between the data being create as Feed records in FortiSOAR or being written to files on the FortiSOAR server (Save to File). ",
+          "onchange": {
+            "Create as Feed Records in FortiSOAR": [
+              {
+                "title": "Record Creation Playbook IRI",
+                "description": "",
+                "type": "text",
+                "name": "create_pb_id",
+                "required": false,
+                "editable": true,
+                "visible": true
+              }
+            ],
+            "Save to File": []
+          }
+        }
+      ],
+      "output_schema": {
+        "result": "",
+        "message": ""
+      }
+    }
+  ]
+}

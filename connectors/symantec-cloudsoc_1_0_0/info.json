@@ -1,0 +1,715 @@
+{
+  "name": "symantec-cloudsoc",
+  "label": "Symantec CloudSOC",
+  "description": "The Symantec CloudSOC platform enables companies to confidently leverage cloud applications and services while staying safe, secure, and compliant",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "Cloud Security Log",
+  "icon_small_name": "small.png",
+  "icon_large_name": "medium.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000070888-symantec-cloudsoc-v1-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "API Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "host_name",
+        "value":"https://configapi.symanteccloud.com/"
+      },
+      {
+        "title": "Key Identifier",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "api_key"
+      },
+      {
+        "title": "Key Secret",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_password"
+      },
+      {
+        "title": "Tenant Identifier",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "tenant"
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_logs",
+      "title": "Get Event Logs",
+      "description": "Pulls Incident and Event data using Detect or Investigate",
+      "category": "investigation",
+      "annotation": "get_log",
+      "parameters": [
+        {
+          "title": "APP",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "app",
+          "options": [
+            "investigate",
+            "detect"
+          ],
+          "value": "",
+          "onchange": {
+            "investigate": [
+              {
+                "title": "Subtype",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "name": "subtype",
+                "options": [
+                  "all"
+                ],
+                "value": ""
+              },
+             {
+                "title": "Created Timestamp",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "created_timestamp",
+                "value": "",
+                "placeholder": "Date Format: 2015-01-01T00:00:00. For date range 2015-01-01T00:00:00,2015-02-01T00:00:00"
+             }
+            ],
+            "detect": [
+              {
+                "title": "Subtype",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "name": "subtype",
+                "options": [
+                  "incidents",
+                  "threatscore"
+                ],
+                "value": ""
+              },
+              {
+                "title": "Created Timestamp",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "created_timestamp",
+                "value": "",
+                "placeholder": "Date Format: 2015-01-01T00:00:00. For date range 2015-01-01T00:00:00,2015-02-01T00:00:00"
+              }
+            ]
+          }
+        },
+        {
+          "title": "User",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "user",
+          "value": "",
+          "placeholder": "Comma separated user in case of multiple user eg: u1,u2"
+        },
+        {
+          "title": "service",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "service",
+          "value": ""
+        },
+        {
+          "title": "severity",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": ["informational", "error", "warning", "critical", "low", "medium", "high"],
+          "name": "severity",
+          "value": ""
+        },
+        {
+          "title": "Inserted Timestamp",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "inserted_timestamp",
+          "value": "",
+          "placeholder": "Date Format: 2015-01-01T00:00:00. For date range 2015-01-01T00:00:00,2015-02-01T00:00:00"
+        },
+        {
+          "title": "Updated Timestamp",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "updated_timestamp",
+          "value": "",
+          "placeholder": "Date Format: 2015-01-01T00:00:00. For date range 2015-01-01T00:00:00,2015-02-01T00:00:00"
+        },
+        {
+          "title": "Search",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "search",
+          "value": ""
+        },
+        {
+          "title": "From",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "from",
+          "value": ""
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": "1000"
+        },
+        {
+          "title": "Sort Inserted Timestamp",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sort_inserted_timestamp",
+          "options": [
+            "asc",
+            "desc"
+          ],
+          "value": "",
+          "placeholder": " 'asc' or 'desc' "
+        },
+        {
+          "title": "Sort",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sort",
+          "options": [
+            "asc",
+            "desc"
+          ],
+          "value": "",
+          "placeholder": " 'asc' or 'desc' "
+        },
+        {
+          "title": "Threat Score",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "threat_score",
+          "value": "",
+          "placeholder": "Eg: 10 OR for range 10,15"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "status": "success",
+        "meta": {
+          "total": "",
+          "from": "",
+          "limit": ""
+        },
+        "logs": [
+          {}
+        ]
+      }
+    },
+    {
+      "operation": "get_audit_data_source",
+      "title": "Get Audit Sources",
+      "description": "Provides a list of all data source objects",
+      "category": "investigation",
+      "annotation": "get_audit_data_source",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {
+        "datasources": [{
+        }]
+      }
+    },
+    {
+      "operation": "get_audit_service",
+      "title": "Get Audit Services",
+      "description": "Provides a list of all services ",
+      "category": "investigation",
+      "annotation": "get_audit_service",
+      "parameters": [
+        {
+          "title": "Earliest Date",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "latest_date",
+          "value": "",
+          "placeholder": "Date Format: Epoch Time in seconds"
+        },
+        {
+          "title": "Latest Date",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "earliest_date",
+          "value": "",
+          "placeholder": "Date Format: Epoch Time in seconds"
+        },
+        {
+          "title": "DataSource Ids",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ds_id",
+          "value": "",
+          "placeholder": "List of data source ids separated by comma."
+        },
+        {
+          "title": "Service Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "enterprise",
+            "consumer",
+            "all",
+            "prosumer"
+          ],
+          "name": "service_type",
+          "value": "all"
+        },
+        {
+          "title": "Allowed",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "allowed",
+          "value": true
+        },
+        {
+          "title": "Blocked",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "blocked",
+          "value": false
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "headers": [],
+        "meta_data":{
+          "max_epoch":"",
+          "fields_map":{}
+        },
+        "data":[]
+      }
+    },
+    {
+      "operation": "get_audit_user",
+      "title": "Get Audit Users",
+      "description": "Returns User activity across SaaS services",
+      "category": "investigation",
+      "annotation": "get_audit_user",
+      "parameters": [
+        {
+          "title": "Earliest Date",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "latest_date",
+          "value": "",
+          "placeholder": "Date Format: Epoch Time in seconds"
+        },
+        {
+          "title": "Latest Date",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "earliest_date",
+          "value": "",
+          "placeholder": "Date Format: Epoch Time in seconds"
+        },
+        {
+          "title": "DataSource Ids",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ds_id",
+          "value": "",
+          "placeholder": "List of data source ids separated by comma."
+        },
+        {
+          "title": "Service Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "enterprise",
+            "consumer",
+            "all",
+            "prosumer"
+          ],
+          "name": "service_type",
+          "value": "all"
+        },
+        {
+          "title": "Allowed",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "allowed",
+          "value": true
+        },
+        {
+          "title": "Blocked",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "blocked",
+          "value": false
+        },
+        {
+          "title": "Next page",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "next_page",
+          "value": "",
+          "placeholder": "List of data source ids separated by comma."
+        },
+        {
+          "title": "Resolution",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "3600",
+            "86400",
+            "2592000"
+          ],
+          "name": "resolution",
+          "value": "2592000",
+          "tooltip": "3600: Hourly, 86400: Daily, 2592000: Monthly"
+        },
+        {
+          "title": "Service Ids",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "service_ids",
+          "value": ""
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "total_users": "",
+        "headers":[],
+        "meta_data":{
+          "max_epoch":"",
+          "fields_map":{}
+        },
+        "data":[]
+      }
+    },
+    {
+      "operation": "get_audit_username",
+      "title": "Get Audit Usernames",
+      "description": "Returns Usernames based on the UserID’s provided",
+      "category": "investigation",
+      "annotation": "get_audit_username",
+      "parameters": [
+        {
+          "title": "User Ids (List or CSV)",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "user_ids",
+          "value": "",
+          "placeholder": "List of user ids separated by comma."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "limit",
+          "value": "",
+          "placeholder": "Max no of users out of the given user ids that should be resolved. Default is 1000"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "datasources": [{
+        }]
+      }
+    },
+    {
+      "operation": "get_audit_summary",
+      "title": "Get Audit Summary",
+      "description": "Provides the audit summary around services, datasources, users etc.",
+      "category": "investigation",
+      "annotation": "get_audit_summary",
+      "parameters": [
+        {
+          "title": "Earliest Date",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "latest_date",
+          "value": "",
+          "placeholder": "Date Format: Epoch Time in seconds"
+        },
+        {
+          "title": "Latest Date",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "earliest_date",
+          "value": "",
+          "placeholder": "Date Format: Epoch Time in seconds"
+        },
+        {
+          "title": "DataSource Ids",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ds_id",
+          "value": "",
+          "placeholder": "List of data source ids separated by comma."
+        },
+        {
+          "title": "Service Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "enterprise",
+            "consumer",
+            "all",
+            "prosumer"
+          ],
+          "name": "service_type",
+          "value": "all"
+        },
+        {
+          "title": "Allowed",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "allowed",
+          "value": true
+        },
+        {
+          "title": "Blocked",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "blocked",
+          "value": false
+        },
+        {
+          "title": "Resolution",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "3600",
+            "86400",
+            "2592000"
+          ],
+          "name": "resolution",
+          "value": "2592000",
+          "tooltip": "3600: Hourly, 86400: Daily, 2592000: Monthly"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "latest_date": "",
+        "top_risky_services":[],
+        "high_risk_services":"",
+        "meta_data":{},
+        "total_services":"",
+        "is_valid":"",
+        "logsource_ids":[],
+        "top_used_services":[],
+        "company_brr":{},
+        "earliest_date":""
+      }
+    },
+    {
+      "operation": "get_content_iqprofile",
+      "title": "Get Content IQ Profile",
+      "description": "Returns a list of alphabetically ContentIQ profiles ordered by profile name",
+      "category": "investigation",
+      "annotation": "get_content_iqprofile",
+      "parameters": [
+        {
+          "title": "Profile Name",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "profile_name",
+          "value": "",
+          "placeholder": "Profile Name"
+        },
+        {
+          "title": "API Enabled",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "api_enabled",
+          "value": ""
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "datasources": [{
+        }]
+      }
+    },
+    {
+      "operation": "get_protect_policies",
+      "title": "Get Protect Policies",
+      "description":"Returns the list of Protect policies with their Name, Type and Status",
+      "category": "investigation",
+      "annotation": "get_protect_policies",
+      "parameters": [
+        {
+          "title": "Policy Name",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "policy_name",
+          "value": ""
+        },
+        {
+          "title": "Policy Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "policy_type",
+          "value": "",
+          "options": ["documentshareapi", "documentshare", "filexfer", "accessenforcement", "anomalydetect", "accessenforceapi"]
+        },
+        {
+          "title": "Is Active",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "is_active",
+          "value": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "meta":{},
+        "objects":[{
+        }]
+      }
+    },
+    {
+      "operation": "modify_user",
+      "title": "Modify User Activation",
+      "description": "Activate or deactivate user account",
+      "category": "containment",
+      "annotation": "modify_account",
+      "parameters": [
+        {
+          "title": "User Email-ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "email",
+          "value": "",
+          "placeholder": "Single or comma separated list of E-mail IDs."
+        },
+        {
+          "title": "Action",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "action",
+          "options": [
+            "Activate User",
+            "Deactivate User"
+          ],
+          "value": "Activate User"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+      }
+    }
+  ]
+}

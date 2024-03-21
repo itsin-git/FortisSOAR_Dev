@@ -1,0 +1,333 @@
+{
+  "name": "aiassistant-utils",
+  "label": "AI Assistant Utils",
+  "version": "1.0.0",
+  "description": "This integration provides helper functions for the Fortinet Advisor AI Assistant that acts as your assistant and advisor in security investigations and automation",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Digital assistant",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/ai-assistant-utils/690/ai-assistant-utils-v1-0-0",
+  "ingestion_modes": [
+    "notification"
+  ],
+  "operations": [
+    {
+      "operation": "get_similar_documents",
+      "title": "Find Similar Documents",
+      "annotation": "get_similar_documents",
+      "description": "Finds documents from the training database that match the user query",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "task",
+          "title": "Task",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Task you want to automate",
+          "description": "Provide a name for a task you want to automate. Eg, \"Enrich IP using Virus Total\""
+        },
+        {
+          "name": "task_type",
+          "title": "Whether its a decision step, user input or another action",
+          "type": "select",
+          "value": "Action",
+          "options": [
+            "Action",
+            "Decision",
+            "Input",
+            "Trigger"
+          ],
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Whether its a decision step, user input or another action",
+          "description": "Whether its a decision step, user input or another action"
+        },
+        {
+          "name": "n_results",
+          "title": "Number of matches",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Number of matches to return",
+          "value": 10,
+          "description": "Number of matches to return"
+        }
+      ],
+      "output_schema": {
+        "status": 0,
+        "message": [
+          {
+            "matching step key": "matching step value"
+          }
+        ]
+      }
+    },
+    {
+      "operation": "refresh_collection",
+      "title": "Refresh Training Data",
+      "annotation": "refresh_collection",
+      "description": "Use this function to fine tune the playbook steps model with data from your own playbook collections",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "output_schema": {
+        "status": 0,
+        "message": "Refreshed training data"
+      },
+      "parameters": [
+        {
+          "name": "export_file_iri",
+          "title": "Export File IRI",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "The IRI of the export template, in the format /api/3/files/<uuid>",
+          "description": "The IRI of the export template, in the format /api/3/files/<uuid>"
+        }
+      ]
+    },
+    {
+      "operation": "generate_steps_prompt",
+      "title": "Generate Playbook Steps Prompt",
+      "annotation": "generate_steps_prompt",
+      "description": "Create a Simple Input Prompt for generating playbook step with examples",
+      "category": "utilities",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "samples",
+          "title": "Samples",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "List of examples to add to the prompt",
+          "description": "List of examples to add to the prompt"
+        },
+        {
+          "name": "query_str",
+          "title": "Task",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Task you want to automate",
+          "description": "Provide a name for a task you want to automate. Eg, \"Enrich IP using Virus Total\""
+        },
+        {
+          "name": "previous_steps",
+          "title": "Previous Steps",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Previous steps jsons. Outputs of previous steps can be used as inputs in the generated step",
+          "description": "Previous steps jsons. Outputs of previous steps can be used as inputs in the generated step"
+        }
+      ],
+      "output_schema": ""
+    },
+    {
+      "operation": "generate_flowchart_prompt",
+      "title": "Generate Flowchart Prompt",
+      "annotation": "generate_flowchart_prompt",
+      "description": "Creates a Simple Input Prompt for generating playbook yml with examples",
+      "category": "utilities",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "query_str",
+          "title": "Instructions",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "Tasks you want to automate",
+          "description": "The workflow you want to automate. Eg, \"Extract IPs from alert description. Enrich IPs using Virus Total. If any of them is malicious, raise the alert severity to critical.\""
+        },
+        {
+          "name": "is_conversation",
+          "title": "Provide the prompt in the form of a conversation",
+          "type": "checkbox",
+          "value": true,
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Whether the prompt should be an array of conversations or a single input",
+          "description": "Whether the prompt should be an array of conversations or a single input"
+        }
+      ],
+      "output_schema": ""
+    },
+    {
+      "operation": "generate_playbook_block",
+      "title": "Utility to connect steps into a Playbook Block",
+      "annotation": "generate_playbook_block",
+      "description": "A helper action to connect Playbook step jsons into a Playbook Block",
+      "category": "utilities",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "flowchart_json",
+          "title": "List of steps",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "tooltip": "List of steps to group together",
+          "description": "List of steps to group together"
+        }
+      ],
+      "output_schema": {
+        "steps": [
+          {
+            "top": 40,
+            "left": 120,
+            "name": "On Create of Alert",
+            "uuid": "47826503-681f-4f46-9815-741f8d2f41db",
+            "group": "/api/3/workflow_groups/dfe695e9-affc-460d-b2bc-9aa6e8ed4094",
+            "stepType": {
+              "id": 31,
+              "@id": "/api/3/workflow_step_types/ea155646-3821-4542-9702-b246da430a8d",
+              "icon": "icon icon-on-create",
+              "name": "cybersponse.post_create",
+              "uuid": "ea155646-3821-4542-9702-b246da430a8d",
+              "@type": "WorkflowStepType",
+              "index": 120,
+              "parent": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "widget": null,
+              "visible": true,
+              "arguments": [],
+              "background": "#e1e815",
+              "collection": "/api/3/step_type_collections/51627f80-3dd5-4260-b86d-cc53a7cece15",
+              "deprecated": false,
+              "description": "Triggered on the creation of records that match the specified criteria.",
+              "displayName": "On Create"
+            },
+            "arguments": {
+              "resource": "alerts",
+              "resources": [
+                "alerts"
+              ],
+              "step_variables": {
+                "input": {
+                  "params": [],
+                  "records": [
+                    "{{vars.input.records[0]}}"
+                  ]
+                }
+              },
+              "fieldbasedtrigger": {
+                "sort": [],
+                "limit": 30,
+                "logic": "AND",
+                "filters": [
+                  {
+                    "type": "object",
+                    "field": "type",
+                    "value": "/api/3/picklists/0b3ef6f9-eb29-4ab9-ac98-98364bd1a3aa",
+                    "_value": {
+                      "@id": "/api/3/picklists/0b3ef6f9-eb29-4ab9-ac98-98364bd1a3aa",
+                      "display": "Phishing",
+                      "itemValue": "Phishing"
+                    },
+                    "operator": "eq"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "top": 160,
+            "left": 120,
+            "name": "Add Comment Saying Hello",
+            "uuid": "1e809344-e3a6-4995-90c3-03f1afe5eb6c",
+            "group": "/api/3/workflow_groups/dfe695e9-affc-460d-b2bc-9aa6e8ed4094",
+            "stepType": {
+              "id": 42,
+              "@id": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "icon": "icon icon-create-record",
+              "name": "InsertData",
+              "uuid": "2597053c-e718-44b4-8394-4d40fe26d357",
+              "@type": "WorkflowStepType",
+              "index": 110,
+              "parent": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "widget": null,
+              "visible": true,
+              "arguments": {
+                "script": "/wf/workflow/tasks/insert_data"
+              },
+              "background": "#f7ac20",
+              "collection": "/api/3/step_type_collections/c04ab14a-669e-4502-92a3-3beef3cf6219",
+              "deprecated": false,
+              "description": null,
+              "displayName": "Create Record"
+            },
+            "arguments": {
+              "resource": {
+                "alerts": "{{vars.input.records[0][\"@id\"]') }}",
+                "content": "Hello"
+              },
+              "_showJson": false,
+              "operation": "Overwrite",
+              "collection": "/api/3/comments",
+              "fieldOperation": {
+                "recordTags": "Overwrite"
+              },
+              "step_variables": []
+            }
+          }
+        ],
+        "groups": [
+          {
+            "@id": "/api/3/workflow_groups/dfe695e9-affc-460d-b2bc-9aa6e8ed4094",
+            "top": "25",
+            "left": "750",
+            "name": "AI Generated Block. Needs Review.",
+            "type": "block",
+            "uuid": "dfe695e9-affc-460d-b2bc-9aa6e8ed4094",
+            "@type": "WorkflowGroup",
+            "width": "500",
+            "height": "280",
+            "metadata": [],
+            "reusable": false,
+            "hideInLogs": false,
+            "recordTags": [],
+            "description": "AI Generated Block. Needs Review.",
+            "isCollapsed": false,
+            "hasTriggerStep": false
+          }
+        ],
+        "routes": [
+          {
+            "name": "On Create of Alert -> Add Comment Saying Hello",
+            "uuid": "6028730b-faa5-4f11-8531-d3bd86e2e237",
+            "@type": "WorkflowRoute",
+            "group": "/api/3/workflow_groups/dfe695e9-affc-460d-b2bc-9aa6e8ed4094",
+            "sourceStep": {
+              "uuid": "47826503-681f-4f46-9815-741f8d2f41db"
+            },
+            "targetStep": {
+              "uuid": "1e809344-e3a6-4995-90c3-03f1afe5eb6c"
+            }
+          }
+        ],
+        "connectors_not_installed": []
+      }
+    }
+  ]
+}

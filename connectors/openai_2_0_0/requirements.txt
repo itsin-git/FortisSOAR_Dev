@@ -1,0 +1,4 @@
+# Add Python Dependencies
+openai>=1.0.0
+jsonschema
+tiktoken

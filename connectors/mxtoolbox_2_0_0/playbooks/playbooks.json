@@ -1,0 +1,107 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - MxToolbox - 2.0.0",
+      "description": "Sample playbooks for \"MxToolbox\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get MxToolbox Records",
+          "description": "API Call to get MX Records",
+          "collection": "/api/3/workflow_collections/a3808fee-6006-4735-8dd2-2f9c97c4966a",
+          "tag": "#mxtoolbox",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/69ec0d18-2949-4dc7-a664-95ecb54e2771",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8f90f4d5-b002-4afc-9f4a-95793c9f9c1b",
+                "title": "#MxToolbox: Get MxToolbox Records",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "40",
+              "top": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "69ec0d18-2949-4dc7-a664-95ecb54e2771"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get MxToolbox Records",
+              "description": null,
+              "arguments": {
+                "name": "MxToolbox",
+                "config": "09cf9796-c656-469b-b970-781133998413",
+                "params": {
+                  "port": "",
+                  "command": "dns",
+                  "argument": "google.com",
+                  "api_method": "Lookup"
+                },
+                "version": "2.0.0",
+                "connector": "mxtoolbox",
+                "operation": "api_call",
+                "operationTitle": "Get MxToolbox Records",
+                "step_variables": {
+                  "step_output": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "220",
+              "top": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e87003a7-a073-43d8-bca3-16a140e549d9"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "564c96fe-49e1-48b5-b50a-2c518224a5a5",
+              "name": "Start -> Get MxToolbox Records",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e87003a7-a073-43d8-bca3-16a140e549d9",
+              "sourceStep": "/api/3/workflow_steps/69ec0d18-2949-4dc7-a664-95ecb54e2771"
+            }
+          ],
+          "versions": null,
+          "uuid": "25b32b9c-412e-4ce7-b15a-08db3cac7203",
+          "isPrivate": false,
+          "owners": []
+        }
+      ],
+      "uuid": "a3808fee-6006-4735-8dd2-2f9c97c4966a"
+    }
+  ]
+}

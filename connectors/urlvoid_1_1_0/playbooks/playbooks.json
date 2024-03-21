@@ -1,0 +1,137 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - URLVoid - 1.1.0",
+      "description": "URLVoid connector playbook can use get website reputation",
+      "visible": true,
+      "image": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Website Reputation",
+          "description": "Get reputation information about website.",
+          "collection": "/api/3/workflow_collections/e8b7ae18-8119-4c6c-81a2-3b7751452aa4",
+          "tag": "#URLVoid",
+          "isActive": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/789c48fd-ccf9-4c64-829a-3c88ad107abb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Website Reputation",
+              "arguments": {
+                "name": "URLVoid",
+                "config": "d7f14281-d805-427a-8549-db3dcdc2cb4c",
+                "params": {
+                  "domain": "gumblar.cn",
+                  "rescan": true
+                },
+                "version": "1.1.0",
+                "connector": "urlvoid",
+                "operation": "domain_reputation",
+                "operationTitle": "Get Website Reputation ",
+                "step_variables": [],
+                "operationOutput": {
+                  "details": {
+                    "ip": {
+                      "asn": "",
+                      "addr": "",
+                      "asname": "",
+                      "hostname": "",
+                      "latitude": "",
+                      "city_name": "",
+                      "longitude": "",
+                      "region_name": "",
+                      "country_code": "",
+                      "country_name": "",
+                      "continent_code": "",
+                      "continent_name": ""
+                    },
+                    "host": "",
+                    "updated": "",
+                    "alexa_rank": "",
+                    "domain_age": "",
+                    "header_size": "",
+                    "connect_time": "",
+                    "download_size": "",
+                    "speed_download": "",
+                    "google_page_rank": "",
+                    "http_response_code": "",
+                    "external_url_redirect": ""
+                  },
+                  "page_load": "",
+                  "detections": {
+                    "count": "",
+                    "engines": {
+                      "engine": []
+                    }
+                  },
+                  "action_result": ""
+                }
+              },
+              "status": null,
+              "left": "440",
+              "top": "160",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "1bdd168a-b155-4041-b04d-091fc0786a3c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "arguments": {
+                "route": "49cc308b-ebe6-4856-8451-7a6ba96aaf44",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "260",
+              "top": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "789c48fd-ccf9-4c64-829a-3c88ad107abb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Result",
+              "arguments": {
+                "domain_details": "{{vars.steps.Get_Website_Reputation.data.details}}",
+                "domain_detections": "{{vars.steps.Get_Website_Reputation.data.detections}}"
+              },
+              "status": null,
+              "left": "630",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "ebecbead-74bd-48ab-b32d-9804127b38ca"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d7bc05a9-be75-4f1d-a766-f2b92b77632c",
+              "name": "Start -> Get Website Reputation",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/1bdd168a-b155-4041-b04d-091fc0786a3c",
+              "sourceStep": "/api/3/workflow_steps/789c48fd-ccf9-4c64-829a-3c88ad107abb"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "58dfec82-1311-410b-b8eb-7d260f888dff",
+              "name": "Get Website Reputation -> Save Result",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ebecbead-74bd-48ab-b32d-9804127b38ca",
+              "sourceStep": "/api/3/workflow_steps/1bdd168a-b155-4041-b04d-091fc0786a3c"
+            }
+          ],
+          "uuid": "4d430458-a13d-403c-af21-e23116ec4178"
+        }
+      ],
+      "uuid": "e8b7ae18-8119-4c6c-81a2-3b7751452aa4"
+    }
+  ]
+}

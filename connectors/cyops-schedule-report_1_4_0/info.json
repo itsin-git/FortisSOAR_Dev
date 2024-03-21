@@ -1,0 +1,186 @@
+{
+  "name": "cyops-schedule-report",
+  "label": "Report Engine",
+  "version": "1.4.0",
+  "description": "Provides operations to generate a report manually or through schedules.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "icon_small_name": "report_engine_small.png",
+  "icon_large_name": "report_engine_large.png",
+  "category": "FortiSOAR Essentials",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.4.0/report-engine-connector/662/report-engine-connector-v1-4-0",
+  "configuration": {},
+  "operations": [
+    {
+      "description": "Generates report using a Schedule ID as input.",
+      "operation": "schedule_report",
+      "title": "Generate Report From Schedule",
+      "category": "investigation",
+      "annotation": "",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Scheduler",
+          "name": "scheduler",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "description": "Generates report using a Report ID as input.",
+      "operation": "schedule_report_manual",
+      "title": "Generate Report From Report ID",
+      "category": "investigation",
+      "annotation": "",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Report ID",
+          "name": "report_id",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": ""
+        },
+        {
+          "title": "Current User ID",
+          "name": "user_id",
+          "tooltip": "Id of the user who triggers the report.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "hidden": true,
+          "type": "text",
+          "value": "{{vars.currentUser}}"
+        },
+        {
+          "title": "Current Timezone",
+          "name": "timezone",
+          "tooltip": "Current Timezone of user who triggers the report.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "hidden": true,
+          "type": "text",
+          "value": "{{vars.request.headers.tz}}"
+        },
+        {
+          "title": "Report Params",
+          "type": "text",
+          "name": "query_params",
+          "tooltip": "Provide report input parameters for e.g: {\"qparam\":{\"incidentID\": 351}}",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "title": "Export Data as a CSV",
+      "operation": "generate_csv_export",
+      "description": "Generates an export of data in CSV format based on the filters provided as input.",
+      "parameters": [
+        {
+          "title": "Query",
+          "type": "object",
+          "name": "query",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": null
+        },
+        {
+            "title": "Module Name",
+            "type": "select",
+            "name": "moduleName",
+            "required": false,
+            "visible": true,
+            "editable": true,
+            "value": "Alerts",
+            "apiOperation": "get_modules",
+            "tooltip": "Either the Module Type or the Module Name must be provided. If both are set, preference is given to the Module Type input"
+          },
+          {
+          "title": "Module Type.",
+          "type": "text",
+          "name": "moduleType",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "alerts",
+          "tooltip": "Either the Module Type or the Module Name must be provided. If both are set, preference is given to the Module Type input"
+        },
+        {
+          "title": "User ID",
+          "name": "userId",
+          "tooltip": "Id of the user whose context will be used to fetch data ie(/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce)",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": ""
+        },
+        {
+          "title": "Export FileName",
+          "name": "exportFileName",
+          "tooltip": "Name for the exported CSV file.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": ""
+        },
+        {
+          "title": "Neutralize CSV",
+          "description": "Specifies whether the exported CSV will Neutralized.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "csvNeutralization",
+          "value": false
+        },
+        {
+          "title": "Maximum Records To Export",
+          "type": "integer",
+          "tooltip":"The maximum number of records to export",
+          "name": "max_record_size",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": 2000
+        },
+        {
+          "title": "Batch Size",
+          "type": "integer",
+          "name": "batchSize",
+          "tooltip":"The records are pulled in batches from the database. Set this to a value lower than the default if the records are large in size and the queries are timing out.",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": 250
+        }
+      ]
+    },
+    {
+      "operation": "get_modules",
+      "title": "Get Modules",
+      "description": "Get available modules",
+      "enabled": true,
+      "visible": false,
+      "annotation": "get_modules",
+      "category": "investigation",
+      "parameters": [],
+      "output_schema": {},
+      "is_config_required": false
+    }
+  ]
+}

@@ -1,0 +1,633 @@
+{
+  "name": "prtg",
+  "label": "PRTG",
+  "version": "1.1.0",
+  "description": "PRTG is a powerful monitoring solution that analyzes your entire IT infrastructure, monitors your network, performance, hardware, cloud, databases, applications etc.",
+  "publisher": "CyberSponse",
+  "vendor_version": "",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Network Monitoring",
+  "icon_small_name": "small-prtg.png",
+  "icon_large_name": "large-prtg.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000086466-prtg-v1-1-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "name": "server_url",
+        "type": "text",
+        "description": "URL of the PRTG server to which you will connect and perform the automated operations.",
+        "tooltip": "URL of the PRTG server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "value": ""
+      },
+      {
+        "title": "Username",
+        "name": "username",
+        "type": "text",
+        "description": "Username to access the PRTG server to which you will connect and perform the automated operations.",
+        "tooltip": "Username to access the PRTG server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "value": ""
+      },
+      {
+        "title": "Authentication Type",
+        "name": "auth",
+        "type": "select",
+        "description": "Select the authentication type that you want to use to access the PRTG server to which you will connect and perform the automated operations. You can choose between Password or Passhash.",
+        "tooltip": "Select the authentication type that you want to use to access the PRTG server to which you will connect and perform the automated operations. You can choose between Password or Passhash.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "options": [
+          "Password",
+          "Passhash"
+        ],
+        "value": "Password"
+      },
+      {
+        "title": "Value",
+        "name": "value",
+        "type": "password",
+        "description": "Value of the Password or Passhash, depending on the Authentication Type that you have selected, that is used to access the PRTG server to which you will connect and perform the automated operations.",
+        "tooltip": "Value of the Password or Passhash, depending on the Authentication Type that you have selected, that is used to access the PRTG server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "value": ""
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True.",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "title": "Acknowledge Alarm",
+      "operation": "acknowledge_alarm",
+      "description": "Marks a sensor as acknowledged on PRTG for the duration (optionally) you have specified based on the sensor ID you have specified.",
+      "category": "investigation",
+      "annotation": "acknowledge_alarm",
+      "output_schema": {
+        "message": "",
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Sensor ID",
+          "name": "id",
+          "type": "text",
+          "description": "ID of the sensor that you want to mark as acknowledged on PRTG.",
+          "tooltip": "ID of the sensor that you want to mark as acknowledged on PRTG",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Message",
+          "name": "ackmsg",
+          "type": "text",
+          "description": "(Optional) Message that you want to display when the user wants to mark the sensor as acknowledged.",
+          "tooltip": "Message that you want to display when the user wants to mark the sensor as acknowledged.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Duration",
+          "name": "duration",
+          "type": "select",
+          "description": "(Optional) Datetime till when the acknowledge status will be retained, i.e., the datetime till when the sensor will be marked as acknowledged. The datetime you select must be in the future.You can choose one of the following options: Indefinitely, For 5 Minutes, For 15 Minutes, For 1 Hour, For 3 Hours, For 1 Day,or Until. If you choose Until, then you require to specify the datetime until when the acknowledge status will be retained. By default, it is set a Indefinitely.",
+          "tooltip": "(Optional) Datetime till when the acknowledge status will be retained, i.e., the datetime till when the sensor will be marked as acknowledged. The datetime you select must be in the future.You can choose one of the following options: Indefinitely, For 5 Minutes, For 15 Minutes, For 1 Hour, For 3 Hours, For 1 Day,or Until. If you choose Until, then you require to specify the datetime until when the acknowledge status will be retained. By default, it is set a Indefinitely.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Indefinitely",
+            "For 5 Minutes",
+            "For 15 Minutes",
+            "For 1 Hour",
+            "For 3 Hours",
+            "For 1 Day",
+            "Until"
+          ],
+          "value": "Indefinitely",
+          "onchange": {
+            "Until": [
+              {
+                "title": "Until",
+                "name": "until",
+                "type": "datetime",
+                "description": "Provide specific datetime for which you want to acknowledge a down status of sensor on PRTG",
+                "visible": true,
+                "required": true,
+                "editable": true
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Get Sensor Status",
+      "operation": "get_sensor_status",
+      "description": "Retrieves the status of a sensor from PRTG, based on the sensor ID you have specified.",
+      "category": "investigation",
+      "annotation": "get_sensor_status",
+      "output_schema": {
+        "status": "",
+        "result": {
+          "prtgversion": "",
+          "sensordata": {
+            "lastup": "",
+            "updownsince": "",
+            "uptimetime": "",
+            "uptime": "",
+            "name": "",
+            "lastmessage": "",
+            "updowntotal": "",
+            "downtime": "",
+            "statusid": "",
+            "sensortype": "",
+            "statustext": "",
+            "parentdevicename": "",
+            "lastcheck": "",
+            "interval": "",
+            "favorite": "",
+            "downtimetime": "",
+            "parentgroupname": "",
+            "probename": "",
+            "lastvalue": "-",
+            "parentdeviceid": "",
+            "info": "",
+            "lastdown": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Sensor ID",
+          "name": "id",
+          "type": "text",
+          "description": "ID of the sensor whose status you want to retrieve from PRTG.",
+          "tooltip": "ID of the sensor that you want to retrieve status from PRTG",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Scan Sensor",
+      "operation": "scan_sensor",
+      "description": "Scans a sensor on PRTG based on the sensor ID you have specified.",
+      "category": "investigation",
+      "annotation": "scan_sensor",
+      "output_schema": {
+        "message": "",
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Sensor ID",
+          "name": "id",
+          "type": "text",
+          "description": "ID of the sensor that you want to scan on PRTG.",
+          "tooltip": "ID of the sensor that you want to scan on PRTG",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Pause Sensor",
+      "operation": "pause_sensor",
+      "description": "Pauses a sensor on PRTG based on the sensor ID and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "pause_sensor",
+      "output_schema": {
+        "message": "",
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Sensor ID",
+          "name": "id",
+          "type": "text",
+          "description": "ID of the sensor that you want to pause on PRTG.",
+          "tooltip": "ID of the sensor that you want to pause on PRTG",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Duration",
+          "name": "duration",
+          "type": "integer",
+          "description": "(Optional) Duration in minutes, for which you want to pause a sensor on PRTG.By default, this is set to \"Indefinite\".",
+          "tooltip": "Provide a duration value in minutes.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Message",
+          "name": "pausemsg",
+          "type": "text",
+          "description": "(Optional) Message that you want to display when the user wants to pause the sensor.",
+          "tooltip": "Message that you want to display when the user wants to pause the sensor.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Resume Sensor",
+      "operation": "resume_sensor",
+      "description": "Resumes a sensor on PRTG based on the sensor ID you have specified.",
+      "category": "investigation",
+      "annotation": "resume_sensor",
+      "output_schema": {
+        "message": "",
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Sensor ID",
+          "name": "id",
+          "type": "text",
+          "tooltip": "ID of the sensor that you want to resume on PRTG",
+          "description": "ID of the sensor that you want to resume on PRTG.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "List Object Details",
+      "operation": "list_object_detail",
+      "description": "Retrieves detailed information for a selected content type such as device or sensor from PRTG, based on the input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "list_object_detail",
+      "output_schema": {},
+      "parameters": [
+        {
+          "title": "Content Type",
+          "name": "content",
+          "type": "select",
+          "description": "Choose the content type from one of the following: Channels, Devices, Messages, Reports, Sensors, Sys Info, Stored Reports, Tickets, or Top Lists.",
+          "tooltip": "Choose the content type from one of the following: Channels, Devices, Messages, Reports, Sensors, Sys Info, Stored Reports, Tickets, or Top Lists.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Channels",
+            "Devices",
+            "Messages",
+            "Reports",
+            "Sensors",
+            "Sys Info",
+            "Stored Reports",
+            "Tickets",
+            "Top Lists"
+          ],
+          "onchange": {
+            "Messages": [
+              {
+                "title": "Last Seen",
+                "name": "duration",
+                "type": "select",
+                "description": "Filter out messages based on selected time frame.",
+                "tooltip": "Filter out messages based on selected time frame.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "options": [
+                  "Today",
+                  "Yesterday",
+                  "One Week",
+                  "One Month",
+                  "Six Months",
+                  "One Year"
+                ]
+              }
+            ],
+            "Sensors": [
+              {
+                "title": "Filter Status",
+                "name": "status",
+                "type": "multiselect",
+                "description": "(Optional) Filters out sensors based on the sensor status you have selected. For example, if you select Up, then information for only those sensors whose status is up will be retrieved from PRTG.Note: This field is visible only when you have selected the Content Type as Sensor.",
+                "tooltip": "(Optional) Filters out sensors based on the sensor status you have selected. For example, if you select Up, then information for only those sensors whose status is up will be retrieved from PRTG.Note: This field is visible only when you have selected the Content Type as Sensor.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "options": [
+                  "Unknown",
+                  "Collecting",
+                  "Up",
+                  "Warning",
+                  "Down",
+                  "No Probe",
+                  "Paused by User",
+                  "Paused by Dependency",
+                  "Paused by Schedule",
+                  "Unusual",
+                  "Paused by License",
+                  "Paused Until",
+                  "Down Acknowledged",
+                  "Down Partial"
+                ],
+                "value": ""
+              },
+              {
+                "title": "Filter Tags",
+                "name": "tags",
+                "type": "text",
+                "description": "(Optional) Filters out sensors based on the sensor tags you have listed. You can provide a csv list of tags based on which sensor will be filtered out while retrieving information from PRTG.Note: This field is visible only when you have selected the Content Type as Sensor.",
+                "tooltip": "Provide a csv list of tags based on which filter out filter while retrieving information from PRTG",
+                "placeholder": "e.g. systemhealthsensor,corehealthsensor",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": ""
+              }
+            ],
+            "Tickets": [
+              {
+                "title": "Last Seen",
+                "name": "last_seen",
+                "type": "select",
+                "description": "(Optional) Filters out messages or tickets based on the time frame you have selected. For example, if you select Yesterday, then information for only those messages or tickets that were last seen yesterday will be retrieved from PRTG.Note: This field is visible only when you have selected the Content Type as Messages or Tickets.",
+                "tooltip": "(Optional) Filters out messages or tickets based on the time frame you have selected. For example, if you select Yesterday, then information for only those messages or tickets that were last seen yesterday will be retrieved from PRTG.Note: This field is visible only when you have selected the Content Type as Messages or Tickets.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "options": [
+                  "Today",
+                  "Yesterday",
+                  "One Week",
+                  "One Month",
+                  "Six Months",
+                  "One Year"
+                ]
+              }
+            ]
+          },
+          "value": "Sensors"
+        },
+        {
+          "title": "Response Fields",
+          "name": "response_fields",
+          "type": "multiselect",
+          "description": "(Optional) Fields (can select multiple fields) that you want to include in the response of this operation.",
+          "tooltip": "Fields (can select multiple fields) that you want to include in the response of this operation.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Object ID",
+            "Type",
+            "Name",
+            "Status",
+            "Message",
+            "Priority",
+            "Last Up",
+            "Last Down",
+            "Sensor Name",
+            "Device Name",
+            "Group Name",
+            "Probe Name",
+            "Size",
+            "Comments",
+            "Host",
+            "Content",
+            "Tags",
+            "Active",
+            "Downtime in Percentage",
+            "Downtime",
+            "Downtime Since",
+            "Uptime in Percentage",
+            "Uptime",
+            "Uptime Since",
+            "Knowntime",
+            "Cumsince",
+            "Interval",
+            "Last Check",
+            "Group Device",
+            "Trigger Type",
+            "Dependency",
+            "Probe Group Device",
+            "Last Value",
+            "Up Sensor State",
+            "Down Sensor State",
+            "Down Acknowledged Sensor State",
+            "Partial Down Sensor State",
+            "Warnning Sensor State",
+            "Paused Sensor State",
+            "Unusual Sensor State",
+            "Undefined Sensor State",
+            "Total Sensor",
+            "Number of Groups",
+            "Number of Devices",
+            "Value",
+            "Coverage",
+            "Favorite",
+            "User",
+            "Parent",
+            "Datetime",
+            "Date Only",
+            "time Only",
+            "Schedule",
+            "Period",
+            "Last Run",
+            "Base Type",
+            "Base Link",
+            "Parent ID",
+            "Location",
+            "Fold",
+            "Ticket Type",
+            "Modified By",
+            "Actions"
+          ],
+          "value": []
+        },
+        {
+          "title": "Open Filter",
+          "name": "open_filter",
+          "type": "text",
+          "description": "(Optional) Open query to filter out data that you want to retrieve from PRTG.",
+          "placeholder": "e.g. filter_type=ping&filter_status=@neq(3)",
+          "tooltip": "Provide open query to filter out data from PRTG.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Start Index",
+          "name": "start",
+          "type": "integer",
+          "description": "(Optional) Start Index from where you want to retrieve results from PRTG. You can use this parameter with the Count parameter to request the data page by page.",
+          "required": false,
+          "tooltip": "Provide start entry index of records",
+          "editable": true,
+          "placeholder": "Default value is 0",
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Count",
+          "name": "count",
+          "type": "integer",
+          "description": "(Optional) Maximum number of results that this operation should return. By default it is set at 500.",
+          "tooltip": "Maximum number of items to returns, default 500",
+          "required": false,
+          "placeholder": "Default value is 500",
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Sort By",
+          "name": "sortby",
+          "type": "text",
+          "description": "(Optional) Sort the results retrieved from PRTG server based on the specified column name. For example, name, lastvalue, uptime, priority, etc.",
+          "tooltip": "Sort the results retrieved from PRTG server based on the specified column name. For example, name, lastvalue, uptime, priority, etc.",
+          "placeholder": "e.g. name",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": "name"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Run Auto Discovery",
+      "operation": "run_auto_discovery",
+      "description": "Runs auto discovery on an existing object in PRTG based on the Device ID or Group ID you have specified. or Runs auto discovery with template on an existing object in PRTG based on the device template(s) and Device ID or Group ID you have specified.",
+      "category": "investigation",
+      "annotation": "run_auto_discovery",
+      "output_schema": {
+        "message": "",
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Auto Discovery",
+          "name": "discovery",
+          "type": "select",
+          "description": "Type of auto discovery type that you want to run on PRTG. You can choose from Run Auto-Discovery or Run Auto-Discovery with Template.If you choose Run Auto-Discovery, then you must specify the following parameters:Object ID: ID of an existing object (device or group) based on which you want to run auto-discovery on PRTG.You can use the List Object Detail operation to get the Object ID.If you choose Run Auto-Discovery with Template, then you must specify the following parameters:Device Template(s): CSV list of device templates that will be used for auto-discovery on PRTG.Object ID: ID of an existing object (device or group) based on which you want to run auto-discovery on PRTG.You can use the List Object Detail operation to get the Object ID.",
+          "tooltip": "Type of auto discovery type that you want to run on PRTG. You can choose from Run Auto-Discovery or Run Auto-Discovery with Template.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Run Auto-Discovery",
+            "Run Auto-Discovery with Template"
+          ],
+          "onchange": {
+            "Run Auto-Discovery with Template": [
+              {
+                "title": "Device Template(s)",
+                "name": "template",
+                "type": "text",
+                "description": "Provide CSV list device templates used for auto-discovery, Note template name should be with .odt extensions",
+                "tooltip": "Provide CSV list device templates used for auto-discovery",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "placeholder": "Cisco ADSL.odt"
+              }
+            ]
+          },
+          "value": "Run Auto-Discovery"
+        },
+        {
+          "title": "Object ID",
+          "name": "id",
+          "type": "text",
+          "description": "ID of an existing object (device or group) based on which you want to run auto discovery on PRTG.",
+          "tooltip": "ID of an existing object (device or group) based on which you want to run auto discovery on PRTG",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Delete Object",
+      "operation": "delete_object",
+      "description": "Deletes an object from PRTG based on the object ID and type you have specified.",
+      "category": "remediation",
+      "annotation": "delete_object",
+      "output_schema": {
+        "message": "",
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Object Type",
+          "name": "object",
+          "type": "select",
+          "description": "Type of object that you want to delete from PRTG. You can choose from the following options: Device, Group, Probe or Sensor.",
+          "tooltip": "Select object type which you want to delete entry.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "options": [
+            "Device",
+            "Group",
+            "Probe",
+            "Sensor"
+          ],
+          "value": "Sensor"
+        },
+        {
+          "title": "Object ID",
+          "name": "id",
+          "type": "text",
+          "description": "ID of the object (based on the object type you have selected) that you want to delete from PRTG.",
+          "tooltip": "ID of the sensor that you want to scan on PRTG",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

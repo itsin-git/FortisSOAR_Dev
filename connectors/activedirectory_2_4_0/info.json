@@ -1,0 +1,1897 @@
+{
+  "name": "activedirectory",
+  "label": "Active Directory",
+  "version": "2.4.0",
+  "category": "Directory Service",
+  "description": "Active Directory (AD) is a directory service that Microsoft developed for Windows domain networks. You can directly query AD to retrieve information about users, groups, and computers, in an organization, by using the Lightweight Directory Access Protocol (LDAP) to directly query the AD.",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "publisher": "Fortinet",
+  "icon_small_name": "small-activedirectory.png",
+  "icon_large_name": "large-activedirectory.png",
+  "tags": [
+    "Enrichment",
+    "User_Enrichment"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.4.0/active-directory/777/active-directory-v2-4-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Hostname",
+        "name": "hostname",
+        "type": "text",
+        "description": "IP address or Hostname of the Active Directory (AD) server.",
+        "tooltip": "IP address or Hostname of the Active Directory (AD) server.",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "value": ""
+      },
+      {
+        "title": "Port",
+        "name": "port",
+        "type": "integer",
+        "tooltip": "Port 389 used for plain text authentication and port 636 used for SSL authentication",
+        "description": "Port number used for connecting to the AD server.",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": "389"
+      },
+      {
+        "title": "Username",
+        "name": "username",
+        "type": "text",
+        "description": "Valid AD service account with a minimum of read access.",
+        "tooltip": "Valid AD service account with a minimum of read access.",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": ""
+      },
+      {
+        "title": "Password",
+        "name": "password",
+        "type": "password",
+        "description": "Password for your AD user.",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": ""
+      },
+      {
+        "title": "Base DN",
+        "name": "baseDN",
+        "type": "text",
+        "description": "The base, or node from where the LDAP search should start. All connector operations are carried out using the Base DN as a root to the AD organization tree. You can restrict the AD lookup by providing appropriate filters in this parameter. Some examples of the same are as follows: DC=cspune,DC=comOU=workstation,DC=cspune,DC=comOU=Develop,OU=workstation,DC=cspune,DC=com",
+        "tooltip": "The base, or node from where the LDAP search should start. All connector operations are carried out using the Base DN as a root to the AD organization tree. You can restrict the AD lookup by providing appropriate filters in this parameter",
+        "placeholder": "DC=example,DC=com",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "value": ""
+      },
+      {
+        "title": "Bind DN",
+        "name": "bindDN",
+        "type": "text",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "description": "The fully distinguished name that is used to bind to the LDAP server. Note: If the user specifies a this parameter value, in that case, Bind DN is considered as the username, and the Base DN and username parameters values are ignored for checking health.",
+        "tooltip": "The fully distinguished name that is used to bind to the LDAP server. Note: If the user specifies a this parameter value, in that case, Bind DN is considered as the username, and the Base DN and username parameters values are ignored for checking health.",
+        "placeholder": "CN=UserName,OU=OU-name,DC=DomainName,DC=DomainExtension",
+        "value": ""
+      },
+      {
+        "title": "Use TLS",
+        "name": "use_tls",
+        "type": "checkbox",
+        "tooltip": "It is Selected then it use SSL port 636",
+        "description": "Specifies whether SSL and TLS will be required to establish the connection between the Active Directory connector and the AD server. By default, this option is set as false, and therefore, SSL is used by default.  If selected, uses SSL port 636",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": false
+      }
+    ]
+  },
+  "operations": [
+    {
+      "title": "Add Object",
+      "operation": "add_object",
+      "description": "Add an object entry of User, Group, Computer or Organization Unit (OU) type in Active Directory based on the type of object and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "add_object",
+      "output_schema": {
+        "description": "",
+        "dn": "",
+        "type": "",
+        "result": "",
+        "message": "",
+        "referrals": ""
+      },
+      "parameters": [
+        {
+          "title": "Object Type",
+          "name": "object_class",
+          "type": "select",
+          "description": "Type of object whose entry you want to add in Active Directory. You can choose from the following options: User, Group, Computer or Organization Unit (OU). If you choose User, then you must specify the following parameters:User DN: Distinguished name of the user that you want to add in Active Directory. SamAccount Name: sAMAccountName of the user object that you want to add in Active Directory. Display Name: (Optional) Display name of the user object that you want to add in Active Directory. Email Address: (Optional) Email address of the user object that you want to add in Active Directory. Enable User: Select this checkbox, if you want to enable the user object in Active Directory. Clear this checkbox (default) if you want to disable the user object in Active directory. User Principal Name: (Optional) Principal name of the user object that you want to add in Active Directory. Title: (Optional) Title of the user object that you want to add in Active Directory. Description: (Optional) Short description of the user object that you want to add in Active Directory. If you choose Group, then you must specify the following parameters:Group DN: Distinguished name of the group object that you want to add in Active Directory. SamAccount Name: sAMAccountName of the group object that you want to add in Active Directory. Group Type: (Optional) Type of group object you want to add in Active Directory. You can choose from the following options: Global Distribution Group, Domain Local Distribution Group, Universal Distribution Group, Global Security Group, Domain Local Security Group, or Universal Security Group.If you choose Organization Unit, then you must specify the following parameters:Organization DN: Distinguished name of the OU object that you want to add in Active Directory. Description: (Optional) Short description of the OU object who you want to add in Active Directory. If you choose Computer, then you must specify the following parameters:Computer DN: Distinguished name of the computer object that you want to add in Active Directory. SamAccount Name: sAMAccountName of the Compute object that you want to add in Active Directory. Enable Computer: Select this checkbox, if you want to enable the computer object in Active Directory. Clear this checkbox (default) if you want to disable the computer object in Active directory. Display Name: (Optional) Display name of the computer object that you want to add in Active Directory. Description: (Optional) Short description of the computer object that you want to add in Active Directory.",
+          "tooltip": "Type of object whose entry you want to add in Active Directory. You can choose from the following options: User, Group, Computer or Organization Unit (OU).",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "options": [
+            "User",
+            "Group",
+            "Computer",
+            "Organization Unit"
+          ],
+          "value": "User",
+          "onchange": {
+            "User": [
+              {
+                "title": "User DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide distinguished name of the user that you want to add to Active Directory. Note: The \"User DN\" value should be unique. If an already existing value is provided, it will result in an error indicating that the entry is already present.",
+                "tooltip": "Provide distinguished name of the user that you want to add to Active Directory. Note: The \"User DN\" value should be unique. If an already existing value is provided, it will result in an error indicating that the entry is already present.",
+                "placeholder": "CN=user-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "SamAccount Name",
+                "name": "sAMAccountName",
+                "type": "text",
+                "description": "The sAMAccountName of the user object that you want to add to Active Directory. Note: The sAMAccountName value should be unique. If an already existing value is provided, it will result in an error indicating that the entry is already present.",
+                "tooltip": "The sAMAccountName of the user object that you want to add to Active Directory. Note: The sAMAccountName value should be unique. If an already existing value is provided, it will result in an error indicating that the entry is already present.",
+                "placeholder": "Provide sAMAccountName",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "Display Name",
+                "name": "displayName",
+                "type": "text",
+                "description": "Display name of the user object that you want to add to Active Directory",
+                "tooltip": "Display name of the user object that you want to add to Active Directory.",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Email Address",
+                "name": "mail",
+                "type": "text",
+                "description": "Email address of the user object that you want to add to Active Directory.",
+                "tooltip": "Email address of the user object that you want to add to Active Directory.",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Enable User",
+                "name": "enable_account",
+                "type": "checkbox",
+                "description": "Select this option, i.e., select the checkbox, if you want to enabled the user. Clear this option, i.e., Uncheck the checkbox, if you want to disable the user. This is the default value.",
+                "tooltip": "Select this checkbox, if you want to enable the user object in Active Directory. Clear this checkbox (default) if you want to disable the user object in Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": false
+              },
+              {
+                "title": "User Principal Name",
+                "name": "userPrincipalName",
+                "type": "text",
+                "description": "Specify the  user's User Principal Name of the user object that you want to add to Active Directory. Note: \"User Principal Name\" name means \"User logon Name\"",
+                "tooltip": "The user's User Principal Name of the user object that you want to add to Active Directory. Note: \"User Principal Name\" name means \"User logon Name\"",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Title",
+                "name": "title",
+                "type": "text",
+                "description": "Title of the user object that you want to add to Active Directory. Note: The user's job title in the organization",
+                "tooltip": "Title of the user object that you want to add to Active Directory. Note: The user's job title in the organization",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Description",
+                "name": "description",
+                "type": "text",
+                "description": "Short description of the user object that you want to add to Active Directory",
+                "tooltip": "Short description of the user object that you want to add to Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              }
+            ],
+            "Group": [
+              {
+                "title": "Group DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Distinguished name of the group object that you want to add to Active Directory.",
+                "tooltip": "Distinguished name of the group object that you want to add to Active Directory.",
+                "placeholder": "CN=group-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "SamAccount Name",
+                "name": "sAMAccountName",
+                "type": "text",
+                "description": "The sAMAccountName of the group object that you want to add to Active Directory",
+                "tooltip": "provide the sAMAccountName of the group object that you want to add to Active Directory",
+                "placeholder": "Provide sAMAccountName",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "Group Type",
+                "name": "GroupType",
+                "type": "select",
+                "description": "Type of group object you want to add to Active Directory. You can choose from the following options: Global Distribution Group, Domain Local Distribution Group, Universal Distribution Group, Global Security Group, Domain Local Security Group, or Universal Security Group.",
+                "tooltip": "Type of group object you want to add to Active Directory. You can choose from the following options",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "options": [
+                  "Global Distribution Group",
+                  "Domain Local Distribution Group",
+                  "Universal Distribution Group",
+                  "Global Security Group",
+                  "Domain Local Security Group",
+                  "Universal Security Group"
+                ]
+              }
+            ],
+            "Computer": [
+              {
+                "title": "Computer DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Distinguished name of the computer object that you want to add to Active Directory",
+                "tooltip": "Distinguished name of the computer object that you want to add to Active Directory",
+                "placeholder": "CN=computer-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "SamAccount Name",
+                "name": "sAMAccountName",
+                "type": "text",
+                "description": "The sAMAccountName of the Compute object that you want to add to Active Directory",
+                "tooltip": "The sAMAccountName of the Compute object that you want to add to Active Directory",
+                "placeholder": "Provide sAMAccountName",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "Enable Computer",
+                "name": "enable_account",
+                "type": "checkbox",
+                "description": "Select this option, i.e., select the checkbox, if you want to enabled the computer. Clear this option, i.e., Uncheck the checkbox, if you want to disable the user. This is the default value.",
+                "tooltip": "Select the checkbox, if you want to enabled the computer.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": false
+              },
+              {
+                "title": "Display Name",
+                "name": "displayName",
+                "type": "text",
+                "description": "The Computers's Display Name",
+                "tooltip": "The Computers's Display Name",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Description",
+                "name": "description",
+                "type": "text",
+                "description": "Display name of the computer object that you want to add to Active Directory",
+                "tooltip": "Display name of the computer object that you want to add to Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              }
+            ],
+            "Organization Unit": [
+              {
+                "title": "Organization DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "The distinguished name of the OU object that you want to add to Active Directory",
+                "tooltip": "Distinguished name of the OU object that you want to add to Active Directory",
+                "placeholder": "OU=ou-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "Description",
+                "name": "description",
+                "type": "text",
+                "description": "Description for OU object that you want to add to Active Directory",
+                "tooltip": "Description for OU object that you want to add to Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              }
+            ]
+          }
+        },
+        {
+          "title": "Custom Attributes",
+          "name": "custom_attributes",
+          "type": "json",
+          "description": "(Optional) Additional fields, in the JSON format, to add in the object that you want to create Active Directory.",
+          "tooltip": "Additional fields, in the JSON format, to add in the object that you want to create Active Directory.",
+          "visible": true,
+          "required": false,
+          "editable": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Get All Objects Details",
+      "operation": "get_all_object_details",
+      "description": "Searches and retrieves all records from AD based on a specified search object, such as user, computer, or group.",
+      "category": "investigation",
+      "annotation": "get_all_object_details",
+      "conditional_output_schema": [
+        {
+          "condition": "{{search_object === 'Group'}}",
+          "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "groupType": "",
+                  "objectSid": "",
+                  "objectGUID": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "objectCategory": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "distinguishedName": "",
+                  "dSCorePropagationData": [
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "condition": "{{search_object === 'Organization Unit'}}",
+          "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "groupType": "",
+                  "objectSid": "",
+                  "objectGUID": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "objectCategory": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "distinguishedName": "",
+                  "dSCorePropagationData": [
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "condition": "{{true}}",
+          "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "codePage": "",
+                  "memberOf": [],
+                  "lastLogon": "",
+                  "objectSid": "",
+                  "adminCount": "",
+                  "lastLogoff": "",
+                  "logonCount": "",
+                  "objectGUID": "",
+                  "pwdLastSet": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "badPwdCount": "",
+                  "countryCode": "",
+                  "description": [],
+                  "lockoutTime": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "accountExpires": "",
+                  "objectCategory": "",
+                  "primaryGroupID": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "badPasswordTime": "",
+                  "distinguishedName": "",
+                  "lastLogonTimestamp": "",
+                  "userAccountControl": "",
+                  "dSCorePropagationData": [
+                  ],
+                  "isCriticalSystemObject": ""
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "name": "search_object",
+          "title": "Object Type",
+          "type": "select",
+          "description": "The object type, such as User, Computer, Group, or Person, based on which you want to search and retrieve all records from AD.",
+          "tooltip": "The object type, such as User, Computer, Group, or Person, based on which you want to search and retrieve all records from AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "User",
+            "Computer",
+            "Group",
+            "Person",
+            "Organization Unit"
+          ]
+        },
+        {
+          "title": "Page Size",
+          "name": "page_size",
+          "type": "integer",
+          "description": "Number of record requests that should be included per page. By default, this is set as 0 i.e., no paging. By default, Impact will ask only for one page from the LDAP server. If the LDAP server has a page size set to 1000, then only 1000 records will be returned.",
+          "tooltip": "Number of record requests that should be included per page. By default, this is set as 0 i.e., no paging. By default, Impact will ask only for one page from the LDAP server. If the LDAP server has a page size set to 1000, then only 1000 records will be returned.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "Size Limit",
+          "name": "size_limit",
+          "type": "integer",
+          "description": "Number of records that should be returned in a single search. When you have enabled paging, i.e., set the Page Size parameter to some value, then this parameter has no effect. However, you must set the value of the Size Limit parameter to less than the value that you have set for Page Size. For example, if you set page size to 100 and size limit to 90, the server will return 90 records. By default, this is set as 0, i.e., none or no limit.",
+          "tooltip": "Number of records that should be returned in a single search. When you have enabled paging, i.e., set the Page Size parameter to some value, then this parameter has no effect. However, you must set the value of the Size Limit parameter to less than the value that you have set for Page Size. For example, if you set page size to 100 and size limit to 90, the server will return 90 records. By default, this is set as 0, i.e., none or no limit.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "Paged Cookie",
+          "name": "cookie",
+          "type": "text",
+          "description": "(Optional) Value of an Opaque string, which if received in a paged search must be sent back while requesting subsequent entries of the search result.",
+          "tooltip": "Value of an Opaque string, which if received in a paged search must be sent back while requesting subsequent entries of the search result.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Get Specific Object Details",
+      "operation": "get_specific_object_details",
+      "description": "Searches and retrieves records from AD based on a specified search object, such as user, computer, or group. However, this search is limited to the records found for the object name you have specified. For example, if you want to retrieve the records from AD for a specific user, you need to specify the name of the user.",
+      "category": "investigation",
+      "annotation": "get_specific_object_details",
+      "conditional_output_schema": [
+        {
+          "condition": "{{search_object === 'Group'}}",
+          "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "groupType": "",
+                  "objectSid": "",
+                  "objectGUID": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "objectCategory": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "distinguishedName": "",
+                  "dSCorePropagationData": [
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "condition": "{{true}}",
+          "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "codePage": "",
+                  "memberOf": [],
+                  "lastLogon": "",
+                  "objectSid": "",
+                  "adminCount": "",
+                  "lastLogoff": "",
+                  "logonCount": "",
+                  "objectGUID": "",
+                  "pwdLastSet": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "badPwdCount": "",
+                  "countryCode": "",
+                  "description": [],
+                  "lockoutTime": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "accountExpires": "",
+                  "objectCategory": "",
+                  "primaryGroupID": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "badPasswordTime": "",
+                  "distinguishedName": "",
+                  "lastLogonTimestamp": "",
+                  "userAccountControl": "",
+                  "dSCorePropagationData": [
+                  ],
+                  "isCriticalSystemObject": ""
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "name": "search_object",
+          "title": "Object Type",
+          "visible": true,
+          "required": true,
+          "type": "select",
+          "description": "The object type, such as User, Computer, Group, or Person, based on which you want to search and retrieve records from AD. If you select the Object Type as Person then you must also add the inputs for the CN and SN parameters.",
+          "tooltip": "Select the object type, such as User, Computer, Group, or Person, based on which you want to search and retrieve records from AD.",
+          "editable": true,
+          "options": [
+            "User",
+            "Computer",
+            "Group",
+            "Person"
+          ],
+          "onchange": {
+            "User": [
+              {
+                "title": "SamAccount Name",
+                "name": "search_attr_value",
+                "type": "text",
+                "tooltip": "The value of the sAMAccountName which you want to search and retrieve records from AD.",
+                "description": "The value of the sAMAccountName which you want to search and retrieve records from AD.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": ""
+              }
+            ],
+            "Computer": [
+              {
+                "title": "SamAccount Name",
+                "name": "search_attr_value",
+                "type": "text",
+                "tooltip": "The value of the sAMAccountName which you want to search and retrieve records from AD.",
+                "description": "The value of the sAMAccountName which you want to search and retrieve records from AD.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": ""
+              }
+            ],
+            "Group": [
+              {
+                "title": "SamAccount Name",
+                "name": "search_attr_value",
+                "type": "text",
+                "tooltip": "The value of the sAMAccountName which you want to search and retrieve records from AD.",
+                "description": "The value of the sAMAccountName which you want to search and retrieve records from AD.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": ""
+              }
+            ],
+            "Person": [
+              {
+                "title": "CN",
+                "name": "cn",
+                "type": "text",
+                "description": "Common name of the Person you want to search and retrieve records from AD.",
+                "tooltip": "Common name of the Person you want to search and retrieve records from AD.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": ""
+              },
+              {
+                "title": "SN",
+                "name": "sn",
+                "type": "text",
+                "tooltip": "Surname of the Person you want to search and retrieve records from AD.",
+                "description": "Surname of the Person you want to search and retrieve records from AD.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": ""
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Update Object",
+      "operation": "update_object",
+      "description": "Updates an existing object entry of User, Group, Computer or Organization Unit (OU) type in Active Directory based on the type of object and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_object",
+      "output_schema": {
+        "description": "",
+        "dn": "",
+        "type": "",
+        "result": "",
+        "message": "",
+        "referrals": ""
+      },
+      "parameters": [
+        {
+          "title": "Object Type",
+          "name": "object_class",
+          "type": "select",
+          "description": "Type of object whose entry you want to update in Active Directory. You can choose from the following options: User, Group, Computer or Organization Unit (OU). If you choose User, then you must specify the following parameters:User DN: Distinguished name of the user that you want to update in Active Directory. SamAccount Name: (Optional) sAMAccountName of the user object that you want to update in Active Directory. Display Name: (Optional) Display name of the user object that you want to update in Active Directory. Email Address: (Optional) Email address of the user object that you want to update in Active Directory. Enable User: Select this checkbox, if you want to enable the user object in Active Directory. Clear this checkbox (default) if you want to disable the user object in Active directory. User Principal Name: (Optional) Principal name of the user object that you want to update in Active Directory. Title: (Optional) Title of the user object that you want to update in Active Directory. Description: (Optional) Short description of the user object that you want to update in Active Directory. If you choose Group, then you must specify the following parameters:Group DN: Distinguished name of the group object that you want to update in Active Directory. SamAccount Name: sAMAccountName of the group object that you want to update in Active Directory. Group Type: (Optional) Type of group object you want to update in Active Directory. You can choose from the following options: Global Distribution Group, Domain Local Distribution Group, Universal Distribution Group, Global Security Group, Domain Local Security Group, or Universal Security Group. If you choose Organization Unit, then you must specify the following parameters:Organization DN: Distinguished name of the OU object that you want to update in Active Directory. Description: (Optional) Short description of the OU object who you want to update in Active Directory. If you choose Computer, then you must specify the following parameters:Computer DN: Distinguished name of the computer object that you want to update in Active Directory. SamAccount Name: sAMAccountName of the Compute object that you want to update in Active Directory. Enable Computer: Select this checkbox, if you want to enable the computer object in Active Directory. Clear this checkbox (default) if you want to disable the computer object in Active directory. Display Name: (Optional) Display name of the computer object that you want to update in Active Directory. Description: (Optional) Short description of the computer object that you want to update in Active Directory.",
+          "tooltip": "Type of object whose entry you want to update in Active Directory. You can choose from the following options: User, Group, Computer or Organization Unit (OU)",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "options": [
+            "User",
+            "Group",
+            "Computer",
+            "Organization Unit"
+          ],
+          "value": "User",
+          "onchange": {
+            "User": [
+              {
+                "title": "User DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide distinguished name of the user object which you want to update, this field used only search record in Active Directory, This is not update",
+                "tooltip": "Provide distinguished name of the user object which you want to update, this field used only search record in Active Directory, This is not update",
+                "placeholder": "CN=user-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "SamAccount Name",
+                "name": "sAMAccountName",
+                "type": "text",
+                "description": "Provide sAMAccountName of the user object that you want to update in Active Directory",
+                "tooltip": "Provide sAMAccountName of the user object that you want to update in Active Directory",
+                "placeholder": "Provide sAMAccountName",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Display Name",
+                "name": "displayName",
+                "type": "text",
+                "description": "Display name of the user object that you want to update in Active Directory",
+                "tooltip": "Display name of the user object that you want to update in Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Email Address",
+                "name": "mail",
+                "type": "text",
+                "description": "Email address of the user object that you want to update in Active Directory",
+                "tooltip": "Email address of the user object that you want to update in Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Enable User",
+                "name": "enable_account",
+                "type": "checkbox",
+                "description": "Select this option, i.e., select the checkbox, if you want to enabled the user. Clear this option, i.e., Uncheck the checkbox, if you want to disable the user. This is the default value.",
+                "tooltip": "Select the checkbox, if you want to enabled the user.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": false
+              },
+              {
+                "title": "User Principal Name",
+                "name": "userPrincipalName",
+                "type": "text",
+                "description": "The user's User Principal Name of the user object that you want to update in Active Directory",
+                "tooltip": "The user's User Principal Name of the user object that you want to update in Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Title",
+                "name": "title",
+                "type": "text",
+                "description": "Title of the user object that you want to update in Active Directory.",
+                "tooltip": "Title of the user object that you want to update in Active Directory.",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Description",
+                "name": "description",
+                "type": "text",
+                "description": "Short description of the user object that you want to update in Active Directory.",
+                "tooltip": "Short description of the user object that you want to update in Active Directory.",
+                "visible": true,
+                "required": false,
+                "editable": true
+              }
+            ],
+            "Group": [
+              {
+                "title": "Group DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide distinguished name of the group object which you want to update, this field used only search record in Active Directory, This is not update",
+                "tooltip": "Provide distinguished name of the group object which you want to update, this field used only search record in Active Directory, This is not update",
+                "placeholder": "CN=user-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "SamAccount Name",
+                "name": "sAMAccountName",
+                "type": "text",
+                "description": "The sAMAccountName of the group object that you want to update in Active Directory",
+                "tooltip": "The sAMAccountName of the group object that you want to update in Active Directory",
+                "placeholder": "Provide sAMAccountName",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Group Type",
+                "name": "GroupType",
+                "type": "select",
+                "description": "Type of group object you want to update in Active Directory. You can choose from the following options: Global Distribution Group, Domain Local Distribution Group, Universal Distribution Group, Global Security Group, Domain Local Security Group, or Universal Security Group",
+                "tooltip": "Type of group object you want to update in Active Directory. You can choose from the following options",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "options": [
+                  "Global Distribution Group",
+                  "Domain Local Distribution Group",
+                  "Universal Distribution Group",
+                  "Global Security Group",
+                  "Domain Local Security Group",
+                  "Universal Security Group"
+                ]
+              }
+            ],
+            "Computer": [
+              {
+                "title": "Computer DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide distinguished name of the computer object which you want to update, this field used only search record in Active Directory, It is not update",
+                "tooltip": "Provide distinguished name of the computer object which you want to update, this field used only search record in Active Directory, It is not update",
+                "placeholder": "CN=computer-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "SamAccount Name",
+                "name": "sAMAccountName",
+                "type": "text",
+                "description": "provide sAMAccount Name of the computer object which you want to update in Active Directory",
+                "tooltip": "provide sAMAccount Name of the computer object which you want to update in Active Directory",
+                "placeholder": "Provide sAMAccountName",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Enable Computer",
+                "name": "enable_account",
+                "type": "checkbox",
+                "description": "Select this option, i.e., select the checkbox, if you want to enabled the computer. Clear this option, i.e., Uncheck the checkbox, if you want to disable the user. This is the default value.",
+                "tooltip": "Select the checkbox, if you want to enabled the computer.",
+                "visible": true,
+                "required": false,
+                "editable": true,
+                "value": false
+              },
+              {
+                "title": "Display Name",
+                "name": "displayName",
+                "type": "text",
+                "description": "Display name of the computer object that you want to update in Active Directory",
+                "tooltip": "Display name of the computer object that you want to update in Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              },
+              {
+                "title": "Description",
+                "name": "description",
+                "type": "text",
+                "description": "Short description of the computer object that you want to update in Active Directory",
+                "tooltip": "Short description of the computer object that you want to update in Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              }
+            ],
+            "Organization Unit": [
+              {
+                "title": "Organization DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide distinguished name of the OU object which you want to update, this field used only search record in Active Directory, It is not update",
+                "tooltip": "Provide distinguished name of the OU object which you want to update, this field used only search record in Active Directory, It is not update",
+                "placeholder": "OU=ou-name,OU=OU-name,DC=Domain,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true
+              },
+              {
+                "title": "Description",
+                "name": "description",
+                "type": "text",
+                "description": "Short description of the OU object who you want to update in Active Directory",
+                "tooltip": "Short description of the OU object who you want to update in Active Directory",
+                "visible": true,
+                "required": false,
+                "editable": true
+              }
+            ]
+          }
+        },
+        {
+          "title": "Custom Attributes",
+          "name": "custom_attributes",
+          "type": "json",
+          "description": "(Optional) Additional fields, in the JSON format, to add or change in the object that you want to update Active Directory.",
+          "tooltip": "Additional fields, in the JSON format, to add or change in the object that you want to update Active Directory.",
+          "visible": true,
+          "required": false,
+          "editable": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Move Computer to Targeted Organization Unit(OU)",
+      "operation": "move_computer_ou",
+      "description": "Move a computer entry from one Organization Unit(OU) to another.",
+      "category": "investigation",
+      "annotation": "move_computer_ou",
+      "output_schema": {
+        "message": "",
+        "result": ""
+      },
+      "parameters": [
+        {
+          "title": "Distinguished Name (DN)",
+          "name": "computer_dn",
+          "type": "text",
+          "description": "Specify the distinguished name (DN) of the computer object you want to modify",
+          "tooltip": "Specify the distinguished name (DN) of the computer object you want to modify",
+          "placeholder": "CN=Demo-Computer, OU=Computers-OU1, DC=example,DC=local",
+          "visible": true,
+          "required": true,
+          "editable": true
+        },
+        {
+          "title": "Common Name",
+          "name": "computer_name",
+          "type": "text",
+          "description": "Specify the Common name (CN) of the computer object",
+          "tooltip": "Specify the Common name (CN) of the computer object",
+          "placeholder": "Demo-Computer",
+          "visible": true,
+          "required": true,
+          "editable": true
+        },
+        {
+          "title": "Target Organization Unit (OU)",
+          "name": "target_dn",
+          "type": "text",
+          "description": "Specify the distinguished name (DN) of the target organizational unit (OU)",
+          "placeholder": "OU=Computers-OU2, DC=example,DC=local",
+          "tooltip": "Specify the distinguished name (DN) of the target organizational unit (OU)",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Delete Object",
+      "operation": "delete_object",
+      "description": "Deletes an existing object entry of User, Group, Computer or Organization Unit (OU) type from Active Directory based on the type of object and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "delete_object",
+      "output_schema": {
+        "description": "",
+        "dn": "",
+        "type": "",
+        "result": "",
+        "message": "",
+        "referrals": ""
+      },
+      "parameters": [
+        {
+          "title": "Object Type",
+          "name": "object_class",
+          "type": "select",
+          "description": "Type of object whose entry you want to delete from Active Directory. You can choose from the following options: User, Group, Computer or Organization Unit (OU). Based on the type of object that you choose you must specify the following parameters: Attributes Type: If you choose User, then from the Attributes Type drop-down list, you can choose Distinguished Name, SamAccount Name or Email of the user object that you want to delete from Active Directory. If you choose Group, then from the Attributes Type drop-down list, you can choose Distinguished Name or SamAccount Name of the computer object that you want to delete from Active Directory. If you choose Computer, then from the Attributes Type drop-down list, you can choose Distinguished Name or SamAccount Name of the computer object that you want to delete from Active Directory. If you choose Organization Unit, then you have to specify the Distinguished Name of the OU object that you want to delete from Active Directory. Value: Value of the attribute type you have choosen.",
+          "tooltip": "Select the type of object whose entry you want to delete from Active Directory. You can choose from the following options: User, Group, Computer or Organization Unit (OU).",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "options": [
+            "User",
+            "Group",
+            "Computer",
+            "Organization Unit"
+          ],
+          "value": "User",
+          "onchange": {
+            "User": [
+              {
+                "name": "search_attr_name",
+                "title": "Attributes Type",
+                "type": "select",
+                "description": "Select attribute, either the Distinguished Name, SamAccount Name or Email of the user object, based on which you want to delete form Active Directory",
+                "tooltip": "Select attribute, either the Distinguished Name, SamAccount Name or Email of the user object, based on which you want to delete form Active Directory",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "options": [
+                  "Distinguished Name",
+                  "SamAccount Name",
+                  "Email"
+                ],
+                "value": "Distinguished Name"
+              },
+              {
+                "title": "Value",
+                "name": "search_attr_value",
+                "type": "text",
+                "description": "The value of for selected attributes types",
+                "tooltip": "The value of for selected attributes types",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "value": ""
+              }
+            ],
+            "Computer": [
+              {
+                "name": "search_attr_name",
+                "title": "Attributes Type",
+                "type": "select",
+                "description": "The attribute, either the Distinguished Name or SamAccount Name of the computer object, based on which you want to delete form Active Directory",
+                "tooltip": "The attribute, either the Distinguished Name or SamAccount Name of the object, based on which you want to delete a object form Active Directory",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "options": [
+                  "Distinguished Name",
+                  "SamAccount Name"
+                ],
+                "value": "Distinguished Name"
+              },
+              {
+                "title": "Value",
+                "name": "search_attr_value",
+                "type": "text",
+                "description": "The value of for selected attributes types",
+                "tooltip": "The value of for selected attributes types",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "value": ""
+              }
+            ],
+            "Group": [
+              {
+                "name": "search_attr_name",
+                "title": "Attributes Type",
+                "type": "select",
+                "description": "The attribute, either the Distinguished Name or SamAccount Name of the object, based on which you want to delete a object form Active Directory",
+                "tooltip": "The attribute, either the Distinguished Name or SamAccount Name of the object, based on which you want to delete a object form Active Directory",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "options": [
+                  "Distinguished Name",
+                  "SamAccount Name"
+                ],
+                "value": "Distinguished Name"
+              },
+              {
+                "title": "Value",
+                "name": "search_attr_value",
+                "type": "text",
+                "description": "The value of for selected attributes types",
+                "tooltip": "The value of for selected attributes types",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "value": ""
+              }
+            ],
+            "Organization Unit": [
+              {
+                "name": "search_attr_name",
+                "title": "Attributes Type",
+                "type": "select",
+                "description": "Provide distinguished Name of the OU object which you want to delete a OU object form Active Directory",
+                "tooltip": "Provide distinguished Name of the OU object which you want to delete a OU object form Active Directory",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "options": [
+                  "Distinguished Name"
+                ],
+                "value": "Distinguished Name"
+              },
+              {
+                "title": "Value",
+                "name": "search_attr_value",
+                "type": "text",
+                "description": "The value of the Distinguished Name of the OU",
+                "tooltip": "The value of the Distinguished Name of the OU",
+                "placeholder": "OU=nested-ou-name,OU=parent-ouname,DC=cspune,DC=com",
+                "visible": true,
+                "required": true,
+                "editable": true,
+                "value": ""
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Add Group Members",
+      "operation": "add_group_members",
+      "description": "Adds an Active Directory User or Computer as a member to an existing Group in Active Directory based on the Group DN and User or computer DN you have specified.",
+      "category": "investigation",
+      "annotation": "add_group_members",
+      "output_schema": {
+        "result": "",
+        "description": "",
+        "dn": [],
+        "message": "",
+        "referrals": "",
+        "type": "",
+        "group_dn": []
+      },
+      "parameters": [
+        {
+          "title": "Group DN",
+          "name": "group_dn",
+          "type": "text",
+          "description": "List of Distinguished Names of the group in Active Directory to which you want to add members. Note: You must enter DN values in the list format.",
+          "tooltip": "Provide list of Distinguished Names of the group in Active Directory to which you want to add members. Note: You must enter DN values in the list format.",
+          "placeholder": [
+            "CN=group-name,OU=OU-name,DC=Domain,DC=com"
+          ],
+          "visible": true,
+          "required": true,
+          "editable": true
+        },
+        {
+          "title": "Object Type",
+          "name": "object_class",
+          "type": "select",
+          "description": "Type of object, User or Computer, that you want to add as members to the specified group in Active Directory. If you choose Computer, then you must specify the following parameter:Computer DN: List of Distinguished Name of the computer object that you want to add as a member to a group in Active Directory. If you choose User, then you must specify the following parameter:User DN: List of Distinguished Name of the user object that you want to add as a member to a group in Active Directory.",
+          "tooltip": "Select the object type, User, or Computer, that you want to add as members to the specified group in Active Directory.",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "options": [
+            "User",
+            "Computer"
+          ],
+          "value": "User",
+          "onchange": {
+            "User": [
+              {
+                "title": "User DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide list of distinguished name of the users to add members into group, Note: DN values should be in List format",
+                "tooltip": "Provide distinguished name of the users to add members into group, Note: DN values should be in List format",
+                "placeholder": [
+                  "CN=user-name,OU=OU-name,DC=Domain,DC=com"
+                ],
+                "visible": true,
+                "required": true,
+                "editable": true
+              }
+            ],
+            "Computer": [
+              {
+                "title": "Computer DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide list of distinguished name of the computer to add member into group, Note: DN values should be in List format",
+                "tooltip": "Provide list of distinguished name of the computers to add member into group, Note: DN values should be in List format",
+                "placeholder": [
+                  "CN=computer-name,OU=OU-name,DC=Domain,DC=com"
+                ],
+                "visible": true,
+                "required": true,
+                "editable": true
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Remove Group Members",
+      "operation": "remove_group_members",
+      "description": "Removes an Active Directory User or Computer as a member from an existing Group in Active Directory based on the Group DN and User or computer DN you have specified.",
+      "category": "investigation",
+      "annotation": "remove_group_members",
+      "output_schema": {
+        "result": "",
+        "description": "",
+        "dn": [],
+        "message": "",
+        "referrals": "",
+        "type": "",
+        "group_dn": []
+      },
+      "parameters": [
+        {
+          "title": "Group DN",
+          "name": "group_dn",
+          "type": "text",
+          "description": "List of Distinguished Names of the group in Active Directory from which you want to remove members. Note: You must enter DN values in the list format.",
+          "tooltip": "Provide list of Distinguished Names of the group in Active Directory from which you want to remove members. Note: You must enter DN values in the list format.",
+          "placeholder": [
+            "CN=group,OU=OU-name,DC=Domain,DC=com"
+          ],
+          "visible": true,
+          "required": true,
+          "editable": true
+        },
+        {
+          "title": "Object Type",
+          "name": "object_class",
+          "type": "select",
+          "description": "Type of object, User or Computer, that you want to remove as members from the specified group in Active Directory. If you choose Computer, then you must specify the following parameter: Computer DN: List of Distinguished Name of the computer object that you want to remove as a member from a group in Active Directory. If you choose User, then you must specify the following parameter: User DN: List of Distinguished Name of the user object that you want to remove as a member from a group in Active Directory.",
+          "tooltip": "Select the type of object, User or Computer, that you want to remove as members from the specified group in Active Directory",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "options": [
+            "User",
+            "Computer"
+          ],
+          "value": "User",
+          "onchange": {
+            "User": [
+              {
+                "title": "User DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide list of distinguished name of the users to remove from groups, Note: DN values should be in List format",
+                "tooltip": "Provide list of distinguished name of the users to remove from groups, Note: DN values should be in List format",
+                "placeholder": [
+                  "CN=user1,OU=OU-name,DC=Domain,DC=com",
+                  "CN=user2,OU=OU-name,DC=Domain,DC=com"
+                ],
+                "visible": true,
+                "required": true,
+                "editable": true
+              }
+            ],
+            "Computer": [
+              {
+                "title": "Computer DN",
+                "name": "object_dn",
+                "type": "text",
+                "description": "Provide list of distinguished name of the computer to remove from group, Note: DN values should be in List format",
+                "tooltip": "Provide list of distinguished name of the computer to remove from group, Note: DN values should be in List format",
+                "placeholder": [
+                  "CN=computer-name,OU=OU-name,DC=Domain,DC=com"
+                ],
+                "visible": true,
+                "required": true,
+                "editable": true
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Advanced Search",
+      "operation": "advanced_search",
+      "description": "Executes an advanced LDAP query that searches and retrieves AD records based on your custom query.",
+      "category": "investigation",
+      "annotation": "advanced_search",
+      "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "codePage": "",
+                  "memberOf": [],
+                  "lastLogon": "",
+                  "objectSid": "",
+                  "adminCount": "",
+                  "lastLogoff": "",
+                  "logonCount": "",
+                  "objectGUID": "",
+                  "pwdLastSet": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "badPwdCount": "",
+                  "countryCode": "",
+                  "description": [],
+                  "lockoutTime": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "accountExpires": "",
+                  "objectCategory": "",
+                  "primaryGroupID": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "badPasswordTime": "",
+                  "distinguishedName": "",
+                  "lastLogonTimestamp": "",
+                  "userAccountControl": "",
+                  "dSCorePropagationData": [
+                  ],
+                  "isCriticalSystemObject": ""
+                }
+              }
+            ]
+          },
+      "parameters": [
+        {
+          "title": "LDAP Query",
+          "name": "query",
+          "type": "text",
+          "description": "The custom LDAP query based on which you want to retrieve records from AD.",
+          "tooltip": "Search Active Directory records using custom query",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "placeholder": "(&(objectClass=user)(objectCategory=user)(sAMAccountName=*))",
+          "value": ""
+        },
+        {
+          "title": "Page Size",
+          "name": "page_size",
+          "type": "integer",
+          "description": "Number of record requests that should be included per page. By default, this is set as 0 i.e., no paging. By default, Impact will ask only for one page from the LDAP server. If the LDAP server has a page size set to 1000, then only 1000 records will be returned.",
+          "tooltip": "This parameter specifies the number of records requests per page. The default is 0 (no paging). By default, Impact will only ask for one page from the LDAP server. If the LDAP server has a page size set to 1000, then only 1000 records will be returned.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "Size Limit",
+          "name": "size_limit",
+          "type": "integer",
+          "description": "Number of records that should be returned in a single search. When you have enabled paging, i.e., set the Page Size parameter to some value, then this parameter has no effect. However, you must set the value of the Size Limit parameter to less than the value that you have set for Page Size. For example, if you set page size to 100 and size limit to 90, the server will return 90 records. By default, this is set as 0, i.e., none or no limit.",
+          "tooltip": "Number of records that should be returned in a single search. When you have enabled paging, i.e., set the Page Size parameter to some value, then this parameter has no effect. However, you must set the value of the Size Limit parameter to less than the value that you have set for Page Size. For example, if you set page size to 100 and size limit to 90, the server will return 90 records. By default, this is set as 0, i.e., none or no limit.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "Paged Cookie",
+          "name": "cookie",
+          "type": "text",
+          "description": "(Optional) Value of an Opaque string, which if received in a paged search must be sent back while requesting subsequent entries of the search result.",
+          "tooltip": "Value of an Opaque string, which if received in a paged search must be sent back while requesting subsequent entries of the search result.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Global Search",
+      "operation": "global_search",
+      "description": "Searches and retrieves records from AD using global search, based on the specified search object, such as user, computer, group, search attribute, or a search attribute value, such as SamAccount Name, Distinguished Name, Common Name, Display Name, or Email. When you search a record based on a search attribute value, the record from AD is retrieved based on the specified attribute value.",
+      "category": "investigation",
+      "annotation": "global_search",
+      "conditional_output_schema": [
+        {
+          "condition": "{{search_object === 'Group'}}",
+          "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "groupType": "",
+                  "objectSid": "",
+                  "objectGUID": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "objectCategory": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "distinguishedName": "",
+                  "dSCorePropagationData": [
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "condition": "{{true}}",
+          "output_schema": {
+            "cookie": "",
+            "entries": [
+              {
+                "dn": "",
+                "attributes": {
+                  "cn": "",
+                  "name": "",
+                  "codePage": "",
+                  "memberOf": [],
+                  "lastLogon": "",
+                  "objectSid": "",
+                  "adminCount": "",
+                  "lastLogoff": "",
+                  "logonCount": "",
+                  "objectGUID": "",
+                  "pwdLastSet": "",
+                  "uSNChanged": "",
+                  "uSNCreated": "",
+                  "badPwdCount": "",
+                  "countryCode": "",
+                  "description": [],
+                  "lockoutTime": "",
+                  "objectClass": [],
+                  "whenChanged": "",
+                  "whenCreated": "",
+                  "instanceType": "",
+                  "accountExpires": "",
+                  "objectCategory": "",
+                  "primaryGroupID": "",
+                  "sAMAccountName": "",
+                  "sAMAccountType": "",
+                  "badPasswordTime": "",
+                  "distinguishedName": "",
+                  "lastLogonTimestamp": "",
+                  "userAccountControl": "",
+                  "dSCorePropagationData": [
+                  ],
+                  "isCriticalSystemObject": ""
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Object Type",
+          "name": "search_object",
+          "type": "select",
+          "description": "The object type, such as User, Computer, Group, or Person, based on which you want to search and retrieve records from AD.",
+          "tooltip": "The object type, such as User, Computer, Group, or Person, based on which you want to search and retrieve records from AD.",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "options": [
+            "User",
+            "Group",
+            "Computer",
+            "Person"
+          ]
+        },
+        {
+          "title": "Attributes Type",
+          "name": "search_attr_name",
+          "type": "select",
+          "description": "The attribute type, such as SamAccount Name, DistinguishedName, Common Name, Display Name, or Email, based on which you want to search and retrieve records from AD",
+          "tooltip": "Select the attribute type, such as SamAccount Name, DistinguishedName, Common Name, Display Name, or Email, based on which you want to search and retrieve records from AD",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "Name",
+            "SamAccount Name",
+            "Common Name",
+            "Distinguished Name",
+            "Object SID",
+            "Surname",
+            "Display Name",
+            "Given Name",
+            "Email"
+          ]
+        },
+        {
+          "title": "Value",
+          "name": "search_attr_value",
+          "type": "text",
+          "description": "The attribute value based on which you want to search and retrieve records from AD.",
+          "tooltip": "The attribute value based on which you want to search and retrieve records from AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "Page Size",
+          "name": "page_size",
+          "type": "integer",
+          "description": "Number of record requests that should be included per page. By default, this is set as 0 i.e., no paging. By default, Impact will ask only for one page from the LDAP server. If the LDAP server has a page size set to 1000, then only 1000 records will be returned.",
+          "tooltip": "Number of record requests that should be included per page. By default, this is set as 0 i.e., no paging. By default, Impact will ask only for one page from the LDAP server. If the LDAP server has a page size set to 1000, then only 1000 records will be returned.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "Size Limit",
+          "name": "size_limit",
+          "type": "integer",
+          "description": "Number of records that should be returned in a single search. When you have enabled paging, i.e., set the Page Size parameter to some value, then this parameter has no effect. However, you must set the value of the Size Limit parameter to less than the value that you have set for Page Size. For example, if you set page size to 100 and size limit to 90, the server will return 90 records. By default, this is set as 0, i.e., none or no limit.",
+          "tooltip": "Number of records that should be returned in a single search. When you have enabled paging, i.e., set the Page Size parameter to some value, then this parameter has no effect. However, you must set the value of the Size Limit parameter to less than the value that you have set for Page Size. For example, if you set page size to 100 and size limit to 90, the server will return 90 records. By default, this is set as 0, i.e., none or no limit.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "Paged Cookie",
+          "name": "cookie",
+          "type": "text",
+          "description": "(Optional) Value of an Opaque string, which if received in a paged search must be sent back while requesting subsequent entries of the search result.",
+          "tooltip": "Value of an Opaque string, which if received in a paged search must be sent back while requesting subsequent entries of the search result.",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Enable User Account",
+      "operation": "enable_user_account",
+      "description": "Enables the account of a specific AD user based on the SamAccount Name or the Email of the user.",
+      "category": "remediation",
+      "annotation": "enable_user_account",
+      "output_schema": {
+        "message": "",
+        "description": "",
+        "result": "",
+        "referrals": "",
+        "type": "",
+        "dn": ""
+      },
+      "parameters": [
+        {
+          "name": "search_attr_name",
+          "title": "Attributes Type",
+          "type": "select",
+          "description": "The attribute, either the SamAccount Name or the Email of the user, based on which you want to enable a user account in AD.",
+          "tooltip": "The attribute, either the SamAccount Name or the Email of the user, based on which you want to enable a user account in AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "SamAccount Name",
+            "Email"
+          ]
+        },
+        {
+          "title": "Value",
+          "name": "search_attr_value",
+          "type": "text",
+          "description": "The value of the SamAccount Name or the Email of the user, based on which you want to enable a user account in AD.",
+          "tooltip": "The value of the SamAccount Name or the Email of the user, based on which you want to enable a user account in AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Disable User Account",
+      "operation": "disable_user_account",
+      "description": "Disables the account of a specific AD user based on the SamAccount Name or the Email of the user.",
+      "category": "containment",
+      "annotation": "disable_user_account",
+      "output_schema": {
+        "message": "",
+        "description": "",
+        "result": "",
+        "referrals": "",
+        "type": "",
+        "dn": ""
+      },
+      "parameters": [
+        {
+          "name": "search_attr_name",
+          "title": "Attributes Type",
+          "type": "select",
+          "description": "The value of the SamAccount Name or the Email of the user, based on which you want to disable a user account in AD.",
+          "tooltip": "The value of the SamAccount Name or the Email of the user, based on which you want to disable a user account in AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "SamAccount Name",
+            "Email"
+          ]
+        },
+        {
+          "title": "Value",
+          "name": "search_attr_value",
+          "type": "text",
+          "description": "The value of the SamAccount Name or the Email of the user, based on which you want to disable a user account in AD.",
+          "tooltip": "The value of the SamAccount Name or the Email of the user, based on which you want to disable a user account in AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Move User to Targeted Organization Unit(OU)",
+      "operation": "move_user_ou",
+      "description": "Moves the account of a specific AD user based on the SamAccount Name or the Email of the user to a new Organization Unit",
+      "category": "investigation",
+      "annotation": "move_user_ou",
+      "output_schema": {
+        "message": "",
+        "description": "",
+        "result": "",
+        "referrals": "",
+        "type": "",
+        "dn": ""
+      },
+      "parameters": [
+        {
+          "title": "Attributes Type",
+          "type": "select",
+          "name": "search_attr_name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Select the value of the SamAccount Name or the Email of the user, based on which you want to move a user account in AD.",
+          "tooltip": "Select the value of the SamAccount Name or the Email of the user, based on which you want to move a user account in AD.",
+          "options": [
+            "SamAccount Name",
+            "Email"
+          ]
+        },
+        {
+          "title": "Value",
+          "type": "text",
+          "name": "search_attr_value",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "tooltip": "Specify the value of the SamAccount Name or the Email of the user, based on which you want to move a user account in a new Organisational Unit",
+          "description": "Specify the value of either the SamAccount Name or the Email of the user based on your preference to move a user account in a new Organisational Unit"
+        },
+        {
+          "title": "Destination OU",
+          "type": "text",
+          "name": "destinationOU",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "placeholder": "OU=ou-name,DC=domain,DC=com",
+          "description": "Specify the value of the targeted new Organizational Unit to which you want to move the user",
+          "tooltip": "Specify the value of the targeted new Organizational Unit to which you want to move the user"
+        }
+      ],
+      "enabled": true,
+      "open": false
+    },
+    {
+      "title": "Enable Computer",
+      "operation": "enable_computer",
+      "description": "Enables the specific computer account based on the Distinguished Name or SamAccount Name of the computer you have specified.",
+      "category": "remediation",
+      "annotation": "enable_computer",
+      "output_schema": {
+        "message": "",
+        "description": "",
+        "result": "",
+        "referrals": "",
+        "type": "",
+        "dn": ""
+      },
+      "parameters": [
+        {
+          "name": "search_attr_name",
+          "title": "Attributes Type",
+          "type": "select",
+          "description": "The attribute, either the Distinguished Names (DN) or the SamAccount Name of the computer using which you want to enable the computer account in Active Directory.",
+          "tooltip": "The attribute, either the Distinguished Names (DN) or the SamAccount Name of the computer using which you want to enable the computer account in Active Directory. ",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "Distinguished Name",
+            "SamAccount Name"
+          ],
+          "value": "Distinguished Name"
+        },
+        {
+          "title": "Value",
+          "name": "search_attr_value",
+          "type": "text",
+          "description": "The value of the Distinguished Names(DN) or the SamAccount Name of the computer account that you want to enable in Active Directory.",
+          "tooltip": "The value of the Distinguished Names(DN) or the SamAccount Name of the computer account that you want to enable in Active Directory.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Disable Computer",
+      "operation": "disable_computer",
+      "description": "Disables the computer account based on the Distinguished Name or SamAccount Name of the computer you have specified.",
+      "category": "containment",
+      "annotation": "disable_computer",
+      "output_schema": {
+        "message": "",
+        "description": "",
+        "result": "",
+        "referrals": "",
+        "type": "",
+        "dn": ""
+      },
+      "parameters": [
+        {
+          "name": "search_attr_name",
+          "title": "Attributes Type",
+          "type": "select",
+          "description": "The attribute, either the Distinguished Names (DN) or the SamAccount Name of the computer using which you want to disable the computer account in Active Directory.",
+          "tooltip": "The attribute, either the Distinguished Names (DN) or the SamAccount Name of the computer using which you want to disable the computer account in Active Directory.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "Distinguished Name",
+            "SamAccount Name"
+          ],
+          "value": "Distinguished Name"
+        },
+        {
+          "title": "Value",
+          "name": "search_attr_value",
+          "type": "text",
+          "description": "The value of the Distinguished Names(DN) or the SamAccount Name of the computer account that you want to disable in Active Directory. ",
+          "tooltip": "The value of the Distinguished Names(DN) or the SamAccount Name of the computer account that you want to disable in Active Directory.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Reset Password",
+      "operation": "reset_password",
+      "description": "Resets the password for a specific AD user based on the SamAccount Name or the Email, or the Distinguished Name (DN) of the user.",
+      "category": "containment",
+      "annotation": "reset_password",
+      "output_schema": {
+        "message": "",
+        "description": "",
+        "result": "",
+        "referrals": "",
+        "type": "",
+        "dn": ""
+      },
+      "parameters": [
+        {
+          "name": "search_attr_name",
+          "title": "Attributes Type",
+          "type": "select",
+          "tooltip": "The attribute, either the SamAccount Name, Distinguished Name, or the Email of the user, whose password you want to reset in AD.",
+          "description": "The attribute, either the SamAccount Name, Distinguished Name, or the Email of the user, whose password you want to reset in AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "SamAccount Name",
+            "Email",
+            "Distinguished Name"
+          ],
+          "value": "SamAccount Name"
+        },
+        {
+          "title": "Attributes Value",
+          "name": "search_attr_value",
+          "type": "text",
+          "description": "The value of the SamAccount Name, the Distinguished Name, or the Email of the user, whose password you want to reset in AD.",
+          "tooltip": "The value of the SamAccount Name, the Distinguished Name, or the Email of the user, whose password you want to reset in AD.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        },
+        {
+          "title": "New Password",
+          "name": "new_password",
+          "type": "password",
+          "tooltip": "The password should meet the password policy requirements. Check the minimum password length, password complexity and password history requirements",
+          "description": "The password that you want to set for the specific user. The new password must meet the password policy requirements. For password policy requirements and the minimum password length, password complexity, and password history requirements, see https://www.grouppolicy.biz/2011/08/tutorial-how-to-setup-default-and-fine-grain-password-policy/.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Force password reset on next logon",
+      "operation": "force_password_reset_next_logon",
+      "description": "Forces specific Active Directory users to reset their password when they next log on to Active Directory. You can specify the user who requires to reset their password based on the SamAccount Name, Email, or Distinguished Name (DN) of the user.",
+      "category": "containment",
+      "annotation": "force_password_reset_next_logon",
+      "output_schema": {
+        "message": "",
+        "description": "",
+        "result": "",
+        "referrals": "",
+        "type": "",
+        "dn": ""
+      },
+      "parameters": [
+        {
+          "name": "search_attr_name",
+          "title": "Attributes Type",
+          "type": "select",
+          "tooltip": "The attribute, either the Distinguished Name (DN), email address, or SamAccount Name of the user who requires to reset their password when they next log on to Active Directory.",
+          "description": "The attribute, either the Distinguished Name (DN), email address, or SamAccount Name of the user who requires to reset their password when they next log on to Active Directory.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "options": [
+            "SamAccount Name",
+            "Email",
+            "Distinguished Name"
+          ],
+          "value": "SamAccount Name"
+        },
+        {
+          "title": "Attributes Value",
+          "name": "search_attr_value",
+          "type": "text",
+          "tooltip": "The value of the Distinguished Name (DN), email address, or SamAccount Name of the user who requires to reset their password when they next log on to Active Directory.",
+          "description": "The value of the Distinguished Name (DN), email address, or SamAccount Name of the user who requires to reset their password when they next log on to Active Directory.",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "value": ""
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

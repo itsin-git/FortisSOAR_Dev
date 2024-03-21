@@ -1,0 +1,235 @@
+{
+  "name": "ipstack",
+  "label": "IPStack",
+  "version": "1.0.1",
+  "description": "IPStack provides geolocation facility for IP Address or Domain.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "ipstack_small.png",
+  "icon_large_name": "ipstack_large.png",
+  "tags": [
+    "Enrichment",
+    "IP_Enrichment",
+    "Domain_Enrichment"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.1/ipstack/368/ipstack-v1-0-1",
+  "configuration": {
+    "fields": [
+      {
+        "type": "text",
+        "editable": true,
+        "title": " Server URL",
+        "name": "server_url",
+        "visible": true,
+        "required": true,
+        "value": "api.ipstack.com",
+        "description": "URL of the IPStack endpoint server to which you will connect and perform the automated operations"
+      },
+      {
+        "type": "password",
+        "editable": true,
+        "title": "API Key",
+        "name": "api_key",
+        "visible": true,
+        "required": true,
+        "value": "",
+        "description": "API key to access the IPStack endpoint to which you will connect and perform the automated operations"
+      },
+      {
+        "type": "select",
+        "editable": true,
+        "options": [
+          "HTTP",
+          "HTTPS"
+        ],
+        "title": "Protocol",
+        "name": "protocol",
+        "visible": true,
+        "required": true,
+        "value": "HTTP",
+        "description": "Protocol that will be used to communicate with the IPStack server. By default, this is http",
+        "tooltip": "Protocol that will be used to communicate with the IPStack server. By default, this is http"
+      },
+      {
+        "type": "checkbox",
+        "editable": true,
+        "title": " Verify SSL",
+        "name": "verify_ssl",
+        "visible": true,
+        "required": false,
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "description": "Search geolocation of IP Address",
+      "operation": "ip_locate",
+      "title": "Geolocate IP",
+      "category": "investigation",
+      "annotation": "geolocation",
+      "output_schema": [
+        {
+          "zip": "",
+          "latitude": "",
+          "longitude": "",
+          "country_code": "",
+          "country_name": "",
+          "city": "",
+          "continent_code": "",
+          "continent_name": "",
+          "region_code": "",
+          "region_name": "",
+          "type": "",
+          "ip": "",
+          "location": {
+            "geoname_id": "",
+            "calling_code": "",
+            "is_eu": "",
+            "capital": "",
+            "country_flag": "",
+            "country_flag_emoji_unicode": "",
+            "country_flag_emoji": "",
+            "languages": [
+              {
+                "name": "",
+                "code": "",
+                "native": ""
+              }
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "title": "IP Address",
+          "name": "query",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": "",
+          "description": "Specify the IP address for which you want to retrieve a geolocate"
+        },
+        {
+          "title": "Specify Response Fields",
+          "name": "fields",
+          "tooltip": "Eg, If country_code specified, returns only the country_code object",
+          "description": "Specify the keys that you want to in the results of this operation. Eg, If country_code specified, returns only the country_code object",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": ""
+        },
+        {
+          "title": "Enable Hostname Lookup",
+          "name": "enable_hostname",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "value": false,
+          "description": "[optional] Set to true to enable Hostname Lookup"
+        },
+        {
+          "title": "Enable Security Module",
+          "name": "enable_security",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "value": false,
+          "description": "[optional] Set to true to enable the Security module"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "description": "Search geolocation of Domain",
+      "operation": "domain_locate",
+      "title": "Geolocate Domain",
+      "category": "investigation",
+      "annotation": "geolocation",
+      "output_schema": [
+        {
+          "zip": "",
+          "latitude": "",
+          "longitude": "",
+          "country_code": "",
+          "country_name": "",
+          "city": "",
+          "continent_code": "",
+          "continent_name": "",
+          "region_code": "",
+          "region_name": "",
+          "type": "",
+          "ip": "",
+          "location": {
+            "geoname_id": "",
+            "calling_code": "",
+            "is_eu": "",
+            "capital": "",
+            "country_flag": "",
+            "country_flag_emoji_unicode": "",
+            "country_flag_emoji": "",
+            "languages": [
+              {
+                "name": "",
+                "code": "",
+                "native": ""
+              }
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Domain",
+          "name": "query",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": "",
+          "description": "Specify the domain for which you want to retrieve a geolocate"
+        },
+        {
+          "title": "Specify Response Fields",
+          "name": "fields",
+          "tooltip": "Eg, If country_code specified, returns only the country_code object",
+          "description": "Specify the keys that you want to in the results of this operation. Eg, If country_code specified, returns only the country_code object",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "value": ""
+        },
+        {
+          "title": "Enable Hostname Lookup",
+          "name": "enable_hostname",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "value": false,
+          "description": "[optional] Set to true to enable Hostname Lookup"
+        },
+        {
+          "title": "Enable Security Module",
+          "name": "enable_security",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "value": false,
+          "description": "[optional] Set to true to enable the Security module"
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

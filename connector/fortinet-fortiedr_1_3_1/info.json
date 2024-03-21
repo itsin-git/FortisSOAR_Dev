@@ -1,0 +1,4584 @@
+{
+  "name": "fortinet-fortiedr",
+  "label": "Fortinet FortiEDR",
+  "version": "1.3.1",
+  "description": "FortiEDR protects endpoints pre and post infection, stopping data breaches in real-time and automatically orchestrating incident investigation and response. This connector facilitates the automated operations related to events, forensics and collectors.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Endpoint Protection",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.3.1/fortinet-fortiedr/518/fortinet-fortiedr-v1-3-1",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "description": "URL of the Fortinet FortiEDR server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url"
+      },
+      {
+        "title": "Username",
+        "description": "Username that contains a Rest API role and using which you will access the Fortinet FortiEDR server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "username"
+      },
+      {
+        "title": "Password",
+        "description": "Password used to access the FortiEDR server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "password"
+      },
+      {
+        "title": "Verify SSL",
+        "description": "Specifies whether the SSL certificate for the Fortinet FortiEDR is to be verified or not. By default, this option is set as True.",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_event_by_id",
+      "title": "Get Event by ID",
+      "description": "Retrieves a specific event from Fortinet FortiEDR based on the event ID you have specified.",
+      "category": "investigation",
+      "annotation": "get_event",
+      "handler_method": false,
+      "endpoint": "/events/list-events",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "eventId": "",
+          "process": "",
+          "processPath": "",
+          "processType": "",
+          "firstSeen": "",
+          "lastSeen": "",
+          "seen": "",
+          "handled": "",
+          "comment": "",
+          "certified": "",
+          "archived": "",
+          "severity": "",
+          "classification": "",
+          "destinations": [],
+          "rules": [],
+          "loggedUsers": [],
+          "organization": "",
+          "muted": "",
+          "muteEndTime": "",
+          "collectors": [
+            {
+              "lastSeen": "",
+              "ip": "",
+              "collectorGroup": "",
+              "macAddresses": [],
+              "id": "",
+              "device": "",
+              "operatingSystem": ""
+            }
+          ],
+          "action": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "eventIds",
+          "placeholder": "e.g. 499117",
+          "description": "ID of the event that you want to retrieve from Fortinet FortiEDR. Note: You can get event IDs using the \"Get Events\" action."
+        }
+      ]
+    },
+    {
+      "operation": "get_event_list",
+      "title": "Get Events",
+      "description": "Retrieves all the events from Fortinet FortiEDR that match the condition(s) you have specified. Note: If none of the input parameters that you specify match the events in Fortinet FortiEDR, then an empty result set is returned.",
+      "category": "investigation",
+      "annotation": "get_event_list",
+      "handler_method": false,
+      "endpoint": "/events/list-events",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "eventId": "",
+          "process": "",
+          "processPath": "",
+          "processType": "",
+          "firstSeen": "",
+          "lastSeen": "",
+          "seen": "",
+          "handled": "",
+          "comment": "",
+          "certified": "",
+          "archived": "",
+          "severity": "",
+          "classification": "",
+          "destinations": [],
+          "rules": [],
+          "loggedUsers": [],
+          "organization": "",
+          "muted": "",
+          "muteEndTime": "",
+          "collectors": [
+            {
+              "lastSeen": "",
+              "ip": "",
+              "collectorGroup": "",
+              "macAddresses": [],
+              "id": "",
+              "device": "",
+              "operatingSystem": ""
+            }
+          ],
+          "action": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event IDs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "eventIds",
+          "tooltip": "The list of event IDs separated by comma.",
+          "placeholder": "e.g. 112903,112848",
+          "description": "List of event IDs based on which you want to retrieve events from Fortinet FortiEDR."
+        },
+        {
+          "title": "Device Name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "device",
+          "value": "",
+          "tooltip": "The device name where the events occurred.",
+          "placeholder": "e.g test-device",
+          "description": "Name of the device on which the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "collectorGroups",
+          "value": "",
+          "placeholder": "e.g. Test Collector Group1,Test Collector Group2",
+          "tooltip": "The list of collector groups whose collector reported the events.",
+          "description": "List of collector groups whose collector had reported the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Operating System",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "operatingSystems",
+          "value": "",
+          "placeholder": "e.g.Windows 7 Pro",
+          "description": "Name of the operating system of the devices on which the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Device IPs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "deviceIps",
+          "value": "",
+          "tooltip": "The IPs of the devices where the event occurred.",
+          "placeholder": "e.g. 192.168.50.10,192.168.50.50",
+          "description": "List of IP addresses of the devices on which the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "MAC Addresses",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "macAddresses",
+          "value": "",
+          "tooltip": "The MAC addresses where the event occurred.",
+          "placeholder": "e.g. 00-0C-29-D0-0A-4F",
+          "description": "MAC addresses where the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Filehash",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "fileHash",
+          "value": "",
+          "tooltip": "The hash signature of the main process of the event.",
+          "placeholder": "e.g. ADF34CKD83682HBJDF82G3",
+          "description": "Hash signature of the main process of the event that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Process",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "process",
+          "value": "",
+          "placeholder": "e.g. example.exe",
+          "description": "Name of the main process of the event that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Process Path",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "paths",
+          "value": "",
+          "tooltip": "The path of the processes related to the event.",
+          "placeholder": "e.g. \\device0\\Users,\\device0\\Documents",
+          "description": "Path of the processes related to the event that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "First Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was first seen. Use this parameter together with the \"First Seen To\" parameter to specify a date range.",
+          "description": "\"From\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "First Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenTo",
+          "value": "",
+          "tooltip": "\"To\" date when the event was first seen. Use this parameter together with the \"First Seen From\" parameter to specify a date range",
+          "description": "\"To\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was last seen. Use this parameter together with the \"Last Seen To\" parameter to specify a date range.",
+          "description": "\"From\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenTo",
+          "value": "",
+          "tooltip": "Specifies the \"to\" date when the event was last seen. Use this parameter together with the \"Last Seen From\" parameter to specify a date range.",
+          "description": "\"To\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Classification",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "multiselect",
+          "name": "classifications",
+          "options": [
+            "Malicious",
+            "Suspicious",
+            "Inconclusive",
+            "PUP",
+            "Likely Safe",
+            "Safe"
+          ],
+          "value": "",
+          "description": "Classification of the events that you want to retrieve from Fortinet FortiEDR. Classification is a list of strings that contain one or more of the following values: Malicious, Suspicious, Inconclusive, Likely Safe, PUP, or Safe."
+        },
+        {
+          "title": "Actions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Block",
+            "SimulationBlock",
+            "Log"
+          ],
+          "name": "actions",
+          "value": "",
+          "tooltip": "The action that was enforced.",
+          "description": "Actions that were enforced on the events that you want to retrieve from Fortinet FortiEDR. You can choose from the following options: Block, Simulation Block, or Log."
+        },
+        {
+          "title": "Destinations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "destinations",
+          "value": "",
+          "tooltip": "The connection destination(s) of the events.",
+          "description": "Connection destination(s) of the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Rule",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "rule",
+          "value": "",
+          "tooltip": "The short rule name of the rule that triggered the events.",
+          "placeholder": "e.g. sample_rule",
+          "description": "Short rule name of the rule that triggered the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Logged in User",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "loggedUser",
+          "value": "",
+          "description": "Logged-in user associated with the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Seen",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "seen",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether events were read/unread.",
+          "description": "True/False parameter indicating whether events that you want to retrieve from Fortinet FortiEDR were read/unread by the user operating the API."
+        },
+        {
+          "title": "Handled",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "handled",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether events were handled/unhandled.",
+          "description": "True/False parameter indicating whether events that you want to retrieve from Fortinet FortiEDR were handled/unhandled."
+        },
+        {
+          "title": "Signed",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "signed",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether the event is signed.",
+          "description": "True/False parameter indicating whether the event that you want to retrieve from Fortinet FortiEDR is signed/unsigned."
+        },
+        {
+          "title": "Muted",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "muted",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether the event is muted.",
+          "description": "True/False parameter indicating whether the event that you want to retrieve from Fortinet FortiEDR is muted/unmuted."
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated events you want to retrieve from Fortinet FortiEDR.Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated events you want to retrieve from Fortinet FortiEDR. The value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the enSilo system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies.If you choose Exact organization name, then you must specify the following parameter:"
+        },
+        {
+          "title": "Archived",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "archived",
+          "value": false,
+          "tooltip": "Enable to include only archived events.",
+          "description": "True/False parameter indicating whether to include only archived events while retrieving events from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Strict Mode",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "strictMode",
+          "value": false,
+          "tooltip": "Enable to perform strict matching on the search parameters.",
+          "description": "True/False parameter indicating whether or not to perform strict matching on the search parameters while retrieving events from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "pageNumber",
+          "value": "",
+          "description": "Page number from which you want to retrieve records."
+        },
+        {
+          "title": "Items Per Page",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "itemsPerPage",
+          "value": 100,
+          "tooltip": "The maximum value is 2,000.",
+          "description": "Maximum number of events that this operation should return for the current page. Values supported are: Default \"100\" and Maximum \"2000\"."
+        },
+        {
+          "title": "Sorting",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "json",
+          "name": "sorting",
+          "value": "",
+          "tooltip": "{\"lastSeen\": true, \"firstSeen\": false } True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on.",
+          "description": "Name of the fields by which you want to sort the results retrieved by this operation. You can enter the fields in the following format: {\"column1\":true, \"column2\":false}. True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on."
+        }
+      ]
+    },
+    {
+      "operation": "update_event",
+      "title": "Update Events",
+      "description": "Updates events in Fortinet FortiEDR that match the condition(s) you have specified. \nNote: If none of the input parameters that you specify match the events in Fortinet FortiEDR, then an empty result set is returned.",
+      "category": "investigation",
+      "annotation": "update_event",
+      "handler_method": true,
+      "endpoint": "/events",
+      "http_method": "PUT",
+      "output_schema": [
+        {
+          "eventId": "",
+          "process": "",
+          "processPath": "",
+          "processType": "",
+          "firstSeen": "",
+          "lastSeen": "",
+          "seen": "",
+          "handled": "",
+          "comment": "",
+          "certified": "",
+          "archived": "",
+          "severity": "",
+          "classification": "",
+          "destinations": [],
+          "rules": [],
+          "loggedUsers": [],
+          "organization": "",
+          "muted": "",
+          "muteEndTime": "",
+          "collectors": [
+            {
+              "lastSeen": "",
+              "ip": "",
+              "collectorGroup": "",
+              "macAddresses": [],
+              "id": "",
+              "device": "",
+              "operatingSystem": ""
+            }
+          ],
+          "action": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Field to Update on Event",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Read",
+            "Handle",
+            "Archive",
+            "Classification",
+            "Mute",
+            "Force Unmute"
+          ],
+          "name": "update_fields",
+          "value": "",
+          "tooltip": "Please select only one field to update as multiple updates are not allowed.",
+          "description": "Specify the one field to update as multiple updates are not allowed.",
+          "onchange": {
+            "Read": [
+              {
+                "title": "Mark as Read",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "True",
+                  "False"
+                ],
+                "name": "read",
+                "value": "",
+                "tooltip": "A true/false parameter that marks the events as read/unread.",
+                "description": "True/False parameter indicating whether the event that you want to mark as read/unread in Fortinet FortiEDR."
+              }
+            ],
+            "Handle": [
+              {
+                "title": "Mark as Handled",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "True",
+                  "False"
+                ],
+                "name": "handle",
+                "value": "",
+                "tooltip": "A true/false parameter that indicates whether the events were handled/unhandled.",
+                "description": "True/False parameter indicating whether the event that you want to mark as handled/unhandled in Fortinet FortiEDR."
+              },
+              {
+                "title": "Add Comment",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "comment",
+                "value": "",
+                "tooltip": "Free text to be added as a comment to the event. The event must be handled in order to accept comments.",
+                "description": "Free text to be added as a comment to the event. The event must be handled in order to accept comments (supported for version 2.6.4 and above)."
+              }
+            ],
+            "Archive": [
+              {
+                "title": "Archive Event",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "True",
+                  "False"
+                ],
+                "name": "archive",
+                "value": "",
+                "tooltip": "A true/false parameter indicating whether to hide/unhide the events.",
+                "description": "True/False parameter indicating whether the event that you want to mark as hide/unhide in Fortinet FortiEDR."
+              }
+            ],
+            "Classification": [
+              {
+                "title": "Classify Event",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "Malicious",
+                  "PUP",
+                  "Safe"
+                ],
+                "name": "classification",
+                "value": "",
+                "tooltip": "Classify event using one of the provided value.",
+                "description": "Classify event with one of the following values: Malicious, PUP or Safe (supported in V2.7.3 and above)."
+              },
+              {
+                "title": "Add Comment",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "comment",
+                "value": "",
+                "tooltip": "Free text to be added as a comment to the event. The event must be handled in order to accept comments.",
+                "description": "Free text to be added as a comment to the event. The event must be handled in order to accept comments (supported for version 2.6.4 and above)."
+              }
+            ],
+            "Mute": [
+              {
+                "title": "Mute Event",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "True",
+                  "False"
+                ],
+                "onchange": {
+                  "True": [
+                    {
+                      "title": "Mute Duration",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "type": "select",
+                      "options": [
+                        "Week",
+                        "Month",
+                        "Year",
+                        "Permanently"
+                      ],
+                      "name": "muteDuration",
+                      "value": "",
+                      "tooltip": "Mute event for specific duration using one of the provided value.",
+                      "description": "Specifies the mute duration time. Allowed values are Week, Month, Year or Permanently."
+                    }
+                  ],
+                  "False": [
+                    {
+                      "title": "Forced to Unmute an Event",
+                      "required": false,
+                      "visible": true,
+                      "editable": true,
+                      "type": "select",
+                      "options": [
+                        "True",
+                        "False"
+                      ],
+                      "name": "forceUnmute",
+                      "value": "",
+                      "tooltip": "To force an archive event when the event is muted.",
+                      "description": "Indicates whether to force an archive event when the event is muted."
+                    }
+                  ]
+                },
+                "name": "mute",
+                "value": "",
+                "tooltip": "A true/false parameter indicating whether to mute events",
+                "description": "True/False parameter indicating whether the event that you want to mark as mute/unmute in Fortinet FortiEDR."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Event IDs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "eventIds",
+          "tooltip": "The list of event IDs separated by comma.",
+          "placeholder": "e.g. 112903,112848",
+          "description": "List of event IDs based on which you want to update events in Fortinet FortiEDR."
+        },
+        {
+          "title": "Device Name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "device",
+          "value": "",
+          "tooltip": "The device name where the events occurred.",
+          "placeholder": "e.g test-device",
+          "description": "Name of the device on which the events occurred that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "collectorGroups",
+          "value": "",
+          "placeholder": "e.g. Test Collector Group1,Test Collector Group2",
+          "tooltip": "The list of collector groups whose collector reported the events.",
+          "description": "List of collector groups whose collector had reported the events that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Operating System",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "operatingSystems",
+          "value": "",
+          "placeholder": "e.g.Windows 7 Pro",
+          "description": "Name of the operating system of the devices on which the events occurred that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Device IPs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "deviceIps",
+          "value": "",
+          "tooltip": "The IPs of the devices where the event occurred.",
+          "placeholder": "e.g. 192.168.50.10,192.168.50.50",
+          "description": "List of IP addresses of the devices on which the events occurred that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Filehash",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "fileHash",
+          "value": "",
+          "tooltip": "The hash signature of the main process of the event.",
+          "placeholder": "e.g. ADF34CKD83682HBJDF82G3",
+          "description": "Hash signature of the main process of the event that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Process",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "process",
+          "value": "",
+          "placeholder": "e.g. example.exe",
+          "description": "Name of the main process of the event that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Process Path",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "paths",
+          "value": "",
+          "tooltip": "The path of the processes related to the event.",
+          "placeholder": "e.g. \\device0\\Users,\\device0\\Documents",
+          "description": "Path of the processes related to the event that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "First Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was first seen. Use this parameter together with the \"First Seen To\" parameter to specify a date range.",
+          "description": "\"From\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "First Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenTo",
+          "value": "",
+          "tooltip": "\"To\" date when the event was first seen. Use this parameter together with the \"First Seen From\" parameter to specify a date range",
+          "description": "\"To\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was last seen. Use this parameter together with the \"Last Seen To\" parameter to specify a date range.",
+          "description": "\"From\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenTo",
+          "value": "",
+          "tooltip": "Specifies the \"to\" date when the event was last seen. Use this parameter together with the \"Last Seen From\" parameter to specify a date range.",
+          "description": "\"To\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Seen",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "seen",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether events were read/unread.",
+          "description": "True/False parameter indicating whether events that you want to update in Fortinet FortiEDR were read/unread by the user operating the API."
+        },
+        {
+          "title": "Handled",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "handled",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether events were handled/unhandled.",
+          "description": "True/False parameter indicating whether events that you want to update in Fortinet FortiEDR were handled/unhandled."
+        },
+        {
+          "title": "Severities",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Critical",
+            "High",
+            "Medium"
+          ],
+          "name": "severities",
+          "value": "",
+          "tooltip": "A severity value for filter to match.",
+          "description": "A severity value for the filter to match. An option with one of the following values: Critical, High, or Medium."
+        },
+        {
+          "title": "Destinations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "destinations",
+          "value": "",
+          "tooltip": "The connection destination(s) of the events.",
+          "description": "Connection destination(s) of the events that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Actions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Block",
+            "SimulationBlock",
+            "Log"
+          ],
+          "name": "actions",
+          "value": "",
+          "tooltip": "The action that was enforced.",
+          "description": "Actions that were enforced on the events that you want to update in Fortinet FortiEDR. You can choose from the following options: Block, Simulation Block, or Log."
+        },
+        {
+          "title": "Rule",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "rule",
+          "value": "",
+          "tooltip": "The short rule name of the rule that triggered the events.",
+          "placeholder": "e.g. sample_rule",
+          "description": "Short rule name of the rule that triggered the events that you want to update in Fortinet FortiEDR."
+        },
+        {
+          "title": "Strict Mode",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "strictMode",
+          "value": false,
+          "tooltip": "Enable to perform strict matching on the search parameters.",
+          "description": "True/False parameter indicating whether or not to perform strict matching on the search parameters while retrieving events from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Classification",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "multiselect",
+          "name": "classifications",
+          "options": [
+            "Malicious",
+            "Suspicious",
+            "Inconclusive",
+            "PUP",
+            "Likely Safe",
+            "Safe"
+          ],
+          "value": "",
+          "description": "Classification of the events that you want to retrieve from Fortinet FortiEDR. Classification is a list of strings that contain one or more of the following values: Malicious, Suspicious, Inconclusive, Likely Safe, PUP, or Safe."
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated events you want to retrieve from Fortinet FortiEDR.Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated events you want to retrieve from Fortinet FortiEDR. The value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the enSilo system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies.If you choose Exact Organization Name, then you must specify the following parameter:"
+        },
+        {
+          "title": "Muted",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "muted",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether the event is muted.",
+          "description": "True/False parameter indicating whether the event that you want to update in Fortinet FortiEDR is muted/unmuted."
+        }
+      ]
+    },
+    {
+      "operation": "get_raw_data_items",
+      "title": "Get Raw Data Items",
+      "description": "Retrieves the raw data items from Fortinet FortiEDR based on the event ID and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_raw_data_items",
+      "handler_method": false,
+      "endpoint": "/events/list-raw-data-items",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "eventId": "",
+          "rawEventId": "",
+          "device": "",
+          "deviceIp": "",
+          "destination": "",
+          "firstSeen": "",
+          "lastSeen": "",
+          "count": "",
+          "loggedUsers": []
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "eventId",
+          "placeholder": "e.g. 112903",
+          "description": "ID of the event that holds the raw data items that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Device Name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "device",
+          "value": "",
+          "tooltip": "The device name where the raw event occurred.",
+          "placeholder": "e.g test-device",
+          "description": "(Optional) Name of the device on which the raw event that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "collectorGroups",
+          "value": "",
+          "placeholder": "e.g. Test Collector Group1,Test Collector Group2",
+          "tooltip": "The list of collector groups whose collector reported the events.",
+          "description": "(Optional) List of collector groups whose collector had reported the raw events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "First Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was first seen. Use this parameter together with the \"First Seen To\" parameter to specify a date range.",
+          "description": "(Optional) \"From\" date when the raw event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "First Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenTo",
+          "value": "",
+          "tooltip": "\"To\" date when the event was first seen. Use this parameter together with the \"First Seen From\" parameter to specify a date range",
+          "description": "(Optional) \"To\" date when the raw event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenFrom",
+          "value": "",
+          "tooltip": "Specifies the \"from\" date when the event was last seen. Use this parameter together with the \"Last Seen To\" parameter to specify a date range.",
+          "description": "Specifies the \"from\" date when the event was last seen. Use this parameter together with the \"Last Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenTo",
+          "value": "",
+          "tooltip": "Specifies the \"to\" date when the event was last seen. Use this parameter together with the \"Last Seen From\" parameter to specify a date range.",
+          "description": "(Optional) \"To\" date when the raw event that you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Strict Mode",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "strictMode",
+          "value": false,
+          "tooltip": "Enable to perform strict matching on the search parameters.",
+          "description": "True/False parameter indicating whether or not to perform strict matching on the search parameters while retrieving events from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Full Data Requested",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "fullDataRequested",
+          "value": false,
+          "tooltip": "Enable to include the event internal information.",
+          "description": "True/False parameter indicating whether to include the event internal information for the raw events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "pageNumber",
+          "value": "",
+          "description": "(Optional) Page number from which you want to retrieve records."
+        },
+        {
+          "title": "Items Per Page",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "itemsPerPage",
+          "value": 100,
+          "tooltip": "The maximum value is 2,000.",
+          "description": "(Optional) Maximum number of events that this operation should return for the current page. Values supported are: Default \"100\" and Maximum \"2000\"."
+        },
+        {
+          "title": "Sorting",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "json",
+          "name": "sorting",
+          "value": "",
+          "tooltip": "{\"lastSeen\": true, \"firstSeen\": false } True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on.",
+          "description": "(Optional) Name of the fields by which you want to sort the results retrieved by this operation. You can enter the fields in the following format: {\"column1\":true, \"column2\":false}. True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on."
+        }
+      ]
+    },
+    {
+      "operation": "count_events",
+      "title": "Get Event Count",
+      "description": "Retrieves the event count from Fortinet FortiEDR based on the filter parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_event_count",
+      "handler_method": false,
+      "endpoint": "/events/count-events",
+      "http_method": "GET",
+      "output_schema": {
+        "event_cout": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event IDs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "eventIds",
+          "tooltip": "List of event IDs separated by comma.",
+          "placeholder": "e.g. 112903, 112848",
+          "description": "List of comma-separated event IDs based on which you want to retrieve event counts from Fortinet FortiEDR."
+        },
+        {
+          "title": "Device Name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "device",
+          "value": "",
+          "tooltip": "The device name where the events occurred.",
+          "placeholder": "e.g test-device",
+          "description": "(Optional) Name of the device on which the event whose counts you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "collectorGroups",
+          "value": "",
+          "placeholder": "e.g. Test Collector Group1,Test Collector Group2",
+          "tooltip": "The list of collector groups whose collector reported the events.",
+          "description": "(Optional) List of collector groups whose collector had reported the events whose counts you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Operating System",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "operatingSystems",
+          "value": "",
+          "placeholder": "e.g. Windows 7 Pro",
+          "description": "(Optional) Name of the operating system of the devices on which the events whose counts you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Device IPs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "deviceIps",
+          "value": "",
+          "tooltip": "The IPs of the devices where the event occurred.",
+          "placeholder": "e.g. 192.168.50.10, 192.168.50.50",
+          "description": "(Optional) List of IP addresses of the devices on which the events whose counts you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "MAC Addresses",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "macAddresses",
+          "value": "",
+          "tooltip": "The MAC addresses where the event occurred.",
+          "placeholder": "e.g. 00-0C-29-D0-0A-4F",
+          "description": "(Optional) MAC addresses where the events whose counts you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Filehash",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "fileHash",
+          "value": "",
+          "tooltip": "The hash signature of the main process of the event.",
+          "placeholder": "e.g. ADF34CKD83682HBJDF82G3",
+          "description": "(Optional) Hash signature of the main process of the events whose counts you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Process",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "process",
+          "value": "",
+          "placeholder": "e.g. example.exe",
+          "description": "(Optional) Name of the main process of the events whose counts you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Process Path",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "paths",
+          "value": "",
+          "tooltip": "The path of the processes related to the event.",
+          "placeholder": "e.g. \\device0\\Users,\\device0\\Documents",
+          "description": "(Optional) Path of the processes related to the events whose counts you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "First Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was first seen. Use this parameter together with the \"First Seen To\" parameter to specify a date range.",
+          "description": "(Optional) \"From\" date when the events whose counts you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "First Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenTo",
+          "value": "",
+          "tooltip": "Specifies the \"to\" date when the event was first seen. Use this parameter together with the \"First Seen From\" parameter to specify a date range",
+          "description": "(Optional) \"To\" date when the events whose counts you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenFrom",
+          "value": "",
+          "tooltip": "Specifies the \"from\" date when the event was last seen. Use this parameter together with the \"Last Seen To\" parameter to specify a date range.",
+          "description": "(Optional) \"From\" date when the events whose counts you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenTo",
+          "value": "",
+          "tooltip": "Specifies the \"to\" date when the event was last seen. Use this parameter together with the \"Last Seen From\" parameter to specify a date range.",
+          "description": "(Optional) \"To\" date when the events whose counts you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Classification",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "multiselect",
+          "name": "classifications",
+          "options": [
+            "Malicious",
+            "Suspicious",
+            "Inconclusive",
+            "PUP",
+            "Likely Safe",
+            "Safe"
+          ],
+          "value": "",
+          "description": "Classification of the events whose counts you want to retrieve from Fortinet FortiEDR. Classification is a list of strings that contain one or more of the following values: Malicious, Suspicious, Inconclusive, Likely Safe, PUP, or Safe."
+        },
+        {
+          "title": "Actions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Block",
+            "SimulationBlock",
+            "Log"
+          ],
+          "name": "actions",
+          "value": "",
+          "tooltip": "The action that was enforced.",
+          "description": "Actions that were enforced on the events whose counts you want to retrieve from Fortinet FortiEDR. You can choose from the following options: Block, Simulation Block, or Log."
+        },
+        {
+          "title": "Destinations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "destinations",
+          "value": "",
+          "tooltip": "The connection destination(s) of the events.",
+          "description": "Connection destination(s) of the events whose counts you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Rule",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "rule",
+          "value": "",
+          "tooltip": "The short rule name of the rule that triggered the events.",
+          "placeholder": "e.g. sample_rule",
+          "description": "Short rule name of the rule that triggered the events whose counts you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Seen",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "seen",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether events were read/unread.",
+          "description": "True/False parameter indicating whether events whose counts you want to retrieve from Fortinet FortiEDR were read/unread by the user operating the API."
+        },
+        {
+          "title": "Handled",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "handled",
+          "value": "",
+          "tooltip": "A True/False parameter indicating whether events were handled/unhandled.",
+          "description": "True/False parameter indicating whether events whose counts you want to retrieve from Fortinet FortiEDR were handled/unhandled."
+        },
+        {
+          "title": "Signed",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "signed",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether the event is signed.",
+          "description": "True/False parameter indicating whether the events whose counts you want to retrieve from Fortinet FortiEDR is signed/unsigned."
+        },
+        {
+          "title": "Muted",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "muted",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether the event is muted.",
+          "description": "True/False parameter indicating whether the events whose counts you want to retrieve from Fortinet FortiEDR is muted/unmuted."
+        },
+        {
+          "title": "Logged in User",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "loggedUser",
+          "value": "",
+          "description": "Logged-in user associated with the events whose counts you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": " Name of a specific organization whose associated event counts you want to retrieve from Fortinet FortiEDR. Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated event counts you want to retrieve from Fortinet FortiEDR. The value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the enSilo system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies.If you choose Exact Organization Name, then you must specify the following parameter:"
+        },
+        {
+          "title": "Archived",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "archived",
+          "value": false,
+          "tooltip": "Enable to include only archived events.",
+          "description": "True/False parameter indicating whether to include only archived events while retrieving event counts from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Strict Mode",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "strictMode",
+          "value": false,
+          "tooltip": "Enable to perform strict matching on the search parameters.",
+          "description": "True/False parameter indicating whether or not to perform strict matching on the search parameters while retrieving event counts from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "pageNumber",
+          "value": "",
+          "description": "(Optional) Page number from which you want to retrieve records."
+        },
+        {
+          "title": "Items Per Page",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "itemsPerPage",
+          "value": 100,
+          "tooltip": "The maximum value is 2,000.",
+          "description": "(Optional) Maximum number of events that this operation should return for the current page. Values supported are: Default \"100\" and Maximum \"2000\"."
+        },
+        {
+          "title": "Sorting",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "json",
+          "name": "sorting",
+          "value": "",
+          "tooltip": "{\"lastSeen\": true, \"firstSeen\": false } True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on.",
+          "description": "Name of the fields by which you want to sort the results retrieved by this operation. You can enter the fields in the following format: {\"column1\":true, \"column2\":false}. True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on."
+        }
+      ]
+    },
+    {
+      "operation": "get_event_list_extended",
+      "title": "Get Event List Extended",
+      "description": "Retrieves archived/unarchived events together from Fortinet FortiEDR based on the filter parameters you have specified. \nNote: If none of the input parameters that you specify match the events in Fortinet FortiEDR, then an empty result set is returned. ",
+      "category": "investigation",
+      "annotation": "get_event_list",
+      "handler_method": true,
+      "endpoint": "/events/list-events",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "eventId": "",
+          "process": "",
+          "processPath": "",
+          "processType": "",
+          "firstSeen": "",
+          "lastSeen": "",
+          "seen": "",
+          "handled": "",
+          "comment": "",
+          "certified": "",
+          "archived": "",
+          "severity": "",
+          "classification": "",
+          "destinations": [],
+          "rules": [],
+          "loggedUsers": [],
+          "organization": "",
+          "muted": "",
+          "muteEndTime": "",
+          "collectors": [
+            {
+              "lastSeen": "",
+              "ip": "",
+              "collectorGroup": "",
+              "macAddresses": [],
+              "id": "",
+              "device": "",
+              "operatingSystem": ""
+            }
+          ],
+          "action": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event IDs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "eventIds",
+          "tooltip": "The list of event IDs separated by comma.",
+          "placeholder": "e.g. 112903,112848",
+          "description": "List of event IDs based on which you want to retrieve events from Fortinet FortiEDR."
+        },
+        {
+          "title": "Device Name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "device",
+          "value": "",
+          "tooltip": "The device name where the events occurred.",
+          "placeholder": "e.g test-device",
+          "description": "Name of the device on which the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "collectorGroups",
+          "value": "",
+          "placeholder": "e.g. Test Collector Group1,Test Collector Group2",
+          "tooltip": "The list of collector groups whose collector reported the events.",
+          "description": "List of collector groups whose collector had reported the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Operating System",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "operatingSystems",
+          "value": "",
+          "placeholder": "e.g.Windows 7 Pro",
+          "description": "Name of the operating system of the devices on which the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Device IPs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "deviceIps",
+          "value": "",
+          "tooltip": "The IPs of the devices where the event occurred.",
+          "placeholder": "e.g. 192.168.50.10,192.168.50.50",
+          "description": "List of IP addresses of the devices on which the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "MAC Addresses",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "macAddresses",
+          "value": "",
+          "tooltip": "The MAC addresses where the event occurred.",
+          "placeholder": "e.g. 00-0C-29-D0-0A-4F",
+          "description": "MAC addresses where the events that you want to retrieve from Fortinet FortiEDR occurred."
+        },
+        {
+          "title": "Filehash",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "fileHash",
+          "value": "",
+          "tooltip": "The hash signature of the main process of the event.",
+          "placeholder": "e.g. ADF34CKD83682HBJDF82G3",
+          "description": "Hash signature of the main process of the event that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Process",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "process",
+          "value": "",
+          "placeholder": "e.g. example.exe",
+          "description": "Name of the main process of the event that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Process Path",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "paths",
+          "value": "",
+          "tooltip": "The path of the processes related to the event.",
+          "placeholder": "e.g. \\device0\\Users,\\device0\\Documents",
+          "description": "Path of the processes related to the event that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "First Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was first seen. Use this parameter together with the \"First Seen To\" parameter to specify a date range.",
+          "description": "\"From\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "First Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "firstSeenTo",
+          "value": "",
+          "tooltip": "\"To\" date when the event was first seen. Use this parameter together with the \"First Seen From\" parameter to specify a date range",
+          "description": "\"To\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the first time. Use this parameter together with the \"First Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen From",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenFrom",
+          "value": "",
+          "tooltip": "\"From\" date when the event was last seen. Use this parameter together with the \"Last Seen To\" parameter to specify a date range.",
+          "description": "\"From\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen To\" parameter to specify a date range."
+        },
+        {
+          "title": "Last Seen To",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenTo",
+          "value": "",
+          "tooltip": "Specifies the \"to\" date when the event was last seen. Use this parameter together with the \"Last Seen From\" parameter to specify a date range.",
+          "description": "\"To\" date when the event that you want to retrieve from Fortinet FortiEDR, was seen for the last time. Use this parameter together with the \"Last Seen From\" parameter to specify a date range."
+        },
+        {
+          "title": "Classification",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "multiselect",
+          "name": "classifications",
+          "options": [
+            "Malicious",
+            "Suspicious",
+            "Inconclusive",
+            "PUP",
+            "Likely Safe",
+            "Safe"
+          ],
+          "value": "",
+          "description": "Classification of the events that you want to retrieve from Fortinet FortiEDR. Classification is a list of strings that contain one or more of the following values: Malicious, Suspicious, Inconclusive, Likely Safe, PUP, or Safe."
+        },
+        {
+          "title": "Actions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Block",
+            "SimulationBlock",
+            "Log"
+          ],
+          "name": "actions",
+          "value": "",
+          "tooltip": "The action that was enforced.",
+          "description": "Actions that were enforced on the events that you want to retrieve from Fortinet FortiEDR. You can choose from the following options: Block, Simulation Block, or Log."
+        },
+        {
+          "title": "Destinations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "destinations",
+          "value": "",
+          "tooltip": "The connection destination(s) of the events.",
+          "description": "Connection destination(s) of the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Rule",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "rule",
+          "value": "",
+          "tooltip": "The short rule name of the rule that triggered the events.",
+          "placeholder": "e.g. sample_rule",
+          "description": "Short rule name of the rule that triggered the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Logged in User",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "loggedUser",
+          "value": "",
+          "description": "Logged-in user associated with the events that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Seen",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "seen",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether events were read/unread.",
+          "description": "True/False parameter indicating whether events that you want to retrieve from Fortinet FortiEDR were read/unread by the user operating the API."
+        },
+        {
+          "title": "Handled",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "handled",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether events were handled/unhandled.",
+          "description": "True/False parameter indicating whether events that you want to retrieve from Fortinet FortiEDR were handled/unhandled."
+        },
+        {
+          "title": "Signed",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "signed",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether the event is signed.",
+          "description": "True/False parameter indicating whether the event that you want to retrieve from Fortinet FortiEDR is signed/unsigned."
+        },
+        {
+          "title": "Muted",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "muted",
+          "value": "",
+          "tooltip": "True/False parameter indicating whether the event is muted.",
+          "description": "True/False parameter indicating whether the event that you want to retrieve from Fortinet FortiEDR is muted/unmuted."
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated events you want to retrieve from Fortinet FortiEDR.Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated events you want to retrieve from Fortinet FortiEDR. The value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the enSilo system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies.If you choose Exact Organization Name, then you must specify the following parameter:"
+        },
+        {
+          "title": "Strict Mode",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "strictMode",
+          "value": false,
+          "tooltip": "Enable to perform strict matching on the search parameters.",
+          "description": "True/False parameter indicating whether or not to perform strict matching on the search parameters while retrieving events from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "pageNumber",
+          "value": "",
+          "description": "Page number from which you want to retrieve records."
+        },
+        {
+          "title": "Items Per Page",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "itemsPerPage",
+          "value": 100,
+          "tooltip": "The maximum value is 2,000.",
+          "description": "Maximum number of events that this operation should return for the current page. Values supported are: Default \"100\" and Maximum \"2000\"."
+        },
+        {
+          "title": "Sorting",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "json",
+          "name": "sorting",
+          "value": "",
+          "tooltip": "{\"lastSeen\": true, \"firstSeen\": false } True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on.",
+          "description": "Name of the fields by which you want to sort the results retrieved by this operation. You can enter the fields in the following format: {\"column1\":true, \"column2\":false}. True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on."
+        }
+      ]
+    },
+    {
+      "operation": "search",
+      "title": "Search Filehash",
+      "description": "Searches a file hash among the current events, threat hunting repository, and communicating applications that exist in the Fortinet FortiEDR system.",
+      "category": "investigation",
+      "annotation": "search_filehash",
+      "handler_method": false,
+      "endpoint": "/hash/search",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "filehash": "",
+          "eventIds": [],
+          "applications": [],
+          "threatsHunting": [
+            {
+              "deviceName": "",
+              "fileName": "",
+              "path": ""
+            }
+          ]
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filehash",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "fileHashes",
+          "value": "",
+          "tooltip": "The list of hashes separated by commas.",
+          "placeholder": "e.g 6C6813CC5187F8B095FDC0172DC635DBD5404282,9CEBE316D935A10F481F1F815953C6B6BA817895 ",
+          "description": "One or more comma-separated file hashes that you want to search for in Fortinet FortiEDR."
+        }
+      ]
+    },
+    {
+      "operation": "get_file",
+      "title": "Get File",
+      "description": "Retrieves a specific file from the specified device from Fortinet FortiEDR, based on the device type, device name/ID, and file paths you have specified, and adds it as an attachment in CyOPs™",
+      "category": "investigation",
+      "annotation": "get_file",
+      "handler_method": false,
+      "endpoint": "/forensics/get-file",
+      "http_method": "GET",
+      "output_schema": {
+        "name": "",
+        "@id": "",
+        "type": "",
+        "file": {
+          "uploadDate": "",
+          "@type": "",
+          "@id": "",
+          "file": {
+            "@type": ""
+          },
+          "owners": "",
+          "@context": "",
+          "filename": "",
+          "metadata": "",
+          "size": "",
+          "mimeType": ""
+        },
+        "createDate": "",
+        "description": "",
+        "modifyUser": {
+          "avatar": "",
+          "@id": "",
+          "modifyDate": "",
+          "userType": "",
+          "createDate": "",
+          "modifyUser": "",
+          "@type": "",
+          "@settings": "",
+          "createUser": "",
+          "id": "",
+          "userId": "",
+          "name": ""
+        },
+        "@type": "",
+        "@context": "",
+        "modifyDate": "",
+        "createUser": {
+          "avatar": "",
+          "@id": "",
+          "modifyDate": "",
+          "userType": "",
+          "createDate": "",
+          "modifyUser": "",
+          "@type": "",
+          "@settings": "",
+          "createUser": "",
+          "id": "",
+          "userId": "",
+          "name": ""
+        },
+        "id": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Type",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "ID",
+            "Name"
+          ],
+          "onchange": {
+            "ID": [
+              {
+                "title": "Device ID",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "integer",
+                "name": "device",
+                "value": "",
+                "placeholder": "e.g 327274",
+                "description": "ID of the device from which you want to retrieve the file."
+              }
+            ],
+            "Name": [
+              {
+                "title": "Device Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "device",
+                "value": "",
+                "placeholder": "e.g. test-device0",
+                "description": "Name of the device from which you want to retrieve the file."
+              }
+            ]
+          },
+          "name": "type",
+          "value": "Name",
+          "tooltip": "The type of the device input parameter.",
+          "description": "Type of the device input parameter from which you want to get the file from Fortinet FortiEDR. You can choose between ID or Name.If you choose 'ID', then you must specify the following parameter:"
+        },
+        {
+          "title": "File Paths",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "filePaths",
+          "value": "",
+          "placeholder": "c:\\temp\\example.exe or \\Device\\HarddiskVolume4\\example.exe",
+          "description": "List of file paths from which you want to retrieve the file. For example, c:\\temp\\example.exe "
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "organization",
+          "value": "",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "(Optional) Name of a specific organization whose associated files you want to retrieve from Fortinet FortiEDR. Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR."
+        }
+      ]
+    },
+    {
+      "operation": "get_event_file",
+      "title": "Retrieve File or Memory",
+      "description": "Retrieves a file or memory related to a specific event from Fortinet FortiEDR based on the raw event ID and other input parameters you have specified and adds it as an attachment in CyOPs™.",
+      "category": "investigation",
+      "annotation": "get_event_file",
+      "handler_method": false,
+      "endpoint": "/forensics/get-event-file",
+      "http_method": "GET",
+      "output_schema": {
+        "name": "",
+        "@id": "",
+        "type": "",
+        "file": {
+          "uploadDate": "",
+          "@type": "",
+          "@id": "",
+          "file": {
+            "@type": ""
+          },
+          "owners": "",
+          "@context": "",
+          "filename": "",
+          "metadata": "",
+          "size": "",
+          "mimeType": ""
+        },
+        "createDate": "",
+        "description": "",
+        "modifyUser": {
+          "avatar": "",
+          "@id": "",
+          "modifyDate": "",
+          "userType": "",
+          "createDate": "",
+          "modifyUser": "",
+          "@type": "",
+          "@settings": "",
+          "createUser": "",
+          "id": "",
+          "userId": "",
+          "name": ""
+        },
+        "@type": "",
+        "@context": "",
+        "modifyDate": "",
+        "createUser": {
+          "avatar": "",
+          "@id": "",
+          "modifyDate": "",
+          "userType": "",
+          "createDate": "",
+          "modifyUser": "",
+          "@type": "",
+          "@settings": "",
+          "createUser": "",
+          "id": "",
+          "userId": "",
+          "name": ""
+        },
+        "id": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Raw Event ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "rawEventId",
+          "value": "",
+          "tooltip": "The ID of the raw event on which to perform the memory retrieval.",
+          "description": "ID of the raw event on which you want to perform the memory retrieval in Fortinet FortiEDR."
+        },
+        {
+          "title": "Retrieve From",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Memory",
+            "Disk"
+          ],
+          "name": "retrieve_from",
+          "value": "Memory",
+          "description": "(Optional) Choose whether to retrieve the memory from Memory, Disk.",
+          "onchange": {
+            "Disk": [
+              {
+                "title": "File Paths",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "filePaths",
+                "tooltip": "The list of file paths separated by comma.",
+                "placeholder": "c:\\temp\\example.exe",
+                "value": "",
+                "description": "(Optional) List of file paths from which you want to perform the memory retrieval in Fortinet FortiEDR."
+              }
+            ],
+            "Memory": [
+              {
+                "title": "Process ID",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "integer",
+                "name": "processId",
+                "value": "",
+                "tooltip": "the ID of the process from which to take a memory image.",
+                "description": "(Optional) ID of the process from which you want to take a memory image."
+              },
+              {
+                "title": "Memory Region Start Address",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "startRange",
+                "tooltip": "The memory start range, in Hexadecimal format",
+                "placeholder": "e.g. 0x10000",
+                "description": "(Optional) Memory start range, in Hexadecimal format from which you want to take a memory image."
+              },
+              {
+                "title": "Memory Region End Address",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "endRange",
+                "tooltip": "The memory end range, in Hexadecimal format.",
+                "placeholder": "e.g. 0x20000",
+                "description": "(Optional) Memory end range, in Hexadecimal format from which you want to take a memory image."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "organization",
+          "value": "",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "(Optional) Name of a specific organization on which you want to perform the memory retrieval in Fortinet FortiEDR. Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR."
+        }
+      ]
+    },
+    {
+      "operation": "remediate_device",
+      "title": "Remediate Device",
+      "description": "Takes remediation actions on Fortinet FortiEDR such as killing a process, deleting a file and/or cleaning persistent data on which malware was detected based on the device type, device name/ID, and other input parameters you have specified.",
+      "category": "remediation",
+      "annotation": "remediate_device",
+      "handler_method": false,
+      "endpoint": "/forensics/remediate-device",
+      "http_method": "PUT",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Type",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "ID",
+            "Name"
+          ],
+          "onchange": {
+            "ID": [
+              {
+                "title": "Device ID",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "integer",
+                "name": "deviceId",
+                "value": "",
+                "description": "ID of the device on which you want to take the remediation action."
+              }
+            ],
+            "Name": [
+              {
+                "title": "Device Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "device",
+                "value": "",
+                "description": "Name of the device on which you want to take the remediation action."
+              }
+            ]
+          },
+          "name": "type",
+          "value": "Name",
+          "tooltip": "The type of the device input parameter.",
+          "description": "Type of the device input parameter on which you want to perform the remediation action in Fortinet FortiEDR. You can choose between ID or Name.If you choose 'ID', then you must specify the following parameter:"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "organization",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "(Optional) Name of a specific organization that contains the device on which you want to perform the remediation action.Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR."
+        },
+        {
+          "title": "Remediation Action",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Kill Process",
+            "Delete File",
+            "Handle Persistent Data",
+            "Remediate Thread"
+          ],
+          "name": "remediate_action",
+          "value": "",
+          "tooltip": "Select one of the Remediation Action.",
+          "description": "Select one of the Remediation Action.",
+          "onchange": {
+            "Kill Process": [
+              {
+                "title": "Process ID",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "integer",
+                "name": "terminatedProcessId",
+                "value": "",
+                "tooltip": "The process ID to terminate on the device.",
+                "description": "Process ID that you want to terminate on the specified device."
+              },
+              {
+                "title": "Process Name",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "processName",
+                "value": "",
+                "placeholder": "e.g. explorer.exe",
+                "description": "Name of the process on which you want to take remediation action."
+              }
+            ],
+            "Delete File": [
+              {
+                "title": "Delete File at Path",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "executablesToRemove",
+                "value": "",
+                "tooltip": "The list of full paths of executable files separated by comma. This param is compulsory if you want to delete file from device.",
+                "placeholder": "c:\\temp\\example1.exe,c:\\temp\\example2.exe",
+                "description": "List of full paths of executable files (*.exe) that you want to delete on the specified device."
+              }
+            ],
+            "Handle Persistent Data": [
+              {
+                "title": "Persistence Data (Registry) Action",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "options": [
+                  "Delete Key",
+                  "Delete Value",
+                  "Update"
+                ],
+                "onchange": {
+                  "Delete Key": [
+                    {
+                      "title": "Persistence Data (Registry) Path",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "type": "text",
+                      "name": "persistenceDataPath",
+                      "placeholder": "e.g. HKEY_LOCAL_MACHINE\\SOFTWARE\\test",
+                      "value": "",
+                      "description": "Path of the persistent data on the specified device."
+                    },
+                    {
+                      "title": "Persistence Data (Registry) Value Name",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "type": "text",
+                      "name": "persistenceDataValueName",
+                      "placeholder": "e.g. DLLPath",
+                      "value": "",
+                      "description": "Value name of the persistent data on the specified device."
+                    }
+                  ],
+                  "Delete Value": [
+                    {
+                      "title": "Persistence Data (Registry) Path",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "type": "text",
+                      "name": "persistenceDataPath",
+                      "placeholder": "e.g. HKEY_LOCAL_MACHINE\\SOFTWARE\\test",
+                      "value": "",
+                      "description": "Path of the persistent data on the specified device."
+                    },
+                    {
+                      "title": "Persistence Data (Registry) Value Name",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "type": "text",
+                      "name": "persistenceDataValueName",
+                      "placeholder": "e.g. DLLPath",
+                      "value": "",
+                      "description": "Value name of the persistent data on the specified device."
+                    }
+                  ],
+                  "Update": [
+                    {
+                      "title": "Persistence Data (Registry) Path",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "type": "text",
+                      "name": "persistenceDataPath",
+                      "placeholder": "e.g. HKEY_LOCAL_MACHINE\\SOFTWARE\\test",
+                      "value": "",
+                      "description": "Path of the persistent data on the specified device."
+                    },
+                    {
+                      "title": "Persistence Data (Registry) Value Name",
+                      "required": true,
+                      "visible": true,
+                      "editable": true,
+                      "type": "text",
+                      "name": "persistenceDataValueName",
+                      "placeholder": "e.g. DLLPath",
+                      "value": "",
+                      "description": "Value name of the persistent data on the specified device."
+                    },
+                    {
+                      "title": "Persistence Data (Registry) Value New Type",
+                      "required": false,
+                      "visible": true,
+                      "editable": true,
+                      "type": "select",
+                      "options": [
+                        "REG_SZ",
+                        "REG_EXPAND_SZ",
+                        "REG_BINARY",
+                        "REG_DWORD",
+                        "REG_DWORD_BIG_ENDIAN",
+                        "REG_LINK",
+                        "REG_MULTI_SZ",
+                        "REG_RESOURCE_LIST",
+                        "REG_FULL_RESOURCE_DESCRIPTOR",
+                        "REG_RESOURCE_REQUIREMENTS_LIST",
+                        "REG_QWORD"
+                      ],
+                      "name": "persistenceDataValueNewType",
+                      "value": "",
+                      "description": "New data value type that should be applied to the persistent data on the specified device. You can choose from the following options: REG_SZ, REG_EXPAND_SZ, REG_BINARY, REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_LINK, REG_MULTI_SZ, REG_RESOURCE_LIST, REG_FULL_RESOURCE_DESCRIPTOR, REG_RESOURCE_REQUIREMENTS_LIST or REG_QWORD.threadId: Specifies the thread ID."
+                    },
+                    {
+                      "title": "Persistence Data (Registry) New Content",
+                      "required": false,
+                      "visible": true,
+                      "editable": true,
+                      "type": "text",
+                      "name": "persistenceDataNewContent",
+                      "value": "",
+                      "placeholder": "e.g. %ProgramFiles%\\Internet Explorer\\hmmapi.dll",
+                      "description": "Specifies the persistent data new content. The content format provided depends on the type used in persistenceDataValueNewType. The format should be provided as follows: String for the following types: REG_SZ(1), REG_EXPAND_SZ(2), REG_DWORD(4) and REG_QWORD(11). Base64 for the following types: REG_BINARY(3), REG_DWORD_BIG_ENDIAN(5), REG_LINK(6), REG_MULTI_SZ(7), REG_RESOURCE_LIST(8), REG_FULL_RESOURCE_DESCRIPTOR(9) and REG_RESOURCE_REQUIREMENTS_LIST(10)."
+                    }
+                  ]
+                },
+                "name": "persistenceDataAction",
+                "value": "",
+                "description": "Action that should be taken for persistent data on the specified device. You can choose from the following options: DeleteKey, DeleteValue, or Update."
+              }
+            ],
+            "Remediate Thread": [
+              {
+                "title": "Thread ID",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "integer",
+                "name": "threadId",
+                "value": "",
+                "tooltip": "ID of the thread on which you want to take remediation action.",
+                "placeholder": "e.g. 1829",
+                "description": "ID of the thread on which you want to take the remediation action."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "get_collector_list",
+      "title": "Get Collector List",
+      "description": "Retrieves the list of the collectors from Fortinet FortiEDR based on the device type, device name/ID, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_collector_list",
+      "handler_method": false,
+      "endpoint": "/inventory/list-collectors",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "id": "",
+          "name": "",
+          "collectorGroupName": "",
+          "operatingSystem": "",
+          "ipAddress": "",
+          "osFamily": "",
+          "state": "",
+          "stateAdditionalInfo": "",
+          "lastSeenTime": "",
+          "version": "",
+          "macAddresses": [],
+          "loggedUsers": [],
+          "accountName": "",
+          "organization": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Type",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "ID",
+            "Name"
+          ],
+          "onchange": {
+            "ID": [
+              {
+                "title": "Device IDs",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "integer",
+                "name": "devicesIds",
+                "value": "",
+                "tooltip": "The list of device IDs separated by comma.",
+                "placeholder": "e.g. 12345,675849",
+                "description": "ID of the device from which you want to retrieve the collector list."
+              }
+            ],
+            "Name": [
+              {
+                "title": "Device Names",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "devices",
+                "value": "",
+                "tooltip": "The list of device names separated by comma.",
+                "placeholder": "e.g. test-device1,test-device2",
+                "description": "ID of the device from which you want to retrieve the collector list."
+              }
+            ]
+          },
+          "name": "type",
+          "value": "",
+          "tooltip": "The type of the device input parameter.",
+          "description": "Type of the device input parameter from which you want to get the collector from Fortinet FortiEDR. You can choose between ID or Name.If you choose 'ID', then you must specify the following parameter:"
+        },
+        {
+          "title": "Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "collectorGroups",
+          "value": "",
+          "tooltip": "The list of collector group names separated by comma.",
+          "placeholder": "e.g. Test Collector Group1,Test Collector Group2",
+          "description": "(Optional) List of collector group names whose associated collectors you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "IPs",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "ips",
+          "value": "",
+          "placeholder": "e.g. 192.168.50.10,192.168.50.50",
+          "description": "(Optional) List of IP addresses whose associated collectors you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Operating Systems",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "operatingSystems",
+          "value": "",
+          "placeholder": "e.g. Windows 7 Pro",
+          "description": "(Optional) List of operating systems whose associated collectors you want to retrieve from Fortinet FortiEDR. For example, Windows 7 Pro."
+        },
+        {
+          "title": "OS Families",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "osFamilies",
+          "value": "",
+          "placeholder": "e.g Windows, Windows Server, OS X.",
+          "description": "(Optional) List of OS Families whose associated collectors you want to retrieve from Fortinet FortiEDR. e.g Windows, Windows Server, OS X."
+        },
+        {
+          "title": "States",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "multiselect",
+          "options": [
+            "Running",
+            "Disconnected",
+            "Disabled",
+            "Degraded",
+            "Pending Reboot",
+            "Isolated",
+            "Expired"
+          ],
+          "name": "states",
+          "value": "",
+          "description": "(Optional) List of collector states based on which you want to retrieve from Fortinet FortiEDR. You can choose on or more of the following options: Running, Disconnected, Disabled, Degraded, RebootPending, Isolated, Expired, or PendingMigration."
+        },
+        {
+          "title": "Last Seen Start",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenStart",
+          "value": "",
+          "tooltip": "Retrieves collectors that were last seen after the value assigned to this date",
+          "description": "(Optional) Retrieves collectors from Fortinet FortiEDR that were last seen after the value assigned to this date."
+        },
+        {
+          "title": "Last Seen End",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "lastSeenEnd",
+          "value": "",
+          "tooltip": "Retrieve collectors that were last seen before the value assigned to this date.",
+          "description": "(Optional) Retrieve collectors from Fortinet FortiEDR that were last seen before the value assigned to this date."
+        },
+        {
+          "title": "Versions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "versions",
+          "value": "",
+          "tooltip": "The list of collector versions separated by comma.",
+          "placeholder": "e.g. 3.1.1.474",
+          "description": "(Optional) List of collector versions that you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Strict Mode",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "name": "strictMode",
+          "value": false,
+          "tooltip": "Enable to perform strict matching on the search parameters.",
+          "description": "(Optional) True/False parameter indicating whether or not to perform strict matching on the search parameters while retrieving event counts from Fortinet FortiEDR. By default, this is set as false."
+        },
+        {
+          "title": "Show Expired",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "showExpired",
+          "value": false,
+          "tooltip": "A True/False parameter indicating whether to show an expired collector.",
+          "description": "True/False parameter indicating whether to show an expired collector in the results retrieved from Fortinet FortiEDR."
+        },
+        {
+          "title": "Logged in User",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "loggedUser",
+          "value": "",
+          "description": "(Optional) Logged-in user associated with the collectors you want to retrieve from Fortinet FortiEDR."
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Specifies the name of a specific organization. The value that you specify here must match exactly.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Specifies the organization. The value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, as described below, determines to which organization(s) an operation applies."
+        },
+        {
+          "title": "Page Number",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "pageNumber",
+          "value": "",
+          "description": "(Optional) Page number from which you want to retrieve records."
+        },
+        {
+          "title": "Items Per Page",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "name": "itemsPerPage",
+          "value": 100,
+          "tooltip": "The maximum value is 2,000.",
+          "description": "(Optional) Maximum number of events that this operation should return for the current page. Values supported are: Default \"100\" and Maximum \"2000\"."
+        },
+        {
+          "title": "Sorting",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "json",
+          "name": "sorting",
+          "value": "",
+          "tooltip": "{\"lastSeenTime\": true} True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on.",
+          "description": "Name of the fields by which you want to sort the results retrieved by this operation. You can enter the fields in the following format:{\"column1\":true, \"column2\":false}. True indicates to sort in descending order. Results are sorted by the first field, then by the second field and so on."
+        }
+      ]
+    },
+    {
+      "operation": "isolate_collector",
+      "title": "Isolate Collector",
+      "description": "Isolates a collector from the Fortinet FortiEDR network based on the device ID and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "isolate_collector",
+      "handler_method": false,
+      "endpoint": "/inventory/isolate-collectors",
+      "http_method": "PUT",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Type",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "ID",
+            "Name"
+          ],
+          "onchange": {
+            "ID": [
+              {
+                "title": "Device IDs",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "devicesIds",
+                "tooltip": "The list of device IDs separated by comma.",
+                "placeholder": "e.g 23464,75667",
+                "value": "",
+                "description": "List of device IDs whose associate collectors you want to isolate from the Fortinet FortiEDR network."
+              }
+            ],
+            "Name": [
+              {
+                "title": "Device Names",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "devices",
+                "tooltip": "The list of device IDs separated by comma.",
+                "placeholder": "e.g. test-device1,test-device2",
+                "value": "",
+                "description": "List of device names whose associate collectors you want to uisolate from the Fortinet FortiEDR network."
+              }
+            ]
+          },
+          "name": "type",
+          "value": "Name",
+          "tooltip": "The type of the device input parameter.",
+          "description": "Type of the device input parameter on which you want to perform the isolation action in Fortinet FortiEDR. You can choose between ID or Name.If you choose 'ID', then you must specify the following parameter:"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "(Optional) Name of a specific organization whose associated collector you want to isolate from the Fortinet FortiEDR network. Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+          "name": "organization"
+        }
+      ]
+    },
+    {
+      "operation": "unisolate_collector",
+      "title": "Unisolate Collector",
+      "description": "Unisolates a collector from the Fortinet FortiEDR network based on the device ID and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "unisolate_collector",
+      "handler_method": false,
+      "endpoint": "/inventory/unisolate-collectors",
+      "http_method": "PUT",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Type",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "ID",
+            "Name"
+          ],
+          "onchange": {
+            "ID": [
+              {
+                "title": "Device IDs",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "devicesIds",
+                "value": "",
+                "tooltip": "The list of device IDs separated by comma.",
+                "placeholder": "e.g 23464,75667",
+                "description": "List of device IDs whose associate collectors you want to unisolate from the Fortinet FortiEDR network."
+              }
+            ],
+            "Name": [
+              {
+                "title": "Device Names",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "name": "devices",
+                "tooltip": "The list of device IDs separated by comma.",
+                "placeholder": "e.g. test-device1,test-device2",
+                "value": "",
+                "description": "List of device names whose associate collectors you want to unisolate from the Fortinet FortiEDR network."
+              }
+            ]
+          },
+          "name": "type",
+          "value": "Name",
+          "tooltip": "The type of the device input parameter.",
+          "description": "Type of the device input parameter on which you want to perform the unisolation action in Fortinet FortiEDR. You can choose between ID or Name.If you choose 'ID', then you must specify the following parameter:"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "(Optional) Name of a specific organization whose associated collector you want to unisolate from the Fortinet FortiEDR network. Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+          "name": "organization"
+        }
+      ]
+    },
+    {
+      "operation": "create_exception",
+      "title": "Create Exception",
+      "description": "Creates an IPSet in Fortinet FortiEDR using the set of IP addresses and other parameters you have specified.",
+      "category": "investigation",
+      "annotation": "create_exception",
+      "handler_method": true,
+      "endpoint": "/events/create-exception",
+      "http_method": "POST",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "description": "ID of the event ID that needs to be added as an exception in Fortinet FortiEDR.",
+          "name": "eventId"
+        },
+        {
+          "title": "Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "collectorGroups",
+          "value": "",
+          "description": "Specify the list of all the collector groups to which the exception should be applied. If you do not specify any collector groups, then, all collector groups are selected."
+        },
+        {
+          "title": "All Collector Groups",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "allCollectorGroups",
+          "value": "True",
+          "tooltip": "Disable to not to applied for all collector groups.",
+          "description": "Select True for this parameter to apply the exception to all collector groups. When this parameter is not used, then all collector groups are selected."
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "Specifies the name of a specific organization. The value that you specify here must match exactly.",
+          "name": "organization"
+        },
+        {
+          "title": "All Organizations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "allOrganizations",
+          "value": "True",
+          "tooltip": "Disable to not to applied for all organisations.",
+          "description": "Select True for this parameter to apply the exception to all organizations. When this parameter is not used, then all organizations are selected."
+        },
+        {
+          "title": "Destinations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "destinations",
+          "description": "List of IP addresses to which the exception applies and/or the value of the internal destinations."
+        },
+        {
+          "title": "All Destinations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "allDestinations",
+          "value": "True",
+          "tooltip": "Disable to not to applied for all destinations.",
+          "description": "Select True for this parameter to apply the exception to all destinations. When this parameter is not used, then all destinations are selected."
+        },
+        {
+          "title": "Comment",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "name": "comment",
+          "value": false,
+          "description": "User-defined string that you want to attach to the exception in Fortinet FortiEDR. "
+        },
+        {
+          "title": "Force Create",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "True",
+            "False"
+          ],
+          "name": "forceCreate",
+          "value": "False",
+          "tooltip": "Select True for this parameter to apply to create the exception, even if there are already exceptions that cover the specified event.",
+          "description": "Select True for this parameter to apply to create the exception, even if there are already exceptions that cover the specified event."
+        },
+        {
+          "title": "Exception JSON Values",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "json",
+          "name": "exceptionJson",
+          "value": "",
+          "tooltip": "e.g {\"useInException\" : { \"wildfire-test-pe-file.exe\" : { \"Unconfirmed File Detectedupdate\" : true, \"Unmapped Executable\" : false} }}",
+          "description": "In order to set the advanced settings of an exception, the user must know which processes exist in the event and which rules were triggered. Please use following JSON format to insert the corrrect details:  \n\n{ \n\n  \"useInException\": { \n\n    \"process_name_1\": { \n\n      \"rule_name1\": true, \n\n      \"rule_name2\": true \n\n    }, \n\n    \"process_name_2\": { \n\n      \"rule_name_1\": false \n\n    } \n\n  }, \n\n  \"useAnyPath\": { \n\n    \"process_name_1\": { \n\n      \"rule_name\": true \n\n    }, \n\n    \"process_name_2\": { \n\n      \"rule_name\": true \n\n    } \n\n  } \n\n} \n\n \n\nFor example : \n{ \n\n  \"useInException\": { \n\n    \" dynamicCode.exe \": { \n\n      \"Unmapped Executable\": true, \n\n      \"Executable Format\": true, \n\n      \"Dynamic Code\": false, \n\n      \"Writeable Code\": false \n\n    }, \n\n    \" dynamic.dll\": {} \n\n  }, \n\n  \"Unmapped Executable\": false, \n\n  \"useAnyPath\": { \n\n    \" dynamicCode.exe \": { \n\n      \"Dynamic Code\": true, \n\n      \"Executable Format\": false, \n\n      \"Unmapped Executable\": true, \n\n      \"Writeable Code\": true \n\n    }, \n\n    \" dynamic.dll\": { \n\n      \"Unmapped Executable\": true \n\n    } \n\n  } \n\n}"
+        }
+      ]
+    },
+    {
+      "operation": "list_exception",
+      "title": "Get Exception List",
+      "description": "Retrieves a list of IPSets from Fortinet FortiEDR based on the IP address and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "list_exception",
+      "handler_method": false,
+      "endpoint": "/exceptions/list-exceptions",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "exceptionId": "",
+          "originEventId": "",
+          "userName": "",
+          "updatedAt": "",
+          "createdAt": "",
+          "comment": "",
+          "organization": "",
+          "selectedDestinations": [],
+          "optionalDestinations": [],
+          "selectedCollectorGroups": [],
+          "optionalCollectorGroups": [],
+          "alerts": [
+            {
+              "ruleName": "",
+              "process": {
+                "name": "",
+                "path": "",
+                "usedInException": "",
+                "useAnyPath": "",
+                "signed": ""
+              }
+            }
+          ]
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Created Before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "description": "DateTime before which the exceptions that you want to retrieve from Fortinet FortiEDR were created.",
+          "name": "createdBefore"
+        },
+        {
+          "title": "Created After",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "createdAfter",
+          "value": "",
+          "description": "DateTime after which the exceptions that you want to retrieve from Fortinet FortiEDR were created."
+        },
+        {
+          "title": "Updated Before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "name": "updatedBefore",
+          "description": "DateTime before which the exceptions that you want to retrieve from Fortinet FortiEDR were updated."
+        },
+        {
+          "title": "Updated After",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "datetime",
+          "description": "DateTime after which the exceptions that you want to retrieve from Fortinet FortiEDR were updated.",
+          "name": "updatedAfter"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated event exceptions you want to retrieve from Fortinet FortiEDR. \nNote: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR. \n\nIf you choose All Organizations, then this operation will retrieve data that is shared by all organizations.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated event exceptions you want to retrieve from Fortinet FortiEDR. \nThe value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies. \nIf you choose Exact Organization Name, then you must specify the following parameter: "
+        }
+      ]
+    },
+    {
+      "operation": "update_exception",
+      "title": "Update Exception",
+      "description": "Updates IP addresses in the specific IPSet in Fortinet FortiEDR using the set of IP addresses, the IPSet name, and other parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_exception",
+      "handler_method": true,
+      "endpoint": "/exceptions/create-or-edit-exception",
+      "http_method": "POST",
+      "output_schema": {
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "description": "Event ID whose associated exception you want to update in Fortinet FortiEDR. ",
+          "name": "eventId"
+        },
+        {
+          "title": "Exception ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "description": "ID of the exception that you want to update in the Fortinet FortiEDR. ",
+          "name": "exceptionId"
+        },
+        {
+          "title": "Organization",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "SName of a specific organization that you want to update in the specific exception Fortinet FortiEDR.  \nNote: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+          "name": "organization"
+        },
+        {
+          "title": "Add Destinations",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Destinations",
+            "All Destinations"
+          ],
+          "onchange": {
+            "Exact Destinations": [
+              {
+                "title": "Exact Destinations (IP Set Names)",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "IP set names to add into the exception. Specify in CSV format.",
+                "description": "If you choose 'Exact Destination', then in the Exact Destinations (IP Set Names) field, specify the destination names, in the CSV format that you want to add to the specified exception. \n\nIf you choose 'All Destinations', then the Destination parameter will be set automatically to 'All Destinations'. ",
+                "name": "ip_set_name"
+              }
+            ]
+          },
+          "name": "destination",
+          "value": "",
+          "description": "(Optional) Type of destination that you want to update in the specific exception Fortinet FortiEDR. You can choose between Exact Destination or All Destinations."
+        },
+        {
+          "title": "Collector Group",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Collector Group",
+            "All Groups",
+            "All Organizations"
+          ],
+          "onchange": {
+            "Exact Collector Group": [
+              {
+                "title": "Exact Collector Group",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "Collector group names to add into the exception. Specify in CSV format.",
+                "description": "Specify the collector group names to add into the exception. Specify in CSV format.",
+                "name": "collector_group"
+              }
+            ]
+          },
+          "name": "collector_grp",
+          "value": "",
+          "tooltip": "If All Organizations option is selected then Destination parameter will be set to All Destination value automatically.",
+          "description": "Specify the collector group names to add into the exception. Specify in CSV format. Note: If All Organizations option is selected then Destination parameter will be set to All Destination value automatically."
+        },
+        {
+          "title": "Add Comment",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "Provide comment sentence to add.",
+          "name": "comment"
+        }
+      ]
+    },
+    {
+      "operation": "get_event_exceptions",
+      "title": "Get Event Exceptions",
+      "description": "Retrieves the list of event exceptions from Fortinet FortiEDR based on the event ID and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_event_exceptions",
+      "handler_method": false,
+      "endpoint": "/exceptions/get-event-exceptions",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "exceptionId": "",
+          "originEventId": "",
+          "userName": "",
+          "updatedAt": "",
+          "createdAt": "",
+          "comment": "",
+          "organization": "",
+          "selectedDestinations": [],
+          "optionalDestinations": [],
+          "selectedCollectorGroups": [],
+          "optionalCollectorGroups": [],
+          "alerts": [
+            {
+              "ruleName": "",
+              "process": {
+                "name": "",
+                "path": "",
+                "usedInException": "",
+                "useAnyPath": "",
+                "signed": ""
+              }
+            }
+          ]
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "integer",
+          "description": "ID of the event whose associated exceptions you want to retrieve from Fortinet FortiEDR.",
+          "name": "eventId"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "(Optional) Name of a specific organization whose associated event exceptions you want to retrieve from Fortinet FortiEDR. \nNote:The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+          "name": "organization"
+        }
+      ]
+    },
+    {
+      "operation": "get_raw_json_event_data",
+      "title": "Get Raw JSON Event Data",
+      "description": "Retrieve the raw data of event based on the event ID.",
+      "category": "investigation",
+      "annotation": "get_raw_json_event_data",
+      "handler_method": false,
+      "endpoint": "/events/export-raw-data-items-json",
+      "http_method": "GET",
+      "output_schema": {
+        "updateTime": "",
+        "sendToSupportOnly": "",
+        "LoggedUsers": [],
+        "EventType": "",
+        "Alerts": [
+          {
+            "updateTime": "",
+            "Rule": "",
+            "RuleContentId": "",
+            "Process": "",
+            "ProcessScriptModule": "",
+            "ProcessMountPoint": "",
+            "StackType": "",
+            "Severity": "",
+            "Action": "",
+            "KeyCrc": "",
+            "ProcessCrc": "",
+            "KeyPathCrc": "",
+            "ProcessPathCrc": "",
+            "KeyScriptCrc": "",
+            "ProcessScriptCrc": "",
+            "KeyShaCrc": "",
+            "ProcessShaCrc": "",
+            "IsKeyBinary": "",
+            "Key": "",
+            "KeyScriptModule": "",
+            "MountPoint": "",
+            "UseBoth": "",
+            "KeyVendor": "",
+            "ProcessVendor": "",
+            "OS": "",
+            "KeySha": "",
+            "ProcessSha": "",
+            "KeyAnalysisFlags": "",
+            "ProcessAnalysisFlags": "",
+            "Is64bit": "",
+            "Policy": "",
+            "Stacks": [
+              {
+                "StackNum": ""
+              }
+            ],
+            "WhitelistingReputation": "",
+            "WhitelistingExpirationTime": "",
+            "Index": "",
+            "MainApp": {
+              "Executable": "",
+              "ScriptModule": "",
+              "Sha1Hash": "",
+              "Vendor": "",
+              "Flags": "",
+              "MalwareLikelihoodPercent": "",
+              "Src": "",
+              "ExtWhiteListing": {
+                "Hash": {
+                  "Hash": "",
+                  "HashType": ""
+                },
+                "ExtWhiteListing": {
+                  "Reputation": "",
+                  "MalwareType": "",
+                  "FamilyName": "",
+                  "ThreatName": "",
+                  "Expiration": ""
+                },
+                "CombinedReputation": "",
+                "RLDetails": {
+                  "RLReputation": "",
+                  "MalwareType": "",
+                  "FamilyName": "",
+                  "ThreatName": ""
+                }
+              }
+            },
+            "ClassificationRules": [
+              {
+                "ClassificationRuleId": "",
+                "Description": ""
+              }
+            ],
+            "MatchedClassificationRules": [
+              {
+                "ClassificationRuleId": "",
+                "Description": ""
+              }
+            ],
+            "Classification": "",
+            "ExtWhiteListing": {
+              "Hash": {
+                "Hash": "",
+                "HashType": ""
+              },
+              "ExtWhiteListing": {
+                "Reputation": "",
+                "MalwareType": "",
+                "FamilyName": "",
+                "ThreatName": "",
+                "Expiration": ""
+              },
+              "CombinedReputation": "",
+              "RLDetails": {
+                "RLReputation": "",
+                "MalwareType": "",
+                "FamilyName": "",
+                "ThreatName": ""
+              }
+            },
+            "IsSuppressed": "",
+            "OriginalClassification": "",
+            "IsOriginallySuppressed": "",
+            "ClassifyCount": "",
+            "ClassificationChanges": [
+              {
+                "ClassificationChangedTo": ""
+              }
+            ],
+            "ClassificationRulesMapSecurityLevel": "",
+            "ReputationSource": "",
+            "ShouldHaveBeenSuppressed": "",
+            "ReputationSourceExt": {
+              "ReputationSource": ""
+            },
+            "PolicyModeWhenAlertWasIssued": "",
+            "IsKeySigned": "",
+            "IsProcessSigned": ""
+          }
+        ],
+        "EventId": "",
+        "Version": "",
+        "FirstSeen": "",
+        "LastSeen": "",
+        "HostName": "",
+        "Count": "",
+        "MainProcessId": "",
+        "OperatingSystem": "",
+        "OS": "",
+        "GlobalAggregationCrc": "",
+        "GlobalShaAggregationCrc": "",
+        "Application": "",
+        "MountPoint": "",
+        "AppScriptModule": "",
+        "Is64bit": "",
+        "IsSigned": "",
+        "AppSha": "",
+        "AppVendor": "",
+        "EventSource": "",
+        "EventCoreVersion": "",
+        "AggregationEventId": "",
+        "AgentVersion": "",
+        "ManagementServerVersion": "",
+        "WhitelistingExpired": "",
+        "MoreAddresses": "",
+        "EventClassification": "",
+        "EventClassificationSourceAlert": "",
+        "AppDetails": {
+          "Executable": "",
+          "ScriptModule": "",
+          "Sha1Hash": "",
+          "Vendor": "",
+          "Flags": "",
+          "MalwareLikelihoodPercent": "",
+          "Src": "",
+          "ExtWhiteListing": {
+            "Hash": {
+              "Hash": "",
+              "HashType": ""
+            },
+            "ExtWhiteListing": {
+              "Reputation": "",
+              "MalwareType": "",
+              "FamilyName": "",
+              "ThreatName": "",
+              "Expiration": ""
+            },
+            "CombinedReputation": "",
+            "RLDetails": {
+              "RLReputation": "",
+              "MalwareType": "",
+              "FamilyName": "",
+              "ThreatName": ""
+            }
+          }
+        },
+        "AppSourceAlert": "",
+        "ClassifierModelVersion": "",
+        "SuppressedAlertCount": "",
+        "ContentVersion": "",
+        "EventRLStatuses": [
+          {
+            "Hash": "",
+            "RLResult": "",
+            "IsAlertGenerated": ""
+          }
+        ],
+        "SecurityLevelWhenIssued": "",
+        "EventClassificationStage": "",
+        "EventRlMissing": [],
+        "RepPreResolveTimerCount": "",
+        "RepPreResWastedTimeMs": "",
+        "EventWorkerTimeMs": "",
+        "WasDeffered": "",
+        "LastSentToECS": "",
+        "WasChangedOnDeferrer": "",
+        "CoreHostName": "",
+        "DeferrerChanges": "",
+        "ConfigurationVersion": "",
+        "FlowInfoFlags": "",
+        "CustomerName": "",
+        "Exceptions": [
+          {
+            "updateTime": "",
+            "UpdatedBy": "",
+            "UpdatedAt": "",
+            "CreatedBy": "",
+            "CreatedAt": "",
+            "Alerts": [
+              {
+                "updateTime": "",
+                "Rule": "",
+                "RuleContentId": "",
+                "Process": "",
+                "ProcessScriptModule": "",
+                "ProcessMountPoint": "",
+                "StackType": "",
+                "Severity": "",
+                "Action": "",
+                "KeyCrc": "",
+                "ProcessCrc": "",
+                "KeyPathCrc": "",
+                "ProcessPathCrc": "",
+                "KeyScriptCrc": "",
+                "ProcessScriptCrc": "",
+                "KeyShaCrc": "",
+                "ProcessShaCrc": "",
+                "IsKeyBinary": "",
+                "Key": "",
+                "KeyScriptModule": "",
+                "MountPoint": "",
+                "UseBoth": "",
+                "UseProcess": "",
+                "UseAnyKeyPath": "",
+                "UseAnyProcessPath": "",
+                "UseProcessScript": "",
+                "UseKeyScript": "",
+                "KeyVendor": "",
+                "ProcessVendor": "",
+                "OS": "",
+                "KeySha": "",
+                "ProcessSha": "",
+                "KeyAnalysisFlags": "",
+                "ProcessAnalysisFlags": "",
+                "Is64bit": "",
+                "Policy": "",
+                "WcProcess": "",
+                "WcProcessScriptModule": "",
+                "WcKeyScriptModule": "",
+                "WcKey": "",
+                "WcMask": "",
+                "IsKeySigned": "",
+                "IsProcessSigned": ""
+              }
+            ],
+            "EventId": "",
+            "OriginalEventJson": {
+              "updateTime": "",
+              "sendToSupportOnly": "",
+              "LoggedUsers": [],
+              "EventType": "",
+              "Alerts": [
+                {
+                  "updateTime": "",
+                  "Rule": "",
+                  "RuleContentId": "",
+                  "Process": "",
+                  "ProcessScriptModule": "",
+                  "ProcessMountPoint": "",
+                  "StackType": "",
+                  "Severity": "",
+                  "Action": "",
+                  "KeyCrc": "",
+                  "ProcessCrc": "",
+                  "KeyPathCrc": "",
+                  "ProcessPathCrc": "",
+                  "KeyScriptCrc": "",
+                  "ProcessScriptCrc": "",
+                  "KeyShaCrc": "",
+                  "ProcessShaCrc": "",
+                  "IsKeyBinary": "",
+                  "Key": "",
+                  "KeyScriptModule": "",
+                  "MountPoint": "",
+                  "UseBoth": "",
+                  "UseProcess": "",
+                  "UseAnyKeyPath": "",
+                  "UseAnyProcessPath": "",
+                  "UseProcessScript": "",
+                  "UseKeyScript": "",
+                  "KeyVendor": "",
+                  "ProcessVendor": "",
+                  "OS": "",
+                  "KeySha": "",
+                  "ProcessSha": "",
+                  "KeyAnalysisFlags": "",
+                  "ProcessAnalysisFlags": "",
+                  "Is64bit": "",
+                  "Policy": "",
+                  "MitreTags": "",
+                  "Stacks": [
+                    {
+                      "StackNum": ""
+                    }
+                  ],
+                  "WhitelistingReputation": "",
+                  "WhitelistingExpirationTime": "",
+                  "Index": "",
+                  "MainApp": {
+                    "Executable": "",
+                    "ScriptModule": "",
+                    "Sha1Hash": "",
+                    "Vendor": "",
+                    "Flags": "",
+                    "MalwareLikelihoodPercent": "",
+                    "Src": "",
+                    "ExtWhiteListing": {
+                      "Hash": {
+                        "Hash": "",
+                        "HashType": ""
+                      },
+                      "ExtWhiteListing": {
+                        "Reputation": "",
+                        "MalwareType": "",
+                        "FamilyName": "",
+                        "ThreatName": "",
+                        "Expiration": ""
+                      },
+                      "CombinedReputation": "",
+                      "RLDetails": {
+                        "RLReputation": "",
+                        "MalwareType": "",
+                        "FamilyName": "",
+                        "ThreatName": ""
+                      }
+                    }
+                  },
+                  "ClassificationRules": [
+                    {
+                      "ClassificationRuleId": "",
+                      "Description": ""
+                    }
+                  ],
+                  "MatchedClassificationRules": [
+                    {
+                      "ClassificationRuleId": "",
+                      "Description": ""
+                    }
+                  ],
+                  "Classification": "",
+                  "ExtWhiteListing": {
+                    "Hash": {
+                      "Hash": "",
+                      "HashType": ""
+                    },
+                    "ExtWhiteListing": {
+                      "Reputation": "",
+                      "MalwareType": "",
+                      "FamilyName": "",
+                      "ThreatName": "",
+                      "Expiration": ""
+                    },
+                    "CombinedReputation": "",
+                    "RLDetails": {
+                      "RLReputation": "",
+                      "MalwareType": "",
+                      "FamilyName": "",
+                      "ThreatName": ""
+                    }
+                  },
+                  "IsSuppressed": "",
+                  "OriginalClassification": "",
+                  "IsOriginallySuppressed": "",
+                  "ClassifyCount": "",
+                  "ForcedClassification": "",
+                  "ClassificationOriginStackData": "",
+                  "OriginalClassificationOriginStackData": "",
+                  "ClassificationChanges": [
+                    {
+                      "ClassificationChangedTo": ""
+                    }
+                  ],
+                  "ClassificationRulesMapSecurityLevel": "",
+                  "ReputationSource": "",
+                  "ShouldHaveBeenSuppressed": "",
+                  "ReputationSourceExt": {
+                    "ReputationSource": ""
+                  },
+                  "OriginalReputationSource": "",
+                  "PolicyModeWhenAlertWasIssued": "",
+                  "IsKeySigned": "",
+                  "IsProcessSigned": ""
+                }
+              ],
+              "EventId": "",
+              "Version": "",
+              "ApplicationOwner": "",
+              "FirstSeen": "",
+              "LastSeen": "",
+              "Protocol": "",
+              "LocalIp": "",
+              "HostName": "",
+              "LocalPort": "",
+              "RemoteIp": "",
+              "Country": "",
+              "Asn": "",
+              "RemotePort": "",
+              "Count": "",
+              "MainProcessId": "",
+              "OperatingSystem": "",
+              "OS": "",
+              "OsVersion": "",
+              "GlobalAggregationCrc": "",
+              "GlobalShaAggregationCrc": "",
+              "Application": "",
+              "MountPoint": "",
+              "AppScriptModule": "",
+              "Is64bit": "",
+              "IsSigned": "",
+              "AppSha": "",
+              "AppVendor": "",
+              "EventSource": "",
+              "EventCoreVersion": "",
+              "AggregationEventId": "",
+              "AgentVersion": "",
+              "ManagementServerVersion": "",
+              "WhitelistingExpired": "",
+              "MoreAddresses": "",
+              "EventClassification": "",
+              "EventClassificationSourceAlert": "",
+              "AppDetails": {
+                "Executable": "",
+                "ScriptModule": "",
+                "Sha1Hash": "",
+                "Vendor": "",
+                "Flags": "",
+                "MalwareLikelihoodPercent": "",
+                "Src": "",
+                "ExtWhiteListing": {
+                  "Hash": {
+                    "Hash": "",
+                    "HashType": ""
+                  },
+                  "ExtWhiteListing": {
+                    "Reputation": "",
+                    "MalwareType": "",
+                    "FamilyName": "",
+                    "ThreatName": "",
+                    "Expiration": ""
+                  },
+                  "CombinedReputation": "",
+                  "RLDetails": {
+                    "RLReputation": "",
+                    "MalwareType": "",
+                    "FamilyName": "",
+                    "ThreatName": ""
+                  }
+                }
+              },
+              "AppSourceAlert": "",
+              "ClassifierModelVersion": "",
+              "SuppressedAlertCount": "",
+              "ContentVersion": "",
+              "EventClassificationOriginStackData": "",
+              "EventRLStatuses": [
+                {
+                  "Hash": "",
+                  "RLResult": "",
+                  "IsAlertGenerated": ""
+                }
+              ],
+              "SecurityLevelWhenIssued": "",
+              "EventClassificationStage": "",
+              "ReputationSource": "",
+              "ShouldHaveBeenSuppressed": "",
+              "EventRlMissing": [],
+              "RepPreResolveTimerCount": "",
+              "RepPreResWastedTimeMs": "",
+              "RepPreResAllowedDelayMs": "",
+              "EventWorkerTimeMs": "",
+              "WasDeffered": "",
+              "LastSentToECS": "",
+              "WasChangedOnDeferrer": "",
+              "EventDigest": "",
+              "CoreHostName": "",
+              "DeferrerChanges": "",
+              "ConfigurationVersion": "",
+              "FlowInfoFlags": "",
+              "CustomerName": "",
+              "Exceptions": "",
+              "MacAddresses": "",
+              "CollectorGroup": "",
+              "EventAggId": "",
+              "ForensicsChart": "",
+              "EventUniqueId": "",
+              "IsSuppressedEvent": "",
+              "IsEventReportedByDeviceNotSupportingWildcardsOrIpSets": "",
+              "Muted": "",
+              "MuteEndTime": "",
+              "DeviceMetadata": "",
+              "Action": "",
+              "ProcessAggregationCrc": "",
+              "DeviceAggregationCrc": "",
+              "ProcessShaAggregationCrc": "",
+              "DeviceShaAggregationCrc": "",
+              "IsRepPreResEnabled": "",
+              "IsRepPreResolveTimedOut": "",
+              "Organization": "",
+              "OrganizationId": "",
+              "AgentId": "",
+              "StackInfos": "",
+              "AggregationClassification": "",
+              "AggregationClassificationSource": "",
+              "ManagementDbId": ""
+            },
+            "OS": "",
+            "Destinations": [],
+            "IpGroups": [],
+            "AgentGroups": [],
+            "AllAccountsAgentGroups": "",
+            "AllAgentGroups": "",
+            "AllDestinations": "",
+            "Origin": "",
+            "ExceptionId": ""
+          }
+        ],
+        "MacAddresses": [],
+        "CollectorGroup": "",
+        "EventAggId": "",
+        "EventUniqueId": "",
+        "IsSuppressedEvent": "",
+        "Muted": "",
+        "Action": "",
+        "StackInfos": [
+          {
+            "StackType": "",
+            "Timestamp": "",
+            "StackInfoFlags": "",
+            "ThreadId": "",
+            "ProcessId": "",
+            "Is64bit": "",
+            "ProcessName": "",
+            "ExecutableHash": "",
+            "ExecutableHashExtWhiteList": {
+              "Reputation": "",
+              "MalwareType": "",
+              "FamilyName": "",
+              "ThreatName": "",
+              "Expiration": ""
+            },
+            "ModuleFlags": "",
+            "PeErrorFlags": "",
+            "PeVerificationErrorFlags": "",
+            "ModuleType": "",
+            "CommonFlags": "",
+            "MalwareLikelihood": "",
+            "MalwareLikelihoodNorm": "",
+            "CommonAdditionalInfo": [
+              {
+                "Type": "",
+                "Privileges": "",
+                "NumOfPrivilegeChanges": "",
+                "ProcessOwner": "",
+                "ProcessEffectiveOwner": "",
+                "LoggedUsers": []
+              },
+              {
+                "Type": "",
+                "ObjVersion": "",
+                "FileOwner": "",
+                "LastModified": "",
+                "IsInternetBit": "",
+                "FileAttributes": ""
+              },
+              {
+                "Type": "",
+                "RootIssuer": "",
+                "RootCertThumbprint": "",
+                "SubjectOfLastCertificate": "",
+                "LastCertThumbprint": "",
+                "IsSignatureValid": "",
+                "IsUnsupportedDigestAlg": "",
+                "IsCertValid": "",
+                "IsUnsupportedCertDigestAlg": "",
+                "IsSelfSigned": "",
+                "IsCertTrusted": "",
+                "IsInvalidSigninigTime": "",
+                "HasExpired": ""
+              },
+              {
+                "Type": "",
+                "MountPoint": ""
+              },
+              {
+                "Type": "",
+                "Company": "",
+                "Description": "",
+                "Version": "",
+                "Product": ""
+              },
+              {
+                "Type": "",
+                "CommandLine": ""
+              }
+            ],
+            "AuxPid": "",
+            "AuxProcessName": "",
+            "AuxIs64bit": "",
+            "AuxModuleFlags": "",
+            "AuxPeErrorFlags": "",
+            "AuxPeVerificationErrorFlags": "",
+            "AuxModuleType": "",
+            "AuxCommonFlags": "",
+            "AuxCommonAdditionalInfo": [],
+            "NumStackEntries": "",
+            "StackEntries": [
+              {
+                "StackEntryFlags": "",
+                "Count": "",
+                "ESP": "",
+                "StackValue": "",
+                "CallTarget": "",
+                "CommonFlags": "",
+                "ModuleBase": "",
+                "ModuleEnd": "",
+                "TotalRetCount": "",
+                "TotalNoRetCount": "",
+                "ModuleFlags": "",
+                "PeErrorFlags": "",
+                "PeVerificationErrorFlags": "",
+                "ModuleType": "",
+                "MalwareLikelihood": "",
+                "MalwareLikelihoodNorm": "",
+                "ModuleName": "",
+                "ModuleHash": "",
+                "AdditionalInfo": [],
+                "CommonAdditionalInfo": [
+                  {
+                    "Type": "",
+                    "Company": ""
+                  },
+                  {
+                    "Type": "",
+                    "ObjVersion": "",
+                    "FileOwner": "",
+                    "LastModified": "",
+                    "IsInternetBit": "",
+                    "FileAttributes": ""
+                  },
+                  {
+                    "Type": "",
+                    "RootIssuer": "",
+                    "RootCertThumbprint": "",
+                    "SubjectOfLastCertificate": "",
+                    "LastCertThumbprint": "",
+                    "IsSignatureValid": "",
+                    "IsUnsupportedDigestAlg": "",
+                    "IsCertValid": "",
+                    "IsUnsupportedCertDigestAlg": "",
+                    "IsSelfSigned": "",
+                    "IsCertTrusted": "",
+                    "IsInvalidSigninigTime": "",
+                    "HasExpired": ""
+                  },
+                  {
+                    "Type": "",
+                    "MountPoint": ""
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "Organization": "",
+        "ProcessAggregationCrc": "",
+        "DeviceAggregationCrc": "",
+        "ProcessShaAggregationCrc": "",
+        "DeviceShaAggregationCrc": "",
+        "IsRepPreResEnabled": "",
+        "IsRepPreResolveTimedOut": "",
+        "AgentId": "",
+        "OrganizationId": "",
+        "AggregationClassification": "",
+        "AggregationClassificationSource": "",
+        "ManagementDbId": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Event ID",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "ID of the event that holds the raw JSON data that you want to retrieve from Fortinet FortiEDR.",
+          "name": "rawItemIds"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "The org name that you specify here must match exactly.",
+          "description": "(Optional) Name of a specific organization whose associated events hold the raw JSON data that you want to retrieve from Fortinet FortiEDR. \nNote:The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+          "name": "organization"
+        }
+      ]
+    },
+    {
+      "operation": "create_ipset",
+      "title": "Create IPSet",
+      "description": "Creates an IPSet in Fortinet FortiEDR using the set of IP addresses and other parameters you have specified. ",
+      "category": "investigation",
+      "annotation": "create_ipset",
+      "handler_method": true,
+      "endpoint": "/ip-sets/create-ip-set",
+      "http_method": "POST",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations",
+            "Each"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated events you want to retrieve from Fortinet FortiEDR.Note: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization in which you want to create the IPSet in Fortinet FortiEDR. \nThe value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies. \nIf you choose Exact Organization Name, then you must specify the following parameter: "
+        },
+        {
+          "title": "IP Set Name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "Name of the IPSet you want to create in Fortinet FortiEDR. ",
+          "name": "name"
+        },
+        {
+          "title": "Description",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "Description of the IPSet you want to create in Fortinet FortiEDR. ",
+          "name": "description"
+        },
+        {
+          "title": "IP Address to Include",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Comma-separated list of IP addresses to include.",
+          "description": "List of IP addresses to include in the IPSet you want to create in Fortinet FortiEDR. ",
+          "name": "include"
+        },
+        {
+          "title": "IP Address to Exclude",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Comma-separated list of IP addresses to exclude.",
+          "description": "List of IP Addresses to exclude from the IPSet you want to create in Fortinet FortiEDR. ",
+          "name": "exclude"
+        }
+      ]
+    },
+    {
+      "operation": "get_ipset_list",
+      "title": "Get IPSet List",
+      "description": "Retrieves a list of IPSets from Fortinet FortiEDR based on the IP address and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_ipset_list",
+      "handler_method": false,
+      "endpoint": "/ip-sets/list-ip-sets",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "name": "",
+          "description": "",
+          "include": [],
+          "exclude": [],
+          "organization": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IP to Search",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "IP address using which you want to search for IPSets in Fortinet FortiEDR.",
+          "name": "ip"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated IPSets you want to retrieve from Fortinet FortiEDR. \nNote: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR. \n\nIf you choose All organizations, then this operation will retrieve data that is shared by all organizations.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated IPSets you want to retrieve from Fortinet FortiEDR. \nThe value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies. \nIf you choose Exact Organization Name, then you must specify the following parameter: "
+        }
+      ]
+    },
+    {
+      "operation": "update_ipset",
+      "title": "Update IPSet",
+      "description": "Updates IP addresses in the specific IPSet in Fortinet FortiEDR using the set of IP addresses, the IPSet name, and other parameters you have specified. ",
+      "category": "investigation",
+      "annotation": "update_ipset",
+      "handler_method": true,
+      "endpoint": "/ip-sets/update-ip-set",
+      "http_method": "PUT",
+      "output_schema": {
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All Organizations",
+            "Each"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Organization Name: Name of a specific organization in which you want to update the IPSet in Fortinet FortiEDR. \nNote: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR. \n\nIf you choose All Organizations, then the Organization parameter will be set automatically to 'All Organizations'. If you choose Each, the operation applies independently to each organization.  \n\nFor example,let's assume that the same user exists in multiple organizations. When each is specified in the organization parameter, then each organization can update this user separately. ",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization in which you want to update the IPSet in Fortinet FortiEDR. \nThe value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies. \nIf you choose Exact Organization Name, then you must specify the following parameter:"
+        },
+        {
+          "title": "IP Set Name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "Name of the IPSet you want to update in Fortinet FortiEDR.",
+          "name": "name"
+        },
+        {
+          "title": "Description",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "Description of the IPSet you want to update in Fortinet FortiEDR. ",
+          "name": "description"
+        },
+        {
+          "title": "Add IP into Sets",
+          "description": "Specifies whether the IP needs to add or remove into the IP Sets Include/Exclude sections. If checkbox is selected then it will add else remove IPs.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "add_items",
+          "tooltip": "Select this checkbox to add the IP address to the IPSets Include/Exclude sections. Clear this checkbox to remove the IP address from the IPSets Include/Exclude sections.",
+          "value": true
+        },
+        {
+          "title": "IP Address to Include",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "List of IP Addresses to include from the IPSet you want to update in Fortinet FortiEDR. ",
+          "tooltip": "Comma-separated list of IP addresses to include.",
+          "name": "include"
+        },
+        {
+          "title": "IP Address to Exclude",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Comma-separated list of IP addresses to exclude.",
+          "description": "List of IP Addresses to exclude from the IPSet you want to update in Fortinet FortiEDR. ",
+          "name": "exclude"
+        }
+      ]
+    },
+    {
+      "operation": "delete_ipset",
+      "title": "Delete IPSet",
+      "description": "Deletes specific IPSets from Fortinet FortiEDR based on the IPSet names and other input parameters you have specified. ",
+      "category": "investigation",
+      "annotation": "delete_ipset",
+      "handler_method": false,
+      "endpoint": "/ip-sets/delete-ip-set",
+      "http_method": "DELETE",
+      "output_schema": {
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IP Set Names",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text",
+          "description": "List of the IPSet names that you want to delete from Fortinet FortiEDR.",
+          "name": "ipSets"
+        },
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": " Name of a specific organization from which you want to delete the IPSet in Fortinet FortiEDR. \nNote: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR. \n\nIf you choose All Organizations, then the Organization parameter will be set automatically to 'All Organizations'.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "(Optional) Name of the organization from which you want to delete the IPSet in Fortinet FortiEDR. \nThe value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies. \nIf you choose Exact Organization Name, then you must specify the following parameter: "
+        }
+      ]
+    },
+    {
+      "operation": "get_agent_group",
+      "title": "Get Agent Groups",
+      "description": "Retrieves a list of all agent group lists from Fortinet FortiEDR.",
+      "category": "investigation",
+      "annotation": "get_agent_group",
+      "handler_method": false,
+      "endpoint": "/inventory/list-collector-groups",
+      "http_method": "GET",
+      "output_schema": [
+        {
+          "id": "",
+          "name": "",
+          "organization": "",
+          "targetVersions": [
+            {
+              "osFamily": "",
+              "version": ""
+            }
+          ]
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated agent groups you want to retrieve from Fortinet FortiEDR. \nNote: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR. \n\nIf you choose All organizations, then this operation will retrieve data that is shared by all organizations.",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated agent groups you want to retrieve from Fortinet FortiEDR. \nThe value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies. \nIf you choose Exact Organization Name, then you must specify the following parameter: "
+        }
+      ]
+    },
+    {
+      "operation": "get_system_summary",
+      "title": "Get System Summary",
+      "description": "Retrieves a summary of the environment from Fortinet FortiEDR. ",
+      "category": "investigation",
+      "annotation": "get_system_summary",
+      "handler_method": false,
+      "endpoint": "/admin/list-system-summary",
+      "http_method": "GET",
+      "output_schema": {
+        "workstationCollectorsLicenseCapacity": "",
+        "serverCollectorsLicenseCapacity": "",
+        "iotDevicesLicenseCapacity": "",
+        "registeredCollectors": "",
+        "workstationsCollectorsInUse": "",
+        "serverCollectorsInUse": "",
+        "iotDevicesInUse": "",
+        "collectorsState": {
+          "Degraded": "",
+          "Disabled": "",
+          "Disconnected": "",
+          "RebootPending": "",
+          "Running": "",
+          "Uninstalling": ""
+        },
+        "collectorsDegradedState": {
+          "ApproveKernelExtensions": "",
+          "ContentUpdateError": "",
+          "DriverLoadFailure": "",
+          "FailedConfigurationUpdate": "",
+          "GatewayUnreachable": "",
+          "LostConnection": "",
+          "MissingMiniFilterSupport": "",
+          "NoConfiguration": "",
+          "NoDiskSpace": "",
+          "OTIFailed": "",
+          "PAEDisabled": "",
+          "unsupportedOSVersion": ""
+        },
+        "collectorsRunningState": {
+          "autonomously": "",
+          "core": ""
+        },
+        "collectorsDisconnectedState": {
+          "disconnected": "",
+          "expired": "",
+          "migrated": "",
+          "pendingMigration": ""
+        },
+        "collectorsWithDumps": {
+          "LinuxKernelPanic": "",
+          "MacOSKernelPanic": "",
+          "NsloCollector": "",
+          "NsloCollectorService": "",
+          "WindowsKernelFull": "",
+          "WindowsKernelMini": ""
+        },
+        "licenseExpirationDate": "",
+        "managementVersion": "",
+        "managementHostname": "",
+        "managementExternalIP": "",
+        "managementInternalIP": "",
+        "collectorVersions": [
+        ],
+        "collectorVersionsV2": [
+          {
+            "count": "",
+            "version": ""
+          }
+        ],
+        "cores": [
+          {
+            "name": "",
+            "address": "",
+            "version": "",
+            "status": "",
+            "statusV2": ""
+          }
+        ],
+        "aggregators": [
+          {
+            "name": "",
+            "address": "",
+            "version": "",
+            "status": "",
+            "statusv2": ""
+          }
+        ],
+        "repositories": [
+          {
+            "address": "",
+            "status": ""
+          }
+        ],
+        "systemState": "",
+        "customerName": "",
+        "licenseFeatures": [
+        ],
+        "licenseType": "",
+        "installationId": "",
+        "time": "",
+        "timeZone": "",
+        "environmentUniqueId": "",
+        "licenseBlob": "",
+        "ecsStatus": "",
+        "ecsRegistrationURL": "",
+        "contentVersion": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Organization",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Exact Organization Name",
+            "All organizations"
+          ],
+          "onchange": {
+            "Exact Organization Name": [
+              {
+                "title": "Organization Name",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "placeholder": "The org name that you specify here must match exactly.",
+                "description": "Name of a specific organization whose associated environment summary you want to retrieve from Fortinet FortiEDR. \nNote: The value that you specify in this parameter must match exactly with the organization name specified in Fortinet FortiEDR. ",
+                "name": "org_name"
+              }
+            ]
+          },
+          "name": "organization",
+          "value": "",
+          "description": "Name of the organization whose associated environment summary you want to retrieve from Fortinet FortiEDR. \nThe value that you specify for this parameter indicates how the operation applies to an organization(s). Some parts of the FortiEDR system have separate, non-shared data that is organization-specific. Other parts of the system have data that is shared by all organizations. The value that you specify for the organization parameter, determines the organization(s) to which this operation applies. \nIf you choose Exact Organization Name, then you must specify the following parameter:"
+        },
+        {
+          "title": "Add License Blob",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "description": "Select this option, i.e., set it to 'true' to the license blob to the response retrieved by this operation. By default, addLicenseBlob is set to 'false'. ",
+          "name": "addLicenseBlob"
+        }
+      ]
+    }
+  ]
+}

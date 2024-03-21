@@ -1,0 +1,640 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@context": "/api/3/contexts/WorkflowCollection",
+      "@type": "WorkflowCollection",
+      "name": "Sample - System Monitoring - 1.5.0",
+      "description": "Sample playbooks for \"System Monitoring\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "system_monitoring_medium.png",
+      "id": 270,
+      "createUser": {
+        "@id": "/api/3/appliances/13e0ad2b-0e36-401f-afc1-c7ddebb9e12e",
+        "@type": "Appliance",
+        "name": "Playbook",
+        "userId": "6f3626c1-0da7-4b44-8d5e-43750f780a47",
+        "userType": null,
+        "avatar": null,
+        "createUser": null,
+        "createDate": null,
+        "modifyUser": null,
+        "modifyDate": null,
+        "id": 87,
+        "@settings": "/api/3/user_settings/13e0ad2b-0e36-401f-afc1-c7ddebb9e12e"
+      },
+      "createDate": 1558531357,
+      "modifyUser": {
+        "@id": "/api/3/appliances/13e0ad2b-0e36-401f-afc1-c7ddebb9e12e",
+        "@type": "Appliance",
+        "name": "Playbook",
+        "userId": "6f3626c1-0da7-4b44-8d5e-43750f780a47",
+        "userType": null,
+        "avatar": null,
+        "createUser": null,
+        "createDate": null,
+        "modifyUser": null,
+        "modifyDate": null,
+        "id": 87,
+        "@settings": "/api/3/user_settings/13e0ad2b-0e36-401f-afc1-c7ddebb9e12e"
+      },
+      "modifyDate": 1558531357,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "System Monitoring",
+          "description": "This playbook monitor CPU , Virtual Memory, Disk space utilization and Service status . It will send notification incase threshold of any is crossed. This playbooks needs to be schedule to run on desired time interval.",
+          "collection": "/api/3/workflow_collections/6964176a-0972-4d79-959e-85d6f5fff16d",
+          "tag": "#SystemMonitoring",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/fa68025a-c390-49b3-b8ef-6015acb0d3f0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "CPU warning notification",
+              "description": null,
+              "arguments": {
+                "config": "88c3d39c-2fa9-4731-b00d-29815008f17c",
+                "params": {
+                  "cc": "",
+                  "to": "{{vars.email_to}}",
+                  "bcc": "",
+                  "from": "{{vars.email_from}}",
+                  "content": "<p>Hello Admin,</p>\n<p>This is notify that following System parameter- CPU -&nbsp; have crossed threshold limit&nbsp;</p>\n<p>CPU : -&nbsp;{{vars.steps.CPU_Utilization.data}}</p>\n<p>&nbsp;</p>\n<p>~ Regards</p>\n<p>&nbsp;</p>",
+                  "subject": "Warning: FortiSOAR Notification : CPU high usage",
+                  "iri_list": "",
+                  "file_name": "",
+                  "file_path": ""
+                },
+                "version": "2.3.2",
+                "from_str": "{{globalVars.Default_Email}}",
+                "connector": "smtp",
+                "operation": "send_richtext_email",
+                "operationTitle": "Send Rich Text Email",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "1413",
+              "top": "367",
+              "stepType": "/api/3/workflow_step_types/4c0019b2-055c-44d0-968c-678a0c2d762e",
+              "uuid": "729070f7-2a39-4c72-94c5-d62fd1eeff35"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Do Nothing incase threshold not crossed",
+              "description": null,
+              "arguments": {
+                "params": [],
+                "version": "3.0.1",
+                "connector": "cyops_utilities",
+                "operation": "no_op",
+                "operationTitle": "Utils: No Operation",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "1413",
+              "top": "573",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "67c456d6-f097-439a-8574-eb4e89277d10"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Do Nothing incase VM threshold not crossed",
+              "description": null,
+              "arguments": {
+                "params": [],
+                "version": "3.0.1",
+                "connector": "cyops_utilities",
+                "operation": "no_op",
+                "operationTitle": "Utils: No Operation",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "2008",
+              "top": "580",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "f4d61a15-de0e-4bed-b153-7840bace76f0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Virtual Memory",
+              "description": null,
+              "arguments": {
+                "name": "System Monitoring",
+                "params": [],
+                "version": "1.5.0",
+                "connector": "cyops-system-monitoring",
+                "operation": "virtual_memory",
+                "operationTitle": "Virtual Memory Utilization",
+                "step_variables": {
+                  "free": "{{vars.result.data.svem.free  / 1073741824 | round(1, 'ceil')}}",
+                  "total": "{{vars.result.data.svem.total  / 1073741824 | round(1, 'ceil') }}",
+                  "available": "{{ vars.result.data.svem.available / 1073741824 | round(1, 'ceil') }}"
+                }
+              },
+              "status": null,
+              "left": "360",
+              "top": "360",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "db6f9605-2f5e-4fbb-9e49-d451bc0a09b4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "email_to": "{{globalVars.Default_Email}}",
+                "email_from": "{{globalVars.Default_Email}}",
+                "cpu_threshold": "70",
+                "disk_threshold": "70",
+                "virtual_memory_threshold": "70"
+              },
+              "status": null,
+              "left": "40",
+              "top": "154",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "f9d552c0-60f0-47bf-acd2-7d49bd256329"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Virtual Memory warning notification",
+              "description": null,
+              "arguments": {
+                "config": "88c3d39c-2fa9-4731-b00d-29815008f17c",
+                "params": {
+                  "cc": "",
+                  "to": "{{vars.email_to}}",
+                  "bcc": "",
+                  "from": "{{vars.email_from}}",
+                  "content": "<p>Hello Admin,</p>\n<p>This is notify that following System parameter - Virtual Memory-&nbsp; have crossed threshold limit&nbsp;</p>\n<p>Available Virtual Memory -&nbsp; {{ \"%.2f\" | format(vars.available) }} GB</p>\n<p>Total Virtual Memory -&nbsp; {{ \"%.2f\" | format(vars.total)}} GB</p>\n<p>&nbsp;</p>\n<p>~ Regards</p>\n<p>&nbsp;</p>",
+                  "subject": "Warning: FortiSOAR Notification : Virtual Memory high usage",
+                  "iri_list": "",
+                  "file_name": "",
+                  "file_path": ""
+                },
+                "version": "2.3.2",
+                "from_str": "{{globalVars.Default_Email}}",
+                "connector": "smtp",
+                "operation": "send_richtext_email",
+                "operationTitle": "Send Rich Text Email",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "2007",
+              "top": "368",
+              "stepType": "/api/3/workflow_step_types/4c0019b2-055c-44d0-968c-678a0c2d762e",
+              "uuid": "c67fb0e6-bd4a-4f61-a281-275605872bb4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Has Virtual Memory crossed threshold",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "step_iri": "/api/3/workflow_steps/c67fb0e6-bd4a-4f61-a281-275605872bb4",
+                    "condition": "{{ vars.steps.Virtual_Memory.data.svem.percent >= ( vars.virtual_memory_threshold | int ) }}"
+                  },
+                  {
+                    "step_iri": "/api/3/workflow_steps/f4d61a15-de0e-4bed-b153-7840bace76f0",
+                    "condition": "{{ true }}"
+                  }
+                ]
+              },
+              "status": null,
+              "left": "1714",
+              "top": "465",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "uuid": "920ce3e0-98a5-4e4e-acf0-7bf841385e97"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Disk space warning notification",
+              "description": null,
+              "arguments": {
+                "config": "88c3d39c-2fa9-4731-b00d-29815008f17c",
+                "params": {
+                  "cc": "",
+                  "to": "{{vars.email_to}}",
+                  "bcc": "",
+                  "from": "{{vars.email_from}}",
+                  "content": "<p>Hello Admin,</p>\n<p>This is notify that following System parameter - Disk Space -&nbsp; have crossed threshold limit&nbsp;</p>\n<table style=\"width: 538px;\" border=\"2\">\n<tbody>\n<tr>\n<td style=\"width: 81px; text-align: center;\"><strong>Sno</strong></td>\n<td style=\"width: 170.076px; text-align: center;\"><strong>Mount</strong></td>\n<td style=\"width: 285.924px; text-align: center;\"><strong>Used Space (%)</strong></td>\n</tr>\n<tr>\n<td style=\"width: 81px; text-align: center;\">4</td>\n<td style=\"width: 170.076px; text-align: center;\">/home</td>\n<td style=\"width: 285.924px;\">{{vars.steps.Disk_Utilization.data[2].sdiskpart.disk_usage.percent }}%</td>\n</tr>\n<tr>\n<td style=\"width: 81px; text-align: center;\">1</td>\n<td style=\"width: 170.076px; text-align: center;\">/</td>\n<td style=\"width: 285.924px;\">{{vars.steps.Disk_Utilization.data[0].sdiskpart.disk_usage.percent }}%</td>\n</tr>\n<tr>\n<td style=\"width: 81px; text-align: center;\">2</td>\n<td style=\"width: 170.076px; text-align: center;\">/opt</td>\n<td style=\"width: 285.924px;\">{{vars.steps.Disk_Utilization.data[3].sdiskpart.disk_usage.percent }}%</td>\n</tr>\n<tr>\n<td style=\"width: 81px; text-align: center;\">3</td>\n<td style=\"width: 170.076px; text-align: center;\">/var/lib/pgsql</td>\n<td style=\"width: 285.924px;\">{{vars.steps.Disk_Utilization.data[9].sdiskpart.disk_usage.percent }}%</td>\n</tr>\n<tr>\n<td style=\"width: 81px; text-align: center;\">5</td>\n<td style=\"width: 170.076px; text-align: center;\">/var/lib/redis</td>\n<td style=\"width: 285.924px;\">{{vars.steps.Disk_Utilization.data[7].sdiskpart.disk_usage.percent }}%</td>\n</tr>\n<tr>\n<td style=\"width: 81px; text-align: center;\">6</td>\n<td style=\"width: 170.076px; text-align: center;\">/var</td>\n<td style=\"width: 285.924px;\">{{vars.steps.Disk_Utilization.data[5].sdiskpart.disk_usage.percent }}%</td>\n</tr>\n<tr>\n<td style=\"width: 81px; text-align: center;\">7</td>\n<td style=\"width: 170.076px; text-align: center;\">/var/log&nbsp;</td>\n<td style=\"width: 285.924px;\">{{vars.steps.Disk_Utilization.data[11].sdiskpart.disk_usage.percent }}%</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp;</p>\n<p>~ Regards</p>\n<p>&nbsp;</p>",
+                  "subject": "Warning: FortiSOAR Notification : High Disk Space Usage",
+                  "iri_list": "",
+                  "file_name": "",
+                  "file_path": ""
+                },
+                "version": "2.3.2",
+                "from_str": "{{globalVars.Default_Email}}",
+                "connector": "smtp",
+                "operation": "send_richtext_email",
+                "operationTitle": "Send Rich Text Email",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "2680",
+              "top": "366",
+              "stepType": "/api/3/workflow_step_types/4c0019b2-055c-44d0-968c-678a0c2d762e",
+              "uuid": "9c6e6c54-09ed-4ae4-9820-24dcc29b5ed9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Do Nothing incase HDD threshold not crossed",
+              "description": null,
+              "arguments": {
+                "params": [],
+                "version": "3.0.1",
+                "connector": "cyops_utilities",
+                "operation": "no_op",
+                "operationTitle": "Utils: No Operation",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "2680",
+              "top": "580",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "d57e5b0c-e1f4-401c-841a-fe7243a6f04f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Service Status",
+              "description": null,
+              "arguments": {
+                "name": "System Monitoring",
+                "params": [],
+                "version": "1.5.0",
+                "connector": "cyops-system-monitoring",
+                "operation": "service_status",
+                "operationTitle": "Service Status",
+                "step_variables": {
+                  "inactive_service_list": "{{vars.result.data | json_query('[?ActiveState == \\'inactive\\'].service')  }}"
+                }
+              },
+              "status": null,
+              "left": "820",
+              "top": "469",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "660f6c63-f680-4219-9955-7db7783e5a92"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "CPU Utilization",
+              "description": null,
+              "arguments": {
+                "name": "System Monitoring",
+                "params": [],
+                "version": "1.5.0",
+                "connector": "cyops-system-monitoring",
+                "operation": "cpu_percent",
+                "operationTitle": "CPU Utilization",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "189",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "379398f4-f28d-4c19-9815-6041e2037ba9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Disk Utilization",
+              "description": null,
+              "arguments": {
+                "name": "System Monitoring",
+                "params": [],
+                "version": "1.5.0",
+                "connector": "cyops-system-monitoring",
+                "operation": "disk_utilization",
+                "operationTitle": "Disk Utilization",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "520",
+              "top": "469",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "a2f75334-40e2-46a0-94a4-fcdedde80610"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "No Service Offline",
+              "description": null,
+              "arguments": {
+                "params": [],
+                "version": "3.0.1",
+                "connector": "cyops_utilities",
+                "operation": "no_op",
+                "operationTitle": "Utils: No Operation",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "3312",
+              "top": "600",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "c827a665-9bdd-48af-98f1-3f06688a179d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Has Any Service Stopped",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "step_iri": "/api/3/workflow_steps/6021d8c8-882e-4c53-b3cf-6f02c9b68e35",
+                    "condition": "{{ vars.inactive_service_list | length > 0 }}"
+                  },
+                  {
+                    "default": true,
+                    "step_iri": "/api/3/workflow_steps/c827a665-9bdd-48af-98f1-3f06688a179d"
+                  }
+                ]
+              },
+              "status": null,
+              "left": "3000",
+              "top": "487",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "uuid": "69f4d54b-2651-4a6d-9479-78aca8b4b395"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Has CPU crossed threshold",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "step_iri": "/api/3/workflow_steps/729070f7-2a39-4c72-94c5-d62fd1eeff35",
+                    "condition": "{{ (vars.steps.CPU_Utilization.data | int ) >= ( vars.cpu_threshold | int) }}"
+                  },
+                  {
+                    "step_iri": "/api/3/workflow_steps/67c456d6-f097-439a-8574-eb4e89277d10",
+                    "condition": "{{ true }}"
+                  }
+                ]
+              },
+              "status": null,
+              "left": "1120",
+              "top": "469",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "uuid": "64075cec-57fa-49d7-a071-35cbfca27662"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Has DiskSpace crossed threshold",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "step_iri": "/api/3/workflow_steps/9c6e6c54-09ed-4ae4-9820-24dcc29b5ed9",
+                    "condition": "{{ ( vars.steps.Disk_Utilization.data[0].sdiskpart.disk_usage.percent | int)  >= ( vars.disk_threshold | int) or ( vars.steps.Disk_Utilization.data[11].sdiskpart.disk_usage.percent | int )  >= ( vars.disk_threshold | int) or ( vars.steps.Disk_Utilization.data[7].sdiskpart.disk_usage.percent | int  ) >= ( vars.disk_threshold | int) or ( vars.steps.Disk_Utilization.data[3].sdiskpart.disk_usage.percent | int ) >= ( vars.disk_threshold | int) or ( vars.steps.Disk_Utilization.data[2].sdiskpart.disk_usage.percent | int)  >= ( vars.disk_threshold | int) or ( vars.steps.Disk_Utilization.data[9].sdiskpart.disk_usage.percent | int)  >= ( vars.disk_threshold | int) or ( vars.steps.Disk_Utilization.data[5].sdiskpart.disk_usage.percent | int)  >= ( vars.disk_threshold | int) }}"
+                  },
+                  {
+                    "step_iri": "/api/3/workflow_steps/d57e5b0c-e1f4-401c-841a-fe7243a6f04f",
+                    "condition": "{{ true }}"
+                  }
+                ]
+              },
+              "status": null,
+              "left": "2360",
+              "top": "472",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "uuid": "995267fd-c087-49ed-acea-f30615d32260"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Service Status Warning Notification",
+              "description": null,
+              "arguments": {
+                "config": "88c3d39c-2fa9-4731-b00d-29815008f17c",
+                "params": {
+                  "cc": "",
+                  "to": "{{vars.email_to}}",
+                  "bcc": "",
+                  "from": "{{vars.email_from}}",
+                  "content": "<p>Hello Admin,</p>\n<p>This is notify that following System parameter -&nbsp;Service&nbsp; -&nbsp; have is offline&nbsp;&nbsp;</p>\n<table style=\"width: 100%;\" border=\"1px\">\n<tbody>\n<tr>\n<th style=\"text-align: Left; padding: 5px; border-right: 1px solid #ddd;\"><strong>Service </strong></th>\n</tr>\n<tr style=\"display: none;\">\n<td>{% for items in vars.inactive_service_list %}</td>\n</tr>\n<tr>\n<td style=\"border: 1px solid black; text-align: left;\">{{items}}</td>\n</tr>\n<tr style=\"display: none;\">\n<td>{% endfor %}</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp;~ Regards&nbsp;</p>",
+                  "subject": "Warning: FortiSOAR Notification :  Service Offline",
+                  "iri_list": "",
+                  "file_name": "",
+                  "file_path": ""
+                },
+                "version": "2.3.2",
+                "from_str": "{{globalVars.Default_Email}}",
+                "connector": "smtp",
+                "operation": "send_richtext_email",
+                "operationTitle": "Send Rich Text Email",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "3300",
+              "top": "360",
+              "stepType": "/api/3/workflow_step_types/4c0019b2-055c-44d0-968c-678a0c2d762e",
+              "uuid": "6021d8c8-882e-4c53-b3cf-6f02c9b68e35"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": []
+              },
+              "status": null,
+              "left": "40",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "fa68025a-c390-49b3-b8ef-6015acb0d3f0"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5722124c-78fb-44d9-b500-2e8e7d3323e8",
+              "name": "CPU warning notification -> Has Virtual Memory crossed threshold",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/920ce3e0-98a5-4e4e-acf0-7bf841385e97",
+              "sourceStep": "/api/3/workflow_steps/729070f7-2a39-4c72-94c5-d62fd1eeff35"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0b4b2be0-4bee-4b2d-9655-da1f25c2a7cb",
+              "name": "Do Nothing incase threshold not crossed -> Has Virtual Memory crossed threshold",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/920ce3e0-98a5-4e4e-acf0-7bf841385e97",
+              "sourceStep": "/api/3/workflow_steps/67c456d6-f097-439a-8574-eb4e89277d10"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ca08fdb1-28eb-44ee-8ce3-f499d5d0601c",
+              "name": "Has Virtual Memory crossed threshold -> Disk space warning notification",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c67fb0e6-bd4a-4f61-a281-275605872bb4",
+              "sourceStep": "/api/3/workflow_steps/920ce3e0-98a5-4e4e-acf0-7bf841385e97"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0dc28682-5cf7-4530-a356-a2a38d89ca55",
+              "name": "Has Virtual Memory crossed threshold -> Do Nothing incase VM threshold not crossed",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f4d61a15-de0e-4bed-b153-7840bace76f0",
+              "sourceStep": "/api/3/workflow_steps/920ce3e0-98a5-4e4e-acf0-7bf841385e97"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "654d8944-5ffb-40a1-aaf7-8e70e89256a5",
+              "name": "Disk space warning notification -> Has DiskSpace crossed threshold",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/995267fd-c087-49ed-acea-f30615d32260",
+              "sourceStep": "/api/3/workflow_steps/c67fb0e6-bd4a-4f61-a281-275605872bb4"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5b992078-c793-433e-bdcf-b599b3d31c7d",
+              "name": "Do Nothing incase VM threshold not crossed -> Has DiskSpace crossed threshold",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/995267fd-c087-49ed-acea-f30615d32260",
+              "sourceStep": "/api/3/workflow_steps/f4d61a15-de0e-4bed-b153-7840bace76f0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "581e79c8-8603-4276-ae5b-2569099b199a",
+              "name": "Has DiskSpace crossed threshold -> Virtual Memory warning notification",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/9c6e6c54-09ed-4ae4-9820-24dcc29b5ed9",
+              "sourceStep": "/api/3/workflow_steps/995267fd-c087-49ed-acea-f30615d32260"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8198e1b3-af1f-4df1-a528-2e71c5d8e2e3",
+              "name": "Has DiskSpace crossed threshold -> Copy  of Do Nothing incase VM threshold not crossed",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/d57e5b0c-e1f4-401c-841a-fe7243a6f04f",
+              "sourceStep": "/api/3/workflow_steps/995267fd-c087-49ed-acea-f30615d32260"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "4d7c98b5-fd8c-4e29-a89b-ab68531beaeb",
+              "name": "CPU Utilization -> Virtual Memory",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/db6f9605-2f5e-4fbb-9e49-d451bc0a09b4",
+              "sourceStep": "/api/3/workflow_steps/379398f4-f28d-4c19-9815-6041e2037ba9"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5fc20ab3-c458-403a-be6a-abb6d3aa74e6",
+              "name": "Virtual Memory -> Disk Utilization",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/a2f75334-40e2-46a0-94a4-fcdedde80610",
+              "sourceStep": "/api/3/workflow_steps/db6f9605-2f5e-4fbb-9e49-d451bc0a09b4"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c4e8c532-18da-4fd8-b12b-0b723854bbb6",
+              "name": "Has CPU crossed threshold -> CPU warning notification",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/729070f7-2a39-4c72-94c5-d62fd1eeff35",
+              "sourceStep": "/api/3/workflow_steps/64075cec-57fa-49d7-a071-35cbfca27662"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1db44eca-bf0a-4823-83f8-d7a8fc9c7ff5",
+              "name": "Has CPU crossed threshold -> Do Nothing incase threshold not crossed",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/67c456d6-f097-439a-8574-eb4e89277d10",
+              "sourceStep": "/api/3/workflow_steps/64075cec-57fa-49d7-a071-35cbfca27662"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1a07282d-74c4-4b41-ad0c-7a7aeeb67a4c",
+              "name": "Configuration -> CPU Utilization",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/379398f4-f28d-4c19-9815-6041e2037ba9",
+              "sourceStep": "/api/3/workflow_steps/f9d552c0-60f0-47bf-acd2-7d49bd256329"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b0dc9314-3ebf-4b8a-85d1-c57cef7d1f17",
+              "name": "Disk Utilization -> Service Status",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/660f6c63-f680-4219-9955-7db7783e5a92",
+              "sourceStep": "/api/3/workflow_steps/a2f75334-40e2-46a0-94a4-fcdedde80610"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "629b5299-c221-4665-8386-17be63d035e9",
+              "name": "Service Status -> Has CPU crossed threshold",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/64075cec-57fa-49d7-a071-35cbfca27662",
+              "sourceStep": "/api/3/workflow_steps/660f6c63-f680-4219-9955-7db7783e5a92"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a0bd4798-a4ad-4857-a74a-7adbe87bc778",
+              "name": "Disk space warning notification -> Has Any Service Stopped",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/69f4d54b-2651-4a6d-9479-78aca8b4b395",
+              "sourceStep": "/api/3/workflow_steps/9c6e6c54-09ed-4ae4-9820-24dcc29b5ed9"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0eac370a-2bb6-4df4-8bfc-4eb812b5edc5",
+              "name": "Has Any Service Stopped -> Copy  of Do Nothing incase HDD threshold not crossed",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c827a665-9bdd-48af-98f1-3f06688a179d",
+              "sourceStep": "/api/3/workflow_steps/69f4d54b-2651-4a6d-9479-78aca8b4b395"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "36a68d5e-4096-4616-b887-bfb4b5ae05f9",
+              "name": "Has Any Service Stopped -> Service Status Warning Notification",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6021d8c8-882e-4c53-b3cf-6f02c9b68e35",
+              "sourceStep": "/api/3/workflow_steps/69f4d54b-2651-4a6d-9479-78aca8b4b395"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2bcf2093-ff5e-4242-aa86-37c45ddf8f28",
+              "name": "Do Nothing incase HDD threshold not crossed -> Has Any Service Stopped",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/69f4d54b-2651-4a6d-9479-78aca8b4b395",
+              "sourceStep": "/api/3/workflow_steps/d57e5b0c-e1f4-401c-841a-fe7243a6f04f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d620c2de-07a4-49bd-9604-ef287193d12c",
+              "name": "Start -> Configuration",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f9d552c0-60f0-47bf-acd2-7d49bd256329",
+              "sourceStep": "/api/3/workflow_steps/fa68025a-c390-49b3-b8ef-6015acb0d3f0"
+            }
+          ],
+          "versions": null,
+          "uuid": "ba63b9fe-bf91-4ed7-8ac6-aa6ca26037ea",
+          "isPrivate": false,
+          "owners": []
+        }
+      ]
+    }
+  ]
+}

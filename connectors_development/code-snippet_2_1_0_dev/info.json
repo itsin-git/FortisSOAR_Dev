@@ -1,0 +1,96 @@
+{
+    "name": "code-snippet",
+    "version": "2.1.0",
+    "label": "Code Snippet",
+    "description": "Execute code snippets as part of your Playbooks.",
+    "publisher": "",
+    "icon_small_name": "code_snippet_small.png",
+    "icon_large_name": "code_snippet_large.png",
+    "id": 173,
+    "configuration": {
+        "fields": [
+            {
+                "title": "Allow Universal Imports",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "name": "allow_imports",
+                "value": false,
+                "tooltip": "If enabled, all python modules (except os, sys, subprocess) will be allowed to use and if allow_only_safe_builtins set in integrations config.ini then only safe python builtins will be allowed for use in code snippets. To include a specific and restricted set of python libraries recommendation is to use the 'Modules to Import' option below.",
+                "onchange": {
+                    "false": [
+                        {
+                            "title": "Modules to Import",
+                            "required": true,
+                            "editable": true,
+                            "visible": true,
+                            "type": "text",
+                            "name": "restrict_imports",
+                            "placeholder": "requests, json",
+                            "tooltip": "Enter comma separated list of allowed python libraries. Eg, 'json, requests'. You will not require them to re-import in code snippet."
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "operations": [
+        {
+            "description": "Execute python code as part of your Playbooks",
+            "operation": "python_inline_code_editor",
+            "annotation": "run_cmd",
+            "title": "Execute Python Code",
+            "parameters": [
+                {
+                    "title": "Python Function",
+                    "name": "python_function",
+                    "type": "codeEditor",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                }
+            ],
+            "output_schema": {
+                "code_output": {}
+            },
+            "enabled": true
+        },
+        {
+            "description": "Execute python code as part of your Playbooks",
+            "operation": "python_inline",
+            "annotation": "run_cmd",
+            "title": "Execute Python Code (Deprecated)",
+            "parameters": [
+                {
+                    "title": "Python Function",
+                    "name": "python_function",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                }
+            ],
+            "output_schema": {
+                "code_output": {}
+            },
+            "enabled": true
+        }
+    ],
+    "category": "utilities",
+    "active": true,
+    "cs_compatible": true,
+    "system": true,
+    "playbook_collections": [
+        {
+            "@id": "/api/3/workflow_collections/fde701b1-4abd-49e1-a239-c57c0ec03891",
+            "name": "Sample - Code Snippet - 2.1.0",
+            "image": "/api/3/images/8d9d5cfc-33e4-4f3e-ba20-8aafd6ffd3d5",
+            "description": "Sample playbooks for \"Code Snippet\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete."
+        }
+    ],
+    "icon_small": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ4IDc5LjE2NDAzNiwgMjAxOS8wOC8xMy0wMTowNjo1NyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODY1Q0VGRjA0MEZCMTFFQThFQzFGQkM3QjBDODM2NTciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzczNzc3RDQ0MEZCMTFFQThFQzFGQkM3QjBDODM2NTciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmNTgxNzliMi0xMTFmLTRjNzQtOTg4NS1hZjUzMjQ2OGFiY2IiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+9XZtHAAAA6NJREFUeNpi/P//PwMtARMDjcHQt4AFUwgYK9fu3Pnx4wcjIyORpgC1sLGyaqiosLKwELDg6YsXrdOmcbGzC/Lzk+BORsaPX768//ChOCVFQ1kZ3XI4+P3nT05Dw9b9+/+TBY6fO5dUXv712zdkQZQ4uP/4MQszs5eDA56gwOMNC0NDaXHxSzdu4Izkb9+/83Fz4zFi3qpV1+/cwaOAn4fn+48fOOMAGKtY3fjtx49t+/fvO3783JUrK7duXT5pEtCjION4edFU/vv/Hy1pEE6mpy5eDExP75k9m5uLS0JU1NrYmJebe9XWrR6JiUfPniUnmSIDoBHp1dU+jo5FKSliwsI37t3TUFICivu7uj5+9iytsnJKY6OjpSWZGe3N+/dlHR2hnp4d5eVA04EiQLffvHcPyABym4qK4oODy7u6nr9+TaYPlqxfz8nOXpGZCWSfOH/+wZMn63bt+vT5c1JoqLCgoLOVFTDVHzh5csHq1ZVZWST74O/fv7uPHAn18mJnYwNyj5w+DfTNvUeP3n/8WNrevu3AAaAgMzNzhI8PMPJ//vpFsgXA8Hn8/LmuujqQfePu3bNXr8pISs5qbV3c16eqqHjr3r2zV64ApfQ1ND59+fL67VuSLeBgZ28qLNTT0ACygeF+5eZNYOFhpKOjpqgoLiJy5+HDi9euAaXY2dmB5K8/f0iOA2Aa97C3//vvHyTN3Lp/f9qSJamVlZwcHCcvXAh0dU0KCwNKPX/1CpgnBPn4yInk8s7O89eupUdGRvn5AZ1vpq8P5AKD20RPT1RYGBhJQFu3HTyopaqKp2TEaQEwMp88fw4MXGCAADNnSng4EC3btOnjp0+ZMTH/wQXTxAULth88WJud/e/fPyYmJtIsAKYQYCaauWxZTW8v0A5IbAO9Ai1UwAWLrYnJw2fPgMH44+dPLk5O0izg4+EBImAC//D5c3RBQUJwsI+zs7SEBNDoZy9frt+1CxjbYd7e4b6+kHKJzKICmAkm1NYCS555a9Ys37yZB1zWfvn2TYCXV1lOjpWVlbSy6D9GWQgBQJcGurvfvHsXmDOAXGCGAJZIWE1nwiiPUSwAhuOnr1+xOgRY2eqoq+uAYwIPAGY6YDrGmdEUZWX//Pmz89Ah8hoQwIL9yYsXuuC8iahj0HwETJrASp+Xi0uAn5+RFNM/f/366t274uRkTRUVfBZAaiVgwQCsPolvtgBjj42NTVtNjQ0jYhhH26YDbgFAgAEAOaTTanPCeLcAAAAASUVORK5CYII=",
+    "icon_large": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ4IDc5LjE2NDAzNiwgMjAxOS8wOC8xMy0wMTowNjo1NyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzczNzc3Q0Q0MEZCMTFFQThFQzFGQkM3QjBDODM2NTciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzczNzc3Q0M0MEZCMTFFQThFQzFGQkM3QjBDODM2NTciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmNTgxNzliMi0xMTFmLTRjNzQtOTg4NS1hZjUzMjQ2OGFiY2IiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUy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",
+    "help_online": "https://docs.fortinet.com/document/fortisoar/2.1.0/code-snippet-connector/724/code-snippet-connector-v2-1-0",
+    "vendor_version": null
+}

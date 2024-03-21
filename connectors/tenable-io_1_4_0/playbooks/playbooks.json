@@ -1,0 +1,3465 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Tenable.io - 1.4.0",
+      "description": "Sample playbooks for \"Tenable.io\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "data:png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAIAAAD/gAIDAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDkwNTA1RkFBNDZDMTFFOUFERjQ5MEM2RkQwNkU2OEYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDkwNTA1RjlBNDZDMTFFOUFERjQ5MEM2RkQwNkU2OEYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpkMzJiYWM3Yi05NWIwLTRhMDctOThhNS02Y2Y2NjRjMmUwOTAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+pek9tQAACU1JREFUeNrsnAlwE+cVx3d1W7ctH/ItAwbZGGOEgTIUAglkAu2EkgOcQEIJZDI0BIZy9JiWaTpTmoEhHIW4hWJg0gCBNDAtR8GQGLsEjC8uCzs+ZMu2JNuSZd33bp+8xjV2qeVO28zE77NGo/2+3e/47Xv/977VyCRN0wSWyAoLESAshIWwEBbCQliIAGEhLISFsBAWwkIECAthISyEhbAQFiJAWAgLYSEshIWwEAHCQlgIC2EhLISFCBAWwkJYCAthISxEgLAQ1jddOJGcVKl3XNNa8tIl05IlCVLemIVFjvijgWv1PYf/bng1L66+29Nq9kSxyUylOF8lmZIkFvPZCOsJUh/daD+0YlKijM/UNHS5q1rtVe1Os8sfI+DmJosWZsUkywVjHdZwUoOLN0BpTa7yJltxQ09hgTpB8v9wT6PN1+UMTIiLEvGeMGp/kNJbfRRNTIyPGrGTTod/7cdagiSLVmXFj2ra9FNKcZ1l2eF7hl4vPVLZc01/prqT/t+XQJDK+c1t4u2rDwzOIU3X63uItVee2VcZST8lDVZixQV4lTb2jmoCrP/ApoaUGSppTZtjcI3J7ltWeK+g6OF/9zdU0JvZHSQomkWSQ5r8QZrwBFgEGUk/c8bJTm3LP70tf3aG9GnnHLttLGvqHTkafvG1tZ+UlB/J2HnJ4qJbHcEQzWGH50rRdFuv//xXhthUiccfYrNIPofFLLW52wNOnx4r4LLIPqMmfEGK33cA/uXwUePjotiP1+vyh0w2cC86XsKNFnKZSi40k6SYx+71BDvt/pRoPuOPYXqAcBArf4husXg4LNa42KF6ymGRBdMThtyGFjPoCp0s5zEdwqJiRLwRYLVYvIVlkdoUUyQCtkzAfdTpnpIkgsM/3DRsOFVHiLjmXp9iW+myvPiTayZX6B3r/6StarHDvc9UCvcXqBdnKeCSF/ZWLZuRwCHJD6/riQD1HXX05+umwNA7LjTvLG4N+UJEkBJJ+T9ZlP7Lxap+FjzWruKWoxUmr9WbrhQfeSNrkTqG0d+BKV3UWjadqm/qdEFdvkpauDI7P00y0Aqgnz1QDTRLNmpixdySxt4tZ+qrYW40HRcT9YvFGRvnp0xLlYyclAZCtFLCj5wUU3KShBWtNuazJkXyzpxkMDCukLv9ubSVMxNAUOcfqIEYenTN5M/WT+1yB5fsr2k2e8FK2syeA5d0t1ttx1dnz1LLb98yflTaAZ2ATv9odtLJdTmH3pzsJ+gdpx+BU4BFsAGYO3CpzvK7lyZsXjKutc3+g6MPHb4Ql/1PUnc7nN/fX210B86un1q0Jqey1bHoYI3ZFRg4gaLoGpO71uTicciGLs+CfdXVOtvOVyYeWZPjpehNR+5/UmGKKCmFQOMJUmDho0o+Z6TLjt8yMp9nqaRJcl7hF/pUKef9F8dDze5ivVtn27oq663ZScyNXben6mSl6Y2ZiXCzFAph8YZpQh7bE6TLyzsNNh+cs2pmIrweL95x5Fyj1uCeO14eAtclWZ+tzdWkiKGptKm36l436DTjp4zpFZa2Ez3e/auzX5kWD4cPOpx7T9ddqjW/+bjDsHWyWQESnJp18EYbYXJtfk39s+fTw17CZxd8WLXruv61fCWLHAkWjJcRI6hqcyyZrIgcVpZSZPUEnb4Qk6baPCF4D1JkiKJBs2ra7YSQc7HWXGsM+0VrjwdUotbohFZQi2gRR9gnEyEQaZJg982xus2564quRGeHA5M7AJezB1IFdliz+sdNEFUFTDqzJzadO+CJAJcQc0EN/ny3G5Zz3+CGqQDroeGCBMUM3YOT+eyZqn6lz0uRwLWPzB6rO6AQcUcWeIhut5rto4LFY5Mpcn5NuwNu/vBWYAJyIBawIRcLUpRSIns2Qz5XHR0IUYxTQEwAdWYyPogGEExn7akIuoO7l0/KT5ce+FJ/rqStT4X7gQykhmHYYGmMRZGDhyNkfBiOH6KoF9QxAnX0MxPlT0k0yeFBFyIFi4xsb6hJlXxa1QlDsshRyBYEsnvtTgYW3UcHls+YSW6y5FNvaEqi+OjKrMGX3G13EsNSYgGHVdZkCxpcyxalb12YBjWQxBEhms9hD8AIPb6qut0Bep+dKAKphXomHOcoxZV3TIuyFBAWBvfc5fDX6B3zJkaHZwV/FNwYNszqhi90p8XOxMdKvZ1w+vMmyuVR3IhgxYq4fDar2ewB/YqQ1EOj6+ojy84XJzCHcWIuIeK1dri2ft4IlvL6jITd4+RFV1pAKWZlSMp1jrIma8kmDUgGREBPoH/lYTsLUBDAVYooYPZXreVEubHD6iu8aSA45GWtZbkmHhIUyKcKjj3Y8N3Ur1p6H9VaxqtjIG8qh1hGEHd0dpDCjQtSj9/s+OnZr22eYGZ81OVaS7czcHH91NdP1F7/su3d5ZP2vJzpD1Bg0mDa785LAdna+zedLIqjEPG2nG+AzOLnz6tIMuJHNOoEUYXeHjmpHRea3v/euAxFf0ajlPIOvpwplfD2XGreV9oORlq6WTNvatzvb7StKao9XG6ckyGD0CbgkKpUaU6ikHEhhZiToZJGi7kz0iQ7VkxiUfQPjz48VNZxanX2krkpTeaw6GTHR83WJCyYEP3OmboTZR2z8uLOv50LoVCTKn5pfqq117flXFNOoujaj6fnpUt+e1H31jHt1TrrbJUMXBW0mIgWpMVEwef8ZFFukhjsUa0UXt+k0WTIfvWXxvc+0aZIOB+/N21pbtwotju3dLbt5xoj2QHAzgN2RfUm1/Ami8vf2OV2+oIDNe1WD+zD7d7+GlArSDrh9jKHob7D4OPDLocPLvfCgvqKDSywb8fDtHfafc3dburJEUHpYX/GnABvrRZvU7cbEmOmFXrW93gGdk7wGnwtnAw5sz9I/ZvF/mtYLl/w1T8+MNq8EZHqdNNjozz1qcP5+91nKzshfk1OFE1XybKVQh6HNdz7PliaGclG/9v/iAZMUmtywR7lYYfL4g0AuOmpkulpUlWs4EGH69eXdR8snTB2SEX0pJQpIDT3DWFwDZ0uCHD2ALV9YXrmWCI1ClhDHvsJuGPxmw4S/3EPfhWGsBAWwkJYCAsRICyEhbAQFsJCWIgAYSEshIWwEBbCQgQIC2EhLISFsBAWIkBYCAthISyEhbAQAcJCWAgLYSEshIUIEBbC+qbLPwQYANF8Avb18jLpAAAAAElFTkSuQmCC",
+      "uuid": "fbd839cf-a40b-40ff-87ee-35f36c475e72",
+      "id": 101,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [
+        "Tenable",
+        "tenable-io"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Vulnerability Information",
+          "aliasName": null,
+          "tag": "#ManualAction#Vulnerability",
+          "description": "Fetch information of the specified vulnerability",
+          "isActive": true,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "vulnIRI"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1673263321,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/73dd52ab-6280-480e-b40c-98bc04c0261d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Vulnerability Details",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "cvss": "{% if vars.risk_info.cvss_base_score %}{{vars.risk_info.cvss_base_score}}{% else %}None{% endif %}",
+                  "risk": "{{vars.risk_info.risk_factor}}",
+                  "severity": "{{ ((vars.cvssBaseScore | float | round(0, 'ceil')) if (vars.cvssBaseScore | float < 1.0) else (vars.cvssBaseScore | float | round(0, 'floor'))) | resolveRange(vars.vulnSeverityMapping)}}",
+                  "cvssVector": "{{vars.risk_info.cvss_vector}}",
+                  "pluginName": "{{vars.plugins_info.name}}",
+                  "pluginType": "{{vars.plugins_info.type}}",
+                  "sourceData": "{{vars.vulnerability_data | toJSON}}",
+                  "cvss3Vector": "{{vars.risk_info.cvss3_vector}}",
+                  "description": "### Synopsis\n{{vars.vulnerability_data.synopsis}}\n\n### Description\n{{vars.vulnerability_data.description}}\n\n### Solution\n{{vars.vulnerability_data.solution}} \n",
+                  "lastSeenDate": "{{ arrow.get(vars.vulnerability_data.discovery.seen_last).timestamp }}",
+                  "pluginFamily": "{{vars.plugins_info.family}}",
+                  "firstSeenDate": "{{ arrow.get(vars.vulnerability_data.discovery.seen_first).timestamp }}",
+                  "pluginVersion": "{{vars.plugins_info.version}}",
+                  "cvss3BaseScore": "{{vars.risk_info.cvss3_base_score}}",
+                  "cvssTemporalScore": "{{vars.risk_info.cvss_temporal_score}}",
+                  "cvss3TemporalScore": "{{vars.risk_info.cvss3_temporal_score}}",
+                  "cvssTemporalVector": "{{vars.risk_info.cvss_temporal_vector}}",
+                  "cvss3TemporalVector": "{{vars.risk_info.cvss3_temporal_score}}",
+                  "pluginPublicationDate": "{{arrow.get(vars.plugins_info.publication_date).format('MM/DD/YYYY hh:mm A')}}",
+                  "pluginModificationDate": "{{arrow.get(vars.plugins_info.modification_date).format('MM/DD/YYYY hh:mm A')}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.vulnerabilityIRI}}",
+                "__recommend": [],
+                "tagsOperation": "OverwriteTags",
+                "collectionType": "/api/3/vulnerabilities",
+                "fieldOperation": {
+                  "recordTags": "Append"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "435",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
+              "group": null,
+              "uuid": "4094e5c1-0088-4613-acc7-54efd697c4d9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "b80c5aea-6ca6-4fcb-b33c-437c063db57a",
+                "resources": [
+                  "vulnerabilities"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "vulnerabilities": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "73dd52ab-6280-480e-b40c-98bc04c0261d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "assetIRIList": "[]",
+                "vulnerabilityID": "{{vars.input.records[0].vulnerabilityId or (vars.input.params.vulnIRI | fromIRI).vulnerabilityId}}",
+                "vulnerabilityIRI": "{{vars.input.params.vulnIRI or vars.input.records[0]['@id']}}",
+                "vulnSeverityMapping": "{\n  '0': {{'Severity'| picklist('Minimal') }}, \n  '1,2,3': {{'Severity'| picklist('Low') }}, \n  '4,5,6': {{'Severity'| picklist('Medium') }}, \n  '7,8': {{'Severity'| picklist('High') }}, \n  '9,10': {{'Severity'| picklist('Critical') }}\n}"
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "8cbcb480-379b-443e-8f95-01f8353b6e1b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Vulnerability Information",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "0427d980-5772-4609-89d8-85cdcac497a1",
+                "params": {
+                  "plugin_id": "{{vars.vulnerabilityID}}"
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_vuln_details",
+                "operationTitle": "Get Vulnerability Information",
+                "step_variables": {
+                  "risk_info": "{{vars.result.data.info.risk_information}}",
+                  "plugins_info": "{{vars.result.data.info.plugin_details}}",
+                  "cvssBaseScore": "{{vars.result.data.info['risk_information']['cvss_base_score']}}",
+                  "vulnerability_data": "{{vars.result.data.info}}"
+                }
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "f01000a9-246e-4c34-891d-ccf321d0f5cf"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Fetch Vulnerability Information",
+              "targetStep": "/api/3/workflow_steps/f01000a9-246e-4c34-891d-ccf321d0f5cf",
+              "sourceStep": "/api/3/workflow_steps/8cbcb480-379b-443e-8f95-01f8353b6e1b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0bde3cf6-b4af-4011-bdff-c237f698a2fe"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/8cbcb480-379b-443e-8f95-01f8353b6e1b",
+              "sourceStep": "/api/3/workflow_steps/73dd52ab-6280-480e-b40c-98bc04c0261d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ca9ea13c-80c3-4a91-86c6-6bcacf968edf"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Vulnerability Information -> Update Vulnerability Details",
+              "targetStep": "/api/3/workflow_steps/4094e5c1-0088-4613-acc7-54efd697c4d9",
+              "sourceStep": "/api/3/workflow_steps/f01000a9-246e-4c34-891d-ccf321d0f5cf",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ee1779eb-0c30-42f1-a112-7cfd8d329e02"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "0b2fcbd0-1851-44c0-9059-3f70e8e7153a",
+          "id": 1265,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [
+            {
+              "apiName": "vulnerabilityManagement",
+              "name": "Vulnerability Management",
+              "version": "2.0.0"
+            }
+          ],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Asset Export Status",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Returns the status of a asset export job from Tenable.io.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/74f904ce-8590-4200-8a57-544157a5b33d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "dca35c17-eb63-4237-bfc3-79816b2408bc",
+                "title": "Tenable.io: Get Asset Export Status",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "74f904ce-8590-4200-8a57-544157a5b33d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Asset Export Status",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_asset_export_status",
+                "operationTitle": "Get Asset Export Status",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7a35d9a9-4412-48ab-ac20-3118512ce73c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Get Asset Export Status",
+              "targetStep": "/api/3/workflow_steps/7a35d9a9-4412-48ab-ac20-3118512ce73c",
+              "sourceStep": "/api/3/workflow_steps/74f904ce-8590-4200-8a57-544157a5b33d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "77b3c0a1-43da-4d83-b08c-1f0d61a4a03b"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "0db8cb58-879c-4ab7-a231-59398bde68ef",
+          "id": 1266,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Tenable.io > Ingest",
+          "aliasName": null,
+          "tag": "#ManualAction#Alert",
+          "description": "Generate scan records for scans fetched from Tenable.io for specified time duration.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1673871635,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d0678062-463b-4916-8cda-8cda7b7afc24",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Scan Data",
+              "description": null,
+              "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": {
+                  "enableBulkIngest": "{{vars.steps.Fetch_Scan_Data.enableBulkIngest}}"
+                },
+                "pass_input_record": false,
+                "workflowReference": "/api/3/workflows/7edd5324-d451-45f9-b7af-ed140e718a0a"
+              },
+              "status": null,
+              "top": "220",
+              "left": "480",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "197d6ec8-d9a5-402d-bac8-7ee1d06ad088"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Mark Scan Ingestion Completed",
+              "description": "Set the 'Ingestion Completed' value to `True`",
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.scanIRIList}}",
+                  "__bulk": false,
+                  "parallel": false,
+                  "condition": ""
+                },
+                "resource": {
+                  "isIngestionCompleted": "/api/3/picklists/cfd49634-d25a-476f-8485-99585e589a8c"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.item}}",
+                "__recommend": [],
+                "collectionType": "/api/3/scans",
+                "fieldOperation": {
+                  "recordTags": "Append"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "540",
+              "left": "1020",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
+              "group": null,
+              "uuid": "6242477c-c7ec-468b-a0ae-61bd88f1dace"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create or Update Asset Record for Scan",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Scan_Data.data}}",
+                  "__bulk": false,
+                  "parallel": false,
+                  "condition": ""
+                },
+                "arguments": {
+                  "sourcedata": "{{vars.item}}",
+                  "enableBulkIngest": "{{vars.enableBulkIngest}}"
+                },
+                "apply_async": false,
+                "step_variables": {
+                  "scanIRIList": "{{vars.steps.Create_or_Update_Asset_Record_for_Scan | json_query('[].scanIRI') | flatten(levels=1) | unique}}",
+                  "assetIRIList": "{{vars.steps.Create_or_Update_Asset_Record_for_Scan | json_query('[].assetIRIList') | flatten(levels=1) | unique}}"
+                },
+                "pass_input_record": true,
+                "workflowReference": "/api/3/workflows/41491ce5-380d-4e19-af66-5694bb09e3e6"
+              },
+              "status": null,
+              "top": "320",
+              "left": "660",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "b5981d72-441a-4b0b-afe4-e0f498b516c7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "d0678062-463b-4916-8cda-8cda7b7afc24"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": [],
+              "status": null,
+              "top": "120",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "d7f44568-9bab-4073-bdf8-b2641f5c28ab"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create or Update Vulnerabilities Records of Asset",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.assetIRIList}}",
+                  "__bulk": false,
+                  "parallel": false,
+                  "condition": ""
+                },
+                "arguments": {
+                  "assetIRI": "{{vars.item}}",
+                  "enableBulkIngest": "{{vars.enableBulkIngest}}"
+                },
+                "apply_async": false,
+                "step_variables": {
+                  "vulnIRIList": "{{vars.steps.Create_or_Update_Vulnerabilities_Records_of_Asset | json_query('[].vulnIRIsList') | flatten(levels=1) | unique}}"
+                },
+                "pass_input_record": false,
+                "workflowReference": "/api/3/workflows/cbf64b42-e6f8-47fb-8287-325de0464df1"
+              },
+              "status": null,
+              "top": "420",
+              "left": "840",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "f9f52d7d-0263-47e6-9a28-786a1341e2fe"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Scan Data -> Create or Update Asset Record for Scan",
+              "targetStep": "/api/3/workflow_steps/b5981d72-441a-4b0b-afe4-e0f498b516c7",
+              "sourceStep": "/api/3/workflow_steps/197d6ec8-d9a5-402d-bac8-7ee1d06ad088",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3af9612e-dd68-4bfb-a345-8a32b3080de7"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Fetch Scan Data",
+              "targetStep": "/api/3/workflow_steps/197d6ec8-d9a5-402d-bac8-7ee1d06ad088",
+              "sourceStep": "/api/3/workflow_steps/d7f44568-9bab-4073-bdf8-b2641f5c28ab",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "5cfaf821-5e48-43a4-81c1-e5cfaba5055b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/d7f44568-9bab-4073-bdf8-b2641f5c28ab",
+              "sourceStep": "/api/3/workflow_steps/d0678062-463b-4916-8cda-8cda7b7afc24",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b36b4a2b-7ed4-4df2-80e8-b1def4795c2c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create or Update Vulnerabilities Records of Asset -> Mark Scan Ingestion Completed",
+              "targetStep": "/api/3/workflow_steps/6242477c-c7ec-468b-a0ae-61bd88f1dace",
+              "sourceStep": "/api/3/workflow_steps/f9f52d7d-0263-47e6-9a28-786a1341e2fe",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b61d13d9-7e17-4092-8be3-b8127a9c0bbd"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create or Update Asset Record for Scan -> Create or Update Vulnerabilities Records of Asset",
+              "targetStep": "/api/3/workflow_steps/f9f52d7d-0263-47e6-9a28-786a1341e2fe",
+              "sourceStep": "/api/3/workflow_steps/b5981d72-441a-4b0b-afe4-e0f498b516c7",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "bf62e365-7053-44fb-a1de-4132d055b41c"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "2fe4ff21-38e0-4bb7-bb80-b18e52700f75",
+          "id": 1267,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [
+            {
+              "apiName": "vulnerabilityManagement",
+              "name": "Vulnerability Management",
+              "version": "2.0.0"
+            }
+          ],
+          "recordTags": [
+            "dataingestion",
+            "ingest",
+            "Referenced",
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Cancel Vulnerability Export Job",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Cancels the specified vulnerability export job.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/26045be6-d030-4bfa-a1f1-57f895be806a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "cc9e57cd-71b0-47d0-8cdd-995c6ca9688d",
+                "title": "Tenable.io: Cancel Vulnerability Export Job",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "26045be6-d030-4bfa-a1f1-57f895be806a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Cancel Vulnerability Export Job",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "cancel_vuln_export_job",
+                "operationTitle": "Cancel Vulnerability Export Job",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "f2c1f6b4-7854-4415-9961-fd22480f8831"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Cancel Vulnerability Export Job",
+              "targetStep": "/api/3/workflow_steps/f2c1f6b4-7854-4415-9961-fd22480f8831",
+              "sourceStep": "/api/3/workflow_steps/26045be6-d030-4bfa-a1f1-57f895be806a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "aa8344b0-9959-4dd8-9b02-adc0aa35ba21"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "33dfdb42-5811-4604-9d5f-554378a83468",
+          "id": 1268,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Download Asset Export Chunk",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Downloads exported assets chunk by ID from Tenable.io",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/de381f86-ed85-4776-a9c5-371395871aa3",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Download Asset Export Chunk",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "download_asset_export_chunk",
+                "operationTitle": "Download Asset Export Chunk",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "93ea0a4e-423a-4c61-b578-3979c5128218"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "9c16e996-27cd-41d9-b2a2-d12229253942",
+                "title": "Tenable.io: Download Asset Export Chunk",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "de381f86-ed85-4776-a9c5-371395871aa3"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Download Asset Export Chunk",
+              "targetStep": "/api/3/workflow_steps/93ea0a4e-423a-4c61-b578-3979c5128218",
+              "sourceStep": "/api/3/workflow_steps/de381f86-ed85-4776-a9c5-371395871aa3",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "8ba12dbf-6aa1-46c0-9655-6c767fcb75e3"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "3e6bf8b7-a915-4402-9158-474d8269d543",
+          "id": 1269,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Tenable.io > Create or Update Asset Records for Scan",
+          "aliasName": null,
+          "tag": "#PostCreate#Scan",
+          "description": "Fetch assets and generates or updates asset records for specified scan from Tenable.io",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "sourcedata",
+            "enableBulkIngest"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1673871493,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/83b769f8-d731-461d-aabb-7be2eb1443b3",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Enable Bulk Ingest Records",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "Yes",
+                    "step_iri": "/api/3/workflow_steps/c0dfc2ac-041c-4e83-be24-3bf92a541476",
+                    "condition": "{{ vars.input.params.enableBulkIngest }}",
+                    "step_name": "Bulk Ingest Asset Records"
+                  },
+                  {
+                    "option": "No",
+                    "default": true,
+                    "step_iri": "/api/3/workflow_steps/109f8191-f67e-49db-809b-d1b6c76fac5e",
+                    "step_name": "Create Asset Records"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "570",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "0e76477b-f0b4-47ba-8cc7-eb46f7f060a4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Asset Records",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Scan_Assets.data}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "ip": "{{vars.item.ip  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}",
+                  "name": "{% if vars.item.fqdn %}{{vars.item.fqdn | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"\\\"\",\"\") }}{% else %}{{vars.item.ip  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}{% endif %}",
+                  "__link": {
+                    "scans": "{{vars.scanIRI}}"
+                  },
+                  "hostname": "{{vars.item.fqdn | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"\\\"\",\"\") }}",
+                  "__replace": "true",
+                  "deviceUid": "{{vars.item.uuid  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}",
+                  "macAddress": "{{vars.item.mac  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}",
+                  "dateScanned": "{{ arrow.get(vars.item.time_end).timestamp }}",
+                  "__fieldsToUpdate": [
+                    "scans"
+                  ],
+                  "registrationDate": "{{ arrow.get(vars.item.time_start).timestamp }}"
+                },
+                "operation": "Append",
+                "collection": "/api/3/upsert/assets",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                  "assetIRIs": "{{ vars.result | json_query('[].\"@id\"') }}"
+                }
+              },
+              "status": null,
+              "top": "975",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "109f8191-f67e-49db-809b-d1b6c76fac5e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Link Assets to Scan Record",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "__link": {
+                    "assets": "{{vars.assetIRIs}}"
+                  }
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{vars.steps.Create_Record['@id']}}",
+                "__recommend": [],
+                "collectionType": "/api/3/scans",
+                "fieldOperation": {
+                  "recordTags": "Append"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "975",
+              "left": "475",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
+              "group": null,
+              "uuid": "1263df0f-f12c-4a26-ac15-d4a26773f8c2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": "Create Scan Record",
+              "arguments": {
+                "resource": {
+                  "name": "{{vars.sourcedata[\"name\"]}}",
+                  "state": "{{vars.sourcedata[\"status\"]}}",
+                  "scanId": "{{vars.sourcedata[\"id\"]}}",
+                  "source": "Tenable.io",
+                  "userId": "{{vars.sourcedata[\"owner\"]}}",
+                  "__replace": "false",
+                  "launchDateTime": "{{vars.sourcedata[\"last_modification_date\"]}}",
+                  "scanReferenceID": "{{vars.sourcedata[\"uuid\"]}}",
+                  "isIngestionCompleted": "/api/3/picklists/711303d3-75ea-437d-a871-0a8d14fcdb7d"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/upsert/scans",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                  "scanIRI": "{{vars.result['@id']}}"
+                }
+              },
+              "status": null,
+              "top": "300",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "1c2977cb-d62d-4cc6-8a51-726b97f152f4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "83b769f8-d731-461d-aabb-7be2eb1443b3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Bulk Ingest Asset Records",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Scan_Assets.data}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "ip": "{{vars.item.ip  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}",
+                  "name": "{% if vars.item.fqdn %}{{vars.item.fqdn | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"\\\"\",\"\") }}{% else %}{{vars.item.ip  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}{% endif %}",
+                  "hostname": "{{vars.item.fqdn | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"\\\"\",\"\") }}",
+                  "__replace": "",
+                  "deviceUid": "{{vars.item.uuid  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}",
+                  "macAddress": "{{vars.item.mac  | replace(\"[\", \"\") | replace(\"]\",\"\") | replace(\"'\",\"\") }}",
+                  "dateScanned": "{{ arrow.get(vars.item.time_end).timestamp }}",
+                  "registrationDate": "{{ arrow.get(vars.item.time_start).timestamp }}"
+                },
+                "collection": "/api/ingest-feeds/assets",
+                "__recommend": [],
+                "step_variables": []
+              },
+              "status": null,
+              "top": "705",
+              "left": "475",
+              "stepType": "/api/3/workflow_step_types/7b221880-716b-4726-a2ca-5e568d330b3e",
+              "group": null,
+              "uuid": "c0dfc2ac-041c-4e83-be24-3bf92a541476"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "scanId": "{{vars.sourcedata[\"id\"]}}"
+              },
+              "status": null,
+              "top": "165",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "cdf55c89-3d39-484c-9189-5daab7ee4b3f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Step Output",
+              "description": null,
+              "arguments": {
+                "scanIRI": "{{vars.scanIRI}}",
+                "assetIRIList": "{{vars.assetIRIs}}"
+              },
+              "status": null,
+              "top": "1110",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "e3088e07-1341-4dc4-8a00-114b1667015e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Scan Assets",
+              "description": "Fetches asset details associated with scan.",
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "0427d980-5772-4609-89d8-85cdcac497a1",
+                "params": {
+                  "scan_id": "{{vars.scanId}}"
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_scan_assets",
+                "operationTitle": "List Scan's Assets",
+                "step_variables": {
+                  "ipList": "{{vars.result.data | json_query(\"[].ip\")| flatten(levels=1)}}"
+                }
+              },
+              "status": null,
+              "top": "435",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "eb8107dc-1c5b-4b8e-add8-9abdc2e7f3fb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Asset Record IRIs",
+              "description": null,
+              "arguments": {
+                "query": {
+                  "sort": [],
+                  "limit": 30,
+                  "logic": "AND",
+                  "filters": [
+                    {
+                      "type": "primitive",
+                      "field": "ip",
+                      "value": "{{vars.ipList}}",
+                      "operator": "in",
+                      "_operator": "in"
+                    }
+                  ],
+                  "__selectFields": [
+                    "id"
+                  ]
+                },
+                "module": "assets?$limit=30000",
+                "checkboxFields": true,
+                "step_variables": {
+                  "assetIRIs": "{{vars.result | json_query('[].\"@id\"')}}"
+                }
+              },
+              "status": null,
+              "top": "840",
+              "left": "475",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928770",
+              "group": null,
+              "uuid": "ed9c48e7-f87d-40bd-9065-fe5dd10eaca6"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create Asset Records -> Step Output",
+              "targetStep": "/api/3/workflow_steps/e3088e07-1341-4dc4-8a00-114b1667015e",
+              "sourceStep": "/api/3/workflow_steps/109f8191-f67e-49db-809b-d1b6c76fac5e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "140574ad-c991-4eb9-826e-2c7570e8b7c2"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Create New Scan",
+              "targetStep": "/api/3/workflow_steps/1c2977cb-d62d-4cc6-8a51-726b97f152f4",
+              "sourceStep": "/api/3/workflow_steps/cdf55c89-3d39-484c-9189-5daab7ee4b3f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1444b46e-aa83-449a-9f0e-551719d192d4"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Use Bulk Ingest -> Create Asset Records",
+              "targetStep": "/api/3/workflow_steps/c0dfc2ac-041c-4e83-be24-3bf92a541476",
+              "sourceStep": "/api/3/workflow_steps/0e76477b-f0b4-47ba-8cc7-eb46f7f060a4",
+              "label": "Yes",
+              "isExecuted": false,
+              "uuid": "69b6b6ae-562d-4f64-9a15-96f9025aa347"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Enable Bulk Ingest -> Create Asset Records",
+              "targetStep": "/api/3/workflow_steps/109f8191-f67e-49db-809b-d1b6c76fac5e",
+              "sourceStep": "/api/3/workflow_steps/0e76477b-f0b4-47ba-8cc7-eb46f7f060a4",
+              "label": "No",
+              "isExecuted": false,
+              "uuid": "73cc814d-42ff-4913-8918-b61d39dc72ab"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Bulk -> Find Asset Records Created",
+              "targetStep": "/api/3/workflow_steps/ed9c48e7-f87d-40bd-9065-fe5dd10eaca6",
+              "sourceStep": "/api/3/workflow_steps/c0dfc2ac-041c-4e83-be24-3bf92a541476",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7b4415e3-2c72-48e0-8911-aec1cfa5b4ca"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/cdf55c89-3d39-484c-9189-5daab7ee4b3f",
+              "sourceStep": "/api/3/workflow_steps/83b769f8-d731-461d-aabb-7be2eb1443b3",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "9cfdc2cf-0ba3-46c8-b029-abccb95b6107"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create New Scan -> Fetch Scan Assets",
+              "targetStep": "/api/3/workflow_steps/eb8107dc-1c5b-4b8e-add8-9abdc2e7f3fb",
+              "sourceStep": "/api/3/workflow_steps/1c2977cb-d62d-4cc6-8a51-726b97f152f4",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b3cc100c-0d90-4584-bd4f-210f2383cd85"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Find Asset Records Created -> Update Scan Record",
+              "targetStep": "/api/3/workflow_steps/1263df0f-f12c-4a26-ac15-d4a26773f8c2",
+              "sourceStep": "/api/3/workflow_steps/ed9c48e7-f87d-40bd-9065-fe5dd10eaca6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "bc5debd2-47ec-43a8-9226-b3aaad7d061c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Scan Assets -> Use Bulk Ingest",
+              "targetStep": "/api/3/workflow_steps/0e76477b-f0b4-47ba-8cc7-eb46f7f060a4",
+              "sourceStep": "/api/3/workflow_steps/eb8107dc-1c5b-4b8e-add8-9abdc2e7f3fb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "bd9e8e91-3002-4db4-b766-6f7e35fc20b3"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Update Scan Record -> Step Output",
+              "targetStep": "/api/3/workflow_steps/e3088e07-1341-4dc4-8a00-114b1667015e",
+              "sourceStep": "/api/3/workflow_steps/1263df0f-f12c-4a26-ac15-d4a26773f8c2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d378526a-cc0b-4933-8f1b-b02e2cb02196"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "41491ce5-380d-4e19-af66-5694bb09e3e6",
+          "id": 1270,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [
+            {
+              "apiName": "vulnerabilityManagement",
+              "name": "Vulnerability Management",
+              "version": "2.0.0"
+            }
+          ],
+          "recordTags": [
+            "dataingestion",
+            "create",
+            "Referenced",
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Vulnerability Export Jobs",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves a list of vulnerability export jobs. This list includes the 1,000 most recent export jobs regardless of status. However, this list includes completed jobs only if the job completed in the previous three days.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ca15767d-2bf6-47d4-b52a-a187ad8d7f0f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Vulnerability Export Jobs",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "list_vuln_export_jobs",
+                "operationTitle": "List Vulnerability Export Jobs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7d97bfff-d0bd-49cd-9725-f1d1d21860f8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "94713b9f-6559-4e1a-bc09-715e285be8e9",
+                "title": "Tenable.io: List Vulnerability Export Jobs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ca15767d-2bf6-47d4-b52a-a187ad8d7f0f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Vulnerability Export Jobs",
+              "targetStep": "/api/3/workflow_steps/7d97bfff-d0bd-49cd-9725-f1d1d21860f8",
+              "sourceStep": "/api/3/workflow_steps/ca15767d-2bf6-47d4-b52a-a187ad8d7f0f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1a1bc5c3-2e14-4ec9-85cf-84f636de6146"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "52e0217a-99d0-49a7-a7cf-92526283b846",
+          "id": 1271,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Vulnerability Export Status",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Returns the status of a vulnerability export job.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0b2a3b23-fc9c-4a34-a7ed-324753584a64",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "451b5412-bf3c-46ef-88c1-0ee2fd2d0273",
+                "title": "Tenable.io: Get Vulnerability Export Status",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "0b2a3b23-fc9c-4a34-a7ed-324753584a64"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Vulnerability Export Status",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_vuln_export_status",
+                "operationTitle": "Get Vulnerability Export Status",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c2505451-0f66-4493-aabf-423b9d9da7cd"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Get Vulnerability Export Status",
+              "targetStep": "/api/3/workflow_steps/c2505451-0f66-4493-aabf-423b9d9da7cd",
+              "sourceStep": "/api/3/workflow_steps/0b2a3b23-fc9c-4a34-a7ed-324753584a64",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "109b6174-1f21-4ff1-8cb2-db87441c6d1d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "55243e93-c4c7-4543-bbb2-f26eab99f21e",
+          "id": 1272,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Export Assets",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Export all assets from the Tenable.io server based on the filter criteria such as chunk size and last assessed time you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1671633999,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/db8d740c-2369-47dc-94f7-1a509aa07afa",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Asset Export Job Status",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "5e7d05d0-cf18-4e10-8b0c-55f01acc4376",
+                "params": {
+                  "export_uuid": "{{vars.export_uuid}}"
+                },
+                "version": "1.4.0",
+                "do_until": {
+                  "delay": 60,
+                  "retries": 10,
+                  "condition": "{{vars.result.data.status == 'FINISHED'}}"
+                },
+                "connector": "tenable-io",
+                "operation": "get_asset_export_status",
+                "operationTitle": "Get Asset Export Status",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "chunks_available": "{{vars.result.data['chunks_available']}}"
+                }
+              },
+              "status": null,
+              "top": "220",
+              "left": "460",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "546618fc-59c1-484b-b0e8-fe7aa50dfe7c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Submit Asset Export Job",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "5e7d05d0-cf18-4e10-8b0c-55f01acc4376",
+                "params": {
+                  "chunk_size": 500,
+                  "last_assessed": ""
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "submit_asset_export_job",
+                "operationTitle": "Submit Asset Export Job",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "export_uuid": "{{vars.result.data['export_uuid']}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "70d88fb2-c86f-41f5-a31c-92fb9d711209"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Download Chunks",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "5e7d05d0-cf18-4e10-8b0c-55f01acc4376",
+                "params": {
+                  "chunk_id": "{{vars.item}}",
+                  "export_uuid": "{{vars.export_uuid}}"
+                },
+                "version": "1.4.0",
+                "for_each": {
+                  "item": "{{vars.chunks_available}}",
+                  "__bulk": false,
+                  "parallel": false,
+                  "condition": ""
+                },
+                "connector": "tenable-io",
+                "operation": "download_asset_export_chunk",
+                "operationTitle": "Download Asset Export Chunk",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "320",
+              "left": "620",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "b3ad1515-dadf-461b-81cb-c25df97c614c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "0cc4bd3b-eba6-4951-a220-3a8f1baee833",
+                "title": "Tenable.io: Export Assets",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "db8d740c-2369-47dc-94f7-1a509aa07afa"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Submit Asset Export Job",
+              "targetStep": "/api/3/workflow_steps/70d88fb2-c86f-41f5-a31c-92fb9d711209",
+              "sourceStep": "/api/3/workflow_steps/db8d740c-2369-47dc-94f7-1a509aa07afa",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "626e48b6-c6d6-4c57-a1d5-1bb04ac5cb73"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Submit Asset Export Job -> Get Asset Export Job Status",
+              "targetStep": "/api/3/workflow_steps/546618fc-59c1-484b-b0e8-fe7aa50dfe7c",
+              "sourceStep": "/api/3/workflow_steps/70d88fb2-c86f-41f5-a31c-92fb9d711209",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7a992426-869b-4f97-ad36-28a609574aca"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Asset Export Job Status -> Download Chunks",
+              "targetStep": "/api/3/workflow_steps/b3ad1515-dadf-461b-81cb-c25df97c614c",
+              "sourceStep": "/api/3/workflow_steps/546618fc-59c1-484b-b0e8-fe7aa50dfe7c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "9bfb77cc-f8d9-456a-97b2-7d0c2a0619bd"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "64944872-8cc7-4508-92ad-69c4bda844c8",
+          "id": 1273,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Plugin Information",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves information about a specific plugin from the Tenable.io server, based on the plugin ID you have specified",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e64499f8-d6bc-4adf-b31b-60c03dd63b74",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Plugin Information",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_plugin_details",
+                "operationTitle": "Get Plugin Information",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d2dbf993-2f5e-4540-9409-4dc4ccdb806d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "ca63c22a-e0c0-4630-a2fe-3a07c9ca0be9",
+                "title": "Tenable.io: Get Plugin Information",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e64499f8-d6bc-4adf-b31b-60c03dd63b74"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Get Plugin Information",
+              "targetStep": "/api/3/workflow_steps/d2dbf993-2f5e-4540-9409-4dc4ccdb806d",
+              "sourceStep": "/api/3/workflow_steps/e64499f8-d6bc-4adf-b31b-60c03dd63b74",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0897d252-7d96-4b3a-a119-44b504de28fd"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "65fb4f7a-8752-4fab-ae80-ba580cf113f8",
+          "id": 1274,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Scan's Assets",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves information about asset(s) that are associated with a particular scan from the Tenable.io server, based on the scan ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/185035c6-1c03-4a1d-92ab-b26e98919853",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Scan's Assets",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_scan_assets",
+                "operationTitle": "List Scan's Assets",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "068ff736-8403-429d-8b7c-e057324ec4c5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "9e57ebac-5a15-49aa-85a7-803edcbdcf13",
+                "title": "Tenable.io: List Scan's Assets",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "185035c6-1c03-4a1d-92ab-b26e98919853"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Scan's Assets",
+              "targetStep": "/api/3/workflow_steps/068ff736-8403-429d-8b7c-e057324ec4c5",
+              "sourceStep": "/api/3/workflow_steps/185035c6-1c03-4a1d-92ab-b26e98919853",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c59ffde6-5e9f-483a-9b68-22331f926c85"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "69c01156-c1bc-4e88-8eb7-0409fb4d640e",
+          "id": 1275,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Scans",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves a list along with the details of all the completed scans from the Tenable.io server, based on the time duration, such as 24 hours or last 3 days, you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/9accbcf9-9fed-458f-9582-f3ee771f42ef",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Scans",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": {
+                  "days": "Last 3 Days"
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_scans",
+                "operationTitle": "List Scans",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6dadbce2-6907-4880-acf6-71253700ec50"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4eb76b86-c664-4e8f-9c5a-eb14e258779e",
+                "title": "Tenable.io: List Scans",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "9accbcf9-9fed-458f-9582-f3ee771f42ef"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Scans",
+              "targetStep": "/api/3/workflow_steps/6dadbce2-6907-4880-acf6-71253700ec50",
+              "sourceStep": "/api/3/workflow_steps/9accbcf9-9fed-458f-9582-f3ee771f42ef",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "510d9693-b258-4e5c-b9a5-2305bdbd9a10"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "6dc75319-23b3-4ff2-a718-7cd90abf358a",
+          "id": 1276,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Asset Export Jobs",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves a list of asset export jobs. This list includes the 1,000 most recent export jobs regardless of status.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/9ddeb46f-bb38-485d-a422-e3c9651e8c77",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8c4b9696-ddd2-4199-9c35-83b81ccf1f64",
+                "title": "Tenable.io: List Asset Export Jobs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "9ddeb46f-bb38-485d-a422-e3c9651e8c77"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Asset Export Jobs",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "list_asset_export_jobs",
+                "operationTitle": "List Asset Export Jobs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "bda66093-3f77-4032-bcf7-e45ae2f91aac"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Asset Export Jobs",
+              "targetStep": "/api/3/workflow_steps/bda66093-3f77-4032-bcf7-e45ae2f91aac",
+              "sourceStep": "/api/3/workflow_steps/9ddeb46f-bb38-485d-a422-e3c9651e8c77",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1e0a6797-cccc-4ac3-9637-8e670d01401e"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "77889cd8-1adc-4120-8c95-892cedc663dc",
+          "id": 1277,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Tenable.io > Fetch Scans Details",
+          "aliasName": null,
+          "tag": null,
+          "description": "Fetches completed scans' details for the specified duration",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1673871510,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/668ee310-ad31-4c7b-9140-ab1f2d1e728d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Scans",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "420bea90-4e7f-439f-8939-20aee2a33bc8",
+                "params": {
+                  "days": "{{vars.days}}"
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_scans",
+                "operationTitle": "List Scans",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "234a3fe3-0af3-48e9-879d-4896dc6f8027"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  },
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Completion Time\",\n    \"type\": \"select\",\n    \"name\": \"days\",\n    \"options\": [\n      \"Last 24 Hours\",\n      \"Last 3 Days\",\n      \"Last 5 Days\",\n      \"Last 7 Days\",\n      \"Last 15 Days\",\n      \"Last 25 Days\",\n      \"Last 30 Days\",\n      \"Last 50 Days\",\n      \"Last 60 Days\",\n      \"Last 90 Days\",\n      \"Last 120 Days\",\n      \"Last 180 Days\"\n    ],\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"tooltip\": \"Time duration for which you want to retrieve a list along with details of all the completed scans from Tenable.io. For example, if you choose Last 24 Hours, then the details of all the scans that were completed in the last 24 hours will be retrieved from the Tenable.io server.\",\n    \"value\": \"Last 3 Days\"\n  },\n  {\n    \"title\": \"Enable Bulk Ingest\",\n    \"name\": \"enableBulkIngest\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Select this option to enable bulk ingest.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": false\n  }\n]"
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "668ee310-ad31-4c7b-9140-ab1f2d1e728d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "days": "Last 3 Days",
+                "enableBulkIngest": "true"
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "75f9a04b-e2d7-4212-99f8-0c03a1899400"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Result",
+              "description": null,
+              "arguments": {
+                "data": "{{vars.steps.Fetch_Scans.data}}",
+                "enableBulkIngest": "{{vars.enableBulkIngest}}"
+              },
+              "status": null,
+              "top": "435",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "ddfabd9a-b161-4afc-86d7-e9edacd8413a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/75f9a04b-e2d7-4212-99f8-0c03a1899400",
+              "sourceStep": "/api/3/workflow_steps/668ee310-ad31-4c7b-9140-ab1f2d1e728d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "35b98c7b-becf-4dda-8977-76fad751263e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Fetch Scan",
+              "targetStep": "/api/3/workflow_steps/234a3fe3-0af3-48e9-879d-4896dc6f8027",
+              "sourceStep": "/api/3/workflow_steps/75f9a04b-e2d7-4212-99f8-0c03a1899400",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "68cb50c0-7a89-4c14-b609-79058f160447"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Scan -> Step Output",
+              "targetStep": "/api/3/workflow_steps/ddfabd9a-b161-4afc-86d7-e9edacd8413a",
+              "sourceStep": "/api/3/workflow_steps/234a3fe3-0af3-48e9-879d-4896dc6f8027",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b85b55b1-3815-4e81-bf57-e9f21e650e0e"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "7edd5324-d451-45f9-b7af-ed140e718a0a",
+          "id": 1278,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "fetch",
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Export Vulnerabilties",
+          "aliasName": null,
+          "tag": null,
+          "description": "Exports all vulnerabilities from the Tenable.io server based on the filter criteria such as chunk size, severity, etc. you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1671633847,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f0bc004d-b8bd-4c68-a485-ba968cba5709",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Submit Vulnerability Export Job",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "5e7d05d0-cf18-4e10-8b0c-55f01acc4376",
+                "params": {
+                  "since": "",
+                  "state": [
+                    "Open"
+                  ],
+                  "severity": [
+                    "Critical"
+                  ],
+                  "cidr_range": "",
+                  "num_assets": 50
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "submit_vuln_export_job",
+                "operationTitle": "Submit Vulnerability Export Job",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "export_uuid": "{{vars.result.data['export_uuid']}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a2f1405a-42d0-4ff8-a9bf-3bd3850664fc"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Vulnerability Export Status",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "5e7d05d0-cf18-4e10-8b0c-55f01acc4376",
+                "params": {
+                  "export_uuid": "{{vars.steps.Submit_Vulnerability_Export_Job.data['export_uuid']}}"
+                },
+                "version": "1.4.0",
+                "do_until": {
+                  "delay": 60,
+                  "retries": 10,
+                  "condition": "{{vars.result.data.status == 'FINISHED'}}"
+                },
+                "connector": "tenable-io",
+                "operation": "get_vuln_export_status",
+                "operationTitle": "Get Vulnerability Export Status",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "chunks_available": "{{vars.result.data['chunks_available']}}"
+                }
+              },
+              "status": null,
+              "top": "220",
+              "left": "460",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ab47a316-8c28-455f-ab58-111f46d67885"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "fc6603a0-79a5-46ce-9fbe-5cad8891ed9d",
+                "title": "Tenable.io: Export Vulnerabilties",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "f0bc004d-b8bd-4c68-a485-ba968cba5709"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Download Vulnerability Export Chunk",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "5e7d05d0-cf18-4e10-8b0c-55f01acc4376",
+                "params": {
+                  "chunk_id": "{{vars.item}}",
+                  "export_uuid": "{{vars.export_uuid}}"
+                },
+                "version": "1.4.0",
+                "for_each": {
+                  "item": "{{vars.chunks_available}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "connector": "tenable-io",
+                "operation": "download_vuln_export_chunk",
+                "operationTitle": "Download Vulnerability Export Chunk",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "320",
+              "left": "620",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "fad6467e-a355-453f-b578-a646e11c19b4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Submit Vulnerability Export Job",
+              "targetStep": "/api/3/workflow_steps/a2f1405a-42d0-4ff8-a9bf-3bd3850664fc",
+              "sourceStep": "/api/3/workflow_steps/f0bc004d-b8bd-4c68-a485-ba968cba5709",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "54382c9c-3462-4009-80b3-ff5bccd18d2b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Submit Vulnerability Export Job -> Get Vulnerability Export Status",
+              "targetStep": "/api/3/workflow_steps/ab47a316-8c28-455f-ab58-111f46d67885",
+              "sourceStep": "/api/3/workflow_steps/a2f1405a-42d0-4ff8-a9bf-3bd3850664fc",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c08126f0-f9a3-4ff2-91ff-be2269082335"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Vulnerability Export Status -> Download Vulnerability Export Chunk",
+              "targetStep": "/api/3/workflow_steps/fad6467e-a355-453f-b578-a646e11c19b4",
+              "sourceStep": "/api/3/workflow_steps/ab47a316-8c28-455f-ab58-111f46d67885",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e4f007c4-ba61-4a27-bf90-19f5e8a07a9a"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "817a0627-ae13-4227-b55f-16c21256efd0",
+          "id": 1279,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Submit Vulnerability Export Job",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Submits vulnerability export job that match the request criteria.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e08722e6-e505-45f7-b359-e48498c99c81",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Submit Vulnerability Export Job",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": {
+                  "since": "",
+                  "state": [
+                    "Open"
+                  ],
+                  "severity": [
+                    "Info",
+                    "Low",
+                    "Medium",
+                    "High",
+                    "Critical"
+                  ],
+                  "cidr_range": "",
+                  "num_assets": 500
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "submit_vuln_export_job",
+                "operationTitle": "Submit Vulnerability Export Job",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d217c650-ac7a-4c2f-9162-b3f6b34bd138"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "1995d339-3493-4741-9665-61a9905b041f",
+                "title": "Tenable.io: Submit Vulnerability Export Job",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e08722e6-e505-45f7-b359-e48498c99c81"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Submit Vulnerability Export Job",
+              "targetStep": "/api/3/workflow_steps/d217c650-ac7a-4c2f-9162-b3f6b34bd138",
+              "sourceStep": "/api/3/workflow_steps/e08722e6-e505-45f7-b359-e48498c99c81",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f11a4571-5d16-4657-88f5-6c5222788b1e"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "95e722f0-04aa-41ff-b756-a92a85fca9f8",
+          "id": 1280,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Asset's Vulnerabilities",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves information about vulnerabilities that are associated with a particular asset from the Tenable.io server, based on the asset UUID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/1ab9fefb-e7b9-43d9-bd97-f0e4149aa570",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "3bdbe71c-dbe1-4f0f-b67e-5cc4e457324f",
+                "title": "Tenable.io: List Asset's Vulnerabilities",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "1ab9fefb-e7b9-43d9-bd97-f0e4149aa570"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Asset's Vulnerabilities",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_asset_vulnerabilities",
+                "operationTitle": "List Asset's Vulnerabilities",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ab058b52-c238-4897-af9b-31c463ad861a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> List Asset's Vulnerabilities",
+              "targetStep": "/api/3/workflow_steps/ab058b52-c238-4897-af9b-31c463ad861a",
+              "sourceStep": "/api/3/workflow_steps/1ab9fefb-e7b9-43d9-bd97-f0e4149aa570",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d959ab1c-f238-4352-8fb3-8796656669ac"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "9c290526-17cb-4829-80f1-1a9a5aed3a44",
+          "id": 1281,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Trigger Scan",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Triggers a scan on the Tenable.io server based on the scan ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e68e9fb8-71f1-4f61-bc32-33c23969938b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Trigger Scan",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "trigger_scan",
+                "operationTitle": "Trigger Scan",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "16130771-582e-4b25-9881-4f5687d358b5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4f9a72eb-002c-4ebc-8415-23c87240dabf",
+                "title": "Tenable.io: Trigger Scan",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e68e9fb8-71f1-4f61-bc32-33c23969938b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Trigger Scan",
+              "targetStep": "/api/3/workflow_steps/16130771-582e-4b25-9881-4f5687d358b5",
+              "sourceStep": "/api/3/workflow_steps/e68e9fb8-71f1-4f61-bc32-33c23969938b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f200ad02-c7e8-4fe5-8694-127a49f7a58b"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "b2388ecb-7049-4dae-bda1-6458e3db194c",
+          "id": 1282,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Tenable.io > Create or Update Vulnerabilities Records for Asset",
+          "aliasName": null,
+          "tag": "#PostCreate#Asset",
+          "description": "Fetch and create or update vulnerabilities records for specified asset",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "assetIRI",
+            "enableBulkIngest"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1673872087,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fa0aa8ef-738c-48ac-b501-e3394c4566d2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Calculate Asset Risk",
+              "description": null,
+              "arguments": {
+                "assetRisk": "{% set _cvss_score = vars.maxCvssScore %}{{ (((_cvss_score | float | round(0, 'ceil')) if (_cvss_score | float < 1.0) else (_cvss_score | float | round(0, 'floor'))) | resolveRange(vars.vulnSeverityMapping)).itemValue}}"
+              },
+              "status": null,
+              "top": "1110",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "201493ee-1eba-4849-8393-08673239282e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Bulk Ingest Vulnerability Records",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.steps.Fetch_Asset_Vulnerabilities.data | length > 0}}",
+                "for_each": {
+                  "item": "{{vars.vulnerabilityData}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "cvss": "{{vars.item.info['risk_information']['cvss_base_score']}}",
+                  "name": "{{vars.item.info['plugin_details']['name']}}",
+                  "risk": "{{vars.item.info['risk_information']['risk_factor']}}",
+                  "cveId": "{{ vars.item.info['reference_information'] | json_query(\"[?contains(name, 'cve')].values\") | flatten(levels=1) | join(', ')}}",
+                  "status": "/api/3/picklists/e001be1d-d050-473c-a82d-003bf14c4b1b",
+                  "severity": "{% set _cvss_score = vars.item.info['risk_information']['cvss_base_score'] %}{{ ((_cvss_score | float | round(0, 'ceil')) if (_cvss_score | float < 1.0) else (_cvss_score | float | round(0, 'floor'))) | resolveRange(vars.vulnSeverityMapping)}}",
+                  "__replace": "",
+                  "cvssVector": "{{vars.item.info['risk_information']['cvss_vector']}}",
+                  "pluginName": "{{vars.item.info['plugin_details']['name']}}",
+                  "pluginType": "{{vars.item.info['plugin_details'].type}}",
+                  "sourceData": "{{vars.item | toJSON}}",
+                  "cvss3Vector": "{{vars.item.info['risk_information']['cvss3_vector']}}",
+                  "description": "### Synopsis\n{{vars.item.info.synopsis}}\n\n### Description\n{{vars.item.info.description}}\n\n### Solution\n{{vars.item.info.solution}}\n",
+                  "lastSeenDate": "{{ arrow.get(vars.item.info.discovery['seen_last']).timestamp }}",
+                  "pluginFamily": "{{vars.item.info['plugin_details'].family}}",
+                  "firstSeenDate": "{{ arrow.get(vars.item.info.discovery['seen_first']).timestamp }}",
+                  "pluginVersion": "{{vars.item.info['plugin_details'].version}}",
+                  "cvss3BaseScore": "{{vars.item.info['risk_information']['cvss3_base_score']}}",
+                  "vulnerabilityId": "{{vars.item.info['plugin_details']['plugin_id']}}",
+                  "cvssTemporalScore": "{{vars.item.info['risk_information']['cvss_temporal_score']}}",
+                  "cvss3TemporalScore": "{{vars.item.info['risk_information']['cvss3_temporal_score']}}",
+                  "cvssTemporalVector": "{{vars.item.info['risk_information']['cvss_temporal_vector']}}",
+                  "cvss3TemporalVector": "{{vars.item.info['risk_information']['cvss3_temporal_vector']}}",
+                  "pluginPublicationDate": "{{arrow.get(vars.item.info.plugin_details.publication_date).format('MM/DD/YYYY hh:mm A')}}",
+                  "pluginModificationDate": "{{arrow.get(vars.item.info.plugin_details.modification_date).format('MM/DD/YYYY hh:mm A')}}"
+                },
+                "_showJson": false,
+                "collection": "/api/ingest-feeds/vulnerabilities",
+                "__recommend": [],
+                "step_variables": []
+              },
+              "status": null,
+              "top": "705",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/7b221880-716b-4726-a2ca-5e568d330b3e",
+              "group": null,
+              "uuid": "42d867ee-38ec-48b5-b470-c3ad28ab5217"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Vulnerability Details",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "0427d980-5772-4609-89d8-85cdcac497a1",
+                "params": {
+                  "plugin_id": "{{vars.item}}"
+                },
+                "version": "1.4.0",
+                "for_each": {
+                  "item": "{{vars.vulnIDList}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "connector": "tenable-io",
+                "operation": "get_vuln_details",
+                "operationTitle": "Get Vulnerability Information",
+                "step_variables": {
+                  "maxCvssScore": "{{vars.result | json_query(\"[].data.info.risk_information.cvss_base_score\") | unique | max}}",
+                  "vulnerabilityData": "{{vars.steps.Fetch_Vulnerability_Details | json_query(\"[].data\") }}"
+                }
+              },
+              "status": null,
+              "top": "435",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "91e8f107-3ea5-46bb-b33b-e2d8daf52ec1"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "assetIRI": "{{vars.input.records[0]['@id'] or vars.input.params.assetIRI}}",
+                "assetUUID": "{{vars.input.records[0].deviceUid or (vars.input.params.assetIRI | fromIRI).deviceUid}}",
+                "enableBulkIngest": "{{vars.input.params.enableBulkIngest or false}}",
+                "vulnSeverityMapping": "{\n  '0': {{'Severity'| picklist('Minimal') }}, \n  '1,2,3': {{'Severity'| picklist('Low') }}, \n  '4,5,6': {{'Severity'| picklist('Medium') }}, \n  '7,8': {{'Severity'| picklist('High') }}, \n  '9,10': {{'Severity'| picklist('Critical') }}\n}"
+              },
+              "status": null,
+              "top": "165",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "b052105c-5019-40f0-a1a5-e9da5be25283"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Asset Risk",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "assetRisk": "{{\"AssetRisk\" | picklist(vars.assetRisk, \"@id\")}}"
+                },
+                "operation": "Append",
+                "collection": "{{vars.assetIRI}}",
+                "__recommend": [],
+                "collectionType": "/api/3/assets",
+                "fieldOperation": {
+                  "recordTags": "Append"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "1245",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
+              "group": null,
+              "uuid": "c6c19431-ea5b-4e2c-9786-7adfdcf6aabf"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Enable Bulk Ingest Records",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "Yes",
+                    "step_iri": "/api/3/workflow_steps/42d867ee-38ec-48b5-b470-c3ad28ab5217",
+                    "condition": "{{ vars.enableBulkIngest }}",
+                    "step_name": "Bulk Ingest Vulnerability Records"
+                  },
+                  {
+                    "option": "No",
+                    "default": true,
+                    "step_iri": "/api/3/workflow_steps/e68aa719-1c6e-4a99-bca1-f74d0e21b9c5",
+                    "step_name": "Create Vulnerability Records"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "570",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "cd11ca20-5ebe-4d36-850e-0d4099163d5a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Link Vulnerabilities to Asset",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "__link": {
+                    "vulnerabilities": "{{vars.vulnIRIsList}}"
+                  }
+                },
+                "operation": "Append",
+                "collection": "{{vars.assetIRI}}",
+                "__recommend": [],
+                "collectionType": "/api/3/assets",
+                "fieldOperation": {
+                  "recordTags": "Append"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "975",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
+              "group": null,
+              "uuid": "e43f5a60-2728-4f17-b55c-35809f63c752"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Vulnerability Record IRIs",
+              "description": null,
+              "arguments": {
+                "query": {
+                  "sort": [],
+                  "limit": 30,
+                  "logic": "AND",
+                  "filters": [
+                    {
+                      "type": "primitive",
+                      "field": "vulnerabilityId",
+                      "value": "{{vars.vulnIDList}}",
+                      "operator": "in",
+                      "_operator": "in"
+                    }
+                  ],
+                  "__selectFields": [
+                    "id",
+                    "severity"
+                  ]
+                },
+                "module": "vulnerabilities?$limit=3000000",
+                "checkboxFields": true,
+                "step_variables": {
+                  "vulnIRIsList": "{{vars.result | json_query('[].\"@id\"')}}",
+                  "vulnSeverityList": "{{vars.result | json_query(\"[].severity.itemValue\") | unique}}"
+                }
+              },
+              "status": null,
+              "top": "840",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928770",
+              "group": null,
+              "uuid": "e58c5576-d93c-44ae-a702-d5be9dcc4a1b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Vulnerability Records",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.vulnerabilityData}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "cvss": "{{vars.item.info['risk_information']['cvss_base_score']}}",
+                  "name": "{{vars.item.info['plugin_details']['name']}}",
+                  "risk": "{{vars.item.info['risk_information']['risk_factor']}}",
+                  "cveId": "{{ vars.item.info['reference_information'] | json_query(\"[?contains(name, 'cve')].values\") | flatten(levels=1) | join(', ')}}",
+                  "__link": {
+                    "assets": "{{vars.assetIRI}}"
+                  },
+                  "status": "/api/3/picklists/e001be1d-d050-473c-a82d-003bf14c4b1b",
+                  "severity": "{% set _cvss_score = vars.item.info['risk_information']['cvss_base_score'] %}{{ ((_cvss_score | float | round(0, 'ceil')) if (_cvss_score | float < 1.0) else (_cvss_score | float | round(0, 'floor'))) | resolveRange(vars.vulnSeverityMapping)}}",
+                  "__replace": "true",
+                  "cvssVector": "{{vars.item.info['risk_information']['cvss_vector']}}",
+                  "pluginName": "{{vars.item.info['plugin_details']['name']}}",
+                  "pluginType": "{{vars.item.info['plugin_details']['type']}}",
+                  "sourceData": "{{vars.item | toJSON}}",
+                  "cvss3Vector": "{{vars.item.info['risk_information']['cvss3_vector']}}",
+                  "description": "### Synopsis\n{{vars.item.info.synopsis}}\n\n### Description\n{{vars.item.info.description}}\n\n### Solution\n{{vars.item.info.solution}}\n",
+                  "lastSeenDate": "{{ arrow.get(vars.item.info.discovery['seen_last']).timestamp }}",
+                  "pluginFamily": "{{vars.item.info['plugin_details']['family']}}",
+                  "firstSeenDate": "{{ arrow.get(vars.item.info.discovery['seen_first']).timestamp }}",
+                  "pluginVersion": "{{vars.item.info['plugin_details']['version']}}",
+                  "cvss3BaseScore": "{{vars.item.info['risk_information']['cvss3_base_score']}}",
+                  "vulnerabilityId": "{{vars.item.info['plugin_details']['plugin_id']}}",
+                  "cvssTemporalScore": "{{vars.item.info['risk_information']['cvss_temporal_score']}}",
+                  "cvss3TemporalScore": "{{vars.item.info['risk_information']['cvss3_temporal_score']}}",
+                  "cvssTemporalVector": "{{vars.item.info['risk_information']['cvss_temporal_vector']}}",
+                  "cvss3TemporalVector": "{{vars.item.info['risk_information']['cvss3_temporal_vector']}}",
+                  "pluginPublicationDate": "{{arrow.get(vars.item.info.plugin_details.publication_date).format('MM/DD/YYYY hh:mm A')}}",
+                  "pluginModificationDate": "{{arrow.get(vars.item.info.plugin_details.modification_date).format('MM/DD/YYYY hh:mm A')}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "/api/3/upsert/vulnerabilities",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": {
+                  "vulnIRIsList": "{{vars.result | json_query('[].\"@id\"')}}",
+                  "vulnSeverityList": "{{vars.result | json_query(\"[].severity.itemValue\") | unique}}"
+                }
+              },
+              "status": null,
+              "top": "975",
+              "left": "475",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "e68aa719-1c6e-4a99-bca1-f74d0e21b9c5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Asset Vulnerabilities",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "0427d980-5772-4609-89d8-85cdcac497a1",
+                "params": {
+                  "asset_id": "{{vars.assetUUID}}"
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_asset_vulnerabilities",
+                "operationTitle": "List Asset's Vulnerabilities",
+                "step_variables": {
+                  "vulnIDList": "{{vars.result.data | json_query('[].\"plugin_id\"')}}",
+                  "currentAssetCriticality": "{{(vars.assetIRI | fromIRI).criticality.itemValue or None}}"
+                }
+              },
+              "status": null,
+              "top": "300",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e91fff34-dd28-4399-9baf-68608c121f15"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "5b3ae9fe-b25f-4fcf-a130-47c8b2d2bfd2",
+                "title": "Get Asset Vulnerabilities",
+                "resources": [
+                  "assets"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "assets": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+              },
+              "status": null,
+              "top": "30",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "fa0aa8ef-738c-48ac-b501-e3394c4566d2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Link Vulnerabilities to Asset -> Calculate Asset Risk",
+              "targetStep": "/api/3/workflow_steps/201493ee-1eba-4849-8393-08673239282e",
+              "sourceStep": "/api/3/workflow_steps/e43f5a60-2728-4f17-b55c-35809f63c752",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7bccd41a-404a-4f5e-b537-38858f4c8903"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create Vulnerability Records -> Calculate Asset Risk",
+              "targetStep": "/api/3/workflow_steps/201493ee-1eba-4849-8393-08673239282e",
+              "sourceStep": "/api/3/workflow_steps/e68aa719-1c6e-4a99-bca1-f74d0e21b9c5",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b66ad6df-a3dd-4335-a8a1-d2efcdbc9acb"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Calculate Asset Risk -> Update Asset Risk",
+              "targetStep": "/api/3/workflow_steps/c6c19431-ea5b-4e2c-9786-7adfdcf6aabf",
+              "sourceStep": "/api/3/workflow_steps/201493ee-1eba-4849-8393-08673239282e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ff2e3764-1d5f-4864-9c37-6a7e65a5858f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Asset Vulnerabilities -> Fetch Vulnerability Details",
+              "targetStep": "/api/3/workflow_steps/91e8f107-3ea5-46bb-b33b-e2d8daf52ec1",
+              "sourceStep": "/api/3/workflow_steps/e91fff34-dd28-4399-9baf-68608c121f15",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "26313949-d6eb-4a57-96bc-1ebc9f4f9afe"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Vulnerability Details -> Enable Bulk Ingest Records",
+              "targetStep": "/api/3/workflow_steps/cd11ca20-5ebe-4d36-850e-0d4099163d5a",
+              "sourceStep": "/api/3/workflow_steps/91e8f107-3ea5-46bb-b33b-e2d8daf52ec1",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a7db7eaa-4c3e-48a7-b407-d4f9e5598af8"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Bulk -> Get Created Vulnerability IRIs",
+              "targetStep": "/api/3/workflow_steps/e58c5576-d93c-44ae-a702-d5be9dcc4a1b",
+              "sourceStep": "/api/3/workflow_steps/42d867ee-38ec-48b5-b470-c3ad28ab5217",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0ce1dcd7-347a-4f00-8d42-7ca3d2ec578c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Enable Bulk Ingest Records -> Create Vulnerability Records",
+              "targetStep": "/api/3/workflow_steps/e68aa719-1c6e-4a99-bca1-f74d0e21b9c5",
+              "sourceStep": "/api/3/workflow_steps/cd11ca20-5ebe-4d36-850e-0d4099163d5a",
+              "label": "No",
+              "isExecuted": false,
+              "uuid": "57e46ac4-1cf3-4ff6-9570-adfd6a704179"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Fetch Asset Vulnerabilities",
+              "targetStep": "/api/3/workflow_steps/e91fff34-dd28-4399-9baf-68608c121f15",
+              "sourceStep": "/api/3/workflow_steps/b052105c-5019-40f0-a1a5-e9da5be25283",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "771c7c84-60ad-4eb9-a377-b7fef4294493"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Created Vulnerability IRIs -> Link Vulnerabilities to Asset",
+              "targetStep": "/api/3/workflow_steps/e43f5a60-2728-4f17-b55c-35809f63c752",
+              "sourceStep": "/api/3/workflow_steps/e58c5576-d93c-44ae-a702-d5be9dcc4a1b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b6c560b8-c451-40b4-8031-b6d5d284584f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/b052105c-5019-40f0-a1a5-e9da5be25283",
+              "sourceStep": "/api/3/workflow_steps/fa0aa8ef-738c-48ac-b501-e3394c4566d2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "bbaa4836-fad6-470e-9db4-1c3e89c324aa"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Enable Bulk Ingest Records -> Create Vulnerability Records",
+              "targetStep": "/api/3/workflow_steps/42d867ee-38ec-48b5-b470-c3ad28ab5217",
+              "sourceStep": "/api/3/workflow_steps/cd11ca20-5ebe-4d36-850e-0d4099163d5a",
+              "label": "Yes",
+              "isExecuted": false,
+              "uuid": "bdfef55a-0c20-446a-838b-37aef13e1b3f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "cbf64b42-e6f8-47fb-8287-325de0464df1",
+          "id": 1283,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [
+            {
+              "apiName": "vulnerabilityManagement",
+              "name": "Vulnerability Management",
+              "version": "2.0.0"
+            }
+          ],
+          "recordTags": [
+            "dataingestion",
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Submit Asset Export Job",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Submits asset export job that match the request criteria from Tenable.io.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/db925986-3073-40c8-87e6-6eb48511a301",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Submit Asset Export Job",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": {
+                  "chunk_size": 500,
+                  "last_assessed": ""
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "submit_asset_export_job",
+                "operationTitle": "Submit Asset Export Job",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ad0423ce-cd94-48bd-bc02-3e6bee44f8f4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a347b967-817a-44ba-8b97-602f02b6c198",
+                "title": "Tenable.io: Submit Asset Export Job",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "db925986-3073-40c8-87e6-6eb48511a301"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Submit Asset Export Job",
+              "targetStep": "/api/3/workflow_steps/ad0423ce-cd94-48bd-bc02-3e6bee44f8f4",
+              "sourceStep": "/api/3/workflow_steps/db925986-3073-40c8-87e6-6eb48511a301",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "64e397b9-e4ea-4a1e-a67d-0ec3981b8912"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "ef985a66-1e28-4585-81ec-1815a56627fe",
+          "id": 1284,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Cancel Asset Export Job",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Cancels the specified asset export job.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0b56a8e1-18f9-41ee-9ff6-bfb52d8791cb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "75476376-2069-4b90-ad3c-498b4cb03f5a",
+                "title": "Tenable.io: Cancel Asset Export Job",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "0b56a8e1-18f9-41ee-9ff6-bfb52d8791cb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Cancel Asset Export Job",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "cancel_asset_export_job",
+                "operationTitle": "Cancel Asset Export Job",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "73b3e052-1a4f-4c9e-a8fa-f4fc71fcc75a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Cancel Asset Export Job",
+              "targetStep": "/api/3/workflow_steps/73b3e052-1a4f-4c9e-a8fa-f4fc71fcc75a",
+              "sourceStep": "/api/3/workflow_steps/0b56a8e1-18f9-41ee-9ff6-bfb52d8791cb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "82ddf19b-18bb-4695-b3ec-c9d4437cee64"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "f1b22899-22af-45d0-b2d3-2211ec173754",
+          "id": 1285,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Download Vulnerability Export Chunk",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Downloads exported vulnerabilities as a JSON file from Tenable.io",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": null,
+          "collection": "/api/3/workflow_collections/fbd839cf-a40b-40ff-87ee-35f36c475e72",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f4e2ff16-f6eb-4786-a7eb-2e9b068c85dc",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Download Vulnerability Export Chunk",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "download_vuln_export_chunk",
+                "operationTitle": "Download Vulnerability Export Chunk",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8a0013de-3db9-4017-8e52-fd888d9432e5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "f095169b-c28a-4bd1-ac86-186ab66ed756",
+                "title": "Tenable.io: Download Vulnerability Export Chunk",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "f4e2ff16-f6eb-4786-a7eb-2e9b068c85dc"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Download Vulnerability Export Chunk",
+              "targetStep": "/api/3/workflow_steps/8a0013de-3db9-4017-8e52-fd888d9432e5",
+              "sourceStep": "/api/3/workflow_steps/f4e2ff16-f6eb-4786-a7eb-2e9b068c85dc",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "fe94ffa1-697f-4e00-81f3-1326bb481b17"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "f8440c83-0091-4f64-b237-1bc3e0b7fec5",
+          "id": 1286,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Host Details",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves the details for the specified host based on the scan UUID and host ID provided.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1685372927,
+          "collection": "/api/3/workflow_collections/8fc44d0e-d104-4832-9769-d0bf1396d003",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/4024d5a4-9e5f-44c4-9363-438ac78ce82a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Host Details",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": [],
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_host_details",
+                "operationTitle": "Get Host Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "1f71c033-e209-4caf-a7a5-3c0fa7053974"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "cc818c46-b78b-4db0-b044-94ce265c5a6d",
+                "title": "Tenable.io: Get Host Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "4024d5a4-9e5f-44c4-9363-438ac78ce82a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Get Host Details",
+              "targetStep": "/api/3/workflow_steps/1f71c033-e209-4caf-a7a5-3c0fa7053974",
+              "sourceStep": "/api/3/workflow_steps/4024d5a4-9e5f-44c4-9363-438ac78ce82a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7753fdc0-8432-4ff6-b80d-5daa4ada7b79"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "4179cd1c-3335-452c-b58e-c82b50abacaf",
+          "id": 6464,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Scan History",
+          "aliasName": null,
+          "tag": "#Tenable.io",
+          "description": "Retrieves a list of objects, each of which represent an individual run of the specified scan based on the scan ID provided",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1685373457,
+          "collection": "/api/3/workflow_collections/8fc44d0e-d104-4832-9769-d0bf1396d003",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/047dba77-308c-4f07-b0e8-b208908713c7",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "645dce7d-4cdc-409c-8e54-50e62e5fd9ed",
+                "title": "Tenable.io: Get Scan History",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "047dba77-308c-4f07-b0e8-b208908713c7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Scan History",
+              "description": null,
+              "arguments": {
+                "name": "Tenable.io",
+                "config": "''",
+                "params": {
+                  "limit": "",
+                  "offset": "",
+                  "scan_id": "",
+                  "exclude_rollover": false
+                },
+                "version": "1.4.0",
+                "connector": "tenable-io",
+                "operation": "get_scan_history",
+                "operationTitle": "Get Scan History",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "89",
+              "left": "434",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "0b163936-cf34-4965-958d-e5f889ee1ed8"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Scan History",
+              "targetStep": "/api/3/workflow_steps/0b163936-cf34-4965-958d-e5f889ee1ed8",
+              "sourceStep": "/api/3/workflow_steps/047dba77-308c-4f07-b0e8-b208908713c7",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "37469dcf-b8d3-41b6-b5c9-68a318c7f699"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "4d463af4-7607-4936-be36-749d86a58b68",
+          "id": 6465,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Tenable",
+            "tenable-io"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "Tenable",
+    "tenable-io",
+    "dataingestion",
+    "ingest",
+    "Referenced",
+    "create",
+    "fetch"
+  ]
+}

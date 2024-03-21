@@ -1,0 +1,1641 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Jira - 1.2.0",
+      "description": "Sample playbooks for \"Jira\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": null,
+      "uuid": "4340fc6e-9481-485f-985c-d63d6f3fd9da",
+      "id": 346,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Add Remote Link",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Creates an issue remote link to an existing specified issue",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/00e46aec-ea93-438a-9833-a6ea199e936d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "bcc45bd9-e4e1-4446-ab8c-2689abca5099",
+                "title": "Jira: Add Remote Link",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "00e46aec-ea93-438a-9833-a6ea199e936d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Add Remote Link",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "url": "https://www.w3schools.com",
+                  "title": "W3schools",
+                  "issue_key": "FOR-4"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "add_remote_link",
+                "operationTitle": "Add Remote Link",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "160",
+              "left": "340",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8c164c56-7a4f-4072-8ed1-96c336ad7f2a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Add Remote Link",
+              "targetStep": "/api/3/workflow_steps/8c164c56-7a4f-4072-8ed1-96c336ad7f2a",
+              "sourceStep": "/api/3/workflow_steps/00e46aec-ea93-438a-9833-a6ea199e936d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "45cd094b-b631-4cba-96a9-a33ad127d068"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "10d23e2f-d5ff-4038-90a0-bb7fa8511493",
+          "id": 4579,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Projects",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Lists all projects",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e68d7407-038b-4235-9c50-2c3caa92a45c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Projects",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": [],
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "list_projects",
+                "operationTitle": "List Projects",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7571bcf9-fb32-422c-a55b-0347af2f49b3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6edb3ad7-5a7c-4fa6-a34c-a160b090459e",
+                "title": "Jira: List Projects",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e68d7407-038b-4235-9c50-2c3caa92a45c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> List Projects",
+              "targetStep": "/api/3/workflow_steps/7571bcf9-fb32-422c-a55b-0347af2f49b3",
+              "sourceStep": "/api/3/workflow_steps/e68d7407-038b-4235-9c50-2c3caa92a45c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3b70ede0-ff19-4881-a083-c7b1e1e3bdc1"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "11113b08-589f-486a-8f95-ceea4f1e2fa8",
+          "id": 4573,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Set Ticket Status",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Setting status of Jira ticket",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ed7c0a3f-d52b-4db9-8170-388751341c17",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Ticket Status",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "status": "In Progress",
+                  "issue_key": "FOR-4"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "set_status",
+                "operationTitle": "Set Status",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "top": "140",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "252495ac-c733-4ae7-9ce6-6f255fdb736d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "9ccf1a5e-7de3-41f6-9641-5e43e5fe37c6",
+                "title": "Jira: Set Ticket Status",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ed7c0a3f-d52b-4db9-8170-388751341c17"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Set Ticket Status",
+              "targetStep": "/api/3/workflow_steps/252495ac-c733-4ae7-9ce6-6f255fdb736d",
+              "sourceStep": "/api/3/workflow_steps/ed7c0a3f-d52b-4db9-8170-388751341c17",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d61016ee-46d5-4a8b-ab6a-ad30167bc930"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1770cd64-19a0-4be4-a021-d110b6426caf",
+          "id": 4576,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Ticket Details",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Get Information Of Jira Ticket",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e6062093-9505-41e2-9d23-b39e1880a370",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Ticket Details",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "issue_key": "FOR-1"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "get_ticket_details",
+                "operationTitle": "Get Ticket Details",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                },
+                "operationOutput": {
+                  "name": ""
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e2626baf-1077-457c-89ac-d7f6afc90b52"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "28d0c2fa-00dc-4b8a-bd01-f98e1ec6c55b",
+                "title": "Jira: Get Ticket Details",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "_promptexpanded": true,
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e6062093-9505-41e2-9d23-b39e1880a370"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Incidents -> Fetcj Ticket Status",
+              "targetStep": "/api/3/workflow_steps/e2626baf-1077-457c-89ac-d7f6afc90b52",
+              "sourceStep": "/api/3/workflow_steps/e6062093-9505-41e2-9d23-b39e1880a370",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0f690123-c330-4e10-a17d-afe2ff529e8d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "232a0053-cbdb-42d3-b3fb-425a676aceba",
+          "id": 4575,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Delete Ticket",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Deletion of Jira ticket",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a2fa7552-568e-40ea-bd71-0326d84210a0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Delete Ticket",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "issue_key": "FOR-3",
+                  "delete_subtask": true
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "delete_ticket",
+                "operationTitle": "Delete Ticket",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9eb0d7f4-af2a-494d-918a-3f909d700593"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "af8b345e-ba5c-4aa3-a00e-2d8d97e1a5e2",
+                "title": "Jira: Delete Ticket",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "a2fa7552-568e-40ea-bd71-0326d84210a0"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Delete Ticket",
+              "targetStep": "/api/3/workflow_steps/9eb0d7f4-af2a-494d-918a-3f909d700593",
+              "sourceStep": "/api/3/workflow_steps/a2fa7552-568e-40ea-bd71-0326d84210a0",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "5f06865f-6b9c-4f8b-8ce4-d59217f50b92"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "28910ffe-cdf5-4fe0-89b8-265ab69c03e1",
+          "id": 4571,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create Ticket",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Creation Of Jira Ticket",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/494ad20a-4aa3-48da-890f-e315609469ff",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Ticket",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "parent": "",
+                  "priority": "Medium",
+                  "issue_type": "Task",
+                  "project_key": "FOR",
+                  "other_fields": "",
+                  "ticket_summary": "Test Summary",
+                  "ticket_description": "Creation of an issue using project keys and issue type names using the REST API"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "create_ticket",
+                "operationTitle": "Create Ticket",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "160",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "293bedab-0f32-4c48-af81-675bccac7175"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "e8e9ff1e-0339-4863-a6c9-a1aebdfbf313",
+                "title": "Jira: Create Ticket",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "494ad20a-4aa3-48da-890f-e315609469ff"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Incidents -> Create Tick",
+              "targetStep": "/api/3/workflow_steps/293bedab-0f32-4c48-af81-675bccac7175",
+              "sourceStep": "/api/3/workflow_steps/494ad20a-4aa3-48da-890f-e315609469ff",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7d74b283-390c-488d-81ed-cdef40d23c42"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "52527fba-4319-4831-bd14-65d41b9668eb",
+          "id": 4568,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get User Details",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Get details of a specific user",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/bd83bfb7-7239-4cbb-b827-c4f0e6f83438",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get User Details",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "3f0c65b8-d4a4-4d3d-b29e-d0fceab606b4",
+                "params": {
+                  "accountId": "624bdcbe5f63fd0069b5a650"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "get_user_details",
+                "operationTitle": "Get User Details",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                },
+                "operationOutput": {
+                  "body": ""
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "340",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "366c0d5c-caaa-48c6-8ca2-dddc5d6f81b5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "d0268ca0-4e98-40bf-8dec-5639793026bb",
+                "title": "Jira: Get User Details",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "bd83bfb7-7239-4cbb-b827-c4f0e6f83438"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "incidents -> Add Comment",
+              "targetStep": "/api/3/workflow_steps/366c0d5c-caaa-48c6-8ca2-dddc5d6f81b5",
+              "sourceStep": "/api/3/workflow_steps/bd83bfb7-7239-4cbb-b827-c4f0e6f83438",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3c89051c-877c-4ee3-b7cb-bb24428f4366"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "8b8c7436-d851-491b-aa17-07b8b766a2ff",
+          "id": 4574,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Comments",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Retrieves list of comments to an existing Jira ticket on your configured Jira server.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/97cacf93-cf5a-4ee7-8dbd-27d337a128df",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Comments",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "orderBy": "",
+                  "startAt": 0,
+                  "issue_key": "FOR-1",
+                  "maxResults": 50
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "get_comments",
+                "operationTitle": "Get Comments",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "08b4e265-be2e-4f15-871e-d873fa13929b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "85fe7410-04cc-45cd-a6cb-cb4e597bab2f",
+                "title": "Jira: Get Comments",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "97cacf93-cf5a-4ee7-8dbd-27d337a128df"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Comments",
+              "targetStep": "/api/3/workflow_steps/08b4e265-be2e-4f15-871e-d873fa13929b",
+              "sourceStep": "/api/3/workflow_steps/97cacf93-cf5a-4ee7-8dbd-27d337a128df",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b8a82fb4-b2f4-4d76-98cb-154eec59bfce"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "8d4efe47-7d9a-47ea-9c76-c8c36a4a1a1c",
+          "id": 4572,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update FortiSOAR Record",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Webhook playbook to get updates from Jira",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b1266039-9685-4134-b279-fcd46f21c758",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Mapping",
+              "description": null,
+              "arguments": {
+                "jira_mapping_status": "{ \t\"Open\": \"{{'JiraStatus'| picklist('Back_to_open', '@id')}}\", \t\"Work in progress\": \"{{'JiraStatus'| picklist('Start_progress', '@id')}}\", \t\"Pending\": \"{{'JiraStatus'| picklist('Pending', '@id')}}\", \t\"Done\": \"{{'JiraStatus'| picklist('Mark_as_Done', '@id')}}\", \t\"Reopened\": \"{{'JiraStatus'| picklist('Reopen_issue', '@id')}}\", \t\"Waiting for customer\": \"{{'JiraStatus'| picklist('Respond_to_customer', '@id')}}\", \t\"Resolved\": \"{{'JiraStatus'| picklist('Resolve_this_issue', '@id')}}\", \t\"Escalated\": \"{{'JiraStatus'| picklist('Escalate_this_issue', '@id')}}\", \t\"Canceled\": \"{{'JiraStatus'| picklist('Cancel_request', '@id')}}\", \t\"3\": \"{{'JiraStatus'| picklist('In_progress', '@id')}}\", \t\"10005\": \"{{'JiraStatus'| picklist('Escalate', '@id')}}\", \t\"In Progress\": \"{{'JiraStatus'| picklist('Back_to_in_progress', '@id')}}\", \t\"Closed\": \"{{'JiraStatus'| picklist('Close', '@id')}}\", \t\"Waiting for support\": \"{{'JiraStatus'| picklist('Respond_to_support', '@id')}}\" }",
+                "jira_mapping_priority": "{   \"Highest\": \"{{'jiraPriority'| picklist('Highest', '@id')}}\",   \"High\": \"{{'jiraPriority'| picklist('High', '@id')}}\",   \"Medium\": \"{{'jiraPriority'| picklist('Medium', '@id')}}\",   \"Low\": \"{{'jiraPriority'| picklist('Low', '@id')}}\", \"Lowest\": \"{{'jiraPriority'| picklist('Lowest', '@id')}}\" }"
+              },
+              "status": null,
+              "top": "160",
+              "left": "340",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "565a3230-ab94-40ec-b342-62a618fb0bc6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update FortiSOAR Record",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "jira_key": "{{vars.request.data.issue.key}}",
+                  "cyops_password": "demo",
+                  "cyops_username": "test"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "update_fortisoar",
+                "operationTitle": "Update FortiSOAR Record",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "300",
+              "left": "520",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8ce8a237-aef8-4cfd-b702-b891cc611e8a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "deferred/jiratest",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "api_body": "{{vars.request.data}}"
+                    }
+                  }
+                },
+                "authentication_methods": [
+                  "anonymous"
+                ]
+              },
+              "status": null,
+              "top": "20",
+              "left": "140",
+              "stepType": "/api/3/workflow_step_types/df26c7a2-4166-4ca5-91e5-548e24c01b5f",
+              "group": null,
+              "uuid": "b1266039-9685-4134-b279-fcd46f21c758"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Set Mapping -> Update FortiSOAR Record",
+              "targetStep": "/api/3/workflow_steps/8ce8a237-aef8-4cfd-b702-b891cc611e8a",
+              "sourceStep": "/api/3/workflow_steps/565a3230-ab94-40ec-b342-62a618fb0bc6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ee797b7b-d7bb-46cf-94c0-b59e2809b5c5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Set Mapping",
+              "targetStep": "/api/3/workflow_steps/565a3230-ab94-40ec-b342-62a618fb0bc6",
+              "sourceStep": "/api/3/workflow_steps/b1266039-9685-4134-b279-fcd46f21c758",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "fd34c725-6318-45d2-80a4-9e97c77952a6"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "b39aa959-90b4-4421-a8f7-3deca09ec59d",
+          "id": 4577,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Add Comment",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Adds a new Comment To Jira Ticket",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ac2928ae-c11d-42b0-8380-2c5c6eb8eadb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Add Comment",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "comment": "This is a comment regarding the quality of the response.",
+                  "issue_key": "FOR-1"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "add_comment",
+                "operationTitle": "Add Comment",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                },
+                "operationOutput": {
+                  "body": ""
+                }
+              },
+              "status": null,
+              "top": "140",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "0c5cc2e5-f828-435a-b093-cd475064a935"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "588b9b2b-7dd8-4cce-907c-af8d4145cec3",
+                "title": "Jira: Add Comment",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ac2928ae-c11d-42b0-8380-2c5c6eb8eadb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "incidents -> Add Comment",
+              "targetStep": "/api/3/workflow_steps/0c5cc2e5-f828-435a-b093-cd475064a935",
+              "sourceStep": "/api/3/workflow_steps/ac2928ae-c11d-42b0-8380-2c5c6eb8eadb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "bd2c622d-96d2-4953-88d3-77dae87016fd"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "c0acae51-ab4e-47a1-ae66-e487b1f771ff",
+          "id": 4578,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Add Attachment",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Submits a file that is present in FortiSOAR for analysis to Jira based on the FortiSOAR file IRI input parameters you have specified",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0be6ae99-ed7a-4ec0-ac9d-7ccf890afe4b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "83ee8dc6-ba2f-4250-9478-ffdc5ec2aaa3",
+                "title": "Jira: Add Attachment",
+                "resources": [
+                  "attachments",
+                  "comments"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "comments": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  },
+                  "attachments": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "0be6ae99-ed7a-4ec0-ac9d-7ccf890afe4b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Add Attachment",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "path": "Attachment ID",
+                  "value": "{{vars.attachment_id}}",
+                  "file_iri": "{{vars.input.records[0].file['@id']}}",
+                  "issue_key": "DEMO-1"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "submit_file",
+                "operationTitle": "Add Attachment",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "300",
+              "left": "480",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9af185b1-4e4a-4639-b106-49b14b0bdb2e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Attachment Details",
+              "description": null,
+              "arguments": {
+                "file_iri": "{{vars.input.records[0].file['@id']}}",
+                "attachment_id": "{{vars.input.records[0]['@id']}}"
+              },
+              "status": null,
+              "top": "160",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "aaef7948-555f-46d4-b5cd-2b26377330af"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Save attachment details -> Add Attachment",
+              "targetStep": "/api/3/workflow_steps/9af185b1-4e4a-4639-b106-49b14b0bdb2e",
+              "sourceStep": "/api/3/workflow_steps/aaef7948-555f-46d4-b5cd-2b26377330af",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "db2ef712-bc62-46ef-9038-e19550c04a52"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Save attachment details",
+              "targetStep": "/api/3/workflow_steps/aaef7948-555f-46d4-b5cd-2b26377330af",
+              "sourceStep": "/api/3/workflow_steps/0be6ae99-ed7a-4ec0-ac9d-7ccf890afe4b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "5cfe73e9-9534-4df0-930e-db70c346b7e2"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "d357f50e-4b91-4e71-a9fd-38aad7c1cd37",
+          "id": 4566,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Search Users",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Search users",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/81477e63-9ada-4369-93a3-a780e722959a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "2c0fab8c-b256-484f-a89a-bcf7fcf2a8c6",
+                "title": "Jira: Search Users",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "81477e63-9ada-4369-93a3-a780e722959a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Users",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "3f0c65b8-d4a4-4d3d-b29e-d0fceab606b4",
+                "params": {
+                  "startAt": "0",
+                  "maxResults": "50"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "search_users",
+                "operationTitle": "Search Users",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                },
+                "operationOutput": {
+                  "body": ""
+                }
+              },
+              "status": null,
+              "top": "140",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e025b1c1-ee2f-40f0-a49d-3583101e467b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "incidents -> Add Comment",
+              "targetStep": "/api/3/workflow_steps/e025b1c1-ee2f-40f0-a49d-3583101e467b",
+              "sourceStep": "/api/3/workflow_steps/81477e63-9ada-4369-93a3-a780e722959a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "8df278bf-9823-4108-9c68-d0b9364dcf2a"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "e55bd860-f372-48f8-b70a-94e4b62c2f47",
+          "id": 4567,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Assign Issue to User",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Assign issue to specific user",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ffe5c9c7-1621-4bc3-8bf6-bb62ae739a76",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Assign Issue to User",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "3f0c65b8-d4a4-4d3d-b29e-d0fceab606b4",
+                "params": {
+                  "accountId": "624bdcbe5f63fd0069b5a650",
+                  "issue_key": "TIC-1211"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "assign_issue",
+                "operationTitle": "Assign Issue to User",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                },
+                "operationOutput": {
+                  "body": ""
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ed85e0ff-aa97-45e6-a36e-944841d26b8f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "d35d39fe-b722-4ad3-804e-382d47d624da",
+                "title": "Jira: Assign Issue to User",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "120",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ffe5c9c7-1621-4bc3-8bf6-bb62ae739a76"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "incidents -> Add Comment",
+              "targetStep": "/api/3/workflow_steps/ed85e0ff-aa97-45e6-a36e-944841d26b8f",
+              "sourceStep": "/api/3/workflow_steps/ffe5c9c7-1621-4bc3-8bf6-bb62ae739a76",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2a675862-8731-437b-bcbb-39e7a4419e4e"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "ea680827-1ba2-4a42-8133-50c4944682cc",
+          "id": 4580,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Tickets",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Lists all tickets in a project",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/23792a94-51de-4000-b53d-a72efcd774d0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "e389120f-9a34-4992-87a6-17be964102e7",
+                "title": "Jira: List Tickets",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "incidents": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "23792a94-51de-4000-b53d-a72efcd774d0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Tickets",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "3f0c65b8-d4a4-4d3d-b29e-d0fceab606b4",
+                "params": {
+                  "fields": "",
+                  "status": "",
+                  "startAt": 0,
+                  "jql_query": "project = TIC and created > -1d",
+                  "maxResults": 50,
+                  "project_key": "For",
+                  "additional_search_parameter": ""
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "list_tickets",
+                "operationTitle": "List Tickets",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "3566e5c7-18f1-4119-8e50-21b938f2f3bc"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> List Tickets",
+              "targetStep": "/api/3/workflow_steps/3566e5c7-18f1-4119-8e50-21b938f2f3bc",
+              "sourceStep": "/api/3/workflow_steps/23792a94-51de-4000-b53d-a72efcd774d0",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "6c8b87ef-0d5a-430e-9b72-d7efac859437"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "f0797355-d75d-46fb-aa12-86fbac721d52",
+          "id": 4569,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Ticket",
+          "aliasName": null,
+          "tag": "#Jira",
+          "description": "Updation Of Jira Ticket",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1686641097,
+          "collection": "/api/3/workflow_collections/4340fc6e-9481-485f-985c-d63d6f3fd9da",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d2de64f0-2aea-4873-a60c-8af05ea9492c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Ticket",
+              "description": null,
+              "arguments": {
+                "name": "Jira",
+                "config": "5e039627-92c8-4e14-a9fd-fba653921a9b",
+                "params": {
+                  "status": "In Progress",
+                  "comment": "Updating comment automatically from CS record",
+                  "summary": "Test Summary",
+                  "priority": "High",
+                  "issue_key": "DEMO-1",
+                  "description": "Test Description",
+                  "project_key": "FOR",
+                  "other_fields": "{\"components\":[{\"name\":\"JIRA\"}]}"
+                },
+                "version": "1.2.0",
+                "connector": "jira",
+                "operation": "update_ticket",
+                "ignore_errors": false,
+                "operationTitle": "Update Ticket",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d0857fe7-e6e8-4e8d-83d1-acc84c153ee3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "89bd1a18-14df-4bbe-a093-bb1662c32c19",
+                "title": "Jira: Update Ticket",
+                "resources": [
+                  "incidents"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d2de64f0-2aea-4873-a60c-8af05ea9492c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Update Ticket",
+              "targetStep": "/api/3/workflow_steps/d0857fe7-e6e8-4e8d-83d1-acc84c153ee3",
+              "sourceStep": "/api/3/workflow_steps/d2de64f0-2aea-4873-a60c-8af05ea9492c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7ceaad15-c113-4416-a041-6e93f826e7f9"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "fbe2a4a5-bd4f-454d-8e6d-b30fa9354396",
+          "id": 4570,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "jira"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "jira"
+  ]
+}

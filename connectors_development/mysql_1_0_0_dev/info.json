@@ -1,0 +1,129 @@
+{
+    "name": "mysql",
+    "version": "1.0.0",
+    "label": "MySQL",
+    "description": "MySQL Connector allows different database operations with MySQL.",
+    "publisher": "",
+    "icon_small_name": "small-mysql.png",
+    "icon_large_name": "large-mysql.png",
+    "id": 196,
+    "configuration": {
+        "fields": [
+            {
+                "name": "host",
+                "required": true,
+                "type": "text",
+                "visible": true,
+                "title": "Hostname / IP Address",
+                "editable": true
+            },
+            {
+                "title": "Database",
+                "name": "database",
+                "type": "text",
+                "required": true,
+                "visible": true,
+                "editable": true
+            },
+            {
+                "title": "Username",
+                "name": "username",
+                "type": "text",
+                "required": false,
+                "visible": true,
+                "editable": true
+            },
+            {
+                "title": "Password",
+                "name": "password",
+                "type": "password",
+                "required": false,
+                "visible": true,
+                "editable": true
+            }
+        ]
+    },
+    "operations": [
+        {
+            "title": "Run Query",
+            "operation": "run_query",
+            "description": "Execute any query on MySQL database. E.g. Create, Update, Delete, Select, Insert",
+            "category": "investigation",
+            "annotation": "run_query",
+            "output_schema": [],
+            "parameters": [
+                {
+                    "name": "query_string",
+                    "value": "",
+                    "required": true,
+                    "type": "text",
+                    "visible": true,
+                    "title": "Query String",
+                    "editable": true
+                }
+            ],
+            "enabled": true
+        },
+        {
+            "title": "List Columns",
+            "operation": "list_columns",
+            "description": "Describes the structure of a table in the database by displaying information about its columns.",
+            "category": "investigation",
+            "annotation": "list_columns",
+            "output_schema": [
+                {
+                    "Type": "",
+                    "Field": "",
+                    "Extra": "",
+                    "Default": "",
+                    "Key": "",
+                    "Null": ""
+                }
+            ],
+            "parameters": [
+                {
+                    "name": "table_name",
+                    "value": "",
+                    "required": true,
+                    "type": "text",
+                    "visible": true,
+                    "title": "Table Name",
+                    "editable": true
+                }
+            ],
+            "enabled": true
+        },
+        {
+            "title": "List Tables",
+            "operation": "list_tables",
+            "category": "investigation",
+            "annotation": "list_tables",
+            "description": "List table names for provided database",
+            "output_schema": [
+                {
+                    "Tables_in_mysql": ""
+                }
+            ],
+            "parameters": [
+                {}
+            ],
+            "enabled": true
+        }
+    ],
+    "category": "Database",
+    "active": true,
+    "cs_compatible": true,
+    "system": false,
+    "playbook_collections": [
+        {
+            "@id": "/api/3/workflow_collections/d0dbfde4-fe11-4a49-a6ff-6bf7e17033d4",
+            "name": "Sample - MySQL - 1.0.0",
+            "image": "/api/3/images/3f6fe521-0a07-4cb7-b814-5743f84e1c60",
+            "description": "Sample playbooks for \"MySQL\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete."
+        }
+    ],
+    "icon_small": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQwIDc5LjE2MDQ1MSwgMjAxNy8wNS8wNi0wMTowODoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NjE2NzIwM0E1NjdCMTFFOEFBQzhBMENCOTM1OThFMUIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NjE2NzIwMzk1NjdCMTFFOEFBQzhBMENCOTM1OThFMUIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5ZDBlNDU3NS1mODA3LTQ0YzUtODZmOC0xMmNiYzI4MDcxYzciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+L358tgAAA0lJREFUeNrsVklME1EYfm+m0Bm6A23BAmUttdqwKZsRESFejAbxauLFqxeOXLx69EBMPHjwojFGDYkLKiZiIRhSiBBAdijYFobSjeks7czzYYkEE3GhHkx4l3n/m5f/+5fv+2cgQgj8y0WAf7wOAf5bAEGMr/iZ37kJ/46mw+Mzq/4ApVRk6XXF+TnZBm2KATaCkcVVf0GuyeNbX9sIGTN1dRXlqSwRDllGKJ6IlxflXThbK4iiyz2R4ibjyqz4N7TqDLxvOukMb3HzHl8qAYwGHS/Ev9f3dI1jbHoplQBsjNeqaJ4XkyZORUWne3xMygAUCpLlhfvP+rzrm8mT6mNlAyOTq/6N1AAo09MyKKU5W+9dDyQSUrLzbY1V2MQkjn87+Xua7qkVx8sy0qjopPlmcDQcYc/UOjF3txM9+DBQ0dT3PQ4XQqhR00l27WYQ44RHrz6cqnaUWY9gs+fdR71W1XTi+B5PXER2dYOID9paofMiCnrQwF3EbRK2NljRjub7QZSBlR34Im5DQpIKLebdDJhg+Pn7YU4QMUAowj55M3iszNpYeRSHQ5IEroAky4q+W0BkiYbrQIoDgZUf34AVHYSxVOrpJDUmxCyAldEkQF5O9o9NDkdZR2mBjwli5Im5ZSyiNAU5Oe/pfvAcv+11jfS4xmEaiWIhYLKB/Gq0OAAIgqi9CosaCGcHmuoFaTRIp36qg1CULbKYDVr1p88Lc8s+rJooy1nMWSs+ZivGLXnXjFoaNHdCSpe404am+wBGysja8aEx48yAnNhvVLAxgaaUNY6Sp2+HYoJgL87HXdFr1VaLCQ+ZKMsfLcwBSh1x5TZ5/qb0ogsF5kGc2/GBwSgdIBQAEvsAcJjLVY6S2WVvQY5Rr1HHsEbFeJ3T9qLfrc6gtjnnHUOBRUgbsCNorUXBBTT1GqzPyLN9RMVlIIko4scmiq4BNgBiwR09Jh+5pkxMJ8zlSy31lY5i3NgqewlJko5SK+55Y5V9m4JhH5q8J4ss2dYFbedIhGT3Q0CQgA+hLQZml6HFIam/G5Y2Q0M+4iOwvOUXQsPT8aXLraapa+2t+wmBmUOBJWhv/eMPztKXNT8TrK+0H0SG8PDP7hDgwOurAAMAnE2M3r5uGFQAAAAASUVORK5CYII=",
+    "icon_large": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAIAAAABc2X6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQwIDc5LjE2MDQ1MSwgMjAxNy8wNS8wNi0wMTowODoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NEI0NUU2N0I1NjdCMTFFOEFBQzhBMENCOTM1OThFMUIiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NEI0NUU2N0E1NjdCMTFFOEFBQzhBMENCOTM1OThFMUIiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5ZDBlNDU3NS1mODA3LTQ0YzUtODZmOC0xMmNiYzI4MDcxYzciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUy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",
+    "help_online": "https://help.cybersponse.com/support/solutions/articles/17000073074-mysql-v1-0-0",
+    "vendor_version": null
+}

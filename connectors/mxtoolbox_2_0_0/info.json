@@ -1,0 +1,180 @@
+{
+  "name": "mxtoolbox",
+  "label": "MxToolbox",
+  "description": "MxToolbox offers monitoring solutions and lookup tools. Connector supports automated operations for Lookup, Monitor and Usage",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "2.0.0",
+  "category": "Information",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000095237-mxtoolbox-v2-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "value": "https://mxtoolbox.com",
+        "description": "URL of the MxToolbox server to which you will connect and perform automated operations."
+      },
+      {
+        "title": "API Key",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_key",
+        "value": "",
+        "description": "API key that is configured for your account to access the MxToolbox endpoint."
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "api_call",
+      "title": "Get MxToolbox Records",
+      "category": "investigation",
+      "annotation": "get_mxtoolbox_records",
+      "description": "Makes an API call and retrieves records from MxToolbox based on the investigation method you have specified.",
+      "enabled": true,
+      "output_schema": {
+        "request_status": "",
+        "result": ""
+      },
+      "parameters": [
+        {
+          "title": "API Method",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "api_method",
+          "value": "",
+          "options": [
+            "Lookup",
+            "Monitor",
+            "Usage"
+          ],
+          "onchange": {
+            "Lookup": [
+              {
+                "title": "Lookup Types",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "name": "command",
+                "options": [
+                  "dns",
+                  "a",
+                  "mx",
+                  "spf",
+                  "txt",
+                  "soa",
+                  "blacklist",
+                  "smtp",
+                  "tcp",
+                  "http",
+                  "https",
+                  "ping",
+                  "trace",
+                  "ptr",
+                  "cname",
+                  "whois",
+                  "arin"
+                ],
+                "tooltip": "The lookup type command to get the lookup result",
+                "description": "Select the lookup type based on which you want to retrieve records from MxToolbox."
+              },
+              {
+                "title": "Lookup Value",
+                "name": "argument",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "value": "",
+                "tooltip": "The lookup value associated to lookup type",
+                "description": "Specify the value of the lookup associated with the lookup type you have specified."
+              },
+              {
+                "title": "Port",
+                "name": "port",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "integer",
+                "value": "",
+                "tooltip": "The port number associated with lookup type",
+                "description": "Port number associated with the lookup type you have specified."
+              }
+            ],
+            "Monitor": [
+              {
+                "title": "Monitor Types",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "select",
+                "name": "command",
+                "options": [
+                  "dns",
+                  "a",
+                  "mx",
+                  "spf",
+                  "blacklist",
+                  "smtp",
+                  "tcp",
+                  "http",
+                  "ptr",
+                  "cname"
+                ],
+                "tooltip": "The lookup type command to get the lookup result",
+                "description": "Select the  monitor type based on which you want to retrieve records from MxToolbox."
+              },
+              {
+                "title": "Monitor Value",
+                "name": "name",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "value": "",
+                "tooltip": "The lookup value associated to lookup type",
+                "description": "Specify the value of the  monitor associated with the  monitor type you have specified."
+              },
+              {
+                "title": "Tags",
+                "name": "tag",
+                "required": false,
+                "visible": true,
+                "editable": true,
+                "type": "text",
+                "value": "",
+                "tooltip": "The tag value to get the current status of all subscribed monitors. Provide comma separated values.",
+                "description": " Tags associated with the  monitor type you have specified. Provide comma separated values."
+              }
+            ]
+          },
+          "tooltip": "API methods are Lookup, Monitor and Usage used for various investigation methods",
+          "description": "API method based on which you want to retrieve records from MxToolbox. API methods are Lookup, Monitor and Usage used for various investigation methods."
+        }
+      ]
+    }
+  ]
+}

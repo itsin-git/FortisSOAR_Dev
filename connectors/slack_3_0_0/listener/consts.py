@@ -1,0 +1,13 @@
+#### DEFAULTS ###
+NUMBER_OF_THREADS_DEFAULT_VALUE = 8
+DEBUG_MODE_DEFAULT_VALUE = False
+ALLOWED_HOSTS_DEFAULT_VALUE = 'localhost, 127.0.0.1'
+ACK_MESSAGE = "Your request is queued, the command result will be displayed shortly"
+WF_COMPLETE_MESSAGE = "Playbook completed successfully!"
+WF_RESUME_ERROR_MESSAGE = "This input request is already submitted or the relevant playbook is terminated!"
+HELP_MESSAGE = [{"type":"section","text":{"type":"mrkdwn","text":"Hey there 👋 I'm your FortiSOAR bot for Slack. I'm here to help you leverage the power of FortiSOAR in your daily communications and threat investigation routines.\nThere are few ways to quickly get started:"}},{"type":"section","text":{"type":"mrkdwn","text":"*1️⃣ Use the `/fortisoar createAlert` command* to quickly create an alert in FortiSOAR using an alert creation form."}},{"type":"section","text":{"type":"mrkdwn","text":"*:two: Use the `/fortisoar createIndicator` command* to quickly create an indicator in FortiSOAR. You can optionally pass an indicator value like *`/fortisoar createIndicator <indicatorValue>`* to add any indicator to FortiSOAR Indicator list and possibly get the latest enrichment back in Slack within seconds. Example, `/fortisoar createIndicator 1.2.3.4`"}},{"type":"section","text":{"type":"mrkdwn","text":"*:three: Use the `/fortisoar invokePlaybook <playbookTag>` command* to trigger a playbook in FortiSOAR. Suppose a playbook for getting IP reputation has the tag 'getIPRep' in FortiSOAR, then you can use the command `/fortisoar invokePlaybook getIPRep` to trigger that playbook. Ensure that the playbooks that need to be triggered have the default tag *bot_enabled* also added to the playbook. "}},{"type":"section","text":{"type":"mrkdwn","text":"*:four: Use the `/fortisoar help` command* to quickly show the available commands and their usage details."}},{"type":"divider"},{"type":"context","elements":[{"type":"mrkdwn","text":"👀 Lists all available tag labels that can be used as commands to trigger respective playbooks using `/fortisoar availableCommands`\n❓Get help at any time with `/fortisoar help`"}]}]
+PLAYBOOK_ERROR_MESSAGE = "Ah! The playbook failed or took too long to execute. Check your FortiSOAR instance's playbook execution logs for more information."
+PLAYBOOK_TRIGGER_MESSAGE = "Ah! The playbook failed triggred. Check your FortiSOAR instance's playbook execution logs for more information."
+PLAYBOOK_INVALID_MESSAGE = "No playbook/command identified for the event"
+CONNECTOR_MAX_VERSION = "99999"
+STATIC_DOT = "• "

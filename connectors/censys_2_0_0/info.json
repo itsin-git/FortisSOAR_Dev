@@ -1,0 +1,731 @@
+{
+  "name": "censys",
+  "label": "Censys",
+  "version": "2.0.0",
+  "description": "Censys is a search engine that focuses on providing comprehensive information about devices and systems connected to the Internet. It is specifically designed to help researchers, security professionals, and organizations gain insights into various aspects of the global Internet infrastructure. Censys employs a variety of techniques to continuously scan and analyze the Internet, collecting data on IP addresses, websites, certificates, open ports, and other network-related information. This extensive dataset allows users to search for specific devices, services, or vulnerabilities, helping them understand the security posture of different entities on the Internet.",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": false,
+  "category": "Threat Intelligence",
+  "icon_small_name": "Censys_32X32.png",
+  "icon_large_name": "Censys_80X80.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/censys/629/censys-v2-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "value": "https://search.censys.io",
+        "description": "The URL of the Censys server to connect and perform the automated operations"
+      },
+      {
+        "title": "API ID",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_id",
+        "description": "The API ID used to access the Censys server to connect and perform the automated operations"
+      },
+      {
+        "title": "API Secret",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_secret",
+        "description": "The API Secret used to access the Censys server to connect and perform the automated operations"
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified.By default, this option is set to true"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_host_details",
+      "title": "Get Host Details Using IP Address",
+      "description": "Fetches the entire host entity by IP address and returns the most recent Censys view of the host and its services based on the IP address that you have specified",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_host_details",
+      "output_schema": {
+        "code": "",
+        "status": "",
+        "result": {
+          "ip": "",
+          "services": [
+            {
+              "port": "",
+              "service_name": "",
+              "transport_protocol": "",
+              "extended_service_name": "",
+              "dns": {
+                "server_type": ""
+              }
+            },
+            {
+              "port": "",
+              "service_name": "",
+              "transport_protocol": "",
+              "extended_service_name": "",
+              "http": {
+                "request": {
+                  "method": "",
+                  "uri": "",
+                  "headers": {
+                    "User_Agent": [
+                    ],
+                    "Accept": [
+                    ]
+                  }
+                },
+                "response": {
+                  "body": "",
+                  "protocol": "",
+                  "body_size": "",
+                  "status_code": "",
+                  "status_reason": "",
+                  "headers": {
+                    "Content_Length": [
+                    ],
+                    "Content_Type": [
+                    ],
+                    "Server": [
+                    ],
+                    "Date": [
+                    ]
+                  },
+                  "html_tags": [
+                  ]
+                }
+              },
+              "certificate": "",
+              "tls": {}
+            }
+          ],
+          "location_updated_at": "",
+          "location": {
+            "continent": "",
+            "country": "",
+            "country_code": "",
+            "postal_code": "",
+            "timezone": "",
+            "coordinates": {
+              "latitude": "",
+              "longitude": ""
+            },
+            "registered_country": "",
+            "registered_country_code": ""
+          },
+          "autonomous_system_updated_at": "",
+          "autonomous_system": {
+            "asn": "",
+            "description": "",
+            "bgp_prefix": "",
+            "name": "",
+            "country_code": ""
+          },
+          "operating_system": {
+            "product": "",
+            "vendor": "",
+            "version": "",
+            "edition": "",
+            "uniform_resource_identifier": "",
+            "other": {}
+          },
+          "last_updated_at": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "IP Address",
+          "name": "ip",
+          "type": "text",
+          "description": "Specify the IP Address of the requested host",
+          "tooltip": "The IP Address of the requested host",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Since Date",
+          "name": "at_time",
+          "type": "datetime",
+          "description": "Select the date from which to fetch the Censys view of a host and its services. Uses RFC3339 Timestamp",
+          "tooltip": "Select the date from which to fetch the Censys view of a host and its services. Uses RFC3339 Timestamp",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "operation": "search_hosts",
+      "title": "Search Hosts",
+      "description": "Accepts queries for host or service attributes provided in the Censys Search Language and returns a list of matching hosts with some summary fields",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "search_hosts",
+      "output_schema": {
+        "code": "",
+        "status": "",
+        "result": {
+          "query": "",
+          "total": "",
+          "hits": [
+            {
+              "ip": "",
+              "services": [
+                {
+                  "port": "",
+                  "service_name": "",
+                  "transport_protocol": ""
+                },
+                {
+                  "port": "",
+                  "service_name": "",
+                  "transport_protocol": "",
+                  "certificate": ""
+                }
+              ],
+              "location": {
+                "continent": "",
+                "country": "",
+                "country_code": "",
+                "postal_code": "",
+                "timezone": "",
+                "coordinates": {
+                  "latitude": "",
+                  "longitude": ""
+                },
+                "registered_country": "",
+                "registered_country_code": ""
+              },
+              "autonomous_system": {
+                "asn": 15169,
+                "description": "",
+                "bgp_prefix": "",
+                "name": "",
+                "country_code": ""
+              }
+            },
+            {
+              "name": "",
+              "ip": "",
+              "services": [
+                {
+                  "port": "",
+                  "service_name": "",
+                  "transport_protocol": ""
+                },
+                {
+                  "port": "",
+                  "service_name": "",
+                  "transport_protocol": "",
+                  "certificate": ""
+                }
+              ],
+              "location": {
+                "continent": "",
+                "country": "",
+                "country_code": "",
+                "postal_code": "",
+                "timezone": "",
+                "coordinates": {
+                  "latitude": "",
+                  "longitude": ""
+                },
+                "registered_country": "",
+                "registered_country_code": ""
+              },
+              "autonomous_system": {
+                "asn": "",
+                "description": "",
+                "bgp_prefix": "",
+                "name": "",
+                "country_code": ""
+              }
+            }
+          ]
+        },
+        "links": {
+          "prev": "",
+          "next": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Censys Search Query",
+          "name": "q",
+          "type": "text",
+          "description": "Specify a query to search for and filter hosts with matching attributes. Uses the Censys Search Language",
+          "tooltip": "Specify a query to search for and filter hosts with matching attributes. Uses the Censys Search Language",
+          "placeholder": "dns.google.com or services.service_name:HTTP",
+          "required": true,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Max Hits",
+          "name": "per_page",
+          "type": "text",
+          "description": "Specify the maximum number of hits to return in each response. You can specify a minimum value of 1 and a maximum value of 100. The default value is 50",
+          "tooltip": "Specify the maximum number of hits to return in each response. You can specify a minimum value of 1 and a maximum value of 100. The default value is 50",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Virtual Hosts",
+          "name": "virtual_hosts",
+          "type": "select",
+          "options": [
+            "EXCLUDE",
+            "INCLUDE",
+            "ONLY"
+          ],
+          "description": "Select the action to take when querying virtual hosts. You can select from following options: EXCLUDE(Default): Select this option to exclude the virtual hosts in the search results. INCLUDE: Select this option to include the virtual hosts in the search results. ONLY: Select this option to return only the virtual hosts in the search results.",
+          "tooltip": "Select the action to take when querying virtual hosts. You can select from following options: EXCLUDE(Default): Select this option to exclude the virtual hosts in the search results. INCLUDE: Select this option to include the virtual hosts in the search results. ONLY: Select this option to return only the virtual hosts in the search results.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": "EXCLUDE"
+        },
+        {
+          "title": "Cursor",
+          "name": "cursor",
+          "type": "text",
+          "description": "Specify the cursor token from the API response to fetch the next or previous page of hits. The token is added to the endpoint URL to get the pages specified by this token",
+          "tooltip": "Specify the cursor token from the API response to fetch the next or previous page of hits. The token is added to the endpoint URL to get the pages specified by this token",
+          "required": false,
+          "editable": true,
+          "visible": true
+        },
+        {
+          "title": "Fields",
+          "name": "fields",
+          "type": "text",
+          "description": "Specify a comma-separated list of up to 25 fields to be returned for each result",
+          "tooltip": "Specify a comma-separated list of up to 25 fields to be returned for each result",
+          "required": false,
+          "editable": true,
+          "visible": true
+        }
+      ]
+    },
+    {
+      "operation": "lookup_certificate",
+      "title": "Lookup Certificate",
+      "description": "Fetches the certificate record for the specified SHA-256 fingerprint, including parsed data, certificate transparency log information, root store trust information, zlint results, and Censys observation metadata",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "lookup_certificate",
+      "output_schema": {
+        "code": "",
+        "status": "",
+        "result": {
+          "_encoding": {
+            "fingerprint_sha256": "",
+            "fingerprint_sha1": "",
+            "fingerprint_md5": "",
+            "tbs_fingerprint_sha256": "",
+            "tbs_no_ct_fingerprint_sha256": "",
+            "spki_fingerprint_sha256": "",
+            "parent_spki_fingerprint_sha256": "",
+            "raw": "",
+            "spki_subject_fingerprint_sha256": "",
+            "parent_spki_subject_fingerprint_sha256": ""
+          },
+          "fingerprint_sha256": "",
+          "fingerprint_sha1": "",
+          "fingerprint_md5": "",
+          "tbs_fingerprint_sha256": "",
+          "tbs_no_ct_fingerprint_sha256": "",
+          "spki_fingerprint_sha256": "",
+          "parent_spki_fingerprint_sha256": "",
+          "parsed": {
+            "version": "",
+            "serial_number": "",
+            "issuer_dn": "",
+            "issuer": {
+              "common_name": [
+              ],
+              "country": [
+              ],
+              "organization": [
+              ]
+            },
+            "subject_dn": "",
+            "subject": {
+              "common_name": [
+              ]
+            },
+            "subject_key_info": {
+              "key_algorithm": {
+                "name": "",
+                "oid": ""
+              },
+              "rsa": {
+                "exponent": "",
+                "_encoding": {
+                  "modulus": ""
+                },
+                "modulus": "",
+                "length": ""
+              },
+              "_encoding": {
+                "fingerprint_sha256": ""
+              },
+              "fingerprint_sha256": "",
+              "_key": ""
+            },
+            "validity_period": {
+              "not_before": "",
+              "not_after": "",
+              "length_seconds": ""
+            },
+            "signature": {
+              "signature_algorithm": {
+                "name": "",
+                "oid": ""
+              },
+              "_encoding": {
+                "value": ""
+              },
+              "value": "",
+              "valid": "",
+              "self_signed": ""
+            },
+            "extensions": {
+              "key_usage": {
+                "digital_signature": "",
+                "key_encipherment": "",
+                "value": "",
+                "content_commitment": "",
+                "data_encipherment": "",
+                "key_agreement": "",
+                "certificate_sign": "",
+                "crl_sign": "",
+                "encipher_only": "",
+                "decipher_only": ""
+              },
+              "basic_constraints": {
+                "is_ca": ""
+              },
+              "subject_alt_name": {
+                "dns_names": [
+                ],
+                "ip_addresses": [
+                ]
+              },
+              "crl_distribution_points": [
+              ],
+              "_encoding": {
+                "authority_key_id": "",
+                "subject_key_id": ""
+              },
+              "authority_key_id": "",
+              "subject_key_id": "",
+              "extended_key_usage": {
+                "server_auth": "",
+                "apple_code_signing": "",
+                "apple_code_signing_development": "",
+                "apple_software_update_signing": "",
+                "apple_code_signing_third_party": "",
+                "apple_resource_signing": "",
+                "apple_ichat_signing": "",
+                "apple_ichat_encryption": "",
+                "apple_system_identity": "",
+                "apple_crypto_env": "",
+                "apple_crypto_production_env": "",
+                "apple_crypto_maintenance_env": "",
+                "apple_crypto_test_env": "",
+                "apple_crypto_development_env": "",
+                "apple_crypto_qos": "",
+                "apple_crypto_tier0_qos": "",
+                "apple_crypto_tier1_qos": "",
+                "apple_crypto_tier2_qos": "",
+                "apple_crypto_tier3_qos": "",
+                "microsoft_cert_trust_list_signing": "",
+                "microsoft_qualified_subordinate": "",
+                "microsoft_key_recovery_3": "",
+                "microsoft_document_signing": "",
+                "microsoft_lifetime_signing": "",
+                "microsoft_mobile_device_software": "",
+                "microsoft_smart_display": "",
+                "microsoft_csp_signature": "",
+                "microsoft_timestamp_signing": "",
+                "microsoft_server_gated_crypto": "",
+                "microsoft_sgc_serialized": "",
+                "microsoft_encrypted_file_system": "",
+                "microsoft_efs_recovery": "",
+                "microsoft_whql_crypto": "",
+                "microsoft_nt5_crypto": "",
+                "microsoft_oem_whql_crypto": "",
+                "microsoft_embedded_nt_crypto": "",
+                "microsoft_root_list_signer": "",
+                "microsoft_drm": "",
+                "microsoft_drm_individualization": "",
+                "microsoft_licenses": "",
+                "microsoft_license_server": "",
+                "microsoft_enrollment_agent": "",
+                "microsoft_smartcard_logon": "",
+                "microsoft_ca_exchange": "",
+                "microsoft_key_recovery_21": "",
+                "microsoft_system_health": "",
+                "microsoft_system_health_loophole": "",
+                "microsoft_kernel_mode_code_signing": "",
+                "dvcs": "",
+                "sbgp_cert_aa_service_auth": "",
+                "eap_over_ppp": "",
+                "eap_over_lan": "",
+                "client_auth": "",
+                "code_signing": "",
+                "email_protection": "",
+                "ipsec_end_system": "",
+                "ipsec_tunnel": "",
+                "ipsec_user": "",
+                "time_stamping": "",
+                "ocsp_signing": "",
+                "ipsec_intermediate_system_usage": "",
+                "netscape_server_gated_crypto": "",
+                "any": ""
+              },
+              "certificate_policies": [
+                {
+                  "id": ""
+                },
+                {
+                  "id": ""
+                }
+              ],
+              "authority_info_access": {
+                "ocsp_urls": [
+                  ""
+                ],
+                "issuer_urls": [
+                  ""
+                ]
+              },
+              "signed_certificate_timestamps": [
+                {
+                  "_encoding": {
+                    "log_id": ""
+                  },
+                  "log_id": "",
+                  "timestamp": "",
+                  "signature": {
+                    "hash_algorithm": "",
+                    "signature_algorithm": "",
+                    "_encoding": {
+                      "signature": ""
+                    },
+                    "signature": ""
+                  },
+                  "version": ""
+                },
+                {
+                  "_encoding": {
+                    "log_id": ""
+                  },
+                  "log_id": "",
+                  "timestamp": "",
+                  "signature": {
+                    "hash_algorithm": "",
+                    "signature_algorithm": "",
+                    "_encoding": {
+                      "signature": ""
+                    },
+                    "signature": ""
+                  },
+                  "version": ""
+                }
+              ],
+              "ct_poison": ""
+            },
+            "serial_number_hex": "",
+            "redacted": ""
+          },
+          "names": [
+          ],
+          "validation_level": "",
+          "validation": {
+            "nss": {
+              "is_valid": "",
+              "ever_valid": "",
+              "has_trusted_path": "",
+              "had_trusted_path": "",
+              "chains": [
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                },
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                }
+              ],
+              "_encoding": {
+                "parents": ""
+              },
+              "parents": [
+              ],
+              "type": "",
+              "in_revocation_set": ""
+            },
+            "microsoft": {
+              "is_valid": "",
+              "ever_valid": "",
+              "has_trusted_path": "",
+              "had_trusted_path": "",
+              "chains": [
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                },
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                }
+              ],
+              "_encoding": {
+                "parents": ""
+              },
+              "parents": [
+              ],
+              "type": "",
+              "in_revocation_set": ""
+            },
+            "apple": {
+              "is_valid": "",
+              "ever_valid": "",
+              "has_trusted_path": "",
+              "had_trusted_path": "",
+              "chains": [
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                },
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                }
+              ],
+              "_encoding": {
+                "parents": ""
+              },
+              "parents": [
+                ""
+              ],
+              "type": "",
+              "in_revocation_set": ""
+            },
+            "chrome": {
+              "is_valid": "",
+              "ever_valid": "",
+              "has_trusted_path": "",
+              "had_trusted_path": "",
+              "chains": [
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                },
+                {
+                  "_encoding": {
+                    "sha256fp": ""
+                  },
+                  "sha256fp": [
+                  ]
+                }
+              ],
+              "_encoding": {
+                "parents": ""
+              },
+              "parents": [
+              ],
+              "type": "",
+              "in_revocation_set": ""
+            }
+          },
+          "revocation": {
+            "ocsp": {
+              "reason": "",
+              "revoked": ""
+            },
+            "crl": {
+              "reason": "",
+              "revoked": ""
+            }
+          },
+          "ever_seen_in_scan": "",
+          "raw": "",
+          "added_at": "",
+          "modified_at": "",
+          "validated_at": "",
+          "parse_status": "",
+          "zlint": {
+            "version": "",
+            "timestamp": "",
+            "notices_present": "",
+            "failed_lints": [
+            ],
+            "warnings_present": "",
+            "errors_present": "",
+            "fatals_present": ""
+          },
+          "spki_subject_fingerprint_sha256": "",
+          "parent_spki_subject_fingerprint_sha256": "",
+          "precert": "",
+          "revoked": "",
+          "labels": [
+          ]
+        }
+      },
+      "parameters": [
+        {
+          "title": "SHA-256 Fingerprint",
+          "name": "fingerprint",
+          "type": "text",
+          "description": "Specify the SHA256 certificate to search and retrieve information from Censys",
+          "tooltip": "Specify the SHA256 certificate to search and retrieve information from Censys",
+          "required": true,
+          "editable": true,
+          "visible": true
+        }
+      ]
+    }
+  ]
+}

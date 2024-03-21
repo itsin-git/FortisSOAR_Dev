@@ -1,0 +1,6 @@
+err_msg_1 = "Only following BPMN Steps supported : 'Start Event', 'End Event', 'Exclusive Gateway', 'Script Task', 'Service Task', 'User Task'. Found '{0}'"
+err_msg_2 = "{0} Connector Details not found. Error as follows: {1}"
+err_msg_3 = "Error Converting BPMN XML to FortiSOAR Playbooks: {}"
+err_msg_4 = "Error retrieving BPMN Step coordinates for step {0}. Error as follows: {1}"
+err_msg_5 = "Error retrieving FortiSOAR step and setting arguments for BPMN Step." "\n" "BPMN Step : {0}" "\n" "BPMN Details : {1}" "\n""Cyberspone to BPMN Mapping Details: {2}" "\n" "Error Message : {3}"
+err_msg_6 = "Following BPMN Element Missing some required information. Please refer to help doc and make sure the mandatory fields are selected. Missing Element : {0}" "\n" "BPMN : {1}"

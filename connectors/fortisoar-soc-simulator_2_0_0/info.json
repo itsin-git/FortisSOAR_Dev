@@ -1,0 +1,236 @@
+{
+    "name": "fortisoar-soc-simulator",
+    "version": "2.0.0",
+    "label": "FortiSOAR SOC Simulator",
+    "description": "The FortiSOAR SOC Simulator connector is a special type of connector that is used to simulate a SOC environment. It creates various scenarios-based artifacts such as alerts, incidents, etc. in FortiSOAR™",
+    "publisher": "Fortinet",
+    "icon_small_name": "fortisoar_small.png",
+    "icon_large_name": "fortisoar_large.png",
+    "category": "information",
+    "icon_medium_name": "fortisoar_medium.png",
+    "configuration": {
+		"fields": [
+            {
+                "title": "Load Threat Intelligence",
+                "description": "Load latest threat intelligence data.",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "value": false,
+                "name": "load_threat"
+            }
+        ]
+    },
+    "operations": [
+        {
+            "operation": "bad_ip",
+            "title": "Fetch Malicious IP",
+            "category": "investigation",
+            "annotation": "bad_ip",
+            "description": "Get Known Malicious IP",
+            "enabled": true,
+            "output_schema": {},
+            "parameters": [
+                {
+                    "title": "Random",
+                    "description": "Check to generate random malicious IP",
+                    "tooltip":"Check to generate random malicious IP",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "checkbox",
+                    "name": "random",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "operation": "bad_url",
+            "title": "Fetch Malicious URL",
+            "category": "investigation",
+            "annotation": "bad_url",
+            "description": "Get Known malicious URL",
+            "enabled": true,
+            "output_schema": {},
+            "parameters": [
+                {
+                    "title": "Random",
+                    "description": "Check to generate random malicious URL",
+                    "tooltip":"Check to generate random malicious URL",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "checkbox",
+                    "name": "random",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "operation": "bad_filehash",
+            "title": "Fetch Malicious Filehash",
+            "category": "investigation",
+            "annotation": "bad_filehash",
+            "description": "Get Known malicious Filehash",
+            "enabled": true,
+            "output_schema": {},
+            "parameters": [
+                {
+                    "title": "Random",
+                    "description": "Check to generate random malicious filehash",
+                    "tooltip": "Check to generate random malicious filehash",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "checkbox",
+                    "name": "random",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "operation": "bad_domain",
+            "title": "Fetch Malicious Domain",
+            "category": "investigation",
+            "annotation": "bad_domain",
+            "description": "Get Known malicious Domain",
+            "enabled": true,
+            "output_schema": {},
+            "parameters": [
+                {
+                    "title": "Random",
+                    "description": "Check to generate random malicious domain",
+                    "tooltip":"Check to generate random malicious domain",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "checkbox",
+                    "name": "random",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "operation": "replace_variables",
+            "title": "Replace Variables",
+            "category": "",
+            "annotation": "",
+            "description": "Replace Variables",
+            "enabled": true,
+            "output_schema": {},
+            "parameters": [
+                {
+                    "title": "Variable String",
+                    "description": "Variable String",
+                    "tooltip":"Variable String",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "type": "textarea",
+                    "name": "variables",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "operation": "malicious_file_indicator",
+            "title": "Create Malicious File Indicator",
+            "category": "",
+            "annotation": "malicious_file_indicator",
+            "description": "Create a new Malicious file Indicator to be used within a scenario",
+            "enabled": true,
+            "output_schema": {},
+            "parameters": [
+                {
+                    "title": "File Name",
+                    "tooltip": "The file name the indicator will have",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "file_name",
+                    "value": ""
+                },
+                {
+                    "title": "Embedded Malicious URL",
+                    "tooltip": "A malicious URL to embed within the docx file to be extracted as an indicator",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "malicious_url",
+                    "placeholder":"https://badurl.com/badpage",
+                    "value": ""
+                },
+                {
+                    "title": "Embedded Malicious Email",
+                    "tooltip": "A malicious Email to embed within the docx file to be extracted as an indicator",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "malicious_email",
+                    "placeholder":"badactor@bad-domain.com",
+                    "value": ""
+                },
+                {
+                    "title": "Custom Indicator Parameters",
+                    "tooltip": "JSON dict with various parameters you want to set for the newly created file Indicator",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "json",
+                    "name": "custom_parameters",
+                    "placeholder":"{'indicatorStatus': '/api/3/picklists/4218cb58-4de5-4eff-ad08-185d36ef9bab'}",
+                    "value": ""
+                },                    
+                {
+                    "title": "Also Create Attachment",
+                    "tooltip":"Create an attachment file as well when creating the indicator file",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "checkbox",
+                    "name": "attachment_also",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "operation": "create_simulated_alert",
+            "title": "Create Simulated Alert",
+            "category": "",
+            "annotation": "create_simulated_alert",
+            "description": "Create a new simulated alert based on alert data JSON. it supports dynamic values lookup",
+            "enabled": true,
+            "output_schema": {},
+            "parameters": [
+                {
+                    "title": "Alert Data",
+                    "tooltip":"Alert JSON Data which you can copy paste from any FortiSOAR alert using a browser Development Tools",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "type": "textarea",
+                    "name": "alert_json",
+                    "value": ""
+                },
+                {
+                    "title": "Fields To Ignore",
+                    "tooltip": "CSV of the fields to be ignored from the Alert data when the alert is created",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "fields_to_ignore",
+                    "placeholder":"uuid,@id,id,respDueDate,ackDate,respDate,dueBy,sourceId,state",
+                    "value": ""
+                }                
+            ]
+        }         
+    ],
+    "cs_approved": true,
+    "cs_compatible": true,
+    "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/fortisoar-soc-simulator/256/fortisoar-soc-simulator-v2-0-0"
+}

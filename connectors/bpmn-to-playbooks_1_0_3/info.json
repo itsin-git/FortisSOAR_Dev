@@ -1,0 +1,60 @@
+{
+  "name": "bpmn-to-playbooks",
+  "label": "BPMN",
+  "description": "Convert BPMN XML to FortiSoar Playbooks",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "version": "1.0.3",
+  "category": "",
+  "icon_small_name": "bpmn_small.png",
+  "icon_large_name": "bpmn_large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.3/bpmn-connector/392/bpmn-connector-v1-0-3",
+  "configuration": {},
+  "operations": [
+    {
+      "operation": "bpmntoplaybooks",
+      "category": "",
+      "annotation": "",
+      "output_schema": [
+      ],
+      "title": "Import BPMN Playbook",
+      "description": "Converts BPMN created in tool like Flowable or Camunda to FortiSOAR Playbooks",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "BPMN Output",
+          "description": "BPMN Output",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "bpmnOutput"
+        },
+        {
+          "title": "BPMN Tool",
+          "description": "BPMN Tool Used",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": ["Flowable", "Camunda"],
+          "value": "Flowable",
+          "name": "bpmnTool"
+        },
+        {
+          "title": "BPMN Format",
+          "description": "BPMN Format, JSON or XML",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": ["json", "xml"],
+          "value": "json",
+          "name": "bpmnFormat"
+        }
+
+      ]
+    }
+  ]
+}

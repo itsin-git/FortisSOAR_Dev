@@ -1,0 +1,386 @@
+{
+  "name": "openai",
+  "version": "2.0.0",
+  "label": "OpenAI",
+  "description": "This integration supports interacting with OpenAI's powerful language model, ChatGPT from FortiSOAR workflows",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/openai/706/openai-v2-0-0",
+  "category": "Miscellaneous",
+  "configuration": {
+    "fields": [
+      {
+        "title": "API Key",
+        "type": "password",
+        "name": "apiKey",
+        "description": "Specify the API key to access the endpoint to connect and perform automated operations. For information on how to get an API Key, see https://platform.openai.com/account/api-keys.",
+        "tooltip": "Specify the API key to access the endpoint to connect and perform automated operations.",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "value": null
+      },
+      {
+        "title": "Use Microsoft Azure OpenAI Endpoint",
+        "type": "checkbox",
+        "name": "api_type",
+        "description": "Select this option to use OpenAI services via a Microsoft Azure Endpoint.",
+        "tooltip": "Select this option to use OpenAI services via a Microsoft Azure Endpoint.",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": false,
+        "onchange": {
+          "true": [
+            {
+              "title": "Endpoint FQHN",
+              "description": "Specify the FQHN of the Azure OpenAI Endpoint to which you want to connect and perform automated operations.",
+              "tooltip": "Specify the FQHN of the Azure OpenAI Endpoint to which you want to connect and perform automated operations.",
+              "name": "api_base",
+              "type": "text",
+              "visible": true,
+              "editable": true,
+              "required": true,
+              "placeholder": "https://example-endpoint.openai.azure.com"
+            },
+            {
+              "title": "API Version",
+              "description": "Specify the Azure OpenAI API version to be used for the connection. For example, 2023-05-15",
+              "tooltip": "Specify the Azure OpenAI API version to be used for the connection.",
+              "name": "api_version",
+              "type": "text",
+              "visible": true,
+              "editable": true,
+              "required": true,
+              "placeholder": "2023-05-15",
+              "value": "2023-05-15"
+            },
+            {
+              "title": "Deployment Name",
+              "description": "Specify the deployment name of Azure OpenAI Deployment Name to be used for the connection.",
+              "tooltip": "Specify the deployment name of Azure OpenAI Deployment Name to be used for the connection.",
+              "name": "deployment_id",
+              "type": "text",
+              "visible": true,
+              "editable": true,
+              "required": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "operations": [
+    {
+      "title": "Ask a Question",
+      "operation": "chat_completions",
+      "annotation": "chat_completions",
+      "description": "Generates a contextually relevant response to a given question using a pre-trained deep learning model.",
+      "parameters": [
+        {
+          "title": "Message",
+          "type": "text",
+          "name": "message",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the message or question for which you want to generate a response.",
+          "tooltip": "Specify the message or question for which you want to generate a response.",
+          "value": ""
+        },
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "gpt-3.5-turbo",
+          "description": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported. By default, it is set to gpt-3.5-turbo.",
+          "tooltip": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported."
+        },
+        {
+          "title": "Temperature",
+          "type": "text",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
+        },
+        {
+          "title": "Top Probability",
+          "type": "text",
+          "name": "top_p",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or Temperature parameter, not both."
+        },
+        {
+          "title": "Max Tokens",
+          "type": "integer",
+          "name": "max_tokens",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Specify the maximum number of tokens to generate in the chat completion. NOTE: The total length of input tokens and generated tokens is limited by the model's context length.",
+          "tooltip": "Specify maximum number of tokens to generate in the chat completion. NOTE: The total length of input tokens and generated tokens is limited by the model's context length."
+        },
+        {
+          "title": "Timeout",
+          "type": "integer",
+          "name": "timeout",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "600",
+          "description": "(Optional) Specify the maximum time (in seconds) you want to wait for the action to complete successfully. By default it is set to 600 seconds.",
+          "tooltip": "Specify the maximum time (in seconds) you want to wait for the action to complete successfully."
+        },
+        {
+          "title": "Additional Inputs",
+          "type": "json",
+          "name": "other_fields",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          }",
+          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          }"
+        }
+      ],
+      "category": "miscellaneous",
+      "output_schema": {
+        "id": "",
+        "model": "",
+        "usage": {
+          "total_tokens": "",
+          "prompt_tokens": "",
+          "completion_tokens": ""
+        },
+        "object": "",
+        "choices": [
+          {
+            "index": "",
+            "message": {
+              "role": "",
+              "content": "",
+              "tool_calls": "",
+              "function_call": ""
+            },
+            "finish_reason": ""
+          }
+        ],
+        "created": "",
+        "system_fingerprint": ""
+      },
+      "enabled": true
+    },
+    {
+      "title": "Converse With OpenAI",
+      "operation": "chat_conversation",
+      "annotation": "chat_conversation",
+      "description": "Allows users to converse with OpenAI, i.e., users can ask a question and get the answer from OpenAI based on the previous discussions.",
+      "parameters": [
+        {
+          "title": "Messages",
+          "type": "json",
+          "name": "messages",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the list of messages for which you want to generate a chat completion. The OpenAI documentation recommends that you should include all previous chat messages.",
+          "tooltip": "Specify the list of messages for which you want to generate a chat completion. The OpenAI documentation recommends that you should include all previous chat messages.",
+          "value": "[{\"role\": \"user\", \"content\": \"when was stuxnet first seen\"},{\"role\": \"assistant\", \"content\": \"Stuxnet was first identified by the infosec community in 2010, but development on it probably began in 20051. I hope this helps!\"},{\"role\": \"user\", \"content\": \"who discovered it\"}]"
+        },
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "gpt-3.5-turbo",
+          "description": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported. By default, it is set to gpt-3.5-turbo.",
+          "tooltip": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported. By default, it is set to gpt-3.5-turbo."
+        },
+        {
+          "title": "Temperature",
+          "type": "text",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
+        },
+        {
+          "title": "Top Probability",
+          "type": "text",
+          "name": "top_p",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
+        },
+        {
+          "title": "Max Tokens",
+          "type": "integer",
+          "name": "max_tokens",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Specify the maximum number of tokens to generate in the chat completion. NOTE: The total length of input tokens and generated tokens is limited by the model's context length.",
+          "tooltip": "(Optional) Specify the maximum number of tokens to generate in the chat completion. NOTE: The total length of input tokens and generated tokens is limited by the model's context length."
+        },
+        {
+          "title": "Timeout",
+          "type": "integer",
+          "name": "timeout",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "600",
+          "description": "(Optional) Specify the maximum time (in seconds) you want to wait for the action to complete successfully. By default it is set to 600 seconds.",
+          "tooltip": "Specify the maximum time (in seconds) you want to wait for the action to complete successfully."
+        },
+        {
+          "title": "Additional Inputs",
+          "type": "json",
+          "name": "other_fields",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          },",
+          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          },"
+        }
+      ],
+      "category": "miscellaneous",
+      "output_schema": {
+        "id": "",
+        "model": "",
+        "usage": {
+          "total_tokens": "",
+          "prompt_tokens": "",
+          "completion_tokens": ""
+        },
+        "object": "",
+        "choices": [
+          {
+            "index": "",
+            "message": {
+              "role": "",
+              "content": "",
+              "tool_calls": "",
+              "function_call": ""
+            },
+            "finish_reason": ""
+          }
+        ],
+        "created": "",
+        "system_fingerprint": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "list_models",
+      "title": "List Available Models",
+      "description": "Retrieves a list and descriptions of all models available in the OpenAI API.",
+      "category": "miscellaneous",
+      "annotation": "list_models",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "object": "",
+            "created": "",
+            "owned_by": ""
+          }
+        ],
+        "object": ""
+      }
+    },
+    {
+      "operation": "get_usage",
+      "title": "Get Tokens Usage",
+      "description": "Retrieves the usage details for each OpenAI API call for the specified date.",
+      "category": "miscellaneous",
+      "annotation": "get_usage",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Date",
+          "type": "datetime",
+          "name": "date",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Select the date for which you want to retrieve usage data for each OpenAI API call.",
+          "tooltip": "Select the date for which you want to retrieve usage data for each OpenAI API call.",
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "data": [
+          {
+            "user_id": "",
+            "operation": "",
+            "n_requests": "",
+            "snapshot_id": "",
+            "organization_id": "",
+            "aggregation_timestamp": "",
+            "n_context_tokens_total": "",
+            "n_generated_tokens_total": ""
+          }
+        ],
+        "object": "",
+        "ft_data": [],
+        "dalle_api_data": [],
+        "whisper_api_data": []
+      }
+    },
+    {
+      "operation": "count_tokens",
+      "title": "Get Token Count",
+      "description": "Counts the number of tokens in the specified string and OpenAI model.",
+      "category": "miscellaneous",
+      "annotation": "count_tokens",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Input Text",
+          "type": "text",
+          "name": "input_text",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the text input, i.e., the string for which you want to evaluate the token count.",
+          "tooltip": "Specify the text input, i.e., the string for which you want to evaluate the token count.",
+          "value": ""
+        },
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "The OpenAI model using which you want to evaluate the token count. Specify the ID of the OpenAI model to use for the evaluation of token count. By default, this parameter is set to gpt-4.",
+          "tooltip": "The OpenAI model using which you want to evaluate the token count. Specify the ID of the OpenAI model to use for the evaluation of token count.",
+          "value": "gpt-4"
+        }
+      ],
+      "output_schema": {
+        "tokens": ""
+      }
+    }
+  ]
+}

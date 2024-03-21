@@ -1,0 +1,628 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Azure Log Analytics - 2.0.0",
+      "description": "Sample playbooks for \"Azure Log Analytics\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": null,
+      "uuid": "03f4c6ab-933d-4e0e-a9ea-c5d0a2cdb90f",
+      "id": 434,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Execute Query",
+          "aliasName": null,
+          "tag": "#azure-log-analytics",
+          "description": "Retrieves all data associated with a specific query from Azure Log Analytics based on the workspace ID and query that you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1679983244,
+          "collection": "/api/3/workflow_collections/03f4c6ab-933d-4e0e-a9ea-c5d0a2cdb90f",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d4b3c8c0-3be8-4f91-be13-e3ee6e9e6648",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Execute Query",
+              "description": null,
+              "arguments": {
+                "name": "Azure Log Analytics",
+                "config": "",
+                "params": {
+                  "query": "Usage | take 100",
+                  "timespan": "",
+                  "workspaces": "",
+                  "WorkspaceId": "6c3970b0-0d7b-4e81-bb05-25e1c2cfdc2e"
+                },
+                "version": "2.0.0",
+                "connector": "azure-log-analytics",
+                "operation": "execute_query",
+                "operationTitle": "Execute Query",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "92cd14d7-0fc7-42b5-a764-607688490807"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "5727080d-909f-468d-a730-baf425617eea",
+                "title": "Azure Log Analytics: Execute Query",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d4b3c8c0-3be8-4f91-be13-e3ee6e9e6648"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Execute Query",
+              "targetStep": "/api/3/workflow_steps/92cd14d7-0fc7-42b5-a764-607688490807",
+              "sourceStep": "/api/3/workflow_steps/d4b3c8c0-3be8-4f91-be13-e3ee6e9e6648",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c9cd9395-38ad-470e-8736-629f3cdfec0f"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "1bc81cd1-8db0-4598-9734-4165643f244f",
+          "id": 6746,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "azure-log-analytics"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Saved Searches",
+          "aliasName": null,
+          "tag": "#azure-log-analytics",
+          "description": "Update a existing saved searches in Azure Log Analytics, based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1679983244,
+          "collection": "/api/3/workflow_collections/03f4c6ab-933d-4e0e-a9ea-c5d0a2cdb90f",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c214822f-6dcb-4e24-911e-55433edff8f8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Saved Searches",
+              "description": null,
+              "arguments": {
+                "name": "Azure Log Analytics",
+                "config": "",
+                "params": {
+                  "etag": "",
+                  "query": "Heartbeat | summarize Count() by Computer | take a",
+                  "category": "Saved Search Test Category",
+                  "displayName": "Update Saved Search Test",
+                  "savedSearchId": "test-new-saved-search-id-2015",
+                  "workspaceName": "Fortinet-Baner",
+                  "subscriptionId": "6212c9c8-54a6-41ee-846b-37727030c040",
+                  "additional_fields": "",
+                  "resourceGroupName": "fortinet-baner"
+                },
+                "version": "2.0.0",
+                "connector": "azure-log-analytics",
+                "operation": "update_saved_searches",
+                "operationTitle": "Update Saved Searches",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8df6f3b5-9e8c-4023-8964-eef3dadc58bd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "af2b756c-61e6-4da5-b078-1f911b49a6ba",
+                "title": "Azure Log Analytics: Update Saved Searches",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c214822f-6dcb-4e24-911e-55433edff8f8"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Update Saved Searches",
+              "targetStep": "/api/3/workflow_steps/8df6f3b5-9e8c-4023-8964-eef3dadc58bd",
+              "sourceStep": "/api/3/workflow_steps/c214822f-6dcb-4e24-911e-55433edff8f8",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "90a6d463-d3d3-4a30-a6e4-2400889b93f4"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "2bb12005-dafd-4ae7-915f-472b2a4ea4d9",
+          "id": 6747,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "azure-log-analytics"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Delete Saved Search",
+          "aliasName": null,
+          "tag": "#azure-log-analytics",
+          "description": "Deletes a specific saved search from Azure Log Analytics, based on the saved search ID and other input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1679983244,
+          "collection": "/api/3/workflow_collections/03f4c6ab-933d-4e0e-a9ea-c5d0a2cdb90f",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/23854235-1641-4f89-b846-c9c07fd9048e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "484f8e19-a7e5-4544-ad7f-13ab8bb5d02a",
+                "title": "Azure Log Analytics: Delete Saved Search",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "23854235-1641-4f89-b846-c9c07fd9048e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Delete Saved Search",
+              "description": null,
+              "arguments": {
+                "name": "Azure Log Analytics",
+                "config": "",
+                "params": {
+                  "savedSearchId": "test-new-saved-search-id-2021",
+                  "workspaceName": "fortinet-baner",
+                  "subscriptionId": "6212c9c8-54a6-41ee-846b-37727030c040",
+                  "resourceGroupName": "fortinet-baner"
+                },
+                "version": "2.0.0",
+                "connector": "azure-log-analytics",
+                "operation": "delete_saved_search",
+                "operationTitle": "Delete Saved Search",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "f85c56fd-a924-4f83-884c-653a411e2398"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Delete Saved Search",
+              "targetStep": "/api/3/workflow_steps/f85c56fd-a924-4f83-884c-653a411e2398",
+              "sourceStep": "/api/3/workflow_steps/23854235-1641-4f89-b846-c9c07fd9048e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f2b29fdb-8376-4c02-aa88-17ac759a9d94"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "5cf6749f-fd34-4270-b9aa-0b93a833ee37",
+          "id": 6751,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "azure-log-analytics"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create Saved Searches",
+          "aliasName": null,
+          "tag": "#azure-log-analytics",
+          "description": "Creates a new saved searches in Azure Log Analytics, based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1679983244,
+          "collection": "/api/3/workflow_collections/03f4c6ab-933d-4e0e-a9ea-c5d0a2cdb90f",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ce8c74e1-3c2b-44aa-b727-3bb72f5db98a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Saved Searches",
+              "description": null,
+              "arguments": {
+                "name": "Azure Log Analytics",
+                "config": "",
+                "params": {
+                  "etag": "",
+                  "query": "Heartbeat | summarize Count() by Computer | take a",
+                  "category": "Saved Search Test Category",
+                  "displayName": "Create Saved Search Test",
+                  "savedSearchId": "test-new-saved-search-id-2021",
+                  "workspaceName": "Fortinet-Baner",
+                  "subscriptionId": "6212c9c8-54a6-41ee-846b-37727030c040",
+                  "additional_fields": "",
+                  "resourceGroupName": "fortinet-baner"
+                },
+                "version": "2.0.0",
+                "connector": "azure-log-analytics",
+                "operation": "create_saved_searches",
+                "operationTitle": "Create Saved Searches",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "65920395-f605-4da6-bfc4-b55340707cd5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4fb88a15-3e06-4180-930c-389c72de7d25",
+                "title": "Azure Log Analytics: Create Saved Searches",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ce8c74e1-3c2b-44aa-b727-3bb72f5db98a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Create Saved Searches",
+              "targetStep": "/api/3/workflow_steps/65920395-f605-4da6-bfc4-b55340707cd5",
+              "sourceStep": "/api/3/workflow_steps/ce8c74e1-3c2b-44aa-b727-3bb72f5db98a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "65e5bb0b-b2fc-4d77-87d3-17d84e22ef88"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "dee8369b-4028-404f-94d9-2b7e1a697fc8",
+          "id": 6748,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "azure-log-analytics"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Saved Searches",
+          "aliasName": null,
+          "tag": "#azure-log-analytics",
+          "description": "Retrieves the list of saved searches from Azure Log Analytics based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1679983244,
+          "collection": "/api/3/workflow_collections/03f4c6ab-933d-4e0e-a9ea-c5d0a2cdb90f",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/6aa9c783-ec19-4ca3-85e7-7be3567cbf6b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Saved Searches",
+              "description": null,
+              "arguments": {
+                "name": "Azure Log Analytics",
+                "config": "",
+                "params": {
+                  "workspaceName": "Fortinet-Baner",
+                  "subscriptionId": "6212c9c8-54a6-41ee-846b-37727030c040",
+                  "resourceGroupName": "fortinet-baner"
+                },
+                "version": "2.0.0",
+                "connector": "azure-log-analytics",
+                "operation": "list_saved_searches",
+                "operationTitle": "List Saved Searches",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "1983ec5c-b644-4fed-a2ca-c8e0b60da9d6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4dbf622e-204b-45d5-ac9e-89edf595e3c3",
+                "title": "Azure Log Analytics: List Saved Searches",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "6aa9c783-ec19-4ca3-85e7-7be3567cbf6b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> List Saved Searches",
+              "targetStep": "/api/3/workflow_steps/1983ec5c-b644-4fed-a2ca-c8e0b60da9d6",
+              "sourceStep": "/api/3/workflow_steps/6aa9c783-ec19-4ca3-85e7-7be3567cbf6b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "9dd28660-3d2e-4cbd-bba1-b22018885b91"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "e59c757f-7f67-438e-968d-823abcf89cea",
+          "id": 6750,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "azure-log-analytics"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Saved Searches",
+          "aliasName": null,
+          "tag": "#azure-log-analytics",
+          "description": "Retrieves information for a specific saved searches from Azure Log Analytics, based on the saved search ID and other input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1679983244,
+          "collection": "/api/3/workflow_collections/03f4c6ab-933d-4e0e-a9ea-c5d0a2cdb90f",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c8e6c4dc-5acf-4b3f-bd9a-2bfc217d3053",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Saved Searches",
+              "description": null,
+              "arguments": {
+                "name": "Azure Log Analytics",
+                "config": "",
+                "params": {
+                  "savedSearchId": "test-new-saved-search-id-2021",
+                  "workspaceName": "Fortinet-Baner",
+                  "subscriptionId": "6212c9c8-54a6-41ee-846b-37727030c040",
+                  "resourceGroupName": "fortinet-baner"
+                },
+                "version": "2.0.0",
+                "connector": "azure-log-analytics",
+                "operation": "get_saved_searches",
+                "operationTitle": "Get Saved Searches",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "b03fd1a0-0126-42c7-a123-b2f6fef6b14e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "32554636-5d95-4ccb-a228-03cc4b707022",
+                "title": "Azure Log Analytics: Get Saved Searches",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c8e6c4dc-5acf-4b3f-bd9a-2bfc217d3053"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Saved Searches",
+              "targetStep": "/api/3/workflow_steps/b03fd1a0-0126-42c7-a123-b2f6fef6b14e",
+              "sourceStep": "/api/3/workflow_steps/c8e6c4dc-5acf-4b3f-bd9a-2bfc217d3053",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "13bf8867-b20b-4b9c-8f83-013c23859e31"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "f7c5e1ac-6c6d-4392-80e2-f91ed4e1ea66",
+          "id": 6749,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "azure-log-analytics"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "Microsoft",
+    "azure-log-analytics"
+  ]
+}

@@ -1,0 +1,689 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Symantec CloudSOC - 1.0.0",
+      "description": "Cloud Access Security Brokers (CASBs) serve as a critical control point to ensure the\nsecure and compliant use of cloud apps and services",
+      "visible": true,
+      "image": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get API Logs",
+          "description": "API Allows to retrieve logs from all data source.",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/87c0dab6-cf1e-4f07-9a88-7826138171d6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "3a51941d-e9e8-44f7-960e-06c81d0e4cbf",
+                "title": "Get Event Logs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "340",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "87c0dab6-cf1e-4f07-9a88-7826138171d6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Event Logs",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "app": "investigate",
+                  "from": "",
+                  "sort": "",
+                  "user": "",
+                  "limit": 1000,
+                  "search": "",
+                  "service": "",
+                  "subtype": "all",
+                  "severity": "",
+                  "threat_score": "",
+                  "created_timestamp": "2018-02-01T00:00:00",
+                  "updated_timestamp": "",
+                  "inserted_timestamp": "",
+                  "sort_inserted_timestamp": ""
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_logs",
+                "operationTitle": "Get Event Logs",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "340",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "96404b2f-6d95-431f-86b0-a4ea449488ae"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "655860fb-8c87-49cc-b780-ba5049d5eb3d",
+              "name": "Start -> Get Event Logs",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/96404b2f-6d95-431f-86b0-a4ea449488ae",
+              "sourceStep": "/api/3/workflow_steps/87c0dab6-cf1e-4f07-9a88-7826138171d6"
+            }
+          ],
+          "uuid": "cd6696bb-4da9-49cf-9746-e31d730b7217"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Modify User Activation",
+          "description": "Modify User Activation",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/70cbcdd2-51d7-4560-9bb6-0ec1dd0fb46e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "9a1dda7f-2a20-48fc-9574-534d17696ba1",
+                "title": "Modify User Activation",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "320",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "70cbcdd2-51d7-4560-9bb6-0ec1dd0fb46e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Modify User Activation",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "email": "test@demo.com",
+                  "action": "Activate User"
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "modify_user",
+                "operationTitle": "Modify User Activation",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "320",
+              "top": "154",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b2affcf5-89ca-4489-92a5-9c8a2f62fb28"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b5ad6c41-1a0a-449c-9ddf-c4c52bf70bc9",
+              "name": "Start -> Get Protect Policies",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b2affcf5-89ca-4489-92a5-9c8a2f62fb28",
+              "sourceStep": "/api/3/workflow_steps/70cbcdd2-51d7-4560-9bb6-0ec1dd0fb46e"
+            }
+          ],
+          "uuid": "712ed926-b403-4b61-b4b3-aa2079c324fc"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Protect Policies",
+          "description": "Get All Protect Policies",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c5ad8f46-00ea-46c5-a5e2-78f5bacd5752",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Protect Policies",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "is_active": true,
+                  "policy_name": "",
+                  "policy_type": ""
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_protect_policies",
+                "operationTitle": "Get Protect Policies",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "269",
+              "top": "146",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "920798cd-39d2-471e-a914-a4bb7da98d59"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "34839720-efa2-4158-b638-e2b5239c7b4c",
+                "title": "Get Protect Policies",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "270",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "c5ad8f46-00ea-46c5-a5e2-78f5bacd5752"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "cfa7cf70-2eef-4723-9d0a-26e0ef514fc8",
+              "name": "Start -> Get Protect Policies",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/920798cd-39d2-471e-a914-a4bb7da98d59",
+              "sourceStep": "/api/3/workflow_steps/c5ad8f46-00ea-46c5-a5e2-78f5bacd5752"
+            }
+          ],
+          "uuid": "dd402d71-cc66-4b3a-9f67-3f5c3ceea57e"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Content IQ Profile",
+          "description": "Get Content IQ Profile",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2f093c35-504b-45ac-bbb9-2ce2ecba4c04",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "776ff86c-379d-4b02-bc52-ee5de256f0f0",
+                "title": "Get Content IQ Profile",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "340",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "2f093c35-504b-45ac-bbb9-2ce2ecba4c04"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Content IQ Profile",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "api_enabled": "true",
+                  "profile_name": ""
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_content_iqprofile",
+                "operationTitle": "Get Content IQ Profile",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "340",
+              "top": "130",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "cb0ab6e7-9f48-48c5-8853-123ffa5f3a80"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1b5bdc5e-eb49-456e-8dd9-c8e6d99e01fb",
+              "name": "Start -> Get Content IQ Profile",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/cb0ab6e7-9f48-48c5-8853-123ffa5f3a80",
+              "sourceStep": "/api/3/workflow_steps/2f093c35-504b-45ac-bbb9-2ce2ecba4c04"
+            }
+          ],
+          "uuid": "70122dbf-bde1-41c3-a786-da34c33d470e"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Audit Summary",
+          "description": "Get API Audit  Summary",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e0ff688d-ccfa-45e7-adbd-b22e7ec16606",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Audit Summary",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "ds_id": "",
+                  "allowed": true,
+                  "blocked": "false",
+                  "resolution": "86400",
+                  "latest_date": "1412812800",
+                  "service_type": "all",
+                  "earliest_date": "1415318400"
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_audit_summary",
+                "operationTitle": "Get Audit Summary",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "366",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "1fe91363-f0b6-448f-9370-3717038add8a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "0a6407df-a05a-4b4a-97ad-3031d710315e",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "366",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e0ff688d-ccfa-45e7-adbd-b22e7ec16606"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ddbe2157-bb55-4c84-812f-c48c1f74a818",
+              "name": "Start -> Get Audit Summary",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/1fe91363-f0b6-448f-9370-3717038add8a",
+              "sourceStep": "/api/3/workflow_steps/e0ff688d-ccfa-45e7-adbd-b22e7ec16606"
+            }
+          ],
+          "uuid": "ad8fa193-88b6-4149-917e-9f606fe7111f"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Audit Users",
+          "description": "Get Audit Users Details",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ba333b7d-0f51-428b-b915-beeb94ac3115",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Audit Users",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "ds_id": "",
+                  "allowed": true,
+                  "blocked": "false",
+                  "next_page": "",
+                  "resolution": "3600",
+                  "latest_date": "1412812800",
+                  "service_ids": "",
+                  "service_type": "all",
+                  "earliest_date": "1524904124"
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_audit_user",
+                "operationTitle": "Get Audit Users",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "340",
+              "top": "132",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "424eb048-a9fc-4337-b531-802f2f63299a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6c4cc6b2-db56-4f23-a9ee-48dd65c2d7c9",
+                "title": "Get Audit Users",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "347",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ba333b7d-0f51-428b-b915-beeb94ac3115"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "39c14231-d972-45c8-9d6e-00465d4a152f",
+              "name": "Start -> Get Audit Users",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/424eb048-a9fc-4337-b531-802f2f63299a",
+              "sourceStep": "/api/3/workflow_steps/ba333b7d-0f51-428b-b915-beeb94ac3115"
+            }
+          ],
+          "uuid": "b0af5b9f-2c90-4521-81a2-6cc27a393b66"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Audit Services",
+          "description": "Get Audit Services",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/535265b4-d108-48ee-a8ae-b489ae345931",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "e3cde4ad-1e2d-44cc-b26d-e367643726cf",
+                "title": "Get Audit Data Service",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "330",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "535265b4-d108-48ee-a8ae-b489ae345931"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Audit Services",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "ds_id": "",
+                  "allowed": true,
+                  "blocked": "false",
+                  "latest_date": "1412812800",
+                  "service_type": "all",
+                  "earliest_date": "1415318400"
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_audit_service",
+                "operationTitle": "Get Audit Services",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "331",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "f3a015e2-5201-439e-97e1-42511bb6acbe"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "efceaff8-8e53-47e5-acfd-d402d1bd5e02",
+              "name": "Start -> Get Audit Services",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f3a015e2-5201-439e-97e1-42511bb6acbe",
+              "sourceStep": "/api/3/workflow_steps/535265b4-d108-48ee-a8ae-b489ae345931"
+            }
+          ],
+          "uuid": "20ec611c-4509-42dc-a97d-9f959a88b26f"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Audit Sources",
+          "description": "Get Audit Data Source Information",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6360d537-c568-47ab-9182-2e8dc7337b17",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Audit Sources",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_audit_data_source",
+                "operationTitle": "Get Audit Sources",
+                "step_variables": {
+                  "step_output": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "360",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "3e731f8a-9079-4375-864b-b5226be6f7f6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8841d7d1-4471-4b1c-9db1-d91b72b07240",
+                "title": "Get Audit Sources",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "360",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "6360d537-c568-47ab-9182-2e8dc7337b17"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c6c155a6-6041-42c6-8336-9742a1842fb3",
+              "name": "Start -> Get Audit Sources",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/3e731f8a-9079-4375-864b-b5226be6f7f6",
+              "sourceStep": "/api/3/workflow_steps/6360d537-c568-47ab-9182-2e8dc7337b17"
+            }
+          ],
+          "uuid": "e7022bbc-b7b0-4ade-8471-3e7f78eaef69"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Audit Usernames",
+          "description": "Get Audit Usernames from User ID",
+          "collection": "/api/3/workflow_collections/63d082aa-9c1a-4ae5-90a3-b8b2101ff643",
+          "tag": "#Symantec #CloudSOC",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a17e3c8a-d991-4a80-be56-4db76827fbe6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Audit Usernames",
+              "description": null,
+              "arguments": {
+                "name": "Symantec CloudSOC",
+                "config": "ca07f02d-c64d-44f5-90e3-b3eedf562864",
+                "params": {
+                  "limit": "",
+                  "user_ids": "1,2"
+                },
+                "version": "1.0.0",
+                "connector": "symantec-cloudsoc",
+                "operation": "get_audit_username",
+                "operationTitle": "Get Audit Usernames",
+                "step_variables": {
+                  "step_output": "{{vars.result.data}}"
+                }
+              },
+              "status": null,
+              "left": "329",
+              "top": "128",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "388f28a8-e372-42b3-a878-da71c2f67d62"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "5482ac1e-085f-49b0-8f72-60646e71146c",
+                "title": "Get Audit Usernames",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "327",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "a17e3c8a-d991-4a80-be56-4db76827fbe6"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "102c78f0-aa4c-4f72-a429-16d16c789627",
+              "name": "Start -> Get Audit Usernames",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/388f28a8-e372-42b3-a878-da71c2f67d62",
+              "sourceStep": "/api/3/workflow_steps/a17e3c8a-d991-4a80-be56-4db76827fbe6"
+            }
+          ],
+          "uuid": "44a87a4d-17d4-49a5-9aad-95046e18ba21"
+        }
+      ],
+      "uuid": "63d082aa-9c1a-4ae5-90a3-b8b2101ff643"
+    }
+  ]
+}

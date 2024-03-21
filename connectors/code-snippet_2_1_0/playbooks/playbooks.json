@@ -1,0 +1,237 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@context": "/api/3/contexts/WorkflowCollection",
+      "@type": "WorkflowCollection",
+      "name": "Sample - code-snippet - 2.0.0",
+      "description": "Sample playbooks for \"code-snippet\" connector. Ensure that you clone this collection before using the playbooks since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "code_snippet_medium.png",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Alerts - Allow Python Imports",
+          "description": "Makes a call to get all Alerts. \nConfiguration allows all python imports.",
+          "collection": "/api/3/workflow_collections/fde701b1-4abd-49e1-a239-c57c0ec03891",
+          "tag": "#AllowAllImports",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e4b3e273-d88a-4404-9fe4-e49eb1f358c2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "839ddde6-9d82-4f1f-9978-24e7e32f06d8",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e4b3e273-d88a-4404-9fe4-e49eb1f358c2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Run",
+              "description": null,
+              "arguments": {
+                "name": "Code Snippet",
+                "config": "56982a9e-4e0c-4221-8194-fb7bf50acbd8",
+                "params": {
+                  "python_function": "import json, requests\n\ncredentials = {\n    'credentials': {\n        'loginid': '',\n        'password': ''\n    }\n}\n\nresponse = requests.post('https://localhost/auth/authenticate',\n                         data=json.dumps(credentials),\n                         headers={},\n                         verify=False)\ntoken = json.loads(response.text)['token']\n\nresponse2 = requests.get('https://localhost/api/3/alerts', headers={\"Authorization\": \"Bearer {}\".format(token)}, verify=False)\nprint(json.dumps(response2.json()))"
+                },
+                "version": "2.0.0",
+                "connector": "code-snippet",
+                "operation": "python_inline_code_editor",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "186",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "f52d830a-985d-476f-ac3d-ddc9b8e4447a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a9363c48-710b-4003-ba0d-857651984b37",
+              "name": "Start -> Run",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f52d830a-985d-476f-ac3d-ddc9b8e4447a",
+              "sourceStep": "/api/3/workflow_steps/e4b3e273-d88a-4404-9fe4-e49eb1f358c2"
+            }
+          ],
+          "versions": null,
+          "uuid": "f9481b6e-dd45-4ffd-ae15-2e9cd73a9b02"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Alerts - Restrict Python Imports",
+          "description": "Makes a call to get all Alerts.\nUses specific imports defined in the configuration, hence no need to re-import.",
+          "collection": "/api/3/workflow_collections/fde701b1-4abd-49e1-a239-c57c0ec03891",
+          "tag": "#RestrictImport",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f51461b6-a849-4276-b382-2178737aa8b7",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Run",
+              "description": null,
+              "arguments": {
+                "name": "Code Snippet",
+                "config": "56982a9e-4e0c-4221-8194-fb7bf50acbd8",
+                "params": {
+                  "python_function": "credentials = {\n    'credentials': {\n        'loginid': '',\n        'password': ''\n    }\n}\n\nresponse = requests.post('https://localhost/auth/authenticate',\n                         data=json.dumps(credentials),\n                         headers={},\n                         verify=False)\ntoken = json.loads(response.text)['token']\n\nresponse2 = requests.get('https://localhost/api/3/alerts', headers={\"Authorization\": \"Bearer {}\".format(token)}, verify=False)\nprint(json.dumps(response2.json()))"
+                },
+                "version": "2.0.0",
+                "connector": "code-snippet",
+                "operation": "python_inline_code_editor",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "253",
+              "top": "300",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b3b1e353-f518-4863-a0cc-a49f19a28b32"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "7206c674-5580-4b84-9cf9-e4347ef3b269",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "f51461b6-a849-4276-b382-2178737aa8b7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3b1506f5-6c10-4172-9e75-4a6d24056062",
+              "name": "Start -> Run",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b3b1e353-f518-4863-a0cc-a49f19a28b32",
+              "sourceStep": "/api/3/workflow_steps/f51461b6-a849-4276-b382-2178737aa8b7"
+            }
+          ],
+          "versions": null,
+          "uuid": "8640e5d1-ddd9-416e-b8ba-20e100ebc8f3"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "File Operation",
+          "description": "Reads the content of the file and output it.",
+          "collection": "/api/3/workflow_collections/fde701b1-4abd-49e1-a239-c57c0ec03891",
+          "tag": "#CodeSnippet",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e087bf68-0e27-4747-bdee-7f5e8bc5f8d0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "3a474ffe-14e7-4bac-8406-c3a914b73033",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e087bf68-0e27-4747-bdee-7f5e8bc5f8d0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Run",
+              "description": null,
+              "arguments": {
+                "name": "Code Snippet",
+                "params": {
+                  "python_function": "fname = \"/opt/test.txt\"\nl=\"s\"\nk = 0\n\nwith open(fname, 'r') as f:\n    for line in f:\n        words = line.split()\n        for i in words:\n            for letter in i:\n                if(letter==l):\n                    k=k+1\nprint(k)"
+                },
+                "version": "2.0.0",
+                "connector": "code-snippet",
+                "operation": "python_inline_code_editor",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "220",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "ed04aa97-4241-4cad-8bfb-075ca31d689f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b0ec1730-8ac9-47c5-b6cb-d896beab1eb4",
+              "name": "Start -> Run",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ed04aa97-4241-4cad-8bfb-075ca31d689f",
+              "sourceStep": "/api/3/workflow_steps/e087bf68-0e27-4747-bdee-7f5e8bc5f8d0"
+            }
+          ],
+          "versions": null,
+          "uuid": "739649f5-e998-4b51-951e-8531bb11cda9"
+        }
+      ],
+      "uuid": "fde701b1-4abd-49e1-a239-c57c0ec03891"
+    }
+  ]
+}

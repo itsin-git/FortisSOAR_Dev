@@ -1,0 +1,1734 @@
+{
+    "name": "cyops_utilities_dev",
+    "version": "3.2.23",
+    "label": "Utilities",
+    "description": "Includes functions to Fetch, Create or Update records and multiple other utility functions for facilitating automation",
+    "publisher": "",
+    "icon_small_name": "utilities_small.png",
+    "icon_large_name": "utilities_large.png",
+    "category": "Utilities",
+    "configuration": {},
+    "operations": [
+        {
+            "description": "Applies a 'JSON patch <https://tools.ietf.org/html/rfc6902>' to the given json",
+            "operation": "map_json",
+            "annotation": "patch_json",
+            "title": "Utils: Patch JSON",
+            "parameters": [
+                {
+                    "title": "JSON",
+                    "name": "json_data",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. {'name':'demoalert'}"
+                },
+                {
+                    "title": "Patch",
+                    "name": "patch",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. [{'op': 'add', 'path': '/severity', 'value': 'HIGH'}]"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Converts an XML string into a dictionary.",
+            "operation": "xml_to_dictionary",
+            "annotation": "xml_to_dict",
+            "title": "Utils: Convert XML to Dictionary",
+            "parameters": [
+                {
+                    "title": "XML",
+                    "name": "xml",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. <name>Suspicious Email: New password</name>"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Converts XML, CSV, XLS or XLSX file into a dictionary.",
+            "operation": "convert_to_json",
+            "annotation": "convert_to_json",
+            "title": "Utils: Convert XML, CSV, XLS or XLSX Files to Dictionary",
+            "parameters": [
+                {
+                    "title": "Convert file from IRI or Filepath",
+                    "name": "type",
+                    "description": "Convert file from record IRI or Filesystem",
+                    "type": "select",
+                    "options": [
+                        "filepath",
+                        "record IRI"
+                    ],
+                    "value": "filepath",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "onchange": {
+                        "filepath": [
+                            {
+                                "title": "Filepath",
+                                "name": "file_name",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "description": "Name of file on the filesystem",
+                                "tooltip": "files under /tmp directory",
+                                "placeholder": "Eg. xmldemo.xml/csvdemo.csv/xlsdemo.xls"
+                            }
+                        ],
+                        "record IRI": [
+                            {
+                                "title": "IRI",
+                                "name": "iri",
+                                "description": "File IRI",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "placeholder": "Eg. /api/3/files/5af00c658289bb5618193f42"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "File type",
+                    "name": "file_type",
+                    "description": "File type to be converted to JSON",
+                    "type": "select",
+                    "options": [
+                        "XML",
+                        "CSV",
+                        "XLS, XLSX"
+                    ],
+                    "value": "XML",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Converts a Table from an HTML into a dictionary.",
+            "operation": "html_table_to_dictionary",
+            "annotation": "html_table_to_dict",
+            "title": "Utils: Convert HTML Table to Dictionary",
+            "parameters": [
+                {
+                    "title": "HTML",
+                    "name": "html",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. <table> </table>"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Converts JSON data into a HTML table.",
+            "operation": "json_to_html",
+            "title": "Utils: Convert JSON into a HTML Table",
+            "parameters": [
+                {
+                    "title": "JSON Data",
+                    "name": "data",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "[{'Name':'Phishing Alert','Type':'Phishing', 'Description':'Admin Mail', 'Comments':'Money Credited'}]"
+                },
+                {
+                    "title": "Display",
+                    "name": "display",
+                    "type": "select",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "options": [
+                        "Horizontal",
+                        "Vertical"
+                    ],
+                    "value": "Horizontal",
+                    "tooltip": "For Generic Styling, lists will be converted horizontally and dictionaries will be converted vertically"
+                },
+                {
+                    "title": "Styling",
+                    "name": "styling",
+                    "tooltip": "Enable to apply custom HTML style to the table.",
+                    "description": "Boolean to indicate whether a custom HTML style is to be applied to the table",
+                    "type": "checkbox",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "value": false,
+                    "onchange": {
+                        "true": [
+                            {
+                                "title": "Table Styling",
+                                "name": "table_style",
+                                "type": "textarea",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "placeholder": "{'table': 'border: 1px solid white;', 'td': 'border: 1px solid white; width:100%;', 'th': 'border: 1px solid white; width:100%;'}"
+                            },
+                            {
+                                "title": "Row Fields",
+                                "name": "row_fields",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "placeholder": "['Name','Type','State']",
+                                "tooltip": "Specify the JSON Data keys to be filtered and displayed as HTML table column headers. By default, all the JSON Data keys will be displayed."
+                            }
+                        ],
+                        "false": [
+                            {
+                                "title": "HTML Template",
+                                "name": "template",
+                                "type": "select",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "options": [
+                                    "Stylized with row selection",
+                                    "Generic"
+                                ],
+                                "value": "Stylized with row selection",
+                                "onchange": {
+                                    "Stylized with row selection": [
+                                        {
+                                            "title": "Row Fields",
+                                            "name": "row_fields",
+                                            "type": "text",
+                                            "visible": true,
+                                            "editable": true,
+                                            "required": false,
+                                            "placeholder": "['Name','Type','State']",
+                                            "tooltip": "Specify the JSON Data keys to be filtered and displayed as HTML table column headers. By default, all the JSON Data keys will be displayed."
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "A wrapper around the python requests library.",
+            "operation": "api_call",
+            "annotation": "rest_api_call",
+            "title": "Utils: Make REST API Call",
+            "parameters": [
+                {
+                    "title": "URL",
+                    "name": "url",
+                    "description": "Endpoint to hit",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                },
+                {
+                    "title": "HTTP method",
+                    "name": "method",
+                    "description": "HTTP method",
+                    "type": "select",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "options": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "PATCH"
+                    ]
+                },
+                {
+                    "title": "Query params",
+                    "name": "params",
+                    "description": "Any query params to send as part of the url",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "placeholder": "{'id':'1'}"
+                },
+                {
+                    "title": "Body",
+                    "name": "body",
+                    "description": "The body (which won't be encoded) to send with the request",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "tooltip": "Body for POST OR PUT methods"
+                },
+                {
+                    "title": "Headers",
+                    "name": "headers",
+                    "description": "A dict full of headers to add to the request",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Verify Certificates",
+                    "name": "verify",
+                    "description": "Boolean to indicate whether to verify certificates",
+                    "type": "checkbox",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "value": true
+                },
+                {
+                    "title": "Username",
+                    "name": "username",
+                    "description": "Username used in basic auth",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Password",
+                    "name": "password",
+                    "description": "Password used in basic auth",
+                    "type": "password",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Auth",
+                    "name": "auth_config",
+                    "description": "Username and password used in basic auth, but in dict form",
+                    "tooltip": "Username and password used in basic auth, but in dict form",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Checks if IP Address is in given CIDR range.",
+            "operation": "ip_cidr_check",
+            "annotation": "ip_cidr_check",
+            "title": "Utils: Is IP in CIDR",
+            "parameters": [
+                {
+                    "title": "IP Address",
+                    "name": "ip_address",
+                    "description": "IP Address",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "127.0.0.1 / 127.0.0.1, 127.0.0.2"
+                },
+                {
+                    "title": "cidr",
+                    "name": "cidr",
+                    "description": "cidr range(eg: range 1,range 2,range 3)",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. range 1,range 2,range 3"
+                }
+            ],
+            "output_schema": {
+                "matched_cidr_ip": {},
+                "unmatched_ips": [],
+                "ip_matched": false
+            },
+            "enabled": true
+        },
+        {
+            "description": "Converts given Periodic time in string format to minutes",
+            "operation": "convert_periodic_time_to_minutes",
+            "title": "Utils: Convert String Time to Minutes",
+            "parameters": [
+                {
+                    "title": "Periodic Time",
+                    "name": "periodic_time",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "year 1, months 2, weeks 3, day 1, hours 4, minutes 10"
+                }
+            ],
+            "output_schema": {
+                "minutes": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Compute the difference of two timestamps.",
+            "operation": "arrow_timestamp_diff",
+            "annotation": "timestamp_delta",
+            "title": "Utils: Compute Time Difference",
+            "parameters": [
+                {
+                    "title": "Timestamp One",
+                    "name": "time_stamp_1",
+                    "description": "Timestamp One",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "YYYY-MM-DDTHH:MM:SS.MS+00:00"
+                },
+                {
+                    "title": "Timestamp Two",
+                    "name": "time_stamp_2",
+                    "description": "Timestamp One",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placehorder": "YYYY-MM-DDTHH:MM:SS.MS+00:00"
+                }
+            ],
+            "output_schema": {
+                "hours": null,
+                "minutes": null,
+                "seconds": null,
+                "days": null,
+                "microseconds": null
+            },
+            "enabled": true
+        },
+        {
+            "description": "No Operation.",
+            "operation": "no_op",
+            "title": "Utils: No Operation",
+            "parameters": [
+                {}
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Raise Exception.",
+            "operation": "raise_exception",
+            "title": "Utils: Raise Exception",
+            "parameters": [
+                {
+                    "title": "Message",
+                    "name": "msg",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "An Exception Message"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Use this function to format some data as richtext.",
+            "operation": "format_richtext",
+            "title": "Utils: Format as RichText (Markdown)",
+            "parameters": [
+                {
+                    "title": "Value",
+                    "name": "value",
+                    "type": "richtext",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "RichText (Markdown)",
+                    "placeholder": "Value"
+                }
+            ],
+            "output_schema": {
+                "formatted_string": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Use this function to format some data as richtext.",
+            "operation": "format_richtext_html",
+            "title": "Utils: Format as RichText (HTML)",
+            "parameters": [
+                {
+                    "title": "Value",
+                    "name": "value",
+                    "type": "html",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "RichText (HTML)",
+                    "placeholder": "Value"
+                }
+            ],
+            "output_schema": {
+                "formatted_string": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Converts Markdown string to HTML.",
+            "operation": "markdown_to_html",
+            "annotation": "markdown_to_html",
+            "title": "Utils: Convert Markdown string to HTML",
+            "parameters": [
+                {
+                    "title": "Markdown",
+                    "name": "markdown_string",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Enter Markdown string"
+                }
+            ],
+            "output_schema": {
+                "html": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Creates a temporary file filled with 'contents'. The content-type of this file will be 'text/plain'",
+            "operation": "create_file_from_string",
+            "annotation": "cyops_create_file",
+            "title": "File: Create File from String",
+            "parameters": [
+                {
+                    "title": "File contents",
+                    "name": "contents",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "Context to be saved in a file"
+                },
+                {
+                    "title": "Filename",
+                    "name": "filename",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "placeholder": "Eg. demo.txt",
+                    "tooltip": "file will create under /tmp directory"
+                }
+            ],
+            "output_schema": {
+                "md5": "",
+                "sha1": "",
+                "sha256": "",
+                "filename": "",
+                "content_length": "",
+                "content_type": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Uploads a file, specified by a file handle uuid. Basic auth to the external endpoint is available with the username and password fields. Customization of the multipart body is also avaliable the same as :class:'upload_file'",
+            "operation": "upload_file_to_url",
+            "annotation": "file_upload",
+            "title": "File: Upload File to URL",
+            "parameters": [
+                {
+                    "title": "Upload file from IRI or Filepath",
+                    "name": "type",
+                    "description": "File upload from record IRI or Filesystem",
+                    "type": "select",
+                    "options": [
+                        "filepath",
+                        "record IRI"
+                    ],
+                    "value": "filepath",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "onchange": {
+                        "filepath": [
+                            {
+                                "title": "Filepath",
+                                "name": "filename",
+                                "description": "Name of file on the filesystem",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "placeholder:": "Eg. demo.txt",
+                                "tooltip": "files under /tmp directory"
+                            }
+                        ],
+                        "record IRI": [
+                            {
+                                "title": "IRI",
+                                "name": "iri",
+                                "description": "File IRI",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "placeholder": "Eg. /api/3/files/5af00c658289bb5618193f42"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "URL",
+                    "name": "url",
+                    "description": "The location to send the file to",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. https://www.virustotal.com/vtapi/v2/file/scan"
+                },
+                {
+                    "title": "Username",
+                    "name": "username",
+                    "description": "Username to use in basic auth of external system",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Password",
+                    "name": "password",
+                    "description": "Password to use in basic auth of external system",
+                    "type": "password",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Request headers",
+                    "name": "request_headers",
+                    "description": "Request headers",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Multipart headers",
+                    "name": "multipart_headers",
+                    "description": "Extra form data to put into the body",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Extra multipart fields",
+                    "name": "extra_multipart_fields",
+                    "description": "Headers to add to the multipart body",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Download Auth",
+                    "name": "download_auth",
+                    "description": "download auth",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Download URL",
+                    "name": "download_url",
+                    "description": "Download URL",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Downloads a file from a url. Optionally takes username/password arguments for use in basic authentication schemes. Otherwise, if a file is public, these arguments are not required",
+            "operation": "download_file_from_url",
+            "annotation": "file_download",
+            "title": "File: Download File from URL",
+            "parameters": [
+                {
+                    "title": "File URL",
+                    "name": "url",
+                    "type": "text",
+                    "description": "URL from where the file to be downloaded",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "https://www.virustotal.com/vtapi/v2/file/scan"
+                },
+                {
+                    "title": "Username",
+                    "name": "username",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Password",
+                    "name": "password",
+                    "type": "password",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Request Headers",
+                    "name": "request_headers",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {
+                "md5": "",
+                "sha1": "",
+                "sha256": "",
+                "filename": "",
+                "cyops_file_path": "",
+                "content_length": "",
+                "content_type": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "This step is deprecated. Please use 'Upload file' utility action instead. Uploads a file in the system, then associates the file with an attachment",
+            "operation": "create_cyops_attachment",
+            "annotation": "cyops_create_attachment",
+            "title": "File: Create Attachment from File",
+            "parameters": [
+                {
+                    "title": "Attachment File Path",
+                    "name": "filename",
+                    "description": "Name of file on the filesystem",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "file under /tmp directory"
+                },
+                {
+                    "title": "Attachment File Name",
+                    "name": "name",
+                    "description": "User provided name for the attachment",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "value": "my_demo_attachment",
+                    "placeholder": "my_demo_attachment"
+                },
+                {
+                    "title": "Description",
+                    "name": "description",
+                    "description": "User provided description for the attachment",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Headers",
+                    "name": "request_headers",
+                    "description": "Headers added to the http request",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Multipart Headers",
+                    "name": "multipart_headers",
+                    "description": "Headers to add to the multipart body",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Extra multipart fields",
+                    "name": "extra_multipart_fields",
+                    "description": "extra form data to put into the body",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {
+                "createDate": null,
+                "type": null,
+                "createUser": {
+                    "@type": "",
+                    "@id": "",
+                    "createDate": null,
+                    "createUser": "",
+                    "modifyUser": "",
+                    "id": null,
+                    "@settings": "",
+                    "userId": "",
+                    "avatar": null,
+                    "modifyDate": null,
+                    "name": ""
+                },
+                "id": null,
+                "modifyDate": null,
+                "@type": "",
+                "@id": "",
+                "file": {
+                    "@type": "",
+                    "@id": "",
+                    "file": {
+                        "@type": ""
+                    },
+                    "owners": [],
+                    "mimeType": "",
+                    "uploadDate": null,
+                    "@context": "",
+                    "metadata": null,
+                    "filename": "",
+                    "size": null
+                },
+                "modifyUser": {
+                    "@type": "",
+                    "@id": "",
+                    "createDate": null,
+                    "createUser": "",
+                    "modifyUser": "",
+                    "id": null,
+                    "@settings": "",
+                    "userId": "",
+                    "avatar": null,
+                    "modifyDate": null,
+                    "name": ""
+                },
+                "@context": "",
+                "description": "",
+                "name": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Downloads a file and the corresponding metadata from system. This will do HMAC authentication. The iri can be either a file or an attachment",
+            "operation": "download_file_from_cyops",
+            "annotation": "cyops_file_download",
+            "title": "File: Compute Hash",
+            "parameters": [
+                {
+                    "title": "Record IRI (Attachment/File)",
+                    "name": "iri",
+                    "description": "Attachment or File IRI",
+                    "placeholder": "Eg. /api/3/attachments/b5b7ee3d-ad68-415b-9102-06d7fda43835",
+                    "tooltip": "Attachment or File IRI",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                }
+            ],
+            "output_schema": {
+                "md5": "",
+                "sha1": "",
+                "sha256": "",
+                "filename": "",
+                "cyops_file_path": "",
+                "content_length": "",
+                "content_type": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Downloads a file and the corresponding metadata from system. This will do HMAC authentication. The iri can be either a file or an attachment",
+            "operation": "download_file_from_cyops_alias",
+            "annotation": "cyops_file_download",
+            "title": "File: Download File From FortiSOAR",
+            "parameters": [
+                {
+                    "title": "Record IRI (Attachment/File)",
+                    "name": "iri",
+                    "description": "Attachment or File IRI",
+                    "placeholder": "Eg. /api/3/attachments/b5b7ee3d-ad68-415b-9102-06d7fda43835",
+                    "tooltip": "Attachment or File IRI",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                }
+            ],
+            "output_schema": {
+                "md5": "",
+                "sha1": "",
+                "sha256": "",
+                "filename": "",
+                "cyops_file_path": "",
+                "content_length": "",
+                "content_type": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Uploads a file in the system, and creates an attachment record with the file if preferred",
+            "operation": "upload_file_to_cyops",
+            "annotation": "file_upload",
+            "title": "File: Upload a file in the system and Create an Attachment",
+            "parameters": [
+                {
+                    "title": "File Path",
+                    "name": "file_path",
+                    "description": "Path of file on the filesystem",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "File under /tmp directory"
+                },
+                {
+                    "title": "Filename",
+                    "name": "filename",
+                    "description": "Name of file on the filesystem",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "Name of file on the filesystem"
+                },
+                {
+                    "title": "Create Attachment",
+                    "name": "create_attachment",
+                    "description": "Check for creating attachment record from file",
+                    "type": "checkbox",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "value": false,
+                    "onchange": {
+                        "true": [
+                            {
+                                "title": "Attachment Name",
+                                "name": "name",
+                                "description": "Name of the attachment record",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "value": "Attachment"
+                            },
+                            {
+                                "title": "Attachment Description",
+                                "name": "description",
+                                "description": "Description of the attachment record",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false
+                            }
+                        ]
+                    }
+                }
+            ],
+            "output_schema": {
+                "filename": "",
+                "@id": "",
+                "mimeType": "",
+                "file": {},
+                "@type": "",
+                "metadata": {
+                    "sha1": "",
+                    "md5": "",
+                    "sha256": ""
+                },
+                "attachment": {}
+            },
+            "enabled": true
+        },
+        {
+            "description": "Zips a file, optionally allowing to add a password.",
+            "operation": "zip_and_protect_file",
+            "annotation": "cyops_file_zip",
+            "title": "File: Zip",
+            "parameters": [
+                {
+                    "name": "filename",
+                    "title": "File IRI or Filename",
+                    "description": "Provide the File IRI or Filename to zip the file. If filename is specified, the file must be present in the /tmp directory in the system",
+                    "placeholder": "eg, 1e7f3640b8524fa0968d8a99ce5722fd OR /api/3/attachments/2fa4b004-e12b-4260-8999-e6ac7af91826",
+                    "tooltip": "Provide the File IRI or Filename. If filename is specified, the file must be present in the /tmp directory in the system",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                },
+                {
+                    "title": "Zipped File Name",
+                    "name": "target_filename",
+                    "description": "Name for the zip created",
+                    "placeholder": "eg, sample.zip",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                },
+                {
+                    "title": "Password",
+                    "name": "password",
+                    "description": "Password to use",
+                    "tooltip": "Provide the password, if you want password protected zipped file.",
+                    "type": "password",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Compression Level",
+                    "name": "compress_level",
+                    "description": "Compression Level",
+                    "tooltip": "Level 0 is the lowest level, where it just zips the file without any compression. Level 6 is the default level of compression. Level 9 is the maximum compression. This will be slower when compared to default level.",
+                    "type": "select",
+                    "options": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                    ],
+                    "value": 6,
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {
+                "zip_filename": ""
+            },
+            "enabled": true
+        },
+        {
+            "description": "Unzips a password protected or a regular zipped file.",
+            "operation": "unzip_protected_file",
+            "annotation": "cyops_file_unzip",
+            "title": "File: Unzip",
+            "parameters": [
+                {
+                    "title": "File IRI/Filepath",
+                    "name": "type",
+                    "description": "Provide the File IRI or Filepath to unzip the file.",
+                    "type": "select",
+                    "options": [
+                        "Filepath",
+                        "File IRI"
+                    ],
+                    "value": "File IRI",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "onchange": {
+                        "Filepath": [
+                            {
+                                "title": "Filepath",
+                                "name": "file_name",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "description": "Name of file on the filesystem",
+                                "tooltip": "files under /tmp directory",
+                                "placeholder": "Eg. 5af00c658289bb5618193f42"
+                            }
+                        ],
+                        "File IRI": [
+                            {
+                                "title": "Record IRI",
+                                "name": "file_iri",
+                                "description": "File IRI",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "placeholder": "Eg. /api/3/files/5af00c658289bb5618193f42"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "Password",
+                    "name": "password",
+                    "description": "Password to open the protected file",
+                    "tooltip": "Provide the password for unzipping the file, in case the zipped file is password-protected.",
+                    "type": "password",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {
+                "filenames": []
+            },
+            "enabled": true
+        },
+        {
+            "description": "Perform XOR bitwise operations on provided input file and stores decrypted data into output file.",
+            "operation": "xor_byte_file_decryption",
+            "title": "File: XOR Decryption",
+            "category": "investigation",
+            "annotation": "xor_decryption",
+            "output_schema": {
+                "output_file": ""
+            },
+            "enabled": true,
+            "visible": true,
+            "parameters": [
+                {
+                    "title": "File IRI / Filepath",
+                    "name": "input_file",
+                    "description": "Provide the File IRI or Filepath to decrypt file.",
+                    "type": "select",
+                    "options": [
+                        "Filepath",
+                        "File IRI"
+                    ],
+                    "value": "File IRI",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "onchange": {
+                        "Filepath": [
+                            {
+                                "title": "Filepath",
+                                "name": "file_path",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "description": "Name of file on the filesystem",
+                                "tooltip": "Provide input file name to decrypt. files under /tmp directory",
+                                "placeholder": "Eg. 5af00c658289bb5618193f42"
+                            }
+                        ],
+                        "File IRI": [
+                            {
+                                "title": "Record IRI",
+                                "name": "file_iri",
+                                "description": "File IRI",
+                                "type": "text",
+                                "tooltip": "Provide file IRI to decrypt.",
+                                "visible": true,
+                                "editable": true,
+                                "required": true,
+                                "placeholder": "Eg. /api/3/files/5af00c658289bb5618193f42"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "Output File",
+                    "name": "output_file",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "description": "Output file name to save decrypted data",
+                    "tooltip": "Provide file name to save decrypted data",
+                    "placeholder": ""
+                },
+                {
+                    "title": "Key to Decrypt",
+                    "name": "key_to_decrypt",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "description": "Key to decrypt with input file",
+                    "tooltip": "Provide key in Hex or corresponding character to decrypt the input file",
+                    "placeholder": "Ex. 0x6a"
+                }
+            ]
+        },
+        {
+            "description": "Ingest a PEM certificate into utilities connector and parse its contents.",
+            "operation": "read_pem_certificate",
+            "title": "File: Read PEM Certificate",
+            "category": "investigation",
+            "annotation": "read_pem_certificate",
+            "parameters": [
+                {
+                    "title": "File Path, Attachment IRI, or File IRI",
+                    "name": "file_iri_or_path",
+                    "description": "A file path or an IRI that points to the PEM certificate",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "/api/3/files/e8a4f592-eec5-445b-aa62-af6d407a4fa8 or /tmp/sample.pem",
+                    "tooltip": "If you are specifying a file path, it must be relative to the /tmp directory"
+                }
+            ],
+            "output_schema": {
+                "subject": "",
+                "serial_number": "",
+                "issuer": "",
+                "version": ""
+            }
+        },
+        {
+            "description": "This function facilitates using the FortiSOAR api.It is for general purpose requests, but takes care of authentication automatically",
+            "operation": "make_cyops_request",
+            "annotation": "cyops_api_call",
+            "title": "FSR: Make FortiSOAR API Call",
+            "parameters": [
+                {
+                    "title": "IRI",
+                    "name": "iri",
+                    "description": "An IRI that points to the location of the FortiSOAR collection (E.g. /api/3/events)",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. /api/3/alerts"
+                },
+                {
+                    "title": "Http method",
+                    "name": "method",
+                    "description": "Http method",
+                    "type": "select",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "options": [
+                        "GET",
+                        "POST",
+                        "PUT",
+                        "DELETE",
+                        "PATCH"
+                    ]
+                },
+                {
+                    "title": "Body",
+                    "name": "body",
+                    "description": "The body (which won't be encoded) to send with the request",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "placeholder": "{'name':'demo_alert','description':'Alert for demo'}"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "A task for inserting new data into the system",
+            "operation": "insert_cyops_resource",
+            "annotation": "cyops_insert_resource",
+            "title": "FSR: Create Record",
+            "parameters": [
+                {
+                    "title": "URL",
+                    "name": "iri",
+                    "description": "An IRI that points to the location of the FortiSOAR collection (E.g. /api/3/events)",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholders": "Eg. /api/3/alerts"
+                },
+                {
+                    "title": "Body",
+                    "name": "body",
+                    "description": "An object to json encode and send to the system",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "{'name':'demo_alert','description':'Alert for demo'}"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "A task for updating system resource",
+            "operation": "update_cyops_resource",
+            "annotation": "cyops_update_resource",
+            "title": "FSR: Update Record",
+            "parameters": [
+                {
+                    "title": "IRI",
+                    "name": "iri",
+                    "description": "An IRI that points to the location of the FortiSOAR collection (E.g. /api/3/events)",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholders": "F.E /api/3/alerts"
+                },
+                {
+                    "title": "Body",
+                    "name": "body",
+                    "description": "An object to json encode and send to system",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "{'name':'demo_alert','description':'Alert for demo'}"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Performs a search using the query api",
+            "operation": "query_cyops_resource",
+            "annotation": "cyops_query_resource",
+            "title": "FSR: Find Record",
+            "parameters": [
+                {
+                    "title": "Resource name",
+                    "name": "resource",
+                    "description": "A model to use as an IRI (e.g. events)",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "Eg. alerts"
+                },
+                {
+                    "title": "Query",
+                    "name": "query",
+                    "description": "A query object to send to the query api",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "tooltip": "Example :: {'logic': 'AND','filters':[{'field': 'status','operator': 'eq','value': '/api/3/picklists/7de816ff-7140-4ee5-bd05-93ce22002146','_value': {},'type': 'object'}]}"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "A task for upsert resource into the system",
+            "operation": "upsert_cyops_resource",
+            "annotation": "upsert_cyops_resource",
+            "title": "FSR: Upsert Record",
+            "parameters": [
+                {
+                    "title": "IRI",
+                    "name": "iri",
+                    "description": "An IRI that points to the location of the FortiSOAR collection (E.g. /api/3/events)",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "/api/3/alerts",
+                    "tooltip": "An IRI that points to the location of the FortiSOAR collection (E.g. /api/3/alerts)"
+                },
+                {
+                    "title": "Body",
+                    "name": "resource",
+                    "description": "An object to json encode and send to system",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "{'name':'Suspicious Email:Security alert'}"
+                },
+                {
+                    "title": "Fields",
+                    "name": "fields",
+                    "description": "A List of fields that collectively define the resource uniqueness",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "['source', 'sourceID']",
+                    "tooltip": "List of fields that collectively define the resource uniqueness. Eg, if an alert with the same source, sourceID already exists, update existing instead of creating a new one"
+                },
+                {
+                    "title": "Ignore Missing Fields",
+                    "name": "Ignore_missing_fields",
+                    "description": "List of fields to be ignored if found missing",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "placeholder": "['type']",
+                    "tooltip": "List of fields to be ignored if found missing"
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Extract artifacts from given string data",
+            "operation": "extract_artifacts",
+            "annotation": "extract_artifacts",
+            "title": "FSR: Extract Artifacts from String",
+            "parameters": [
+                {
+                    "title": "Data",
+                    "name": "data",
+                    "description": "Data",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                },
+                {
+                    "title": "Whitelisted Artifacts",
+                    "name": "whitelist",
+                    "description": "Comma separated list of artifacts(Domain, CIDR ranges, IPs)that will be ommited in extraction result.",
+                    "tooltip": "Comma separated list of artifacts ( Domains, CIDR Ranges, IPs) that will be omitted in extraction results. If \u201cexample.com\u201d is provided, all related artifacts like \u201ctest@example.com\u201d, \u201cexample.com/sub1/sub2\u201d will be whitelisted.",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "placeholder": "fortinet.com, *google.com, 10.0.0.0/8, 192.168.0.0",
+                    "value": ""
+                },
+                {
+                    "title": "Artifact values are case-sensitive",
+                    "name": "case_sensitive",
+                    "type": "checkbox",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "value": false
+                },
+                {
+                    "title": "Whitelist Private Addresses",
+                    "name": "private_whitelist",
+                    "tooltip": "The following private RFC1918 IPv4 addresses will be whitelisted: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 ",
+                    "type": "checkbox",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "value": true
+                },
+                {
+                    "title": "Override URL Extraction Settings",
+                    "description": "Provide a custom regex that will override teh default URL extraction expression",
+                    "name": "override_regex",
+                    "tooltip": "Edit the default regex expression or provide custom regex that will override the default URL extraction settings",
+                    "type": "checkbox",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "value": false,
+                    "onchange": {
+                        "true": [
+                            {
+                                "title": "RegEx Expression For URL Extraction",
+                                "name": "url_regex",
+                                "description": "Edit the below to provide custom regex that will override the default URL extraction settings.",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "value": "((http(s)?|(s)?ftp://.){1}(www\\.)?[-a-zA-Z0-9@:%%._\\+~#=]{1,256}([-a-zA-Z0-9@:%%_\\+.~#?&//=]*)[-a-zA-Z0-9@/$&=?]{1})"
+                            },
+                            {
+                                "title": "RegEx Expression For Host Extraction",
+                                "name": "host_regex",
+                                "description": "Edit the below to provide custom regex that will override the default Host extraction settings.",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "value": "\\b(([a-z0-9\\-]{2,}\\[?\\.\\]?)+(abogado|ac|academy|accountants|active|actor|ad|adult|ae|aero|af|ag|agency|ai|airforce|al|allfinanz|alsace|am|amsterdam|an|android|ao|aq|aquarelle|ar|archi|army|arpa|as|asia|associates|at|attorney|au|auction|audio|autos|aw|ax|axa|az|ba|band|bank|bar|barclaycard|barclays|bargains|bayern|bb|bd|be|beer|berlin|best|bf|bg|bh|bi|bid|bike|bingo|bio|biz|bj|black|blackfriday|bloomberg|blue|bm|bmw|bn|bnpparibas|bo|boo|boutique|br|brussels|bs|bt|budapest|build|builders|business|buzz|bv|bw|by|bz|bzh|ca|cal|camera|camp|cancerresearch|canon|capetown|capital|caravan|cards|care|career|careers|cartier|casa|cash|cat|catering|cc|cd|center|ceo|cern|cf|cg|ch|channel|chat|cheap|christmas|chrome|church|ci|citic|city|ck|cl|claims|cleaning|click|clinic|clothing|club|cm|cn|co|coach|codes|coffee|college|cologne|com|community|company|computer|condos|construction|consulting|contractors|cooking|cool|coop|country|cr|credit|creditcard|cricket|crs|cruises|cu|cuisinella|cv|cw|cx|cy|cymru|cz|dabur|dad|dance|dating|day|dclk|de|deals|degree|delivery|democrat|dental|dentist|desi|design|dev|diamonds|diet|digital|direct|directory|discount|dj|dk|dm|dnp|do|docs|domains|doosan|durban|dvag|dz|eat|ec|edu|education|ee|eg|email|emerck|energy|engineer|engineering|enterprises|equipment|er|es|esq|estate|et|eu|eurovision|eus|events|everbank|exchange|expert|exposed|fail|farm|fashion|feedback|fi|finance|financial|firmdale|fish|fishing|fit|fitness|fj|fk|flights|florist|flowers|flsmidth|fly|fm|fo|foo|forsale|foundation|fr|frl|frogans|fund|furniture|futbol|ga|gal|gallery|garden|gb|gbiz|gd|ge|gent|gf|gg|ggee|gh|gi|gift|gifts|gives|gl|glass|gle|global|globo|gm|gmail|gmo|gmx|gn|goog|google|gop|gov|gp|gq|gr|graphics|gratis|green|gripe|gs|gt|gu|guide|guitars|guru|gw|gy|hamburg|hangout|haus|healthcare|help|here|hermes|hiphop|hiv|hk|hm|hn|holdings|holiday|homes|horse|host|hosting|house|how|hr|ht|hu|ibm|id|ie|ifm|il|im|immo|immobilien|in|industries|info|ing|ink|institute|insure|int|international|investments|io|iq|ir|irish|is|it|iwc|jcb|je|jetzt|jm|jo|jobs|joburg|jp|juegos|kaufen|kddi|ke|kg|kh|ki|kim|kitchen|kiwi|km|kn|koeln|kp|kr|krd|kred|kw|ky|kyoto|kz|la|lacaixa|land|lat|latrobe|lawyer|lb|lc|lds|lease|legal|lgbt|li|lidl|life|lighting|limited|limo|link|lk|loans|london|lotte|lotto|lr|ls|lt|ltda|lu|luxe|luxury|lv|ly|ma|madrid|maison|management|mango|market|marketing|marriott|mc|md|me|media|meet|melbourne|meme|memorial|menu|mg|mh|miami|mil|mini|mk|ml|mm|mn|mo|mobi|moda|moe|monash|money|mormon|mortgage|moscow|motorcycles|mov|mp|mq|mr|ms|mt|mu|museum|mv|mw|mx|my|mz|na|nagoya|name|navy|nc|ne|net|network|neustar|new|nexus|nf|ng|ngo|nhk|ni|ninja|nl|no|np|nr|nra|nrw|ntt|nu|nyc|nz|okinawa|om|one|ong|onl|ooo|org|organic|osaka|otsuka|ovh|pa|paris|partners|parts|party|pe|pf|pg|ph|pharmacy|photo|photography|photos|physio|pics|pictures|pink|pizza|pk|pl|place|plumbing|pm|pn|pohl|poker|porn|post|pr|praxi|press|pro|prod|productions|prof|properties|property|ps|pt|pub|pw|qa|qpon|quebec|re|realtor|recipes|red|rehab|reise|reisen|reit|ren|rentals|repair|report|republican|rest|restaurant|reviews|rich|rio|rip|ro|rocks|rodeo|rs|rsvp|ru|ruhr|rw|ryukyu|sa|saarland|sale|samsung|sarl|sb|sc|sca|scb|schmidt|schule|schwarz|science|scot|sd|se|services|sew|sexy|sg|sh|shiksha|shoes|shriram|si|singles|sj|sk|sky|sl|sm|sn|so|social|software|sohu|solar|solutions|soy|space|spiegel|sr|st|style|su|supplies|supply|support|surf|surgery|suzuki|sv|sx|sy|sydney|systems|sz|taipei|tatar|tattoo|tax|tc|td|technology|tel|temasek|tennis|tf|tg|th|tienda|tips|tires|tirol|tj|tk|tl|tm|tn|to|today|tokyo|tools|top|toshiba|town|toys|tp|tr|trade|training|travel|trust|tt|tui|tv|tw|tz|ua|ug|uk|university|uno|uol|us|uy|uz|va|vacations|vc|ve|vegas|ventures|versicherung|vet|vg|vi|viajes|video|villas|vision|vlaanderen|vn|vodka|vote|voting|voto|voyage|vu|wales|wang|watch|webcam|website|wed|wedding|wf|whoswho|wien|wiki|williamhill|wme|work|works|world|ws|wtc|wtf|xyz|yachts|yandex|ye|yoga|yokohama|youtube|yt|za|zm|zone|zuerich|zw))\\b"
+                            },
+                            {
+                                "title": "RegEx Expression For IPv4 Extraction",
+                                "name": "ipv4_regex",
+                                "description": "Edit the below to provide custom regex that will override the default IPv4 extrcation settings.",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "value": "\\b(\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})\\b"
+                            },
+                            {
+                                "title": "RegEx Expression For IPv6 Extraction",
+                                "name": "ipv6_regex",
+                                "description": "Edit the below to provide custom regex that will override the default IPv6 extraction settings.",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "value": "(?:(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){6})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:::(?:(?:(?:[0-9a-fA-F]{1,4})):){5})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){4})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,1}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){3})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,2}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:(?:[0-9a-fA-F]{1,4})):){2})(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,3}(?:(?:[0-9a-fA-F]{1,4})))?::(?:(?:[0-9a-fA-F]{1,4})):)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,4}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9]))\\.){3}(?:(?:25[0-5]|(?:[1-9]|1[0-9]|2[0-4])?[0-9])))))))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,5}(?:(?:[0-9a-fA-F]{1,4})))?::)(?:(?:[0-9a-fA-F]{1,4})))|(?:(?:(?:(?:(?:(?:[0-9a-fA-F]{1,4})):){0,6}(?:(?:[0-9a-fA-F]{1,4})))?::))))"
+                            },
+                            {
+                                "title": "RegEx Expression For Email Extraction",
+                                "name": "email_regex",
+                                "description": "Edit the below to provide custom regex that will override the default Email extraction settings.",
+                                "type": "text",
+                                "visible": true,
+                                "editable": true,
+                                "required": false,
+                                "value": "[a-zA-Z0-9\\.\\-+_]+@[a-zA-Z0-9]+[a-zA-Z0-9\\.\\-+_]*\\.[a-zA-Z0-9]{1,4}"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "output_schema": {
+                "results": [
+                    {
+                        "value": "",
+                        "type": "",
+                        "picklist_iri": ""
+                    }
+                ],
+                "whitelisted_results": [
+                    {
+                        "value": "",
+                        "type": "",
+                        "picklist_iri": ""
+                    }
+                ]
+            },
+            "enabled": true
+        },
+        {
+            "description": "Create and Attach the extracted Indicators into FortiSOAR module. This would create or fetch Indicators record and associate indicators record to the FortiSOAR module.",
+            "operation": "attach_indicators",
+            "annotation": "cyops_attach_indicators",
+            "title": "FSR: Attach Indicators to Record",
+            "parameters": [
+                {
+                    "title": "Collection IRI",
+                    "name": "iri",
+                    "description": "A FortiSOAR collection",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                },
+                {
+                    "title": "Indicators",
+                    "name": "indicators",
+                    "description": "Indicators Data",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "{'Domain':['testdomain.com'], 'IP Address':['192.168.1.1']}",
+                    "tooltip": "{'<indicator_type>':['<indicator_value>']}"
+                },
+                {
+                    "title": "Source",
+                    "name": "source",
+                    "description": "Source of Indicators",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                },
+                {
+                    "title": "Attach Indicators to field",
+                    "name": "related_field",
+                    "description": "Name of the field in the collection to which the indicators need to be related. Default field is 'indicators'.",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Parse a string in CEF format and return a dict with the header values and the extension data.",
+            "operation": "parse_cef",
+            "title": "FSR: Parse CEF String to JSON.",
+            "parameters": [
+                {
+                    "title": "CEF String",
+                    "name": "cef_input",
+                    "description": "CEF input string",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "description": "Updates a Global Variable",
+            "operation": "updatemacro",
+            "title": "FSR: Create/Update Global Variables",
+            "parameters": [
+                {
+                    "title": "Global Variable",
+                    "name": "macro",
+                    "description": "Global Variable",
+                    "type": "select",
+                    "apiOperation": "get_macro_list",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                },
+                {
+                    "title": "Value",
+                    "name": "value",
+                    "description": "Value",
+                    "type": "textarea",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "operation": "get_macro_list",
+            "title": "Get Global Variable List",
+            "description": "Get Global Variable List",
+            "output_schema": {},
+            "enabled": true,
+            "visible": false,
+            "parameters": []
+        },
+        {
+            "description": "Extracts email's metadata from email file",
+            "operation": "extract_email_metadata",
+            "title": "Email: Extracts email's metadata from email file (Deprecated)",
+            "parameters": [
+                {
+                    "title": "File Path",
+                    "name": "filepath",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "demoemail.txt",
+                    "tooltip": "file under /tmp directory"
+                },
+                {
+                    "title": "File Type",
+                    "name": "filetype",
+                    "type": "select",
+                    "options": [
+                        "eml",
+                        "msg"
+                    ],
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {
+                "subject": "",
+                "body": "",
+                "to": "",
+                "date": "",
+                "cc": "",
+                "from": "",
+                "header": {},
+                "attachment": []
+            },
+            "enabled": true,
+            "visible": false
+        },
+        {
+            "description": "Extracts email's metadata from email file",
+            "operation": "extract_email_metadata_new",
+            "title": "Email: Extracts email's metadata from email file",
+            "parameters": [
+                {
+                    "title": "File Path",
+                    "name": "filepath",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "demoemail.txt",
+                    "tooltip": "file under /tmp directory"
+                },
+                {
+                    "title": "File Type",
+                    "name": "filetype",
+                    "type": "select",
+                    "options": [
+                        "eml",
+                        "msg"
+                    ],
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {
+                "body": "",
+                "file": "",
+                "headers": {},
+                "attachments": [],
+                "attachment_files": [],
+                "parsed_attachment_data": []
+            },
+            "enabled": true
+        },
+        {
+            "operation": "get_attachment_types",
+            "title": "Get Attachment Types",
+            "description": "Get available attachment types",
+            "category": "investigation",
+            "annotation": "get_attachment_types",
+            "output_schema": {},
+            "enabled": true,
+            "visible": false,
+            "parameters": []
+        }
+    ],
+    "forked_from": "cyops_utilities_3_2_2",
+    "cs_approved": false,
+    "cs_compatible": true,
+    "help_online": "https://docs.fortinet.com/document/fortisoar/3.2.2/utilities-connector/391/utilities-connector-v3-2-2"
+}

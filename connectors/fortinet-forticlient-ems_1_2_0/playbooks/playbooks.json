@@ -1,0 +1,1028 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+      "@type": "WorkflowCollection",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "66a11daf-f852-4693-a8af-02ec92dd2d34",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "17e9a63a-21e4-4590-821b-e7c1eb80e275",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "0a646631-891e-4dff-a67f-16cf52febfdc",
+              "@type": "WorkflowStep",
+              "name": "Get All Endpoints",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "device_id": "",
+                  "group_id": "",
+                  "client_id": "",
+                  "client_os": "",
+                  "client_version": "",
+                  "activity": "",
+                  "connection": "",
+                  "event_type": "",
+                  "management": "",
+                  "status": "",
+                  "view_type": "",
+                  "verification": {
+                    "saml_id": "",
+                    "ldap_ids": []
+                  },
+                  "filters": {
+                    "name": "",
+                    "user": "",
+                    "group": "",
+                    "ip": "",
+                    "os": "",
+                    "tag": "",
+                    "fctVersion": "",
+                    "fctUid": "",
+                    "deployment": {
+                      "name": "",
+                      "status": []
+                    },
+                    "policy": {
+                      "name": "",
+                      "status": []
+                    },
+                    "profile": {
+                      "name": "",
+                      "status": []
+                    },
+                    "ipList": {
+                      "name": "",
+                      "status": []
+                    },
+                    "fortigate": {
+                      "name": "",
+                      "status": []
+                    },
+                    "ems": {
+                      "name": "",
+                      "status": []
+                    },
+                    "status": [],
+                    "events": [],
+                    "fctStatus": [],
+                    "features": {
+                      "avSigVersion": "",
+                      "avEngVersion": "",
+                      "fwSigVersion": "",
+                      "fwEngVersion": "",
+                      "vulnSigVersion": "",
+                      "vulnEngVersion": "",
+                      "rtpStatus": ""
+                    },
+                    "date": {
+                      "startDate": "",
+                      "endDate": ""
+                    }
+                  },
+                  "order_by": "name",
+                  "order_asc": true,
+                  "count": 50,
+                  "offset": "",
+                  "custom_attributes": {
+                    "ignore_latest_fct_user_condition": ""
+                  }
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "get_endpoints",
+                "operationTitle": "Get All Endpoints"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of all the endpoints or the specific endpoints connected to the specified Fortinet FortiClient EMS server based on the input parameters you have specified.",
+          "name": "Get All Endpoints",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/17e9a63a-21e4-4590-821b-e7c1eb80e275",
+          "routes": [
+            {
+              "uuid": "4e2ca238-1759-4647-a907-8953a409ffa5",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get All Endpoints",
+              "sourceStep": "/api/3/workflow_steps/17e9a63a-21e4-4590-821b-e7c1eb80e275",
+              "targetStep": "/api/3/workflow_steps/0a646631-891e-4dff-a67f-16cf52febfdc"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "fa54c826-a805-4767-8f7e-eb4a7b866584",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "17b2593e-7010-4834-afc0-75a61cba2b77",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "e5a0e13d-0ea9-4eff-ad08-35339b58b84d",
+              "@type": "WorkflowStep",
+              "name": "Get Endpoint Details",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "device_id": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "get_endpoint_details",
+                "operationTitle": "Get Endpoint Details"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves details for a specific endpoint from the Fortinet FortiClient EMS server based on the device ID you have specified.",
+          "name": "Get Endpoint Details",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/17b2593e-7010-4834-afc0-75a61cba2b77",
+          "routes": [
+            {
+              "uuid": "289fb5f7-978c-4866-b12d-e7e86225ce6c",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Endpoint Details",
+              "sourceStep": "/api/3/workflow_steps/17b2593e-7010-4834-afc0-75a61cba2b77",
+              "targetStep": "/api/3/workflow_steps/e5a0e13d-0ea9-4eff-ad08-35339b58b84d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "311329c7-4eb2-4eba-9127-9db2c55980e2",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "c523f597-65bc-4a65-9b6f-08e438f8603b",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "bbd20d89-7298-443f-8587-f88aef2259e7",
+              "@type": "WorkflowStep",
+              "name": "Get Zero Trust Rule Sets List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "filters": {
+                    "name": {
+                      "type": "",
+                      "match": "",
+                      "query": []
+                    },
+                    "tag": {
+                      "type": "",
+                      "match": "",
+                      "query": []
+                    },
+                    "enabled": {
+                      "type": "",
+                      "match": "",
+                      "query": []
+                    },
+                    "comments": {
+                      "type": "",
+                      "match": "",
+                      "query": []
+                    }
+                  },
+                  "sort_col": "Name",
+                  "sort_ord": "Ascending",
+                  "count": 50,
+                  "offset": "",
+                  "custom_attributes": {
+                    "is_for_fgd_alert": ""
+                  }
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "get_zero_trust_rule_sets",
+                "operationTitle": "Get Zero Trust Rule Sets List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of all zero trust rule sets or specific zero trust rule sets from the FortiClient EMS server based on the input parameters you have specified.",
+          "name": "Get Zero Trust Rule Sets List",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c523f597-65bc-4a65-9b6f-08e438f8603b",
+          "routes": [
+            {
+              "uuid": "5ba5f741-3199-43fb-af56-05fb12fff365",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Zero Trust Rule Sets List",
+              "sourceStep": "/api/3/workflow_steps/c523f597-65bc-4a65-9b6f-08e438f8603b",
+              "targetStep": "/api/3/workflow_steps/bbd20d89-7298-443f-8587-f88aef2259e7"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "bd64b6bc-e759-45dd-831a-3d36ae9ad40d",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "c58bc3e9-b8fc-4157-9232-2a6d35f0bee4",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "fa9b50cd-b256-423f-85c4-65d62be2a000",
+              "@type": "WorkflowStep",
+              "name": "Get Zero Trust Rule Tags List",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": [],
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "get_zero_trust_rule_tags",
+                "operationTitle": "Get Zero Trust Rule Tags List"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of all zero trust rule tags from the FortiClient EMS server.",
+          "name": "Get Zero Trust Rule Tags List",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c58bc3e9-b8fc-4157-9232-2a6d35f0bee4",
+          "routes": [
+            {
+              "uuid": "65e458f8-f032-49c3-ade2-cb8d84993f3e",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Zero Trust Rule Tags List",
+              "sourceStep": "/api/3/workflow_steps/c58bc3e9-b8fc-4157-9232-2a6d35f0bee4",
+              "targetStep": "/api/3/workflow_steps/fa9b50cd-b256-423f-85c4-65d62be2a000"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "fd079d33-d165-4fbe-977d-07b464fb668b",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "9e29ac00-bad4-461b-b8b8-8ef27d197d4e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "6448a97f-e136-445b-a15c-b5615c55b89b",
+              "@type": "WorkflowStep",
+              "name": "Quarantine Endpoints",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "ids": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "quarantine_endpoints",
+                "operationTitle": "Quarantine Endpoints"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Quarantines the specified endpoints on the Fortinet FortiClient EMS server based on the endpoint IDs you have specified.",
+          "name": "Quarantine Endpoints",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/9e29ac00-bad4-461b-b8b8-8ef27d197d4e",
+          "routes": [
+            {
+              "uuid": "881dfa48-c96e-462c-af35-e579dd009cf2",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Quarantine Endpoints",
+              "sourceStep": "/api/3/workflow_steps/9e29ac00-bad4-461b-b8b8-8ef27d197d4e",
+              "targetStep": "/api/3/workflow_steps/6448a97f-e136-445b-a15c-b5615c55b89b"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c4a55a2d-ab45-4500-a677-d7bd1979b69a",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "719c9cdd-ebf1-4e8b-abee-70966e7c4e6b",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "d1d4b21c-bfd4-4a39-abaf-00828b87c161",
+              "@type": "WorkflowStep",
+              "name": "Unquarantine Endpoints",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "ids": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "unquarantine_endpoints",
+                "operationTitle": "Unquarantine Endpoints"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Unquarantines the specified endpoints on the Fortinet FortiClient EMS server based on the endpoint IDs you have specified.",
+          "name": "Unquarantine Endpoints",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/719c9cdd-ebf1-4e8b-abee-70966e7c4e6b",
+          "routes": [
+            {
+              "uuid": "e269e8cf-51f0-4333-8b7a-089c50798aba",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Unquarantine Endpoints",
+              "sourceStep": "/api/3/workflow_steps/719c9cdd-ebf1-4e8b-abee-70966e7c4e6b",
+              "targetStep": "/api/3/workflow_steps/d1d4b21c-bfd4-4a39-abaf-00828b87c161"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "937f63cb-3359-428f-ba0e-0693030f05b2",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "c89ee0cb-01fd-4c20-945b-0c5a94dcd0dd",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "1cd5a138-50b0-4988-9e89-f04ca93972c6",
+              "@type": "WorkflowStep",
+              "name": "Create Custom Tag",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "tag_name": "",
+                  "device_id": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "create_custom_tag",
+                "operationTitle": "Create Custom Tag"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create a custom tag and assign it to the endpoint. Creating a new tag is followed by assigning it to a endpoint.",
+          "name": "Create Custom Tag",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c89ee0cb-01fd-4c20-945b-0c5a94dcd0dd",
+          "routes": [
+            {
+              "uuid": "cd8ee73a-ac4e-4da7-b5c7-fbcc33552fa3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Custom Tag",
+              "sourceStep": "/api/3/workflow_steps/c89ee0cb-01fd-4c20-945b-0c5a94dcd0dd",
+              "targetStep": "/api/3/workflow_steps/1cd5a138-50b0-4988-9e89-f04ca93972c6"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "120a3175-f2bd-4b0a-850b-f987722c899b",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "474fadd9-5fab-42b6-baba-cd403658b67e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "5089301a-3080-465d-ba6e-1e0d617520b9",
+              "@type": "WorkflowStep",
+              "name": "Delete Custom Tag",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "ids": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "delete_custom_tag",
+                "operationTitle": "Delete Custom Tag"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Delete custom tag based on the ID that you have specified.",
+          "name": "Delete Custom Tag",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/474fadd9-5fab-42b6-baba-cd403658b67e",
+          "routes": [
+            {
+              "uuid": "1eb8ba9f-b7fc-4a73-870e-f35f4cf19937",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Custom Tag",
+              "sourceStep": "/api/3/workflow_steps/474fadd9-5fab-42b6-baba-cd403658b67e",
+              "targetStep": "/api/3/workflow_steps/5089301a-3080-465d-ba6e-1e0d617520b9"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "9958ea0b-3939-4a21-aa1e-e1a01467d83f",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "1fe3e99d-d742-49b8-931a-01e3fad6ec7d",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "6aa5f5dd-3434-455b-99a5-70f6033faba9",
+              "@type": "WorkflowStep",
+              "name": "Add Custom Tag to Endpoint",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "ids": "",
+                  "tag_id": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "add_custom_tag",
+                "operationTitle": "Add Custom Tag to Endpoint"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Add Custom Tag to endpoint based on the device IDs and custom tag ID that you have specified.",
+          "name": "Add Custom Tag to Endpoint",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1fe3e99d-d742-49b8-931a-01e3fad6ec7d",
+          "routes": [
+            {
+              "uuid": "b7a4d463-9c83-40d8-a1d2-2ecf73a143fd",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Add Custom Tag to Endpoint",
+              "sourceStep": "/api/3/workflow_steps/1fe3e99d-d742-49b8-931a-01e3fad6ec7d",
+              "targetStep": "/api/3/workflow_steps/6aa5f5dd-3434-455b-99a5-70f6033faba9"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "46ea27cf-7ecc-4ed3-a5a6-f3380bd216ce",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "91e9109e-3c78-428b-a3d8-4b581fb45c89",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "4063fca7-4f26-495a-abf0-ed6b9b2d39de",
+              "@type": "WorkflowStep",
+              "name": "Remove Custom Tag From Endpoint",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "ids": "",
+                  "tag_id": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "remove_custom_tag",
+                "operationTitle": "Remove Custom Tag From Endpoint"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Remove Custom Tag from endpoint based on the device IDs and custom tag ID that you have specified.",
+          "name": "Remove Custom Tag From Endpoint",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/91e9109e-3c78-428b-a3d8-4b581fb45c89",
+          "routes": [
+            {
+              "uuid": "eef621fd-a1cf-45f6-b37c-d20c4b12ef12",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Remove Custom Tag From Endpoint",
+              "sourceStep": "/api/3/workflow_steps/91e9109e-3c78-428b-a3d8-4b581fb45c89",
+              "targetStep": "/api/3/workflow_steps/4063fca7-4f26-495a-abf0-ed6b9b2d39de"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "385fbfe0-c127-43fe-b5bc-4723bad31225",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "a7007b7d-4ed7-46cd-b8be-bbef04372417",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "2e860fa2-1d4b-4346-85ee-f06714364356",
+              "@type": "WorkflowStep",
+              "name": "Get Zero Trust Tag By ID",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "id": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "get_zero_trust_tag_by_id",
+                "operationTitle": "Get Zero Trust Tag By ID"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves zero trust tag details based on the ID that you have specified.",
+          "name": "Get Zero Trust Tag By ID",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a7007b7d-4ed7-46cd-b8be-bbef04372417",
+          "routes": [
+            {
+              "uuid": "905fe6b1-df00-49f6-8538-a003c2edf568",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Zero Trust Tag By ID",
+              "sourceStep": "/api/3/workflow_steps/a7007b7d-4ed7-46cd-b8be-bbef04372417",
+              "targetStep": "/api/3/workflow_steps/2e860fa2-1d4b-4346-85ee-f06714364356"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c668d48a-d076-470a-82b9-9cfefabbe301",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "a0a15433-58e4-4512-8689-120f1be4e0dc",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "039250e0-6956-4e9d-96c1-9f2a10da82bc",
+              "@type": "WorkflowStep",
+              "name": "Create Zero Trust Tag",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "name": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "create_zero_trust_tag",
+                "operationTitle": "Create Zero Trust Tag"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Create a new zero trust tag based on the details that you have specified.",
+          "name": "Create Zero Trust Tag",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a0a15433-58e4-4512-8689-120f1be4e0dc",
+          "routes": [
+            {
+              "uuid": "03880d95-3787-41bb-b275-ae2303f7bd00",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Zero Trust Tag",
+              "sourceStep": "/api/3/workflow_steps/a0a15433-58e4-4512-8689-120f1be4e0dc",
+              "targetStep": "/api/3/workflow_steps/039250e0-6956-4e9d-96c1-9f2a10da82bc"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "abf00d46-0e61-49ef-ba2d-e11e541801ea",
+          "collection": "/api/3/workflow_collections/59ed8d1a-c6b7-4c76-b61a-c6ceb4e73755",
+          "steps": [
+            {
+              "uuid": "bdb59f78-e44e-4434-8b32-bcd635288671",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "9de1597b-4e4b-4163-954e-43a412c81055",
+              "@type": "WorkflowStep",
+              "name": "Delete Zero Trust Tag",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Fortinet FortiClient EMS",
+                "config": "''",
+                "params": {
+                  "id": ""
+                },
+                "version": "1.2.0",
+                "connector": "fortinet-forticlient-ems",
+                "operation": "delete_zero_trust_tag",
+                "operationTitle": "Delete Zero Trust Tag"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Delete zero trust tag based on the ID that you have specified.",
+          "name": "Delete Zero Trust Tag",
+          "tag": "#Fortinet FortiClient EMS",
+          "recordTags": [
+            "Fortinet",
+            "fortinet-forticlient-ems"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/bdb59f78-e44e-4434-8b32-bcd635288671",
+          "routes": [
+            {
+              "uuid": "dba83bbb-2af1-44d3-929c-4d8392f94fc8",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Zero Trust Tag",
+              "sourceStep": "/api/3/workflow_steps/bdb59f78-e44e-4434-8b32-bcd635288671",
+              "targetStep": "/api/3/workflow_steps/9de1597b-4e4b-4163-954e-43a412c81055"
+            }
+          ]
+        }
+      ],
+      "name": "Sample - Fortinet FortiClient EMS - 1.2.0",
+      "description": "FortiClient Enterprise Management Server (FortiClient EMS) is a security management solution that enables scalable and centralized management of multiple endpoints (computers).This connector provides operations related to quarantine/unquarantine endpoints, get endpoint details, etc",
+      "visible": true,
+      "recordTags": [
+        "Fortinet",
+        "fortinet-forticlient-ems"
+      ]
+    }
+  ]
+}

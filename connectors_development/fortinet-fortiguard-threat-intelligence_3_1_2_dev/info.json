@@ -1,0 +1,370 @@
+{
+    "name": "fortinet-fortiguard-threat-intelligence",
+    "version": "3.1.2",
+    "label": "Fortinet FortiGuard Threat Intelligence",
+    "description": "FortiGuard Threat Intelligence is the global threat intelligence and research organization at Fortinet. This connector facilitates automated operations to check IP, URL, Domain and File Hash Lookup\u2019s and ingestion of daily threat feeds.<br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
+    "publisher": "",
+    "icon_small_name": "small.png",
+    "icon_large_name": "large.png",
+    "id": 155,
+    "configuration": {
+        "fields": [
+            {
+                "title": "Server Name",
+                "description": "URL of the FortiGuard Threat Intelligence API server to which you will connect and perform automated operations.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "server_url",
+                "value": "https://productapi.fortinet.com"
+            },
+            {
+                "title": "Verify SSL",
+                "name": "verify_ssl",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "value": true,
+                "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set to True."
+            }
+        ]
+    },
+    "operations": [
+        {
+            "operation": "threat_intel_search",
+            "title": "Threat Intel Search",
+            "description": "Retrieves information about a threat from FortiGuard Threat Intelligence based on the indicator you have specified.",
+            "enabled": true,
+            "category": "investigation",
+            "annotation": "threat_intel_search",
+            "parameters": [
+                {
+                    "title": "Indicator",
+                    "description": "Specify the threat indicator whose information to retrieve from the FortiGuard Threat Intelligence server.",
+                    "type": "text",
+                    "name": "indicator",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "tooltip": "Indicator should be File Hash, Domain, URL or IP."
+                }
+            ],
+            "output_schema": {
+                "reference_url": "",
+                "ioc_cate": "",
+                "confidence": "",
+                "wf_cate": "",
+                "spam_cates": [],
+                "ioc_tags": [],
+                "av_cate": ""
+            }
+        },
+        {
+            "operation": "get_threat_categories",
+            "title": "Get Threat Categories",
+            "description": "Retrieves a static list of threat types and names from FortiGuard Threat Intelligence based on the title that you have specified.",
+            "enabled": true,
+            "category": "investigation",
+            "annotation": "get_threat_categories",
+            "parameters": [
+                {
+                    "title": "Title",
+                    "description": "Specify the title of the threat whose associated threat types and names to retrieve from FortiGuard Threat Intelligence server.",
+                    "type": "text",
+                    "name": "title",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "placeholder": "e.g Malware.",
+                    "tooltip": "Title should be one of this value: Malware, Mobile_CnC, APTAttack, etc"
+                }
+            ],
+            "output_schema": [
+                {
+                    "ctype": "",
+                    "title": "",
+                    "description": ""
+                }
+            ]
+        },
+        {
+            "operation": "get_encyclopedia_lookup",
+            "title": "Get Encyclopedia Lookup",
+            "description": "Retrieves a lookup from FortiGuard Threat Intelligence based on the threat source and the associated encyclopedia lookup ID you have specified.",
+            "enabled": true,
+            "category": "investigation",
+            "annotation": "get_encyclopedia_lookup",
+            "parameters": [
+                {
+                    "title": "Source",
+                    "description": "Specify the source of the lookup, for example, viruses, botnet, etc., whose information to retrieve from FortiGuard Threat Intelligence server.",
+                    "type": "select",
+                    "name": "source",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "options": [
+                        "Viruses",
+                        "Intrusion Prevention",
+                        "Botnet",
+                        "Endpoint Vulnerabilities",
+                        "Mobile",
+                        "Application",
+                        "Internet Services"
+                    ]
+                },
+                {
+                    "title": "ID",
+                    "description": "Specify the ID of the encyclopedia lookup whose information to retrieve from the FortiGuard Threat Intelligence server.",
+                    "type": "text",
+                    "name": "id",
+                    "required": true,
+                    "editable": true,
+                    "visible": true
+                }
+            ],
+            "conditional_output_schema": [
+                {
+                    "condition": "{{source === 'Viruses'}}",
+                    "output_schema": {
+                        "Type": "",
+                        "ID": "",
+                        "Name": "",
+                        "Aliases": "",
+                        "Symptoms": "",
+                        "Analysis": "",
+                        "Action": "",
+                        "SecurityRefs": [],
+                        "DetectionAvailability": [
+                            {
+                                "product": "",
+                                "sigdb": "",
+                                "status": ""
+                            }
+                        ],
+                        "Discovered": "",
+                        "Created": "",
+                        "Updated": ""
+                    }
+                },
+                {
+                    "condition": "{{source === 'Intrusion Prevention'}}",
+                    "output_schema": {
+                        "Type": "",
+                        "ID": "",
+                        "Name": "",
+                        "isActive": "",
+                        "Risk": "",
+                        "Summary": "",
+                        "Symptoms": "",
+                        "Analysis": "",
+                        "Action": "",
+                        "DefaultAction": "",
+                        "BehaviorList": [],
+                        "os_list": [],
+                        "app_list": [],
+                        "SecurityRefs": [],
+                        "DetectionAvailability": [
+                            {
+                                "product": "",
+                                "sigdb": "",
+                                "status": ""
+                            }
+                        ],
+                        "Released": "",
+                        "Created": "",
+                        "Updated": ""
+                    }
+                },
+                {
+                    "condition": "{{source === 'Botnet'}}",
+                    "output_schema": {
+                        "Type": "",
+                        "ID": "",
+                        "Name": "",
+                        "Aliases": "",
+                        "Summary": "",
+                        "Symptoms": "",
+                        "Analysis": "",
+                        "Action": "",
+                        "Platform": "",
+                        "Created": "",
+                        "Updated": ""
+                    }
+                },
+                {
+                    "condition": "{{source === 'Endpoint Vulnerabilities'}}",
+                    "output_schema": {
+                        "Type": "",
+                        "ID": "",
+                        "Name": "",
+                        "Risk": "",
+                        "Summary": "",
+                        "Analysis": "",
+                        "Products": [],
+                        "SecurityRefs": [
+                            {
+                                "reftype": "",
+                                "refid": "",
+                                "url": ""
+                            }
+                        ],
+                        "DetectionAvailability": [
+                            {
+                                "product": "",
+                                "sigdb": "",
+                                "status": ""
+                            }
+                        ],
+                        "Created": "",
+                        "Updated": ""
+                    }
+                },
+                {
+                    "condition": "{{source === 'Mobile'}}",
+                    "output_schema": {
+                        "Type": "",
+                        "ID": "",
+                        "Name": "",
+                        "Aliases": "",
+                        "Symptoms": "",
+                        "Analysis": "",
+                        "Action": "",
+                        "SecurityRefs": [],
+                        "DetectionAvailability": [
+                            {
+                                "product": "",
+                                "sigdb": "",
+                                "status": ""
+                            }
+                        ],
+                        "Discovered": "",
+                        "Created": "",
+                        "Updated": ""
+                    }
+                },
+                {
+                    "condition": "{{source === 'Application'}}",
+                    "output_schema": {
+                        "Type": "",
+                        "ID": "",
+                        "Name": "",
+                        "Category": "",
+                        "Risk": "",
+                        "RiskID": "",
+                        "Popularity": "",
+                        "Summary": "",
+                        "Symptoms": "",
+                        "Analysis": "",
+                        "Action": "",
+                        "DefaultAction": "",
+                        "BehaviorList": [],
+                        "AppPort": "",
+                        "References": [],
+                        "DeepAppCtrl": "",
+                        "Vendor": "",
+                        "Deprecated": "",
+                        "Language": "",
+                        "Technology": [],
+                        "os_list": [],
+                        "app_list": [],
+                        "Released": "",
+                        "Created": "",
+                        "Updated": "",
+                        "RequireApp": []
+                    }
+                },
+                {
+                    "condition": "{{source === 'Internet Services'}}",
+                    "output_schema": {
+                        "Type": "",
+                        "ID": "",
+                        "Name": "",
+                        "Analysis": ""
+                    }
+                }
+            ]
+        },
+        {
+            "operation": "ingest_feeds",
+            "title": "Fetch Threat Intel Feeds",
+            "description": "Download the FortiGuard Threat Intel Feeds",
+            "enabled": true,
+            "category": "investigation",
+            "annotation": "threat_intel_feeds",
+            "parameters": [
+                {
+                    "title": "Fetch feeds created after",
+                    "description": "Specify the start DateTime of the duration to fetch feeds incrementally since the last successful pull during data ingestion.",
+                    "tooltip": "Specify the start DateTime of the duration to fetch feeds incrementally since the last successful pull during data ingestion.",
+                    "type": "datetime",
+                    "name": "modified_after",
+                    "required": false,
+                    "editable": true,
+                    "visible": true
+                },
+                {
+                    "title": "Process Response As",
+                    "name": "output_mode",
+                    "visible": true,
+                    "required": false,
+                    "editable": true,
+                    "type": "select",
+                    "options": [
+                        "Create as Feed Records in FortiSOAR",
+                        "Save to File"
+                    ],
+                    "value": "Create as Feed Records in FortiSOAR",
+                    "tooltip": "Select the method of returning the Feed Data information",
+                    "description": "Select the method of returning the Feed Data information. You can choose between the data being create as Feed records in FortiSOAR or being written to files on the FortiSOAR server (Save to File). ",
+                    "onchange": {
+                        "Create as Feed Records in FortiSOAR": [
+                            {
+                                "title": "Record Creation Playbook IRI",
+                                "description": "Specify the IRI of the playbook that creates feed records in FortiSOARTM in the Record Creation Playbook IRI field.",
+                                "type": "text",
+                                "name": "create_pb_id",
+                                "required": false,
+                                "editable": true,
+                                "visible": true,
+                                "tooltip": "Specify the IRI of the playbook that creates feed records in FortiSOARTM in the Record Creation Playbook IRI field."
+                            }
+                        ],
+                        "Save to File": []
+                    }
+                }
+            ],
+            "output_schema": {
+                "result": "",
+                "message": ""
+            }
+        }
+    ],
+    "category": "Threat Intelligence",
+    "active": true,
+    "cs_compatible": true,
+    "system": false,
+    "playbook_collections": [
+        {
+            "@id": "/api/3/workflow_collections/70d5e5ae-7ff3-4fe7-9c58-819afd457001",
+            "name": "Sample - Fortinet FortiGuard Threat Intelligence - 3.1.2",
+            "image": "/api/3/images/a6ca2db7-c3ff-4eec-b53e-a608c5ee964a",
+            "description": "Sample playbooks for \"Fortinet FortiGuard Threat Intelligence\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete."
+        }
+    ],
+    "icon_small": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDM1MiwgMjAyMC8wMS8zMC0xNTo1MDozOCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MzhDNTJBQ0Y3Njc1MTFFQUE0MjBFOUNBNkVGMDkwNTAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MzhDNTJBQ0U3Njc1MTFFQUE0MjBFOUNBNkVGMDkwNTAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0YjNjMGYzYy1kZjFiLTQ5MDYtOWE5ZC1iMWYwZTI0NDg1OTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+9CwUXQAAA/VJREFUeNpi/P//PwMtARMDjcGoBdS04O+/fxt3704uKz908iTxuhgJpiKggifPnx89e3bd9h0Xrl/n4eL6+v27jYlJkIe7qb6+mLAwmRbcefhwzdZtb9+/v/v40f1Hj4GGaigpRfn7mRsabtu/f8227Y+fPxcWEFBRUFCSlRXk548NChTFZhlOC/YcPZpeUakoJ6cgI6OnoWFpZGigpcXKygqR/fT5y6mLF46fPXf1zu1HT599/PRpzYzpmioq2EMAK9h37Ji2i+v5K1f+EwLrd+7UcXW7cfcuVlkCkQx3Mh7Awc6OR5YFv+Z///4Byc9fv67eulVJVo6JmenitWtWxsbPX7768v1bsIcH0AUQNWRaAAGHTpycsWRpuI/3z99/Fq5dC3TynQcPj507C7TSzEAfv16iLBAREowPDtZSU7UwNMyKjQFasPvIEXlpaU4ODupktLOXLk9euGjvkSNAEwX4+IAWACN26uLFwIglqJcoHwDTfik7u5aqKjBknrx4riQnF+XnZ21srKOuRr4FkPzByATy4pv379qnT4/29//3//+s5ctrcrIv37x54tx5I20dUCCA1fwn1QJgOPz+8+f9h49Atru9/ea5c4CFBNC+IHd3KQlxL0dHoAuA2Rgo+/bdeyDJzspGmgXqSspCAgKb9+yxNTMFcuG5VEZCAkiKi4jAPbpl3z4leTkZCXGcQYEL9M+Zq2xrt+fIUTxqFq1dp2Bts3b7dlwK8FkAzF9B6RlGXt5nLl3GqmDnoUNqDk45tXV//v4lxwIgePjkiUt0jIGn17Z9+9Gklm7YoOHkHJmb9+HjJzwmMBAsyx49fRqala1kY1vd3Q0sOIEi12/fya6plbeyzqqu+fDxI37tjMQ0W759/z5p/oJFa9fy8vBoqKhcuHoVmDSBWTo5PBySRimq0eDg0o0bS9dvuHr7toWBQVSAPzC7UafKpBCg54N3795duXKFkZlZQ0xU8MPnP59+sClJ3vz1+8WzZxISEj9+/Hjz5rWYmBgvL9+dO7e5uXmUlJRu377FysLKxMwM1KurqysjI4PPghMnjk+Y0K9lbJwrKs/DwMKorPhz/popr+69/fCenY1N38Dg86dPcvLyp0+d1tLWAqpftmzpi+fPIyKjvnz5fOH8BT09PQI+YGJiDgoKtndykrx88/etB6yfvvxjZQK6PTI29tjRI2qqarx8fGxsbGfPnHV1dfv+/fuVy1fY2Tm+f/umqanJwc4hLi5OIA6AetjZ2UFp48f3vy9e///+i0lS6DMTCz8f35cvX4CKmZmZGRkZgWw+Pj5QZvz8+ePHj8DELiEp+ffvXx4eHqACukYyzZuOAAEGAOuLGqFg6RYOAAAAAElFTkSuQmCC",
+    "icon_large": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAIAAAABc2X6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDM1MiwgMjAyMC8wMS8zMC0xNTo1MDozOCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MzhDNTJBQ0I3Njc1MTFFQUE0MjBFOUNBNkVGMDkwNTAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MzhDNTJBQ0E3Njc1MTFFQUE0MjBFOUNBNkVGMDkwNTAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0YjNjMGYzYy1kZjFiLTQ5MDYtOWE5ZC1iMWYwZTI0NDg1OTUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUy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",
+    "help_online": "https://docs.fortinet.com/document/fortisoar/3.1.2/fortinet-fortiguard-threat-intelligence/670/fortinet-fortiguard-threat-intelligence-v3-1-2",
+    "vendor_version": null,
+    "ingestion_modes": [
+        "scheduled"
+    ],
+    "ingestion_preferences": {
+        "modules": [
+            "threat_intel_feeds",
+            "indicators"
+        ]
+    }
+}

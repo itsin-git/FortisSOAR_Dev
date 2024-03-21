@@ -1,0 +1,520 @@
+{
+  "name": "urlscan-io",
+  "label": "URLScan.io",
+  "version": "1.1.2",
+  "description": "URLScan.io provides a service that analyzes websites and the resources they request. URLScan.io provides actions like search domain, ip, hash scan URL and retrieve report of scanned url.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "urlscan_small.png",
+  "icon_large_name": "urlscan_large.png",
+  "tags": [
+    "Enrichment",
+    "URL_Enrichment"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.2/urlscan-io/440/urlscan-io-v1-1-2",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "type": "text",
+        "name": "server",
+        "description": "URL of the URLScan.io server to which you will connect and perform automated operations.",
+        "tooltip": "URL of the URLScan.io server to which you will connect and perform automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "value": "urlscan.io"
+      },
+      {
+        "title": "API Key",
+        "type": "password",
+        "name": "api_key",
+        "description": "API key that is configured for your account for using the URLScan.io server.",
+        "tooltip": "API key that is configured for your account for using the URLScan.io server.",
+        "required": true,
+        "editable": true,
+        "visible": true
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not.",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_report",
+      "title": "Get Report",
+      "description": "Retrieves a report from URLScan.io for the URLs that you have already submitted to the URLScan.io for analysis. Reports are retrieved based on the scan_id of the sample",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_report",
+      "output_schema": {
+        "page": {
+          "asnname": "",
+          "domain": "",
+          "ip": "",
+          "url": "",
+          "asn": "",
+          "country": "",
+          "city": "",
+          "server": ""
+        },
+        "data": {
+          "console": [],
+          "links": [
+            {
+              "text": "",
+              "href": ""
+            }
+          ],
+          "requests": [],
+          "cookies": [
+            {
+              "path": "",
+              "httpOnly": "",
+              "session": "",
+              "expires": "",
+              "secure": "",
+              "size": "",
+              "domain": "",
+              "value": "",
+              "name": ""
+            }
+          ],
+          "timing": [
+            {
+              "beginNavigation": "",
+              "frameStartedLoading": "",
+              "loadEventFired": "",
+              "frameStoppedLoading": "",
+              "domContentEventFired": "",
+              "frameNavigated": ""
+            }
+          ]
+        },
+        "lists": {
+          "urls": [],
+          "domains": [],
+          "linkDomains": [],
+          "certificates": [
+            {
+              "sanList": [],
+              "subjectName": "",
+              "issuer": "",
+              "validTo": "",
+              "validFrom": ""
+            }
+          ],
+          "hashes": [],
+          "ips": [],
+          "servers": []
+        },
+        "meta": {
+          "processors": {
+            "asn": {
+              "data": [
+                {
+                  "description": "",
+                  "country": "",
+                  "ip": "",
+                  "asn": "",
+                  "registrar": "",
+                  "date": "",
+                  "name": "",
+                  "route": ""
+                }
+              ]
+            },
+            "wappa": {
+              "data": [
+                {
+                  "app": "",
+                  "website": "",
+                  "confidenceTotal": "",
+                  "categories": [
+                    {
+                      "priority": "",
+                      "name": ""
+                    }
+                  ],
+                  "confidence": [
+                    {
+                      "pattern": "",
+                      "confidence": ""
+                    }
+                  ]
+                }
+              ]
+            },
+            "abp": {
+              "data": [
+                {
+                  "type": "",
+                  "url": "",
+                  "source": ""
+                }
+              ]
+            },
+            "cdnjs": {
+              "data": [
+                {
+                  "hash": "",
+                  "matches": []
+                }
+              ]
+            },
+            "geoip": {
+              "data": [
+                {
+                  "ip": "",
+                  "geoip": {
+                    "country": "",
+                    "country_name": "",
+                    "city": "",
+                    "ll": [],
+                    "range": []
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "task": {
+          "visibility": "",
+          "time": "",
+          "uuid": "",
+          "reportURL": "",
+          "userAgent": ""
+        },
+        "stats": {
+          "adBlocked": "",
+          "securePercentage": "",
+          "malicious": "",
+          "totalLinks": "",
+          "IPv6Percentage": "",
+          "secureRequests": ""
+        }
+      },
+      "parameters": [
+        {
+          "title": "Scan ID",
+          "type": "text",
+          "name": "scan_id",
+          "description": "uuid for a previously submitted URL for which you want to retrieve an analysis report from URLScan.io.",
+          "tooltip": "uuid for a previously submitted URL for which you want to retrieve an analysis report from URLScan.io.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "custom_search",
+      "title": "Custom Search",
+      "description": "Retrieves information from URLScan.io based on the query you have specified.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "custom_search",
+      "output_schema": {
+        "result": [
+          {
+            "task": {
+              "visibility": "",
+              "method": "",
+              "time": "",
+              "source": "",
+              "url": ""
+            },
+            "stats": {
+              "uniqIPs": "",
+              "consoleMsgs": "",
+              "dataLength": "",
+              "encodedDataLength": "",
+              "requests": ""
+            },
+            "page": {
+              "country": "",
+              "server": "",
+              "city": "",
+              "domain": "",
+              "ip": "",
+              "asnname": "",
+              "asn": "",
+              "url": "",
+              "ptr": ""
+            },
+            "uniq_countries": "",
+            "_id": "",
+            "result": "",
+            "screenshot": ""
+          }
+        ],
+        "total": "",
+        "took": ""
+      },
+      "parameters": [
+        {
+          "title": "Query",
+          "type": "text",
+          "name": "query",
+          "description": "Query using which you want to retrieve information from URLScan.io.",
+          "tooltip": "Query using which you want to retrieve information from URLScan.io.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "placeholder": "(page.domain:urlscan.io AND country:DE)",
+          "value": ""
+        },
+        {
+          "title": "Size",
+          "type": "integer",
+          "name": "size",
+          "description": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "tooltip": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "search_domain",
+      "title": "Search Domain",
+      "description": "Searches and returns information for a specific domain from URLScan.io based on the domain name you have specified.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "domain_details",
+      "output_schema": {
+        "results": [
+          {
+            "_id": "",
+            "task": {
+              "method": "",
+              "time": "",
+              "visibility": "",
+              "url": "",
+              "source": ""
+            },
+            "uniq_countries": "",
+            "page": {
+              "server": "",
+              "country": "",
+              "ip": "",
+              "asn": "",
+              "ptr": "",
+              "domain": "",
+              "asnname": "",
+              "url": "",
+              "city": ""
+            },
+            "result": ""
+          }
+        ],
+        "total": ""
+      },
+      "parameters": [
+        {
+          "title": "Domain",
+          "type": "text",
+          "name": "domain",
+          "description": "Name of the domain for which you want to retrieve information from URLScan.io.",
+          "tooltip": "Name of the domain for which you want to retrieve information from URLScan.io.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Size",
+          "type": "integer",
+          "name": "size",
+          "description": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "tooltip": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "search_hash",
+      "title": "Search Hash",
+      "description": "Searches and returns information for a specific hash from URLScan.io based on the hash value you have specified.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "hash_details",
+      "output_schema": {
+        "results": [
+          {
+            "task": {
+              "visibility": "",
+              "method": "",
+              "time": "",
+              "source": "",
+              "url": ""
+            },
+            "stats": {
+              "uniqIPs": "",
+              "consoleMsgs": "",
+              "dataLength": "",
+              "encodedDataLength": "",
+              "requests": ""
+            },
+            "page": {
+              "country": "",
+              "server": "",
+              "city": "",
+              "domain": "",
+              "ip": "",
+              "asnname": "",
+              "asn": "",
+              "url": "",
+              "ptr": ""
+            },
+            "uniq_countries": "",
+            "_id": "",
+            "result": "",
+            "screenshot": ""
+          }
+        ],
+        "total": "",
+        "took": ""
+      },
+      "parameters": [
+        {
+          "title": "Hash",
+          "type": "text",
+          "name": "hash",
+          "description": "Hash value for which you want to retrieve information from URLScan.io.",
+          "tooltip": "Hash value for which you want to retrieve information from URLScan.io.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Size",
+          "type": "integer",
+          "name": "size",
+          "description": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "tooltip": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "search_ip",
+      "title": "Search IP",
+      "description": "Searches and returns information for a specific IP from URLScan.io based on the IP address you have specified.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "ip_details",
+      "output_schema": {
+        "results": [
+          {
+            "_id": "",
+            "task": {
+              "method": "",
+              "time": "",
+              "visibility": "",
+              "url": "",
+              "source": ""
+            },
+            "uniq_countries": "",
+            "page": {
+              "server": "",
+              "country": "",
+              "ip": "",
+              "asn": "",
+              "ptr": "",
+              "domain": "",
+              "asnname": "",
+              "url": "",
+              "city": ""
+            },
+            "result": ""
+          }
+        ],
+        "total": ""
+      },
+      "parameters": [
+        {
+          "title": "IP Address",
+          "type": "text",
+          "name": "ip",
+          "description": "IP address for which you want to retrieve information from URLScan.io.",
+          "tooltip": "IP address for which you want to retrieve information from URLScan.io.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Size",
+          "type": "integer",
+          "name": "size",
+          "description": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "tooltip": "Maximum results that this operation should return. By default, this is set to 100, Maximum number that can be set is 10000 (depending on your subscription).",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "submit_url",
+      "title": "Submit URL",
+      "description": "Submits a URL to URLScan.io for analysis.",
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "submit_url",
+      "output_schema": {
+        "uuid": "",
+        "message": "",
+        "visibility": "",
+        "report_link": ""
+      },
+      "parameters": [
+        {
+          "title": "URL",
+          "type": "text",
+          "name": "url",
+          "description": "URL that you want to submit to URLScan.io for scanning and analyzing.",
+          "tooltip": "URL that you want to submit to URLScan.io for scanning and analyzing. ",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Private Scan",
+          "name": "private",
+          "type": "checkbox",
+          "description": "Select this option to set the visibility of the scan to Private. By default, this option is set to True, i.e., the visibility of scans is set as Private",
+          "tooltip": "Select this option to set the visibility of the scan to Private. By default, this option is set to True, i.e., the visibility of scans is set as Private.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": true
+        }
+      ]
+    }
+  ]
+}

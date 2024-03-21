@@ -1,0 +1,94 @@
+{
+  "name": "cyops-system-monitoring",
+  "label": "System Monitoring",
+  "description": "CPU, Memory and Disk Utilization Monitoring for FortiSOAR",
+  "publisher": "Fortinet",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.5.0/system-monitoring-connector/687/system-monitoring-connector-v1-5-0",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.5.0",
+  "category": "System Monitoring",
+  "icon_small_name": "system_monitoring_small.png",
+  "icon_large_name": "system_monitoring_large.png",
+  "configuration": {},
+  "operations": [
+    {
+      "operation": "disk_utilization",
+      "category": "investigation",
+      "annotation": "disk_utilization",
+      "output_schema": [
+        {
+          "sdiskpart": {
+            "device": "",
+            "mountpoint": "",
+            "disk_usage": {
+              "used": "",
+              "percent": "",
+              "total": "",
+              "free": ""
+            },
+            "opts": "",
+            "fstype": ""
+          }
+        }
+      ],
+      "title": "Disk Utilization",
+      "description": "Collects disk utilization information such as used/free/total space",
+      "enabled": true,
+      "parameters": [
+      ]
+    },
+    {
+      "operation": "virtual_memory",
+      "category": "investigation",
+      "annotation": "virtual_memory_utilization",
+      "output_schema": {
+        "svem": {
+          "free": "",
+          "inactive": "",
+          "used": "",
+          "available": "",
+          "active": "",
+          "buffers": "",
+          "cached": "",
+          "shared": "",
+          "percent": "",
+          "total": ""
+        }
+      },
+      "title": "Virtual Memory Utilization",
+      "description": "Collects virtual memory utilization information such as active/available/total space",
+      "enabled": true,
+      "parameters": [
+      ]
+    },
+    {
+      "operation": "cpu_percent",
+      "category": "investigation",
+      "annotation": "cpu_utilization",
+      "output_schema": "",
+      "title": "CPU Utilization",
+      "description": "Collects CPU usage percentage",
+      "enabled": true,
+      "parameters": [
+      ]
+    },
+    {
+      "operation": "service_status",
+      "category": "investigation",
+      "annotation": "service_status",
+      "output_schema": [
+        {
+          "service": "",
+          "ActiveState": "",
+          "SubState": ""
+        }
+      ],
+      "title": "Service Status",
+      "description": "List of the system's service statuses",
+      "enabled": true,
+      "parameters": [
+      ]
+    }
+  ]
+}

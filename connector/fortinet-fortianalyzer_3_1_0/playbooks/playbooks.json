@@ -1,0 +1,4273 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Fortinet FortiAnalyzer - 3.1.0",
+      "description": "Sample playbooks for \"Fortinet FortiAnalyzer\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": null,
+      "uuid": "999611fa-f5ee-4b91-bca7-d6b5435a9005",
+      "id": 73,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Events For Incident",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves all associated events for a specified incident from the Fortinet FortiAnalyzer server based on the incident ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/98ae05c6-35ca-4dac-9d56-a4244be5f42e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Events For Incident",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "377bbf55-f62b-45f2-8d2b-eb21e977dd27",
+                "params": {
+                  "incid": "IN00000002",
+                  "limit": 50,
+                  "offset": 0,
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_events_for_incident",
+                "operationTitle": "Get Events For Incident",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "step_output": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "220",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "74377bc5-4364-4eef-8a00-b5fbca387d71"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "7d2ca834-28e2-470e-bc9d-50e43f5e33ca",
+                "title": "FortiAnalyzer: Get Events For Incident",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "98ae05c6-35ca-4dac-9d56-a4244be5f42e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Events For Incident",
+              "targetStep": "/api/3/workflow_steps/74377bc5-4364-4eef-8a00-b5fbca387d71",
+              "sourceStep": "/api/3/workflow_steps/98ae05c6-35ca-4dac-9d56-a4244be5f42e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d9dac442-fb7d-4076-9c89-4bba6a8ec4f9"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1f0046d1-140b-4708-b58a-8c831f34b49b",
+          "id": 959,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Log-File Content",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Get the content of the specified log file from Fortinet FortiAnalyzer and the log file is added to Fortisoar attachment module.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850393,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/28adfaec-e2a3-45e2-a8ee-4f9ae0f8f108",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "2fba6a85-75b7-4f37-9a63-353f7ba94bb6",
+                "title": "FortiAnalyzer: Get Log-File Content",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "28adfaec-e2a3-45e2-a8ee-4f9ae0f8f108"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Log File Content",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "vdom": "root",
+                  "devid": "FGVM02TM20003087",
+                  "length": 1048576,
+                  "offset": 0,
+                  "filename": "tlog.log",
+                  "adom_name": "root",
+                  "data-type": "base64"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_log_file_content",
+                "operationTitle": "Get Log-File Content",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "394ca13e-0a23-403f-bb99-cc9c8e86f9e4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Log File Content",
+              "targetStep": "/api/3/workflow_steps/394ca13e-0a23-403f-bb99-cc9c8e86f9e4",
+              "sourceStep": "/api/3/workflow_steps/28adfaec-e2a3-45e2-a8ee-4f9ae0f8f108",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7f4829c9-bf57-459f-ad89-1dc1b3848507"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "29bec3d8-8564-4d79-9db8-54ef6e7b2a21",
+          "id": 960,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident for Multiple ADOMs",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves a list and details of incidents from the Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e3ba2970-2611-4393-a3d5-9b3287933262",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident for Multiple ADOMs",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c60fc53b-05af-4fe0-893e-159e4440ef5c",
+                "params": {
+                  "limit": 50,
+                  "filter": "",
+                  "incids": "",
+                  "offset": 0,
+                  "status": "",
+                  "sort-by": false,
+                  "detail-level": "Standard"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "list_incidents_for_multiple_adoms",
+                "operationTitle": "Get Incident for Multiple ADOMs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "5ae207eb-c171-430c-abaf-5e711a469c70"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "0e2efb57-2a1b-4da0-a2e2-0fe6d734cb2d",
+                "title": "FortiAnalyzer: Get Incident",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e3ba2970-2611-4393-a3d5-9b3287933262"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Fetch Incidents",
+              "targetStep": "/api/3/workflow_steps/5ae207eb-c171-430c-abaf-5e711a469c70",
+              "sourceStep": "/api/3/workflow_steps/e3ba2970-2611-4393-a3d5-9b3287933262",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e6506eb8-de9a-44fa-ba27-f7ff407fa5a5"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "2d024c8e-cb71-4138-bee9-7669e285cfa0",
+          "id": 961,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Attachments",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves all attachments associated with a specified incident in Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c66d0cb3-9af4-4c52-9887-0a0d424a317e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Attachments",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "90f68db0-dfda-4520-b7c4-cfcc4303374d",
+                "params": {
+                  "incid": "IN00000009",
+                  "limit": 50,
+                  "offset": 0,
+                  "adom_name": "root",
+                  "attachtype": "note"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_attachments_for_incident",
+                "operationTitle": "Get Attachments For Incident",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "234",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4858367e-155b-4051-a6db-c6fc028465ac"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "c1230b92-fb14-4791-8174-6103c9e6bff7",
+                "title": "FortiAnalyzer: Get Incident Attachments",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c66d0cb3-9af4-4c52-9887-0a0d424a317e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Attachments For Incident",
+              "targetStep": "/api/3/workflow_steps/4858367e-155b-4051-a6db-c6fc028465ac",
+              "sourceStep": "/api/3/workflow_steps/c66d0cb3-9af4-4c52-9887-0a0d424a317e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a57f3b26-0caf-4b57-818b-8cf060f10b17"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "2d51b83f-ffaa-47ef-a396-15c2955e0267",
+          "id": 962,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Executed Report List",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "It will list all reports in pending-running or generated state.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/35fbb77c-5f11-44db-bb57-575935db0018",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "ff1cbb3e-44bd-4584-8f7b-7632643c1b84",
+                "title": "FortiAnalyzer: Get Executed Report List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "35fbb77c-5f11-44db-bb57-575935db0018"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Executed Report List",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c60fc53b-05af-4fe0-893e-159e4440ef5c",
+                "params": {
+                  "end": "2021-12-21T07:43:24.635Z",
+                  "start": "2021-12-21T06:44:58.861Z",
+                  "state": "generated",
+                  "apiver": 3,
+                  "jsonrpc": "2.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_reports",
+                "operationTitle": "Get Reports",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8d058070-c195-4814-8ef0-66435ad2897a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Reports",
+              "targetStep": "/api/3/workflow_steps/8d058070-c195-4814-8ef0-66435ad2897a",
+              "sourceStep": "/api/3/workflow_steps/35fbb77c-5f11-44db-bb57-575935db0018",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "cc352adf-9df8-45ea-9309-f4df0780c836"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "34819310-6557-4a91-b60f-0805fa5df169",
+          "id": 963,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Fetch Log Search Result by Task ID",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Start a new task to search logs from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ea086f9c-a344-4cf8-99da-2548586e289c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "0a572351-684d-4545-8acd-bb6febafd7dc",
+                "title": "FortiAnalyzer: Fetch Log Search Result by Task ID",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ea086f9c-a344-4cf8-99da-2548586e289c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Log Search Result by Task ID",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "tid": "439091651",
+                  "limit": 50,
+                  "offset": 0,
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "fetch_log_search_result_by_task_id",
+                "operationTitle": "Fetch Log Search Result by Task ID",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "200",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ef7649cb-29b3-4882-ae1d-2efe7604c447"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Fetch Log Search Result by Task ID",
+              "targetStep": "/api/3/workflow_steps/ef7649cb-29b3-4882-ae1d-2efe7604c447",
+              "sourceStep": "/api/3/workflow_steps/ea086f9c-a344-4cf8-99da-2548586e289c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2a1248ac-534e-4ec1-8f70-ce45700a80bc"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "42f8d596-f3a1-42f7-b3e4-c458a73a3bfb",
+          "id": 964,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Device Information",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves the device information from Fortinet FortiAnalyzer based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/1f9ad6b0-6604-44bb-9b2d-8c856eae8209",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "8223994d-e4c9-4cb6-84fe-b9d96f330ad7",
+                "title": "FortiAnalyzer: Get Device Information",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "1f9ad6b0-6604-44bb-9b2d-8c856eae8209"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Device Information",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "name": "Enterprise_First_Floor",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_device_info",
+                "operationTitle": "Get Device Information",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "33818160-10b2-41d4-a68a-5d87d7ba7138"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Device Information",
+              "targetStep": "/api/3/workflow_steps/33818160-10b2-41d4-a68a-5d87d7ba7138",
+              "sourceStep": "/api/3/workflow_steps/1f9ad6b0-6604-44bb-9b2d-8c856eae8209",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "8f807d49-fc00-4de0-9de2-c7c6fe86a459"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "496a7344-a867-4193-9737-915b9bd84f86",
+          "id": 965,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves a list and details of incidents from the Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850260,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0de47bb0-7b97-4ae9-ba66-3c64f477bf77",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "afdb71c4-50ee-4d9b-afb4-3548a09ede83",
+                "title": "FortiAnalyzer: Get Incident",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "0de47bb0-7b97-4ae9-ba66-3c64f477bf77"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c60fc53b-05af-4fe0-893e-159e4440ef5c",
+                "params": {
+                  "limit": "",
+                  "apiver": 3,
+                  "filter": "",
+                  "incids": "",
+                  "offset": "",
+                  "status": "",
+                  "jsonrpc": "2.0",
+                  "sort-by": false,
+                  "adom_name": "root",
+                  "detail-level": "Basic"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "list_incidents",
+                "operationTitle": "Fetch Incidents",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "186",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "69b45c8e-264a-40d8-8e74-f351dbc86be7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Fetch Incidents",
+              "targetStep": "/api/3/workflow_steps/69b45c8e-264a-40d8-8e74-f351dbc86be7",
+              "sourceStep": "/api/3/workflow_steps/0de47bb0-7b97-4ae9-ba66-3c64f477bf77",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1409d841-3235-415b-a457-3888f09c2eab"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "4fcd6fd2-2605-44fe-ad29-a0baf26f5ebd",
+          "id": 966,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Count Events for Multiple ADOMs",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Fetches all events or specific event from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649849819,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/646a591f-e311-4332-b016-9355502ea34f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Count Events for Multiple ADOMs",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "end": "",
+                  "start": "",
+                  "filter": "",
+                  "group-by": "dev_name"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "count_alerts_for_multiple_adoms",
+                "operationTitle": "Count Events for Multiple ADOMs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "220",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "15d64add-e468-4b69-9d12-db9a4e0804d4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "a75b01ce-532c-44ab-8af6-b0005f3ed284",
+                "title": "FortiAnalyzer: Get Event",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "646a591f-e311-4332-b016-9355502ea34f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Count Events for Multiple ADOMs",
+              "targetStep": "/api/3/workflow_steps/15d64add-e468-4b69-9d12-db9a4e0804d4",
+              "sourceStep": "/api/3/workflow_steps/646a591f-e311-4332-b016-9355502ea34f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "9425b7bc-9ba8-4861-98f6-ce91ed442887"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "5aa28f30-75ba-4d1a-8b74-646f8adbc1b0",
+          "id": 967,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Incident",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Update incident details on the Fortinet FortiAnalyzer based on the incident ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850734,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b0507bd7-86d6-47c3-a21a-9f455e867ca9",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Incident",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "377bbf55-f62b-45f2-8d2b-eb21e977dd27",
+                "params": {
+                  "euid": "",
+                  "incid": "IN00000002",
+                  "apiver": 3,
+                  "status": "New",
+                  "jsonrpc": "2.0",
+                  "category": "Uncategorized",
+                  "endpoint": "N/A",
+                  "severity": "Medium",
+                  "adom_name": "root",
+                  "assigned-to": "",
+                  "description": "",
+                  "other_fields": "{\n  \"lastuser\": \"demouser\"\n}"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "update_incident_details",
+                "operationTitle": "Update Incident",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "29cf1a82-c45b-45e7-baa1-76d8cf369c57"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "380c52f0-89fb-4d9d-bdd1-ba921902e903",
+                "title": "FortiAnalyzer: Update Incident",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "b0507bd7-86d6-47c3-a21a-9f455e867ca9"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Update Incident",
+              "targetStep": "/api/3/workflow_steps/29cf1a82-c45b-45e7-baa1-76d8cf369c57",
+              "sourceStep": "/api/3/workflow_steps/b0507bd7-86d6-47c3-a21a-9f455e867ca9",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ca973974-06f6-4d74-af69-9c98aaf2adb9"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "617023f4-6f43-43b4-b605-1cdbc3a2e00e",
+          "id": 968,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Authorize Device",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Authorizes the device in Fortinet FortiAnalyzer based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649851167,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/10edaaa9-5413-4aba-92e1-fcfa8bf48205",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "d73ddf14-aa6a-4044-a756-dd237b552ed9",
+                "title": "FortiAnalyzer: Authorize Device",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "10edaaa9-5413-4aba-92e1-fcfa8bf48205"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Authorize Device",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "sn": "JDTEMS0000117804",
+                  "name": "Test-Device",
+                  "os_ver": "6.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "authorize_device",
+                "operationTitle": "Authorize Device",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "231",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4cb210dc-8a83-4cc0-a8f3-e7a84f3791c0"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Authorize Device",
+              "targetStep": "/api/3/workflow_steps/4cb210dc-8a83-4cc0-a8f3-e7a84f3791c0",
+              "sourceStep": "/api/3/workflow_steps/10edaaa9-5413-4aba-92e1-fcfa8bf48205",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3265a9f1-4970-4115-8e3e-bde364eb1e44"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "6c519b50-9f29-4d6c-9131-74f5e90687ec",
+          "id": 969,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Add a Slave Device",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Adds a slave device to the Fortinet FortiAnalyzer device manager database based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649851046,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c0f6e2ee-080f-4d75-ae86-4d8ca15fd429",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Add a Slave Device",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "slave_sn": "FGVM02TM10006076",
+                  "adom_name": "root",
+                  "master_sn": "FGVM010000176989",
+                  "slave_name": "New_Device_01",
+                  "master_name": "Enterprise"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "add_slave_device",
+                "operationTitle": "Add a Slave Device",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4d767081-25f0-45d7-8da7-c491b30cff1f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "814a80e4-2ebd-405a-9650-b1f5e2ef2c5e",
+                "title": "FortiAnalyzer: Add a Slave Device",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c0f6e2ee-080f-4d75-ae86-4d8ca15fd429"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Add a Slave Device",
+              "targetStep": "/api/3/workflow_steps/4d767081-25f0-45d7-8da7-c491b30cff1f",
+              "sourceStep": "/api/3/workflow_steps/c0f6e2ee-080f-4d75-ae86-4d8ca15fd429",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "89319d6e-1c64-453e-bc83-d2eea2d17401"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "6f58e37b-73f2-417a-87b0-21422518ee2a",
+          "id": 970,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "FortiAnalyzer > Fetch > Create",
+          "aliasName": null,
+          "tag": "#fortinet-fortianalyzer #dataingestion #create",
+          "description": "Data Ingestion Playbook",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "last_pull_time",
+            "curr_timestamp",
+            "open_query",
+            "limit",
+            "offset",
+            "tenant_name"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1678790686,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a6553c34-b46b-4472-97d9-81ca405b7818",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "alerts_status_map": "{\"open\": {{\"AlertStatus\"| picklist(\"Open\")}}, \"mitigated\": {{\"AlertStatus\"| picklist(\"Investigating\")}}, \"contained\": {{\"AlertStatus\"| picklist(\"Closed\")}}, \"blank\": {{\"AlertStatus\"| picklist(\"Open\")}}  }",
+                "alerts_severity_map": "{'high': {{'Severity'| picklist('High')}}, 'medium': {{'Severity'| picklist('Medium')}}, 'low': {{'Severity'| picklist('Low')}}, 'critical': {{'Severity'| picklist('Critical')}} }"
+              },
+              "status": null,
+              "top": "260",
+              "left": "440",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "315fe988-0bda-4728-965e-33cbb4e5c539"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Events",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "6ea0711b-adbb-4b1c-9e40-132803243435",
+                "params": {
+                  "end": "{{vars.curr_timestamp}}",
+                  "devid": "",
+                  "limit": "{{vars.limit}}",
+                  "start": "{{vars.last_pull_time}}",
+                  "filter": "{{vars.open_query}}",
+                  "offset": "{{vars.offset}}",
+                  "alertid": "",
+                  "devname": ""
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_alerts_for_multiple_adoms",
+                "operationTitle": "Get Event for Multiple ADOMs",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6307d04e-3404-4b49-b5d2-9d3d0118be74"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Events.data.result.data}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "",
+                  "batch_size": 200
+                },
+                "resource": {
+                  "name": "{{vars.item.subject}}",
+                  "type": "/api/3/picklists/574a6ee2-7265-4701-815e-cff83b053bce",
+                  "state": "/api/3/picklists/a1bac09b-1441-45aa-ad1b-c88744e48e72",
+                  "source": "Fortinet FortiAnalyzer",
+                  "status": "{{vars.item.eventstatus | resolveRange(vars.alerts_status_map)}}",
+                  "tenant": "{{vars.tenant_name[vars.item.adom] | default(\"null\")}}",
+                  "severity": "{{vars.item.severity | resolveRange(vars.alerts_severity_map)}}",
+                  "sourceId": "{{vars.item.alertid}}",
+                  "__replace": "true",
+                  "recordTags": "{{vars.item.tag}}",
+                  "sourcedata": "{{vars.item | toJSON }}",
+                  "description": "<table style=\"width: 400px; border-collapse: unset;\" border=\"2\">\n<tbody>\n<tr>\n<td style=\"width: 152px;\"><strong>Event Type</strong></td>\n<td style=\"width: 326px;\">&nbsp;{{vars.item.eventtype}}</td>\n</tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Device Name</strong></td>\n<td style=\"width: 326px;\">&nbsp;{{vars.item.devname}}</td>\n</tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Device Type</strong></td>\n<td style=\"width: 326px;\">&nbsp;{{vars.item.devtype}}</td>\n</tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Device ID</strong></td>\n<td style=\"width: 326px;\">&nbsp;{{vars.item.devid}}</td>\n</tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Tag</strong></td>\n<td style=\"width: 326px;\">&nbsp;{{vars.item.tag}}</td>\n</tr>\n<tr>\n<td style=\"width: 152px;\"><strong>Subject</strong></td>\n<td style=\"width: 326px;\">&nbsp;{{vars.item.subject}}</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp;</p>",
+                  "ackSlaStatus": "/api/3/picklists/72979f64-e8b9-4888-a965-957e0ec24818",
+                  "respSlaStatus": "/api/3/picklists/72979f64-e8b9-4888-a965-957e0ec24818",
+                  "priorityWeight": 1,
+                  "escalatedtoincident": "/api/3/picklists/2128a09c-153d-4db3-985d-de6be33deae5",
+                  "alertRemainingAckSLA": 0
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/upsert/alerts",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "380",
+              "left": "640",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "7584c70b-40e2-4f85-9718-6da5fd12ce5e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "29",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "a6553c34-b46b-4472-97d9-81ca405b7818"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Fetch Alerts",
+              "targetStep": "/api/3/workflow_steps/6307d04e-3404-4b49-b5d2-9d3d0118be74",
+              "sourceStep": "/api/3/workflow_steps/a6553c34-b46b-4472-97d9-81ca405b7818",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0d447145-3a9a-42d9-bdf1-6042b6b066c0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Create Record",
+              "targetStep": "/api/3/workflow_steps/7584c70b-40e2-4f85-9718-6da5fd12ce5e",
+              "sourceStep": "/api/3/workflow_steps/315fe988-0bda-4728-965e-33cbb4e5c539",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "39fef2f4-9953-41a9-8a94-a778c9aa8db4"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Alerts -> Configuration",
+              "targetStep": "/api/3/workflow_steps/315fe988-0bda-4728-965e-33cbb4e5c539",
+              "sourceStep": "/api/3/workflow_steps/6307d04e-3404-4b49-b5d2-9d3d0118be74",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "752e2803-03bd-43e2-846b-b66338b4e99d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "72f0e287-ce39-4617-97d5-f27be0c3fe9c",
+          "id": 971,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "create",
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Log Status",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves the last log time and log rate per device[vdom] from Fortinet FortiAnalyzer based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850407,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/239cf7fd-8619-483f-9500-01e88b07e512",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Log Status",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "devid": "",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_log_status",
+                "operationTitle": "Get Log Status",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "169",
+              "left": "234",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "17a1ac01-42b2-4741-bb26-7d7d6a75c789"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "0fe1d672-e847-4a3d-9866-92eb6e6dca61",
+                "title": "FortiAnalyzer: Get Log Status",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "239cf7fd-8619-483f-9500-01e88b07e512"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Log Status",
+              "targetStep": "/api/3/workflow_steps/17a1ac01-42b2-4741-bb26-7d7d6a75c789",
+              "sourceStep": "/api/3/workflow_steps/239cf7fd-8619-483f-9500-01e88b07e512",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "34361bee-8514-4d24-8a28-0def1630bdc0"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "76e96649-ff77-4e1d-a352-762531b5d1a1",
+          "id": 972,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Devices",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves all devices from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7442cd15-8f63-4112-9462-b76dc453f09d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "d7abac1b-27af-4d15-b77d-22d2b60fc51c",
+                "title": "FortiAnalyzer: Get Devices",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "7442cd15-8f63-4112-9462-b76dc453f09d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Devices",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_devices",
+                "operationTitle": "Get Devices",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "80aa498e-a74c-4dc6-8bee-2c6d3268ebb2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Devices",
+              "targetStep": "/api/3/workflow_steps/80aa498e-a74c-4dc6-8bee-2c6d3268ebb2",
+              "sourceStep": "/api/3/workflow_steps/7442cd15-8f63-4112-9462-b76dc453f09d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "189a7ad3-d548-4f0b-97d7-af7308cd18fc"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "77c8c3b2-6da4-49ac-acca-256805e8bbc7",
+          "id": 973,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Log Fields",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Fetches all log fields from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/022d919c-8e8d-46ef-b4ad-10e97cda8538",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "5b8ab1ff-cf4f-4a20-92c7-123603111797",
+                "title": "FortiAnalyzer: List Log Fields",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "29",
+              "left": "54",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "022d919c-8e8d-46ef-b4ad-10e97cda8538"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Log Fields",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "devtype": "FortiGate",
+                  "logtype": "FCT Event",
+                  "subtype": "",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "list_log_fields",
+                "operationTitle": "List Log Fields",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "160",
+              "left": "260",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e46dfc7d-1f73-410e-b36d-88a926ce76b4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> List Log Fields",
+              "targetStep": "/api/3/workflow_steps/e46dfc7d-1f73-410e-b36d-88a926ce76b4",
+              "sourceStep": "/api/3/workflow_steps/022d919c-8e8d-46ef-b4ad-10e97cda8538",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "4e86a386-f510-406b-97bd-3546a158777c"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "7b4beb58-9cc2-4d34-92e0-ba25ac1d1bc7",
+          "id": 974,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Report Schedule List",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "It will list all schedules from the Fortinet FortiAnalyzer server.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7f9f23fa-a4be-4dd4-9e41-56e16e57c982",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Report Schedule List",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c60fc53b-05af-4fe0-893e-159e4440ef5c",
+                "params": {
+                  "apiver": 3,
+                  "jsonrpc": "2.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_schedules",
+                "operationTitle": "List Schedules",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "28133804-45eb-475b-b5b0-0365e8a3e9ca"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "160f51e8-8215-46ab-9fec-886c75e89dfc",
+                "title": "FortiAnalyzer: Get Report Schedule List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "7f9f23fa-a4be-4dd4-9e41-56e16e57c982"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> List Schedules",
+              "targetStep": "/api/3/workflow_steps/28133804-45eb-475b-b5b0-0365e8a3e9ca",
+              "sourceStep": "/api/3/workflow_steps/7f9f23fa-a4be-4dd4-9e41-56e16e57c982",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "fa2666d2-b910-4444-8610-d5d524aa0083"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "7d856ed1-65d1-4c68-9329-2853d4d1a2d1",
+          "id": 975,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Endpoint Info",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieve a list of all endpoints from Fortinet FortiAnalzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850036,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/beb19f89-e5d7-46f9-8ebd-88d7f46c3d54",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8012c2c3-6acb-47dc-87dd-714b45463bb5",
+                "title": "FortiAnalyzer: Get Endpoint Info",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "26",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "beb19f89-e5d7-46f9-8ebd-88d7f46c3d54"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Endpoint Info",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "1c3d8505-5461-43db-a421-db4c58e059bb",
+                "params": {
+                  "epids": "",
+                  "limit": 100000,
+                  "filter": "",
+                  "offset": 0,
+                  "sort-by": false,
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_endpoints",
+                "operationTitle": "List Endpoints",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "140",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ef586b86-4884-4a17-b53e-5ccab2e56c04"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> List Endpoints",
+              "targetStep": "/api/3/workflow_steps/ef586b86-4884-4a17-b53e-5ccab2e56c04",
+              "sourceStep": "/api/3/workflow_steps/beb19f89-e5d7-46f9-8ebd-88d7f46c3d54",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "96bca385-c367-4c60-97bb-666e8c982948"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "83c4ff16-63e8-4688-90db-9116a7598f4a",
+          "id": 976,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "FortiAnalyzer > Ingest",
+          "aliasName": null,
+          "tag": "#fortinet-fortianalyzer #dataingestion #fetch #ingest",
+          "description": "Fetches Incidents from FortiAnalyzer",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1678785154,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d0af7004-3822-481a-872a-c77d9ecb2aa8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Handle Large Data",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "Greater Limit Value",
+                    "step_iri": "/api/3/workflow_steps/969795e4-a07e-4751-9f77-2f7aa96516fe",
+                    "condition": "{{ vars.limit > 2000 }}",
+                    "step_name": "Calculate Total Count"
+                  },
+                  {
+                    "option": "Less Limit Value",
+                    "default": true,
+                    "step_iri": "/api/3/workflow_steps/7c3bc7aa-ccce-40af-8560-a506bbf0ccf7",
+                    "step_name": "Call Child Playbook for Less Limit"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "800",
+              "left": "1640",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "01295dbf-0b59-45f1-a584-427d71f95735"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Time Configuration",
+              "description": null,
+              "arguments": {
+                "limit": "{%if not vars.limit%}50{%else%}{{vars.limit}}{%endif%}",
+                "curr_timestamp": "{{arrow.get( arrow.utcnow().int_timestamp).strftime('%Y-%m-%dT%H:%M:%S.%fZ')}}",
+                "last_pull_time": "{%if vars.request.env_setup %}{{arrow.get(arrow.utcnow().shift(minutes=-vars.Pull_Sample_Events_in_Past_X_Minutes).int_timestamp).strftime('%Y-%m-%dT%H:%M:%S.%fZ')}}{%elif vars.steps.Get_Macro_Value.data['hydra:member']  | length > 0%}{{vars.steps.Get_Macro_Value.data['hydra:member'][0].value}}{%else%}{{arrow.get(arrow.utcnow().shift(minutes=-vars.Pull_Sample_Events_in_Past_X_Minutes).int_timestamp).strftime('%Y-%m-%dT%H:%M:%S.%fZ')}}{% endif %}"
+              },
+              "status": null,
+              "top": "400",
+              "left": "620",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "2f6363cb-fa89-4a6d-8934-de82e59f4e1d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Is data only for mapping",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "Yes, For Mapping",
+                    "step_iri": "/api/3/workflow_steps/8bba1fae-d6c8-4a32-a0b6-b0ccc63c5c9d",
+                    "condition": "{{ vars.request.env_setup == true }}",
+                    "step_name": "Return Fetch Alerts Data"
+                  },
+                  {
+                    "option": "No, For Ingestion",
+                    "default": true,
+                    "step_iri": "/api/3/workflow_steps/6c562a52-f5da-4609-a36c-5c4aafa17494",
+                    "step_name": "Count Events for Multiple ADOMs"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "620",
+              "left": "1120",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "36b9d989-07ed-4ff1-9c7b-3896cc3b0381"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Call Child Playbook",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.offset_list}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "arguments": {
+                  "limit": "{{vars.limit}}",
+                  "offset": "{{vars.item}}",
+                  "open_query": "{{vars.open_query}}",
+                  "tenant_name": "{{vars.mapped_ids | default({})}}",
+                  "curr_timestamp": "{{vars.curr_timestamp}}",
+                  "last_pull_time": "{{vars.last_pull_time}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/72f0e287-ce39-4617-97d5-f27be0c3fe9c"
+              },
+              "status": null,
+              "top": "960",
+              "left": "2160",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "5c20531b-50f8-4a67-b93b-f081dab2c08b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "limit": "200",
+                "open_query": "severity='medium'",
+                "pullTimeMacro": "FortiAnalyzerLastPullTime_{{vars['audit_info']['cyops_playbook_iri'].split('/')[-1].replace('-','_')}}",
+                "Pull_Sample_Events_in_Past_X_Minutes": "10"
+              },
+              "status": null,
+              "top": "140",
+              "left": "220",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "64eb8367-b767-4114-b6da-e64813a9fcd6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Count Events for Multiple ADOMs",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "24a0a58f-d77e-429a-bd31-b9aa3645fdab",
+                "params": {
+                  "end": "{{vars.curr_timestamp}}",
+                  "start": "{{vars.last_pull_time}}",
+                  "filter": "{{vars.open_query}}",
+                  "group-by": "dev_name"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "count_alerts_for_multiple_adoms",
+                "operationTitle": "Count Events for Multiple ADOMs",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "700",
+              "left": "1440",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6c562a52-f5da-4609-a36c-5c4aafa17494"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Offset List",
+              "description": null,
+              "arguments": {
+                "offset_list": "{%set max=vars.sumCount %}{% if max > vars.limit %}{% set max=vars.limit %}{% endif %}\n{%set offset_list=[]%}{% for n in range(0, max, 2000) %}\n{%set _temp=offset_list.append(n) %}\n{% endfor %}{{offset_list}}"
+              },
+              "status": null,
+              "top": "1020",
+              "left": "1820",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "71774427-f35b-4fc0-91cf-7f6e2d776839"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Tenant IDs",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.is_mssp == True}}",
+                "params": {
+                  "iri": "/api/3/tenants",
+                  "body": "{}",
+                  "method": "GET"
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": {
+                  "mapped_ids": "{% set final_dict = {} %} \n{% for k,v in vars.tenant_mapping.items() %}\n{% for dict in vars.result.data['hydra:member'] %}\n{% if dict.name==v%}\n{% set test= final_dict.update({k:dict[\"@id\"]}) %}\n{% endif %}\n{% endfor %}\n{% endfor %}\n{{final_dict}}",
+                  "tenant_ids_info": "{{vars.result.data['hydra:member']}}"
+                }
+              },
+              "status": null,
+              "top": "520",
+              "left": "820",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "7505f51e-b538-4705-bfb1-b1e49d5af5af"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Call Child Playbook for Less Limit",
+              "description": null,
+              "arguments": {
+                "arguments": {
+                  "limit": "{{vars.limit}}",
+                  "offset": "0",
+                  "open_query": "{{vars.open_query}}",
+                  "tenant_name": "{{vars.mapped_ids | default({})}}",
+                  "curr_timestamp": "{{vars.curr_timestamp}}",
+                  "last_pull_time": "{{vars.last_pull_time}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/72f0e287-ce39-4617-97d5-f27be0c3fe9c"
+              },
+              "status": null,
+              "top": "620",
+              "left": "2140",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "7c3bc7aa-ccce-40af-8560-a506bbf0ccf7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Return Fetch Alerts Data",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "17a60bcf-cf7b-4d9d-8829-e2b6c56797c8",
+                "params": {
+                  "end": "{{vars.curr_timestamp}}",
+                  "devid": "",
+                  "limit": 5,
+                  "start": "{{vars.last_pull_time}}",
+                  "filter": "{{vars.open_query}}",
+                  "offset": 0,
+                  "alertid": "",
+                  "devname": ""
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_alerts_for_multiple_adoms",
+                "operationTitle": "Get Event for Multiple ADOMs",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "520",
+              "left": "1440",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8bba1fae-d6c8-4a32-a0b6-b0ccc63c5c9d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Calculate Total Count",
+              "description": null,
+              "arguments": {
+                "sumCount": "{%set _count=[]%}{%for i in vars.steps.Count_Events_for_Multiple_ADOMs.data.result.data%}{%set _temp=_count.append(i.count|int)%}{%endfor%}{{_count|sum}}"
+              },
+              "status": null,
+              "top": "900",
+              "left": "1820",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "969795e4-a07e-4751-9f77-2f7aa96516fe"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Macro Value",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "iri": "/api/wf/api/dynamic-variable/?name={{vars.pullTimeMacro}}",
+                  "body": "",
+                  "method": "GET"
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "260",
+              "left": "420",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "abbd6d9d-610f-4f82-a205-75eedcb87002"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  },
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Pull Sample Events in Past X Minutes\",\n    \"name\": \"Pull_Sample_Events_in_Past_X_Minutes\",\n    \"type\": \"text\",\n    \"tooltip\": \"Pull the events in the past X minutes. e.g. 10 minutes.\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 10\n  },\n  {\n    \"title\": \"Search Query\",\n    \"name\": \"open_query\",\n    \"type\": \"text\",\n    \"tooltip\": \"Query filter for fetching events from FortiAnalyzer. Supported keys are 'alertid', 'devid', 'severity', 'eventtype', 'devname' etc.\",\n    \"placeholder\": \"alertid=202008311000000023 and devtype=\\\"FortiGate\\\" and severity=\\\"medium\\\"\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": \"severity=medium\"\n  },\n  {\n    \"title\": \"Maximum Records to Fetch\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"integer\",\n    \"name\": \"limit\",\n    \"value\": 50,\n    \"tooltip\": \"The maximum number of records to return. Default: 50 Min: 1 Max: 2000\",\n    \"description\": \"Maximum number of records that this operation should return. Values supported are: Default: 50 Min: 1 Max: 2000\"\n  },\n  {\n    \"title\": \"Configure Multi-Tenant Mappings\",\n    \"name\": \"is_mssp\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Select this checkbox to map the ADOM in FortiAnalyzer with the tenant in FortiSOAR.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": false,\n    \"onchange\": {\n      \"true\": [\n        {\n          \"title\": \"ADOM Mapping\",\n          \"name\": \"tenant_mapping\",\n          \"required\": true,\n          \"visible\": true,\n          \"editable\": true,\n          \"type\": \"json\",\n          \"value\": \"{\\\"ADOM1\\\": \\\"Self\\\",\\\"fortianalyzer_customer1\\\": \\\"fortisoar_customer1\\\"}\",\n          \"tooltip\": \"Map the ADOM in FortiAnalyzer with the tenant in FortiSOAR. This tenant mapping will ensure that the events are mapped to the right tenant in FortiSOAR during ingestion.\"\n        }\n      ]\n    }\n  }\n]"
+                }
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "d0af7004-3822-481a-872a-c77d9ecb2aa8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Return Data",
+              "description": null,
+              "arguments": {
+                "data": "{{vars.steps.Return_Fetch_Alerts_Data.data.result.data}}"
+              },
+              "status": null,
+              "top": "520",
+              "left": "1740",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "d58133c2-0138-46bd-aa2b-99e8f8f2cc75"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Last Event Pull Time",
+              "description": null,
+              "arguments": {
+                "when": "{{not(vars.request.env_setup)}}",
+                "params": {
+                  "macro": "{{vars.pullTimeMacro}}",
+                  "value": "{{vars.curr_timestamp}}"
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "updatemacro",
+                "operationTitle": "FSR: Update Global Variables",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "800",
+              "left": "2480",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "f4f0ae77-bd74-40d2-89a7-a2413ac74a0e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Get Macro Value",
+              "targetStep": "/api/3/workflow_steps/abbd6d9d-610f-4f82-a205-75eedcb87002",
+              "sourceStep": "/api/3/workflow_steps/64eb8367-b767-4114-b6da-e64813a9fcd6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e3d89a8b-2836-4e47-91b3-c04424251591"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check for Greater Limit -> Calculate Total Count",
+              "targetStep": "/api/3/workflow_steps/969795e4-a07e-4751-9f77-2f7aa96516fe",
+              "sourceStep": "/api/3/workflow_steps/01295dbf-0b59-45f1-a584-427d71f95735",
+              "label": "Greater Limit Value",
+              "isExecuted": false,
+              "uuid": "0e8a1b35-3210-4cbf-9daf-a424f3012562"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Calculate Total Count -> Offset List",
+              "targetStep": "/api/3/workflow_steps/71774427-f35b-4fc0-91cf-7f6e2d776839",
+              "sourceStep": "/api/3/workflow_steps/969795e4-a07e-4751-9f77-2f7aa96516fe",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "13a45329-c04f-429f-8fc3-3551092b964b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Set Time Configuration -> Get Tenant IDs",
+              "targetStep": "/api/3/workflow_steps/7505f51e-b538-4705-bfb1-b1e49d5af5af",
+              "sourceStep": "/api/3/workflow_steps/2f6363cb-fa89-4a6d-8934-de82e59f4e1d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "21246078-9f5a-44c5-b3db-5024daa4478c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Is data only for mapping -> Count Events for Multiple ADOMs",
+              "targetStep": "/api/3/workflow_steps/6c562a52-f5da-4609-a36c-5c4aafa17494",
+              "sourceStep": "/api/3/workflow_steps/36b9d989-07ed-4ff1-9c7b-3896cc3b0381",
+              "label": "No, For Ingestion",
+              "isExecuted": false,
+              "uuid": "2c29af5c-a0ca-4f60-865c-f73fc09d60bf"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Offset List -> Call Child Playbook",
+              "targetStep": "/api/3/workflow_steps/5c20531b-50f8-4a67-b93b-f081dab2c08b",
+              "sourceStep": "/api/3/workflow_steps/71774427-f35b-4fc0-91cf-7f6e2d776839",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "6bca71f1-bb4c-47db-add2-d85c63c74702"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Is data only for mapping -> Return Fetch Alerts Data",
+              "targetStep": "/api/3/workflow_steps/8bba1fae-d6c8-4a32-a0b6-b0ccc63c5c9d",
+              "sourceStep": "/api/3/workflow_steps/36b9d989-07ed-4ff1-9c7b-3896cc3b0381",
+              "label": "Yes, For Mapping",
+              "isExecuted": false,
+              "uuid": "8094bcb4-eb71-49d4-94c0-a06aa15d1f6f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/64eb8367-b767-4114-b6da-e64813a9fcd6",
+              "sourceStep": "/api/3/workflow_steps/d0af7004-3822-481a-872a-c77d9ecb2aa8",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "834cfbdf-54ae-4616-ad29-e07eecbaa81e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Count Events for Multiple ADOMs -> Check for Greater Limit",
+              "targetStep": "/api/3/workflow_steps/01295dbf-0b59-45f1-a584-427d71f95735",
+              "sourceStep": "/api/3/workflow_steps/6c562a52-f5da-4609-a36c-5c4aafa17494",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ab3ddbfa-44c0-4dbd-8b79-5ba1577549b7"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check for Greater Limit -> Call Child Playbook for Less Limit",
+              "targetStep": "/api/3/workflow_steps/7c3bc7aa-ccce-40af-8560-a506bbf0ccf7",
+              "sourceStep": "/api/3/workflow_steps/01295dbf-0b59-45f1-a584-427d71f95735",
+              "label": "Less Limit Value",
+              "isExecuted": false,
+              "uuid": "b8d7047a-db91-4000-aa33-52c25e6109f0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Return Fetch Alerts Data -> Return Data",
+              "targetStep": "/api/3/workflow_steps/d58133c2-0138-46bd-aa2b-99e8f8f2cc75",
+              "sourceStep": "/api/3/workflow_steps/8bba1fae-d6c8-4a32-a0b6-b0ccc63c5c9d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "be5e1768-2c5d-4298-9a20-a89dd50f0aee"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Tenant IDs -> Is data only for mapping",
+              "targetStep": "/api/3/workflow_steps/36b9d989-07ed-4ff1-9c7b-3896cc3b0381",
+              "sourceStep": "/api/3/workflow_steps/7505f51e-b538-4705-bfb1-b1e49d5af5af",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d30a62ff-eac5-4bf8-ae4f-24d074e8c612"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Call Child Playbook for Less Limit -> Update Last Event Pull Time",
+              "targetStep": "/api/3/workflow_steps/f4f0ae77-bd74-40d2-89a7-a2413ac74a0e",
+              "sourceStep": "/api/3/workflow_steps/7c3bc7aa-ccce-40af-8560-a506bbf0ccf7",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d3e9374b-0856-43ce-b064-65fdf966644f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Macro Value -> Set Time Configuration",
+              "targetStep": "/api/3/workflow_steps/2f6363cb-fa89-4a6d-8934-de82e59f4e1d",
+              "sourceStep": "/api/3/workflow_steps/abbd6d9d-610f-4f82-a205-75eedcb87002",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "da87cffa-40ba-4d5b-9a57-50a18254f0bb"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Call Child Playbook -> Update Last Event Pull Time",
+              "targetStep": "/api/3/workflow_steps/f4f0ae77-bd74-40d2-89a7-a2413ac74a0e",
+              "sourceStep": "/api/3/workflow_steps/5c20531b-50f8-4a67-b93b-f081dab2c08b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "fef62756-f3ce-447a-9d93-73fe56a99ac6"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "84456c47-25f0-48eb-83e9-b00e14fd206f",
+          "id": 977,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "ingest",
+            "fetch",
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Event Logs",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Fetches the logs associated with the specific event from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850123,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3ad23638-b0c1-4fef-8e38-5f90ff343a00",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "9ea0cfdf-0c32-46d9-b542-ba7dec161ad2",
+                "title": "FortiAnalyzer: Get Event Logs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "3ad23638-b0c1-4fef-8e38-5f90ff343a00"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Event Logs",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "limit": 10,
+                  "offset": 0,
+                  "alertid": "202009211000002076",
+                  "adom_name": "root",
+                  "time-order": "desc"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_alert_event_logs",
+                "operationTitle": "Get Alert Event Logs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "200",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "8899c36b-66ea-4e8a-b421-f17bc1366790"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Alert Event Logs",
+              "targetStep": "/api/3/workflow_steps/8899c36b-66ea-4e8a-b421-f17bc1366790",
+              "sourceStep": "/api/3/workflow_steps/3ad23638-b0c1-4fef-8e38-5f90ff343a00",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b7a57c30-5a08-428d-8470-3cffa2aaf923"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "86a695c0-270c-4f63-8683-c84000f319a3",
+          "id": 978,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Log Search over Log-File",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Run a log search task on a single log file from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850518,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fafa6fa1-6d05-4434-8aa2-c2f05aaa50e9",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Log Search over Log File",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "vdom": "root",
+                  "devid": "FGVM02TM20003157",
+                  "limit": 50,
+                  "filter": "",
+                  "offset": 0,
+                  "logtype": "Traffic",
+                  "filename": "tlog.log",
+                  "adom_name": "root",
+                  "case-sensitive": ""
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "log_search_over_log_file",
+                "operationTitle": "Log Search over Log-File",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "166",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9409f467-e6d8-408d-90da-088228fced1b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "a53161cb-b043-45fa-8a4a-9f34ad420099",
+                "title": "FortiAnalyzer: Log Search over Log-File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "fafa6fa1-6d05-4434-8aa2-c2f05aaa50e9"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Log Search over Log File",
+              "targetStep": "/api/3/workflow_steps/9409f467-e6d8-408d-90da-088228fced1b",
+              "sourceStep": "/api/3/workflow_steps/fafa6fa1-6d05-4434-8aa2-c2f05aaa50e9",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d7510e72-9d15-4ca7-b3e1-b10cc92092ce"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "8bfbc0c5-b6b0-4f69-8e60-ffeb90454a4a",
+          "id": 979,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Add a New Device",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Adds a new device to Fortinet FortiAnalyzer based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850984,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/9c3944a5-dec4-47e1-a1dd-0cb5d10e423d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "b72f4d54-5984-4e56-b9b4-5f3030346c7e",
+                "title": "FortiAnalyzer: Add a New Device",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "9c3944a5-dec4-47e1-a1dd-0cb5d10e423d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Add a New Device",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "ip": "10.20.66.3",
+                  "sn": "FEVM010000322587",
+                  "name": "Enterprise_New",
+                  "os_ver": "6.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "add_new_device",
+                "operationTitle": "Add a New Device",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "f8bce7be-8c07-44b6-91d2-9140bb93a92b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Add a New Device",
+              "targetStep": "/api/3/workflow_steps/f8bce7be-8c07-44b6-91d2-9140bb93a92b",
+              "sourceStep": "/api/3/workflow_steps/9c3944a5-dec4-47e1-a1dd-0cb5d10e423d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1e95f0c1-69dd-430b-b1c0-36b2d19875d0"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "98798a1d-909c-4e74-9515-30e2a89b0d42",
+          "id": 980,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get User Info",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieve a list of all users from Fortinet FortiAnalzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850459,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/836356a0-85c7-47b3-b6f4-b648767db140",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "493cd22c-d373-4b85-8701-c54acbc7bc2a",
+                "title": "FortiAnalyzer: Get User Info",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "836356a0-85c7-47b3-b6f4-b648767db140"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get User Info",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "1c3d8505-5461-43db-a421-db4c58e059bb",
+                "params": {
+                  "euids": "",
+                  "limit": 100000,
+                  "filter": "",
+                  "offset": 0,
+                  "sort-by": false,
+                  "adom_name": "root",
+                  "detail-level": "Standard"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_users",
+                "operationTitle": "List Users",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "140",
+              "left": "233",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "dbe8990d-656d-4c94-a619-9d2a201f202e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> List Users",
+              "targetStep": "/api/3/workflow_steps/dbe8990d-656d-4c94-a619-9d2a201f202e",
+              "sourceStep": "/api/3/workflow_steps/836356a0-85c7-47b3-b6f4-b648767db140",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3ea7249b-a88f-4461-8bfd-673f95f00314"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "9fccaa43-ec14-4bda-a72f-4a2a8bc9a035",
+          "id": 981,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get ADOMs",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves all ADOMs from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ee7e97cf-ed4e-4f44-860a-8de81661c327",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get ADOMs",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": [],
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_adoms",
+                "operationTitle": "Get ADOMs",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "188",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7749aa90-08ea-4280-aa32-b5456f08eafd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "95739605-422b-4b83-8f1b-8541c5207fa1",
+                "title": "FortiAnalyzer: Get ADOMs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ee7e97cf-ed4e-4f44-860a-8de81661c327"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get ADOMs",
+              "targetStep": "/api/3/workflow_steps/7749aa90-08ea-4280-aa32-b5456f08eafd",
+              "sourceStep": "/api/3/workflow_steps/ee7e97cf-ed4e-4f44-860a-8de81661c327",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "44d98e42-9bea-42ad-97b2-7c83e30d8cdc"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "a12c4562-cdda-4cc2-baa7-387dcda9c758",
+          "id": 982,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create Incident",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Adds a new incident record in Fortinet FortiAnalyzer based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c559a0bc-3e22-427f-aa10-7bb697a5b302",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Incident",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "5addf81b-03b2-437f-89b5-bae08d5ef8d9",
+                "params": {
+                  "euid": "",
+                  "status": "New",
+                  "category": "Denial of Service",
+                  "endpoint": "N/A",
+                  "reporter": "reporter1",
+                  "severity": "Low",
+                  "adom_name": "root",
+                  "assigned-to": "",
+                  "description": "",
+                  "other_fields": ""
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "create_incident",
+                "operationTitle": "Create Incident",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "220",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7d287830-a2a2-4d05-a72d-7de162b5b255"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "9a245bf9-a351-462a-b3d7-966a487a0264",
+                "title": "FortiAnalyzer: Create Incident",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "32",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c559a0bc-3e22-427f-aa10-7bb697a5b302"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Create Incident",
+              "targetStep": "/api/3/workflow_steps/7d287830-a2a2-4d05-a72d-7de162b5b255",
+              "sourceStep": "/api/3/workflow_steps/c559a0bc-3e22-427f-aa10-7bb697a5b302",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f54fc34f-c3b4-467b-977f-03d853d7500a"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "a23ab763-b181-4109-9af6-79270a8eb62b",
+          "id": 983,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Assets",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Fetches all assets associated with a specified incident from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3320bfcb-d8f6-46ad-8296-830793c9c760",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "70a13edf-9899-4273-833c-05ada5a5710c",
+                "title": "FortiAnalyzer: Get Incident Assets",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "3320bfcb-d8f6-46ad-8296-830793c9c760"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Assets",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "90f68db0-dfda-4520-b7c4-cfcc4303374d",
+                "params": {
+                  "incid": "IN00000002",
+                  "limit": 50,
+                  "offset": 0,
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_incident_assets",
+                "operationTitle": "Get Incident Assets",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ac87ff77-e065-47bc-9d33-6bf198c40b01"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Incident Assets",
+              "targetStep": "/api/3/workflow_steps/ac87ff77-e065-47bc-9d33-6bf198c40b01",
+              "sourceStep": "/api/3/workflow_steps/3320bfcb-d8f6-46ad-8296-830793c9c760",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2cf6a3e6-daa4-408a-bc09-27f2920e9231"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "a307190c-d8a2-46f2-a907-160aa7d07fab",
+          "id": 984,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Count Incidents for Multiple ADOMs",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Fetches all events or specific event from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/64cb3d71-e601-4fb3-bd6f-c55c3a5e5bf2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "71534916-b6b6-41bf-a138-e098310ab23f",
+                "title": "FortiAnalyzer: Get Event",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "64cb3d71-e601-4fb3-bd6f-c55c3a5e5bf2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Count Incidents for Multiple ADOMs",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": [],
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "count_incidents_for_multiple_adoms",
+                "operationTitle": "Count Incidents for Multiple ADOMs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e4033655-1129-41e3-92c0-4c9f6d6d03ca"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Alerts",
+              "targetStep": "/api/3/workflow_steps/e4033655-1129-41e3-92c0-4c9f6d6d03ca",
+              "sourceStep": "/api/3/workflow_steps/64cb3d71-e601-4fb3-bd6f-c55c3a5e5bf2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "660b8be6-597a-4900-b576-6dfcbb7849a2"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "b7624e13-849c-43b1-9f29-8a6d00bfa45c",
+          "id": 985,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Delete a Device",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Deletes the device from Fortinet FortiAnalyzer based on the device name parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649851245,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f2dc4427-adba-4bd3-9a87-20592c8c8d9c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Delete a Device",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "name": "Enterprise_Device",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "delete_device",
+                "operationTitle": "Delete a Device",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "43c4928b-a5f1-410a-9d3c-d7aeabcbaf72"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "4b96bee3-1dcc-4470-95fe-8af8b407c352",
+                "title": "FortiAnalyzer: Delete a Device",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "f2dc4427-adba-4bd3-9a87-20592c8c8d9c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Delete a Device",
+              "targetStep": "/api/3/workflow_steps/43c4928b-a5f1-410a-9d3c-d7aeabcbaf72",
+              "sourceStep": "/api/3/workflow_steps/f2dc4427-adba-4bd3-9a87-20592c8c8d9c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "64494f6e-fe49-4ae3-a494-b6dfafc4fc64"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "b9462841-9f27-40e6-93fd-7f18b59c93a4",
+          "id": 986,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Start Log Search Request",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Start a new task to search logs from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850707,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fe21e35d-0632-4394-8ea6-e4ce826e661b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start Log Search Request",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "end": "2021-12-14T07:33:30.308Z",
+                  "devid": "FG3K6ETB18900065",
+                  "start": "2021-11-01T08:30:00.000Z",
+                  "filter": "",
+                  "devname": "Van_Office_FW1_Master",
+                  "logtype": "Traffic",
+                  "adom_name": "TestADOM",
+                  "time-order": "desc",
+                  "case-sensitive": false
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "start_log_search_request",
+                "operationTitle": "Start Log Search Request",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d461ee94-bdd6-4839-971b-fa46d7bdbb94"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "d27bf33c-a9c2-4a72-844b-e78c174654f2",
+                "title": "FortiAnalyzer: Start Log Search Request",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "fe21e35d-0632-4394-8ea6-e4ce826e661b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Start Log Search Request",
+              "targetStep": "/api/3/workflow_steps/d461ee94-bdd6-4839-971b-fa46d7bdbb94",
+              "sourceStep": "/api/3/workflow_steps/fe21e35d-0632-4394-8ea6-e4ce826e661b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f18c97aa-c495-4ddc-a92b-32e395547175"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "bb4747ed-d67c-4d49-8626-2fc7fdf31170",
+          "id": 987,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Event for Multiple ADOMs",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Fetches all events or specific event from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850096,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b4a6f13a-60f7-4a1d-8870-9837c1d21d4a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Event for Multiple ADOMs",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "end": "",
+                  "devid": "",
+                  "limit": 50,
+                  "start": "",
+                  "filter": "severity='medium'",
+                  "offset": 0,
+                  "alertid": "",
+                  "devname": ""
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_alerts_for_multiple_adoms",
+                "operationTitle": "Get Event for Multiple ADOMs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "506cc275-ffc3-469d-a7d7-805b951daa0c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "3bf9a8e3-3302-4bb3-b422-254adc019417",
+                "title": "FortiAnalyzer: Get Event",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "b4a6f13a-60f7-4a1d-8870-9837c1d21d4a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Alerts",
+              "targetStep": "/api/3/workflow_steps/506cc275-ffc3-469d-a7d7-805b951daa0c",
+              "sourceStep": "/api/3/workflow_steps/b4a6f13a-60f7-4a1d-8870-9837c1d21d4a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "21ddd1c7-e246-43ba-be4b-6ec2b64bdba3"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "caba013b-19c3-40e7-be2e-59c35734100f",
+          "id": 988,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Log-File State",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Get the state of log file from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850353,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/8403e7a3-a2a0-4a51-940c-6ed88f03c04e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "b49e64cc-afe8-47da-a3f6-410744a5107f",
+                "title": "FortiAnalyzer: Get Log-File State",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "8403e7a3-a2a0-4a51-940c-6ed88f03c04e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Log File State",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "end": "",
+                  "vdom": "",
+                  "devid": "",
+                  "start": "",
+                  "filename": "",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_log_file_state",
+                "operationTitle": "Get Log-File State",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "169",
+              "left": "252",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ca31069d-f8c0-449e-9ea4-8c2cf2b0a5cb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Log File State",
+              "targetStep": "/api/3/workflow_steps/ca31069d-f8c0-449e-9ea4-8c2cf2b0a5cb",
+              "sourceStep": "/api/3/workflow_steps/8403e7a3-a2a0-4a51-940c-6ed88f03c04e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "018a21e6-acff-42fb-8414-623f380ccdd8"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "cfd25835-bbfc-4979-9c6f-21e243b9653a",
+          "id": 989,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Report File",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Retrieves  a specific report generated by Fortinet FortiAnalyzer based on the report ID you have specified and file is added to Fortisoar attachment module.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a7875b34-cd92-418b-90d6-8f978668135f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Report File",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c60fc53b-05af-4fe0-893e-159e4440ef5c",
+                "params": {
+                  "tid": "8175a072-86ff-11eb-92bc-00090f000409,ace8b122-86ff-11eb-86d4-00090f000409",
+                  "apiver": 3,
+                  "jsonrpc": "2.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_generated_report",
+                "operationTitle": "Get Generated Report",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "16e68776-c274-4feb-a7c5-b62e347db05f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "9c2a3786-eeb3-462e-9122-7a81a6b4c6fc",
+                "title": "FortiAnalyzer: Get Report File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "a7875b34-cd92-418b-90d6-8f978668135f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Generated Report",
+              "targetStep": "/api/3/workflow_steps/16e68776-c274-4feb-a7c5-b62e347db05f",
+              "sourceStep": "/api/3/workflow_steps/a7875b34-cd92-418b-90d6-8f978668135f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d949029c-7bbf-4e7d-b669-197a11deb10e"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "d49a1b75-6fc8-42d5-813f-1f0087eb2916",
+          "id": 990,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Event",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Fetches all events or specific event from Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850073,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d7ce4e1f-b946-424d-a560-8260a5206d7f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Event",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c1bd3238-9c28-41ee-aaae-2ee3fd241b73",
+                "params": {
+                  "end": "",
+                  "devid": "",
+                  "limit": 10,
+                  "start": "",
+                  "filter": "severity='medium'",
+                  "offset": 0,
+                  "alertid": "",
+                  "devname": "",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_alerts",
+                "operationTitle": "Get Alerts",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "849d21fb-8ee1-41cf-83f8-5455b629e241"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "acb04f49-d910-495a-b1c1-99cac5880cf3",
+                "title": "FortiAnalyzer: Get Event",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d7ce4e1f-b946-424d-a560-8260a5206d7f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Alerts",
+              "targetStep": "/api/3/workflow_steps/849d21fb-8ee1-41cf-83f8-5455b629e241",
+              "sourceStep": "/api/3/workflow_steps/d7ce4e1f-b946-424d-a560-8260a5206d7f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "83b25655-bd8d-4fcb-962c-a4b5a06fe4ae"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "d4b6beb8-c8f8-4009-8e82-39f6061dab7c",
+          "id": 991,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Run Report",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Runs a report on the Fortinet FortiAnalyzer based on the report template name and other input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1642051284,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/52f1e5aa-33f9-46e7-97f4-cb46e789e052",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Reports",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "37aaf6bf-42f4-4782-94d0-8e57106a15dd",
+                "params": {
+                  "end": "2021-03-17T09:03:20.941Z",
+                  "start": "2021-03-15T08:30:00.000Z",
+                  "state": "generated",
+                  "apiver": 3,
+                  "jsonrpc": "2.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_reports",
+                "operationTitle": "Get Reports",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "220",
+              "left": "360",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "451060e0-6ce7-40a9-a0fd-2fb9ac368d46"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "04d45016-3dfd-4edb-a3cb-0d3c303c33ff",
+                "title": "FortiAnalyzer: Run Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "52f1e5aa-33f9-46e7-97f4-cb46e789e052"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Run Report",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "c60fc53b-05af-4fe0-893e-159e4440ef5c",
+                "params": {
+                  "id": "{{vars.steps.Get_Reports.data.result.data[0].tid}}",
+                  "apiver": 3,
+                  "jsonrpc": "2.0",
+                  "schedule": "{{vars.steps.List_Schedules.data.result.data[0].name}}",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "run_report",
+                "operationTitle": "Run Report",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "332",
+              "left": "530",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e8998e31-02a0-46ca-98f8-dad792a395d4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Schedules",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "37aaf6bf-42f4-4782-94d0-8e57106a15dd",
+                "params": {
+                  "apiver": 3,
+                  "jsonrpc": "2.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "get_schedules",
+                "operationTitle": "List Schedules",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "192",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "f1b11ae2-ece2-4df6-9158-343f667acafa"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Reports -> Run Report",
+              "targetStep": "/api/3/workflow_steps/e8998e31-02a0-46ca-98f8-dad792a395d4",
+              "sourceStep": "/api/3/workflow_steps/451060e0-6ce7-40a9-a0fd-2fb9ac368d46",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "59bb6d53-a71f-4fc6-8545-8f37f7726b8a"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> List Schedules",
+              "targetStep": "/api/3/workflow_steps/f1b11ae2-ece2-4df6-9158-343f667acafa",
+              "sourceStep": "/api/3/workflow_steps/52f1e5aa-33f9-46e7-97f4-cb46e789e052",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "711f5911-2063-489e-86b3-de6c6f13724a"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "List Schedules -> Get Reports",
+              "targetStep": "/api/3/workflow_steps/451060e0-6ce7-40a9-a0fd-2fb9ac368d46",
+              "sourceStep": "/api/3/workflow_steps/f1b11ae2-ece2-4df6-9158-343f667acafa",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "77e41c86-4377-4cad-ba95-1eb607ec8c1f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "da0aec5c-3a34-48c8-81e7-801457396c70",
+          "id": 992,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Add a Master Device",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Adds a master device to the Fortinet FortiAnalyzer device manager database based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850933,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/aaf8a75b-bef2-4f17-9db9-c5a32830c4a0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "496deba7-82c0-4046-8661-5122bcc0903a",
+                "title": "FortiAnalyzer: Add a Master Device",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "aaf8a75b-bef2-4f17-9db9-c5a32830c4a0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Add a Master Device",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "0e2c38cc-8af7-4ece-b2a4-b71b4e2dcd72",
+                "params": {
+                  "ip": "10.20.3.24",
+                  "sn": "FGVM030000182467",
+                  "name": "Enterprise",
+                  "os_ver": "6.0",
+                  "adom_name": "root"
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "add_master_device",
+                "operationTitle": "Add a Master Device",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c57ff3c5-ea63-467a-8461-4b1de8ec9f13"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Add a Master Device",
+              "targetStep": "/api/3/workflow_steps/c57ff3c5-ea63-467a-8461-4b1de8ec9f13",
+              "sourceStep": "/api/3/workflow_steps/aaf8a75b-bef2-4f17-9db9-c5a32830c4a0",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "528f61b1-c744-41ef-b390-3707d2240581"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "fcc3a26d-c51b-486a-b9c6-015a95d66b7a",
+          "id": 993,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Incident Attachment",
+          "aliasName": null,
+          "tag": "#Fortinet FortiAnalyzer",
+          "description": "Updates incident attachment fields corresponding to a specific incident in Fortinet FortiAnalyzer.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1649850875,
+          "collection": "/api/3/workflow_collections/999611fa-f5ee-4b91-bca7-d6b5435a9005",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/390028d0-b6a3-4196-9b07-568b941b46d7",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Incident Attachment",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiAnalyzer",
+                "config": "90f68db0-dfda-4520-b7c4-cfcc4303374d",
+                "params": {
+                  "data": "{\n  \"tag\": \"Risky\",\n  \"epid\": \"1032\",\n  \"epip\": \"10.20.1.2\",\n  \"euid\": \"1312\",\n  \"vdom\": \"root\",\n  \"devid\": \"FGVM02TM20005164\",\n  \"epname\": \"Noel Bryant Laptop\",\n  \"euname\": \"Noel Bryant\",\n  \"ackflag\": \"no\",\n  \"alertid\": \"202102081000000399\",\n  \"devname\": \"Enterprise\",\n  \"devtype\": \"TestGate\",\n  \"logtype\": \"traffic\",\n  \"subject\": \"Traffic to C&C\",\n  \"filterid\": \"1\",\n  \"groupby1\": \"dstip:176.31.62.76\",\n  \"groupby2\": \"endpoint\",\n  \"logcount\": \"1\",\n  \"readflag\": \"no\",\n  \"severity\": \"low\",\n  \"alerttime\": \"1612763034\",\n  \"eventtype\": \"traffic\",\n  \"extrainfo\": \"Traffic\",\n  \"filterkey\": \"5868743271317481592\",\n  \"multiflag\": \"\",\n  \"updatetime\": \"1612763034\",\n  \"eventstatus\": \"blank\",\n  \"filtercksum\": \"-472809671\",\n  \"lastlogtime\": \"1612763034\",\n  \"triggername\": \"Default-Compromised Host-Detection-IOC-By-Threat\",\n  \"firstlogtime\": \"1612763034\"\n}",
+                  "attachid": "26",
+                  "lastuser": "",
+                  "adom_name": "root",
+                  "attachsrc": "playbook",
+                  "attachsrcid": "",
+                  "attachsrctrigger": ""
+                },
+                "version": "3.1.0",
+                "connector": "fortinet-fortianalyzer",
+                "operation": "update_attachment",
+                "operationTitle": "Update Incident Attachment",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "180",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "2ef52911-191a-4c9d-b9af-0951a34ad89d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8f4b0e94-2c51-4ad5-8ff3-d9a915fc0d77",
+                "title": "FortiAnalyzer: Update Incident Attachment",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "390028d0-b6a3-4196-9b07-568b941b46d7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Update Incident Attachment",
+              "targetStep": "/api/3/workflow_steps/2ef52911-191a-4c9d-b9af-0951a34ad89d",
+              "sourceStep": "/api/3/workflow_steps/390028d0-b6a3-4196-9b07-568b941b46d7",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3cdaa8c0-dd8e-45d8-8cd6-5e1e8af4b183"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "fe16719b-14f0-4714-8fc6-63526551fcf5",
+          "id": 994,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Fortinet",
+            "fortinet-fortianalyzer"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "Fortinet",
+    "fortinet-fortianalyzer",
+    "dataingestion",
+    "create",
+    "ingest",
+    "fetch"
+  ]
+}

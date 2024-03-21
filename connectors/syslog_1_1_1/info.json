@@ -1,0 +1,106 @@
+{
+  "name": "syslog",
+  "label": "Syslog",
+  "description": "CyberSponse Syslog Connector",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.1.1",
+  "category": "SIEM",
+  "icon_small_name": "syslog_small.png",
+  "icon_large_name": "syslog_large.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000099956-syslog-v1-1-1",
+  "ingestion_supported": true,
+  "ingestion_modes": ["notification"],
+  "configuration": {
+    "fields": [
+      {
+        "title": "Listener Protocol",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "name": "protocol",
+        "options": ["TCP", "UDP"]
+      },
+      {
+        "title": "Listener Port",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "name": "port"
+      },
+      {
+        "title": "CyberSponse Endpoint(/api/triggers/1/ will be prepended)",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "trigger",
+        "value": "syslog"
+
+      },
+      {
+        "title": "Filter String (Only messages containing this text would be forwarded to CyOPs)",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "filter_str"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "start",
+      "title": "Start Listener",
+      "description": "Start Syslog Listener",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {"status": 0, "message": ""}
+    },
+    {
+      "operation": "stop",
+      "title": "Stop Listener",
+      "description": "Stop Syslog Listener",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {"status": 0, "message": ""}
+    },
+    {
+      "operation": "restart",
+      "title": "Restart Listener",
+      "description": "Restart Listener",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {"status": 0, "message": ""}
+    },
+    {
+      "operation": "parse",
+      "title": "Parse Message",
+      "description": "Parse Syslog message",
+      "enabled": true,
+      "output_schema": {"header": "", "message": ""},
+      "parameters": [
+        {
+          "title": "Message",
+          "name": "message",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "text"
+        },
+        {
+          "title": "RFC",
+          "name": "rfc",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "type": "select",
+          "options": ["3164", "5424"]
+        }
+      ]
+    }
+  ]
+}

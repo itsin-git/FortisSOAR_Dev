@@ -1,0 +1,11 @@
+#### What's Fixed
+- Added default JSON values for Verification, Filters and Custom Properties parameters of Get All Endpoints action.
+- Added default JSON values for Filters and Custom Properties parameters of Get Zero Trust Rule Sets List action.
+- Added the following actions:
+  - Create Custom Tag
+  - Delete Custom Tag
+  - Add Custom Tag to Endpoint
+  - Remove Custom Tag From Endpoint
+  - Get Zero Trust Tag By ID
+  - Create Zero Trust Tag
+  - Delete Zero Trust Tag

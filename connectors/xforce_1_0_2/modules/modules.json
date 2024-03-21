@@ -1,0 +1,1979 @@
+{
+  "modules": [
+    {
+      "@type": "StagingModelMetadata",
+      "type": "xforce",
+      "parentType": null,
+      "tableName": "xforce",
+      "ownable": true,
+      "trackable": true,
+      "defaultSort": [],
+      "indexable": true,
+      "attributes": [
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "searchVulnerabilityByStdcode",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ searchVulnerabilityByStdcode }}",
+          "descriptions": {
+            "singular": "Search Vulnerability By STDCODE"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "searchVulnerabilityByXfid",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ searchVulnerabilityByXfid }}",
+          "descriptions": {
+            "singular": "Search Vulnerability By XFID"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "searchVulnerability",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ searchVulnerability }}",
+          "descriptions": {
+            "singular": "Search Vulnerability"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getLiveAndPassiveDnsRecord",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getLiveAndPassiveDnsRecord }}",
+          "descriptions": {
+            "singular": "Get Live and Passive DNS Record"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "searchSignatureByPamId",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ searchSignatureByPamId }}",
+          "descriptions": {
+            "singular": "Search Signature By Pam ID"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "searchSignatureByXpu",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ searchSignatureByXpu }}",
+          "descriptions": {
+            "singular": "Search Signature By XPU"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "searchSignature",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ searchSignature }}",
+          "descriptions": {
+            "singular": "Search Signature"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getMalwareForURL",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getMalwareForURL }}",
+          "descriptions": {
+            "singular": "Get Malware For URL"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getIpReport",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getIpReport }}",
+          "descriptions": {
+            "singular": "Get IP Report"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getReportForURL",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getReportForURL }}",
+          "descriptions": {
+            "singular": "Get Report For URL"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "identifyOwner",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ identifyOwner }}",
+          "descriptions": {
+            "singular": "Identify Owner"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getMalwareByFamily",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getMalwareByFamily }}",
+          "descriptions": {
+            "singular": "Get Malware By Family"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getMalwareForFileHash",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getMalwareForFileHash }}",
+          "descriptions": {
+            "singular": "Get Malware For File Hash"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getIpMalwareContent",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getIpMalwareContent }}",
+          "descriptions": {
+            "singular": "Get IP Malware Content"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "getIpReputation",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ getIpReputation }}",
+          "descriptions": {
+            "singular": "Get IP Reputation"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "name",
+          "length": 255,
+          "formType": "text",
+          "dataSource": null,
+          "searchable": true,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": null,
+          "validation": {
+            "required": true,
+            "minlength": 0,
+            "maxlength": 255
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ name }}",
+          "descriptions": {
+            "singular": "Name"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "sourceId",
+          "length": 255,
+          "formType": "text",
+          "dataSource": null,
+          "searchable": true,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": null,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": 255
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ sourceId }}",
+          "descriptions": {
+            "singular": "Source ID"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "source",
+          "length": 255,
+          "formType": "text",
+          "dataSource": null,
+          "searchable": true,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": null,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": 255
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ source }}",
+          "descriptions": {
+            "singular": "Source"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "origin",
+          "length": 255,
+          "formType": "text",
+          "dataSource": null,
+          "searchable": true,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": null,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": 255
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ origin }}",
+          "descriptions": {
+            "singular": "Origin"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "integer",
+          "name": "dueDate",
+          "length": null,
+          "formType": "datetime",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": null,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ dueDate }}",
+          "descriptions": {
+            "singular": "Due Date"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "picklists",
+          "name": "type",
+          "length": null,
+          "formType": "picklist",
+          "dataSource": {
+            "model": "picklists",
+            "query": {
+              "logic": "AND",
+              "filters": [
+                {
+                  "field": "listName__name",
+                  "operator": "eq",
+                  "value": "AlertType"
+                }
+              ],
+              "sort": [
+                {
+                  "field": "orderIndex",
+                  "direction": "ASC"
+                }
+              ]
+            }
+          },
+          "searchable": false,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ type }}",
+          "descriptions": {
+            "singular": "Type"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "description",
+          "length": null,
+          "formType": "richtext",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": null,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ description }}",
+          "descriptions": {
+            "singular": "Description"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "picklists",
+          "name": "severity",
+          "length": null,
+          "formType": "picklist",
+          "dataSource": {
+            "model": "picklists",
+            "query": {
+              "logic": "AND",
+              "filters": [
+                {
+                  "field": "listName__name",
+                  "operator": "eq",
+                  "value": "Severity"
+                }
+              ],
+              "sort": [
+                {
+                  "field": "orderIndex",
+                  "direction": "ASC"
+                }
+              ]
+            }
+          },
+          "searchable": false,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ severity }}",
+          "descriptions": {
+            "singular": "Severity"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "picklists",
+          "name": "status",
+          "length": null,
+          "formType": "picklist",
+          "dataSource": {
+            "model": "picklists",
+            "query": {
+              "logic": "AND",
+              "filters": [
+                {
+                  "field": "listName__name",
+                  "operator": "eq",
+                  "value": "AlertStatus"
+                }
+              ],
+              "sort": [
+                {
+                  "field": "orderIndex",
+                  "direction": "ASC"
+                }
+              ]
+            }
+          },
+          "searchable": false,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ status }}",
+          "descriptions": {
+            "singular": "Status"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "people",
+          "name": "assignedTo",
+          "length": null,
+          "formType": "lookup",
+          "dataSource": {
+            "model": "people"
+          },
+          "searchable": false,
+          "gridColumn": true,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ assignedTo }}",
+          "descriptions": {
+            "singular": "Assigned To"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "string",
+          "name": "uuid",
+          "length": 36,
+          "formType": "text",
+          "dataSource": null,
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": null,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": 255
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": true,
+          "unique": false,
+          "displayName": "{{ uuid }}",
+          "descriptions": {
+            "singular": "UUID"
+          }
+        },
+        {
+          "@type": "AttributeMetadata",
+          "type": "system_assigned_queues",
+          "name": "systemAssignedQueue",
+          "length": null,
+          "formType": "lookup",
+          "dataSource": {
+            "model": "system_assigned_queues"
+          },
+          "searchable": false,
+          "gridColumn": false,
+          "collection": false,
+          "inversedField": null,
+          "ownsRelationship": false,
+          "validation": {
+            "required": false,
+            "minlength": 0,
+            "maxlength": -1
+          },
+          "visibility": true,
+          "readable": true,
+          "writeable": true,
+          "identifier": false,
+          "unique": false,
+          "displayName": "{{ systemAssignedQueue }}",
+          "descriptions": {
+            "singular": "System Assigned Queue"
+          }
+        }
+      ],
+      "writable": true,
+      "displayName": "{{name}}",
+      "descriptions": {
+        "singular": "Xforce",
+        "plural": "Xforces"
+      },
+      "checked": true
+    }
+  ],
+  "viewTemplates": {
+    "xforce": [
+      {
+        "id": "modules/xforce/list",
+        "type": "rows",
+        "config": {
+          "rows": [
+            {
+              "columns": [
+                {
+                  "widgets": [
+                    {
+                      "type": "grid",
+                      "config": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "_moduleTemplate": "list",
+        "@type": "SystemViewTemplate"
+      },
+      {
+        "id": "modules/xforce/detail",
+        "type": "rows",
+        "config": {
+          "rows": [
+            {
+              "columns": [
+                {
+                  "style": "col-lg-9 col-md-8",
+                  "widgets": [
+                    {
+                      "type": "primaryDetail",
+                      "config": {
+                        "titleField": "name",
+                        "wid": "90332331-52fa-4708-862f-7438c3db7813"
+                      }
+                    },
+                    {
+                      "type": "tabs",
+                      "config": {
+                        "tabs": [
+                          {
+                            "title": "Description",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "description",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Timeline",
+                            "widget": {
+                              "type": "timeline",
+                              "config": {
+                                "wid": "01471df4-2fd2-4fc8-b0ff-9f1963a04592"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Related Records",
+                            "widget": {
+                              "type": "relationship.subtab",
+                              "config": {
+                                "excludes": [
+                                  "attachments"
+                                ],
+                                "gridsConfig": {
+                                  "alerts": {
+                                    "columns": [
+                                      "name",
+                                      "type",
+                                      "severity",
+                                      "status",
+                                      "assignedTo"
+                                    ]
+                                  },
+                                  "people": {
+                                    "columns": [
+                                      "firstname",
+                                      "lastname",
+                                      "title",
+                                      "phoneWork",
+                                      "company"
+                                    ]
+                                  },
+                                  "tasks": {
+                                    "columns": [
+                                      "name",
+                                      "dueDate",
+                                      "priority",
+                                      "status",
+                                      "assignedToPerson"
+                                    ]
+                                  }
+                                },
+                                "wid": "617a7d2e-4e55-48d0-b1fc-9728c663f75f"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get Malware For File Hash",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getMalwareForFileHash",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get IP Malware Content",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getIpMalwareContent",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get IP Reputation",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getIpReputation",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get Malware By Family",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getMalwareByFamily",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Identify Owner",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "identifyOwner",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get Report For URL",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getReportForURL",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get IP Report",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getIpReport",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get Malware For URL",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getMalwareForURL",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Search Signature",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "searchSignature",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Search Signature By XPU",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "searchSignatureByXpu",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Search Signature By Pam ID",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "searchSignatureByPamId",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Get Live and Passive DNS Record",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "getLiveAndPassiveDnsRecord",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Search Vulnerability",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "searchVulnerability",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Search Vulnerability By XFID",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "searchVulnerabilityByXfid",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          },
+                          {
+                            "title": "Search Vulnerability By STDCODE",
+                            "widget": {
+                              "type": "rows",
+                              "config": {
+                                "rows": [
+                                  {
+                                    "columns": [
+                                      {
+                                        "style": "container-pane col-md-12",
+                                        "widgets": [
+                                          {
+                                            "type": "editableFormGroup",
+                                            "config": {
+                                              "usePlaceholder": true,
+                                              "rows": [
+                                                {
+                                                  "style": "padding-left-lg padding-right-lg",
+                                                  "columns": [
+                                                    {
+                                                      "fields": [
+                                                        {
+                                                          "name": "searchVulnerabilityByStdcode",
+                                                          "highlightMode": false
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ],
+                                              "wid": "707d08a4-5b9c-4dd6-9990-954764c877c0"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "wid": "4e72e00a-a7f5-48be-b374-c2fa0dab6dbd"
+                                  }
+                                ],
+                                "wid": "2fd85cfb-3d01-400a-9d9f-dee63a2093fe"
+                              }
+                            }
+                          }
+                        ],
+                        "wid": "1186adf1-acc3-42b3-8c45-945f8c9ce8ee"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "style": "col-lg-3 col-md-4",
+                  "widgets": [
+                    {
+                      "type": "editableFormGroup",
+                      "config": {
+                        "title": "Summary",
+                        "rows": [
+                          {
+                            "columns": [
+                              {
+                                "fields": [
+                                  "id",
+                                  "sourceId",
+                                  "severity",
+                                  "status"
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "wid": "65ce8a7f-0da1-4e02-9170-b04e1f2f6ad8"
+                      }
+                    },
+                    {
+                      "type": "editableFormGroup",
+                      "config": {
+                        "title": "Details",
+                        "rows": [
+                          {
+                            "columns": [
+                              {
+                                "fields": [
+                                  "type",
+                                  "source",
+                                  "origin",
+                                  "createDate",
+                                  "dueDate",
+                                  "assignedTo"
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "wid": "d6bedad7-91b6-4ab3-8b41-34518c51c654"
+                      }
+                    },
+                    {
+                      "type": "editableFormGroup",
+                      "config": {
+                        "wid": "41fdad7f-d718-45e9-b834-ca872bb4ad8e",
+                        "rows": [
+                          {
+                            "columns": [
+                              {
+                                "fields": [
+                                  {
+                                    "name": "newfield",
+                                    "highlightMode": true
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "wid": "bad45855-50c1-4875-9991-11a921183020"
+            }
+          ],
+          "wid": "c7e65257-a8d5-4b38-99d2-93d2db4d2688"
+        },
+        "_moduleTemplate": "detail",
+        "@type": "SystemViewTemplate"
+      },
+      {
+        "id": "modules/xforce/form",
+        "type": "form",
+        "config": {
+          "rows": [
+            {
+              "columns": [
+                {
+                  "widgets": [
+                    {
+                      "type": "formGroup",
+                      "config": {
+                        "size": "large",
+                        "rows": [
+                          {
+                            "columns": [
+                              {
+                                "fields": [
+                                  "name"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "formGroup",
+                      "config": {
+                        "rows": [
+                          {
+                            "columns": [
+                              {
+                                "fields": [
+                                  "description"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "formGroup",
+                      "config": {
+                        "title": "Summary",
+                        "rows": [
+                          {
+                            "columns": [
+                              {
+                                "fields": [
+                                  "sourceId",
+                                  "severity",
+                                  "status"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "formGroup",
+                      "config": {
+                        "title": "Details",
+                        "rows": [
+                          {
+                            "columns": [
+                              {
+                                "fields": [
+                                  "type",
+                                  "source",
+                                  "origin",
+                                  "dueDate",
+                                  "assignedTo"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "_moduleTemplate": "form",
+        "@type": "SystemViewTemplate"
+      }
+    ]
+  },
+  "picklists": {
+    "xforce": [
+      {
+        "@type": "PicklistNames",
+        "name": "AlertType",
+        "picklists": [
+          {
+            "@type": "Picklist",
+            "itemValue": "McAfee Alert",
+            "orderIndex": 8,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 560,
+            "uuid": "c3798a51-381e-413e-aacd-bf9ad3bd5a13"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Phishing",
+            "orderIndex": 11,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 42,
+            "uuid": "0b3ef6f9-eb29-4ab9-ac98-98364bd1a3aa"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Malware",
+            "orderIndex": 8,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 43,
+            "uuid": "0cbc2c31-c360-4770-b1e7-3653a8c24ead"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Denial of Service",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 54,
+            "uuid": "1b143a42-8dd4-4121-8f38-fb5c299692ae"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Lost / Stolen",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 65,
+            "uuid": "2b8024fd-096a-426f-bf7f-63fb149ff9ee"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Other / Unknown",
+            "orderIndex": 19,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 108,
+            "uuid": "574a6ee2-7265-4701-815e-cff83b053bce"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Communication error (fax, email)",
+            "orderIndex": 0,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 142,
+            "uuid": "84b72637-ad92-452e-8611-b464b883a214"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Improper disposal",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 176,
+            "uuid": "a36e1dbd-a9ec-47b2-8f25-e077a40d509c"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Vendor / 3rd party error",
+            "orderIndex": 16,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+            "id": 257,
+            "uuid": "f80ac0ab-7f93-40f0-a6d0-841f0e3e192f"
+          }
+        ],
+        "id": 24,
+        "uuid": "a7087b9c-5660-495f-a8ac-c3b198ddb8c2"
+      },
+      {
+        "@type": "PicklistNames",
+        "name": "Severity",
+        "picklists": [
+          {
+            "@type": "Picklist",
+            "itemValue": "Minimal",
+            "orderIndex": 0,
+            "color": "#157DD9",
+            "icon": null,
+            "listName": "/api/3/picklist_names/4e80cba3-032f-48b4-ac03-17e3ec247aac",
+            "id": 45,
+            "uuid": "0d609b08-45e0-469f-8910-41145c0b7c03"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "High",
+            "orderIndex": 3,
+            "color": "#DE7A13",
+            "icon": null,
+            "listName": "/api/3/picklist_names/4e80cba3-032f-48b4-ac03-17e3ec247aac",
+            "id": 80,
+            "uuid": "40187287-89fc-4e9c-b717-e9443d57eedb"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Low",
+            "orderIndex": 1,
+            "color": "#28B35C",
+            "icon": null,
+            "listName": "/api/3/picklist_names/4e80cba3-032f-48b4-ac03-17e3ec247aac",
+            "id": 112,
+            "uuid": "58d0753f-f7e4-403b-953c-b0f521eab759"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Critical",
+            "orderIndex": 4,
+            "color": "#A51516",
+            "icon": null,
+            "listName": "/api/3/picklist_names/4e80cba3-032f-48b4-ac03-17e3ec247aac",
+            "id": 140,
+            "uuid": "7efa2220-39bb-44e4-961f-ac368776e3b0"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Medium",
+            "orderIndex": 2,
+            "color": "#D2AC1A",
+            "icon": null,
+            "listName": "/api/3/picklist_names/4e80cba3-032f-48b4-ac03-17e3ec247aac",
+            "id": 195,
+            "uuid": "b3c20a3a-ecfd-4adc-a225-0205968e6793"
+          }
+        ],
+        "id": 13,
+        "uuid": "4e80cba3-032f-48b4-ac03-17e3ec247aac"
+      },
+      {
+        "@type": "PicklistNames",
+        "name": "AlertStatus",
+        "picklists": [
+          {
+            "@type": "Picklist",
+            "itemValue": "Investigating",
+            "orderIndex": 2,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/33e964a9-d607-49f2-813c-7ce46141815a",
+            "id": 132,
+            "uuid": "758925e7-629c-46d8-89db-fb36f5fbe88a"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Open",
+            "orderIndex": 1,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/33e964a9-d607-49f2-813c-7ce46141815a",
+            "id": 139,
+            "uuid": "7de816ff-7140-4ee5-bd05-93ce22002146"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "Verified",
+            "orderIndex": 4,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/33e964a9-d607-49f2-813c-7ce46141815a",
+            "id": 188,
+            "uuid": "abf1eb92-819e-4825-b351-3c288686c2ff"
+          },
+          {
+            "@type": "Picklist",
+            "itemValue": "False Positive",
+            "orderIndex": 3,
+            "color": null,
+            "icon": null,
+            "listName": "/api/3/picklist_names/33e964a9-d607-49f2-813c-7ce46141815a",
+            "id": 242,
+            "uuid": "e83d747e-1aa4-4a63-986f-1904ecc40012"
+          }
+        ],
+        "id": 9,
+        "uuid": "33e964a9-d607-49f2-813c-7ce46141815a"
+      }
+    ]
+  },
+  "includeMmd": true
+}

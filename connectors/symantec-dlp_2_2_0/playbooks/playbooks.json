@@ -1,0 +1,979 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Symantec DLP - 2.1.0",
+      "description": "Sample playbooks for \"Symantec DLP\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "/api/3/images/64c430de-8941-4ead-ac1c-0951094c5b03",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Incident",
+          "aliasName": null,
+          "description": "Update Symantec DLP incidents from CyOps.",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1400bcdd-633b-437a-85ab-f720d19143b9",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "0c9c169a-7bb4-4225-8a62-19930dc7b7e2",
+                "title": "Symantec DLP: Update Incident",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "1400bcdd-633b-437a-85ab-f720d19143b9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Incident",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "320f2a3f-a21a-4767-8852-fce19b65d182",
+                "params": {
+                  "status": "Investigation",
+                  "batch_id": "1",
+                  "severity": "MEDIUM",
+                  "add_notes": false,
+                  "incident_long_id": "21",
+                  "custom_attrib_name": "",
+                  "remediation_status": "",
+                  "custom_attrib_value": "{\n  \"First Name\": \"admin\",\n  \"Country\": \"India\"\n}",
+                  "remediation_location": ""
+                },
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "update_incident",
+                "operationTitle": "Update Incident",
+                "step_variables": [],
+                "operationOutput": {
+                  "ns5:incidentUpdateResponse": []
+                }
+              },
+              "status": null,
+              "left": "180",
+              "top": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "52a14877-ec99-4079-9e35-cf288c9c95f3"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1e6b8cc3-4dfb-42ba-8703-2d7aba7f7dd7",
+              "name": "Start -> Update Incident",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/52a14877-ec99-4079-9e35-cf288c9c95f3",
+              "sourceStep": "/api/3/workflow_steps/1400bcdd-633b-437a-85ab-f720d19143b9"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593497699,
+          "uuid": "8f8febae-e5ec-45d1-a08a-de3139251680",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Status",
+          "aliasName": null,
+          "description": "Returns the list of all custom status that are defined in Symantec DLP system.",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ea6492cf-be5a-44dd-bc9a-5141c93d0602",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Status",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "623c6a26-e35d-4dc0-9f48-2cb63ba126e8",
+                "params": [],
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "get_incident_status",
+                "operationTitle": "Get Incident Status",
+                "step_variables": [],
+                "operationOutput": {
+                  "ns5:incidentStatusList": {
+                    "incidentStatusName": []
+                  }
+                }
+              },
+              "status": null,
+              "left": "171",
+              "top": "220",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "cdd989e5-ad68-436e-950d-01fbe8685421"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "df5112b3-8947-4854-9df7-2c6cebdca3bf",
+                "title": "Symantec DLP: Get Incident Status",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ea6492cf-be5a-44dd-bc9a-5141c93d0602"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a782b950-2578-4f39-b236-9ff3231477a5",
+              "name": "Start -> Get Incident Status",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/cdd989e5-ad68-436e-950d-01fbe8685421",
+              "sourceStep": "/api/3/workflow_steps/ea6492cf-be5a-44dd-bc9a-5141c93d0602"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593495814,
+          "uuid": "a27b7444-85c2-4972-96e0-785e2e2d9c92",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Attachments",
+          "aliasName": null,
+          "description": "Get attachments for specified incident from Symantec DLP",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/05453ea0-b38d-450d-bb71-6930479dae99",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "cf968fc1-ff69-4b58-bd7f-3647571b26b3",
+                "title": "Symantec DLP: Get Incident Attachments",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "05453ea0-b38d-450d-bb71-6930479dae99"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Attachments",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "623c6a26-e35d-4dc0-9f48-2cb63ba126e8",
+                "params": {
+                  "incident_long_id": "2",
+                  "includeAllComponents": false,
+                  "includeOriginalMessage": true
+                },
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "get_incident_attachment",
+                "operationTitle": "Get Incident Attachments",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "260",
+              "top": "160",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "0a3cde5e-be82-457f-bb7e-1a1ce1f34992"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "f434b291-3fab-431e-84c9-a00dec3b1fe5",
+              "name": "Alerts -> Get Attachments",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/0a3cde5e-be82-457f-bb7e-1a1ce1f34992",
+              "sourceStep": "/api/3/workflow_steps/05453ea0-b38d-450d-bb71-6930479dae99"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593153829,
+          "uuid": "94870ddd-330e-4b45-a555-eba25849024b",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Details",
+          "aliasName": null,
+          "description": "Get details of incidents based on provided incidents ids",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f2b65bb3-9ba3-430c-9cc0-372ab6251f02",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "b9ee857a-b518-4230-807a-ee783051bce2",
+                "title": "Symantec DLP: Get Incident Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "f2b65bb3-9ba3-430c-9cc0-372ab6251f02"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Details",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "bede9fb1-2fba-41e3-8b24-e737fa294929",
+                "params": {
+                  "include_history": true,
+                  "incident_long_id": "[1,2]",
+                  "include_violations": true
+                },
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "get_incident_details",
+                "operationTitle": "Get Incident Details",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "194",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "f4cb6974-2646-4c79-a58b-724117edc038"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e3e8d383-241e-4616-83bb-4677ce4d516d",
+              "name": "Start -> Get Incident Details",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f4cb6974-2646-4c79-a58b-724117edc038",
+              "sourceStep": "/api/3/workflow_steps/f2b65bb3-9ba3-430c-9cc0-372ab6251f02"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593491673,
+          "uuid": "11a31494-bc5e-48d1-8a3a-2ad624975cbd",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incidents IDs",
+          "aliasName": null,
+          "description": "Get List of incidents based on saved Report ID",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d471d081-94cf-4cb9-af63-f71382b87c19",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident IDs",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "623c6a26-e35d-4dc0-9f48-2cb63ba126e8",
+                "params": {
+                  "report_id": "122",
+                  "creation_date_greater_then": "2017-01-01"
+                },
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "get_incidents_ids",
+                "operationTitle": "Get Incidents IDs",
+                "step_variables": [],
+                "operationOutput": {
+                  "ns5:incidentListResponse": {
+                    "ns5:incidentId": [],
+                    "ns5:incidentLongId": []
+                  }
+                }
+              },
+              "status": null,
+              "left": "180",
+              "top": "211",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "54f6f6ca-5f73-486d-9e3b-a094e683d318"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "23fb953e-e206-47b2-9e70-c9e5c6e46993",
+                "title": "Symantec DLP: Get Incident IDs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "d471d081-94cf-4cb9-af63-f71382b87c19"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "6ca14108-2eec-40ee-9745-111326153b9d",
+              "name": "Start -> Get Incident IDs",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/54f6f6ca-5f73-486d-9e3b-a094e683d318",
+              "sourceStep": "/api/3/workflow_steps/d471d081-94cf-4cb9-af63-f71382b87c19"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593491725,
+          "uuid": "dd090f01-af32-4ec0-ab82-1c4866d33e5a",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Custom Attributes",
+          "aliasName": null,
+          "description": "Returns the list of custom attribute that are defined in symantec DLP system",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/930f4fa7-d5d7-470f-9c84-ff38290aa13c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "91e17b4b-d062-40b7-a390-0d7c4069b928",
+                "title": "Symantec DLP: Get Custom Attribute",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "930f4fa7-d5d7-470f-9c84-ff38290aa13c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Custom Attributes",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "623c6a26-e35d-4dc0-9f48-2cb63ba126e8",
+                "params": [],
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "get_custom_attributes",
+                "operationTitle": "Get Custom Attributes",
+                "step_variables": [],
+                "operationOutput": {
+                  "ns5:customAttributeList": {
+                    "customAttributeName": []
+                  }
+                }
+              },
+              "status": null,
+              "left": "200",
+              "top": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "c090ad0a-f75b-45de-9789-71e69085e3ef"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "193d1b9d-c8e8-478d-b4f1-7e5604337e45",
+              "name": "Start -> Get Custom Attributes",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c090ad0a-f75b-45de-9789-71e69085e3ef",
+              "sourceStep": "/api/3/workflow_steps/930f4fa7-d5d7-470f-9c84-ff38290aa13c"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593491627,
+          "uuid": "72acfa95-3132-448b-8fd5-ce6019dcd10c",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Violations",
+          "aliasName": null,
+          "description": "It returns the text-based content for each match in the incident based on provided incident ID",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ba2e4b2c-fba7-4710-92f1-779c6db6bcd7",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Violations",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "623c6a26-e35d-4dc0-9f48-2cb63ba126e8",
+                "params": {
+                  "incident_long_id": "1",
+                  "include_image_violations": ""
+                },
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "get_incident_violations",
+                "operationTitle": "Get Incident Violations",
+                "step_variables": [],
+                "operationOutput": {
+                  "ns5:incidentViolationsResponse": {
+                    "ns5:incidentViolation": []
+                  }
+                }
+              },
+              "status": null,
+              "left": "209",
+              "top": "214",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "3fb0339c-2b4e-4a7d-a53b-ed45cc33eb69"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a961f5ce-be37-4c93-90ca-740ef0ed0b5e",
+                "title": "Symantec DLP: Get Incident Violations",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ba2e4b2c-fba7-4710-92f1-779c6db6bcd7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e4f8979f-847b-43ff-9e1d-936abac3ef50",
+              "name": "Start -> Get Incident Violations",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/3fb0339c-2b4e-4a7d-a53b-ed45cc33eb69",
+              "sourceStep": "/api/3/workflow_steps/ba2e4b2c-fba7-4710-92f1-779c6db6bcd7"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593497306,
+          "uuid": "c3029e2a-cb23-4a44-a29e-7e880c888747",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Download EML File",
+          "aliasName": null,
+          "description": "Download eml file from server based on the Symantec DLP incident ID that you have specified.",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/af9cd888-a06b-48ea-b738-a27965b9c921",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "f05cea20-35ff-499a-97cc-a1d6ba252e91",
+                "title": "Symantec DLP: Download EML File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "40",
+              "top": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "af9cd888-a06b-48ea-b738-a27965b9c921"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Download EML File",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "5320e122-f425-4115-b0a3-d62968bdee41",
+                "params": {
+                  "incident_long_id": "81",
+                  "save_as_attachment": true
+                },
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "download_eml",
+                "operationTitle": "Download EML File",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "380",
+              "top": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "f20c43e8-70b2-4d75-8e35-47a188985690"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "48c22bca-0ebe-49e2-98e4-7f647ebe0db9",
+              "name": "Start -> Download EML File",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f20c43e8-70b2-4d75-8e35-47a188985690",
+              "sourceStep": "/api/3/workflow_steps/af9cd888-a06b-48ea-b738-a27965b9c921"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1593491030,
+          "uuid": "95bb1015-2c5c-4f9b-81fb-50457eccd4e0",
+          "recordTags": [
+            "/api/3/tags/symantec-dlp",
+            "/api/3/tags/Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Sender/Recipient Pattern",
+          "aliasName": null,
+          "description": "Updates the sender/recipient pattern with specified email address, IP address, URL domains.",
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "tag": "#Symantec DLP",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0289b62e-d761-45d1-842a-b2dc127ab530",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "a2767b1a-2ba4-49ca-970b-3594ad1f49d3",
+                "title": "Symantec DLP: Update Sender_Recipient Pattern",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "0289b62e-d761-45d1-842a-b2dc127ab530"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Sender_Recipient Pattern",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "8aaa5733-a4e9-4400-97ac-77184c0e793e",
+                "params": {
+                  "ips": "10.132.255.45",
+                  "urls": "hello.com",
+                  "emails": "test_one@example.com,test_two@example.com",
+                  "add_items": true,
+                  "pattern_name": "demo",
+                  "rule_pattern": "Recipient"
+                },
+                "version": "2.1.0",
+                "connector": "symantec-dlp",
+                "operation": "update_sender_recipient_pattern",
+                "operationTitle": "Update Recipient Pattern",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b1c28a31-0c88-4c3e-bc84-2ade5410d3b8"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "fb49d3b9-048a-467e-869b-27ac2abb559e",
+              "name": "Alerts -> Update Recipient Pattern",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b1c28a31-0c88-4c3e-bc84-2ade5410d3b8",
+              "sourceStep": "/api/3/workflow_steps/0289b62e-d761-45d1-842a-b2dc127ab530"
+            }
+          ],
+          "versions": null,
+          "lastModifyDate": 1627064682,
+          "priority": null,
+          "uuid": "dce862e1-ef62-4e2a-90e3-129dcbd23a17",
+          "recordTags": [
+            "symantec-dlp",
+            "Symantec"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Sender/Recipient Pattern",
+          "aliasName": null,
+          "tag": "#Symantec DLP",
+          "description": "Get the sender/recipient pattern's details of specified pattern.",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1628521906,
+          "collection": "/api/3/workflow_collections/b25d243d-afe5-45eb-8f00-54e84ec7253d",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e0ed0003-a963-40b1-bae9-32b0fb3a0bda",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Sender_Recipient Pattern",
+              "description": null,
+              "arguments": {
+                "name": "Symantec DLP",
+                "config": "a67ff539-da1a-4d98-bc0b-b53fcc494441",
+                "params": {
+                  "rule_type": "Recipient",
+                  "pattern_name": "demo"
+                },
+                "version": "2.2.0",
+                "connector": "symantec-dlp",
+                "operation": "get_sender_recipient_pattern",
+                "operationTitle": "Get Sender/Recipient Pattern",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "1ed14c9d-9d53-4f90-a5c9-70870cb8d6e5",
+              "id": 9042
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "99bcafd9-dfba-46b2-a18e-466db95970ba",
+                "title": "Symantec DLP: Get Sender/Recipient Pattern",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e0ed0003-a963-40b1-bae9-32b0fb3a0bda",
+              "id": 9041
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Sender/Recipient Pattern",
+              "targetStep": "/api/3/workflow_steps/1ed14c9d-9d53-4f90-a5c9-70870cb8d6e5",
+              "sourceStep": "/api/3/workflow_steps/e0ed0003-a963-40b1-bae9-32b0fb3a0bda",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a7ffe060-0b2e-443b-8b05-401cfa037358"
+            }
+          ],
+          "priority": null,
+          "uuid": "55b51be0-2e3b-4af4-b207-8a0c16a031ab",
+          "recordTags": [
+            "symantec-dlp",
+            "Symantec"
+          ],
+          "id": 3163,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1628521049,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1628521906,
+          "owners": [],
+          "isPrivate": false
+        }
+      ],
+      "uuid": "b25d243d-afe5-45eb-8f00-54e84ec7253d",
+      "recordTags": []
+    }
+  ],
+  "exported_tags": [
+    "symantec-dlp",
+    "Symantec"
+  ]
+}

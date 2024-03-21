@@ -1,0 +1,1307 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "91dfde9a-bbca-4679-a867-c145a47a828a",
+      "@type": "WorkflowCollection",
+      "name": "Sample - AlienVault-OTX - 1.0.2",
+      "description": "AlienVault-OTX is an open source of Indicators of Compromise (IOCs) supported by the community.This connector provides actions Get IP Reputation, Create Pulse, Get Domain Reputation, etc",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "alienvault-otx"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "1550e2bb-be1f-4b0d-b711-309eeebc6633",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Create new pulse which contains a collection of IOCs targeted at a particular area.",
+          "name": "Create Pulse",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/8de59a55-29e7-486c-a929-5b08ecb7e040",
+          "steps": [
+            {
+              "uuid": "8de59a55-29e7-486c-a929-5b08ecb7e040",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "a2f999ed-9f2f-4d94-80f4-2e6bf755b915",
+                "title": "AlienVault-OTX: Create Pulse",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "45ddfc6e-1891-4ece-a60b-c58a59ac611b",
+              "@type": "WorkflowStep",
+              "name": "Create Pulse",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "public": true
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "create_pulse",
+                "operationTitle": "Create Pulse",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3e1a3613-fd31-4723-b03f-c53d74dc4148",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Pulse",
+              "sourceStep": "/api/3/workflow_steps/8de59a55-29e7-486c-a929-5b08ecb7e040",
+              "targetStep": "/api/3/workflow_steps/45ddfc6e-1891-4ece-a60b-c58a59ac611b"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1d4d158d-c19a-42d6-8629-a97a941ec3d0",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves the reputation for a specified IP based on parameters such as, the IP address that you have specified.",
+          "name": "Get IP Reputation",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/443b1e9a-2f18-41ec-bf08-8bd57f969e17",
+          "steps": [
+            {
+              "uuid": "443b1e9a-2f18-41ec-bf08-8bd57f969e17",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "3b11c0ba-7e8a-44fa-a550-8f750cecb47a",
+                "title": "AlienVault-OTX: Get IP Reputation",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "04d3c24a-5dba-4be5-ab82-edc707589165",
+              "@type": "WorkflowStep",
+              "name": "Get IP Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "indicator_type": "IPv4"
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_ip_reputation",
+                "operationTitle": "Get IP Reputation",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1b3f939e-7032-43fc-8672-b8ac5cbba8ea",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get IP Reputation",
+              "sourceStep": "/api/3/workflow_steps/443b1e9a-2f18-41ec-bf08-8bd57f969e17",
+              "targetStep": "/api/3/workflow_steps/04d3c24a-5dba-4be5-ab82-edc707589165"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "d30b0494-4a96-4b23-b19e-38b5a1ad7aed",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves the reputation for a specified domain based on parameters such as, the domain name that you have specified.",
+          "name": "Get Domain Reputation",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/58190773-0241-4515-a810-b8e3ce85a162",
+          "steps": [
+            {
+              "uuid": "58190773-0241-4515-a810-b8e3ce85a162",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "76ccfac3-0bb1-40d3-ab4c-e4ee7fb2bbdb",
+                "title": "AlienVault-OTX: Get Domain Reputation",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "cbd98bca-bc74-4c4a-9461-8c61403fc3a5",
+              "@type": "WorkflowStep",
+              "name": "Get Domain Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "section": "General"
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_domain_reputation",
+                "operationTitle": "Get Domain Reputation",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c630dd93-40b1-4887-9234-cc89bbfde540",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Domain Reputation",
+              "sourceStep": "/api/3/workflow_steps/58190773-0241-4515-a810-b8e3ce85a162",
+              "targetStep": "/api/3/workflow_steps/cbd98bca-bc74-4c4a-9461-8c61403fc3a5"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "dfd6303e-2144-41dc-a649-010262d1f764",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves the reputation for a specified URL based on the URL that you have specified.",
+          "name": "Get URL Reputation",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1dc20736-eb21-4daa-afa5-e6553c7a7052",
+          "steps": [
+            {
+              "uuid": "1dc20736-eb21-4daa-afa5-e6553c7a7052",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "b880be81-e817-4358-87ab-410e7e01ee42",
+                "title": "AlienVault-OTX: Get URL Reputation",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "74082191-2ae3-4d3a-b4bb-30df90002833",
+              "@type": "WorkflowStep",
+              "name": "Get URL Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_url_reputation",
+                "operationTitle": "Get URL Reputation",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "98ebcab6-5a64-45e5-bb06-e34c3b5e414f",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get URL Reputation",
+              "sourceStep": "/api/3/workflow_steps/1dc20736-eb21-4daa-afa5-e6553c7a7052",
+              "targetStep": "/api/3/workflow_steps/74082191-2ae3-4d3a-b4bb-30df90002833"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "6ad11ba5-0477-474e-b644-206e900b2381",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves the reputation for a specified file based on parameters such as, the filehash that you have specified.",
+          "name": "Get File Reputation",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c194880a-89b0-40ed-85bd-fb58b9504cff",
+          "steps": [
+            {
+              "uuid": "c194880a-89b0-40ed-85bd-fb58b9504cff",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "bd382d0a-f8ad-4413-a255-7c12600e199c",
+                "title": "AlienVault-OTX: Get File Reputation",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "6389118d-9e29-475a-a818-2b211926de34",
+              "@type": "WorkflowStep",
+              "name": "Get File Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_file_reputation",
+                "operationTitle": "Get File Reputation",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5b7779a5-286c-481f-b227-0a12df40d7fb",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get File Reputation",
+              "sourceStep": "/api/3/workflow_steps/c194880a-89b0-40ed-85bd-fb58b9504cff",
+              "targetStep": "/api/3/workflow_steps/6389118d-9e29-475a-a818-2b211926de34"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "75e72156-f2ee-4c81-98f2-f01f051e0877",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves the reputation for a specified host based on parameters such as, the hostname that you have specified.",
+          "name": "Get Hostname Reputation",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/14539a34-0d26-4500-b457-1d618ac18c1c",
+          "steps": [
+            {
+              "uuid": "14539a34-0d26-4500-b457-1d618ac18c1c",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "58741823-3cfb-40c6-aa07-839418a8bd6a",
+                "title": "AlienVault-OTX: Get Hostname Reputation",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "32fc4257-c623-4149-b2b3-237d6c29d475",
+              "@type": "WorkflowStep",
+              "name": "Get Hostname Reputation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "section": "General"
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_hostname_reputation",
+                "operationTitle": "Get Hostname Reputation",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ccd70655-5b83-428e-8459-52f1f647f6ce",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Hostname Reputation",
+              "sourceStep": "/api/3/workflow_steps/14539a34-0d26-4500-b457-1d618ac18c1c",
+              "targetStep": "/api/3/workflow_steps/32fc4257-c623-4149-b2b3-237d6c29d475"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "5bf5aff1-3bad-4fdd-b2e3-e20464c81097",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all indicators based on various parameters such as indicator type and value that you have specified.",
+          "name": "Get All Indicators",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ca7a088a-c1a7-4231-af8d-4447983aeccf",
+          "steps": [
+            {
+              "uuid": "ca7a088a-c1a7-4231-af8d-4447983aeccf",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "ff3d2750-b96f-4d61-9c70-2ce46126ec28",
+                "title": "AlienVault-OTX: Get All Indicators",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "305f1b67-712e-4742-81b2-656b2f3716ee",
+              "@type": "WorkflowStep",
+              "name": "Get All Indicators",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "indicator_type": "IPv4",
+                  "limit": 20,
+                  "page": 1,
+                  "export_json": true
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_all_indicators",
+                "operationTitle": "Get All Indicators",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ac5d81cd-3a78-4e30-bf88-72b674b87aed",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get All Indicators",
+              "sourceStep": "/api/3/workflow_steps/ca7a088a-c1a7-4231-af8d-4447983aeccf",
+              "targetStep": "/api/3/workflow_steps/305f1b67-712e-4742-81b2-656b2f3716ee"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "68df3b82-d24d-40e9-9bd7-5fede9666fde",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all indicators based on the pulse ID that you have specified.",
+          "name": "Get Pulse Indicators",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/4eb15345-64e3-44dd-8bf9-f3bfc10a3b49",
+          "steps": [
+            {
+              "uuid": "4eb15345-64e3-44dd-8bf9-f3bfc10a3b49",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "b04650d1-ec53-430f-bfb5-6148db24bfee",
+                "title": "AlienVault-OTX: Get Pulse Indicators",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "27993551-a4fb-4b8c-8340-f57103e63792",
+              "@type": "WorkflowStep",
+              "name": "Get Pulse Indicators",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "include_inactive": false,
+                  "limit": 1000,
+                  "page": 1
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_pulse_indicators",
+                "operationTitle": "Get Pulse Indicators",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "9dc239bb-4293-450a-8c58-13c826ffad12",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pulse Indicators",
+              "sourceStep": "/api/3/workflow_steps/4eb15345-64e3-44dd-8bf9-f3bfc10a3b49",
+              "targetStep": "/api/3/workflow_steps/27993551-a4fb-4b8c-8340-f57103e63792"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "5c97df85-f52a-4cc5-9002-7ab78d90ef23",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves details about a pulse based on the pulse ID that you have specified.",
+          "name": "Get Pulse Details",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ecdcccdf-1ff5-46aa-8fc7-7c771c0a89d3",
+          "steps": [
+            {
+              "uuid": "ecdcccdf-1ff5-46aa-8fc7-7c771c0a89d3",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "fa1a9a4d-bd4f-44eb-b158-16f9c1499a3d",
+                "title": "AlienVault-OTX: Get Pulse Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "aa0b7e9a-c61e-4bf5-a9d7-939993fe2880",
+              "@type": "WorkflowStep",
+              "name": "Get Pulse Details",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_pulse_details",
+                "operationTitle": "Get Pulse Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "177f586f-f490-4a82-bba9-32fb1359d457",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Pulse Details",
+              "sourceStep": "/api/3/workflow_steps/ecdcccdf-1ff5-46aa-8fc7-7c771c0a89d3",
+              "targetStep": "/api/3/workflow_steps/aa0b7e9a-c61e-4bf5-a9d7-939993fe2880"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b013ebc2-2cbc-40c4-bfb1-99323fd45b11",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves a list of pulses that share an indicator with the pulse that you have specified using the pulse ID.",
+          "name": "Get Related Pulses",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c385d9cf-9a0b-4811-bc93-684721588857",
+          "steps": [
+            {
+              "uuid": "c385d9cf-9a0b-4811-bc93-684721588857",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "05e247ec-432a-496e-b5a4-bf4f234e024f",
+                "title": "AlienVault-OTX: Get Related Pulses",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "b791874c-ca61-470b-b55d-7ea3b17ac998",
+              "@type": "WorkflowStep",
+              "name": "Get Related Pulses",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "page_number": 1
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_shared_indicator_pulses",
+                "operationTitle": "Get Related Pulses",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "4e7b43cd-2cad-492c-8d97-9dc4538af8d8",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Related Pulses",
+              "sourceStep": "/api/3/workflow_steps/c385d9cf-9a0b-4811-bc93-684721588857",
+              "targetStep": "/api/3/workflow_steps/b791874c-ca61-470b-b55d-7ea3b17ac998"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b4deedb1-51bc-43ed-8e75-9f8149b2eca7",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all subscribed pulses based on various parameters such as datetime that you have specified..",
+          "name": "Get Subscribed Pulses",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/3184a1e2-1d2e-48e4-b514-3fd63c221367",
+          "steps": [
+            {
+              "uuid": "3184a1e2-1d2e-48e4-b514-3fd63c221367",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "ad239620-fee6-4930-bd08-0ca8826d1450",
+                "title": "AlienVault-OTX: Get Subscribed Pulses",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "fd30216f-103b-41d7-8a89-6547760052c2",
+              "@type": "WorkflowStep",
+              "name": "Get Subscribed Pulses",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "limit": 20,
+                  "page": 1
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "get_subscribed_pulses",
+                "operationTitle": "Get Subscribed Pulses",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "22935fa0-69ef-4bd3-a7c3-167c1b9ed28c",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Subscribed Pulses",
+              "sourceStep": "/api/3/workflow_steps/3184a1e2-1d2e-48e4-b514-3fd63c221367",
+              "targetStep": "/api/3/workflow_steps/fd30216f-103b-41d7-8a89-6547760052c2"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "8a3cf839-4ca3-41de-a0d6-8f5ea5787db7",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Runs a query that you have specified and fetches data from your AlienVault-OTX instance, based on the input filters.",
+          "name": "Run Query",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b32f77a5-e254-44a0-ab7c-03e555a42e89",
+          "steps": [
+            {
+              "uuid": "b32f77a5-e254-44a0-ab7c-03e555a42e89",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "323fb39e-f2bf-4396-86de-44c378840911",
+                "title": "AlienVault-OTX: Run Query",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "7907dd84-259c-445e-9b0c-2d652201c0da",
+              "@type": "WorkflowStep",
+              "name": "Run Query",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "run_query",
+                "operationTitle": "Run Query",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "29d9b513-28e1-4ff1-8ac2-36fd4ab35a52",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Run Query",
+              "sourceStep": "/api/3/workflow_steps/b32f77a5-e254-44a0-ab7c-03e555a42e89",
+              "targetStep": "/api/3/workflow_steps/7907dd84-259c-445e-9b0c-2d652201c0da"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "0a033136-5c75-4531-83d1-2c8def06e35d",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Searches for pulses that match the text that you have specified in the input parameters.",
+          "name": "Search Pulses",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e826e136-3e85-4314-8d2a-6eadb1583701",
+          "steps": [
+            {
+              "uuid": "e826e136-3e85-4314-8d2a-6eadb1583701",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "e003450a-0fb8-4b80-a76b-39dcac46d5d5",
+                "title": "AlienVault-OTX: Search Pulses",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "d8cb01cf-fcfd-45d8-970d-488167ad201b",
+              "@type": "WorkflowStep",
+              "name": "Search Pulses",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": {
+                  "limit": 50,
+                  "page": 1
+                },
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "search_pulses",
+                "operationTitle": "Search Pulses",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "bd38aca9-a717-4430-ac41-8f78aee401ec",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Search Pulses",
+              "sourceStep": "/api/3/workflow_steps/e826e136-3e85-4314-8d2a-6eadb1583701",
+              "targetStep": "/api/3/workflow_steps/d8cb01cf-fcfd-45d8-970d-488167ad201b"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c74eae0d-d217-4926-b1c9-2357fd3cc141",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Subscribes to a particular pulse based on the pulse ID that you have specified.",
+          "name": "Subscribe to Pulse",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ff1e9fd5-37ef-47a6-8917-0e099a63611f",
+          "steps": [
+            {
+              "uuid": "ff1e9fd5-37ef-47a6-8917-0e099a63611f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "a6ca78f8-b566-4918-b081-10428b1736cb",
+                "title": "AlienVault-OTX: Subscribe to Pulse",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "b1b7fbc6-e43d-4fbb-94dc-f3552e730982",
+              "@type": "WorkflowStep",
+              "name": "Subscribe to Pulse",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "subscribe_pulse",
+                "operationTitle": "Subscribe to Pulse",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0e5e78c4-8438-4f64-838f-36bffdc56152",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Subscribe to Pulse",
+              "sourceStep": "/api/3/workflow_steps/ff1e9fd5-37ef-47a6-8917-0e099a63611f",
+              "targetStep": "/api/3/workflow_steps/b1b7fbc6-e43d-4fbb-94dc-f3552e730982"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "0d874889-3cff-41eb-8997-c6186986b886",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Unsubscribes from a particular pulse based on the pulse ID that you have specified.",
+          "name": "Unsubscribe from Pulse",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/fd4b9441-7725-4ad5-ac0c-08691817a9f9",
+          "steps": [
+            {
+              "uuid": "fd4b9441-7725-4ad5-ac0c-08691817a9f9",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "5dd2c3ec-e04b-442e-b56f-6571b9a8cf77",
+                "title": "AlienVault-OTX: Unsubscribe from Pulse",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "7d2cd128-aa98-4cac-b1af-fd6a24dad3a7",
+              "@type": "WorkflowStep",
+              "name": "Unsubscribe from Pulse",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "unsubscribe_pulse",
+                "operationTitle": "Unsubscribe from Pulse",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3d92db0f-f1ce-41d7-877d-29dc486ad448",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Unsubscribe from Pulse",
+              "sourceStep": "/api/3/workflow_steps/fd4b9441-7725-4ad5-ac0c-08691817a9f9",
+              "targetStep": "/api/3/workflow_steps/7d2cd128-aa98-4cac-b1af-fd6a24dad3a7"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "21402f9a-c531-41ff-a869-18e8e2e8ec22",
+          "collection": "/api/3/workflow_collections/91dfde9a-bbca-4679-a867-c145a47a828a",
+          "triggerLimit": null,
+          "description": "Allows you to perform actions, such as follow, subscribe, etc for a specified user on the AlienVault-OTX server based on the username that you have specified.",
+          "name": "User Actions",
+          "tag": "#AlienVault-OTX",
+          "recordTags": [
+            "alienvault-otx"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b7ea4cfd-8bae-428e-b49e-34eaf1fe7886",
+          "steps": [
+            {
+              "uuid": "b7ea4cfd-8bae-428e-b49e-34eaf1fe7886",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "98d835df-180c-4506-abcc-319327ebcef8",
+                "title": "AlienVault-OTX: User Actions",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "6faa02c4-2cfc-495d-a7a2-e0af97f438cd",
+              "@type": "WorkflowStep",
+              "name": "User Actions",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "AlienVault-OTX",
+                "config": "''",
+                "params": [],
+                "version": "1.0.2",
+                "connector": "alienvault-otx",
+                "operation": "user_action",
+                "operationTitle": "User Actions",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1eb3d4b0-51a2-4994-a4db-3e03e6504225",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> User Actions",
+              "sourceStep": "/api/3/workflow_steps/b7ea4cfd-8bae-428e-b49e-34eaf1fe7886",
+              "targetStep": "/api/3/workflow_steps/6faa02c4-2cfc-495d-a7a2-e0af97f438cd"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

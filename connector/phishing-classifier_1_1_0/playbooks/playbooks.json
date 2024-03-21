@@ -1,0 +1,300 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Phishing Classifier - 1.0.0",
+      "description": null,
+      "visible": true,
+      "image": null,
+      "uuid": "6d69821c-267b-46ff-adfc-25b70cc41179",
+      "id": 18,
+      "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+      "createDate": 1641469306.240237,
+      "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+      "modifyDate": 1641469306.240237,
+      "recordTags": ["phishing-classifier"],
+      "deletedAt": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Predict",
+          "aliasName": null,
+          "tag": null,
+          "description": "Sample playbook to predict record's field(s)",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1641470766,
+          "collection": "/api/3/workflow_collections/6d69821c-267b-46ff-adfc-25b70cc41179",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/580488c5-1a6f-4ad6-8b00-d3363f0e28c0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "be9688a9-158d-45e2-ba4a-9b36a9283481",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "580488c5-1a6f-4ad6-8b00-d3363f0e28c0",
+              "id": 302
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Predict",
+              "description": null,
+              "arguments": {
+                "name": "Phishing Classifier",
+                "config": "40dc29e4-435b-48df-a5b8-40489868dddb",
+                "params": {
+                  "record": ""
+                },
+                "version": "1.0.0",
+                "connector": "phishing-classifier",
+                "operation": "predict",
+                "operationTitle": "Predict",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "240",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b06477ef-2fc7-403e-a4bc-5a4a7293e8cd",
+              "id": 303
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Predict2",
+              "targetStep": "/api/3/workflow_steps/b06477ef-2fc7-403e-a4bc-5a4a7293e8cd",
+              "sourceStep": "/api/3/workflow_steps/580488c5-1a6f-4ad6-8b00-d3363f0e28c0",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "6a032132-020e-4cfe-857c-1aefcef60d76"
+            }
+          ],
+          "priority": null,
+          "uuid": "21e13774-4ff3-4810-b7bd-7498c677146c",
+          "recordTags": ["phishing-classifier", "predict", "classify"],
+          "id": 87,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1641470756.549944,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1641470766.13395,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Train The Machine Learning Model",
+          "aliasName": null,
+          "tag": null,
+          "description": "Sample playbook to train the machine learning model",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1641469343,
+          "collection": "/api/3/workflow_collections/6d69821c-267b-46ff-adfc-25b70cc41179",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/28c361e0-04f3-4237-b161-ed4faa36af2d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4ece2e45-0508-4f6a-a3e0-b15e9adca079",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "28c361e0-04f3-4237-b161-ed4faa36af2d",
+              "id": 277
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Train the model",
+              "description": null,
+              "arguments": {
+                "name": "Phishing Classifier",
+                "config": "e2847f4d-01b5-4e08-b68d-3edeef31e121",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "phishing-classifier",
+                "operation": "train",
+                "operationTitle": "Train",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "220",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "9250716e-4882-4633-b55b-2ba7359c64b8",
+              "id": 278
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Train the model",
+              "targetStep": "/api/3/workflow_steps/9250716e-4882-4633-b55b-2ba7359c64b8",
+              "sourceStep": "/api/3/workflow_steps/28c361e0-04f3-4237-b161-ed4faa36af2d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d17c15de-6b76-4a50-b579-a574f25b77dd"
+            }
+          ],
+          "priority": null,
+          "uuid": "48a1e4a5-73d8-4126-849d-9021a53e7d55",
+          "recordTags": ["phishing-classifier", "train"],
+          "id": 75,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1641469344.046637,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1641469344.046637,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Training Results",
+          "aliasName": null,
+          "tag": null,
+          "description": "Sample playbook to retrieve results of last successful training",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1641469343,
+          "collection": "/api/3/workflow_collections/6d69821c-267b-46ff-adfc-25b70cc41179",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fed98256-4f8d-4f2c-a406-ca08438a4e05",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "9ffe6042-1fb9-45d7-a8ea-2bc1fac378eb",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "fed98256-4f8d-4f2c-a406-ca08438a4e05",
+              "id": 279
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Training Results",
+              "description": null,
+              "arguments": {
+                "name": "Phishing Classifier",
+                "config": "e2847f4d-01b5-4e08-b68d-3edeef31e121",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "phishing-classifier",
+                "operation": "get_training_results",
+                "operationTitle": "Get Training Results",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "240",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "a6c8de79-8e30-4ed5-8b71-2009217a15cd",
+              "id": 280
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Training Results",
+              "targetStep": "/api/3/workflow_steps/a6c8de79-8e30-4ed5-8b71-2009217a15cd",
+              "sourceStep": "/api/3/workflow_steps/fed98256-4f8d-4f2c-a406-ca08438a4e05",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "cf1c7fac-9f4e-4b31-8d25-387ac7dd5caf"
+            }
+          ],
+          "priority": null,
+          "uuid": "c29dc828-bc5b-4d47-b845-e2f3b84b5068",
+          "recordTags": ["phishing-classifier", "results"],
+          "id": 76,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1641469344.12934,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1641469344.12934,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "predict",
+    "classify",
+    "train",
+    "phishing-classifier"
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "name": "mitre-attack",
+  "label": "MITRE ATT&CK",
+  "version": "2.0.2",
+  "description": "The MITRE ATT&CK knowledge base is used as a foundation for the development of specific threat models and methodologies. Connector helps to replicate knowledge base of adversary tactics and techniques based on real-world observations",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Information",
+  "icon_small_name": "attack_small.png",
+  "icon_large_name": "attack_large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.2/mitre-att-ck/469/mitre-att-amp-ck-v2-0-2",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "configuration": {
+    "fields": [
+      {
+        "title": "Upload JSON Manually",
+        "name": "upload_json",
+        "visible": true,
+        "editable": true,
+        "required": false,
+        "type": "checkbox",
+        "value": false,
+        "tooltip": "You can choose to provide the MITRE datasets manually via a file selector if you don't have access to GitHub or have no connection to the Internet",
+        "onchange": {
+          "true": [
+            {
+              "title": "Enterprise ATT&CK JSON",
+              "name": "enterprise_json",
+              "visible": true,
+              "editable": true,
+              "required": false,
+              "type": "file"
+            },
+            {
+              "title": "Mobile ATT&CK JSON",
+              "name": "mobile_json",
+              "visible": true,
+              "editable": true,
+              "required": false,
+              "type": "file"
+            },
+            {
+              "title": "ICS ATT&CK JSON",
+              "name": "ics_json",
+              "visible": true,
+              "editable": true,
+              "required": false,
+              "type": "file"
+            }
+          ],
+          "false": [
+            {
+              "title": "Matrices",
+              "name": "matrices",
+              "visible": true,
+              "editable": true,
+              "required": true,
+              "type": "multiselect",
+              "options": [
+                "Enterprise",
+                "Mobile",
+                "ICS"
+              ],
+              "value": [
+                "Enterprise"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "operations": [
+    {
+      "description": "Ingest latest data from MITRE",
+      "operation": "get_mitre_data",
+      "annotation": "get_mitre_data",
+      "title": "Get MITRE Data",
+      "parameters": [
+        {
+          "title": "Modules",
+          "name": "modules",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "type": "multiselect",
+          "options": [
+            "Tactics",
+            "Groups",
+            "Techniques",
+            "Subtechniques",
+            "Mitigations",
+            "Software"
+          ],
+          "value": [
+            "Tactics",
+            "Groups",
+            "Techniques",
+            "Subtechniques",
+            "Mitigations",
+            "Software"
+          ]
+        },
+        {
+          "title": "Force Ingestion",
+          "name": "force_ingestion",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "type": "checkbox",
+          "value": false
+        }
+      ],
+      "output_schema": "",
+      "enabled": true
+    },
+    {
+      "description": "Ingest sample data from MITRE",
+      "operation": "get_mitre_data_sample",
+      "annotation": "get_mitre_data_sample",
+      "title": "Get MITRE Sample Data",
+      "parameters": [],
+      "output_schema": [],
+      "enabled": true
+    }
+  ]
+}

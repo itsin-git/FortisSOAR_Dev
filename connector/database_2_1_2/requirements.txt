@@ -1,0 +1,4 @@
+# Dependencies
+sqlalchemy
+voluptuous
+pymssql>=2.2.1

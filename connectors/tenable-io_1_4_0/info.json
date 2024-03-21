@@ -1,0 +1,1060 @@
+{
+  "name": "tenable-io",
+  "label": "Tenable.io",
+  "version": "1.4.0",
+  "description": "Tenable.io provide actions like get all scans, trigger scan, scan specific assets, asset specific vulnerabilities, export assets and export vulnerabilities from Tenable.io",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "category": "Vulnerability Management",
+  "icon_small_name": "tenable_io_small.png",
+  "icon_large_name": "tenable_io_large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.4.0/tenable-io/613/tenable-io-v1-4-0",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server",
+        "tooltip": "Specify the URL of the Tenable.io server to which you will connect and perform the automated operations.",
+        "description": "Specify the URL of the Tenable.io server to which you will connect and perform the automated operations.",
+        "value": "cloud.tenable.com"
+      },
+      {
+        "title": "Access Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "tooltip": "Specify the Access Key that is configured for your account to access the Tenable.io server to which you will connect and perform the automated operations.",
+        "description": "Specify the Access Key that is configured for your account to access the Tenable.io server to which you will connect and perform the automated operations.",
+        "name": "access_key"
+      },
+      {
+        "title": "Secret Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "tooltip": "Specify the Secret Key that is configured for your account to access the Tenable.io server to which you will connect and perform the automated operations.",
+        "description": "Specify the Secret Key that is configured for your account to access the Tenable.io server to which you will connect and perform the automated operations.",
+        "name": "secret_key"
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.",
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_scans",
+      "title": "List Scans",
+      "description": "Retrieves a list and the details of all the completed scans from the Tenable.io server, based on the time duration (such as 24 hours or the last 3 days) you have specified.",
+      "enabled": true,
+      "annotation": "search_scans",
+      "category": "investigation",
+      "output_schema": [
+        {
+          "legacy": "",
+          "schedule_uuid": "",
+          "enabled": "",
+          "type": "",
+          "read": "",
+          "timezone": "",
+          "control": "",
+          "permissions": "",
+          "id": "",
+          "uuid": "",
+          "user_permissions": "",
+          "creation_date": "",
+          "shared": "",
+          "last_modification_date": "",
+          "starttime": "",
+          "rrules": "",
+          "owner": "",
+          "status": "",
+          "name": ""
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Completion Time",
+          "type": "select",
+          "name": "days",
+          "options": [
+            "Last 24 Hours",
+            "Last 3 Days",
+            "Last 5 Days",
+            "Last 7 Days",
+            "Last 15 Days",
+            "Last 25 Days",
+            "Last 30 Days",
+            "Last 50 Days",
+            "Last 60 Days",
+            "Last 90 Days",
+            "Last 120 Days",
+            "Last 180 Days"
+          ],
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "description": "Select the time duration for which you want to retrieve a list and details of all the completed scans from Tenable.io. \nFor example, if you choose Last 24 Hours, then the details of all the scans that were completed in the last 24 hours will be retrieved from the Tenable.io server. \nYou can choose from the following options: Last 24 Hours, Last 3 Days, Last 5 Days, Last 7 Days, Last 15 Days, Last 25 Days, Last 30 Days, Last 50 Days, Last 60 Days, Last 90 Days, Last 120 Days, and Last 180 Days.",
+          "tooltip": "Select the time duration for which you want to retrieve a list and details of all the completed scans from Tenable.io. For example, if you choose Last 24 Hours, then the details of all the scans that were completed in the last 24 hours will be retrieved from the Tenable.io server.",
+          "value": "Last 3 Days"
+        }
+      ]
+    },
+    {
+      "operation": "trigger_scan",
+      "title": "Trigger Scan",
+      "description": "Triggers a scan on the Tenable.io server based on the scan ID and optionally targets you have specified.",
+      "enabled": true,
+      "annotation": "trigger_scan",
+      "category": "investigation",
+      "output_schema": {
+        "scan_uuid": ""
+      },
+      "parameters": [
+        {
+          "title": "Scan ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the ID of the scan that you want to trigger on Tenable.io.",
+          "tooltip": "Specify the ID of the scan that you want to trigger on Tenable.io.",
+          "name": "scan_id"
+        },
+        {
+          "title": "Targets",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "tooltip": "(Optional) Specify the targets to be scanned instead of the default targets. Value for this field can be an array where each index is a target or an array with a single index of comma-separated targets. \nFor example, ['111.122.22.1', 'example.com']",
+          "description": "(Optional) Specify the targets to be scanned instead of the default targets. Value for this field can be an array where each index is a target or an array with a single index of comma-separated targets. \nFor example, ['111.122.22.1', 'example.com']",
+          "name": "alt_targets"
+        }
+      ]
+    },
+    {
+      "operation": "get_scan_assets",
+      "title": "List Scan's Assets",
+      "description": "Retrieves information about assets from the Tenable.io server that are associated with a particular scan, based on the scan ID you have specified.",
+      "enabled": true,
+      "annotation": "get_endpoints",
+      "category": "investigation",
+      "output_schema": [
+        {
+          "time_start": "",
+          "uuid": "",
+          "time_end": "",
+          "ip": [],
+          "os": [],
+          "mac": [],
+          "fqdn": []
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Scan ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the scan whose associated assets' information you want to retrieve from Tenable.io.",
+          "description": "Specify the ID of the scan whose associated assets' information you want to retrieve from Tenable.io.",
+          "name": "scan_id"
+        }
+      ]
+    },
+    {
+      "operation": "get_asset_vulnerabilities",
+      "title": "List Asset's Vulnerabilities",
+      "description": "Retrieves information about vulnerabilities from the Tenable.io server that are associated with a particular asset based on the asset UUID you have specified.",
+      "enabled": true,
+      "annotation": "get_vulnerabilities",
+      "category": "investigation",
+      "output_schema": [
+        {
+          "plugin_family": "",
+          "accepted_count": "",
+          "severity": "",
+          "vulnerability_state": "",
+          "recasted_count": "",
+          "plugin_id": "",
+          "count": "",
+          "plugin_name": "",
+          "counts_by_severity": [
+            {
+              "value": "",
+              "count": ""
+            }
+          ]
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Asset UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "tooltip": "Specify the UUID of the asset whose associated vulnerabilities information you want to retrieve from Tenable.io.",
+          "description": "Specify the UUID of the asset whose associated vulnerabilities information you want to retrieve from Tenable.io.",
+          "name": "asset_id"
+        }
+      ]
+    },
+    {
+      "operation": "get_vuln_details",
+      "title": "Get Vulnerability Information",
+      "description": "Retrieves information about vulnerabilities from the Tenable.io server that are associated with a particular plugin based on the plugin ID you have specified.",
+      "enabled": true,
+      "annotation": "vuln_details",
+      "category": "investigation",
+      "output_schema": {
+        "info": {
+          "count": "",
+          "vuln_count": "",
+          "description": "",
+          "synopsis": "",
+          "solution": "",
+          "discovery": {
+            "seen_first": "",
+            "seen_last": ""
+          },
+          "severity": "",
+          "plugin_details": {
+            "name": "",
+            "type": "",
+            "family": "",
+            "version": "",
+            "severity": "",
+            "plugin_id": "",
+            "publication_date": "",
+            "modification_date": ""
+          },
+          "reference_information": [
+            {
+              "name": "",
+              "url": "",
+              "values": [
+              ]
+            }
+          ],
+          "risk_information": {
+            "risk_factor": "",
+            "cvss_vector": "",
+            "cvss_base_score": "",
+            "cvss_temporal_vector": "",
+            "cvss_temporal_score": "",
+            "cvss3_vector": "",
+            "cvss3_base_score": "",
+            "cvss3_temporal_vector": "",
+            "cvss3_temporal_score": "",
+            "stig_severity": ""
+          },
+          "see_also": [
+          ],
+          "vulnerability_information": {
+            "vulnerability_publication_date": "",
+            "exploited_by_malware": "",
+            "patch_publication_date": "",
+            "exploit_available": "",
+            "exploitability_ease": "",
+            "asset_inventory": "",
+            "default_account": "",
+            "exploited_by_nessus": "",
+            "in_the_news": "",
+            "malware": "",
+            "unsupported_by_vendor": "",
+            "cpe": "",
+            "exploit_frameworks": [
+              {
+                "name": ""
+              },
+              {
+                "name": "",
+                "exploits": [
+                  {
+                    "name": "",
+                    "url": ""
+                  }
+                ]
+              }
+            ]
+          },
+          "vpr": {
+            "score": "",
+            "drivers": {
+              "age_of_vuln": {
+                "lower_bound": "",
+                "upper_bound": ""
+              },
+              "exploit_code_maturity": "",
+              "cvss3_impact_score": "",
+              "cvss_impact_score_predicted": "",
+              "threat_intensity_last28": "",
+              "threat_recency": {
+                "lower_bound": "",
+                "upper_bound": ""
+              },
+              "threat_sources_last28": [
+              ],
+              "product_coverage": ""
+            },
+            "updated": ""
+          }
+        }
+      },
+      "parameters": [
+        {
+          "title": "Plugin ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "tooltip": "Specify the ID of the plugin whose associated vulnerabilities details you want to retrieve from Tenable.io.",
+          "description": "Specify the ID of the plugin whose associated vulnerabilities details you want to retrieve from Tenable.io.",
+          "name": "plugin_id"
+        }
+      ]
+    },
+    {
+      "operation": "get_plugin_details",
+      "title": "Get Plugin Information",
+      "description": "Retrieves information about a specific plugin from the Tenable.io server, based on the plugin ID you have specified.",
+      "enabled": true,
+      "annotation": "plugin_details",
+      "category": "investigation",
+      "output_schema": {
+        "attributes": [
+          {
+            "attribute_value": "",
+            "attribute_name": ""
+          }
+        ],
+        "family_name": "",
+        "name": "",
+        "id": ""
+      },
+      "parameters": [
+        {
+          "title": "Plugin ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "description": "Specify the ID of the plugin whose details you want to retrieve from Tenable.io.",
+          "tooltip": "Specify the ID of the plugin whose details you want to retrieve from Tenable.io.",
+          "name": "plugin_id"
+        }
+      ]
+    },
+    {
+      "operation": "submit_vuln_export_job",
+      "title": "Submit Vulnerability Export Job",
+      "description": "Submits vulnerability export job used to export the vulnerabilities, which match the specified request criteria, from Tenanable.io. Vulnerabilities are exported from the Tenable.io server based on the chuck size and other input parameters you have specified.",
+      "enabled": true,
+      "annotation": "submit_vuln_export_job",
+      "category": "investigation",
+      "output_schema": {
+        "export_uuid": ""
+      },
+      "parameters": [
+        {
+          "title": "Chunk Size",
+          "description": "Specify the maximum number of vulnerabilities that you want to export, per chunk, from Tenable.io.",
+          "tooltip": "Specify the maximum number of vulnerabilities that you want to export, per chunk, from Tenable.io.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "num_assets",
+          "value": 500,
+          "validation": {
+            "maxlength": "5000",
+            "minlength": "50"
+          }
+        },
+        {
+          "title": "CIDR Range",
+          "description": "Specify the CIDR range to restrict the search for vulnerabilities in Tenable.io. If specified, the search gets restricted to assets that are assigned to IP addresses specified within the specified CIDR range.",
+          "tooltip": "Specify the CIDR range to restrict the search for vulnerabilities in Tenable.io. If specified, the search gets restricted to assets that are assigned to IP addresses specified within the specified CIDR range. For example, 0.0.0.0/0 restricts the search to 0.0.0.1 and 255.255.255.254",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "cidr_range",
+          "value": ""
+        },
+        {
+          "title": "Severity",
+          "description": "Select one or more severities that are assigned to the vulnerabilities that you want to export from Tenable.io. You can choose from the following options: Info, Low, Medium, High, or Critical. By default, all severity levels are selected.",
+          "tooltip": "Select one or more severities that are assigned to the vulnerabilities that you want to export. You can choose from the following options: Info, Low, Medium, High, or Critical. By default, all severity levels are selected.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Info",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ],
+          "name": "severity",
+          "value": [
+            "Info",
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+          ]
+        },
+        {
+          "title": "From",
+          "description": "(Optional) Select the start date for the range of data (vulnerabilities) you want to export from Tenable.io.",
+          "tooltip": "(Optional) Select the start date for the range of data (vulnerabilities) you want to export from Tenable.io",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "since",
+          "value": ""
+        },
+        {
+          "title": "State",
+          "description": "(Optional) Select one or more states of the vulnerabilities that you want to export from Tenable.io. You can choose from the following options: Open, Reopened or Fixed.",
+          "tooltip": "(Optional) Select one or more states of the vulnerabilities that you want to export from Tenable.io. You can choose from the following options: Open, Reopened or Fixed.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Open",
+            "Reopened",
+            "Fixed"
+          ],
+          "name": "state",
+          "value": [
+            "Open"
+          ]
+        }
+      ]
+    },
+    {
+      "operation": "get_vuln_export_status",
+      "title": "Get Vulnerability Export Status",
+      "description": "Returns the status of a vulnerability export job from Tenanable.io based on the export UUID you have specified.",
+      "enabled": true,
+      "annotation": "get_vuln_export_status",
+      "category": "investigation",
+      "output_schema": {
+        "uuid": "",
+        "status": "",
+        "chunks_available": [],
+        "chunks_failed": [],
+        "chunks_cancelled": [],
+        "total_chunks": "",
+        "chunks_available_count": "",
+        "empty_chunks_count": "",
+        "finished_chunks": "",
+        "filters": {
+          "state": [],
+          "tags": {},
+          "since": "",
+          "first_found": "",
+          "last_found": "",
+          "last_fixed": "",
+          "first_seen": "",
+          "last_seen": "",
+          "indexed_at": ""
+        },
+        "num_assets_per_chunk": "",
+        "created": ""
+      },
+      "parameters": [
+        {
+          "title": "Export UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the UUID of the vulnerability export request whose export status you want to retrieve from Tenable.io.",
+          "tooltip": "Specify the UUID of the vulnerability export request whose export status you want to retrieve from Tenable.io.",
+          "name": "export_uuid"
+        }
+      ]
+    },
+    {
+      "operation": "download_vuln_export_chunk",
+      "title": "Download Vulnerability Export Chunk",
+      "description": "Downloads the exported vulnerabilities, as a JSON file, from Tenable.io based on the export UUID and chunk ID you have specified.",
+      "enabled": true,
+      "annotation": "download_vuln_export",
+      "category": "investigation",
+      "output_schema": {
+        "asset": {
+          "fqdn": "",
+          "hostname": "",
+          "uuid": "",
+          "ipv4": "",
+          "operating_system": [],
+          "network_id": "",
+          "tracked": ""
+        },
+        "output": "",
+        "plugin": {
+          "cve": [],
+          "cvss_base_score": "",
+          "cvss_temporal_score": "",
+          "cvss_temporal_vector": {
+            "exploitability": "",
+            "remediation_level": "",
+            "report_confidence": "",
+            "raw": ""
+          },
+          "cvss_vector": {
+            "access_complexity": "",
+            "access_vector": "",
+            "authentication": "",
+            "confidentiality_impact": "",
+            "integrity_impact": "",
+            "availability_impact": "",
+            "raw": ""
+          },
+          "description": "",
+          "family": "",
+          "family_id": "",
+          "has_patch": "",
+          "id": "",
+          "name": "",
+          "risk_factor": "",
+          "see_also": [],
+          "solution": "",
+          "synopsis": "",
+          "vpr": {
+            "score": "",
+            "drivers": {
+              "age_of_vuln": {
+                "lower_bound": "",
+                "upper_bound": ""
+              },
+              "exploit_code_maturity": "",
+              "cvss_impact_score_predicted": "",
+              "cvss3_impact_score": "",
+              "threat_intensity_last28": "",
+              "threat_sources_last28": [],
+              "product_coverage": ""
+            },
+            "updated": ""
+          }
+        },
+        "port": {
+          "port": "",
+          "protocol": ""
+        },
+        "scan": {
+          "completed_at": "",
+          "schedule_uuid": "",
+          "started_at": "",
+          "uuid": ""
+        },
+        "severity": "",
+        "severity_id": "",
+        "severity_default_id": "",
+        "severity_modification_type": "",
+        "first_found": "",
+        "last_found": "",
+        "indexed_at": "",
+        "state": ""
+      },
+      "parameters": [
+        {
+          "title": "Export UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the UUID for the vulnerability export request whose chunk you want to download from Tenable.io.",
+          "tooltip": "Specify the UUID for the vulnerability export request whose chunk you want to download from Tenable.io.",
+          "name": "export_uuid"
+        },
+        {
+          "title": "Chunk ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "description": "Specify the ID of the chunk of the vulnerability export request that you want to download from Tenable.io.",
+          "tooltip": "Specify the ID of the chunk of the vulnerability export request that you want to download from Tenable.io.",
+          "name": "chunk_id"
+        }
+      ]
+    },
+    {
+      "operation": "list_vuln_export_jobs",
+      "title": "List Vulnerability Export Jobs",
+      "description": "Retrieves a list of vulnerability export jobs. This list includes the 1,000 most recent export jobs regardless of status. However, this list includes completed jobs only if the job was completed in the previous three days.",
+      "enabled": true,
+      "annotation": "list_vuln_export_jobs",
+      "category": "investigation",
+      "output_schema": {
+        "exports": [
+          {
+            "uuid": "",
+            "status": "",
+            "total_chunks": "",
+            "chunks_available_count": "",
+            "empty_chunks_count": "",
+            "finished_chunks": "",
+            "filters": {
+              "state": [],
+              "tags": {
+                "tag.<category>": []
+              },
+              "since": "",
+              "first_found": "",
+              "last_found": "",
+              "last_fixed": "",
+              "first_seen": "",
+              "last_seen": "",
+              "indexed_at": ""
+            },
+            "num_assets_per_chunk": "",
+            "created": ""
+          }
+        ]
+      },
+      "parameters": []
+    },
+    {
+      "operation": "cancel_vuln_export_job",
+      "title": "Cancel Vulnerability Export Job",
+      "description": "Cancels the specified vulnerability export job in Tenanable.io based on the export UUID you have specified.",
+      "enabled": true,
+      "annotation": "cancel_vuln_export_job",
+      "category": "investigation",
+      "output_schema": {
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Export UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the UUID of the vulnerability export job that you want to cancel in Tenable.io.",
+          "tooltip": "Specify the UUID of the vulnerability export job that you want to cancel in Tenable.io.",
+          "name": "export_uuid"
+        }
+      ]
+    },
+    {
+      "operation": "submit_asset_export_job",
+      "title": "Submit Asset Export Job",
+      "description": "Submits asset export job used to export the assets, which match the specified request criteria, from Tenanable.io. Assets are exported from the Tenable.io server based on the chuck size and other input parameters you have specified.",
+      "enabled": true,
+      "annotation": "submit_asset_export_job",
+      "category": "investigation",
+      "output_schema": {
+        "export_uuid": ""
+      },
+      "parameters": [
+        {
+          "title": "Chunk Size",
+          "description": "Specify the maximum number of assets that you want to export, per chunk, from Tenable.io.",
+          "tooltip": "Specify the maximum number of assets that you want to export, per chunk, from Tenable.io.The range of supported chunk sizes is a minimum of 100 (the default size) to a maximum of 10,000",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "chunk_size",
+          "value": 500,
+          "validation": {
+            "maxlength": "5000",
+            "minlength": "50"
+          }
+        },
+        {
+          "title": "Last Assessed Time",
+          "tooltip": "Select the last assessed DateTime of the assets from when you want to export assets from Tenable.io.",
+          "description": "Select the last assessed DateTime of the assets from when you want to export assets from Tenable.io.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "last_assessed",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "get_asset_export_status",
+      "title": "Get Asset Export Status",
+      "description": "Returns the status of an asset export job from Tenanable.io based on the export UUID you have specified.",
+      "enabled": true,
+      "annotation": "get_asset_export_status",
+      "category": "investigation",
+      "output_schema": {
+        "status": "",
+        "chunks_available": []
+      },
+      "parameters": [
+        {
+          "title": "Export UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the UUID of the asset export request whose export status you want to retrieve from Tenable.io.",
+          "tooltip": "Specify the UUID of the asset export request whose export status you want to retrieve from Tenable.io.",
+          "name": "export_uuid"
+        }
+      ]
+    },
+    {
+      "operation": "download_asset_export_chunk",
+      "title": "Download Asset Export Chunk",
+      "description": "Downloads the exported assets, as a JSON file, from Tenable.io based on the export UUID and chunk ID you have specified.",
+      "enabled": true,
+      "annotation": "download_asset_export_chunk",
+      "category": "investigation",
+      "output_schema": [
+        {
+          "id": "",
+          "has_agent": "",
+          "has_plugin_results": "",
+          "created_at": "",
+          "terminated_at": "",
+          "terminated_by": "",
+          "updated_at": "",
+          "deleted_at": "",
+          "deleted_by": "",
+          "first_seen": "",
+          "last_seen": "",
+          "first_scan_time": "",
+          "last_scan_time": "",
+          "last_authenticated_scan_date": "",
+          "last_licensed_scan_date": "",
+          "last_scan_id": "",
+          "last_schedule_id": "",
+          "azure_vm_id": "",
+          "azure_resource_id": "",
+          "gcp_project_id": "",
+          "gcp_zone": "",
+          "gcp_instance_id": "",
+          "aws_ec2_instance_ami_id": "",
+          "aws_ec2_instance_id": "",
+          "agent_uuid": "",
+          "bios_uuid": "",
+          "aws_owner_id": "",
+          "aws_availability_zone": "",
+          "aws_region": "",
+          "aws_vpc_id": "",
+          "aws_ec2_instance_group_name": "",
+          "aws_ec2_instance_state_name": "",
+          "aws_ec2_instance_type": "",
+          "aws_subnet_id": "",
+          "aws_ec2_product_code": "",
+          "aws_ec2_name": "",
+          "mcafee_epo_guid": "",
+          "mcafee_epo_agent_guid": "",
+          "servicenow_sysid": "",
+          "bigfix_asset_id": "",
+          "agent_names": [],
+          "installed_software": [],
+          "ipv4s": [],
+          "ipv6s": [],
+          "fqdns": [],
+          "mac_addresses": [],
+          "netbios_names": [],
+          "operating_systems": [],
+          "system_types": [],
+          "hostnames": [],
+          "ssh_fingerprints": [],
+          "qualys_asset_ids": [],
+          "qualys_host_ids": [],
+          "manufacturer_tpm_ids": [],
+          "symantec_ep_hardware_keys": [],
+          "sources": [
+            {
+              "name": "",
+              "first_seen": "",
+              "last_seen": ""
+            }
+          ],
+          "tags": [
+            {
+              "uuid": "",
+              "key": "",
+              "value": "",
+              "added_by": "",
+              "added_at": ""
+            }
+          ],
+          "network_interfaces": [
+            {
+              "name": "",
+              "mac_address": [],
+              "ipv4": [],
+              "ipv6": [],
+              "fqdn": []
+            }
+          ],
+          "acr_score": "",
+          "exposure_score": ""
+        }
+      ],
+      "parameters": [
+        {
+          "title": "Export UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the UUID for the asset export request whose chunk you want to download from Tenable.io.",
+          "tooltip": "Specify the UUID for the asset export request whose chunk you want to download from Tenable.io.",
+          "name": "export_uuid"
+        },
+        {
+          "title": "Chunk ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "description": "Specify the ID of the chunk of the asset export request that you want to download from Tenable.io.",
+          "tooltip": "Specify the ID of the chunk of the asset export request that you want to download from Tenable.io.",
+          "name": "chunk_id"
+        }
+      ]
+    },
+    {
+      "operation": "list_asset_export_jobs",
+      "title": "List Asset Export Jobs",
+      "description": "Retrieves a list of asset export jobs. This list includes the 1,000 most recent export jobs regardless of status. However, this list includes completed jobs only if the job was completed in the previous three days.",
+      "enabled": true,
+      "annotation": "list_asset_export_jobs",
+      "category": "investigation",
+      "output_schema": {
+        "exports": [
+          {
+            "uuid": "",
+            "status": "",
+            "total_chunks": "",
+            "filters": "",
+            "finished_chunks": "",
+            "num_assets_per_chunk": "",
+            "created": ""
+          }
+        ]
+      },
+      "parameters": []
+    },
+    {
+      "operation": "cancel_asset_export_job",
+      "title": "Cancel Asset Export Job",
+      "description": "Cancels the specified asset export job in Tenanable.io based on the export UUID you have specified.",
+      "enabled": true,
+      "annotation": "cancel_asset_export_job",
+      "category": "investigation",
+      "output_schema": {
+        "status": ""
+      },
+      "parameters": [
+        {
+          "title": "Export UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the UUID of the asset export job that you want to cancel in Tenable.io.",
+          "tooltip": "Specify the UUID of the asset export job that you want to cancel in Tenable.io.",
+          "name": "export_uuid"
+        }
+      ]
+    },
+    {
+      "operation": "get_host_details",
+      "title": "Get Host Details",
+      "description": "Retrieves the details for the specified host based on the scan UUID and host ID you have specified.",
+      "enabled": true,
+      "annotation": "get_host_details",
+      "category": "investigation",
+      "output_schema": {
+        "info": {
+          "mac-address": "",
+          "host-fqdn": "",
+          "host-ip": "",
+          "operating-system": [],
+          "host_end": "",
+          "host_start": ""
+        },
+        "vulnerabilities": [
+          {
+            "count": "",
+            "host_id": "",
+            "hostname": "",
+            "plugin_family": "",
+            "plugin_id": "",
+            "plugin_name": "",
+            "severity": "",
+            "severity_index": "",
+            "vuln_index": ""
+          }
+        ],
+        "compliance": [
+          {
+            "count": "",
+            "host_id": "",
+            "hostname": "",
+            "plugin_family": "",
+            "plugin_id": "",
+            "plugin_name": "",
+            "severity": "",
+            "severity_index": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Scan UUID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the identifier for the scan. This identifier can be the either the schedule_uuid or the numeric id attribute for the scan.",
+          "tooltip": "Specify the identifier for the scan. This identifier can be the either the schedule_uuid or the numeric id attribute for the scan.",
+          "name": "scan_uuid"
+        },
+        {
+          "title": "Host ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "description": "Specify the ID of the host to retrieve.",
+          "tooltip": "Specify the ID of the host to retrieve.",
+          "name": "host_id"
+        },
+        {
+          "title": "History ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "description": "Specify the unique identifier of the historical data that you want Tenable.io to return. This identifier corresponds to the history.id attribute of the response message from the GET /scans/{scan_id}/history endpoint.",
+          "tooltip": "Specify the unique identifier of the historical data that you want Tenable.io to return. This identifier corresponds to the history.id attribute of the response message from the GET /scans/{scan_id}/history endpoint.",
+          "name": "history_id"
+        },
+        {
+          "title": "History UUID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the UUID of the historical data that you want Tenable.io to return. This identifier corresponds to the history.scan_uuid attribute of the response message from the GET /scans/{scan_id}/history endpoint.",
+          "tooltip": "Specify the UUID of the historical data that you want Tenable.io to return. This identifier corresponds to the history.scan_uuid attribute of the response message from the GET /scans/{scan_id}/history endpoint.",
+          "name": "history_uuid"
+        }
+      ]
+    },
+    {
+      "operation": "get_scan_history",
+      "title": "Get Scan History",
+      "description": "Retrieves a list of objects, each of which represent an individual run of a scan based on the scan ID you have specified.",
+      "enabled": true,
+      "annotation": "get_scan_history",
+      "category": "investigation",
+      "output_schema": {
+        "pagination": {
+          "offset": "",
+          "total": "",
+          "sort": [
+            {
+              "order": "",
+              "name": ""
+            }
+          ],
+          "limit": ""
+        },
+        "history": [
+          {
+            "time_end": "",
+            "scan_uuid": "",
+            "id": "",
+            "is_archived": "",
+            "time_start": "",
+            "visibility": "",
+            "targets": {
+              "custom": "",
+              "default": ""
+            },
+            "status": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Scan ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "description": "Specify the unique identifier for the scan. This identifier can be either the scans.schedule_uuid or the scans.id attribute in the response message from the GET /scans endpoint.",
+          "tooltip": "Specify the unique identifier for the scan. This identifier can be either the scans.schedule_uuid or the scans.id attribute in the response message from the GET /scans endpoint.",
+          "name": "scan_id"
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "description": "Specify the number of records to retrieve. If this parameter is omitted, Tenable.io uses the default value of 50.",
+          "tooltip": "Specify the number of records to retrieve. If this parameter is omitted, Tenable.io uses the default value of 50.",
+          "name": "limit"
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "description": "Specify the starting record to retrieve. If this parameter is omitted, Tenable.io uses the default value of 0.",
+          "tooltip": "Specify the starting record to retrieve. If this parameter is omitted, Tenable.io uses the default value of 0.",
+          "name": "offset"
+        },
+        {
+          "title": "Exclude Rollover",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "description": "Specify whether or not to exclude rollover scans from the scan history.",
+          "tooltip": "Specify whether or not to exclude rollover scans from the scan history.",
+          "name": "exclude_rollover",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

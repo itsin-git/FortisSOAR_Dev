@@ -1,0 +1,1427 @@
+{
+  "name": "slack",
+  "label": "Slack",
+  "version": "3.0.0",
+  "description": "Slack is a cloud-based set of proprietary team collaboration tools and services. This connector facilitates automated operations like list channels, list users, send message etc. This release of Slack connector supports bi-directional communication between Slack and FortiSOAR, allowing you to leverage the power of FortiSOAR as part of your daily communications and threat investigation routines.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "ingestion_modes": [
+    "notification"
+  ],
+  "category": "Communication",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/3.0.0/slack/478/slack-v3-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "tooltip": "Server address of Slack server.",
+        "placeholder": "e.g. https://www.slack.com",
+        "description": "URL of the Slack cloud to which you will connect and perform automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "value": "https://www.slack.com"
+      },
+      {
+        "title": "OAuth Token",
+        "tooltip": "Enter Bot User OAuth Token/User OAuth token for your workspace",
+        "description": "The OAuth Token that contains required scopes that are configured for your account for the Slack cloud to which you will connect and perform the automated operations. To generate a OAuth Token, you need to create and install a Slack Application (app), which is described in the Creating and installing a Slack App in a workspace topic.",
+        "required": true,
+        "placeholder": "token starting with xoxb- or xoxp-",
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "slack_token"
+      },
+      {
+        "title": "Verify SSL",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.Defaults to True.",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true
+      },
+      {
+        "title": "Enable Bot Communication",
+        "description": "Allow Slack for triggering commands.Defaults to False.",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "enable_slack_bot",
+        "value": false,
+        "onchange": {
+          "true": [
+            {
+              "title": "App Level Token",
+              "tooltip": "Enter App level token for your callback app",
+              "description": "The App level token that contains required scopes that are configured for your callback app.",
+              "required": true,
+              "placeholder": "token starting with xapp-",
+              "editable": true,
+              "visible": true,
+              "type": "password",
+              "name": "app_token"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "send_message",
+      "title": "Send Message",
+      "description": "Sends a message to a specific channel configured on your Slack cloud, based on the Channel ID and other input parameters that you have specified.",
+      "output_schema": {
+        "ok": "",
+        "channel": "",
+        "ts": "",
+        "message": {
+          "bot_id": "",
+          "type": "",
+          "text": "",
+          "user": "",
+          "ts": "",
+          "team": "",
+          "bot_profile": {
+            "id": "",
+            "deleted": "",
+            "name": "",
+            "updated": "",
+            "app_id": "",
+            "icons": {},
+            "team_id": ""
+          }
+        },
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "send_message",
+      "parameters": [
+        {
+          "title": "Channel ID/User ID",
+          "tooltip": "Channel, private group, or IM channel to send message",
+          "description": "Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "channel"
+        },
+        {
+          "title": "Send via Email Address",
+          "description": "Email address of the user to send the message to.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "email_id"
+        },
+        {
+          "title": "Message",
+          "tooltip": "Message that you want to send",
+          "description": "Message that you want to send to the channel that you have specified on your configured Slack cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "message"
+        },
+        {
+          "title": "Blocks",
+          "tooltip": "A JSON-based array of structured blocks, presented as a URL-encoded string.",
+          "description": "A JSON-based array of structured blocks, presented as a URL-encoded string.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "blocks",
+          "value": []
+        },
+        {
+          "title": "Attachments",
+          "description": "JSON-based array of structured attachments.For example:[{ \"fallback\": \"ReferenceError - UI is not defined\", \"text\": \"ReferenceError - UI is not defined\", \"fields\": [       {        \"title\": \"Project\",        \"value\": \"Awesome Project\",        \"short\": true      },      {        \"title\": \"Environment\",        \"value\": \"production\",        \"short\": true      }  ], \"color\": \"#F35A00\" }]Note: For more information on how to set attachments, see https://api.slack.com/docs/message-attachments.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachments",
+          "value": [],
+          "tooltip": "A JSON-based array of structured attachments. Please refer the documentation for more information"
+        },
+        {
+          "title": "Thread TS",
+          "tooltip": "Thread TS",
+          "description": "Thread TS",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "thread_ts"
+        }
+      ]
+    },
+    {
+      "operation": "send_input",
+      "title": "Send Manual Input/Approval Form to Slack",
+      "description": "Sends an Manual Input Form or Approval request to Slack",
+      "output_schema": {
+        "ok": "",
+        "channel": "",
+        "ts": "",
+        "message": {
+          "bot_id": "",
+          "type": "",
+          "text": "",
+          "user": "",
+          "ts": "",
+          "team": "",
+          "bot_profile": {
+            "id": "",
+            "deleted": "",
+            "name": "",
+            "updated": "",
+            "app_id": "",
+            "icons": {},
+            "team_id": ""
+          }
+        },
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "send_input",
+      "parameters": [
+        {
+          "title": "input",
+          "tooltip": "A FortiSOAR Manual Input object",
+          "description": "A FortiSOAR Manual Input object which can either be an input form or an approval request",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "input"
+        }
+      ]
+    },
+    {
+      "operation": "get_message_history",
+      "title": "Get Message History",
+      "description": "Fetches a conversation's history of messages and events configured on your Slack cloud, based on the Channel ID and other input parameters that you have specified.",
+      "output_schema": {
+        "ok": "",
+        "has_more": "",
+        "messages": [
+          {
+            "ts": "",
+            "team": "",
+            "text": "",
+            "type": "",
+            "user": "",
+            "blocks": [
+              {
+                "type": "",
+                "block_id": "",
+                "elements": [
+                  {
+                    "type": "",
+                    "elements": [
+                      {
+                        "text": "",
+                        "type": ""
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "client_msg_id": ""
+          }
+        ],
+        "pin_count": "",
+        "response_metadata": {
+          "next_cursor": ""
+        },
+        "channel_actions_ts": "",
+        "channel_actions_count": ""
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_message_history",
+      "parameters": [
+        {
+          "title": "Channel ID/User ID",
+          "tooltip": "Conversation ID to fetch history for.",
+          "description": "Conversation ID to fetch history for.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "channel"
+        },
+        {
+          "title": "Cursor",
+          "tooltip": "Set this param to 'next_cursor' attribute returned by a previous request's response_metadata.",
+          "description": "Paginate through collections of data by setting the cursor parameter to a next_cursor attribute returned by a previous request's response_metadata. Default value fetches the first \"page\" of the collection",
+          "required": false,
+          "placeholder": "e.g. dXNlcjpVMDYxTkZUVDI=",
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "cursor"
+        },
+        {
+          "title": "Inclusive",
+          "tooltip": "Include messages with latest or oldest timestamp in results only when either timestamp is specified.",
+          "description": "Include messages with latest or oldest timestamp in results only when either timestamp is specified. Default: 0",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "inclusive"
+        },
+        {
+          "title": "Start Time",
+          "tooltip": "Start of time range of messages to include in results",
+          "description": "Start of time range of messages to include in results",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "oldest",
+          "value": false
+        },
+        {
+          "title": "End Time",
+          "tooltip": "End of time range of messages to include in results.",
+          "description": "End of time range of messages to include in results.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "latest",
+          "value": false
+        },
+        {
+          "title": "Limit",
+          "tooltip": "The maximum number of items to return in response",
+          "description": "The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": true
+        }
+      ]
+    },
+    {
+      "operation": "create_channel",
+      "title": "Create Channel",
+      "description": "Creates a new channel in your configured Slack cloud, based on the channel name and other input parameters that you have specified.",
+      "output_schema": {
+        "ok": "",
+        "channel": {
+          "id": "",
+          "name": "",
+          "is_channel": "",
+          "is_group": "",
+          "is_im": "",
+          "created": "",
+          "is_archived": "",
+          "is_general": "",
+          "unlinked": "",
+          "name_normalized": "",
+          "is_shared": "",
+          "parent_conversation": "",
+          "creator": "",
+          "is_ext_shared": "",
+          "is_org_shared": "",
+          "shared_team_ids": [],
+          "pending_shared": [],
+          "pending_connected_team_ids": [],
+          "is_pending_ext_shared": "",
+          "is_member": "",
+          "is_private": "",
+          "is_mpim": "",
+          "last_read": "",
+          "is_open": "",
+          "topic": {
+            "value": "",
+            "creator": "",
+            "last_set": ""
+          },
+          "purpose": {
+            "value": "",
+            "creator": "",
+            "last_set": ""
+          },
+          "priority": ""
+        },
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "create_channel",
+      "parameters": [
+        {
+          "title": "Channel Name",
+          "tooltip": "Name of the public or private channel to create",
+          "description": "Name of the public or private channel that you want to create on your Slack cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "placeholder": "e.g test"
+        },
+        {
+          "title": "Is Private",
+          "tooltip": "Create a private channel instead of a public one",
+          "description": "Select this option to create a private channel on your Slack cloud. If you leave this unchecked then a public (default) channel will be created on your Slack cloud.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "is_private",
+          "value": false
+        }
+      ]
+    },
+    {
+      "operation": "list_channels",
+      "title": "Get Channels List",
+      "description": "Retrieves a list of channels and their details, available in a Slack team, from your configured Slack cloud.",
+      "output_schema": {
+        "ok": "",
+        "channels": [
+          {
+            "id": "",
+            "name": "",
+            "is_channel": "",
+            "created": "",
+            "is_archived": "",
+            "is_general": "",
+            "unlinked": "",
+            "creator": "",
+            "name_normalized": "",
+            "is_shared": "",
+            "is_org_shared": "",
+            "is_member": "",
+            "is_private": "",
+            "is_mpim": "",
+            "members": [],
+            "topic": {
+              "value": "",
+              "creator": "",
+              "last_set": ""
+            },
+            "purpose": {
+              "value": "",
+              "creator": "",
+              "last_set": ""
+            },
+            "previous_names": [],
+            "num_members": ""
+          }
+        ],
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_channels",
+      "parameters": [
+        {
+          "title": "Exclude Archived",
+          "description": "Select this option, i.e., set it as true, to exclude archived channels from the list of channels retrieved from your configured Slack cloud.By default, this is set as false.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "exclude_archived",
+          "value": false
+        },
+        {
+          "title": "Maximum Records",
+          "description": "Maximum number of records you want this operation to return.By default, this is set as 0.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 100
+        },
+        {
+          "title": "Channel Types",
+          "tooltip": "Select channel type to show in response",
+          "description": "Types of channels that you want to retrieve from your configured Slack cloud. You can choose from the following options: Public Channel, Private Channel, Group messaging, or Direct Messages.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Public Channel",
+            "Private Channel",
+            "Group messaging",
+            "Direct Messages"
+          ],
+          "name": "types",
+          "value": "Public Channel"
+        },
+        {
+          "title": "Cursor",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "cursor",
+          "tooltip": "Set this param to 'next_cursor' attribute returned by a previous request's response_metadata.",
+          "description": "Set this parameter to a next_cursor attribute returned by a previous request's response_metadata."
+        }
+      ]
+    },
+    {
+      "operation": "search_channel",
+      "title": "Search Channel",
+      "description": "Retrieves detailed information about a specific channel, based on the channel name that you have specified, from your configured Slack cloud.",
+      "output_schema": {
+        "status": "",
+        "message": "",
+        "data": [
+          {
+            "id": "",
+            "name": "",
+            "is_channel": "",
+            "created": "",
+            "is_archived": "",
+            "is_general": "",
+            "unlinked": "",
+            "creator": "",
+            "name_normalized": "",
+            "is_shared": "",
+            "is_org_shared": "",
+            "is_member": "",
+            "is_private": "",
+            "is_mpim": "",
+            "members": [],
+            "topic": {
+              "value": "",
+              "creator": "",
+              "last_set": ""
+            },
+            "purpose": {
+              "value": "",
+              "creator": "",
+              "last_set": ""
+            },
+            "previous_names": [],
+            "num_members": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_channels",
+      "parameters": [
+        {
+          "title": "Channel to Search",
+          "tooltip": "Name of the channel whose details you want to retrieve",
+          "description": "Name of the channel whose details you want to retrieve from your configured Slack cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "search_name"
+        },
+        {
+          "title": "Type of Search",
+          "tooltip": "Type of filter option that you want to apply to the search operation",
+          "description": "Type of filter option that you want to apply to the search operation.You can choose from the following options: Exact, Contains, Starts With, or Ends With.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "search_type",
+          "options": [
+            "Exact",
+            "Contains",
+            "Starts With",
+            "Ends With"
+          ],
+          "value": "Exact"
+        }
+      ]
+    },
+    {
+      "operation": "get_channel_info",
+      "title": "Get Channel Information",
+      "description": "Retrieves information about conversations of a specific channel from your configured Slack cloud, based on the channel ID and other input parameters that you have specified.",
+      "output_schema": {
+        "ok": "",
+        "channels": [
+          {
+            "id": "",
+            "name": "",
+            "is_channel": "",
+            "created": "",
+            "is_archived": "",
+            "is_general": "",
+            "unlinked": "",
+            "creator": "",
+            "name_normalized": "",
+            "is_shared": "",
+            "is_org_shared": "",
+            "is_member": "",
+            "is_private": "",
+            "is_mpim": "",
+            "members": [],
+            "topic": {
+              "value": "",
+              "creator": "",
+              "last_set": ""
+            },
+            "purpose": {
+              "value": "",
+              "creator": "",
+              "last_set": ""
+            },
+            "previous_names": [],
+            "num_members": ""
+          }
+        ],
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_channel_info",
+      "parameters": [
+        {
+          "title": "Channel ID",
+          "tooltip": "ID of Channel to learn more about",
+          "description": "ID of the channel (conversations) you want to retrieve from your configured Slack cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "channel",
+          "placeholder": "e.g C1234567890"
+        },
+        {
+          "title": "Include Locale",
+          "tooltip": "Select this box to include the locale of the specified conversations retrieved from your configured Slack account",
+          "description": "Select this checkbox, i.e., set it to true to include the locale of the specified conversations retrieved from your configured Slack cloud. By default, this is set to false, i.e., the checkbox is unchecked.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "include_locale",
+          "value": false
+        },
+        {
+          "title": "Include Number Of Members",
+          "tooltip": "Include member count of the specified conversations",
+          "description": "Select this checkbox, i.e., set it to true, to include the member count of the specified conversations retrieved from your configured Slack cloud. By default, this is set to false, i.e., the checkbox is unchecked.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "include_num_members",
+          "value": false
+        }
+      ]
+    },
+    {
+      "operation": "rename_channel",
+      "title": "Rename Channel",
+      "description": "Renames a channel (conversation) on your configured Slack cloud based on the channel ID and new channel name that you have specified.Note: You can rename a channel only if you are the owner of the channel or you have \"admin\" permissions.",
+      "output_schema": {
+        "channel": {
+          "id": "",
+          "name": "",
+          "is_channel": "",
+          "is_group": "",
+          "is_im": "",
+          "created": "",
+          "is_archived": "",
+          "is_general": "",
+          "unlinked": "",
+          "name_normalized": "",
+          "is_shared": "",
+          "parent_conversation": "",
+          "creator": "",
+          "is_ext_shared": "",
+          "is_org_shared": "",
+          "shared_team_ids": [],
+          "pending_shared": [],
+          "pending_connected_team_ids": [],
+          "is_pending_ext_shared": "",
+          "is_member": "",
+          "is_private": "",
+          "is_mpim": "",
+          "last_read": "",
+          "is_open": "",
+          "topic": {
+            "value": "",
+            "creator": "",
+            "last_set": ""
+          },
+          "purpose": {
+            "value": "",
+            "creator": "",
+            "last_set": ""
+          }
+        },
+        "ok": "",
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "rename_channel",
+      "parameters": [
+        {
+          "title": "Channel ID",
+          "tooltip": "ID of Channel to rename",
+          "description": "ID of the channel you want to rename on your configured Slack cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "channel",
+          "placeholder": "e.g C1234567890"
+        },
+        {
+          "title": "Channel Name",
+          "tooltip": "New name for channel.",
+          "description": "New name that you want to assign to the specified channel on your configured Slack cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "placeholder": "e.g test"
+        }
+      ]
+    },
+    {
+      "operation": "invite_user_to_channel",
+      "title": "Invite Users To Channel",
+      "description": "Invites users to a specified channel on your configured Slack cloud based on the channel ID and user IDs that you have specified.",
+      "output_schema": {
+        "ok": "",
+        "channel": {
+          "id": "",
+          "name": "",
+          "is_channel": "",
+          "is_group": "",
+          "is_im": "",
+          "created": "",
+          "is_archived": "",
+          "is_general": "",
+          "unlinked": "",
+          "name_normalized": "",
+          "is_shared": "",
+          "parent_conversation": "",
+          "creator": "",
+          "is_ext_shared": "",
+          "is_org_shared": "",
+          "shared_team_ids": [],
+          "pending_shared": [],
+          "pending_connected_team_ids": [],
+          "is_pending_ext_shared": "",
+          "is_member": "",
+          "is_private": "",
+          "is_mpim": "",
+          "last_read": "",
+          "is_open": "",
+          "topic": {
+            "value": "",
+            "creator": "",
+            "last_set": ""
+          },
+          "purpose": {
+            "value": "",
+            "creator": "",
+            "last_set": ""
+          },
+          "priority": ""
+        },
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "invite_user_to_channel",
+      "parameters": [
+        {
+          "title": "Channel ID",
+          "tooltip": "The ID of the public or private channel to invite user(s) to.",
+          "description": "ID of the public or private channel to which you want to invite specified users.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "channel",
+          "placeholder": "e.g C1234567890"
+        },
+        {
+          "title": "User IDs",
+          "tooltip": "A comma separated list of user IDs. Up to 1000 users may be listed.",
+          "description": "Comma-separated list of user IDs that you want to invite to the specified channel.Note: You can list a maximum of 1000 users.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "users",
+          "placeholder": "e.g W1234567890,U2345678901,U3456789012"
+        }
+      ]
+    },
+    {
+      "operation": "close_channel",
+      "title": "Close Channel",
+      "description": "Closes a direct message or multi-person direct message on your configured Slack cloud based on the channel ID that you have specified.",
+      "output_schema": {
+        "ok": "",
+        "no_op": "",
+        "already_closed": "",
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "content-length": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "close_channel",
+      "parameters": [
+        {
+          "title": "Channel ID",
+          "tooltip": "The ID of the channel to close.",
+          "description": "ID of the direct message (channel) or multi-person direct message you want to close on your configured Slack cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "channel",
+          "placeholder": "e.g C1234567890"
+        }
+      ]
+    },
+    {
+      "operation": "list_users",
+      "title": "Get User List",
+      "description": "Retrieves a list of users and their details, available in a Slack team, from your configured Slack cloud.",
+      "output_schema": {
+        "ok": "",
+        "members": [
+          {
+            "id": "",
+            "team_id": "",
+            "name": "",
+            "deleted": "",
+            "color": "",
+            "real_name": "",
+            "tz": null,
+            "tz_label": "",
+            "tz_offset": "",
+            "profile": {
+              "title": "",
+              "phone": "",
+              "skype": "",
+              "real_name": "",
+              "real_name_normalized": "",
+              "display_name": "",
+              "display_name_normalized": "",
+              "fields": "",
+              "status_text": "",
+              "status_emoji": "",
+              "status_expiration": "",
+              "avatar_hash": "",
+              "always_active": "",
+              "first_name": "",
+              "last_name": "",
+              "image_24": "",
+              "image_32": "",
+              "image_48": "",
+              "image_72": "",
+              "image_192": "",
+              "image_512": "",
+              "status_text_canonical": "",
+              "team": ""
+            },
+            "is_admin": "",
+            "is_owner": "",
+            "is_primary_owner": "",
+            "is_restricted": "",
+            "is_ultra_restricted": "",
+            "is_bot": "",
+            "is_app_user": "",
+            "updated": ""
+          }
+        ],
+        "cache_ts": "",
+        "headers": {
+          "date": "",
+          "server": "",
+          "x-slack-req-id": "",
+          "x-oauth-scopes": "",
+          "x-accepted-oauth-scopes": "",
+          "access-control-expose-headers": "",
+          "x-slack-backend": "",
+          "x-content-type-options": "",
+          "expires": "",
+          "cache-control": "",
+          "x-xss-protection": "",
+          "vary": "",
+          "pragma": "",
+          "access-control-allow-headers": "",
+          "strict-transport-security": "",
+          "referrer-policy": "",
+          "content-encoding": "",
+          "access-control-allow-origin": "*",
+          "transfer-encoding": "",
+          "content-type": "",
+          "x-via": ""
+        }
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_users",
+      "parameters": [
+        {
+          "title": "Maximum Records",
+          "tooltip": "Maximum number of records you want this operation to return",
+          "description": "Maximum number of records you want this operation to return.By default, this is set as 0.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 0
+        },
+        {
+          "title": "Cursor",
+          "description": "Set this parameter to a next_cursor attribute returned by a previous request's response_metadata.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "cursor",
+          "tooltip": "Set this param to 'next_cursor' attribute returned by a previous request's response_metadata."
+        }
+      ]
+    },
+    {
+      "operation": "get_user",
+      "title": "Get User Information",
+      "description": "Retrieves detailed information of a specific user from your configured Slack cloud based on the search criteria that you have specified.",
+      "output_schema": {
+        "status": "",
+        "message": "",
+        "data": [
+          {
+            "id": "",
+            "team_id": "",
+            "name": "",
+            "deleted": "",
+            "color": "",
+            "real_name": "",
+            "tz": "",
+            "tz_label": "",
+            "tz_offset": "",
+            "profile": {
+              "title": "",
+              "phone": "",
+              "skype": "",
+              "real_name": "",
+              "real_name_normalized": "",
+              "display_name": "",
+              "display_name_normalized": "",
+              "status_text": "",
+              "status_emoji": "",
+              "status_expiration": "",
+              "avatar_hash": "",
+              "image_original": "",
+              "is_custom_image": "",
+              "email": "",
+              "first_name": "",
+              "last_name": "",
+              "image_24": "",
+              "image_32": "",
+              "image_48": "",
+              "image_72": "",
+              "image_192": "",
+              "image_512": "",
+              "image_1024": "",
+              "status_text_canonical": "",
+              "team": ""
+            },
+            "is_admin": "",
+            "is_owner": "",
+            "is_primary_owner": "",
+            "is_restricted": "",
+            "is_ultra_restricted": "",
+            "is_bot": "",
+            "is_app_user": "",
+            "updated": "",
+            "has_2fa": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "category": "investigation",
+      "annotation": "get_user",
+      "parameters": [
+        {
+          "title": "Search By",
+          "description": "Get user information by selecting available options Email, Alias,Username or User ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "search_by",
+          "options": [
+            "Email",
+            "Alias",
+            "Username",
+            "User ID"
+          ],
+          "value": "Username",
+          "onchange": {
+            "Email": [
+              {
+                "title": "Email To Search",
+                "description": "Email To Search",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "value",
+                "value": ""
+              }
+            ],
+            "User ID": [
+              {
+                "title": "User ID",
+                "description": "Unique ID of the users whose details you want to retrieve from your configured Slack cloud",
+                "tooltip": "Unique ID of the users whose details you want to retrieve",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "value",
+                "value": ""
+              },
+              {
+                "title": "Include Locale",
+                "description": "Select this option, i.e., set it as true to include locale information for the user.By default, this is set as false.",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "checkbox",
+                "name": "include_locale",
+                "value": false
+              }
+            ],
+            "Alias": [
+              {
+                "title": "Alias Name",
+                "description": "Search user by its Alias name",
+                "tooltip": "Search user by its Alias name",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "value",
+                "value": ""
+              },
+              {
+                "title": "Search Type",
+                "description": "Select match criteria, Available options are Exact, Contains, Starts With and Ends With",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "name": "search_type",
+                "options": [
+                  "Exact",
+                  "Contains",
+                  "Starts With",
+                  "Ends With"
+                ],
+                "value": "Exact",
+                "tooltip": "Select match criteria"
+              }
+            ],
+            "Username": [
+              {
+                "title": "Username To Search",
+                "description": "Username To Search",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "value",
+                "value": ""
+              },
+              {
+                "title": "Search Type",
+                "description": "Select match criteria, Available options are Exact, Contains, Starts With and Ends With",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "name": "search_type",
+                "options": [
+                  "Exact",
+                  "Contains",
+                  "Starts With",
+                  "Ends With"
+                ],
+                "value": "Exact",
+                "tooltip": "Select match criteria"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "operation": "upload_file",
+      "title": "Upload File",
+      "description": "Uploads a file to a specific channel configured on your Slack cloud, based on the Channel ID and other input parameters that you have specified.",
+      "output_schema": {
+        "ok": "",
+        "file": {
+          "id": "",
+          "created": "",
+          "timestamp": "",
+          "name": "",
+          "title": "",
+          "mimetype": "",
+          "filetype": "",
+          "pretty_type": "",
+          "user": "",
+          "mode": "",
+          "editable": "",
+          "is_external": "",
+          "external_type": "",
+          "username": "",
+          "size": "",
+          "url_private": "",
+          "url_private_download": "",
+          "thumb_64": "",
+          "thumb_80": "",
+          "thumb_360": "",
+          "thumb_360_gif": "",
+          "thumb_360_w": "",
+          "thumb_360_h": "",
+          "thumb_480": "",
+          "thumb_480_w": "",
+          "thumb_480_h": "",
+          "thumb_160": "",
+          "permalink": "",
+          "permalink_public": "",
+          "edit_link": "",
+          "preview": "",
+          "preview_highlight": "",
+          "lines": "",
+          "lines_more": "",
+          "is_public": "",
+          "public_url_shared": "",
+          "display_as_bot": "",
+          "channels": [],
+          "groups": [],
+          "ims": [],
+          "initial_comment": {},
+          "num_stars": "",
+          "is_starred": "",
+          "pinned_to": [],
+          "reactions": [
+            {
+              "name": "",
+              "count": "",
+              "users": []
+            }
+          ],
+          "comments_count": ""
+        }
+      },
+      "enabled": true,
+      "category": "miscellaneous",
+      "annotation": "upload_file",
+      "parameters": [
+        {
+          "title": "File Reference",
+          "description": "Type of file reference that you will be providing for the file that you want to upload to the specified Slack channels.You can choose from the following options: Attachment ID or File IRI.If you choose Attachment ID, then you must specify the following parameter:Attachment ID: ID of the attachment that you want to upload to the specified Slack channels. The Attachment ID is used to access the file directly from the FortiSOAR Attachments module.If you choose File IRI, then you must specify the following parameter:File IRI: IRI of the file that you want to upload to the specified Slack channels. The File IRI is used to access the file directly from FortiSOAR.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Attachment ID",
+            "File IRI"
+          ],
+          "name": "path",
+          "onchange": {
+            "Attachment ID": [
+              {
+                "title": "Attachment ID",
+                "description": "Attachment ID that is used to access the file directly from the CyOPs™ Attachments module. This should be the file that you want to upload to the specified Slack channels.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "value",
+                "value": ""
+              }
+            ],
+            "File IRI": [
+              {
+                "title": "File IRI",
+                "description": "File IRI that is used to access the file directly from the CyOPs™ Attachments module. This should be the file that you want to upload to the specified Slack channels.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "value",
+                "value": ""
+              }
+            ]
+          },
+          "value": "Attachment ID"
+        },
+        {
+          "title": "Channel ID/User ID",
+          "description": "Comma-separated list of channel names or IDs to which you want to upload the file on your configured Slack cloud.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "channel",
+          "tooltip": "Channel ID to upload file"
+        },
+        {
+          "title": "Title",
+          "tooltip": "Title of the file that you want to upload",
+          "description": "(Optional) Title of the file that you want to upload to the specified Slack channels.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "title"
+        },
+        {
+          "title": "File Name",
+          "tooltip": "Name of the file that you want to upload",
+          "description": "(Optional) Name of the file that you want to upload to the specified Slack channels.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_name"
+        },
+        {
+          "title": "File Type",
+          "tooltip": "Type of the file that you want to upload to the specified Slack channels",
+          "description": "(Optional) Type of the file that you want to upload to the specified Slack channels.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_type"
+        },
+        {
+          "title": "Comment",
+          "tooltip": "Initial comment to add to the file that you want to upload to the specified Slack channels",
+          "description": "(Optional) Initial comment to add to the file that you want to upload to the specified Slack channels.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "comment"
+        }
+      ]
+    }
+  ]
+}

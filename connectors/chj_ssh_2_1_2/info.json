@@ -1,0 +1,146 @@
+{
+    "name": "chj_ssh",
+    "version": "2.1.2",
+    "label": "chj_SSH",
+    "description": "Steps that use an ssh connection. Including sftp and remote code execution",
+    "publisher": "",
+    "icon_small_name": "ssh_small.png",
+    "icon_large_name": "ssh_large.png",
+    "category": "utilities",
+    "configuration": {
+        "fields": [
+            {
+                "title": "Host",
+                "name": "host",
+                "type": "text",
+                "visible": true,
+                "editable": true,
+                "required": true
+            },
+            {
+                "title": "Port",
+                "name": "port",
+                "type": "text",
+                "value": "22",
+                "visible": true,
+                "editable": true,
+                "required": false
+            },
+            {
+                "title": "Username",
+                "name": "username",
+                "type": "text",
+                "visible": true,
+                "editable": true,
+                "required": true
+            },
+            {
+                "title": "Password",
+                "name": "password",
+                "type": "password",
+                "visible": true,
+                "editable": true,
+                "required": false
+            },
+            {
+                "title": "Private Key",
+                "name": "private_key",
+                "value": "",
+                "type": "file",
+                "visible": true,
+                "editable": true,
+                "required": false
+            },
+            {
+                "title": "Super User Password",
+                "name": "super_user_password",
+                "type": "password",
+                "visible": true,
+                "editable": true,
+                "required": false
+            },
+            {
+                "title": "Timeout",
+                "name": "timeout",
+                "value": 10,
+                "type": "text",
+                "visible": true,
+                "editable": true,
+                "required": false
+            }
+        ]
+    },
+    "operations": [
+        {
+            "operation": "run_remote_command",
+            "annotation": "remote_command",
+            "description": "Executes a command on a remote server",
+            "title": "Execute remote command",
+            "parameters": [
+                {
+                    "title": "Command",
+                    "name": "cmd",
+                    "value": "",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true,
+                    "placeholder": "E.g: ls -l"
+                },
+                {
+                    "title": "Allowed exit codes",
+                    "name": "allowed_exit",
+                    "value": "-1,0",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false,
+                    "placeholder": "E.g: 0,1,-1",
+                    "tooltip": "A list of non-standard exit codes to allow from remote commands. Default values are 0 (standard success exit code) and -1 (meaning the remote command did not return any exit code)"
+                },
+                {
+                    "title": "Run as super user",
+                    "name": "is_super_user",
+                    "value": false,
+                    "type": "checkbox",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        },
+        {
+            "operation": "run_remote_python",
+            "description": "Executes a python script on a remote server",
+            "title": "Execute a python script",
+            "parameters": [
+                {
+                    "title": "Script",
+                    "name": "script",
+                    "value": "",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": true
+                },
+                {
+                    "title": "Python version",
+                    "name": "version",
+                    "value": "2",
+                    "type": "text",
+                    "visible": true,
+                    "editable": true,
+                    "required": false
+                }
+            ],
+            "output_schema": {},
+            "enabled": true
+        }
+    ],
+    "forked_from": "ssh_2_1_2",
+    "help_online": "https://docs.fortinet.com/document/fortisoar/2.1.2/ssh-connector/395/ssh-connector-v2-1-2",
+    "cs_approved": false,
+    "cs_compatible": true
+}

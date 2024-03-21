@@ -1,0 +1,305 @@
+{
+  "name": "gitlab",
+  "label": "GitLab",
+  "version": "1.0.0",
+  "description": "GitLab is a single application for the entire software development lifecycle. From project planning and source code management to CI/CD, monitoring, and security.",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Source Code Management",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000089697-gitlab-v1-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "type": "text",
+        "name": "server_url",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "description": "IP address or hostname of the GitLab server to which you will connect and perform automated operations."
+      },
+      {
+        "title": "Access Token",
+        "type": "password",
+        "name": "api_key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "description": "Access Token that is provided to you by a GitLab administrator that you will use to access the GitLab REST API."
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "create_new_file_in_repository",
+      "title": "Create File",
+      "description": "Creates a single file in the GitLab repository based on the project ID, branch name, file name and other input parameters.",
+      "category": "investigation",
+      "annotation": "create_new_file_in_repository",
+      "enabled": true,
+      "output_schema": {
+        "file_path": "",
+        "branch": ""
+      },
+      "parameters": [
+        {
+          "title": "Project ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project_id",
+          "description": "Project ID in which you want to create a new file in the GitLab repository."
+        },
+        {
+          "title": "Branch Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "branch",
+          "description": "Name of the branch in which you want to create a new file in the GitLab repository."
+        },
+        {
+          "title": "File Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_path",
+          "description": "Name of the file that you want to create in the GitLab repository."
+        },
+        {
+          "title": "Content Information",
+          "tooltip": "Content information that you want to add to the file.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "content",
+          "description": "Content information that you want to add to the file that you want to create in the GitLab repository."
+        },
+        {
+          "title": "Commit Message",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "commit_message",
+          "description": "Commit message that you want to add while creating the file in the GitLab repository."
+        },
+        {
+          "title": "Author Email ID",
+          "tooltip": "Email address of the commit author.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "author_email",
+          "description": "(Optional) Email address of the commit author that you want to add while creating the file in the GitLab repository."
+        },
+        {
+          "title": "Author Name",
+          "tooltip": "Name of the commit author.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "author_name",
+          "description": "(Optional) Name of the commit author that you want to add while creating the file in the GitLab repository."
+        }
+      ]
+    },
+    {
+      "operation": "get_file_from_repository",
+      "title": "Get File",
+      "description": "Retrieves information such as name, size, content(Base64 encoded), etc. about a file from the GitLab repository based on the project ID, branch name, and file name. ",
+      "category": "investigation",
+      "annotation": "get_file_from_repository",
+      "enabled": true,
+      "output_schema": {
+        "file_name": "",
+        "file_path": "",
+        "size": "",
+        "encoding": "",
+        "content_sha256": "",
+        "ref": "",
+        "blob_id": "",
+        "commit_id": "",
+        "last_commit_id": "",
+        "content": ""
+      },
+      "parameters": [
+        {
+          "title": "Project ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project_id",
+          "description": "Project ID in which the file is stored in the GitLab repository whose information you want to retrieve."
+        },
+        {
+          "title": "Branch Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ref",
+          "description": "Name of the branch in which the file is stored in the GitLab repository whose information you want to retrieve."
+        },
+        {
+          "title": "File Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_path",
+          "description": "Name of the file whose information you want to retrieve from the GitLab repository."
+        }
+      ]
+    },
+    {
+      "operation": "update_file_in_repository",
+      "title": "Update File",
+      "description": "Updates a single file in the GitLab repository based on the project ID, branch name, file name and other input parameters.",
+      "category": "investigation",
+      "annotation": "update_file_in_repository",
+      "enabled": true,
+      "output_schema": {
+        "file_path": "",
+        "branch": ""
+      },
+      "parameters": [
+        {
+          "title": "Project ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project_id",
+          "description": "Project ID in which the file that you want to update is stored in the GitLab repository."
+        },
+        {
+          "title": "Branch Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "branch",
+          "description": "Name of the branch in which the file that you want to update is stored in the GitLab repository."
+        },
+        {
+          "title": "File Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_path",
+          "description": "Name of the file that you want to update in the GitLab repository."
+        },
+        {
+          "title": "Content Information",
+          "tooltip": "Content information that you want to append.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "content",
+          "description": "Content information that you want to update in the file in the GitLab repository."
+        },
+        {
+          "title": "Commit Message",
+          "tooltip": "Commit message that you want to add.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "commit_message",
+          "description": "Commit message that you want to add while updating the file in the GitLab repository."
+        }
+      ]
+    },
+    {
+      "operation": "delete_existing_file_in_repository",
+      "title": "Delete File",
+      "description": "Deletes a single file in the GitLab repository based on the project ID, branch name, file name and other input parameters.",
+      "category": "investigation",
+      "annotation": "delete_existing_file_in_repository",
+      "enabled": true,
+      "output_schema": {
+      },
+      "parameters": [
+        {
+          "title": "Project ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "project_id",
+          "description": "Project ID in which the file that you want to delete is stored in the GitLab repository."
+        },
+        {
+          "title": "Branch Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "branch",
+          "description": "Name of the branch in which the file that you want to delete is stored in the GitLab repository."
+        },
+        {
+          "title": "File Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_path",
+          "description": "Name of the file that you want to delete in the GitLab repository."
+        },
+        {
+          "title": "Commit Message",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "commit_message",
+          "description": "Commit message that you want to add while deleting the file in the GitLab repository."
+        },
+        {
+          "title": "Author Email ID",
+          "tooltip": "Email address of the commit author.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "author_email",
+          "description": "(Optional) Email address of the commit author that you want to add while deleting the file in the GitLab repository."
+        },
+        {
+          "title": "Author Name",
+          "tooltip": "Name of the commit author.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "author_name",
+          "description": "(Optional) Name of the commit author that you want to add while deleting the file in the GitLab repository."
+        }
+      ]
+    }
+  ]
+}

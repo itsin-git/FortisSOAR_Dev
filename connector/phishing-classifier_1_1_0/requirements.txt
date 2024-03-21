@@ -1,0 +1,7 @@
+joblib
+numpy
+pandas
+scikit-learn
+web.py
+nltk
+requests

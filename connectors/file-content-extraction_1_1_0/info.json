@@ -1,0 +1,115 @@
+{
+  "name": "file-content-extraction",
+  "label": "File Content Extraction",
+  "version": "1.1.0",
+  "description": "Utility to Extract Text, Artifacts and Metadata from almost any file. Internet connectivity is required for the connector to download dependent packages",
+  "publisher": "Fortinet",
+  "supportInfo": "https://github.com/ftnt-cse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Utilities",
+  "icon_small_name": "small_icon.png",
+  "icon_large_name": "large_icon.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/file-content-extraction/596/file-content-extraction-v1-1-0",
+  "configuration": {
+  },
+  "operations": [
+    {
+      "description": "Extracts text and metadata from file based on the file IRI/path that you have specified.",
+      "operation": "extract_text",
+      "annotation": "extract_text",
+      "title": "Extract Text",
+      "parameters": [
+        {
+          "title": "File IRI/Path",
+          "description": "Specify the file IRI/path where the file is located. File IRI is an attribute of a file which is in turn an attribute of an attachment or an indicator. NOTE: The file name is taken from the tmp directory.",
+          "name": "file_iri",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the file IRI/path where the file is located. File IRI is an attribute of a file which is in turn an attribute of an attachment or an indicator. NOTE: The file name is taken from the tmp directory."
+        },
+        {
+          "title": "Set Output Format to XHTML",
+          "description": "Select to format the extracted text in XHTML",
+          "name": "html_output_format",
+          "type": "checkbox",
+          "value": false,
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Select to format the extracted text in XHTML"
+        }
+      ],
+      "output_schema": {
+        "metadata": {},
+        "extracted_text": ""
+      },
+      "enabled": true
+    },
+    {
+      "description": "Extracts artifacts from file based on the file IRI/path that you have specified.",
+      "operation": "extract_indicators",
+      "annotation": "extract_indicators",
+      "title": "Extract Artifacts",
+      "parameters": [
+        {
+          "title": "File IRI/Path",
+          "description": "Specify the file IRI/path where the file is located. File IRI is an attribute of a file which is in turn an attribute of an attachment or an indicator. NOTE: The file name is taken from the /tmp directory.",
+          "name": "file_iri",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Specify the file IRI/path where the file is located. File IRI is an attribute of a file which is in turn an attribute of an attachment or an indicator. NOTE: The file name is taken from the /tmp directory."
+        }
+      ],
+      "output_schema": {
+        "extraction_result": {
+          "IP": "",
+          "CVE": "",
+          "MD5": "",
+          "URL": "",
+          "Host": "",
+          "SHA1": "",
+          "Email": "",
+          "SHA256": "",
+          "results": "",
+          "Filename": "",
+          "Filepath": "",
+          "Registry": "",
+          "unified_result": "",
+          "whitelisted_results": ""
+        },
+        "status": ""
+      },
+      "enabled": true
+    },
+    {
+      "description": "Get extraction backend configuration details based on the file IRI/path that you have specified.",
+      "operation": "get_backend_config",
+      "annotation": "get_backend_config",
+      "title": "Get Backend Config",
+      "parameters": [
+        {
+          "title": "Verbose",
+          "description": "Select to fetch verbose details.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "verbose_config",
+          "value": false,
+          "tooltip": "Select to fetch verbose details."
+        }
+      ],
+      "output_schema": {
+        "Parsers": "",
+        "MimeTypes": "",
+        "Detectors": ""
+      },
+      "enabled": true
+    }
+  ]
+}

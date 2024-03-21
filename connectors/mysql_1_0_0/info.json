@@ -1,0 +1,117 @@
+{
+  "name": "mysql",
+  "label": "MySQL",
+  "version": "1.0.0",
+  "description": "MySQL Connector allows different database operations with MySQL.",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Database",
+  "icon_small_name": "small-mysql.png",
+  "icon_large_name": "large-mysql.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000073074-mysql-v1-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "name": "host",
+        "required": true,
+        "type": "text",
+        "visible": true,
+        "title": "Hostname / IP Address",
+        "editable": true
+      },
+      {
+        "title": "Database",
+        "name": "database",
+        "type": "text",
+        "required": true,
+        "visible": true,
+        "editable": true
+      },
+      {
+        "title": "Username",
+        "name": "username",
+        "type": "text",
+        "required": false,
+        "visible": true,
+        "editable": true
+      },
+      {
+        "title": "Password",
+        "name": "password",
+        "type": "password",
+        "required": false,
+        "visible": true,
+        "editable": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "title": "Run Query",
+      "operation": "run_query",
+      "description": "Execute any query on MySQL database. E.g. Create, Update, Delete, Select, Insert",
+      "category": "investigation",
+      "annotation": "run_query",
+      "output_schema": [],
+      "parameters": [
+        {
+          "name": "query_string",
+          "value": "",
+          "required": true,
+          "type": "text",
+          "visible": true,
+          "title": "Query String",
+          "editable": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "List Columns",
+      "operation": "list_columns",
+      "description": "Describes the structure of a table in the database by displaying information about its columns.",
+      "category": "investigation",
+      "annotation": "list_columns",
+      "output_schema": [
+        {
+          "Type": "",
+          "Field": "",
+          "Extra": "",
+          "Default": "",
+          "Key": "",
+          "Null": ""
+        }
+      ],
+      "parameters": [
+        {
+          "name": "table_name",
+          "value": "",
+          "required": true,
+          "type": "text",
+          "visible": true,
+          "title": "Table Name",
+          "editable": true
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "List Tables",
+      "operation": "list_tables",
+      "category": "investigation",
+      "annotation": "list_tables",
+      "description": "List table names for provided database",
+      "output_schema": [
+        {
+          "Tables_in_mysql": ""
+        }
+      ],
+      "parameters": [
+        {
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,2847 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Exchange - 4.2.1",
+      "description": "Sample playbooks for \"Exchange\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "",
+      "uuid": "56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+      "id": 54,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Folder : Get Folder Metadata",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Retrieves the count of all the emails, including unread emails and subfolder details, from your Exchange account for the folder you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/8c3ca003-5064-40e6-be82-6a9a0e9544fb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "82460020-0913-4c5f-8872-025b3a9cea19",
+                "title": "Exchange: Get Folder Metadata",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "8c3ca003-5064-40e6-be82-6a9a0e9544fb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Folder Metadata",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "729a5684-802d-4902-ac4a-74f030c5af6a",
+                "params": {
+                  "source": "Custom Folder",
+                  "source_folder": "Malware"
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "get_folder_metadata",
+                "operationTitle": "Get Folder Metadata",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "80",
+              "left": "428",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "cb3be4a4-e163-414c-a03d-b5385e0d39db"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Get_Folder_Metadata.data}}"
+              },
+              "status": null,
+              "top": "166",
+              "left": "780",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "f3e59172-bd11-4fb4-9d1c-0488e3f1bdcd"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Folder Metadata",
+              "targetStep": "/api/3/workflow_steps/cb3be4a4-e163-414c-a03d-b5385e0d39db",
+              "sourceStep": "/api/3/workflow_steps/8c3ca003-5064-40e6-be82-6a9a0e9544fb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "08c7d6f9-c9a5-4732-832f-0a6a9a0a1515"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Folder Metadata -> Save Response",
+              "targetStep": "/api/3/workflow_steps/f3e59172-bd11-4fb4-9d1c-0488e3f1bdcd",
+              "sourceStep": "/api/3/workflow_steps/cb3be4a4-e163-414c-a03d-b5385e0d39db",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d75b1408-da80-46be-89e3-1d5287eb182f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1c7aaafa-6e9d-4a95-b809-77933ce02b18",
+          "id": 572,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Categorize: Add Category",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Assigns categories to an email in your Exchange account based on the message ID and categories that you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/5ed4a379-f7e3-4fb4-bada-e5f0f8a3dfb8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Add_Category.data}}"
+              },
+              "status": null,
+              "top": "240",
+              "left": "829",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "0ee724f2-3341-4ee5-bf6d-e7f7e1de1963"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a3769d19-0887-4225-b1a3-ffe5468fb163",
+                "title": "Exchange: Add Category",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "5ed4a379-f7e3-4fb4-bada-e5f0f8a3dfb8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Add Category",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "3617baf9-edb7-4503-b8d7-b466a4449037",
+                "params": {
+                  "source": "Inbox",
+                  "categories": "[\"malware1\",\"spam1\",\"test\"]",
+                  "message_id": "<157510367354.20802.18006934464241300011@shravan.cybersponse.net>"
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "add_category",
+                "operationTitle": "Add Category",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "100",
+              "left": "466",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e06878e4-ae30-4cd0-a69e-fb670bfb0931"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Add Category -> Save Response",
+              "targetStep": "/api/3/workflow_steps/0ee724f2-3341-4ee5-bf6d-e7f7e1de1963",
+              "sourceStep": "/api/3/workflow_steps/e06878e4-ae30-4cd0-a69e-fb670bfb0931",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "272b9915-43e9-44d4-a0e9-dc7115c5162f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Add Category",
+              "targetStep": "/api/3/workflow_steps/e06878e4-ae30-4cd0-a69e-fb670bfb0931",
+              "sourceStep": "/api/3/workflow_steps/5ed4a379-f7e3-4fb4-bada-e5f0f8a3dfb8",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7541c0e5-d170-4ca2-b653-6b9ca4dcf86c"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "20f55f69-d551-4473-8437-1bf80cbecc8d",
+          "id": 573,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Email : Copy Email",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Copy an email from a specified folder to a specified folder, based on the message ID and the source and destination folder you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/73bcf766-2f8c-4585-bef6-13dc6484506b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "5a34f89a-7cb2-4ccf-8160-ce540641c918",
+                "title": "Exchange: Copy Email",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "27",
+              "left": "60",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "73bcf766-2f8c-4585-bef6-13dc6484506b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Copy Email",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "7b3a6289-0e3b-46b6-90c4-d5378adba644",
+                "params": {
+                  "source": "Folder Name",
+                  "message_id": "<DM6PR19MB25887C96A7A6DA7C5B4E122686490@DM6PR19MB2588.namprd19.prod.outlook.com>",
+                  "destination": "Folder Path",
+                  "source_email": "",
+                  "target_email": "",
+                  "source_folder": "analysis",
+                  "destination_folder_path": "/root/Top of Information Store/malware"
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "copy_email",
+                "operationTitle": "Copy Email",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "154",
+              "left": "454",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "d635f311-2a24-4987-8062-a8962a26f404"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Copy_Email.data}}"
+              },
+              "status": null,
+              "top": "276",
+              "left": "824",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "d71855fe-cb3a-4b9c-9343-a6a87f9773f4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Move Email -> Save Response",
+              "targetStep": "/api/3/workflow_steps/d71855fe-cb3a-4b9c-9343-a6a87f9773f4",
+              "sourceStep": "/api/3/workflow_steps/d635f311-2a24-4987-8062-a8962a26f404",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "347d85d6-17d8-43c2-84b6-847650548b9c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Move Email",
+              "targetStep": "/api/3/workflow_steps/d635f311-2a24-4987-8062-a8962a26f404",
+              "sourceStep": "/api/3/workflow_steps/73bcf766-2f8c-4585-bef6-13dc6484506b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "4b69d34f-bece-408c-b96e-46be1c4ed53c"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "2a269835-bfa7-427b-ae60-807902376b83",
+          "id": 574,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Calendar : Create Calendar Event",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Creates an event in a calendar on the Exchange Server, based on input parameters, such as subject, from date and to date, you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/9807a8d8-e3c9-45d7-aaec-795a3f7be812",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Calendar Event",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "ddf16be5-5bec-4fbc-876d-eb535da83abc",
+                "params": {
+                  "body": "",
+                  "private": true,
+                  "subject": "Demo",
+                  "end_date": "2022-04-05T15:38:30.853Z",
+                  "location": "",
+                  "categories": "",
+                  "is_all_day": false,
+                  "start_date": "2022-04-05T14:38:16.204Z",
+                  "reminder_min": "10 minutes",
+                  "optional_attendees": "",
+                  "required_attendees": "noreply@cybersponse.com",
+                  "legacy_free_busy_status": "Free"
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "create_calendar_event",
+                "operationTitle": "Create Calendar Event",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "153",
+              "left": "369",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "22ba3d3b-5044-40ac-bca4-2ae96f6bf4fd"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6a3734fd-4e80-45c8-b4c3-528f2883ffd3",
+                "title": "Exchange: Create Calendar Event",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "9807a8d8-e3c9-45d7-aaec-795a3f7be812"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.result.data}}"
+              },
+              "status": null,
+              "top": "308",
+              "left": "751",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "cddc6f3a-4489-404b-a7a1-b782ae06ff9e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Create Calendar Event",
+              "targetStep": "/api/3/workflow_steps/22ba3d3b-5044-40ac-bca4-2ae96f6bf4fd",
+              "sourceStep": "/api/3/workflow_steps/9807a8d8-e3c9-45d7-aaec-795a3f7be812",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0fdd0d94-70a3-4bb2-8fd7-838efa12b141"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create Calendar Event -> Save Response",
+              "targetStep": "/api/3/workflow_steps/cddc6f3a-4489-404b-a7a1-b782ae06ff9e",
+              "sourceStep": "/api/3/workflow_steps/22ba3d3b-5044-40ac-bca4-2ae96f6bf4fd",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "4e0ae1e8-4b74-4f8f-a24e-f036f49bcf43"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "3cbfd819-5734-401f-a565-39956b0e69bf",
+          "id": 575,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Unread Emails",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Gets all unread emails from your Exchange account. You can also mark the retrieved Unread emails as Read.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d2f094fd-75b5-44d1-aafb-73b956504f43",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Unread Emails",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "ddf16be5-5bec-4fbc-876d-eb535da83abc",
+                "params": {
+                  "limit": "",
+                  "source": "Inbox",
+                  "mark_read": false,
+                  "pull_oldest": false,
+                  "parse_inline": true,
+                  "save_as_attachment": false,
+                  "extract_attach_data": true
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "get_email",
+                "operationTitle": "Get Unread Emails (Deprecated)",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "360",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a5b3e128-6572-4318-a64a-cf0317579a97"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "55225cd1-df1c-44f3-bcec-b2d235a9ffba",
+                "title": "Exchange: Get Unread Emails",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d2f094fd-75b5-44d1-aafb-73b956504f43"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "unread_emails": "{{vars.steps.Get_Unread_Emails.data}}"
+              },
+              "status": null,
+              "top": "226",
+              "left": "746",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "eddb079f-6a78-4e10-a282-abde446293ec"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Unread Emails",
+              "targetStep": "/api/3/workflow_steps/a5b3e128-6572-4318-a64a-cf0317579a97",
+              "sourceStep": "/api/3/workflow_steps/d2f094fd-75b5-44d1-aafb-73b956504f43",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "da7c015f-1602-4bb8-baf2-629a88fc1b66"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Unread Emails -> Save Response",
+              "targetStep": "/api/3/workflow_steps/eddb079f-6a78-4e10-a282-abde446293ec",
+              "sourceStep": "/api/3/workflow_steps/a5b3e128-6572-4318-a64a-cf0317579a97",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ee38dd8b-f4e9-4317-b873-ae4080b44c17"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "4ea1e3ee-77aa-4038-9d80-91f9877f7b02",
+          "id": 576,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Email : Send Email",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Sends an email from your Exchange account.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1685076994,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/5283432f-2165-4dc1-a6fe-9b9ac783d7b8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "3dd106bd-1fcd-468a-bbd8-e24af8cb953c",
+                "title": "Exchange: Send Email",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "5283432f-2165-4dc1-a6fe-9b9ac783d7b8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Send_Email.data}}"
+              },
+              "status": null,
+              "top": "220",
+              "left": "712",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "5c68f5e5-4f0d-410d-b106-47d117333557"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Send Email",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "ddf16be5-5bec-4fbc-876d-eb535da83abc",
+                "params": {
+                  "body": "<p>Hi</p>\n<p>test email please ignore</p>\n<p>Thanks</p>",
+                  "subject": "Test",
+                  "iri_list": "",
+                  "cc_recipients": "",
+                  "to_recipients": "noreply@cybersponse.com",
+                  "bcc_recipients": "",
+                  "inline_iri_list": ""
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "send_email",
+                "operationTitle": "Send Email",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "100",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a8bdcca2-6b50-4ca8-8d3f-d2ed3f2b84e5"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Send Email",
+              "targetStep": "/api/3/workflow_steps/a8bdcca2-6b50-4ca8-8d3f-d2ed3f2b84e5",
+              "sourceStep": "/api/3/workflow_steps/5283432f-2165-4dc1-a6fe-9b9ac783d7b8",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b4355373-21a3-49e1-afd2-eaaacd8cb72d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Send Email -> Save Response",
+              "targetStep": "/api/3/workflow_steps/5c68f5e5-4f0d-410d-b106-47d117333557",
+              "sourceStep": "/api/3/workflow_steps/a8bdcca2-6b50-4ca8-8d3f-d2ed3f2b84e5",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "bcc3c6d6-5e06-4b1c-81c8-75aa6a1d9e03"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "58c11915-3e61-4e6b-b541-fc843f4bd64f",
+          "id": 577,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Exchange > Ingest",
+          "aliasName": null,
+          "tag": "#exchange #dataingestion #ingest",
+          "description": "Fetch unread emails from Exchange mailbox",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297981,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0fa7d678-8b99-497d-8a6f-248043a2d5df",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "fetch_emails_exchange",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "api_body": "{{vars.request.data}}"
+                    }
+                  }
+                },
+                "authentication_methods": [
+                  ""
+                ]
+              },
+              "status": null,
+              "top": "30",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/df26c7a2-4166-4ca5-91e5-548e24c01b5f",
+              "group": null,
+              "uuid": "0fa7d678-8b99-497d-8a6f-248043a2d5df"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Emails",
+              "description": null,
+              "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": [],
+                "pass_input_record": true,
+                "workflowReference": "/api/3/workflows/fba40eed-6897-493c-9813-715d6e2d14d6"
+              },
+              "status": null,
+              "top": "220",
+              "left": "420",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "66ca2555-2ef4-46cf-8d78-469c95790a99"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Extract and Link File Indicator",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Emails.data}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "arguments": {
+                  "email": "{{vars.item}}",
+                  "use_communication": "{{vars.steps.Fetch_Emails.use_communications}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_input_record": false,
+                "workflowReference": "/api/3/workflows/8b6af0ce-9907-4b76-9ca9-1e56465eb703"
+              },
+              "status": null,
+              "top": "320",
+              "left": "740",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "7b9daab8-ad21-45f6-a803-e1ba5537dde6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "alerts_type_map": "{}",
+                "alerts_state_map": "{}",
+                "alerts_status_map": "{}",
+                "fileIndicatorType": "{{(\"IndicatorType\" | picklist(\"File\"))[\"@id\"]}}",
+                "alerts_severity_map": "{}",
+                "alerts_ackSlaStatus_map": "{}",
+                "alerts_respSlaStatus_map": "{}",
+                "alerts_escalatedtoincident_map": "{}"
+              },
+              "status": null,
+              "top": "120",
+              "left": "220",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "bbb11f82-8cf0-4522-b8d1-783cbb4d69c3"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Fetch Emails",
+              "targetStep": "/api/3/workflow_steps/66ca2555-2ef4-46cf-8d78-469c95790a99",
+              "sourceStep": "/api/3/workflow_steps/bbb11f82-8cf0-4522-b8d1-783cbb4d69c3",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0fa84943-35a2-4420-a91b-31f6a719ab05"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Emails -> Create Record Handling",
+              "targetStep": "/api/3/workflow_steps/7b9daab8-ad21-45f6-a803-e1ba5537dde6",
+              "sourceStep": "/api/3/workflow_steps/66ca2555-2ef4-46cf-8d78-469c95790a99",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "30e3e96b-34c9-48f4-b84c-80a33f7ca948"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/bbb11f82-8cf0-4522-b8d1-783cbb4d69c3",
+              "sourceStep": "/api/3/workflow_steps/0fa7d678-8b99-497d-8a6f-248043a2d5df",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "830ff39d-05d7-47c1-824e-553d0ad3f179"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "5d081c06-55fe-47d3-bb36-49eb69b11d8d",
+          "id": 578,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "ingest",
+            "Microsoft",
+            "microsoft-exchange",
+            "exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Exchange > Process Email",
+          "aliasName": null,
+          "tag": "#exchange #dataingestion",
+          "description": "Extract Exchange Email and checks if msg/eml file is present",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "email"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1685354807,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/94b5c8e0-8835-4a1e-ac4a-82c8409af2f6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Attachment is msg or eml",
+              "description": "Check attachments is msg or eml",
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "No",
+                    "step_iri": "/api/3/workflow_steps/94b7cde9-ba61-44bd-b94a-a768b399890c",
+                    "condition": "{{ vars.msgAttachments | length == 0 and vars.emlAttachments | length == 0 }}"
+                  },
+                  {
+                    "option": "Yes",
+                    "step_iri": "/api/3/workflow_steps/ceade1d9-b2b5-4bf6-8971-4caaab712289",
+                    "condition": "{{ vars.msgAttachments | length > 0 or vars.emlAttachments | length >0 }}"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "540",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "261c3078-66cd-4ad3-85ce-7ac8a6a5cfc8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Attachments as Processed Email",
+              "description": null,
+              "arguments": {
+                "processed_email": "{{vars.email.parsed_attachment_data}}"
+              },
+              "status": null,
+              "top": "840",
+              "left": "480",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "2ba9b165-3a7f-426f-b843-eab6295bf34d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Is Attachment a Zip",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "Yes",
+                    "step_iri": "/api/3/workflow_steps/a05f0958-fc03-4fa8-86ad-3e7386df9818",
+                    "condition": "{{ vars.zipAttachments | length >0 }}",
+                    "step_name": "Unzip a attachment"
+                  },
+                  {
+                    "option": "No",
+                    "default": true,
+                    "step_iri": "/api/3/workflow_steps/261c3078-66cd-4ad3-85ce-7ac8a6a5cfc8",
+                    "step_name": "Attachment is msg or eml"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "300",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "40fcce20-68b5-485c-816d-07fd6fc77e16"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "email": "{{ vars.email }}"
+                    }
+                  }
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "94b5c8e0-8835-4a1e-ac4a-82c8409af2f6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Processed Email",
+              "description": null,
+              "arguments": {
+                "processed_email": "{{vars.email}}"
+              },
+              "status": null,
+              "top": "700",
+              "left": "140",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "94b7cde9-ba61-44bd-b94a-a768b399890c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Unzip Attachment",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "type": "Filepath",
+                  "password": "",
+                  "file_name": "{{vars.zipAttachments[0].file}}"
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "unzip_protected_file",
+                "operationTitle": "File: Unzip",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "300",
+              "left": "800",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "a05f0958-fc03-4fa8-86ad-3e7386df9818"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Extract and Update the msg eml file",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.steps.Unzip_Attachment.data.filenames[0].split('.')[-1] |regex_replace(\"[^A-Za-z0-9.\\-]\", \"\") in ['msg', 'eml']}}",
+                "params": {
+                  "filepath": "{{vars.steps.Unzip_Attachment.data.filenames[0]}}",
+                  "filetype": "{{vars.steps.Unzip_Attachment.data.filenames[0].split('.')[-1] |regex_replace(\"[^A-Za-z0-9.\\-]\", \"\") }}"
+                },
+                "version": "3.2.3",
+                "connector": "cyops_utilities",
+                "operation": "extract_email_metadata_new",
+                "operationTitle": "Email: Extracts email's metadata from email file",
+                "step_variables": {
+                  "__temp_extract": "{%if vars.steps.Unzip_Attachment.data.filenames[0].split('.')[-1] == 'msg'%}{{vars.msgAttachments.append(vars.result.data)}}{%else%}{{vars.emlAttachments.append(vars.result.data)}}{%endif%}",
+                  "__temp_extract_email": "{{vars.email.parsed_attachment_data.append(vars.result.data)}}"
+                }
+              },
+              "status": null,
+              "top": "420",
+              "left": "800",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "c8237f23-838f-44f0-a908-4686f138df0e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update headers in parsed data",
+              "description": null,
+              "arguments": {
+                "_temp": "{% for item in vars.email.parsed_attachment_data %}{% set _dummy3=item.update({'reporterEmailBody': vars.email.body}) %}{% set _dummy4=item.update({'reporterEmailAddress': vars.email.headers.from}) %}{% endfor %}"
+              },
+              "status": null,
+              "top": "720",
+              "left": "480",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "ceade1d9-b2b5-4bf6-8971-4caaab712289"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set the other Attachments",
+              "description": null,
+              "arguments": {
+                "__set_other_Attachment": "{% for file in vars.steps.Unzip_Attachment.data.filenames %}\n\n{%if file.split('.')[-1] not in ['msg', 'eml']%}\n{% set attachment_name = file %}\n{% set dummy_attachment = {'file':attachment_name,'metadata':{'filename':attachment_name}} %}\n{{vars.email.attachments.append(dummy_attachment)}}\n{%endif%}\n{% endfor %}"
+              },
+              "status": null,
+              "top": "540",
+              "left": "800",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "de677504-f35f-41e8-9029-ae6437c61c97"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "_temp": "{% set lower_case_headers = {} %}{% for key, value in vars.email.headers.items() %}{% set _dummy = lower_case_headers.update({key.lower(): value}) %}{% endfor %}{{vars.email.update({'headers': lower_case_headers}) }}",
+                "emlAttachments": "{{vars.email.attachments  | json_query(\"[?contains(metadata.filename, '.eml')]\") }}",
+                "msgAttachments": "{{vars.email.attachments  | json_query(\"[?contains(metadata.filename, '.msg')]\") }}",
+                "zipAttachments": "{{vars.email.attachments  | json_query(\"[?contains(metadata.filename, '.zip')]\") }}",
+                "dummy_attachment2": "{\"file\":\"\", \"metadata\":{\"filename\":\"\"}}"
+              },
+              "status": null,
+              "top": "160",
+              "left": "300",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "e6a67a88-66c9-4276-8ab8-831003633b3a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/e6a67a88-66c9-4276-8ab8-831003633b3a",
+              "sourceStep": "/api/3/workflow_steps/94b5c8e0-8835-4a1e-ac4a-82c8409af2f6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "369d7ac2-7504-4847-adf1-ae53f5d1beef"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Is Attachment a Zip -> Attachment is msg or eml",
+              "targetStep": "/api/3/workflow_steps/261c3078-66cd-4ad3-85ce-7ac8a6a5cfc8",
+              "sourceStep": "/api/3/workflow_steps/40fcce20-68b5-485c-816d-07fd6fc77e16",
+              "label": "No",
+              "isExecuted": false,
+              "uuid": "38f68695-a33d-456a-b102-b2e6651ebabf"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Is Attachment a Zip",
+              "targetStep": "/api/3/workflow_steps/40fcce20-68b5-485c-816d-07fd6fc77e16",
+              "sourceStep": "/api/3/workflow_steps/e6a67a88-66c9-4276-8ab8-831003633b3a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "55afdf38-be8b-4367-935a-2b16e4030083"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Is Attachment a Zip -> Unzip a attachment",
+              "targetStep": "/api/3/workflow_steps/a05f0958-fc03-4fa8-86ad-3e7386df9818",
+              "sourceStep": "/api/3/workflow_steps/40fcce20-68b5-485c-816d-07fd6fc77e16",
+              "label": "Yes",
+              "isExecuted": false,
+              "uuid": "6e7a998b-88f6-4a20-b371-9312650fff80"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Extract and Update the msg eml file -> Set the other Attachments",
+              "targetStep": "/api/3/workflow_steps/de677504-f35f-41e8-9029-ae6437c61c97",
+              "sourceStep": "/api/3/workflow_steps/c8237f23-838f-44f0-a908-4686f138df0e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7b6ef1b7-5ca8-4c2c-b423-9061fcf40633"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Attachment is msg or eml -> Update headers in parsed data",
+              "targetStep": "/api/3/workflow_steps/ceade1d9-b2b5-4bf6-8971-4caaab712289",
+              "sourceStep": "/api/3/workflow_steps/261c3078-66cd-4ad3-85ce-7ac8a6a5cfc8",
+              "label": "Yes",
+              "isExecuted": false,
+              "uuid": "aaa4d60b-6f41-4d0c-a8d0-7f73a19bbdaf"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Attachment is msg or eml -> Set Processed Email",
+              "targetStep": "/api/3/workflow_steps/94b7cde9-ba61-44bd-b94a-a768b399890c",
+              "sourceStep": "/api/3/workflow_steps/261c3078-66cd-4ad3-85ce-7ac8a6a5cfc8",
+              "label": "No",
+              "isExecuted": false,
+              "uuid": "bc95c402-4927-4609-98af-24a70131652e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Update headers in parsed data -> Set Attachments as Processed Email",
+              "targetStep": "/api/3/workflow_steps/2ba9b165-3a7f-426f-b843-eab6295bf34d",
+              "sourceStep": "/api/3/workflow_steps/ceade1d9-b2b5-4bf6-8971-4caaab712289",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d35801ff-866c-4f3f-b827-673c6c2f99b5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Unzip Attachment -> Extract and Update the msg eml file",
+              "targetStep": "/api/3/workflow_steps/c8237f23-838f-44f0-a908-4686f138df0e",
+              "sourceStep": "/api/3/workflow_steps/a05f0958-fc03-4fa8-86ad-3e7386df9818",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e7423d21-84b1-4dd0-8e66-7ff687327f65"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Set the other Attachments -> Attachment is msg or eml",
+              "targetStep": "/api/3/workflow_steps/261c3078-66cd-4ad3-85ce-7ac8a6a5cfc8",
+              "sourceStep": "/api/3/workflow_steps/de677504-f35f-41e8-9029-ae6437c61c97",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f74b2e98-37ec-4588-bba1-83eeaccf60b0"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "6b61c15e-e351-4de4-989c-76d646b03d11",
+          "id": 579,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "Microsoft",
+            "microsoft-exchange",
+            "exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Email : Search Email",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Runs a query in your Exchange account and searches emails, based on input parameters, such as folder name, email address, body, and subject, that you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1687266737,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c5b3b6e7-96d7-48df-9e77-80b77ed27e57",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "emails": "{{vars.steps.Search_Email.data}}"
+              },
+              "status": null,
+              "top": "220",
+              "left": "800",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "bb255e5d-107c-4a44-b40b-688b003c1fcf"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Email",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "864927b0-c9c7-41a0-90a3-f8158f967a2c",
+                "params": {
+                  "query": {
+                    "is_read": false,
+                    "subject__icontains": "365",
+                    "datetime_received__gt": "2018-01-20T18:30:00.000Z"
+                  },
+                  "range": "",
+                  "folder": "",
+                  "body_text": "",
+                  "pull_oldest": false,
+                  "sender_text": "",
+                  "parse_inline": "",
+                  "query_method": "Basic",
+                  "subject_text": "",
+                  "target_email": "",
+                  "extract_attach_data": false,
+                  "exclude_absolute_path": false
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "run_query",
+                "operationTitle": "Search Email",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "bb76e75f-a24b-4583-9d22-a2f3ffebfc70"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "348433fa-6b13-4a18-9d23-170c3272e90d",
+                "title": "Exchange: Search Email",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "26",
+              "left": "31",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c5b3b6e7-96d7-48df-9e77-80b77ed27e57"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Search Email -> Save Response",
+              "targetStep": "/api/3/workflow_steps/bb255e5d-107c-4a44-b40b-688b003c1fcf",
+              "sourceStep": "/api/3/workflow_steps/bb76e75f-a24b-4583-9d22-a2f3ffebfc70",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2e9fddd3-b9a6-4940-945c-05f93d9dea27"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Search Email",
+              "targetStep": "/api/3/workflow_steps/bb76e75f-a24b-4583-9d22-a2f3ffebfc70",
+              "sourceStep": "/api/3/workflow_steps/c5b3b6e7-96d7-48df-9e77-80b77ed27e57",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f14f2226-3b89-459f-aa15-e12cd61299d8"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "6b943d43-4a47-4ea5-a14e-84f7419b2bf3",
+          "id": 5622,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Categorize: Get Category",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Retrieves categories associated with the specified email in your Exchange account based on the message ID that you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d7cc5c17-bfff-4472-a3a6-be145a43f3cb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Get_Category.data}}"
+              },
+              "status": null,
+              "top": "289",
+              "left": "780",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "96e98540-d5ae-496d-969f-20c62278d1ba"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Category",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "3617baf9-edb7-4503-b8d7-b466a4449037",
+                "params": {
+                  "source": "Inbox",
+                  "message_id": "<157510367354.20802.18006934464241300011@shravan.cybersponse.net>"
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "get_category",
+                "operationTitle": "Get Category",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "111",
+              "left": "560",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a7586257-8580-4a2e-b9be-3045cf815e8c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "7a271562-c2a2-46c8-aa09-a13f97252f3b",
+                "title": "Exchange: Get Category",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "114",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d7cc5c17-bfff-4472-a3a6-be145a43f3cb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Category",
+              "targetStep": "/api/3/workflow_steps/a7586257-8580-4a2e-b9be-3045cf815e8c",
+              "sourceStep": "/api/3/workflow_steps/d7cc5c17-bfff-4472-a3a6-be145a43f3cb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "81f3b1ab-b8c6-4484-ad88-39587bd44ce1"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Category -> Save Response",
+              "targetStep": "/api/3/workflow_steps/96e98540-d5ae-496d-969f-20c62278d1ba",
+              "sourceStep": "/api/3/workflow_steps/a7586257-8580-4a2e-b9be-3045cf815e8c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d0530521-6a42-4c98-808d-1e19e4f1bf73"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "7196cd15-a344-4bb7-9cf8-e7cc78e01d47",
+          "id": 581,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Categorize: Remove Category",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Removes categories from an email in your Exchange account based on the message ID and categories that you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b842f464-e92b-4b52-8ebb-a998665a4bf9",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Remove Category",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "3617baf9-edb7-4503-b8d7-b466a4449037",
+                "params": {
+                  "source": "Inbox",
+                  "categories": "[\"malware1\",\"spam1\"]",
+                  "message_id": "<157510367354.20802.18006934464241300011@shravan.cybersponse.net>"
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "remove_category",
+                "operationTitle": "Remove Category",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "134",
+              "left": "540",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "576391e9-7eb9-4c5a-b941-c06fc54aa357"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Remove_Category.data}}"
+              },
+              "status": null,
+              "top": "288",
+              "left": "881",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "8284669d-1b30-4828-b913-d949db146a0c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8692f722-74f6-42e1-bc0d-d25d5b785191",
+                "title": "Exchange: Remove Category",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "b842f464-e92b-4b52-8ebb-a998665a4bf9"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Remove Category",
+              "targetStep": "/api/3/workflow_steps/576391e9-7eb9-4c5a-b941-c06fc54aa357",
+              "sourceStep": "/api/3/workflow_steps/b842f464-e92b-4b52-8ebb-a998665a4bf9",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "cd29432a-cbcb-425e-a42c-8a46643fa3aa"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Remove Category -> Save Response",
+              "targetStep": "/api/3/workflow_steps/8284669d-1b30-4828-b913-d949db146a0c",
+              "sourceStep": "/api/3/workflow_steps/576391e9-7eb9-4c5a-b941-c06fc54aa357",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ef2d951b-5d76-439e-a8d6-0fb17d5bf091"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "8650b0b4-9e91-45c0-a63e-956737f861bb",
+          "id": 582,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Email : Send Reply",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Sends reply to the mail of which the MessageID is provided in the parameters",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/75f6ad0d-71ce-4bd9-b583-e16eca50c8d2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "Response": "{{vars.steps.Send_reply}}"
+              },
+              "status": null,
+              "top": "220",
+              "left": "760",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "32805ca8-c959-4c52-9889-1616f93147b9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Send reply",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "7281ed4c-62d1-42f9-b49c-5def872778d2",
+                "params": {
+                  "body": "<p>Test Email</p>",
+                  "subject": "TEST subject",
+                  "iri_list": "",
+                  "reply_all": false,
+                  "message_id": "<DS7SPRMB0008A6E1246F6F16764EC749869F9@DS7SPRMB0008.namprd19.prod.outlook.com>",
+                  "to_recipients": ""
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "send_reply",
+                "operationTitle": "Send Reply",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "440",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "420e258e-54ad-479d-9247-33da54c77eed"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "1df79232-09c8-44e5-b79b-5a2c81a80888",
+                "title": "Exchange: Send Reply",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "75f6ad0d-71ce-4bd9-b583-e16eca50c8d2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Send reply -> Save Response",
+              "targetStep": "/api/3/workflow_steps/32805ca8-c959-4c52-9889-1616f93147b9",
+              "sourceStep": "/api/3/workflow_steps/420e258e-54ad-479d-9247-33da54c77eed",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "26fb3337-dafb-4852-8fd3-598de5c5ca2d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Send reply",
+              "targetStep": "/api/3/workflow_steps/420e258e-54ad-479d-9247-33da54c77eed",
+              "sourceStep": "/api/3/workflow_steps/75f6ad0d-71ce-4bd9-b583-e16eca50c8d2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c160c5c1-64f0-4749-9403-bc6e216ba7b7"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "8a658374-4525-4f37-97c3-0caf0cf5c41e",
+          "id": 583,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Exchange > Extract and Link File Indicator",
+          "aliasName": null,
+          "tag": "#exchange #dataingestion #create",
+          "description": "Creates Alerts, Indications,Attachments and Communications records based on email headers and linked attachments and indicators records with alert.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "email",
+            "use_communication"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1685082059,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/8fdded9d-d760-42f2-9d4c-d9207a8832ef",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Indicators",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Upload_File_IOCs_and_Create_Attachments}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "tlp": "/api/3/picklists/7bff95b7-6438-4b01-b23a-0fe8cb5b33d3",
+                  "file": "{{ vars.item.data.file['@id'] or None }}",
+                  "value": "File -  {{vars.item.data.file.filename.split(\"/\")[-1] | regex_replace(\"[^A-Za-z0-9. /\\-]\", \"\") if \"/tmp/\" in vars.item.data.file.filename else vars.item.data.file.filename |regex_replace(\"[^A-Za-z0-9. /\\-]\", \"\")}}",
+                  "__replace": "false",
+                  "indicatorStatus": "/api/3/picklists/2f5cff61-fbff-4bb3-96be-302b78a9fb47",
+                  "typeofindicator": "{{(\"IndicatorType\" | picklist(\"File\"))[\"@id\"]}}",
+                  "enrichmentStatus": "/api/3/picklists/a6d9da29-27b1-4b8a-965d-8d91518540d5"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/upsert/indicators",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "200",
+              "left": "700",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "25ac2cf3-5aca-4d35-b009-655e6de0eb5d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": null,
+              "arguments": {
+                "when": "{{(vars.input.params.email[\"body\"][\"html\"] | regex_search('(?<=FSR)(.*?)(?=FSR)') is none) if vars.input.params.email[\"body\"][\"html\"] else (vars.input.params.email[\"body\"][\"text\"] | regex_search('(?<=FSR)(.*?)(?=FSR)') is none)}}",
+                "resource": {
+                  "name": "{% if vars.input.params.email.headers.subject %} {{vars.input.params.email.headers.subject}} {% else %} None {% endif %}",
+                  "type": "/api/3/picklists/c145394b-069a-449b-a05e-67980d0f4b82",
+                  "state": "/api/3/picklists/a1bac09b-1441-45aa-ad1b-c88744e48e72",
+                  "source": "{% if  'reporterEmailAddress' in vars.input.params.email %}User Reported{% else %}Email Server{% endif %}",
+                  "status": "/api/3/picklists/7de816ff-7140-4ee5-bd05-93ce22002146",
+                  "emailTo": "{{vars.input.params.email[\"headers\"][\"to\"]}}",
+                  "fileHash": "{% if vars.input.params.email.attachments | json_query(\"[*].metadata.md5\") | join(',') %}{{vars.input.params.email.attachments | json_query(\"[*].metadata.md5\") | join(', ')}}{%else%}NA{% endif%}",
+                  "reporter": "{{vars.input.params.email.reporterEmailAddress}}",
+                  "severity": "/api/3/picklists/b3c20a3a-ecfd-4adc-a225-0205968e6793",
+                  "sourceId": "{% if vars.input.params.email.headers['message-id'] %} {{ vars.input.params.email.headers['message-id'] | join }} {% else %} null {% endif %}",
+                  "__replace": "false",
+                  "emailBody": "{%if vars.input.params.email[\"body\"][\"html\"] %}<p>{{vars.input.params.email[\"body\"][\"html\"]}}{%else%}{{vars.input.params.email[\"body\"][\"text\"]}}</p>{%endif%}",
+                  "emailFrom": "{{vars.input.params.email[\"headers\"][\"from\"]}}",
+                  "fileNames": "{% if vars.input.params.email.attachments | json_query(\"[*].metadata.md5\") | join(',') %}{{vars.input.params.email.attachments | json_query(\"[*].metadata.md5\") | join(', ')}}{%else%}NA{% endif%}",
+                  "indicators": "{{vars.steps.Create_Indicators |json_query('[].\"@id\"')}}",
+                  "returnPath": "{% if vars.input.params.email.headers['return-path'] %}{{ (vars.input.params.email.headers['return-path'] |join(\", \") if vars.input.params.email.headers['return-path'] is not string else vars.input.params.email.headers['return-path']) | replace(\"<\",\"\") | replace(\">\",\"\")}}{% endif %}",
+                  "sourcedata": "{{vars.input.params.email | toJSON}}",
+                  "attachments": "{{vars.steps.Upload_File_IOCs_and_Create_Attachments|json_query('[].\"data\".\"@id\"')}}",
+                  "ackSlaStatus": "/api/3/picklists/72979f64-e8b9-4888-a965-957e0ec24818",
+                  "emailHeaders": "{{vars.input.params.email[\"headers\"] | toJSON}}",
+                  "emailSubject": "{{vars.input.params.email[\"headers\"][\"subject\"]}}",
+                  "senderDomain": "{% if vars.input.params.email.headers.from %}{{(vars.input.params.email.headers.from.split('<')[-1] | replace(\">\",\"\")).split('@')[-1] | replace(\">\",\"\")}}{% endif %}",
+                  "respSlaStatus": "/api/3/picklists/72979f64-e8b9-4888-a965-957e0ec24818",
+                  "priorityWeight": 1,
+                  "reporterEmailBody": "{% if vars.input.params.email[\"reporterEmailBody\"][\"html\"] %}<p>{{vars.input.params.email[\"reporterEmailBody\"][\"html\"]}}</p> {%else%}{{vars.input.params.email[\"reporterEmailBody\"][\"text\"]}}{%endif%}\n",
+                  "senderEmailAddress": "{% if vars.input.params.email.headers.from %}{{vars.input.params.email.headers.from }}{% endif %}",
+                  "escalatedtoincident": "/api/3/picklists/2128a09c-153d-4db3-985d-de6be33deae5",
+                  "alertRemainingAckSLA": 0,
+                  "recipientEmailAddress": "{% if vars.input.params.email.headers['to'] is not string %}{{vars.input.params.email.headers['to'] | join(',') }}{%else%}{{vars.input.params.email.headers['to']}}{% endif%}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/upsert/alerts",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "320",
+              "left": "1440",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "826668f8-e849-4790-b96c-8b75c1306a84"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Upload File IOCs and Create Attachments",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "name": "{{vars.item.metadata.filename.split(\"/\")[-1] if \"/tmp/\" in vars.item.metadata.filename else vars.item.metadata.filename}}",
+                  "filename": "{{vars.item.metadata.filename.split(\"/\")[-1] | regex_replace(\"[^A-Za-z0-9. /\\-]\", \"\") if \"/tmp/\" in vars.item.metadata.filename else vars.item.metadata.filename |regex_replace(\"[^A-Za-z0-9. /\\-]\", \"\")}}",
+                  "file_path": "{{vars.item.file}}",
+                  "description": "",
+                  "create_attachment": true
+                },
+                "version": "3.2.3",
+                "for_each": {
+                  "item": "{{vars.input.params.email.attachments}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "connector": "cyops_utilities",
+                "operation": "upload_file_to_cyops",
+                "operationTitle": "File: Upload a file to CyOPs and Create an Attachment",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "360",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "8973160b-c2e2-4485-973d-1c2578f8e89c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "8fdded9d-d760-42f2-9d4c-d9207a8832ef"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Communications Record",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.input.params['use_communication']}}",
+                "resource": {
+                  "to": "{{vars.input.params.email[\"headers\"][\"to\"]}}",
+                  "body": "<p>{{vars.input.params.email[\"body\"][\"html\"]}}</p>",
+                  "from": "{{vars.input.params.email[\"headers\"][\"from\"]}}",
+                  "type": "/api/3/picklists/b8e7c917-5299-4a43-9c1a-fac1d9a5438f",
+                  "alerts": "{%if vars.input.params.email[\"body\"][\"html\"] | regex_search('(?<=FSR)(.*?)(?=FSR)')%}{{vars.input.params.email[\"body\"][\"html\"] | regex_search('(?<=FSR)(.*?)(?=FSR)') | string | b64decode}}{%else%}[]{%endif%}",
+                  "subject": "{{vars.input.params.email[\"headers\"][\"subject\"]}}",
+                  "__replace": "",
+                  "emailRefId": "{{ vars.input.params.email.headers['message-id'] | join }}",
+                  "msgDirection": "/api/3/picklists/c89f8eb7-0669-4535-9935-888ff46f544f"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/communication",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "260",
+              "left": "1060",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "dab8449c-3e62-4b07-a115-c30bcd6dd4eb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Upload File IOCs -> Create Indicators",
+              "targetStep": "/api/3/workflow_steps/25ac2cf3-5aca-4d35-b009-655e6de0eb5d",
+              "sourceStep": "/api/3/workflow_steps/8973160b-c2e2-4485-973d-1c2578f8e89c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "15ed5689-8ee8-4693-95f8-911001865583"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Upload File IOCs",
+              "targetStep": "/api/3/workflow_steps/8973160b-c2e2-4485-973d-1c2578f8e89c",
+              "sourceStep": "/api/3/workflow_steps/8fdded9d-d760-42f2-9d4c-d9207a8832ef",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "73d50e2a-ce9d-4c4e-8a7c-6a41847ad24d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create Indicators -> Create Communications Record",
+              "targetStep": "/api/3/workflow_steps/dab8449c-3e62-4b07-a115-c30bcd6dd4eb",
+              "sourceStep": "/api/3/workflow_steps/25ac2cf3-5aca-4d35-b009-655e6de0eb5d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a3b5b0de-6f10-4cab-8b87-122ffeddc7f5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create Communications Record -> Create Record",
+              "targetStep": "/api/3/workflow_steps/826668f8-e849-4790-b96c-8b75c1306a84",
+              "sourceStep": "/api/3/workflow_steps/dab8449c-3e62-4b07-a115-c30bcd6dd4eb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a43ff608-5ce8-40d3-8bde-c6fd7a711a93"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "8b6af0ce-9907-4b76-9ca9-1e56465eb703",
+          "id": 584,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "create",
+            "Microsoft",
+            "microsoft-exchange",
+            "exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Email : Mark Email as Read",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Marks an unread email as read in your Exchange account, based on the message ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/58c04223-e037-45f5-84bd-a9747b570a3c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Mark Email as Read",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "fd0d33bf-31b9-432e-960b-569aa9d03406",
+                "params": {
+                  "message_id": "<DB7PR04MB508259D59CA1D3B16C871A3CF6E20@DB7PR04MB5082.eurprd04.prod.outlook.com>",
+                  "folder_name": ""
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "mark_as_read",
+                "operationTitle": "Mark Email as Read",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "214",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4120eb58-71b0-47d4-b544-dbd62facd915"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6420e97a-5ddf-46e9-892f-265691b6c6f6",
+                "title": "Exchange: Mark Email as Read",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "58c04223-e037-45f5-84bd-a9747b570a3c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Mark_Email_as_Read.data}}"
+              },
+              "status": null,
+              "top": "298",
+              "left": "518",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "7a7094fe-0034-40eb-b892-f929c92bd226"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Mark Email as Read",
+              "targetStep": "/api/3/workflow_steps/4120eb58-71b0-47d4-b544-dbd62facd915",
+              "sourceStep": "/api/3/workflow_steps/58c04223-e037-45f5-84bd-a9747b570a3c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "5b4a078d-3577-4a21-88b0-1a7e0914355b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Mark Email as Read -> Save Response",
+              "targetStep": "/api/3/workflow_steps/7a7094fe-0034-40eb-b892-f929c92bd226",
+              "sourceStep": "/api/3/workflow_steps/4120eb58-71b0-47d4-b544-dbd62facd915",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7c0e6f1b-0d88-4246-aa10-cd087e31daf1"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "a50ff3b2-7fda-446e-a09a-a8cc2d3a66b5",
+          "id": 585,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Contacts : Get Contacts",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Retrieves the list of contacts from the mailbox associated with your Exchange account.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/db84cd40-4538-4c69-a196-4858147d6fbb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Contact list",
+              "description": null,
+              "arguments": {
+                "contact_list": "{{vars.steps.Get_Contacts.data}}"
+              },
+              "status": null,
+              "top": "200",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "02df0080-7274-4e6d-9539-332780684c0a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Contacts",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "ddf16be5-5bec-4fbc-876d-eb535da83abc",
+                "params": [],
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "get_contacts",
+                "operationTitle": "Get Contacts",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "107",
+              "left": "200",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "2e1bfe4b-75d5-4317-9211-f4d52da097d4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "fc524f9d-bfa2-4546-ad1b-646c66901319",
+                "title": "Exchange: Get Contact",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "db84cd40-4538-4c69-a196-4858147d6fbb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Contacts -> Save Contact list",
+              "targetStep": "/api/3/workflow_steps/02df0080-7274-4e6d-9539-332780684c0a",
+              "sourceStep": "/api/3/workflow_steps/2e1bfe4b-75d5-4317-9211-f4d52da097d4",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "989d7728-d91f-4000-ba9c-c3fc0e2afefb"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Contacts",
+              "targetStep": "/api/3/workflow_steps/2e1bfe4b-75d5-4317-9211-f4d52da097d4",
+              "sourceStep": "/api/3/workflow_steps/db84cd40-4538-4c69-a196-4858147d6fbb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f594880f-bf33-47c9-b37a-ff9c5ab4e978"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "b76b25a3-25ce-4da5-b8fc-0e3af2b6ace6",
+          "id": 586,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Calendar : Get Calendar Events",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Gets events from the calendar on the Exchange server, based on the filter criteria, such as subject, from time, and to time, you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/6b40ee65-0e30-4350-a6ac-03665bc69c1b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "5f467252-6646-487a-907e-aa40b24ba6e3",
+                "title": "Exchange: Get Calendar Events",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "6b40ee65-0e30-4350-a6ac-03665bc69c1b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Calendar Events",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "ddf16be5-5bec-4fbc-876d-eb535da83abc",
+                "params": {
+                  "subject": "",
+                  "to_time": "",
+                  "from_time": ""
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "get_calendar_events",
+                "operationTitle": "Get Calendar Events",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "127",
+              "left": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "79defa9f-7e54-4b43-a74a-26c8a5654459"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "calendar_events": "{{vars.steps.Get_Calendar_Events.data}}"
+              },
+              "status": null,
+              "top": "240",
+              "left": "387",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "876861d3-6994-4782-a6fc-d562a58be232"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Calendar Events",
+              "targetStep": "/api/3/workflow_steps/79defa9f-7e54-4b43-a74a-26c8a5654459",
+              "sourceStep": "/api/3/workflow_steps/6b40ee65-0e30-4350-a6ac-03665bc69c1b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "09f1d015-12ae-419b-be22-6d15ca5ac4eb"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Calendar Events -> Save Response",
+              "targetStep": "/api/3/workflow_steps/876861d3-6994-4782-a6fc-d562a58be232",
+              "sourceStep": "/api/3/workflow_steps/79defa9f-7e54-4b43-a74a-26c8a5654459",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "34d0d5e4-a522-405d-a293-5f685e3dc19a"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "cbd52938-de16-4886-971a-7cf221245465",
+          "id": 587,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Email : Move Email",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Moves an email from a specified folder to a specified folder, based on the message ID and the source and destination folder you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ec38a022-b73c-41ab-a2d0-6298fe36674c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Move Email",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "7b3a6289-0e3b-46b6-90c4-d5378adba644",
+                "params": {
+                  "source": "Folder Name",
+                  "message_id": "<0ca9e90bcc304f159c030835c1adfdf4-JVKUGUBNKBZG6ZBNIJHDE7CPJVJU2T2OJF6EGQ2EMVRWY2LOMV6FG3LUOA======@microsoft.com>",
+                  "destination": "Folder Path",
+                  "source_email": "",
+                  "target_email": "",
+                  "source_folder": "analysis",
+                  "destination_folder_path": "/root/Top of Information Store/Malware"
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "move_email",
+                "operationTitle": "Move Email",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "154",
+              "left": "454",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "0f85bfe4-6126-498b-9ca5-d981be2152d5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.steps.Move_Email.data}}"
+              },
+              "status": null,
+              "top": "276",
+              "left": "824",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "7c6e4ac0-4502-45c5-adbc-e3335327525f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "784aa2e8-2895-4930-9f64-5e882677052b",
+                "title": "Exchange: Move Email",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "27",
+              "left": "60",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "ec38a022-b73c-41ab-a2d0-6298fe36674c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Move Email",
+              "targetStep": "/api/3/workflow_steps/0f85bfe4-6126-498b-9ca5-d981be2152d5",
+              "sourceStep": "/api/3/workflow_steps/ec38a022-b73c-41ab-a2d0-6298fe36674c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "514cec94-fa28-4c9c-9c51-42c6e2627c2b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Move Email -> Save Response",
+              "targetStep": "/api/3/workflow_steps/7c6e4ac0-4502-45c5-adbc-e3335327525f",
+              "sourceStep": "/api/3/workflow_steps/0f85bfe4-6126-498b-9ca5-d981be2152d5",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c0a9c443-3cc2-4366-824d-7fc8b5c59175"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "d03faa6a-228e-4147-a9d9-efd872833c26",
+          "id": 588,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Exchange > Fetch",
+          "aliasName": null,
+          "tag": "#exchange #dataingestion #fetch",
+          "description": "Fetches Email from Exchange mailbox",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297981,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/8aba1f7d-49b2-4372-abed-c5f900a2ec8b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Process emails",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_emails.data}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "arguments": {
+                  "email": "{{vars.item}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_input_record": true,
+                "workflowReference": "/api/3/workflows/6b61c15e-e351-4de4-989c-76d646b03d11"
+              },
+              "status": null,
+              "top": "300",
+              "left": "580",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "2bdf7a64-4f2e-4b60-8d53-ad13970c112b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Source\",\n    \"name\": \"source\",\n    \"type\": \"select\",\n    \"tooltip\": \"Retrieve the unread emails for selected folder from the Exchange server.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\n      \"Inbox\",\n      \"Sent\",\n      \"Drafts\",\n      \"Trash\",\n      \"Custom Folder\"\n    ],\n    \"value\": \"Inbox\",\n    \"onchange\": {\n      \"Custom Folder\": [\n        {\n          \"title\": \"Folder Name\",\n          \"tooltip\": \"Retrieve the unread emails from specified source folder in Exchange server\",\n          \"name\": \"source_folder\",\n          \"required\": true,\n          \"editable\": true,\n          \"visible\": true,\n          \"type\": \"text\",\n          \"value\": \"\"\n        }\n      ]\n    }\n  },\n  {\n    \"title\": \"Parse Inline Images\",\n    \"name\": \"parse_inline\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Select this option to retrieve the body of the unread emails including inline images, from the Exchange server\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": false\n  },\n  {\n    \"title\": \"Use Unified Communication\",\n    \"name\": \"use_communications\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Select this option to create a record of the retrieved email in the Communication Module\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": true\n  }\n]"
+                }
+              },
+              "status": null,
+              "top": "34",
+              "left": "80",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "8aba1f7d-49b2-4372-abed-c5f900a2ec8b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Consolidated Result",
+              "description": null,
+              "arguments": {
+                "data": "{{ vars.steps.Process_emails | json_query('[].processed_email[]') }}",
+                "use_communications": "{{vars.use_communications}}"
+              },
+              "status": null,
+              "top": "406",
+              "left": "740",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "aa93125e-78ad-4a34-af13-4dd28b218323"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch emails",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "5593cfcb-bc5e-4fa8-a9c1-eab613ecf514",
+                "params": {
+                  "limit": "",
+                  "source": "{{vars.source}}",
+                  "mark_read": "{{false if vars.request.env_setup else true}}",
+                  "pull_oldest": "",
+                  "parse_inline": "{{vars.parse_inline}}",
+                  "source_folder": "{{vars.source_folder}}",
+                  "save_as_attachment": false,
+                  "extract_attach_data": true,
+                  "exclude_absolute_path": ""
+                },
+                "version": "4.1.0",
+                "connector": "exchange",
+                "operation": "get_email_new",
+                "operationTitle": "Get Unread Emails",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "220",
+              "left": "420",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "b78ee529-3862-4dbe-a221-876614ebc852"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "source": "Inbox",
+                "parse_inline": "false",
+                "source_folder": "",
+                "use_communications": "true"
+              },
+              "status": null,
+              "top": "120",
+              "left": "260",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "c23e6155-805e-4747-94ac-cd38c0ea531f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/c23e6155-805e-4747-94ac-cd38c0ea531f",
+              "sourceStep": "/api/3/workflow_steps/8aba1f7d-49b2-4372-abed-c5f900a2ec8b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e201c41c-7466-430d-8698-4452cd009c38"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch emails -> Process emails",
+              "targetStep": "/api/3/workflow_steps/2bdf7a64-4f2e-4b60-8d53-ad13970c112b",
+              "sourceStep": "/api/3/workflow_steps/b78ee529-3862-4dbe-a221-876614ebc852",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e81d55d3-269a-41df-94d7-b0c664c23b2b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Fetch emails",
+              "targetStep": "/api/3/workflow_steps/b78ee529-3862-4dbe-a221-876614ebc852",
+              "sourceStep": "/api/3/workflow_steps/c23e6155-805e-4747-94ac-cd38c0ea531f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f5a3b53f-0a51-4d0c-9ea9-24fc09998174"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Process emails -> Set Consolidated Result",
+              "targetStep": "/api/3/workflow_steps/aa93125e-78ad-4a34-af13-4dd28b218323",
+              "sourceStep": "/api/3/workflow_steps/2bdf7a64-4f2e-4b60-8d53-ad13970c112b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "f7c1fb96-261b-493d-b11b-ca73f0db86b6"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "fba40eed-6897-493c-9813-715d6e2d14d6",
+          "id": 589,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "fetch",
+            "Microsoft",
+            "microsoft-exchange",
+            "exchange"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Email : Delete Email",
+          "aliasName": null,
+          "tag": "#exchange",
+          "description": "Deletes an email from a specified folder in your Exchange account, based on the input parameters, such as message ID and delete type, you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1684297912,
+          "collection": "/api/3/workflow_collections/56f4ef93-2e4b-4bcb-891a-4a3c2b95d962",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7b287797-9a13-41e9-aad7-eacbfb01f9dc",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Delete Email",
+              "description": null,
+              "arguments": {
+                "name": "Exchange",
+                "config": "ddf16be5-5bec-4fbc-876d-eb535da83abc",
+                "params": {
+                  "message_id": "<0ca9e90bcc304f159c030835c1adfdf4-JVKUGUBNKBZG6ZBNIJHDE7CPJVJU2T2OJF6EGQ2EMVRWY2LOMV6FG3LUOA======@microsoft.com>",
+                  "delete_type": "Move To Trash",
+                  "folder_name": "Drafts",
+                  "target_email": ""
+                },
+                "version": "4.2.1",
+                "connector": "exchange",
+                "operation": "delete_email",
+                "operationTitle": "Delete Email",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "17dd7ae8-5fb7-40f0-b4e2-8562c6350f71"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "delete_response": "{{vars.steps.Delete_Email.data}}"
+              },
+              "status": null,
+              "top": "231",
+              "left": "747",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "26ef1a80-d375-4418-849b-b81a62dfddb3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a370b546-8b71-4b5f-b0eb-b6e193242df4",
+                "title": "Exchange: Delete Email",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "27",
+              "left": "80",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "7b287797-9a13-41e9-aad7-eacbfb01f9dc"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Delete Email -> Save Response",
+              "targetStep": "/api/3/workflow_steps/26ef1a80-d375-4418-849b-b81a62dfddb3",
+              "sourceStep": "/api/3/workflow_steps/17dd7ae8-5fb7-40f0-b4e2-8562c6350f71",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "63362fa1-a2e3-4b4d-9c4e-43825872f8e3"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Delete Email",
+              "targetStep": "/api/3/workflow_steps/17dd7ae8-5fb7-40f0-b4e2-8562c6350f71",
+              "sourceStep": "/api/3/workflow_steps/7b287797-9a13-41e9-aad7-eacbfb01f9dc",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e74387e1-0a46-4c10-be82-a5ae079f9c3d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "fee06528-dbc6-4b52-ab71-9ccc6d70dca8",
+          "id": 590,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "Microsoft",
+            "microsoft-exchange"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "Microsoft",
+    "microsoft-exchange",
+    "dataingestion",
+    "ingest",
+    "exchange",
+    "create",
+    "fetch"
+  ]
+}

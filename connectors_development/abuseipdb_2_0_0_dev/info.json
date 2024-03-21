@@ -1,0 +1,215 @@
+{
+    "name": "abuseipdb",
+    "version": "2.0.0",
+    "label": "AbuseIPDB",
+    "description": "AbuseIPDB Connector helps to report and identify IP addresses that have been associated with malicious activity online",
+    "publisher": "",
+    "icon_small_name": "small.png",
+    "icon_large_name": "large.png",
+    "id": 100,
+    "configuration": {
+        "fields": [
+            {
+                "title": "Server URL",
+                "name": "server_url",
+                "description": "URL of the AbuseIPDB API server to which you will connect and perform automated operations. For example, https://api.abuseipdb.com.",
+                "type": "text",
+                "visible": true,
+                "editable": true,
+                "required": true,
+                "value": "https://api.abuseipdb.com"
+            },
+            {
+                "title": "API Token",
+                "description": "API key to access the AbuseIPDB API.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "password",
+                "name": "token"
+            },
+            {
+                "title": "Verify SSL",
+                "description": "Specifies whether the SSL certificate for the server is to be verified or not.\nBy default, this option is set as True.",
+                "name": "verify_ssl",
+                "type": "checkbox",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "value": true
+            }
+        ]
+    },
+    "operations": [
+        {
+            "operation": "ip_lookup",
+            "title": "IP Lookup",
+            "category": "investigation",
+            "annotation": "ip_lookup",
+            "description": "Performs IP lookup in AbuseIPDB based on the IP address you have specified.",
+            "enabled": true,
+            "output_schema": {
+                "ipAddress": "",
+                "isPublic": "",
+                "ipVersion": "",
+                "isWhitelisted": "",
+                "abuseConfidenceScore": "",
+                "countryCode": "",
+                "usageType": "",
+                "isp": "",
+                "domain": "",
+                "hostnames": [],
+                "totalReports": "",
+                "numDistinctUsers": "",
+                "lastReportedAt": ""
+            },
+            "parameters": [
+                {
+                    "title": "IP",
+                    "description": "IP address for which you want to perform a search and identify malicious activities online.",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "ip",
+                    "value": ""
+                },
+                {
+                    "title": "Reports Within X Days",
+                    "description": "Number of days within which you want to check reports for the specified IP address in AbuseIPDB.\nValid values are between 1 to 365 days. By default, this is set to 10 days.",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "integer",
+                    "name": "days",
+                    "tooltip": "Value should be between 1 to 365"
+                }
+            ]
+        },
+        {
+            "operation": "report_ip",
+            "title": "Report IP",
+            "category": "miscellaneous",
+            "annotation": "report_ip",
+            "description": "Reports a specific IP address that has been identified with malicious activities online to AbuseIPDB based on the IP address and malware category you have specified.",
+            "enabled": true,
+            "output_schema": {
+                "ipAddress": "",
+                "abuseConfidenceScore": ""
+            },
+            "parameters": [
+                {
+                    "title": "IP",
+                    "description": "IP address that you want to report to AbuseIPDB that has been identified with malicious activities.",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "ip",
+                    "tooltip": "A valid IPv4 or IPv6 address."
+                },
+                {
+                    "title": "Categories",
+                    "description": "Categories of malware in which you want to categorize the specified IP address in AbuseIPDB. You can choose from categories such as, Bad Web Bot, Blog Spam, Brute-Force, DDos Attack, DNS Compromise, etc.",
+                    "required": true,
+                    "editable": true,
+                    "visible": true,
+                    "type": "multiselect",
+                    "options": [
+                        "Bad Web Bot",
+                        "Blog Spam",
+                        "Brute-Force",
+                        "DDoS Attack",
+                        "DNS Compromise",
+                        "DNS Poisoning",
+                        "Email Spam",
+                        "Exploited Host",
+                        "Fraud Orders",
+                        "Fraud VoIP",
+                        "FTP Brute-Force",
+                        "Hacking",
+                        "IoT Targeted",
+                        "Open Proxy",
+                        "Phishing",
+                        "Ping of Death",
+                        "Port Scan",
+                        "Spoofing",
+                        "SQL Injection",
+                        "SSH",
+                        "VPN IP",
+                        "Web App Attack",
+                        "Web Spam"
+                    ],
+                    "name": "categories"
+                },
+                {
+                    "title": "Comment",
+                    "description": "(Optional) Comment that you want to add with the reported IP.",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "comment"
+                }
+            ]
+        },
+        {
+            "operation": "get_ip_blacklist",
+            "title": "Get IP Blacklist",
+            "category": "investigation",
+            "annotation": "get_ip_blacklist",
+            "description": "Retrieves a list of all reported IP addresses from AbuseIPDB or a list of specific IP addresses from AbuseIPDB based on the input parameters you have specified.",
+            "enabled": true,
+            "output_schema": {
+                "meta": {
+                    "generatedAt": ""
+                },
+                "data": [
+                    {
+                        "ipAddress": "",
+                        "abuseConfidenceScore": ""
+                    }
+                ]
+            },
+            "parameters": [
+                {
+                    "title": "Confidence Minimum",
+                    "description": "Minimum confidence level that has been specified by users who have reported the malicious IP addresses to AbuseIPDB. If you specify this parameter, then this operation will retrieve the list of only those IP addresses that have their confidence level more than the value specified. \nValid values are between 25 to 100.",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "text",
+                    "name": "confidenceMinimum",
+                    "tooltip": "Value should be between 25 to 100"
+                },
+                {
+                    "title": "Limit",
+                    "description": "Maximum number of results, per page, that this operation should return. By default, this value is set as 10000.",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "type": "integer",
+                    "name": "limit",
+                    "value": 10000,
+                    "tooltip": "Limit number of returned items (1-10000).Default is 10000"
+                }
+            ]
+        }
+    ],
+    "category": "information",
+    "active": true,
+    "cs_compatible": true,
+    "system": false,
+    "playbook_collections": [
+        {
+            "@id": "/api/3/workflow_collections/3c6463e1-e876-4dc6-85cd-c3e527def69a",
+            "name": "Sample - AbuseIPDB - 2.0.0",
+            "image": "/api/3/images/37e0b1a8-ca4e-4a73-8faa-633a581965e5",
+            "description": "Sample playbooks for \"AbuseIPDB\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete."
+        }
+    ],
+    "icon_small": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQwIDc5LjE2MDQ1MSwgMjAxNy8wNS8wNi0wMTowODoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0RBMzlDMDk5M0ZEMTFFODhGODZFNjg5NkU3MDY3RTYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0RBMzlDMDg5M0ZEMTFFODhGODZFNjg5NkU3MDY3RTYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmOGMwODQ3OC0zZTExLTQ4ODktYmMyNy02MWVhOWU1NzEzOWUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+GnCsaAAAAgNJREFUeNpi/P//PwMtARMDjcGoBaMWjFowHCxggdJ//zIcPcLw/TuDnByDphYVLWAEFXYPHzKUl7zS0fvOxib/9g2DhCRDYRH1guj3b4Y5sz7ev1O9dKnShIkdisog4a1bgMS1R8f//fv77O2df///4tL/9O2dR6+uH7m6/v6LK0CV+y+tfvb27vsvL49d33z76dn/DP8Z/9+8ebmupvbHr/CNGzcwMuzX0NzX3a1z+uy7ytyGeV45fpMv3j/07ednKw1fUIAyswLZj15fN1XzvPPsHBsLx+1nF959eQ4Mhh+/vnKwccmIqL///IKNlfP1h8e///5I9+xhbigtLcvJOsPFzentnfTqqbyEVNb06fnaervl3rx/9/zt52esLBx8nIKnb+/8/P39649Pnry9ffHegU/f3p2+tf3T93d//v78/+8/yAVafl9/fDJWcX758fHnb2842Xl+/v6hIqnP+P/v3xcxUe0fPu79/oPjy5fm968+3H0UuXXLVvn3xpLWlx8c/v7ry/uvr3TlbYCh8eXHRy058/N39ytL6r39+IyfR4SdhevT97eqUkbKkgaHrqy5+vC0lryJALfopftHgR5yM4oDR/KtWwwT+xj0DL4LCLAcPMAqIsLQ1ELVVAQEHz8y7NjO8PIlg4UFg5k5tZPpaFExasGoBaMWDLAFAAEGAHC4BE+hJeAOAAAAAElFTkSuQmCC",
+    "icon_large": "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAIAAAABc2X6AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA3hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQwIDc5LjE2MDQ1MSwgMjAxNy8wNS8wNi0wMTowODoyMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1MDNhYTZiMy0zYzEzLTQ5YzEtODNiZi00MThjZWIxM2VhNTIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MEU5QjE4QUM5M0ZEMTFFODhGODZFNjg5NkU3MDY3RTYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MEU5QjE4QUI5M0ZEMTFFODhGODZFNjg5NkU3MDY3RTYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTggKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmOGMwODQ3OC0zZTExLTQ4ODktYmMyNy02MWVhOWU1NzEzOWUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTAzYWE2YjMtM2MxMy00OWMxLTgzYmYtNDE4Y2ViMTNlYTUy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",
+    "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/abuseipdb/61/abuseipdb-v2-0-0",
+    "vendor_version": null
+}

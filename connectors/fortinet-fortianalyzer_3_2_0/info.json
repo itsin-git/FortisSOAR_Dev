@@ -1,0 +1,4370 @@
+{
+  "name": "fortinet-fortianalyzer",
+  "label": "Fortinet FortiAnalyzer",
+  "description": "FortiAnalyzer is the NOC-SOC security analysis tool built with operations perspective. With action-oriented views and deep drill-down capabilities, FortiAnalyzer not only gives organizations critical insight into threats, but also accurately scopes risk across the attack surface, pinpointing where immediate response is required.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "3.2.0",
+  "category": "Analytics & SIEM",
+  "icon_small_name": "FortiAnalyzer_small.png",
+  "icon_large_name": "FortiAnalyzer_large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/3.2.0/fortinet-fortianalyzer/691/fortinet-fortianalyzer-v3-2-0",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "description": "URL of the Fortinet FortiAnalyzer server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "Username",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "username",
+        "description": "Username used to access the Fortinet FortiAnalyzer server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "Password",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "password",
+        "description": "Password used to access the Fortinet FortiAnalyzer server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "ADOM Name(s)",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "adom_name",
+        "value": "",
+        "tooltip": "Administrative domain name(s). e.g. root",
+        "description": "Administrative domain name(s) of the Fortinet FortiAnalyzer server to which you will connect and perform the automated operations."
+      },
+      {
+        "title": "Port",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "name": "port",
+        "value": 10405,
+        "description": "Port number used to access the Fortinet FortiAnalyzer server to which you will connect and perform the automated operations. By default, this is set to 10405."
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "create_incident",
+      "title": "Create Incident",
+      "description": "Creates a new incident record in Fortinet FortiAnalyzer based on the incident reporter, affected endpoint, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "create_incident",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "incid": "",
+          "revision": "",
+          "attach_revision": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident Reporter",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "reporter",
+          "value": "",
+          "tooltip": "Name of incident reporter.",
+          "description": "Specify the name of the incident reporter for the incident being created in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Affected Endpoint",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "endpoint",
+          "value": "",
+          "tooltip": "Details of the affected endpoint, for e.g. 10.XXX.YY.Z/32 (10.XXX.YY.Z) or 10.XXX.YY.Z/32 (Charlie Laptop).",
+          "placeholder": "10.XXX.YY.Z/32 (10.XXX.YY.Z) or 10.XXX.YY.Z/32 (Charlie Laptop)",
+          "description": "Specify the details of the endpoints affected by the incident being created in Fortinet FortiAnalyzer. For example, 10.XXX.YY.Z/32 (10.XXX.YY.Z) or 10.XXX.YY.Z/32 (Charlie Laptop)."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to create the incident in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Assigned To",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "assigned-to",
+          "value": "",
+          "tooltip": "Name of person to which you want to assign the incident.",
+          "description": "(Optional) Specify the name of person to assign the incident being created in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Category",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "category",
+          "value": "",
+          "tooltip": "The category of the incident.",
+          "description": "(Optional) Specify the category in which to create the incident in Fortinet FortiAnalyzer. You can specify one of the following: Unauthorized access, Denial of Service, Malicious Code, Improper Usage, Scans/Probes/Attempted Access, or Uncategorized."
+        },
+        {
+          "title": "Severity",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "name": "severity",
+          "value": "",
+          "tooltip": "The severity level of the incident.",
+          "description": "(Optional) Select the severity level to assign to the incident being created in Fortinet FortiAnalyzer. You can choose from the following options: High, Medium, or Low."
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "New",
+            "Analysis",
+            "Response",
+            "Closed: Remediated",
+            "Closed: False Positive"
+          ],
+          "name": "status",
+          "value": "",
+          "tooltip": "The status of the incident.",
+          "description": "(Optional) Select the status to assign to the incident being created in Fortinet FortiAnalyzer. You can choose from the following options: New, Analysis, Response, Closed: Remediated, or Closed: False Positive."
+        },
+        {
+          "title": "End User ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "euid",
+          "value": "",
+          "tooltip": "User ID of the affected endpoint.",
+          "description": "(Optional) Specify the ID of the end user to assign to the incident being created in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Description",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "description",
+          "value": "",
+          "tooltip": "The description of the incident.",
+          "description": "(Optional) Specify the description of the incident being created in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Other Fields",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "other_fields",
+          "tooltip": "JSON field provided to enable you to enter other fields while updating an incident. example, {\"epid\":123}",
+          "description": "(Optional) Specify additional fields in JSON format to add to the incident being created in Fortinet FortiAnalyzer. For example, {\"epid\":123}"
+        }
+      ]
+    },
+    {
+      "operation": "list_incidents",
+      "title": "Get Incident",
+      "description": "Retrieves all incidents or a specific incident from Fortinet FortiAnalyzer based on the ADOM name and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "list_incidents",
+      "output_schema": {
+        "result": {
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "detail-level": "",
+          "data": [
+            {
+              "attach_lastupdate": "",
+              "attach_revision": "",
+              "category": "",
+              "createtime": "",
+              "description": "",
+              "endpoint": "",
+              "epid": "",
+              "euid": "",
+              "incid": "",
+              "lastupdate": "",
+              "lastuser": "",
+              "refinfo": "",
+              "reporter": "",
+              "revision": "",
+              "severity": "",
+              "status": "",
+              "epcount": "",
+              "eucount": "",
+              "report_src": "",
+              "assigned_to": "",
+              "remedy_time": "",
+              "report_srcid": "",
+              "remedy_action": "",
+              "report_detail": "",
+              "remedy_approver": "",
+              "remedy_executor": "",
+              "incident_reporter": ""
+            }
+          ]
+        },
+        "jsonrpc": "",
+        "id": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve the incident from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Incident IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incids",
+          "value": "",
+          "tooltip": "The list of incident ID's. e.g. IN00000002,IN00000005 or IN00000002",
+          "placeholder": "IN00000002,IN00000005 or IN00000002",
+          "description": "Specify the list of incident IDs to retrieve the incidents from Fortinet FortiAnalyzer. For example, IN00000002,IN00000005 or IN00000002"
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "New",
+            "Analysis",
+            "Response",
+            "Closed: Remediated",
+            "Closed: False Positive"
+          ],
+          "name": "status",
+          "value": "",
+          "tooltip": "The status of the incident.",
+          "description": "Select the status of the incident to filter retrieved incidents from Fortinet FortiAnalyzer. You can choose from the following options: New, Analysis, Response, Closed: Remediated, or Closed: False Positive."
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to retrieve the list of incidents. e.g. status='draft' and severity='low'",
+          "placeholder": "status='draft' and severity='low'",
+          "description": "Specify the filter query to filter incidents being retrieved from Fortinet FortiAnalyzer. For example, status='draft' and severity='low'"
+        },
+        {
+          "title": "Detail Level",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Basic",
+            "Standard",
+            "Extended"
+          ],
+          "name": "detail-level",
+          "value": "Standard",
+          "tooltip": "The detail level of returned data, Basic, Standard(default) or Extended.",
+          "description": "Specify the level of detail to retrieve for the incidents from Fortinet FortiAnalyzer. You can choose from the following options: Basic, Standard(default) or Extended."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 50 Min: 1 Max: 2000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 50."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Specify the count of records to skip when retrieving records using this operation. This parameter is useful to get a subset of records, say incidents starting from the 10th incident. By default, this is set to 0 and the minimum supported value is 0."
+        },
+        {
+          "title": "Sort",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "onchange": {
+            "true": [
+              {
+                "title": "Sort by Field",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "field",
+                "value": "",
+                "tooltip": "The field by which you want to sort the incidents.",
+                "description": "Specify the name of the field on which to sort the result."
+              },
+              {
+                "title": "Sort by Order",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "ASC",
+                  "DESC"
+                ],
+                "name": "order",
+                "value": "",
+                "tooltip": "The order by which you want to sort the incidents.",
+                "description": "Specify the sorting order of the result. You choose from following options: ASC (ascending) or DESC (descending)."
+              }
+            ]
+          },
+          "name": "sort-by",
+          "value": false,
+          "tooltip": "Select if you want to filter incidents by field and order. Works only with the Detail Level as 'Basic' or 'Standard'.",
+          "description": "Select this checkbox if you want to sort the incidents by a field and order the results. If you select this checkbox, i.e., set it as \"true\", then specify the following parameters: Sort by Field: Name of the field on which you want to sort the result. Sort by Order: Sorting order of the result, choose between ASC (ascending) or DESC (descending)."
+        }
+      ]
+    },
+    {
+      "operation": "update_incident_details",
+      "title": "Update Incident",
+      "description": "Updates incident fields like severity, category, status, etc. corresponding to a specific incident in Fortinet FortiAnalyzer based on the incident ID, ADOM name and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_incident_details",
+      "output_schema": {
+        "result": {
+          "incid": "",
+          "revision": "",
+          "attach_revision": "",
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        },
+        "jsonrpc": "",
+        "id": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incid",
+          "value": "",
+          "tooltip": "The ID of the incident.",
+          "description": "Specify the ID of the incident to update in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to update the incident in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Assigned To",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "assigned-to",
+          "value": "",
+          "tooltip": "Name of incident reporter.",
+          "description": "(Optional) Specify the name of person to assign the incident being updated in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Category",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Unauthorized Access",
+            "Denial of Service",
+            "Malicious Code",
+            "Improper Usage",
+            "Scans/Probes/Attempted Access",
+            "Uncategorized"
+          ],
+          "name": "category",
+          "value": "",
+          "tooltip": "The category of the incident.",
+          "description": "(Optional) Specify the category in which to update the incident in Fortinet FortiAnalyzer.You can specify one of the following: Unauthorized access, Denial of Service, Malicious Code, Improper Usage, Scans/Probes/Attempted Access, or Uncategorized."
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "New",
+            "Analysis",
+            "Response",
+            "Closed: Remediated",
+            "Closed: False Positive"
+          ],
+          "name": "status",
+          "value": "",
+          "tooltip": "The status of the incident.",
+          "description": "(Optional) Select the status to assign to the incident being updated in Fortinet FortiAnalyzer. You can choose from the following options: New, Analysis, Response, Closed: Remediated, or Closed: False Positive."
+        },
+        {
+          "title": "Affected Endpoint",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "endpoint",
+          "value": "",
+          "tooltip": "Details of the affected endpoint, for e.g. 10.XXX.YY.Z/32 (10.XXX.YY.Z) or 10.XXX.YY.Z/32 (Charlie Laptop).",
+          "description": "Specify the details of the endpoints affected by the incident being updated in Fortinet FortiAnalyzer. For example, 10.XXX.YY.Z/32 (10.XXX.YY.Z) or 10.XXX.YY.Z/32 (Charlie Laptop)."
+        },
+        {
+          "title": "Severity",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "name": "severity",
+          "value": "",
+          "tooltip": "The severity of the incident.",
+          "description": "(Optional) Select the severity level to assign to the incident being updated in Fortinet FortiAnalyzer. You can choose from the following options: High, Medium, or Low."
+        },
+        {
+          "title": "End User ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "euid",
+          "value": "",
+          "tooltip": "User ID of the affected endpoint.",
+          "description": "(Optional) Specify the ID of the end user to assign to the incident being updated in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Description",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "name": "description",
+          "value": "",
+          "tooltip": "The description of the incident.",
+          "description": "(Optional) Specify the description of the incident being updated in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Other Fields",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "other_fields",
+          "tooltip": "JSON field provided to enable you to enter other fields while updating an incident in Fortinet FortiAnalyzer. example, {\"epid\":123}",
+          "description": "(Optional) Specify additional fields in JSON format to add to the incident being updated in Fortinet FortiAnalyzer. For example, {\"epid\":123}"
+        }
+      ]
+    },
+    {
+      "operation": "get_events_for_incident",
+      "title": "Get Events For Incident",
+      "description": "Retrieves all events associated with a specified incident in Fortinet FortiAnalyzer based on the incident ID, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_events_for_incident",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "attachid": "",
+              "incid": "",
+              "attachtype": "",
+              "data": "",
+              "tags": "",
+              "attachsrc": "",
+              "user_tags": "",
+              "attachsrcid": "",
+              "attachsrctrigger": "",
+              "createtime": "",
+              "lastupdate": "",
+              "lastuser": "",
+              "revision": ""
+            }
+          ],
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incid",
+          "value": "",
+          "tooltip": "The ID of the incident, for which the events need to be pulled.",
+          "description": "Specify the ID of the incident whose associated events to retrieve from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve events associated with the incident from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 50 Min: 1 Max: 2000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 50."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Specify the count of records to skip when retrieving records using this operation. This parameter is useful to get a subset of records, say incidents starting from the 10th incident. By default, this is set to 0 and the minimum supported value is 0."
+        }
+      ]
+    },
+    {
+      "operation": "get_incident_assets",
+      "title": "Get Incident Assets",
+      "description": "Retrieves a list of assets affected by the specified incident from FortiAnalyzer based on the incident ID, ADOM name, and other parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_incident_assets",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "seqid": "",
+              "incid": "",
+              "srctype": "",
+              "srcinfo": "",
+              "ctime": "",
+              "epid": "",
+              "mac": "",
+              "epip": "",
+              "osname": "",
+              "alerttime": "",
+              "osversion": "",
+              "euid": "",
+              "epname": "",
+              "euname": ""
+            }
+          ],
+          "status": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incid",
+          "value": "",
+          "tooltip": "The ID of the incident, for which the assets need to be pulled.",
+          "description": "Specify the incident ID whose associated affected assets are to be retrieved from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server to get incident assets from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 50 Min: 1 Max: 2000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 50."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Specify the count of records to skip when retrieving records using this operation. This parameter is useful to get a subset of records, say incidents starting from the 10th incident. By default, this is set to 0 and the minimum supported value is 0."
+        }
+      ]
+    },
+    {
+      "operation": "get_reports",
+      "title": "Get Executed Report List",
+      "description": "Retrieves a list of all executed reports that have been generated or are in the pending state from Fortinet FortiAnalyzer based on the ADOM name, time frame, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_reports",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "name": "",
+              "devtype": "",
+              "timezone": "",
+              "schedule_color": "",
+              "title": "",
+              "device": {
+                "data": "",
+                "count": ""
+              },
+              "tid": "",
+              "date": "",
+              "adminuser": "",
+              "profileid": "",
+              "start": "",
+              "timestamp-start": "",
+              "end": "",
+              "timestamp-end": "",
+              "timezone-desc": "",
+              "period-start": "",
+              "period-end": "",
+              "state": "",
+              "progress-percent": "",
+              "format": []
+            }
+          ],
+          "count": "",
+          "revision": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "State",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "state",
+          "value": "",
+          "placeholder": "pending-running, or generated",
+          "tooltip": "The state of the report that you want to get from Fortinet FortiAnalyzer. The states are pending-running, or generated.",
+          "description": "Specify the state of the executed report to retrieve from Fortinet FortiAnalyzer. The supported states are: pending-running or generated."
+        },
+        {
+          "title": "Start Time",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "start",
+          "value": "",
+          "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the start date and time from when to retrieve the list of executed reports from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for retrieving the reports."
+        },
+        {
+          "title": "End Time",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "end",
+          "value": "",
+          "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the end date and time till when to retrieve the list of executed reports from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for retrieving the reports."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve the list of executed reports from Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "get_schedules",
+      "title": "Get Report Schedule List",
+      "description": "Retrieves a list of all report schedules from Fortinet FortiAnalyzer based on the ADOM name you have specified.",
+      "category": "investigation",
+      "annotation": "get_schedules",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "data": [
+            {
+              "admin-user": "",
+              "auto-hcache": "",
+              "date-format": "",
+              "description": "",
+              "dev-type": "",
+              "device-list-type": "",
+              "devices": [
+                {
+                  "devices-name": "",
+                  "interfaces": ""
+                }
+              ],
+              "display-device-by": "",
+              "display-table-contents": "",
+              "email-report-per-device": "",
+              "filter": "",
+              "filter-logic": "",
+              "data-accuracy": "",
+              "filter-type": "",
+              "is-template": "",
+              "include-coverpage": "",
+              "include-other": "",
+              "language": "",
+              "ldap-query": "",
+              "ldap-server": "",
+              "ldap-user-case-change": "",
+              "max-reports": "",
+              "name": "",
+              "tz": "",
+              "obfuscate-user": "",
+              "orientation": "",
+              "output-format": "",
+              "output-profile": "",
+              "period-last-n": "",
+              "period-opt": "",
+              "print-report-filters": "",
+              "report-layout": [
+                {
+                  "layout-id": ""
+                }
+              ],
+              "report-per-device": "",
+              "resolve-hostname": "",
+              "soc-cust-filters": "",
+              "schedule-color": "",
+              "soc-def-filters": "",
+              "cached-filtering": "",
+              "schedule-frequency": "",
+              "schedule-type": "",
+              "soc-filtering": "",
+              "address-filter": [
+                {
+                  "id": "",
+                  "grp-name": "",
+                  "obj-name": "",
+                  "address-type": "",
+                  "include-option": ""
+                }
+              ],
+              "schedule-valid-end": [],
+              "schedule-valid-start": [],
+              "status": "",
+              "time-period": "",
+              "week-start": ""
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve report schedules from Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "run_report",
+      "title": "Run Report",
+      "description": "Runs a report on the Fortinet FortiAnalyzer based on the report ID, schedule ID, and ADOM name you have specified.",
+      "category": "investigation",
+      "annotation": "run_report",
+      "output_schema": {
+        "result": {
+          "tid": ""
+        },
+        "jsonrpc": "",
+        "id": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Schedule",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "schedule",
+          "value": "",
+          "tooltip": "Schedule name or id.",
+          "description": "Specify the name or ID of the schedule to run the report. Note: You can get the name or ID of the schedule using the Get Report Schedule List action."
+        },
+        {
+          "title": "Report ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "id",
+          "value": "",
+          "tooltip": "The ID of the report that you want to run on Fortinet FortiAnalyzer.",
+          "description": "Specify the ID of the report to run on Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to run the report in Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "get_generated_report",
+      "title": "Get Report File",
+      "description": "Retrieves a specific generated report file from Fortinet FortiAnalyzer based on the report ID and ADOM name you have specified and adds that report file to FortiSOAR as an Attachment.",
+      "category": "investigation",
+      "annotation": "get_generated_report",
+      "output_schema": {
+        "result": {
+          "checksum": "",
+          "data": "",
+          "length": "",
+          "name": "",
+          "tid": "",
+          "data-type": ""
+        },
+        "jsonrpc": "",
+        "id": "",
+        "@id": "",
+        "file": {
+          "id": "",
+          "@id": "",
+          "size": "",
+          "uuid": "",
+          "@type": "",
+          "assignee": "",
+          "filename": "",
+          "metadata": [
+          ],
+          "mimeType": "",
+          "thumbnail": "",
+          "uploadDate": ""
+        },
+        "name": "",
+        "type": "",
+        "uuid": "",
+        "@type": "",
+        "tasks": [],
+        "alerts": [],
+        "assets": [],
+        "owners": [],
+        "people": [],
+        "@context": "",
+        "assignee": "",
+        "comments": [],
+        "warrooms": [],
+        "incidents": [],
+        "createDate": "",
+        "createUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "createUser": "",
+          "modifyDate": "",
+          "modifyUser": ""
+        },
+        "indicators": [],
+        "modifyDate": "",
+        "modifyUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "createUser": "",
+          "modifyDate": "",
+          "modifyUser": ""
+        },
+        "recordTags": [],
+        "userOwners": [],
+        "description": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Task ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "tid",
+          "value": "",
+          "tooltip": "The Task ID of the generated report. This ID can be retrieved from the results of Run Report action.",
+          "description": "Specify the task ID of the generated report to retrieve from Fortinet FortiAnalyzer and upload the report file as an Attachment in FortiSOAR."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve the generated report from Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "get_users",
+      "title": "Get User Information",
+      "description": "Retrieves information for all users or specific users from Fortinet FortiAnalyzer based on the ADOM name and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_users",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "euid": "",
+              "euuuid": "",
+              "euname": "",
+              "title": "",
+              "firstname": "",
+              "lastname": "",
+              "gender": "",
+              "birthday": "",
+              "socialid": {
+                "data": []
+              },
+              "authtype": "",
+              "eugroup": "",
+              "homeaddr": "",
+              "employeeid": "",
+              "firstseen": "",
+              "lastseen": "",
+              "workaddr": "",
+              "workphone": "",
+              "workemail": "",
+              "phone": "",
+              "email": ""
+            }
+          ],
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve user information from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Fetch Users Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "fetch_type",
+          "value": "Fetch Limited Users",
+          "description": "Select whether you want this operation to Fetch Limited Users or Fetch All Users.",
+          "options": [
+            "Fetch All Users",
+            "Fetch Limited Users"
+          ],
+          "onchange": {
+            "Fetch All Users": [
+              {
+                "title": "Start Time",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "datetime",
+                "name": "start",
+                "value": "",
+                "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+                "description": "Starting datetime from when you want to retrieve from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone considered for retrieving the reports."
+              },
+              {
+                "title": "End Time",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "datetime",
+                "name": "end",
+                "value": "",
+                "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+                "description": "Ending datetime till when you want to retrieve from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone considered for retrieving the reports."
+              }
+            ],
+            "Fetch Limited Users": [
+              {
+                "title": "User IDs",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "euids",
+                "value": "",
+                "tooltip": "The list of user ID's. e.g. 1043,1055 or 1043",
+                "placeholder": "1043,1055 or 1043",
+                "description": "Specify the list of user IDs based on which to fetch user information from Fortinet FortiAnalyzer. For example, 1043,1055 or 1043."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "Query filter to retrieve the list of users. e.g. euuuid='c0a74c48-2367-11ea-aedf-00090f000409' and euname='localhost'",
+          "placeholder": "euuuid='c0a74c48-2367-11ea-aedf-00090f000409' and euname='localhost'",
+          "description": "Specify the filter query to filter users being fetched from Fortinet FortiAnalyzer. For example, euuuid='c0a74c48-2367-11ea-aedf-00090f000409' and euname='localhost'"
+        },
+        {
+          "title": "Detail Level",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Basic",
+            "Standard",
+            "Extended"
+          ],
+          "name": "detail-level",
+          "value": "Standard",
+          "tooltip": "The detail level of returned data, Basic, Standard(default) or Extended.",
+          "description": "Select the level of detail to retrieve for the users from Fortinet FortiAnalyzer. You can choose from the following options: Basic, Standard(default) or Extended."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 100000,
+          "tooltip": "The maximum number of records to return. Default: 100000 Min: 1 Max: 1000000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 50."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Specify the count of records to skip when retrieving records using this operation. This parameter is useful to get a subset of records, say incidents starting from the 10th incident. By default, this is set to 0 and the minimum supported value is 0."
+        },
+        {
+          "title": "Sort",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "onchange": {
+            "true": [
+              {
+                "title": "Sort by Field",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "field",
+                "value": "",
+                "tooltip": "The field by which you want to sort the users.",
+                "description": "Specify the name of the field on which to sort the result."
+              },
+              {
+                "title": "Sort by Order",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "ASC",
+                  "DESC"
+                ],
+                "name": "order",
+                "value": "",
+                "tooltip": "The order by which you want to sort the users. Works only with the Detail Level as 'Basic' or 'Standard'.",
+                "description": "Specify the sorting order of the result. You choose from following options: ASC (ascending) or DESC (descending)."
+              }
+            ]
+          },
+          "name": "sort-by",
+          "value": false,
+          "tooltip": "Select if you want to filter users by field and order.",
+          "description": "Select this checkbox to sort the users by a field and order the results. If you select this checkbox, i.e., set it as \"true\", then specify the following parameters: Sort by Field: Name of the field on which you want to sort the result. Sort by Order: Sorting order of the result, choose between ASC (ascending) or DESC (descending)."
+        }
+      ]
+    },
+    {
+      "operation": "get_endpoints",
+      "title": "Get Endpoint Information",
+      "description": "Retrieves information for all endpoints or specific endpoints from Fortinet FortiAnalyzer based on the ADOM name and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_endpoints",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "lastseen": "",
+              "epid": "",
+              "epname": "",
+              "epdevtype": "",
+              "osname": "",
+              "osversion": "",
+              "fctuid": "",
+              "adomoid": "",
+              "detecttype": "",
+              "detectkey": "",
+              "devid": "",
+              "vd": "",
+              "macip": [
+                {
+                  "mac": "",
+                  "epip": "",
+                  "lastseen": ""
+                }
+              ]
+            }
+          ],
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve endpoint information from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Fetch Endpoint Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "fetch_type",
+          "value": "Fetch Limited Endpoints",
+          "description": "Select whether you want this operation to Fetch Limited Endpoints or Fetch All Endpoints.",
+          "options": [
+            "Fetch All Endpoints",
+            "Fetch Limited Endpoints"
+          ],
+          "onchange": {
+            "Fetch All Endpoints": [
+              {
+                "title": "Start Time",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "datetime",
+                "name": "start",
+                "value": "",
+                "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+                "description": "Starting datetime from when you want to retrieve from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone considered for retrieving the reports."
+              },
+              {
+                "title": "End Time",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "datetime",
+                "name": "end",
+                "value": "",
+                "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+                "description": "Ending datetime till when you want to retrieve from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone considered for retrieving the reports."
+              }
+            ],
+            "Fetch Limited Endpoints": [
+              {
+                "title": "Endpoint IDs",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "epids",
+                "value": "",
+                "tooltip": "The list of endpoint ID's. e.g. 1047,1077 or 1077",
+                "placeholder": "1047,1077 or 1077",
+                "description": "Specify the list of endpoint IDs based on which to fetch endpoint information from Fortinet FortiAnalyzer. For example, 1047,1077 or 1077. The list of endpoint ID's. e.g. 1047,1077 or 1077"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to retrieve the list of endpoints. e.g. epname='10.0.10.3' and detectkey='10.0.10.3'",
+          "placeholder": "epname='10.0.10.3' and detectkey='10.0.10.3'",
+          "description": "Specify the filter query to filter endpoints being fetched from Fortinet FortiAnalyzer. For example, epname='10.0.10.3' and detectkey='10.0.10.3'"
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 100000,
+          "tooltip": "The maximum number of records to return. Default: 100000 Min: 1 Max: 1000000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 50."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "Offset of the first item to return. Default: 0 Min: 0",
+          "description": "Specify the count of records to skip when retrieving records using this operation. This parameter is useful to get a subset of records, say incidents starting from the 10th incident. By default, this is set to 0 and the minimum supported value is 0."
+        },
+        {
+          "title": "Sort",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "onchange": {
+            "true": [
+              {
+                "title": "Sort by Field",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "field",
+                "value": "",
+                "tooltip": "The field by which you want to sort the endpoints.",
+                "description": "Specify the name of the field on which to sort the result."
+              },
+              {
+                "title": "Sort by Order",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "ASC",
+                  "DESC"
+                ],
+                "name": "order",
+                "value": "",
+                "tooltip": "The order by which you want to sort the endpoints.",
+                "description": "Specify the sorting order of the result. You choose from following options: ASC (ascending) or DESC (descending)."
+              }
+            ]
+          },
+          "name": "sort-by",
+          "value": false,
+          "tooltip": "Select if you want to filter endpoints by field and order.",
+          "description": "Select this checkbox if you want to sort the endpoints by a field and order the results. If you select this checkbox, i.e., set it as \"true\", then specify the following parameters: Sort by Field: Name of the field on which you want to sort the result. Sort by Order: Sorting order of the result, choose between ASC (ascending) or DESC (descending)."
+        }
+      ]
+    },
+    {
+      "operation": "list_log_fields",
+      "title": "List Log Fields",
+      "description": "Retrieves all log fields from Fortinet FortiAnalyzer based on the device and log type, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "list_log_fields",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "field": [
+            {
+              "defaultshow": "",
+              "desc": "",
+              "logfldgrp": "",
+              "name": "",
+              "type": ""
+            }
+          ],
+          "private-field": [
+            {
+              "defaultshow": "",
+              "desc": "",
+              "logfldgrp": "",
+              "name": "",
+              "type": ""
+            }
+          ],
+          "data": [
+            {
+              "field": [
+                {
+                  "desc": "",
+                  "name": "",
+                  "type": "",
+                  "logfldgrp": "",
+                  "defaultshow": ""
+                }
+              ],
+              "index": "",
+              "logtype": "",
+              "private-field": [
+                {
+                  "desc": "",
+                  "name": "",
+                  "type": "",
+                  "logfldgrp": "",
+                  "defaultshow": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "devtype",
+          "value": "",
+          "tooltip": "Device type name, such as FortiGate, FortiClient, FortiMail, FortiWeb, FortiSandbox, FortiAnalyzer, FortiDDos, FortiDeceptor",
+          "placeholder": "FortiGate, FortiClient, FortiMail, FortiWeb, FortiSandbox, FortiAnalyzer, FortiDDos, FortiDeceptor",
+          "description": "Specify the list of device types to retrieve log fields from Fortinet FortiAnalyzer. You can add device types such as FortiGate, FortiClient, FortiMail, FortiWeb, FortiSandbox, FortiDDos, and FortiDeceptor."
+        },
+        {
+          "title": "Log Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Traffic",
+            "Application control",
+            "Attack",
+            "Content",
+            "DLP",
+            "Email Filter",
+            "Event",
+            "History",
+            "Virus",
+            "VOIP",
+            "Web Filter",
+            "Netscan",
+            "FCT Event",
+            "FCT Traffic",
+            "WAF",
+            "GTP"
+          ],
+          "name": "logtype",
+          "value": "",
+          "tooltip": "The log type name of the log.",
+          "description": "Select the log type to filter logs being retrieved from Fortinet FortiAnalyzer. You can choose from following options: Event, Traffic, FCT Event, Email Filter, Virus, etc."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve log fields from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Subtype",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "subtype",
+          "value": "",
+          "tooltip": "The subtype name of the log.",
+          "placeholder": "logdev",
+          "description": "Specify the subtype of the log to filter logs retrieved from Fortinet FortiAnalyzer. For example, logdev, system, fazsys, logging, logfile, dvm, etc."
+        }
+      ]
+    },
+    {
+      "operation": "get_log_file_content",
+      "title": "Get Log-File Content",
+      "description": "Retrieves the content of a specified log file from Fortinet FortiAnalyzer based on the device ID, filename, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_log_file_content",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "checksum": "",
+          "data": "",
+          "data-type": "",
+          "length": "",
+          "log-count": "",
+          "offset": "",
+          "logfile-orig-size": ""
+        },
+        "@id": "",
+        "file": {
+          "id": "",
+          "@id": "",
+          "size": "",
+          "uuid": "",
+          "@type": "",
+          "assignee": "",
+          "filename": "",
+          "metadata": [],
+          "mimeType": "",
+          "thumbnail": "",
+          "uploadDate": ""
+        },
+        "name": "",
+        "type": "",
+        "uuid": "",
+        "@type": "",
+        "tasks": [],
+        "alerts": [],
+        "assets": [],
+        "owners": [],
+        "people": [],
+        "@context": "",
+        "assignee": "",
+        "comments": [],
+        "warrooms": [],
+        "incidents": [],
+        "createDate": "",
+        "createUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "createUser": "",
+          "modifyDate": "",
+          "modifyUser": ""
+        },
+        "indicators": [],
+        "modifyDate": "",
+        "modifyUser": {
+          "id": "",
+          "@id": "",
+          "name": "",
+          "uuid": "",
+          "@type": "",
+          "avatar": "",
+          "userId": "",
+          "userType": "",
+          "createDate": "",
+          "createUser": "",
+          "modifyDate": "",
+          "modifyUser": ""
+        },
+        "recordTags": [],
+        "userOwners": [],
+        "description": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "devid",
+          "value": "",
+          "tooltip": "ID of the device hosting the logfile. e.g. FG10CH3G11601364",
+          "placeholder": "FG10CH3G11601364",
+          "description": "Specify the ID of the device hosting the log file whose content is to be retrieved from Fortinet FortiAnalyzer. For example, FG10CH3G11601364."
+        },
+        {
+          "title": "Filename",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filename",
+          "value": "",
+          "tooltip": "Name of the file.",
+          "description": "Specify the name of the log file whose content is to be retrieved from Fortinet FortiAnalyze."
+        },
+        {
+          "title": "VDOM",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "vdom",
+          "value": "",
+          "tooltip": "Name of the VDOM. e.g. root",
+          "placeholder": "root",
+          "description": "Specify the name of the VDOM to filter the log files whose content is to be retrieved from Fortinet FortiAnalyzer. For example, root"
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve log file content from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Data Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "data-type",
+          "value": "base64",
+          "tooltip": "The type of return data, e.g. 'text/gzip/base64, csv/gzip/base64'. Default is base64.",
+          "description": "Specify the type of returned data of log file whose content is to be retrieved from Fortinet FortiAnalyzer. e.g. 'text/gzip/base64, csv/gzip/base64'. Default is base64."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "(Optional) Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. Values supported are: Default is set to 0  and Minimum Value is set to 0."
+        },
+        {
+          "title": "Length",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "length",
+          "value": 1048576,
+          "tooltip": "Length in byte of the file content to return. Default: 1048576 Min: 1 Max: 52428800",
+          "description": "(Optional) Length in bytes, of the file content, that this operation should return. Values supported are: Default is set to 1048576, Minimum Value is set to 1, and Maximum Value is set to 52428800."
+        }
+      ]
+    },
+    {
+      "operation": "log_search_over_log_file",
+      "title": "Log Search over Log-File",
+      "description": "Runs a log search task for a single log file from Fortinet FortiAnalyzer based on the device ID, filename, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "log_search_over_log_file",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "data": [
+            {
+              "logver": "",
+              "idseq": "",
+              "itime": "",
+              "devid": "",
+              "vd": "",
+              "app": "",
+              "date": "",
+              "time": "",
+              "logid": "",
+              "type": "",
+              "appid": "",
+              "subtype": "",
+              "transip": "",
+              "countapp": "",
+              "level": "",
+              "eventtime": "",
+              "tz": "",
+              "srcip": "",
+              "srcname": "",
+              "msg": "",
+              "url": "",
+              "hostname": "",
+              "direction": "",
+              "eventtype": "",
+              "scertcname": "",
+              "scertissuer": "",
+              "incidentserialno": "",
+              "srcport": "",
+              "srcintf": "",
+              "srcintfrole": "",
+              "dstip": "",
+              "dstport": "",
+              "dstintf": "",
+              "dstintfrole": "",
+              "srcuuid": "",
+              "dstuuid": "",
+              "sessionid": "",
+              "srcfamily": "",
+              "proto": "",
+              "action": "",
+              "policyid": "",
+              "policytype": "",
+              "poluuid": "",
+              "service": "",
+              "dstcountry": "",
+              "srccountry": "",
+              "trandisp": "",
+              "duration": "",
+              "sentbyte": "",
+              "rcvdbyte": "",
+              "sentpkt": "",
+              "rcvdpkt": "",
+              "appcat": "",
+              "srchwvendor": "",
+              "osname": "",
+              "mastersrcmac": "",
+              "srcmac": "",
+              "applist": "",
+              "apprisk": "",
+              "srcserver": "",
+              "transport": "",
+              "utmaction": "",
+              "offset_idx": "",
+              "policyname": "",
+              "dtime": "",
+              "itime_t": "",
+              "devname": "",
+              "devtype": ""
+            }
+          ],
+          "return-lines": "",
+          "total-count": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "devid",
+          "value": "",
+          "tooltip": "ID of the device hosting the logfile. e.g. FG10CH3G11601364",
+          "placeholder": "FG10CH3G11601364",
+          "description": "Specify the ID of the device hosting the log file based on which to search for the log file in Fortinet FortiAnalyzer. For example, FG10CH3G11601364."
+        },
+        {
+          "title": "Filename",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filename",
+          "value": "",
+          "tooltip": "Name of the file.",
+          "description": "Specify the name of the log file to search in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "VDOM",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "vdom",
+          "value": "",
+          "tooltip": "Name of the VDOM. e.g. root",
+          "placeholder": "root",
+          "description": "Specify the name of the VDOM based on which to search the log file content in Fortinet FortiAnalyzer. For example, root."
+        },
+        {
+          "title": "Log Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Traffic",
+            "Application control",
+            "Attack",
+            "Content",
+            "DLP",
+            "Email Filter",
+            "Event",
+            "History",
+            "Virus",
+            "VOIP",
+            "Web Filter",
+            "Netscan",
+            "FCT Event",
+            "FCT Traffic",
+            "WAF",
+            "GTP"
+          ],
+          "name": "logtype",
+          "value": "",
+          "tooltip": "The name of the logtype. , e.g. traffic, content, emailfilter, webfilter, fct-traffic",
+          "description": "Specify the type of log to search in Fortinet FortiAnalyzer. You can choose from options such as, Event, Traffic, FCT Event, Email Filter, Virus, etc."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to search the log file content in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Case Sensitive",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "case-sensitive",
+          "value": "",
+          "tooltip": "Case sensitivty.",
+          "description": "Select this option to perform a case-sensitive search of the log file in from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to search logs. e.g. subtype='forward' and srcname='LAN-FSW-GUEST'",
+          "placeholder": "subtype='forward' and srcname='LAN-FSW-GUEST'",
+          "description": "Specify the filter query to filter logs to be searched in Fortinet FortiAnalyzer. For example, subtype='forward' and srcname='LAN-FSW-GUEST'."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "(Optional) Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. Values supported are: Default is set to 0  and Minimum Value is set to 0."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "Maximum number of log records that this operation should return. Default: 50 Min: 1 Max: 500",
+          "description": "(Optional) Maximum number of log records that this operation should return. Values supported are: Default is set to 50, Minimum Value is set to 1, and Maximum Value is set to 500."
+        }
+      ]
+    },
+    {
+      "operation": "get_log_file_state",
+      "title": "Get Log-File State",
+      "description": "Retrieves the state of a log file from Fortinet FortiAnalyzer based on the device ID, filename, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_log_file_state",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "device-file-list": [
+            {
+              "device-id": "",
+              "device-name": "",
+              "endtime": "",
+              "starttime": "",
+              "vdom-file-list": [
+                {
+                  "endtime": "",
+                  "logfile-list": {
+                    "rlog": {
+                      "files": [
+                        {
+                          "fsize": "",
+                          "endtime": "",
+                          "filename": "",
+                          "starttime": ""
+                        }
+                      ],
+                      "logtype": {
+                        "id": "",
+                        "key": "",
+                        "name": ""
+                      }
+                    },
+                    "elog": {
+                      "files": [
+                        {
+                          "endtime": "",
+                          "filename": "",
+                          "fsize": "",
+                          "starttime": ""
+                        }
+                      ],
+                      "logtype": {
+                        "id": "",
+                        "key": "",
+                        "name": ""
+                      }
+                    },
+                    "tlog": {
+                      "files": [
+                        {
+                          "fsize": "",
+                          "endtime": "",
+                          "filename": "",
+                          "starttime": ""
+                        }
+                      ],
+                      "logtype": {
+                        "id": "",
+                        "key": "",
+                        "name": ""
+                      }
+                    }
+                  },
+                  "starttime": "",
+                  "vdom-name": ""
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve the state of a log file from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Device ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "devid",
+          "value": "",
+          "tooltip": "ID of the device hosting the logfile. e.g. FG10CH3G11601364",
+          "placeholder": "FG10CH3G11601364",
+          "description": "Specify the ID of the device hosting the log file whose state to retrieve from Fortinet FortiAnalyzer. For example, FG10CH3G11601364."
+        },
+        {
+          "title": "Filename",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filename",
+          "value": "",
+          "tooltip": "Name of the file.",
+          "description": "Specify the name of the log file whose state to retrieve from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "VDOM",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "vdom",
+          "value": "",
+          "tooltip": "Name of the VDOM. e.g. root",
+          "placeholder": "root",
+          "description": "Specify the name of the VDOM to filter log files and retrieve the log file state from Fortinet FortiAnalyzer. For example, root."
+        },
+        {
+          "title": "Start Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "start",
+          "value": "",
+          "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "(Optional) Specify the start date and time from when to retrieve the state of log files from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log file state."
+        },
+        {
+          "title": "End Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "end",
+          "value": "",
+          "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "(Optional) Specify the end date and time till when to retrieve the state of log files from Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log file state."
+        }
+      ]
+    },
+    {
+      "operation": "start_log_search_request",
+      "title": "Start Log Search Request",
+      "description": "Starts a new task to search for logs in Fortinet FortiAnalyzer based on the device ID, device name, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "start_log_search_request",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "tid": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "devid",
+          "value": "",
+          "tooltip": "ID of the device based on which you want to search logs. e.g. FG10CH3G11601364",
+          "placeholder": "FG10CH3G11601364",
+          "description": "Specify the ID of the device hosting the log file based on which to start the search for logs in Fortinet FortiAnalyzer. For example, FG10CH3G11601364."
+        },
+        {
+          "title": "Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "devname",
+          "value": "",
+          "tooltip": "Name of the device based on which you want to search logs. e.g. FG10CH3G11601364",
+          "placeholder": "FG10CH3G11601364",
+          "description": "Specify the name of the device based on which to start the search for logs from Fortinet FortiAnalyzer. For example, FG10CH3G11601364."
+        },
+        {
+          "title": "Start Time",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "start",
+          "value": "",
+          "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "(Optional) Specify the start date and time from when to search for logs in Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for starting the log search request."
+        },
+        {
+          "title": "End Time",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "end",
+          "value": "",
+          "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "(Optional) Specify the end date and time till when to search for logs in Fortinet FortiAnalyzer. Note: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for starting the log search request."
+        },
+        {
+          "title": "Log Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Traffic",
+            "Application control",
+            "Attack",
+            "Content",
+            "DLP",
+            "Email Filter",
+            "Event",
+            "History",
+            "Virus",
+            "VOIP",
+            "Web Filter",
+            "Netscan",
+            "FCT Event",
+            "FCT Traffic",
+            "WAF",
+            "GTP"
+          ],
+          "name": "logtype",
+          "value": "",
+          "tooltip": "The name of the logtype. , e.g. traffic, content, emailfilter, webfilter, fct-traffic",
+          "description": "Select the log type to filter logs being searched in Fortinet FortiAnalyzer. You can choose from following options: Traffic, Application control, Attack, Content, DLP, Email Filter, Event, History, Virus, VOIP, Web Filter, Netscan, FCT Event, FCT Traffic,WAF, GTP."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to search for logs in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to search logs. e.g. status='draft' and severity='low'",
+          "placeholder": "status='draft' and severity='low'",
+          "description": "Specify the filter query to filter logs to be searched in Fortinet FortiAnalyzer. For example, status='draft' and severity='low'"
+        },
+        {
+          "title": "Case Sensitive",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "case-sensitive",
+          "value": false,
+          "tooltip": "Case sensitivty.",
+          "description": "Select this option to perform a case-sensitive search of the log file in from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Time Order",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "ASC",
+            "DESC"
+          ],
+          "name": "time-order",
+          "value": "desc",
+          "tooltip": "The order by which you want to sort the log search.",
+          "description": "Select the order to sort the results retrieved from the Fortinet FortiAnalyzer. You choose from following options: ASC(ascending)  or DESC(descending)."
+        }
+      ]
+    },
+    {
+      "operation": "start_bulk_device_log_search_request",
+      "title": "Start bulk device log Search Request",
+      "description": "Starts a new task to search for logs in Fortinet FortiAnalyzer based on the All device Type, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "start_bulk_device_log_search_request",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "tid": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "All Device Type",
+          "type": "select",
+          "name": "devid",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "tooltip": "The name of the All Device type, e.g. All_FortiGate, All_FortiMail, All_FortiWeb, All_FortiManager, All_Syslog, All_FortiClient, All_FortiCache, All_FortiProxy, All_FortiAnalyzer, All_FortiSandbox, All_FortiAuthenticator, All_FortiDDoS",
+          "options": [
+            "All_FortiGate",
+            "All_FortiMail",
+            "All_FortiWeb",
+            "All_FortiManager",
+            "All_Syslog",
+            "All_FortiClient",
+            "All_FortiCache",
+            "All_FortiProxy",
+            "All_FortiAnalyzer",
+            "All_FortiSandbox",
+            "All_FortiAuthenticator",
+            "All_FortiDDoS"
+          ],
+          "description": "Specify the name of the All Device type. For example: All_FortiGate, All_FortiMail, All_FortiWeb, All_FortiManager, All_Syslog, All_FortiClient, All_FortiCache, All_FortiProxy, All_FortiAnalyzer, All_FortiSandbox, All_FortiAuthenticator, All_FortiDDoS."
+        },
+        {
+          "title": "Start Time",
+          "type": "datetime",
+          "name": "start",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "(Optional) Specify the start date and time from when to search for logs in Fortinet FortiAnalyzer. NOTE: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for starting the log search request."
+        },
+        {
+          "title": "End Time",
+          "type": "datetime",
+          "name": "end",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "(Optional) Specify the end date and time till when to search for logs in Fortinet FortiAnalyzer. NOTE: If the timezone information is not specified then the Fortinet FortiAnalyzer's timezone is considered for starting the log search request."
+        },
+        {
+          "title": "Log Type",
+          "type": "select",
+          "name": "logtype",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "tooltip": "The name of the logtype. , e.g. traffic, content, emailfilter, webfilter, fct-traffic.",
+          "options": [
+            "Traffic",
+            "Application control",
+            "Attack",
+            "Content",
+            "DLP",
+            "Email Filter",
+            "Event",
+            "History",
+            "Virus",
+            "VOIP",
+            "Web Filter",
+            "Netscan",
+            "FCT Event",
+            "FCT Traffic",
+            "WAF",
+            "GTP"
+          ],
+          "description": "Select the log type to filter logs being searched in Fortinet FortiAnalyzer. You can choose from following options: Traffic, Application control, Attack, Content, DLP, Email Filter, Event, History, Virus, VOIP, Web Filter, Netscan, FCT Event, FCT Traffic, WAF, GTP."
+        },
+        {
+          "title": "ADOM Name",
+          "type": "text",
+          "name": "adom_name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to search for logs in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Filter",
+          "type": "text",
+          "name": "filter",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "",
+          "tooltip": "The query filter to search logs. e.g. status='draft' and severity='low'",
+          "description": "Specify the filter query to filter logs to be searched in Fortinet FortiAnalyzer. For example, status='draft' and severity='low'."
+        },
+        {
+          "title": "Case Sensitive",
+          "type": "checkbox",
+          "name": "case-sensitive",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": false,
+          "tooltip": "Case sensitivty.",
+          "description": "Select this option to perform a case-sensitive search of the log file in from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Time Order",
+          "type": "select",
+          "name": "time-order",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "desc",
+          "tooltip": "The order by which you want to sort the log search.",
+          "description": "Select the order to sort the results retrieved from the Fortinet FortiAnalyzer. You choose from following options: ASC (ascending) or DESC (descending)",
+          "options": [
+            "ASC",
+            "DESC"
+          ]
+        }
+      ],
+      "open": false
+    },
+    {
+      "operation": "fetch_log_search_result_by_task_id",
+      "title": "Fetch Log Search Result by Task ID",
+      "description": "Starts a new task to retrieve the log search results from Fortinet FortiAnalyzer based on the task ID, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "fetch_log_search_result_by_task_id",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "data": [
+            {
+              "action": "",
+              "app": "",
+              "appcat": "",
+              "date": "",
+              "devid": "",
+              "devname": "",
+              "devtype": "",
+              "dstcountry": "",
+              "dstintf": "",
+              "dstip": "",
+              "dstport": "",
+              "dtime": "",
+              "duration": "",
+              "itime": "",
+              "itime_t": "",
+              "level": "",
+              "logid": "",
+              "logver": "",
+              "mastersrcmac": "",
+              "osname": "",
+              "policyid": "",
+              "proto": "",
+              "rcvdbyte": "",
+              "rcvdpkt": "",
+              "sentbyte": "",
+              "sentpkt": "",
+              "service": "",
+              "sessionid": "",
+              "srccountry": "",
+              "srcintf": "",
+              "srcip": "",
+              "srcmac": "",
+              "srcname": "",
+              "srcport": "",
+              "subtype": "",
+              "time": "",
+              "trandisp": "",
+              "transip": "",
+              "transport": "",
+              "type": "",
+              "vd": ""
+            }
+          ],
+          "percentage": "",
+          "return-lines": "",
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "tid": ""
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Task ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "tid",
+          "value": "",
+          "tooltip": "The task ID for log search fetch task.",
+          "placeholder": "193200136",
+          "description": "Specify the ID of the task log search to retrieve the log search result from Fortinet FortiAnalyzer. For example, 193200136."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve the log search result from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "(Optional) Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. Values supported are: Default is set to 0 and Minimum Value is set to 0."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "Maximum number of log records that this operation should return. Default: 50 Min: 1 Max: 500",
+          "description": "(Optional) Maximum number of log records that this operation should return. Values supported are: Default is set to 50, Minimum Value is set to 1, and Maximum Value is set to 500."
+        }
+      ]
+    },
+    {
+      "operation": "get_alerts",
+      "title": "Get Event",
+      "description": "Retrieves all the events or a specific event from Fortinet FortiAnalyzer based on the ADOM name and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_alerts",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "data": [
+            {
+              "ack_flag": "",
+              "addi_info": "",
+              "alert_id": "",
+              "count": "",
+              "ctime": "",
+              "dev_name": "",
+              "devid": "",
+              "ackflag": "",
+              "alertid": "",
+              "devname": "",
+              "devtype": "",
+              "logtype": "",
+              "subject": "",
+              "filterid": "",
+              "groupby1": "",
+              "groupby2": "",
+              "logcount": "",
+              "readflag": "",
+              "epid": "",
+              "csf": "",
+              "tag": "",
+              "epip": "",
+              "vdom": "",
+              "epname": "",
+              "euid": "",
+              "euname": "",
+              "event_info": "",
+              "event_name": "",
+              "event_status": "",
+              "event_type": "",
+              "last_occurrence": "",
+              "last_update": "",
+              "read_flag": "",
+              "severity": "",
+              "alerttime": "",
+              "eventtype": "",
+              "extrainfo": "",
+              "filterkey": "",
+              "multiflag": "",
+              "updatetime": "",
+              "eventstatus": "",
+              "filtercksum": "",
+              "lastlogtime": "",
+              "triggername": "",
+              "firstlogtime": "",
+              "handler_type": "",
+              "alert_part_info": {
+                "ruleid": "",
+                "devtype": "",
+                "logtype": "",
+                "subtype": "",
+                "hdlrhash": "",
+                "rulename": "",
+                "selector": "",
+                "handlerid": "",
+                "handlername": ""
+              },
+              "automation_stitch": "",
+              "trigger_name": "",
+              "vd_name": ""
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve alert events from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Start Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "start",
+          "value": "",
+          "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the start date and time from when to retrieve the events from Fortinet FortiAnalyzer. Note: If you do not specify the timezone information, then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log alert events."
+        },
+        {
+          "title": "End Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "end",
+          "value": "",
+          "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the end date and time till when to retrieve the events from Fortinet FortiAnalyzer. Note: If you do not specify the timezone information, then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log alert events."
+        },
+        {
+          "title": "Alert IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "alertid",
+          "value": "",
+          "tooltip": "The list of alert ID's, i.e., the FAZ event IDs, e.g. 202008201000003361,202008201000003362 or 202008201000003361. And for single ID \"202008201000003361\"",
+          "placeholder": "202008201000003361,202008201000003362. For single ID \"202008201000003361\"",
+          "description": "Specify a list of alert IDs, i.e., the FAZ event IDs, based on which to fetch events from Fortinet FortiAnalyzer. For example, 202008201000003361,202008201000003362 or 202008201000003361"
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to retrieve the list of alerts. e.g. eventtype='traffic' and severity='medium'",
+          "placeholder": "eventtype='traffic' and severity='medium'",
+          "description": "Specify the filter query to search for events in Fortinet FortiAnalyzer. For example, eventtype='traffic' and severity='medium'"
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 1000 Min: 1 Max: 2000",
+          "description": "Maximum number of log records that this operation should return. Values supported are: Default is set to 1000, Minimum Value is set to 1, and Maximum Value is set to 2000."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. Values supported are: Default is set to 0 and Minimum Value is set to 0."
+        }
+      ]
+    },
+    {
+      "operation": "get_alert_event_logs",
+      "title": "Get Event Logs",
+      "description": "Retrieves the logs associated with a specific event from Fortinet FortiAnalyzer based on the FAZ event ID, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_alert_event_logs",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "data": [
+            {
+              "action": "",
+              "alert_log_seqnum": "",
+              "cat": "",
+              "catdesc": "",
+              "crlevel": "",
+              "crscore": "",
+              "devid": "",
+              "devname": "",
+              "direction": "",
+              "dstintf": "",
+              "dstip": "",
+              "dstport": "",
+              "dtime": "",
+              "epid": "",
+              "euid": "",
+              "eventtype": "",
+              "fctuid": "",
+              "hostname": "",
+              "id": "",
+              "itime": "",
+              "level": "",
+              "logid": "",
+              "logver": "",
+              "method": "",
+              "msg": "",
+              "policyid": "",
+              "profile": "",
+              "proto": "",
+              "rcvdbyte": "",
+              "reqtype": "",
+              "sentbyte": "",
+              "service": "",
+              "sessionid": "",
+              "srcintf": "",
+              "srcip": "",
+              "srcport": "",
+              "subtype": "",
+              "type": "",
+              "unauthuser": "",
+              "url": "",
+              "vd": ""
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Alert ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "alertid",
+          "value": "",
+          "tooltip": "The list of alert ID's, i.e., FAZ event IDs, e.g. 202008201000003361,202008201000003362 or 202008201000003361",
+          "placeholder": "202008201000003361,202008201000003362 or 202008201000003361",
+          "description": "Specify a list of alert IDs, i.e., FAZ event IDs, based on which you want to retrieve event logs from Fortinet FortiAnalyzer. For example, 202008201000003361,202008201000003362 or 202008201000003361."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve event logs from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 1000 Min: 1 Max: 2000",
+          "description": "Maximum number of log records that this operation should return. Values supported are: Default is set to 1000, Minimum Value is set to 1, and Maximum Value is set to 2000."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "(Optional) Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. Values supported are: Default is set to 0 and Minimum Value is set to 0."
+        },
+        {
+          "title": "Time Order",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "ASC",
+            "DESC"
+          ],
+          "name": "time-order",
+          "value": "desc",
+          "tooltip": "The order by which you want to sort the log search.",
+          "description": "Specify the order to sort the results retrieved from the Fortinet FortiAnalyzer. You choose from following options: ASC(ascending)  or DESC(descending)."
+        }
+      ]
+    },
+    {
+      "operation": "add_attachment",
+      "title": "Add Incident Attachment",
+      "description": "Adds new attachment to incident in FortiAnalyzer based on the incident ID and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "add_attachment",
+      "output_schema": {
+        "result": {
+          "attachids": []
+        },
+        "jsonrpc": "",
+        "id": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incid",
+          "value": "",
+          "tooltip": "The ID of the incident, into which you need to add attachment.",
+          "description": "Specify the ID of the incident to add attachments in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Data",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "data",
+          "value": "",
+          "tooltip": "The attachment data.",
+          "description": "Specify the attachment data, in JSON format, for the incident attachment, to add in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server for the incident attachment, to add in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Attachment Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachtype",
+          "value": "",
+          "tooltip": "The attachment type by which you need to add attahcment for given incident. alertevent, note, file, report",
+          "description": "Specify the attachment type for the incident attachment, to add in Fortinet FortiAnalyzer. Following values are supported: alertevent, note, file, report."
+        },
+        {
+          "title": "Attachment Source",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachsrc",
+          "value": "",
+          "tooltip": "The source of the attachment. You can choose from the following options: manual, playbook.",
+          "description": "(Optional) Specify the attachment source for the incident attachment, to add in Fortinet FortiAnalyzer. You can specify one of the following options: manual or playbook."
+        },
+        {
+          "title": "Attachment Source ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachsrcid",
+          "value": "",
+          "tooltip": "User name for manual type attachment source, playbook UUID for playbook.",
+          "description": "(Optional) Specify the ID of the attachment source for the incident attachment, to add in Fortinet FortiAnalyzer. Specify the user name if Attachment Source is Manual. Specify the playbook UUID if Attachment Source is Playbook."
+        },
+        {
+          "title": "Attachment Source Trigger",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachsrctrigger",
+          "value": "",
+          "tooltip": "Attachment trigger information.",
+          "description": "(Optional) Specify the attachment trigger information for the incident attachment, to add in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Last User",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "lastuser",
+          "value": "",
+          "tooltip": "User name who updated the attachment.",
+          "description": "(Optional) Specify the name of the user who last updated the incident attachment to add in Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "get_attachments_for_incident",
+      "title": "Get Incident Attachments",
+      "description": "Retrieves all attachments (i.e. Comments, Events, Report, Indicators etc.) associated with the specified incident from FortiAnalyzer based on the incident ID, ADOM name, and input other parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_attachments_for_incident",
+      "output_schema": {
+        "id": "",
+        "jsonrpc": "",
+        "result": {
+          "data": [
+            {
+              "attachid": "",
+              "tags": "",
+              "attachsrc": "",
+              "user_tags": "",
+              "attachsrcid": "",
+              "attachsrctrigger": "",
+              "attachtype": "",
+              "createtime": "",
+              "data": "",
+              "incid": "",
+              "lastupdate": "",
+              "lastuser": "",
+              "revision": ""
+            }
+          ],
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incid",
+          "value": "",
+          "tooltip": "The ID of the incident, for which the events need to be pulled.",
+          "description": "Specify the ID of the incident to retrieve its associated attachments from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve attachments associated with the incident from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Attachment Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachtype",
+          "value": "",
+          "tooltip": "The attachment type by which you need to fetch attahcment for given incident. alertevent, note, file, report",
+          "description": "Specify the attachment type based on which to fetch the attachment for the specified incident. Following values are supported: alertevent, sysnote, note, file, report, history, and logsearchfilter."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 50 Min: 1 Max: 2000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 50."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say attachments starting from the 10th attachment. By default, this is set as 0 and the minimum supported value is 0."
+        }
+      ]
+    },
+    {
+      "operation": "update_attachment",
+      "title": "Update Incident Attachment",
+      "description": "Updates incident attachment fields associated with a specific incident in FortiAnalyzer based on the incident ID, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_attachment",
+      "output_schema": {
+        "result": {
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        },
+        "jsonrpc": "",
+        "id": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Attachment ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachid",
+          "value": "",
+          "tooltip": "The ID of the attachment.",
+          "description": "Specify the ID of the attachment to update in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Data",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "data",
+          "value": "",
+          "tooltip": "The attachment data.",
+          "description": "Specify the attachment data in, JSON format, for the incident attachment, to update in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server for the incident attachment, to update in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Attachment Source",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachsrc",
+          "value": "",
+          "tooltip": "The source of the attachment. You can choose from the following options: manual, playbook.",
+          "description": "(Optional) Specify the attachment source for the incident attachment, to update in Fortinet FortiAnalyzer. You can specify one of the following options: manual or playbook."
+        },
+        {
+          "title": "Attachment Source ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachsrcid",
+          "value": "",
+          "tooltip": "User name for manual type attachment source, playbook UUID for playbook.",
+          "description": "(Optional) Specify the ID of the attachment source for the incident attachment, to update in Fortinet FortiAnalyzer. Specify the user name if Attachment Source is Manual. Specify the playbook UUID if Attachment Source is Playbook."
+        },
+        {
+          "title": "Attachment Source Trigger",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attachsrctrigger",
+          "value": "",
+          "tooltip": "Attachment trigger information.",
+          "description": "(Optional) Specify the attachment trigger information for the incident attachment, to update in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Last User",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "lastuser",
+          "value": "",
+          "tooltip": "User name who updated the attachment.",
+          "description": "(Optional) Specify the name of the user who last updated the incident attachment to update in Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "get_adoms",
+      "title": "Get ADOMs",
+      "description": "Retrieves all ADOMs from Fortinet FortiAnalyzer based on the ADOM name you have specified.",
+      "category": "investigation",
+      "annotation": "get_adoms",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "data": [
+              {
+                "oid": "",
+                "name": "",
+                "desc": "",
+                "state": "",
+                "mode": "",
+                "os_ver": "",
+                "mr": "",
+                "flags": "",
+                "mig_os_ver": "",
+                "mig_mr": "",
+                "obj_customize": "",
+                "tab_status": "",
+                "logview_customize": "",
+                "restricted_prds": "",
+                "log_db_retention_hours": "",
+                "log_file_retention_hours": "",
+                "log_disk_quota": "",
+                "log_disk_quota_split_ratio": "",
+                "log_disk_quota_alert_thres": "",
+                "uuid": "",
+                "create_time": "",
+                "workspace_mode": "",
+                "tz": ""
+              }
+            ],
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+      ]
+    },
+    {
+      "operation": "add_master_device",
+      "title": "Add a Primary Device",
+      "description": "Adds a primary device to the Fortinet FortiAnalyzer device manager database based on the device name, IP address, serial number, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "add_primary_device",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "data": {
+              "device": {
+                "beta": "",
+                "conn_mode": "",
+                "dev_status": "",
+                "flags": "",
+                "ip": "",
+                "maxvdom": "",
+                "mgmt_id": "",
+                "mgmt_mode": "",
+                "mr": "",
+                "name": "",
+                "oid": "",
+                "os_type": "",
+                "version": "",
+                "mgmt_uuid": "",
+                "vm_lic_overdue_since": "",
+                "os_ver": "",
+                "patch": "",
+                "platform_id": "",
+                "platform_str": "",
+                "sn": "",
+                "source": "",
+                "tab_status": "",
+                "vm.lic_type": "",
+                "vm_lic_expire": ""
+              }
+            },
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "value": "",
+          "tooltip": "The name of the device. e.g. Enterprise_DEV",
+          "placeholder": "Enterprise_DEV",
+          "description": "Specify the name of the primary device to add to the Fortinet FortiAnalyzer device manager database. For example, Enterprise_DEV"
+        },
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip",
+          "value": "",
+          "tooltip": "The IP address of the primary device. e.g. xx.xx.xx.xx",
+          "placeholder": "xx.xx.xx.xx",
+          "description": "Specify the IP address of the primary device to add to the Fortinet FortiAnalyzer device manager database. For example, xx.xx.xx.xx"
+        },
+        {
+          "title": "Serial Number",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sn",
+          "value": "",
+          "tooltip": "The serial number of the primary device. e.g. XXVM010000166969",
+          "placeholder": "XXVM010000166969",
+          "description": "Specify the serial number of the primary device to add to the Fortinet FortiAnalyzer device manager database. For example, XXVM010000166969"
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to add a primary device to the Fortinet FortiAnalyzer device manager database."
+        },
+        {
+          "title": "OS Version",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "os_ver",
+          "value": "",
+          "tooltip": "The OS version of the primary device. e.g. 6.0",
+          "description": "(Optional) Specify the OS version of the primary device to add to the Fortinet FortiAnalyzer device manager database. For example, 6.0"
+        }
+      ]
+    },
+    {
+      "operation": "add_slave_device",
+      "title": "Add a Secondary Device",
+      "description": "Adds a secondary device to the Fortinet FortiAnalyzer device manager database based on the device name, IP address, serial number, primary device name, and primary device serial number you have specified.",
+      "category": "investigation",
+      "annotation": "add_secondary_device",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Secondary Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "slave_name",
+          "value": "",
+          "tooltip": "The name of the secondary device. e.g. Branch_Dev_01",
+          "placeholder": "Branch_Dev_01",
+          "description": "Specify the name of the secondary device to add to the Fortinet FortiAnalyzer device manager database. For example, Secondary Device Name: Branch_Dev_01"
+        },
+        {
+          "title": "Secondary Device Serial Number",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "slave_sn",
+          "value": "",
+          "tooltip": "The serial number of the secondary device. e.g. XXVM02TM20007936",
+          "placeholder": "XXVM02TM20007936",
+          "description": "Specify the serial number of the secondary device to add to the Fortinet FortiAnalyzer device manager database. Secondary Device Serial Number: XXVM02TM20007936"
+        },
+        {
+          "title": "Primary Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "master_name",
+          "value": "",
+          "tooltip": "The name of the primary device. e.g. Enterprise_DEV",
+          "placeholder": "Enterprise_DEV",
+          "description": "Specify the name of the primary device under which to add the secondary device in the Fortinet FortiAnalyzer device manager database. Primary Device Name: Enterprise_DEV"
+        },
+        {
+          "title": "Primary Device Serial Number",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "master_sn",
+          "value": "",
+          "tooltip": "The serial number of the primary device. e.g. XXVM010000166969",
+          "placeholder": "XXVM010000166969",
+          "description": "Specify the serial number of the primary device under which to add the secondary device in the Fortinet FortiAnalyzer device manager database. Primary Device Serial Number: XXVM010000166969"
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to add a secondary device to the Fortinet FortiAnalyzer device manager database."
+        }
+      ]
+    },
+    {
+      "operation": "add_new_device",
+      "title": "Add a New Device",
+      "description": "Adds a new device to the Fortinet FortiAnalyzer device manager database based on the device name, IP address, serial number, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "add_new_device",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "data": {
+              "device": {
+                "beta": "",
+                "conn_mode": "",
+                "dev_status": "",
+                "flags": "",
+                "ip": "",
+                "maxvdom": "",
+                "mgmt_id": "",
+                "mgmt_mode": "",
+                "mgmt_uuid": "",
+                "vm_lic_overdue_since": "",
+                "mr": "",
+                "name": "",
+                "oid": "",
+                "os_type": "",
+                "os_ver": "",
+                "patch": "",
+                "platform_id": "",
+                "platform_str": "",
+                "sn": "",
+                "source": "",
+                "tab_status": "",
+                "tunnel_ip": "",
+                "version": "",
+                "vm.lic_type": "",
+                "vm_lic_expire": ""
+              }
+            },
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "value": "",
+          "tooltip": "The name of the device. e.g. Enterprise_Dev",
+          "placeholder": "Enterprise_Dev",
+          "description": "Specify the name of the device to add to the Fortinet FortiAnalyzer device manager database. For example, Device Name: Enterprise_Dev"
+        },
+        {
+          "title": "IP Address",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip",
+          "value": "",
+          "tooltip": "The IP address of the device. e.g. xx.xx.xx.xx",
+          "placeholder": "xx.xx.xx.xx",
+          "description": "Specify the IP address of the device to add to the Fortinet FortiAnalyzer device manager database. For example, xx.xx.xx.xx"
+        },
+        {
+          "title": "Serial Number",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sn",
+          "value": "",
+          "tooltip": "The serial number of the device. e.g. XXVM010000212677",
+          "placeholder": "XXVM010000212677",
+          "description": "Specify the serial number of the device to add to the Fortinet FortiAnalyzer device manager database. For example, Serial Number: XXVM010000212677"
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to add a device to the Fortinet FortiAnalyzer device manager database."
+        },
+        {
+          "title": "OS Version",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "os_ver",
+          "value": "",
+          "tooltip": "The OS version of the device. e.g. 6.0",
+          "description": "(Optional) Specify the OS version of the device to add to the Fortinet FortiAnalyzer device manager database. For example, 6.0"
+        }
+      ]
+    },
+    {
+      "operation": "get_devices",
+      "title": "Get Devices",
+      "description": "Retrieves all devices from the Fortinet FortiAnalyzer device manager database based on the ADOM name you have specified.",
+      "category": "investigation",
+      "annotation": "get_devices",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "data": [
+              {
+                "adm_pass": [
+                  "",
+                  ""
+                ],
+                "adm_usr": "",
+                "app_ver": "",
+                "av_ver": "",
+                "beta": "",
+                "branch_pt": "",
+                "build": "",
+                "checksum": "",
+                "conf_status": "",
+                "conn_mode": "",
+                "conn_status": "",
+                "db_status": "",
+                "desc": "",
+                "dev_status": "",
+                "fap_cnt": "",
+                "faz.full_act": "",
+                "faz.perm": "",
+                "faz.quota": "",
+                "faz.used": "",
+                "fex_cnt": "",
+                "first_tunnel_up": "",
+                "flags": "",
+                "foslic_cpu": "",
+                "foslic_dr_site": "",
+                "foslic_inst_time": "",
+                "foslic_last_sync": "",
+                "foslic_ram": "",
+                "foslic_type": "",
+                "foslic_utm": "",
+                "fsw_cnt": "",
+                "ha_group_id": "",
+                "ha_group_name": "",
+                "ha_mode": "",
+                "ha_slave": "",
+                "hdisk_size": "",
+                "hostname": "",
+                "hw_rev_major": "",
+                "hw_rev_minor": "",
+                "hyperscale": "",
+                "ip": "",
+                "ips_ext": "",
+                "ips_ver": "",
+                "last_checked": "",
+                "last_resync": "",
+                "latitude": "",
+                "lic_flags": "",
+                "lic_region": "",
+                "location_from": "",
+                "logdisk_size": "",
+                "longitude": "",
+                "maxvdom": "",
+                "mgmt.__data[0]": "",
+                "mgmt.__data[1]": "",
+                "mgmt.__data[2]": "",
+                "mgmt.__data[3]": "",
+                "mgmt.__data[4]": "",
+                "mgmt.__data[5]": "",
+                "mgmt.__data[6]": "",
+                "mgmt.__data[7]": "",
+                "mgmt_id": "",
+                "mgmt_if": "",
+                "mgmt_mode": "",
+                "mgt_vdom": "",
+                "mgmt_uuid": "",
+                "auto_mgmt": "",
+                "module_sn": "",
+                "mr": "",
+                "name": "",
+                "node_flags": "",
+                "nsxt_service_name": "",
+                "oid": "",
+                "onboard_rule": "",
+                "eip": "",
+                "opts": "",
+                "os_type": "",
+                "os_ver": "",
+                "patch": "",
+                "platform_str": "",
+                "prefer_img_ver": "",
+                "prio": "",
+                "private_key": "",
+                "private_key_status": "",
+                "psk": "",
+                "role": "",
+                "sn": "",
+                "source": "",
+                "tab_status": "",
+                "tunnel_cookie": "",
+                "tunnel_ip": "",
+                "vdom": [
+                  {
+                    "comments": "",
+                    "devid": "",
+                    "ext_flags": "",
+                    "flags": "",
+                    "name": "",
+                    "node_flags": "",
+                    "oid": "",
+                    "opmode": "",
+                    "rtm_prof_id": "",
+                    "status": "",
+                    "tab_status": "",
+                    "vpn_id": "",
+                    "vdom_type": ""
+                  }
+                ],
+                "version": "",
+                "vm_cpu": "",
+                "vm_cpu_limit": "",
+                "vm_lic_expire": "",
+                "vm_lic_overdue_since": "",
+                "vm_mem": "",
+                "vm_mem_limit": "",
+                "vm_status": ""
+              }
+            ],
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve devices from Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "get_log_status",
+      "title": "Get Log Status",
+      "description": "Retrieves the last log time and log rate per device[vdom] from Fortinet FortiAnalyzer. This operation retrieves the log status for all devices or the log status for particular devices based on the device ID and ADOM name you have specified.",
+      "category": "investigation",
+      "annotation": "get_log_status",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "vdoms": [
+                {
+                  "vdom": "",
+                  "last-log-time": "",
+                  "last-log-timestamp": "",
+                  "lograte": ""
+                }
+              ],
+              "devs": [
+                {
+                  "devid": "",
+                  "is-ha": "",
+                  "vdoms": [
+                    {
+                      "vdom": "",
+                      "lograte": "",
+                      "log-db-size": "",
+                      "logstat-info": "",
+                      "adom-quota-MB": "",
+                      "last-log-time": "",
+                      "log-disk-size": "",
+                      "last-log-timestamp": ""
+                    }
+                  ],
+                  "status": "",
+                  "devname": "",
+                  "logging-mode": "",
+                  "logstat-info": "",
+                  "encrypted-logging": "",
+                  "encrypted-forwarding": ""
+                }
+              ],
+              "log-interval-dev-no-logging-upload": "",
+              "log-interval-dev-no-logging-realtime": "",
+              "devid": ""
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve log status from Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "Device ID",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "devid",
+          "value": "",
+          "tooltip": "The device ID. e.g. XXVM02TM20007478",
+          "placeholder": "XXVM02TM20007478",
+          "description": "(Optional) Specify the device ID based on which to fetch the log status and the log rate per device from Fortinet FortiAnalyzer. Device ID: XXVM02TM20007478"
+        }
+      ]
+    },
+    {
+      "operation": "get_device_info",
+      "title": "Get Device Information",
+      "description": "Retrieves device information from Fortinet FortiAnalyzer based on the device name and ADOM name you have specified.",
+      "category": "investigation",
+      "annotation": "get_device_info",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "data": {
+              "adm_pass": [
+              ],
+              "adm_usr": "",
+              "app_ver": "",
+              "av_ver": "",
+              "beta": "",
+              "branch_pt": "",
+              "build": "",
+              "checksum": "",
+              "conf_status": "",
+              "conn_mode": "",
+              "conn_status": "",
+              "db_status": "",
+              "desc": "",
+              "dev_status": "",
+              "fap_cnt": "",
+              "faz.full_act": "",
+              "faz.perm": "",
+              "faz.quota": "",
+              "faz.used": "",
+              "fex_cnt": "",
+              "flags": "",
+              "foslic_cpu": "",
+              "foslic_dr_site": "",
+              "foslic_inst_time": "",
+              "foslic_last_sync": "",
+              "foslic_ram": "",
+              "foslic_type": "",
+              "foslic_utm": "",
+              "fsw_cnt": "",
+              "ha_group_id": "",
+              "ha_group_name": "",
+              "ha_mode": "",
+              "ha_slave": "",
+              "hdisk_size": "",
+              "hostname": "",
+              "hw_rev_major": "",
+              "hw_rev_minor": "",
+              "hyperscale": "",
+              "ip": "",
+              "ips_ext": "",
+              "ips_ver": "",
+              "last_checked": "",
+              "last_resync": "",
+              "latitude": "",
+              "lic_flags": "",
+              "lic_region": "",
+              "location_from": "",
+              "logdisk_size": "",
+              "onboard_rule": "",
+              "longitude": "",
+              "maxvdom": "",
+              "mgmt.__data[0]": "",
+              "mgmt.__data[1]": "",
+              "mgmt.__data[2]": "",
+              "mgmt.__data[3]": "",
+              "mgmt.__data[4]": "",
+              "mgmt.__data[5]": "",
+              "mgmt.__data[6]": "",
+              "mgmt.__data[7]": "",
+              "mgmt_id": "",
+              "mgmt_if": "",
+              "mgmt_mode": "",
+              "mgmt_uuid": "",
+              "mgt_vdom": "",
+              "auto_mgmt": "",
+              "module_sn": "",
+              "mr": "",
+              "name": "",
+              "node_flags": "",
+              "nsxt_service_name": "",
+              "oid": "",
+              "opts": "",
+              "os_type": "",
+              "os_ver": "",
+              "patch": "",
+              "platform_str": "",
+              "prefer_img_ver": "",
+              "first_tunnel_up": "",
+              "prio": "",
+              "private_key": "",
+              "private_key_status": "",
+              "vm_lic_overdue_since": "",
+              "psk": "",
+              "role": "",
+              "sn": "",
+              "eip": "",
+              "source": "",
+              "tab_status": "",
+              "tunnel_cookie": "",
+              "tunnel_ip": "",
+              "vdom": [
+                {
+                  "comments": "",
+                  "devid": "",
+                  "ext_flags": "",
+                  "vdom_type": "",
+                  "flags": "",
+                  "name": "",
+                  "node_flags": "",
+                  "oid": "",
+                  "opmode": "",
+                  "rtm_prof_id": "",
+                  "status": "",
+                  "tab_status": "",
+                  "vpn_id": ""
+                }
+              ],
+              "version": "",
+              "vm_cpu": "",
+              "vm_cpu_limit": "",
+              "vm_lic_expire": "",
+              "vm_mem": "",
+              "vm_mem_limit": "",
+              "vm_status": ""
+            },
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "value": "",
+          "tooltip": "The name of the device. e.g. Enterprise_Dev",
+          "placeholder": "Enterprise_Dev",
+          "description": "Specify the name of the device whose information to retrieve from Fortinet FortiAnalyzer. For example, Device Name: Enterprise_Dev"
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to retrieve device information from Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "authorize_device",
+      "title": "Authorize Device",
+      "description": "Authorizes the device in Fortinet FortiAnalyzer based on the device name, serial number, ADOM name, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "authorize_device",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "data": {
+              "device": {
+                "beta": "",
+                "conn_mode": "",
+                "dev_status": "",
+                "faz.perm": "",
+                "flags": "",
+                "maxvdom": "",
+                "mgmt_id": "",
+                "mgmt_mode": "",
+                "mgmt_uuid": "",
+                "vm_lic_overdue_since": "",
+                "mr": "",
+                "name": "",
+                "oid": "",
+                "os_type": "",
+                "os_ver": "",
+                "patch": "",
+                "platform_id": "",
+                "platform_str": "",
+                "sn": "",
+                "source": "",
+                "tab_status": "",
+                "tunnel_ip": "",
+                "version": "",
+                "vm.lic_type": "",
+                "vm_lic_expire": ""
+              }
+            },
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "value": "",
+          "tooltip": "The name of the device. e.g. Enterprise_Dev",
+          "placeholder": "Enterprise_Dev",
+          "description": "Specify the name of the device to authorize in Fortinet FortiAnalyzer. For example, Device Name: Enterprise_Dev"
+        },
+        {
+          "title": "Serial Number",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sn",
+          "value": "",
+          "tooltip": "The serial number of the device. e.g. XXVM010000212677",
+          "placeholder": "XXVM010000212677",
+          "description": "Specify the serial number of the device to authorize in Fortinet FortiAnalyzer. For example, Serial Number: XXVM010000212677"
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to authorize the device in Fortinet FortiAnalyzer."
+        },
+        {
+          "title": "OS Version",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "os_ver",
+          "value": "",
+          "tooltip": "The OS version of the device. e.g. 6.0",
+          "description": "Specify the OS version of the device to authorize in Fortinet FortiAnalyzer. For example, 6.0"
+        }
+      ]
+    },
+    {
+      "operation": "delete_device",
+      "title": "Delete a Device",
+      "description": "Deletes a specific device from Fortinet FortiAnalyzer based on the device name and ADOM name you have specified.",
+      "category": "investigation",
+      "annotation": "delete_device",
+      "output_schema": {
+        "id": "",
+        "result": [
+          {
+            "status": {
+              "code": "",
+              "message": ""
+            },
+            "url": ""
+          }
+        ]
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "name",
+          "value": "",
+          "tooltip": "The name of the device. e.g. Enterprise_Dev",
+          "placeholder": "Enterprise_Dev",
+          "description": "Specify the name of the device to delete from Fortinet FortiAnalyzer. For example, Device Name: Enterprise_Dev"
+        },
+        {
+          "title": "ADOM Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "adom_name",
+          "value": "",
+          "tooltip": "Administrative domain name. e.g. root",
+          "description": "Specify the administrative domain (ADOM) name of the Fortinet FortiAnalyzer server based on which to delete a device from Fortinet FortiAnalyzer."
+        }
+      ]
+    },
+    {
+      "operation": "get_alerts_for_multiple_adoms",
+      "title": "Get Event for Multiple ADOMs",
+      "description": "Retrieves all events or specific event for multiple ADOMs from FortiAnalyzer based on the input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_alerts_for_multiple_adoms",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "alerttime": "",
+              "logcount": "",
+              "alertid": "",
+              "adom": "",
+              "epid": "",
+              "epname": "",
+              "subject": "",
+              "euid": "",
+              "euname": "",
+              "devname": "",
+              "logtype": "",
+              "devtype": "",
+              "devid": "",
+              "vdom": "",
+              "groupby1": "",
+              "triggername": "",
+              "tag": "",
+              "eventtype": "",
+              "severity": "",
+              "extrainfo": "",
+              "ackflag": "",
+              "readflag": "",
+              "filterkey": "",
+              "firstlogtime": "",
+              "multiflag": "",
+              "lastlogtime": "",
+              "updatetime": "",
+              "filtercksum": "",
+              "filterid": "",
+              "csf": "",
+              "epip": "",
+              "groupby2": "",
+              "eventstatus": "",
+              "handler_type": "",
+              "alert_part_info": {
+                "ruleid": "",
+                "devtype": "",
+                "logtype": "",
+                "subtype": "",
+                "hdlrhash": "",
+                "rulename": "",
+                "selector": "",
+                "handlerid": "",
+                "handlername": ""
+              },
+              "automation_stitch": ""
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Start Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "start",
+          "value": "",
+          "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the start date and time from when to retrieve the alert events from Fortinet FortiAnalyzer. Note: If you do not specify the timezone information, then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log alert events."
+        },
+        {
+          "title": "End Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "end",
+          "value": "",
+          "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the end date and time till when to retrieve the alert events from Fortinet FortiAnalyzer. Note: If you do not specify the timezone information, then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log alert events."
+        },
+        {
+          "title": "Alert IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "alertid",
+          "value": "",
+          "tooltip": "The list of alert ID's, i.e., the FAZ event IDs, e.g. 202008201000003361,202008201000003362. And for single ID \"202008201000003361\"",
+          "placeholder": "202008201000003361,202008201000003362. For single ID \"202008201000003361\"",
+          "description": "Specify the list of alert IDs, i.e., the FAZ event IDs, based on which to fetch events from Fortinet FortiAnalyzer. For example, 202008201000003361,202008201000003362 or 202008201000003361"
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to retrieve the list of alerts. e.g. eventtype='traffic' and severity='medium'",
+          "placeholder": "eventtype='traffic' and severity='medium'",
+          "description": "Specify the filter query to search for alert events in Fortinet FortiAnalyzer. For example, eventtype='traffic' and severity='medium'"
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 1000 Min: 1 Max: 2000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 1000."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. Values supported are: Default is set to 0 and Minimum Value is set to 0."
+        }
+      ]
+    },
+    {
+      "operation": "count_alerts_for_multiple_adoms",
+      "title": "Count Events for Multiple ADOMs",
+      "description": "Retrieves the count of events from multiple ADOMs in FortiAnalyzer based on the group by and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "count_alerts_for_multiple_adoms",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "severity": "",
+              "count": ""
+            }
+          ]
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Group By",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "group-by",
+          "value": "",
+          "tooltip": "Counts the events based on group-by field, e.g. dev_name",
+          "placeholder": "dev_name",
+          "description": "Specify the group-by field to count the events retrieved from Fortinet FortiAnalyzer. For example, dev_name"
+        },
+        {
+          "title": "Start Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "start",
+          "value": "",
+          "tooltip": "Starting date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the start date and time from when to retrieve the count of alert events from Fortinet FortiAnalyzer. Note: If you do not specify the timezone information, then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log alert events."
+        },
+        {
+          "title": "End Time",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "end",
+          "value": "",
+          "tooltip": "Ending date time. Consider it as the FortiAnalyzer's timezone if the timezone info is not specified.",
+          "description": "Specify the end date and time till when to retrieve the count of alert events from Fortinet FortiAnalyzer. Note: If you do not specify the timezone information, then the Fortinet FortiAnalyzer's timezone is considered for retrieving the log alert events."
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to retrieve the list of alerts. e.g. eventtype='traffic' and severity='medium'",
+          "placeholder": "eventtype='traffic' and severity='medium'",
+          "description": "Specify the filter query to search for the alert events and retrieve their counts from Fortinet FortiAnalyzer. For example, eventtype='traffic' and severity='medium'"
+        }
+      ]
+    },
+    {
+      "operation": "list_incidents_for_multiple_adoms",
+      "title": "Get Incident for Multiple ADOMs",
+      "description": "Retrieves all incidents or a specific incident for multiple ADOMs from Fortinet FortiAnalyzer based on the input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "list_incidents_for_multiple_adoms",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "incid": "",
+              "epid": "",
+              "endpoint": "",
+              "euid": "",
+              "category": "",
+              "severity": "",
+              "status": "",
+              "description": "",
+              "reporter": "",
+              "createtime": "",
+              "lastupdate": "",
+              "lastuser": "",
+              "revision": "",
+              "attach_lastupdate": "",
+              "attach_revision": "",
+              "refinfo": "",
+              "report_src": "",
+              "report_srcid": "",
+              "report_detail": "",
+              "assigned_to": "",
+              "remedy_action": "",
+              "remedy_executor": "",
+              "remedy_approver": "",
+              "remedy_time": "",
+              "adom": "",
+              "epcount": "",
+              "eucount": "",
+              "incident_reporter": ""
+            }
+          ],
+          "detail-level": "",
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incids",
+          "value": "",
+          "tooltip": "The list of incident ID's. e.g. IN00000002,IN00000005",
+          "placeholder": "IN00000002,IN00000005",
+          "description": "Specify the list of incident IDs based on which to fetch incidents from Fortinet FortiAnalyzer. For example, IN00000002,IN00000005"
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "New",
+            "Analysis",
+            "Response",
+            "Closed: Remediated",
+            "Closed: False Positive"
+          ],
+          "name": "status",
+          "value": "",
+          "tooltip": "The status of the incident.",
+          "description": "Specify the status of the incident to filter incidents to be fetched from Fortinet FortiAnalyzer. You can choose from the following options: New, Analysis, Response, Closed: Remediated, or Closed: False Positive."
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to retrieve the list of incidents. e.g. status='draft' and severity='low'",
+          "placeholder": "status='draft' and severity='low'",
+          "description": "Specify the filter query to filter incidents to be fetched from Fortinet FortiAnalyzer. For example, status='draft' and severity='low'"
+        },
+        {
+          "title": "Detail Level",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Basic",
+            "Standard",
+            "Extended"
+          ],
+          "name": "detail-level",
+          "value": "Standard",
+          "tooltip": "The detail level of returned data, Basic, Standard(default) or Extended.",
+          "description": "Specify the level of detail to retrieve for the incidents from Fortinet FortiAnalyzer. You can choose from the following options: Basic, Standard(default), or Extended."
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 50,
+          "tooltip": "The maximum number of records to return. Default: 50 Min: 1 Max: 2000",
+          "description": "Specify the maximum number of records that this operation should return. You can specify a minimum of 1 and a maximum value of 2000 records to retrieve. Default value is 1000."
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The offset of the first item to return. Default: 0 Min: 0",
+          "description": "Index of the first item to be returned by this operation. This parameter is useful if you want to get a subset of records, say incidents starting from the 10th incident. By default, this is set as 0 and the minimum supported value is 0."
+        },
+        {
+          "title": "Sort",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "onchange": {
+            "true": [
+              {
+                "title": "Sort by Field",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "field",
+                "value": "",
+                "tooltip": "The field by which you want to sort the incidents.",
+                "description": "Specify the name of the field on which to sort the result."
+              },
+              {
+                "title": "Sort by Order",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "select",
+                "options": [
+                  "ASC",
+                  "DESC"
+                ],
+                "name": "order",
+                "value": "",
+                "tooltip": "The order by which you want to sort the incidents.",
+                "description": "Specify the sorting order of the result. You choose from following options: ASC (ascending) or DESC (descending)."
+              }
+            ]
+          },
+          "name": "sort-by",
+          "value": false,
+          "tooltip": "Select if you want to filter incidents by field and order. Works only with the Detail Level as 'Basic' or 'Standard'.",
+          "description": "Select this checkbox if you want to sort the incidents by a field and order the results. If you select this checkbox, i.e., set it as \"true\", then specify the following parameters: Sort by Field: Name of the field on which you want to sort the result. Sort by Order: Sorting order of the result, choose between ASC (ascending) or DESC (descending)."
+        }
+      ]
+    },
+    {
+      "operation": "count_incidents_for_multiple_adoms",
+      "title": "Count Incidents for Multiple ADOMs",
+      "description": "Retrieves the count of incidents from multiple ADOMs in FortiAnalyzer based on the input parameters you have specified. ",
+      "category": "investigation",
+      "annotation": "count_incidents_for_multiple_adoms",
+      "output_schema": {
+        "jsonrpc": "",
+        "id": "",
+        "result": {
+          "data": [
+            {
+              "count": ""
+            }
+          ],
+          "detail-level": "",
+          "status": {
+            "code": "",
+            "message": ""
+          }
+        }
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident IDs",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incids",
+          "value": "",
+          "tooltip": "The list of incident ID's. e.g. IN00000002,IN00000005 or IN00000002",
+          "placeholder": "IN00000002,IN00000005 or IN00000002",
+          "description": "Specify the list of incident IDs to count the incidents retrieved from Fortinet FortiAnalyzer. For example, IN00000002,IN00000005 or IN00000002"
+        },
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "value": "",
+          "tooltip": "The query filter to retrieve the list of incidents. e.g. status='analysis' and severity='medium'",
+          "placeholder": "status='analysis' and severity='medium'",
+          "description": "Specify the filter query to search for the incidents and retrieve their counts from Fortinet FortiAnalyzer. For example, status='analysis' and severity='medium'"
+        }
+      ]
+    }
+  ]
+}

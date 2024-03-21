@@ -1,0 +1,300 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - MySQL - 1.0.0",
+      "description": "MySQL Connector allows different database operations with MySQL",
+      "visible": true,
+      "image": "/api/3/images/5b618e690d9fd7167b188fb2",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Run Query",
+          "description": "Execute any query on MySQL database. E.g. Create, Update, Delete, Select, Insert",
+          "collection": "/api/3/workflow_collections/d0dbfde4-fe11-4a49-a6ff-6bf7e17033d4",
+          "tag": "#MySQL",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/029e1af7-1396-4d81-9e44-ad59055a05de",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a18200f2-5605-4c3a-94dc-2381b02083ed",
+                "title": "MySQL: Run Query",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "332",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "029e1af7-1396-4d81-9e44-ad59055a05de"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Run Query",
+              "description": null,
+              "arguments": {
+                "name": "MySQL",
+                "config": "093111ee-d15a-479c-9be2-d13c305e89fb",
+                "params": {
+                  "query_string": "select * from Persons;"
+                },
+                "version": "1.0.0",
+                "connector": "mysql",
+                "operation": "run_query",
+                "operationTitle": "Run Query",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "332",
+              "top": "134",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "284ddee9-a962-4dc0-b226-47028e2ffa76"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "query_output": "{{vars.result}}"
+              },
+              "status": null,
+              "left": "332",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "f2a49de2-69c6-41f5-86cd-80a9c8439277"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ebe502b9-f51b-498b-a585-30dc1b3387c2",
+              "name": "Start -> Run Query",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/284ddee9-a962-4dc0-b226-47028e2ffa76",
+              "sourceStep": "/api/3/workflow_steps/029e1af7-1396-4d81-9e44-ad59055a05de"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "630b6537-6308-4f87-84a7-0e743774850d",
+              "name": "Run Query -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f2a49de2-69c6-41f5-86cd-80a9c8439277",
+              "sourceStep": "/api/3/workflow_steps/284ddee9-a962-4dc0-b226-47028e2ffa76"
+            }
+          ],
+          "uuid": "ebc8a38f-0e29-4335-ab71-2cb43216af67"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Tables",
+          "description": "List table names for provided database",
+          "collection": "/api/3/workflow_collections/d0dbfde4-fe11-4a49-a6ff-6bf7e17033d4",
+          "tag": "#MySQL",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/aeb4875a-d944-4482-9117-b3443d91b0a7",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Tables",
+              "description": null,
+              "arguments": {
+                "name": "MySQL",
+                "config": "16ec105b-7f59-4499-b799-1bdb861b6186",
+                "params": {
+                  "undefined": ""
+                },
+                "version": "1.0.0",
+                "connector": "mysql",
+                "operation": "list_tables",
+                "operationTitle": "List Tables",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "300",
+              "top": "132",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "0a9fa543-9527-41ae-bdd1-b86b62cc5ee8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "list_tables": "{{vars.result}}"
+              },
+              "status": null,
+              "left": "300",
+              "top": "233",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "6229d9d2-4115-4565-82a2-e2d48f243508"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "ee4b9c5f-245e-4edd-96d5-064ce6dc38fa",
+                "title": "MySQL: List Tables",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "300",
+              "top": "13",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "aeb4875a-d944-4482-9117-b3443d91b0a7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0f5c5060-ad43-4901-bd82-f749de5bf5d4",
+              "name": "Start -> List Tables",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/0a9fa543-9527-41ae-bdd1-b86b62cc5ee8",
+              "sourceStep": "/api/3/workflow_steps/aeb4875a-d944-4482-9117-b3443d91b0a7"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "480dea87-f746-469f-8546-a6cfab60ae78",
+              "name": "List Tables -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6229d9d2-4115-4565-82a2-e2d48f243508",
+              "sourceStep": "/api/3/workflow_steps/0a9fa543-9527-41ae-bdd1-b86b62cc5ee8"
+            }
+          ],
+          "uuid": "f1bff1ee-51a5-4c25-b185-d569bd94581f"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Columns",
+          "description": "Describes the structure of a table in the database by displaying information about its columns",
+          "collection": "/api/3/workflow_collections/d0dbfde4-fe11-4a49-a6ff-6bf7e17033d4",
+          "tag": "#MySQL",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d5627fa4-7e30-431a-b08b-328ce5ce9a26",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Respnse",
+              "description": null,
+              "arguments": {
+                "tables_details": "{{vars.result}}"
+              },
+              "status": null,
+              "left": "280",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "11c1c5e1-4457-4a46-9b4c-9912c17c7c70"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Columns",
+              "description": null,
+              "arguments": {
+                "name": "MySQL",
+                "config": "b38a76ed-056d-4b62-b02f-2417519b7a61",
+                "params": {
+                  "table_name": "Persons"
+                },
+                "version": "1.0.0",
+                "connector": "mysql",
+                "operation": "list_columns",
+                "operationTitle": "List Columns",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "280",
+              "top": "128",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "9f47ec2e-f162-4a15-8978-0ddda69bf8c1"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "f1a36692-c176-4409-be03-10960d7b0018",
+                "title": "MySQL: List Columns",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "280",
+              "top": "26",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "d5627fa4-7e30-431a-b08b-328ce5ce9a26"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e757e96b-9e53-49b8-b7e8-f27e00834646",
+              "name": "Start -> List Columns",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/9f47ec2e-f162-4a15-8978-0ddda69bf8c1",
+              "sourceStep": "/api/3/workflow_steps/d5627fa4-7e30-431a-b08b-328ce5ce9a26"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8d43758f-6d15-41f9-8bf2-97743624f258",
+              "name": "List Columns -> Save Respnse",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/11c1c5e1-4457-4a46-9b4c-9912c17c7c70",
+              "sourceStep": "/api/3/workflow_steps/9f47ec2e-f162-4a15-8978-0ddda69bf8c1"
+            }
+          ],
+          "uuid": "d37c4798-7f70-484b-bd05-3542882691b5"
+        }
+      ],
+      "uuid": "d0dbfde4-fe11-4a49-a6ff-6bf7e17033d4"
+    }
+  ]
+}

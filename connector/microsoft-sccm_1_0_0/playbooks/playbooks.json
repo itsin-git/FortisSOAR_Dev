@@ -1,0 +1,212 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Microsoft SCCM - 1.0.0",
+      "description": "Sample playbooks for the Microsoft SCCM Connector that demonstrate how to list patches, device groups and to deploy patches on device groups",
+      "visible": true,
+      "image": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Deploy Patch",
+          "description": null,
+          "collection": "/api/3/workflow_collections/21e86510-9572-4060-bc37-34ed18e5b81a",
+          "tag": null,
+          "isActive": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ae3d25cc-a435-4a4c-8f4f-73ed99c97da2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "arguments": {
+                "route": "303ec0dc-fb61-453e-a71e-5fe965fdac60",
+                "title": "Deploy Microsoft Patch",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ae3d25cc-a435-4a4c-8f4f-73ed99c97da2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Device Collections",
+              "arguments": {
+                "name": "Microsoft SCCM",
+                "config": "016715cf-fdab-4ee6-85ca-fc16fcc262a7",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "microsoft-sccm",
+                "operation": "get_device_collections",
+                "operationTitle": "List All Device Collections",
+                "step_variables": [],
+                "operationOutput": {"op_status": 0, "op_result":[
+                  {
+                    "Name": "",
+                    "Comment": "",
+                    "ISVData": "",
+                    "ISVString": "",
+                    "IsBuiltIn": "",
+                    "ObjectPath": "",
+                    "UseCluster": "",
+                    "ISVDataSize": "",
+                    "MemberCount": "",
+                    "RefreshType": "",
+                    "CollectionID": "",
+                    "CurrentStatus": "",
+                    "CollectionType": "",
+                    "LastChangeTime": "",
+                    "PSComputerName": "",
+                    "CollectionRules": "",
+                    "LastRefreshTime": "",
+                    "MemberClassName": "",
+                    "MonitoringFlags": "",
+                    "OwnedByThisSite": "",
+                    "RefreshSchedule": "",
+                    "LocalMemberCount": "",
+                    "PowerConfigsCount": "",
+                    "PSShowComputerName": "",
+                    "LimitToCollectionID": "",
+                    "ReplicateToSubSites": "",
+                    "ServiceWindowsCount": "",
+                    "HasProvisionedMember": "",
+                    "LastMemberChangeTime": "",
+                    "IsReferenceCollection": "",
+                    "LimitToCollectionName": "",
+                    "SmsProviderObjectPath": "",
+                    "CollectionVariablesCount": "",
+                    "IncludeExcludeCollectionsCount": ""
+                  }
+                ]}
+              },
+              "status": null,
+              "left": "20",
+              "top": "220",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "fe3aa5f9-b881-47d2-93eb-47b00739ac54"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Patches",
+              "arguments": {
+                "name": "Microsoft SCCM",
+                "config": "016715cf-fdab-4ee6-85ca-fc16fcc262a7",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "microsoft-sccm",
+                "operation": "get_patches",
+                "operationTitle": "List All Software Patches",
+                "operationOutput": {"op_status": 0, "op_result":[
+                  {
+                    "ArticleID": "",
+                    "IsExpired": "",
+                    "BulletinID": "",
+                    "DatePosted": "",
+                    "IsDeployed": "",
+                    "DateRevised": "",
+                    "IsSuperseded": "",
+                    "PercentCompliant": "",
+                    "LocalizedDisplayName": ""
+                  }
+                ]}
+              },
+              "status": null,
+              "left": "20",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "1f8c1ed3-193f-4f22-ae04-3804aabbfaf8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Select First Patch and Collection For Demo",
+              "arguments": {
+                "var_patch": "{{vars.steps.List_Patches.data[0].LocalizedDisplayName}}",
+                "var_collection": "{{vars.steps.List_Device_Collections.data[0].Name}}"
+              },
+              "status": null,
+              "left": "20",
+              "top": "328",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "6f887ba7-2510-47ba-a8dd-3ac711af9671"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Deploy Patch",
+              "arguments": {
+                "name": "Microsoft SCCM",
+                "config": "016715cf-fdab-4ee6-85ca-fc16fcc262a7",
+                "params": {
+                  "patch_name": "Test",
+                  "collection_name": "Test",
+                  "additional_params": "-DeploymentType Required -DisableOperationsManagerAlert $True -GenerateOperationsManagerAlert $True -GenerateSuccessAlert $True -ProtectedType RemoteDistributionPoint -UnprotectedType UnprotectedDistributionPoint -UserNotification DisplaySoftwareCenterOnly -TimeBasedOn LocalTime -VerbosityLevel AllMessages -AcceptEula"
+                },
+                "version": "1.0.0",
+                "connector": "microsoft-sccm",
+                "operation": "deploy_patch",
+                "operationTitle": "Deploy Patch",
+                "operationOutput": {"op_status": 0, "op_result":{"SmsProviderObjectPath":  "", "ApplyToSubTargets":  "", "AssignedCIs":  "", "AssignmentAction":  "", "AssignmentDescription":  "",
+        "AssignmentID":  "", "AssignmentName":  "","AssignmentType":  "","AssignmentUniqueID":  "","ContainsExpiredUpdates":  "", "CreationTime":  "",
+        "DesiredConfigType":  "", "DisableMomAlerts":  "", "DPLocality":  "", "Enabled":  "", "EnforcementDeadline":  "", "EvaluationSchedule":  "",
+        "ExpirationTime":  "","LastModificationTime":  "", "LastModifiedBy":  "", "LimitStateMessageVerbosity":  "", "LocaleID":  "", "LogComplianceToWinEvent":  "",
+        "NonComplianceCriticality":  "", "NotifyUser":  "", "OverrideServiceWindows":  "", "PersistOnWriteFilterDevices":  "", "RaiseMomAlertsOnFailure":  "",
+        "RandomizationEnabled":  "", "RebootOutsideOfServiceWindows":  "", "RequirePostRebootFullScan":  "", "SendDetailedNonComplianceStatus":  "",
+        "SoftDeadlineEnabled":  "", "SourceSite":  "", "StartTime":  "", "StateMessagePriority":  "", "StateMessageVerbosity":  "", "SuppressReboot":  "",
+        "TargetCollectionID":  "", "UseBranchCache":  "", "UseGMTTimes":  "", "UserUIExperience":  "", "WoLEnabled":  "", "PSComputerName":  "", "PSShowComputerName":  ""}}
+              },
+              "status": null,
+              "left": "20",
+              "top": "440",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "93700781-0409-4694-9c5f-2c2471908c59"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e63cf5aa-513b-49f8-a0f8-c1793c44d160",
+              "name": "Start -> List Patches",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/1f8c1ed3-193f-4f22-ae04-3804aabbfaf8",
+              "sourceStep": "/api/3/workflow_steps/ae3d25cc-a435-4a4c-8f4f-73ed99c97da2"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "552646d6-42b9-46f9-8e77-4e23ef797d25",
+              "name": "List Patches -> List Device Collections",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/fe3aa5f9-b881-47d2-93eb-47b00739ac54",
+              "sourceStep": "/api/3/workflow_steps/1f8c1ed3-193f-4f22-ae04-3804aabbfaf8"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e32e766e-8399-4988-a7d0-a0f2b866fb4a",
+              "name": "List Device Collections -> Set Results",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6f887ba7-2510-47ba-a8dd-3ac711af9671",
+              "sourceStep": "/api/3/workflow_steps/fe3aa5f9-b881-47d2-93eb-47b00739ac54"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "398e701f-14d6-4fe0-9c6c-c12dd61f993f",
+              "name": "Select Patch and Collection -> Deploy Patch",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/93700781-0409-4694-9c5f-2c2471908c59",
+              "sourceStep": "/api/3/workflow_steps/6f887ba7-2510-47ba-a8dd-3ac711af9671"
+            }
+          ],
+          "uuid": "968da39c-6c1e-4544-927a-1450b2ee7357"
+        }
+      ],
+      "uuid": "21e86510-9572-4060-bc37-34ed18e5b81a"
+    }
+  ]
+}

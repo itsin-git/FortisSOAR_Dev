@@ -1,0 +1,117 @@
+{
+  "name": "urlvoid",
+  "label": "URLVoid",
+  "version": "1.1.0",
+  "description": "URLVoid Connector",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "SandBox",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000067160-urlvoid-v1-1-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "base_url",
+        "value": "http://api.urlvoid.com"
+      },
+      {
+        "title": "API Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_key"
+      },
+      {
+        "title": "Identifier",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "identifier"
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "domain_reputation",
+      "title": "Get Website Reputation ",
+      "description": "Get reputation information of website",
+      "category": "investigation",
+      "annotation": "domain_reputation",
+      "output_schema": {
+        "details": {
+          "host": "",
+          "updated": "",
+          "http_response_code": "",
+          "domain_age": "",
+          "google_page_rank": "",
+          "alexa_rank": "",
+          "connect_time": "",
+          "header_size": "",
+          "download_size": "",
+          "speed_download": "",
+          "external_url_redirect": "",
+          "ip": {
+            "addr": "",
+            "hostname": "",
+            "asn": "",
+            "asname": "",
+            "country_code": "",
+            "country_name": "",
+            "region_name": "",
+            "city_name": "",
+            "continent_code": "",
+            "continent_name": "",
+            "latitude": "",
+            "longitude": ""
+          }
+        },
+        "detections": {
+          "engines": {
+            "engine": []
+          },
+          "count": ""
+        },
+        "action_result": "",
+        "page_load": ""
+      },
+      "parameters": [
+        {
+          "title": "Website Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "domain"
+        },
+        {
+          "title": "Rescan",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "rescan",
+          "value": true
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "name": "code-snippet",
+  "label": "Code Snippet",
+  "version": "2.1.0",
+  "description": "Execute code snippets as part of your Playbooks.",
+  "publisher": "Fortinet",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.1.0/code-snippet-connector/724/code-snippet-connector-v2-1-0",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "utilities",
+  "icon_small_name": "code_snippet_small.png",
+  "icon_large_name": "code_snippet_large.png",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Allow Universal Imports",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "allow_imports",
+        "value": false,
+        "tooltip": "If enabled, all python modules (except os, sys, subprocess) will be allowed to use and if allow_only_safe_builtins set in integrations config.ini then only safe python builtins will be allowed for use in code snippets. To include a specific and restricted set of python libraries recommendation is to use the 'Modules to Import' option below.",
+        "onchange": {
+          "false": [
+            {
+              "title": "Modules to Import",
+              "required": true,
+              "editable": true,
+              "visible": true,
+              "type": "text",
+              "name": "restrict_imports",
+              "placeholder": "requests, json",
+              "tooltip": "Enter comma separated list of allowed python libraries. Eg, 'json, requests'. You will not require them to re-import in code snippet."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "operations": [
+    {
+      "description": "Execute python code as part of your Playbooks",
+      "operation": "python_inline_code_editor",
+      "annotation": "run_cmd",
+      "title": "Execute Python Code",
+      "parameters": [
+        {
+          "title": "Python Function",
+          "name": "python_function",
+          "type": "codeEditor",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "code_output": {}
+      },
+      "enabled": true
+    },
+    {
+      "description": "Execute python code as part of your Playbooks",
+      "operation": "python_inline",
+      "annotation": "run_cmd",
+      "title": "Execute Python Code (Deprecated)",
+      "parameters": [
+        {
+          "title": "Python Function",
+          "name": "python_function",
+          "type": "textarea",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "code_output": {}
+      },
+      "enabled": true
+    }
+  ]
+}

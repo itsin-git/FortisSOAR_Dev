@@ -1,0 +1,138 @@
+{
+  "name": "ansible-tower",
+  "label": "Ansible Tower",
+  "description": "Ansible Tower connector perform automated operations, such as retrieving job status, launching jobs, retrieving job template, list job, list users from resources within Tower.",
+  "publisher": "CyberSponse Community",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "DevOps",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000074821-ansible-tower-v1-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "type": "text",
+        "name": "host",
+        "description": "URL of the Ansible Tower to which you will connect and perform automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true
+      },
+      {
+        "title": "Username",
+        "name": "username",
+        "type": "text",
+        "description": "Username to access the Ansible Tower.",
+        "required": true,
+        "editable": true,
+        "visible": true
+      },
+      {
+        "title": "Password",
+        "name": "password",
+        "type": "password",
+        "description": "Password to access the Ansible Tower.",
+        "required": true,
+        "editable": true,
+        "visible": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "launch_job",
+      "category": "miscellaneous",
+      "annotation": "launch_job",
+      "output_schema": {
+        "job_status": {}
+      },
+      "title": "Launch a Job",
+      "description": "Launch a new job based on a job template name.",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Template Name",
+          "name": "template_name",
+          "type": "text",
+          "description": "Provide a name of the job template to launch new job",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Job template to use"
+        }
+      ]
+    },
+    {
+      "operation": "get_job_status",
+      "category": "miscellaneous",
+      "annotation": "get_job_status",
+      "output_schema": {
+        "job_status": {}
+      },
+      "title": "Get Job Status",
+      "description": "Retrieve the job status of specified job ID",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Job ID",
+          "name": "pk",
+          "type": "text",
+          "description": "Primary key of the resource to retrieve status from.",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "ID of the job to fetch"
+        }
+      ]
+    },
+    {
+      "operation": "list_job_templates",
+      "title": "List Job Templates",
+      "description": "Retrieve a list of job templates from Ansible Tower.",
+      "category": "miscellaneous",
+      "annotation": "list_job_templates",
+      "output_schema": {
+        "job_templates": {}
+      },
+      "enabled": true,
+      "parameters": []
+    },
+    {
+      "operation": "search_job_templates",
+      "category": "miscellaneous",
+      "annotation": "search_job_templates",
+      "output_schema": {
+        "job_templates": {}
+      },
+      "title": "Search Job Templates",
+      "description": "Search for a specific job template by name",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Template Name",
+          "name": "name",
+          "type": "text",
+          "description": "Provide a name of the job template to search",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "operation": "list_users",
+      "category": "investigation",
+      "annotation": "list_users",
+      "output_schema": {
+        "users": {}
+      },
+      "title": "List Users",
+      "description": "Retrieve a list of users",
+      "enabled": true,
+      "parameters": []
+    }
+  ]
+}

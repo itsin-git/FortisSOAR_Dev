@@ -1,0 +1,1435 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "15943136-6c1c-493d-81a4-97b933e51b04",
+      "@type": "WorkflowCollection",
+      "name": "Sample - VMware Carbon Black EDR - 2.0.2",
+      "description": "VMware Carbon Black EDR is purpose-built for enterprise SOC and IR teams.This connector facilitates automated operation related to endpoint protection like isolate endpoint, unisolate endpoint, hunt file, terminate process etc. with VMware Carbon Black EDR server.",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "VMware",
+        "Carbon Black EDR"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "23b2cf53-dba0-41a7-a7d6-e0570a6c78a9",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Retrieves details about all sensors (endpoints) or specific sensor(s) from the VMware Carbon Black EDR, based on the input parameters you have specified.",
+          "name": "Get Sensor(s) Information",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/06d48827-9f19-4f99-af7a-c70949b7b3cc",
+          "steps": [
+            {
+              "uuid": "06d48827-9f19-4f99-af7a-c70949b7b3cc",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "6913b08e-09a3-40bf-bab3-d2ad1bd36909",
+                "title": "VMware Carbon Black EDR: Get Sensor(s) Information",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "b686b664-67d8-4b01-b064-d3630a8842a1",
+              "@type": "WorkflowStep",
+              "name": "Get Sensor(s) Information",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "input_type": "All",
+                  "value": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "get_host_details",
+                "operationTitle": "Get Sensor(s) Information",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "43c0e289-da87-4276-93a3-dc57ad6cfbf3",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Sensor(s) Information",
+              "sourceStep": "/api/3/workflow_steps/06d48827-9f19-4f99-af7a-c70949b7b3cc",
+              "targetStep": "/api/3/workflow_steps/b686b664-67d8-4b01-b064-d3630a8842a1"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "81a57ea7-9963-4acf-ba65-d5aae5ab4938",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Isolates sensor(s) on the VMware Carbon Black EDR based on Hostname, IP Address, Process Name or Filehash(MD5) you have specified.",
+          "name": "Isolate Sensor",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/119b49af-fd5a-44ff-9d78-6014e9b87954",
+          "steps": [
+            {
+              "uuid": "119b49af-fd5a-44ff-9d78-6014e9b87954",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "c76a1584-570d-47ee-b88b-cfb8e20d5808",
+                "title": "VMware Carbon Black EDR: Isolate Sensor",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "a80d25b8-7224-40d8-94cf-4b6106f417bf",
+              "@type": "WorkflowStep",
+              "name": "Isolate Sensor",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "input_type": "Hostname",
+                  "value": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "isolate_sensor",
+                "operationTitle": "Isolate Sensor",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "6211fe28-bb55-4cdf-846d-b8b59f0e8341",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Isolate Sensor",
+              "sourceStep": "/api/3/workflow_steps/119b49af-fd5a-44ff-9d78-6014e9b87954",
+              "targetStep": "/api/3/workflow_steps/a80d25b8-7224-40d8-94cf-4b6106f417bf"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f443204e-f9c4-439d-978b-2a9101f81fd2",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Removes isolation on sensor(s) from the VMware Carbon Black EDR based on Hostname, IP Address, Process Name or Filehash(MD5) you have specified.",
+          "name": "Remove Isolation",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f25823bd-02a6-43fa-870e-d9aea7aa94c8",
+          "steps": [
+            {
+              "uuid": "f25823bd-02a6-43fa-870e-d9aea7aa94c8",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "b69179e5-386b-4946-9f4d-3fbb5cf8e512",
+                "title": "VMware Carbon Black EDR: Remove Isolation",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "c2230720-67c3-4b06-af87-3abe8ae84183",
+              "@type": "WorkflowStep",
+              "name": "Remove Isolation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "input_type": "Hostname",
+                  "value": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "unisolate_sensor",
+                "operationTitle": "Remove Isolation",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2d011240-a415-48ba-bffb-c31e2ca2a083",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Remove Isolation",
+              "sourceStep": "/api/3/workflow_steps/f25823bd-02a6-43fa-870e-d9aea7aa94c8",
+              "targetStep": "/api/3/workflow_steps/c2230720-67c3-4b06-af87-3abe8ae84183"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "919e855b-6c56-4111-8b31-faefd213fa22",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all running processes along with its details from the VMware Carbon Black EDR, based on the sensor details you have specified.",
+          "name": "Get All Processes",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2fa6ec1a-6073-4edb-af85-9ff1a528d9ad",
+          "steps": [
+            {
+              "uuid": "2fa6ec1a-6073-4edb-af85-9ff1a528d9ad",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "a577574f-e051-49a9-b90b-8d3e11b19325",
+                "title": "VMware Carbon Black EDR: Get All Processes",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "3fb72f2b-312f-45fb-831c-f129d972070e",
+              "@type": "WorkflowStep",
+              "name": "Get All Processes",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "input_type": "Hostname",
+                  "value": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "get_process_list",
+                "operationTitle": "Get All Processes",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "063a424a-edcc-4ba2-8529-bb5c3f995809",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get All Processes",
+              "sourceStep": "/api/3/workflow_steps/2fa6ec1a-6073-4edb-af85-9ff1a528d9ad",
+              "targetStep": "/api/3/workflow_steps/3fb72f2b-312f-45fb-831c-f129d972070e"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "429d5ebb-15df-4587-b2b5-7c5c535da483",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Retrieves a list of connections for a specific sensor and process from the VMware Carbon Black EDR, based on the sensor and process details you have specified.",
+          "name": "Get Process Connections",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d6e61e50-feca-44cc-aae4-97ce865fc62e",
+          "steps": [
+            {
+              "uuid": "d6e61e50-feca-44cc-aae4-97ce865fc62e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "5d23d64f-e824-4f2d-84b3-38c41c4932e0",
+                "title": "VMware Carbon Black EDR: Get Process Connections",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "b1fabc9d-c5cf-43f1-95b2-8c8fcb076000",
+              "@type": "WorkflowStep",
+              "name": "Get Process Connections",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "input_type": "Hostname",
+                  "value": "",
+                  "pname_pid": "Process ID",
+                  "proc_pid": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "list_connections",
+                "operationTitle": "Get Process Connections",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c6ada96d-19cc-4943-97df-3cd9bc23e2ed",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Process Connections",
+              "sourceStep": "/api/3/workflow_steps/d6e61e50-feca-44cc-aae4-97ce865fc62e",
+              "targetStep": "/api/3/workflow_steps/b1fabc9d-c5cf-43f1-95b2-8c8fcb076000"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "2d37b556-422b-4441-920a-c6f9793cc1b3",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Terminates a process running on an endpoint on the VMware Carbon Black EDR, based on the sensor and process details you have specified.",
+          "name": "Terminate Process",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/4b26693e-3441-4ff0-853e-ab3347b87067",
+          "steps": [
+            {
+              "uuid": "4b26693e-3441-4ff0-853e-ab3347b87067",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "eeefb27e-0852-4d52-86fc-026456441300",
+                "title": "VMware Carbon Black EDR: Terminate Process",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "23bed7fc-8cfd-457d-ad90-e3416c163f08",
+              "@type": "WorkflowStep",
+              "name": "Terminate Process",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "input_type": "Hostname",
+                  "value": "",
+                  "select_type": "Process ID",
+                  "process_value": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "terminate_process",
+                "operationTitle": "Terminate Process",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "285bcd88-8960-4f6d-8813-90a1c833abdc",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Terminate Process",
+              "sourceStep": "/api/3/workflow_steps/4b26693e-3441-4ff0-853e-ab3347b87067",
+              "targetStep": "/api/3/workflow_steps/23bed7fc-8cfd-457d-ad90-e3416c163f08"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "3956b39c-303b-4f5d-85ee-9fa7f1534727",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Retrieves information about a file from the VMware Carbon Black EDR, based on the filehash you have specified.",
+          "name": "Get File Information",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/37b3b6e5-bdc7-4851-9d48-797f1ccd6cb9",
+          "steps": [
+            {
+              "uuid": "37b3b6e5-bdc7-4851-9d48-797f1ccd6cb9",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "3199e321-6e79-40f6-9377-5eb011401c72",
+                "title": "VMware Carbon Black EDR: Get File Information",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "d87810d4-12d6-4705-bf8f-41e5b1eb4232",
+              "@type": "WorkflowStep",
+              "name": "Get File Information",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "md5": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "get_file_info_md5",
+                "operationTitle": "Get File Information",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "57687889-45bc-44c3-8291-713a097ce4c0",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get File Information",
+              "sourceStep": "/api/3/workflow_steps/37b3b6e5-bdc7-4851-9d48-797f1ccd6cb9",
+              "targetStep": "/api/3/workflow_steps/d87810d4-12d6-4705-bf8f-41e5b1eb4232"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "7a86a459-716f-4318-9a2f-aa566f829f79",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Hunts for a file and retrieves details for that file from the VMware Carbon Black EDR, based on the file type and filehash you have specified.",
+          "name": "Hunt file",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/5d01e6cd-920c-46f1-b75b-718d98cf419f",
+          "steps": [
+            {
+              "uuid": "5d01e6cd-920c-46f1-b75b-718d98cf419f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "c9029c60-8ab5-4d79-ae37-d2dbdf71f245",
+                "title": "VMware Carbon Black EDR: Hunt file",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "ae031ae5-3d59-4c40-af55-ccdfc480c80a",
+              "@type": "WorkflowStep",
+              "name": "Hunt file",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "query_type": "Process",
+                  "md5": "",
+                  "start": 0,
+                  "rows": 10
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "hunt_file",
+                "operationTitle": "Hunt file",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b2c9acad-0cf4-4851-bed6-bb61a6d45ac0",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Hunt file",
+              "sourceStep": "/api/3/workflow_steps/5d01e6cd-920c-46f1-b75b-718d98cf419f",
+              "targetStep": "/api/3/workflow_steps/ae031ae5-3d59-4c40-af55-ccdfc480c80a"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1ee71db0-2c2d-4628-ac9f-68132a597f24",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Retrieves a list of all blacklisted filehashes and their details from the VMware Carbon Black EDR.",
+          "name": "Get All Block Hashes",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0fa5b5bf-31c3-438f-8020-371b22f6ad90",
+          "steps": [
+            {
+              "uuid": "0fa5b5bf-31c3-438f-8020-371b22f6ad90",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "ba2d2165-5b44-4049-8fc4-3d252b59f6e1",
+                "title": "VMware Carbon Black EDR: Get All Block Hashes",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "b6e64125-4540-44ce-9e17-301d64633a12",
+              "@type": "WorkflowStep",
+              "name": "Get All Block Hashes",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": [],
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "get_blacklisted_hash",
+                "operationTitle": "Get All Block Hashes",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0224e7e0-7084-4306-9554-bf3d8ddb8793",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get All Block Hashes",
+              "sourceStep": "/api/3/workflow_steps/0fa5b5bf-31c3-438f-8020-371b22f6ad90",
+              "targetStep": "/api/3/workflow_steps/b6e64125-4540-44ce-9e17-301d64633a12"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "9ad2c31e-a56e-44a9-a446-cd9cf6c90961",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Blocks a particular file on the VMware Carbon Black EDR, based on the filehash (MD5 only) you have specified.",
+          "name": "Block Hash",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/828210d1-e96f-45d9-97ff-c63040b826ef",
+          "steps": [
+            {
+              "uuid": "828210d1-e96f-45d9-97ff-c63040b826ef",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "94131e90-cb67-49ea-af50-630f35c00381",
+                "title": "VMware Carbon Black EDR: Block Hash",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "af87c63b-1778-45e1-ad74-c3fc8279cad3",
+              "@type": "WorkflowStep",
+              "name": "Block Hash",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "md5": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "block_hash",
+                "operationTitle": "Block Hash",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "f32fdd95-6961-4f73-81b5-e5fd776c2bda",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Block Hash",
+              "sourceStep": "/api/3/workflow_steps/828210d1-e96f-45d9-97ff-c63040b826ef",
+              "targetStep": "/api/3/workflow_steps/af87c63b-1778-45e1-ad74-c3fc8279cad3"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b9269df5-3ee2-4552-bd25-4f00dccd2fb4",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Unblocks a particular file on the VMware Carbon Black EDR, based on the filehash (MD5 only) you have specified.",
+          "name": "Unblock Hash",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6a3c787e-038f-446a-83ec-13d75734f544",
+          "steps": [
+            {
+              "uuid": "6a3c787e-038f-446a-83ec-13d75734f544",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "bcd05cd2-e3b3-4f4e-a752-31c68b5dcdef",
+                "title": "VMware Carbon Black EDR: Unblock Hash",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "e808d403-8f02-4047-bb76-518b8d9edfd4",
+              "@type": "WorkflowStep",
+              "name": "Unblock Hash",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "md5": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "unblock_hash",
+                "operationTitle": "Unblock Hash",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ac20d618-4cc0-4932-8dd1-9bbfaf9b8087",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Unblock Hash",
+              "sourceStep": "/api/3/workflow_steps/6a3c787e-038f-446a-83ec-13d75734f544",
+              "targetStep": "/api/3/workflow_steps/e808d403-8f02-4047-bb76-518b8d9edfd4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "e62b336a-275f-4623-9727-133c19667c53",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Deletes a particular file from the VMware Carbon Black EDR, based on the sensor details and file path you have specified.",
+          "name": "Delete file",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ba11e649-02bd-453a-a570-a92fcd871d93",
+          "steps": [
+            {
+              "uuid": "ba11e649-02bd-453a-a570-a92fcd871d93",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "13509a1a-798b-479e-9794-501d4cf975c1",
+                "title": "VMware Carbon Black EDR: Delete file",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "225aea9e-5dfc-46c2-a227-f66de5d071da",
+              "@type": "WorkflowStep",
+              "name": "Delete file",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "input_type": "Hostname",
+                  "value": "",
+                  "file_name": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "delete_file",
+                "operationTitle": "Delete file",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b6c84d8a-ef4c-4212-85f3-18e00a47abcb",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete file",
+              "sourceStep": "/api/3/workflow_steps/ba11e649-02bd-453a-a570-a92fcd871d93",
+              "targetStep": "/api/3/workflow_steps/225aea9e-5dfc-46c2-a227-f66de5d071da"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "76b4de0f-582b-48c3-9c34-0eb725b813d9",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Runs a search query on the endpoint to retrieve the information of binary or process from the VMware Carbon Black EDR.",
+          "name": "Run Query",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/222fd015-87f3-4837-a6a4-5983d36689a2",
+          "steps": [
+            {
+              "uuid": "222fd015-87f3-4837-a6a4-5983d36689a2",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "d48814e1-0d45-4438-8edd-decd1dbce721",
+                "title": "VMware Carbon Black EDR: Run Query",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "5a7678b6-e7f8-4942-b4f4-f08e99635fb4",
+              "@type": "WorkflowStep",
+              "name": "Run Query",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "query_type": "Process",
+                  "query": "",
+                  "start": 0,
+                  "rows": 10
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "run_query",
+                "operationTitle": "Run Query",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a73d2d1e-8dfc-489a-9815-6dedc519fc31",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Run Query",
+              "sourceStep": "/api/3/workflow_steps/222fd015-87f3-4837-a6a4-5983d36689a2",
+              "targetStep": "/api/3/workflow_steps/5a7678b6-e7f8-4942-b4f4-f08e99635fb4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b1f8e7fd-f82a-4dd2-bae6-e2077606b90d",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Searches for alerts on the VMware Carbon Black EDR, based on the search query you have specified.",
+          "name": "Search Alerts",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/55a65434-0944-4eef-b87d-f1c9918d67a6",
+          "steps": [
+            {
+              "uuid": "55a65434-0944-4eef-b87d-f1c9918d67a6",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "89281740-c2aa-448d-9390-30e102f07f10",
+                "title": "VMware Carbon Black EDR: Search Alerts",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "2ba54f0c-1361-4846-842d-332859ac9806",
+              "@type": "WorkflowStep",
+              "name": "Search Alerts",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "query": "",
+                  "status": "",
+                  "sort_by": "Severity",
+                  "start": 0,
+                  "rows": 10
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "search_alert",
+                "operationTitle": "Search Alerts",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "eb2b1ad1-d249-4ba4-b910-8f9b45319ab4",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Search Alerts",
+              "sourceStep": "/api/3/workflow_steps/55a65434-0944-4eef-b87d-f1c9918d67a6",
+              "targetStep": "/api/3/workflow_steps/2ba54f0c-1361-4846-842d-332859ac9806"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "9f27dd9d-e6de-4301-99cc-20d5cc8be66e",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Updates the status of an alert on the VMware Carbon Black EDR, based on the input parameters you have specified.",
+          "name": "Update Alert",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/4185e41d-44e4-4433-9321-e81a02b6954a",
+          "steps": [
+            {
+              "uuid": "4185e41d-44e4-4433-9321-e81a02b6954a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "76a20621-da6a-4f96-bee5-ba7063a91fc4",
+                "title": "VMware Carbon Black EDR: Update Alert",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "8e365928-e715-410d-80bf-fa306732267b",
+              "@type": "WorkflowStep",
+              "name": "Update Alert",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "unique_id": "",
+                  "status": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "update_alert",
+                "operationTitle": "Update Alert",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0b460fb7-e883-4bba-88cf-1c911381c83e",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update Alert",
+              "sourceStep": "/api/3/workflow_steps/4185e41d-44e4-4433-9321-e81a02b6954a",
+              "targetStep": "/api/3/workflow_steps/8e365928-e715-410d-80bf-fa306732267b"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "af36c8d7-8ccd-4ff1-a0d7-f89980e58a1c",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Updates the status of multiple alerts on the VMware Carbon Black EDR, based on the input parameters you have specified.",
+          "name": "Bulk Update Alerts",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/cb2d4726-02c5-464d-aa91-54bb3ec5e05a",
+          "steps": [
+            {
+              "uuid": "cb2d4726-02c5-464d-aa91-54bb3ec5e05a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "94ad4540-1919-4962-afe6-38d2524506b2",
+                "title": "VMware Carbon Black EDR: Bulk Update Alerts",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "5c26e8ba-36d2-4069-8403-6148cb1aaf90",
+              "@type": "WorkflowStep",
+              "name": "Bulk Update Alerts",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "alert_id": "",
+                  "status": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "bulk_update_alert",
+                "operationTitle": "Bulk Update Alerts",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "fd8b4ecc-5213-474c-9f30-7e2c6a0c714c",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Bulk Update Alerts",
+              "sourceStep": "/api/3/workflow_steps/cb2d4726-02c5-464d-aa91-54bb3ec5e05a",
+              "targetStep": "/api/3/workflow_steps/5c26e8ba-36d2-4069-8403-6148cb1aaf90"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "486b7dba-bbe1-4b19-a0cf-b7fe89048e63",
+          "collection": "/api/3/workflow_collections/15943136-6c1c-493d-81a4-97b933e51b04",
+          "triggerLimit": null,
+          "description": "Retrieves a list along with its details for all watchlists or specific watchlist (if you have specified the watchlist ID) from the VMware Carbon Black EDR.",
+          "name": "Get Watchlist",
+          "tag": "#VMware Carbon Black EDR",
+          "recordTags": [
+            "VMware",
+            "Carbon Black EDR"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e7c7b0e9-4365-4305-a982-3c86202de014",
+          "steps": [
+            {
+              "uuid": "e7c7b0e9-4365-4305-a982-3c86202de014",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "9f33565d-aefa-4bbd-a65b-1f8884a398c9",
+                "title": "VMware Carbon Black EDR: Get Watchlist",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "bbdc1b37-71f9-47b9-b591-b6bac8aaf30d",
+              "@type": "WorkflowStep",
+              "name": "Get Watchlist",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "VMware Carbon Black EDR",
+                "config": "''",
+                "params": {
+                  "watchlist_id": ""
+                },
+                "version": "2.0.2",
+                "connector": "carbonblack-response",
+                "operation": "get_watchlist",
+                "operationTitle": "Get Watchlist",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7aa3afed-6243-4301-be6b-6fa945b4e494",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Watchlist",
+              "sourceStep": "/api/3/workflow_steps/e7c7b0e9-4365-4305-a982-3c86202de014",
+              "targetStep": "/api/3/workflow_steps/bbdc1b37-71f9-47b9-b591-b6bac8aaf30d"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

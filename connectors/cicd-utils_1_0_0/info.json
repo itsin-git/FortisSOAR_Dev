@@ -1,0 +1,136 @@
+{
+  "name": "cicd-utils",
+  "version": "1.0.0",
+  "label": "CICD Utils",
+  "description": "CICD Utils provides out of the box actions for CICD solution pack",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "icon_small_name": "default_small.png",
+  "icon_large_name": "default_large.png",
+  "category": "Utilities",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/cicd-utils/556/cicd-utils-v1-0-0",
+  "configuration": {},
+  "operations": [
+    {
+      "title": "Unzip Export Template",
+      "operation": "unzip_export_template",
+      "annotation": "unzip_export_template",
+      "category": "utilities",
+      "description": "Unzip the specified export template zip file",
+      "output_schema": {
+        "filenames": []
+      },
+      "parameters": [
+        {
+          "title": "Filepath",
+          "type": "text",
+          "name": "filepath",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "placeholder": "Eg. 5af00c658289bb5618193f42",
+          "description": "Specify the export template zip file path on the filesystem",
+          "tooltip": "Export template zip file path under /tmp directory"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "title": "Split Export Template",
+      "operation": "split_export_templates",
+      "annotation": "split_export_templates",
+      "category": "utilities",
+      "description": "Split the export template file into three export templates named Production Content, Production Settings and Development Settings",
+      "output_schema": {
+        "exportFileName": ""
+      },
+      "parameters": [
+        {
+          "title": "Prod Content Filepath",
+          "type": "text",
+          "name": "prod_content_filepath",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "placeholder": "/tmp/2023-04-10-10-18-10-073530/Source Control - Production Content/records/export_templates/Source Control - Production Content.json",
+          "description": "Specify the filepath of production content's export template to create in export template record set",
+          "tooltip": "Filepath under /tmp directory e.g. \"/tmp/2023-04-10-10-18-10-073530/Source Control - Production Content/records/export_templates/Source Control - Production Content.json\""
+        },
+        {
+          "title": "Prod Content JSON",
+          "type": "text",
+          "name": "prod_content_json",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the json of production content's export template to add in export template record set",
+          "tooltip": "Specify the json of production content's export template to add in export template record set"
+        },
+        {
+          "title": "Prod Settings Filepath",
+          "type": "text",
+          "name": "prod_settings_filepath",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "placeholder": "/tmp/2023-04-10-10-18-10-073530/Source Control - Production Content/records/export_templates/Source Control - Production Settings.json",
+          "description": "Specify the filepath of production setting's export template to create in export template record set",
+          "tooltip": "Filepath under /tmp directory e.g. \"/tmp/2023-04-10-10-18-10-073530/Source Control - Production Content/records/export_templates/Source Control - Production Settings.json\""
+        },
+        {
+          "title": "Prod Settings JSON",
+          "type": "text",
+          "name": "prod_settings_json",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the json code of production setting's export template to add in export template record set",
+          "tooltip": "Specify the json code of production setting's export template to add in export template record set"
+        },
+        {
+          "title": "Dev Settings Filepath",
+          "type": "text",
+          "name": "dev_settings_filepath",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "placeholder": "/tmp/2023-04-10-10-18-10-073530/Source Control - Production Content/records/export_templates/Source Control - Development Settings.json",
+          "description": "Specify the filepath of development setting's export template to create in export template record set",
+          "tooltip": "Filepath under /tmp directory e.g. \"/tmp/2023-04-10-10-18-10-073530/Source Control - Production Content/records/export_templates/Source Control - Development Settings.json\""
+        },
+        {
+          "title": "Dev Settings JSON",
+          "type": "text",
+          "name": "dev_settings_json",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the json code of development setting's export template to add in export template record set",
+          "tooltip": "Specify the json code of development setting's export template to add in export template record set"
+        },
+        {
+          "title": "Unzip Export Template Filepath",
+          "type": "text",
+          "name": "unzip_filepath",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the export template filepath under /tmp directory to extract the zip file",
+          "tooltip": "Specify the export template filepath under /tmp directory to extract the zip file"
+        },
+        {
+          "title": "Split Zip Export Template Filename",
+          "type": "text",
+          "name": "zip_filename",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the split export template zip filename",
+          "tooltip": "Specify the split export template zip filename"
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

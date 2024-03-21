@@ -1,0 +1,16 @@
+# Dependencies
+jsonpatch
+defusedxml
+requests-toolbelt
+xmltodict
+bs4
+arrow
+pyminizip==0.2.4
+json2html
+extract-msg>=0.36.3
+markdown==3.3.4
+cryptography
+openpyxl
+pandas>=1.5.2
+xlrd>=2.0.1
+imapclient>=2.2.0

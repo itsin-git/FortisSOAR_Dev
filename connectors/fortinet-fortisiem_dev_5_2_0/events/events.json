@@ -1,0 +1,148 @@
+[
+  {
+    "event_id": "fortinet-fortisiem.get_incidents",
+    "name": "Fortisiem - List Incidents",
+    "description": "List of incidents from the Fortinet FortiSIEM server",
+    "type": [
+      "PUSH"
+    ],
+    "connector_action": "get_incidents",
+    "connector_action_inputs": {
+      "ip": "",
+      "to": "{{arrow.utcnow().int_timestamp}}",
+      "org": "",
+      "from": "{{arrow.get(arrow.utcnow().int_timestamp).shift(hours=-1)}}",
+      "size": 50,
+      "start": 0,
+      "fields": "",
+      "search": {
+        "status": [
+          0
+        ]
+      },
+      "status": "",
+      "orderBy": "",
+      "perPage": 100,
+      "hostname": "",
+      "severity": "",
+      "eventType": "",
+      "search_by": "By Other Filters",
+      "incidentId": "",
+      "select_clause": "",
+      "incidentStatus": [
+        "Active"
+      ],
+      "time_selection": "Absolute Time",
+      "reportingDevice": "",
+      "incidentCategory": "",
+      "incidentSubCategory": ""
+    },
+    "trigger_condition": {
+      "sort": [],
+      "limit": 30,
+      "logic": "AND",
+      "filters": [
+        {
+          "type": "string",
+          "field": "eventType",
+          "value": "PH_RULE_SUSPICIOUS_FAILED_LOGON_NO_SUCCESS",
+          "operator": "eq"
+        }
+      ]
+    },
+    "sample_data": [
+      {
+        "count": 2,
+        "customer": "Super",
+        "eventName": "Sudden User Login Pattern Change",
+        "eventType": "PH_RULE_USER_MON_SUDDEN_LOGIN_DISTRIBUTION_CHANGE",
+        "incidentId": 1,
+        "incidentSrc": {
+          "computer": ""
+        },
+        "incidentReso": 1,
+        "eventSeverity": 1,
+        "incidentRptIp": "10.10.10.10",
+        "incidentTitle": "Sudden logon profile change for CS Admin",
+        "incidentDetail": "incidentCount:1, ",
+        "incidentStatus": 0,
+        "incidentTarget": {
+          "user": "CS Admin",
+          "destName": "HOST-10.132.254.238"
+        },
+        "eventSeverityCat": "MEDIUM",
+        "incidentLastSeen": 1700161860000,
+        "incidentFirstSeen": 1699643460000,
+        "incidentRptDevName": "fortisiem",
+        "phIncidentCategory": 4,
+        "incidentClearedTime": 0,
+        "phSubIncidentCategory": "Behavioral Anomaly"
+      }
+    ],
+    "connector_mapping": {
+      "response": "{{data.data}}"
+    }
+  },
+  {
+    "event_id": "fortinet-fortisiem.search_events",
+    "name": "FortiSIEM - Search Events",
+    "description": "Searches for events in the Fortinet FortiSIEM server",
+    "type": [
+      "PUSH"
+    ],
+    "connector_action": "search_events",
+    "connector_action_inputs": {
+      "start": 0,
+      "value": 4,
+      "perPage": 10,
+      "rel_time": "Hours",
+      "attribute": [
+        "Raw Event Log"
+      ],
+      "select_clause": "phRecvTime,reptDevIpAddr,eventType,eventName,srcIpAddr,destIpAddr,user,rawEventMsg",
+      "time_selection": "Relative Time",
+      "event_id_operator": "=",
+      "file_name_operator": "CONTAIN",
+      "raw_event_log_value": "port"
+    },
+    "trigger_condition": {
+      "sort": [],
+      "limit": 30,
+      "logic": "AND",
+      "filters": [
+        {
+          "type": "string",
+          "field": "eventType",
+          "value": "FortiSOAR-postmaster",
+          "operator": "eq"
+        }
+      ]
+    },
+    "sample_data": [
+      {
+        "id": "2567051787612155597",
+        "nid": "2567051787612155597",
+        "index": "0",
+        "custId": "1",
+        "dataStr": null,
+        "eventType": "FortiSOAR-postmaster",
+        "attributes": {
+          "eventName": "FortiSOAR-postmaster",
+          "eventType": "FortiSOAR-postmaster",
+          "phRecvTime": "Fri Nov 17 16:58:45 IST 2023",
+          "rawEventMsg": "",
+          "reptDevIpAddr": "10.132.254.238"
+        },
+        "receiveTime": "2023-11-17T16:58:45+05:30"
+      }
+    ],
+    "connector_mapping": {
+      "response": "{{data.events}}",
+      "pagination": {
+        "total": "{{data.@total}}",
+        "limit": "perPage",
+        "offset": "start"
+      }
+    }
+  }
+]

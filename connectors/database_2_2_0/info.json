@@ -1,0 +1,87 @@
+{
+  "name": "database",
+  "version": "2.2.0",
+  "label": "Database",
+  "description": "Steps related to querying DB",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "utilities",
+  "help_online":"https://docs.fortinet.com/document/fortisoar/2.2.0/database-connector/686/database-connector-v2-2-0",
+  "icon_small_name": "database_small.png",
+  "icon_large_name": "database_large.png",
+  "configuration": {
+    "fields": [
+      {
+        "name": "host",
+        "required": true,
+        "type": "text",
+        "visible": true,
+        "title": "Host",
+        "editable": true
+      },
+      {
+        "name": "port",
+        "required": true,
+        "type": "text",
+        "visible": true,
+        "title": "Port",
+        "editable": true
+      },
+      {
+        "name": "engine",
+        "required": true,
+        "type": "select",
+        "visible": true,
+        "title": "Engine",
+        "editable": true,
+        "options": ["postgresql", "mssql", "mysql"]
+      },
+      {
+        "name": "database",
+        "required": true,
+        "type": "text",
+        "visible": true,
+        "title": "Database",
+        "editable": true
+      },
+      {
+        "name": "username",
+        "required": false,
+        "type": "text",
+        "visible": true,
+        "title": "Username",
+        "editable": true
+      },
+      {
+        "name": "password",
+        "required": false,
+        "type": "password",
+        "visible": true,
+        "title": "Password",
+        "editable": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "db_query",
+      "annotation": "db_query",
+      "title": "Query DB",
+      "description": "Make DB Query with query string",
+      "enabled": true,
+      "output_schema": {},
+      "parameters": [
+        {
+          "name": "query_string",
+          "value": "",
+          "required": true,
+          "type": "text",
+          "visible": true,
+          "title": "Query String",
+          "editable": true
+        }
+      ]
+    }
+  ]
+}

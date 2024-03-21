@@ -1,0 +1,1073 @@
+{
+  "name": "nist-nvd",
+  "version": "1.0.1",
+  "label": "NIST National Vulnerability Database",
+  "description": "The NIST National Vulnerability Database (NVD) is the U.S. government repository of standards based vulnerability management data represented using the Security Content Automation Protocol (SCAP). This data enables automation of vulnerability management, security measurement, and compliance. The NVD includes databases of security checklist references, security related software flaws, misconfigurations, product names, and impact metrics.",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "category": "Vulnerability Management",
+  "icon_small_name": "cyops_small.png",
+  "icon_large_name": "cyops_large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.1/nist-national-vulnerability-database/511/nist-national-vulnerability-database-v1-0-1",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "name": "server_url",
+        "description": "Specify the URL of the NIST NVD server to which you will connect and perform the automated operations.",
+        "tooltip": "Specify the URL of the NIST NVD server to which you will connect and perform the automated operations.",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": "https://services.nvd.nist.gov"
+      },
+      {
+        "title": "API Key",
+        "name": "api_key",
+        "description": "The API key used to access the NIST NVD server to which you will connect and perform the automated operations.",
+        "tooltip": "Specify the API key used to access the NIST NVD server to which you will connect and perform the automated operations.",
+        "type": "password",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": ""
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. \nBy default, this option is set to True.",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. \nBy default, this option is set to True.",
+        "type": "checkbox",
+        "visible": true,
+        "editable": true,
+        "required": false,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_specific_cve_details",
+      "title": "Get Specific CVE ID Details",
+      "annotation": "get_specific_cve_details",
+      "description": "Retrieves the details of a specific vulnerability based on the Common Vulnerabilities and Exposures Identifier (CVE ID) you have specified.",
+      "category": "investigation",
+      "parameters": [
+        {
+          "name": "cveId",
+          "title": "CVE ID",
+          "description": "Specify the CVE ID to retrieve its details from National Vulnerability Database(NVD).",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": "",
+          "tooltip": "Specify the CVE ID whose details you wants to retrieve from National Vulnerability Database(NVD).",
+          "placeholder": "e.g CVE-2021-44228"
+        }
+      ],
+      "output_schema": {
+        "format": "",
+        "version": "",
+        "timestamp": "",
+        "startIndex": "",
+        "totalResults": "",
+        "resultsPerPage": "",
+        "vulnerabilities": [
+          {
+            "cve": {
+              "id": "",
+              "metrics": {
+                "cvssMetricV2": [
+                  {
+                    "type": "",
+                    "source": "",
+                    "cvssData": {
+                      "version": "",
+                      "baseScore": "",
+                      "accessVector": "",
+                      "vectorString": "",
+                      "authentication": "",
+                      "integrityImpact": "",
+                      "accessComplexity": "",
+                      "availabilityImpact": "",
+                      "confidentialityImpact": ""
+                    },
+                    "acInsufInfo": "",
+                    "impactScore": "",
+                    "baseSeverity": "",
+                    "obtainAllPrivilege": "",
+                    "exploitabilityScore": "",
+                    "obtainUserPrivilege": "",
+                    "obtainOtherPrivilege": "",
+                    "userInteractionRequired": ""
+                  }
+                ],
+                "cvssMetricV31": [
+                  {
+                    "type": "",
+                    "source": "",
+                    "cvssData": {
+                      "scope": "",
+                      "version": "",
+                      "baseScore": "",
+                      "attackVector": "",
+                      "baseSeverity": "",
+                      "vectorString": "",
+                      "integrityImpact": "",
+                      "userInteraction": "",
+                      "attackComplexity": "",
+                      "availabilityImpact": "",
+                      "privilegesRequired": "",
+                      "confidentialityImpact": ""
+                    },
+                    "impactScore": "",
+                    "exploitabilityScore": ""
+                  }
+                ]
+              },
+              "published": "",
+              "references": [
+                {
+                  "url": "",
+                  "tags": [],
+                  "source": ""
+                }
+              ],
+              "vulnStatus": "",
+              "weaknesses": [
+                {
+                  "type": "",
+                  "source": "",
+                  "description": [
+                    {
+                      "lang": "",
+                      "value": ""
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "lang": "",
+                  "value": ""
+                }
+              ],
+              "lastModified": "",
+              "configurations": [
+                {
+                  "nodes": [
+                    {
+                      "negate": "",
+                      "cpeMatch": [
+                        {
+                          "criteria": "",
+                          "vulnerable": "",
+                          "matchCriteriaId": "",
+                          "versionEndExcluding": ""
+                        }
+                      ],
+                      "operator": ""
+                    }
+                  ]
+                }
+              ],
+              "sourceIdentifier": ""
+            }
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "cve_search",
+      "title": "Advance CVE Search",
+      "annotation": "advance_cve_search",
+      "description": "Retrieves a list of CVE IDs based on the filter criteria you have specified.",
+      "category": "investigation",
+      "parameters": [
+        {
+          "title": "Filter By CVE ID",
+          "name": "useCveId",
+          "description": "Select this checkbox to retrieve CVEs associated with a specific Common Vulnerabilities and Exposures Identifier (CVE ID) from the National Vulnerability Database(NVD).",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve CVEs associated with a specific Common Vulnerabilities and Exposures Identifier (CVE ID) from the National Vulnerability Database(NVD).",
+          "onchange": {
+            "true": [
+              {
+                "name": "cveId",
+                "title": "CVE ID",
+                "description": "Specify the CVE ID to retrieve its details from National Vulnerability Database(NVD).",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": "",
+                "tooltip": "Specify the CVE ID whose details you wants to retrieve from National Vulnerability Database(NVD).",
+                "placeholder": "e.g CVE-2021-44228"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Filter by CPE Name",
+          "name": "useCpeName",
+          "description": "Select this checkbox to retrieve CVEs associated with a specific Common Platform Enumeration(CPE) from the National Vulnerability Database(NVD).",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve CVEs associated with a specific Common Platform Enumeration(CPE) from the National Vulnerability Database(NVD).",
+          "onchange": {
+            "true": [
+              {
+                "name": "cpeName",
+                "title": "CPE Name",
+                "description": "Specify the CPE name to filter the search results so that the results contain only the specified CPE name.",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": "",
+                "tooltip": "Specify the CPE name to filter the search results so that the results contain only the specified CPE name.",
+                "placeholder": "e.g cpe:2.3:o:microsoft:windows_10:1607:*:*:*:*:*:*:*"
+              },
+              {
+                "name": "isVulnerable",
+                "title": "Is Vulnerable",
+                "description": "Select the checkbox to filter the search results so that they contain only the vulnerable CPEs.",
+                "type": "checkbox",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "value": false,
+                "tooltip": "Select the checkbox to filter the search results so that they contain only the vulnerable CPEs."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Filter By CWE ID",
+          "name": "useCweId",
+          "description": "Select this checkbox to retrieve CVEs associated with a specific Common Weakness Enumeration (CWE) ID from the National Vulnerability Database(NVD).",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve CVEs associated with a specific Common Weakness Enumeration (CWE) ID from the National Vulnerability Database(NVD).",
+          "onchange": {
+            "true": [
+              {
+                "name": "cweId",
+                "title": "CWE ID",
+                "description": "Specify the CPE name to filter the search results so that the results contain only the specified CWE ID.",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "value": "",
+                "tooltip": "Specify the CPE name to filter the search results so that the results contain only the specified CWE ID.",
+                "placeholder": "e.g CWE-287"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Filter By CVSSv2 Metrics",
+          "name": "useCVSSv2",
+          "description": "Select this checkbox to retrieve CVEs associated with a specified CVSSv2 string from the National Vulnerability Database(NVD).",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve CVEs associated with a specified CVSSv2 string from the National Vulnerability Database(NVD).",
+          "onchange": {
+            "true": [
+              {
+                "name": "cvssV2Metrics",
+                "title": "CVSSv2 Vector String",
+                "description": "Specify the CVSSv2 vector string to filter the results so that they contain only the specified CVSSv2 vector string.",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "value": "",
+                "tooltip": "Specify the CVSSv2 vector string to filter the results so that they contain only the specified CVSSv2 vector string.",
+                "placeholder": "e.g AV:N/AC:H/Au:N/C:C/I:C/A:C"
+              },
+              {
+                "name": "cvssV2Severity",
+                "title": "CVSSv2 Severity",
+                "description": "Select a severity rating, to return only the results that match the CVSSv2 qualitative severity rating, from the following options:  \n\nLOW \n\nMEDIUM \n\nHIGH",
+                "type": "select",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "tooltip": "Select a severity rating, to return only the results that match the CVSSv2 qualitative severity rating, from the following options",
+                "options": [
+                  "HIGH",
+                  "MEDIUM",
+                  "LOW"
+                ],
+                "value": "HIGH"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Filter By CVSSv3 Metrics",
+          "name": "useCVSSv3",
+          "description": "Select this checkbox to retrieve CVEs associated with a specified CVSSv3 string from the National Vulnerability Database(NVD).",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve CVEs associated with a specified CVSSv3 string from the National Vulnerability Database(NVD).",
+          "onchange": {
+            "true": [
+              {
+                "name": "cvssV3Metrics",
+                "title": "CVSSv3 Vector String",
+                "description": "Specify the CVSSv3 vector string to filter the results so that they contain only the specified CVSSv3 vector string.",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "value": "",
+                "tooltip": "Specify the CVSSv3 vector string to filter the results so that they contain only the specified CVSSv3 vector string.",
+                "placeholder": "e.g AV:L/AC:L/PR:L/UI:R/S:U/C:N/I:L/A:L"
+              },
+              {
+                "name": "cvssV3Severity",
+                "title": "CVSSv3 Severity",
+                "description": "Select a severity rating, to return only the results that match the CVSSv3 qualitative severity rating, from the following options:  \n\nLOW \n\nMEDIUM \n\nHIGH",
+                "type": "select",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "tooltip": "Select a severity rating, to return only the results that match the CVSSv3 qualitative severity rating, from the following options",
+                "options": [
+                  "HIGH",
+                  "MEDIUM",
+                  "LOW"
+                ],
+                "value": "HIGH"
+              }
+            ]
+          }
+        },
+                {
+          "name": "useSearchFlags",
+          "title": "Use Search Flags",
+          "type": "multiselect",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Select from the following available options to retrieve CVEs associated with the selected search flags.",
+          "description": "Select from the following available options to retrieve CVEs associated with the selected search flags.",
+          "options": [
+            "Has KEV",
+            "Has Technical Alerts",
+            "Has Cert Notes",
+            "Has Oval"
+          ]
+        },
+        {
+          "title": "Filter By Publish Date",
+          "name": "usePublishDate",
+          "description": "Select this checkbox to retrieve a CVE list that was published to the NVD during the specified period.",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve a CVE list that was published to the NVD during the specified period.",
+          "onchange": {
+            "true": [
+              {
+                "title": "Start Date",
+                "name": "pubStartDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the start date and time of the period when the CVEs were published.",
+                "description": "Specify the start date and time of the period when the CVEs were published."
+              },
+              {
+                "title": "End Date",
+                "name": "pubEndDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the end date and time of the period when the CVEs were published.",
+                "description": "Specify the end date and time of the period when the CVEs were published."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Filter By Last Modified Date",
+          "name": "useLastModDate",
+          "description": "Select this checkbox to retrieve a CVE list that was modified in the NVD during the specified period.",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve a CVE list that was modified in the NVD during the specified period.",
+          "onchange": {
+            "true": [
+              {
+                "title": "Start Date",
+                "name": "lastModStartDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the start date and time of the period when the CVEs were modified.",
+                "description": "Specify the start date and time of the period when the CVEs were modified."
+              },
+              {
+                "title": "End Date",
+                "name": "lastModEndDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the end date and time of the period when the CVEs were modified.",
+                "description": "Specify the end date and time of the period when the CVEs were modified."
+              }
+            ]
+          }
+        },
+        {
+          "name": "startIndex",
+          "title": "Page Index",
+          "description": "(Optional) Specify the count of the first few records to skip while retrieving the response.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 0,
+          "tooltip": "(Optional) Specify the count of the first few records to skip while retrieving the response."
+        },
+        {
+          "name": "resultsPerPage",
+          "title": "Page Size",
+          "description": "(Optional) Specify the maximum number of results to get in the resulting output. By default, this is set to 10.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 10,
+          "tooltip": "(Optional) Specify the maximum number of results to get in the resulting output. By default, this is set to 10 and cannot be set greater than 2000.",
+          "validation": {
+            "maxlength": "2000",
+            "minlength": "1"
+          }
+        }
+      ],
+      "output_schema": {
+        "format": "",
+        "version": "",
+        "timestamp": "",
+        "startIndex": "",
+        "totalResults": "",
+        "resultsPerPage": "",
+        "vulnerabilities": [
+          {
+            "cve": {
+              "id": "",
+              "metrics": {
+                "cvssMetricV2": [
+                  {
+                    "type": "",
+                    "source": "",
+                    "cvssData": {
+                      "version": "",
+                      "baseScore": "",
+                      "accessVector": "",
+                      "vectorString": "",
+                      "authentication": "",
+                      "integrityImpact": "",
+                      "accessComplexity": "",
+                      "availabilityImpact": "",
+                      "confidentialityImpact": ""
+                    },
+                    "acInsufInfo": "",
+                    "impactScore": "",
+                    "baseSeverity": "",
+                    "obtainAllPrivilege": "",
+                    "exploitabilityScore": "",
+                    "obtainUserPrivilege": "",
+                    "obtainOtherPrivilege": "",
+                    "userInteractionRequired": ""
+                  }
+                ],
+                "cvssMetricV31": [
+                  {
+                    "type": "",
+                    "source": "",
+                    "cvssData": {
+                      "scope": "",
+                      "version": "",
+                      "baseScore": "",
+                      "attackVector": "",
+                      "baseSeverity": "",
+                      "vectorString": "",
+                      "integrityImpact": "",
+                      "userInteraction": "",
+                      "attackComplexity": "",
+                      "availabilityImpact": "",
+                      "privilegesRequired": "",
+                      "confidentialityImpact": ""
+                    },
+                    "impactScore": "",
+                    "exploitabilityScore": ""
+                  }
+                ]
+              },
+              "published": "",
+              "references": [
+                {
+                  "url": "",
+                  "tags": [],
+                  "source": ""
+                }
+              ],
+              "vulnStatus": "",
+              "weaknesses": [
+                {
+                  "type": "",
+                  "source": "",
+                  "description": [
+                    {
+                      "lang": "",
+                      "value": ""
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "lang": "",
+                  "value": ""
+                }
+              ],
+              "lastModified": "",
+              "configurations": [
+                {
+                  "nodes": [
+                    {
+                      "negate": "",
+                      "cpeMatch": [
+                        {
+                          "criteria": "",
+                          "vulnerable": "",
+                          "matchCriteriaId": "",
+                          "versionEndExcluding": ""
+                        }
+                      ],
+                      "operator": ""
+                    }
+                  ]
+                }
+              ],
+              "sourceIdentifier": ""
+            }
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "cve_search_by_keywords",
+      "title": "CVE Search by Keywords",
+      "annotation": "cve_search_by_keywords",
+      "description": "Retrieves CVEs from the National Vulnerability Database (NVD) based on the keywords you have specified.",
+      "category": "investigation",
+      "parameters": [
+        {
+          "name": "keywordSearch",
+          "title": "Keyword(s)",
+          "description": "Specify the keywords to search for in the CVE's description and return the CVEs that match all the keywords specified.",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": "",
+          "tooltip": "Specify the keywords to search for in the CVE's description and return the CVEs that match all the keywords specified.",
+          "placeholder": "['Windows', 'MacOs', 'Debian']"
+        },
+        {
+          "name": "startIndex",
+          "title": "Page Index",
+          "description": "(Optional) Specify the count of the first few records to skip while retrieving the response.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 0,
+          "tooltip": "(Optional) Specify the count of the first few records to skip while retrieving the response."
+        },
+        {
+          "name": "resultsPerPage",
+          "title": "Page Size",
+          "description": "Number of results that should be included per page. By default, this is set to 10.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 10,
+          "tooltip": "(Optional) Specify the maximum number of results to get in the resulting output. By default, this is set to 10 and cannot be set greater than 2000.",
+          "validation": {
+            "maxlength": "2000",
+            "minlength": "1"
+          }
+        }
+      ],
+      "output_schema": {
+        "format": "",
+        "version": "",
+        "timestamp": "",
+        "startIndex": "",
+        "totalResults": "",
+        "resultsPerPage": "",
+        "vulnerabilities": [
+          {
+            "cve": {
+              "id": "",
+              "metrics": {
+                "cvssMetricV2": [
+                  {
+                    "type": "",
+                    "source": "",
+                    "cvssData": {
+                      "version": "",
+                      "baseScore": "",
+                      "accessVector": "",
+                      "vectorString": "",
+                      "authentication": "",
+                      "integrityImpact": "",
+                      "accessComplexity": "",
+                      "availabilityImpact": "",
+                      "confidentialityImpact": ""
+                    },
+                    "acInsufInfo": "",
+                    "impactScore": "",
+                    "baseSeverity": "",
+                    "obtainAllPrivilege": "",
+                    "exploitabilityScore": "",
+                    "obtainUserPrivilege": "",
+                    "obtainOtherPrivilege": "",
+                    "userInteractionRequired": ""
+                  }
+                ]
+              },
+              "published": "",
+              "references": [
+                {
+                  "url": "",
+                  "tags": [],
+                  "source": ""
+                }
+              ],
+              "vulnStatus": "",
+              "weaknesses": [
+                {
+                  "type": "",
+                  "source": "",
+                  "description": [
+                    {
+                      "lang": "",
+                      "value": ""
+                    }
+                  ]
+                }
+              ],
+              "descriptions": [
+                {
+                  "lang": "",
+                  "value": ""
+                }
+              ],
+              "lastModified": "",
+              "configurations": [
+                {
+                  "nodes": [
+                    {
+                      "negate": "",
+                      "cpeMatch": [
+                        {
+                          "criteria": "",
+                          "vulnerable": "",
+                          "matchCriteriaId": ""
+                        }
+                      ],
+                      "operator": ""
+                    }
+                  ]
+                }
+              ],
+              "sourceIdentifier": ""
+            }
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_cve_change_history",
+      "title": "Get CVE Change History",
+      "annotation": "get_cve_change_history",
+      "description": "Retrieves information on changes made to a CVE based on the CVE ID and Change Event type you have specified.",
+      "category": "investigation",
+      "parameters": [
+        {
+          "name": "cveId",
+          "title": "CVE ID",
+          "description": "Specify the CVE ID to get the complete change history for a specific vulnerability identified by its unique Common Vulnerabilities and Exposures identifier (CVE ID).",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": "",
+          "tooltip": "Specify the CVE ID to get the complete change history for a specific vulnerability identified by its unique Common Vulnerabilities and Exposures identifier (CVE ID).",
+          "placeholder": "e.g CVE-2021-44228"
+        },
+        {
+          "title": "Change Event Type",
+          "description": "Select one of the following options to retrieve all CVEs associated with the specified change event type.",
+          "tooltip": "Select one of the following options to retrieve all CVEs associated with the specified change event type.",
+          "type": "select",
+          "name": "eventName",
+          "options": [
+            "Initial Analysis",
+            "Reanalysis",
+            "CVE Modified",
+            "Modified Analysis",
+            "CVE Translated",
+            "Vendor Comment",
+            "CVE Source Update",
+            "CPE Deprecation Remap",
+            "CWE Remap",
+            "CVE Rejected",
+            "CVE Unrejected"
+          ],
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "Initial Analysis"
+        },
+        {
+          "title": "Filter By Change Date",
+          "name": "useChangeDate",
+          "description": "Select this checkbox to retrieve a CVE list where CVEs were changed in the NVD during the specified period.",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve a CVE list where CVEs were changed in the NVD during the specified period. Date range cannot exceed 120 days.",
+          "onchange": {
+            "true": [
+              {
+                "title": "Change Start Date",
+                "name": "changeStartDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "description": "Specify the start date and time of the period when the CVEs were changed.",
+                "tooltip": "Specify the start date and time of the period when the CVEs were changed."
+              },
+              {
+                "title": "Change End Date",
+                "name": "changeEndDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "description": "Specify the end date and time of the period when the CVEs were changed.",
+                "tooltip": "Specify the end date and time of the period when the CVEs were changed."
+              }
+            ]
+          }
+        },
+        {
+          "name": "startIndex",
+          "title": "Page Index",
+          "description": "Specify the count of the first few records to skip while retrieving the response.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 0,
+          "tooltip": "Specify the count of the first few records to skip while retrieving the response."
+        },
+        {
+          "name": "resultsPerPage",
+          "title": "Page Size",
+          "description": "Specify the maximum number of results to get in the resulting output. By default, this is set to 10.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 10,
+          "tooltip": "Specify the maximum number of results to get in the resulting output. By default, this is set to 10. The page size cannot be set greater than 5000.",
+          "validation": {
+            "maxlength": "5000",
+            "minlength": "1"
+          }
+        }
+      ],
+      "output_schema": {
+        "resultsPerPage": "",
+        "startIndex": "",
+        "totalResults": "",
+        "format": "",
+        "version": "",
+        "timestamp": "",
+        "cveChanges": [
+          {
+            "change": {
+              "cveId": "",
+              "eventName": "",
+              "cveChangeId": "",
+              "sourceIdentifier": "",
+              "created": "",
+              "details": [
+                {
+                  "action": "",
+                  "type": "",
+                  "newValue": ""
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "cpe_search",
+      "title": "CPE Search",
+      "annotation": "cpe_search",
+      "description": "Retrieves information about the Common Platform Enumeration(CPE) records from the official CPE Dictionary in National Vulnerability Database(NVD) based on the CPE Name ID you have specified.",
+      "category": "investigation",
+      "parameters": [
+        {
+          "title": "Filter By",
+          "description": "Select an option from the following to filter the search information of a CPE record.",
+          "tooltip": "Select an option from the following to filter the search information of a CPE record.",
+          "type": "select",
+          "name": "filterBy",
+          "options": [
+            "CPE Name ID",
+            "CPE Match String",
+            "Keywords Search",
+            "Match Criteria ID",
+            "CVE ID"
+          ],
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "CPE Name ID",
+          "onchange": {
+            "CPE Name ID": [
+              {
+                "name": "cpeNameId",
+                "title": "CPE Name ID",
+                "description": "Retrieves a specific CPE record identified by a Universal Unique Identifier (UUID) from National Vulnerability Database(NVD).",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": "",
+                "tooltip": "Specify the CPE Name ID to retrieve associated CPE records.",
+                "placeholder": "e.g 87316812-5F2C-4286-94FE-CC98B9EAEF53"
+              }
+            ],
+            "CPE Match String": [
+              {
+                "name": "cpeMatchString",
+                "title": "CPE Match String",
+                "description": "Retrieves CPE Names that exist in the Official CPE Dictionary, based on the value of provided match string from National Vulnerability Database(NVD).",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": "",
+                "tooltip": "Specify the CPE Match String to retrieve corresponding CPE Names.",
+                "placeholder": "e.g cpe:2.3:o:microsoft:windows_10"
+              }
+            ],
+            "Keywords Search": [
+              {
+                "name": "keywordSearch",
+                "title": "Keyword(s)",
+                "description": "Retrieves only the CPE records where a word or phrase is found in the metadata title or reference links from National Vulnerability Database(NVD).",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": "",
+                "tooltip": "Specify the keywords(s) to retrieve corresponding CPE(s) in CSV or List format.",
+                "placeholder": "e.g Java, Oracle"
+              },
+              {
+                "name": "keywordExactMatch",
+                "title": "Exact Keyword Match",
+                "description": "Retrieves CPE records only when provided keyword is exact match in CPE.",
+                "type": "checkbox",
+                "editable": true,
+                "visible": true,
+                "required": false,
+                "value": false,
+                "tooltip": "Select if exact keyword match needed"
+              }
+            ],
+            "Match Criteria ID": [
+              {
+                "name": "matchCriteriaId",
+                "title": "Match Criteria ID",
+                "description": "Retrieves all CPE records associated with a match string identified by its UUID from National Vulnerability Database(NVD).",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": "",
+                "tooltip": "Specify the CPE Match Criteria ID to retrieve corresponding CPE records.",
+                "placeholder": "e.g 36FBCF0F-8CEE-474C-8A04-5075AF53FAF4"
+              }
+            ],
+            "CVE ID": [
+              {
+                "name": "cveId",
+                "title": "CVE ID",
+                "description": "Retrieves all non-deprecated CPE match strings in the availability statement of a specific vulnerability identified by its Common Vulnerabilities and Exposures identifier (the CVE ID).",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": "",
+                "tooltip": "Specify the CVE ID to retrieve associated CPE records.",
+                "placeholder": "e.g CVE-2022-32223"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Use Last Modified Date",
+          "name": "useLastModDate",
+          "description": "Select this checkbox to retrieve any CPE where CPEs were last modified during the specified period.",
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "value": false,
+          "tooltip": "Select this checkbox to retrieve any CPE where CPEs were last modified during the specified period. Date range cannot exceed 120 days.",
+          "onchange": {
+            "true": [
+              {
+                "title": "Start Date",
+                "name": "lastModStartDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the start date and time of the period when the CPEs were last modified.",
+                "description": "Specify the start date and time of the period when the CPEs were last modified."
+              },
+              {
+                "title": "End Date",
+                "name": "lastModEndDate",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "type": "datetime",
+                "tooltip": "Specify the end date and time of the period when the CVEs were last modified.",
+                "description": "Specify the end date and time of the period when the CVEs were last modified."
+              }
+            ]
+          }
+        },
+        {
+          "name": "startIndex",
+          "title": "Page Index",
+          "description": "Specify the count of the first few records to skip while retrieving the response.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 0,
+          "tooltip": "Specify the count of the first few records to skip while retrieving the response."
+        },
+        {
+          "name": "resultsPerPage",
+          "title": "Page Size",
+          "description": "Specify the maximum number of results to get in the resulting output. By default, this is set to 10.",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 10,
+          "tooltip": "Specify the maximum number of results to get in the resulting output. By default, this is set to 10. The page size cannot be set greater than 5000.",
+          "validation": {
+            "maxlength": "5000",
+            "minlength": "1"
+          }
+        }
+      ],
+      "output_schema": {
+        "format": "",
+        "version": "",
+        "products": [
+          {
+            "cpe": {
+              "refs": [
+                {
+                  "ref": ""
+                }
+              ],
+              "titles": [
+                {
+                  "lang": "",
+                  "title": ""
+                }
+              ],
+              "cpeName": "",
+              "created": "",
+              "cpeNameId": "",
+              "deprecated": "",
+              "deprecatedBy": [
+                {
+                  "cpeName": "",
+                  "cpeNameId": ""
+                }
+              ],
+              "lastModified": ""
+            }
+          }
+        ],
+        "timestamp": "",
+        "startIndex": "",
+        "totalResults": "",
+        "resultsPerPage": ""
+      },
+      "enabled": true
+    }
+  ]
+}

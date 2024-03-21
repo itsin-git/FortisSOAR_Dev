@@ -1,0 +1,700 @@
+{
+  "name": "symantec-dlp",
+  "label": "Symantec DLP",
+  "description": "Symantec DLP provide actions like get incident attachments, get incident details, get incident status, update incident etc.",
+  "publisher": "Community",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "version": "2.2.0",
+  "category": "Network Visibility",
+  "icon_small_name": "small_icon.png",
+  "icon_large_name": "large_icon.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.2.0/symantec-dlp/159/symantec-dlp-v2-2-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "description": "IP or URL of the Symantec DLP server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url"
+      },
+      {
+        "title": "Username",
+        "description": "Username to access the Symantec DLP server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "username"
+      },
+      {
+        "title": "Password",
+        "description": "Password to access the Symantec DLP server to which you will connect and perform the automated operations.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "password"
+      },
+      {
+        "title": "Protocol",
+        "description": "Protocol used to remotely connect to the Symantec DLP server. Choose between http or https.By default, https is used",
+        "name": "protocol",
+        "type": "select",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "options": [
+          "https",
+          "http"
+        ],
+        "value": "https"
+      },
+      {
+        "title": "Port",
+        "description": "Port number used to connect to the Symantec DLP server. default, this is set to 8443.",
+        "required": false,
+        "value": 8443,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "name": "port"
+      },
+      {
+        "title": "Verify SSL",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True.",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_incident_status",
+      "title": "Get Incident Status",
+      "description": "Retrieves a list of all incident status values available on the Symantec DLP server.",
+      "category": "investigation",
+      "annotation": "get_status",
+      "parameters": [
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ns5:incidentStatusList": {
+          "incidentStatusName": []
+        }
+      }
+    },
+    {
+      "operation": "get_incident_attachment",
+      "title": "Get Incident Attachments",
+      "description": "Retrieves additional components of the message that generated an incident, such as the message header, body, and binary attachments, based on the Symantec DLP incident ID that you have specified.",
+      "category": "investigation",
+      "annotation": "get_incident_attachment",
+      "parameters": [
+        {
+          "title": "Incident Long ID",
+          "description": "Unique Symantec DLP incident ID whose associated attachments such as message headers etc you want to retrieve from Symantec DLP.",
+          "tooltip": "Incident ID to get its attachment",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incident_long_id",
+          "value": ""
+        },
+        {
+          "title": "Include All Components",
+          "description": "If you select this check box, then the Web Service will include all the message components (for example, headers and file attachments) in the response document retrieved from Symantec DLP.",
+          "tooltip": "Whether the Web Service should include all message components (for example, headers and file attachments) in the response document.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "includeAllComponents",
+          "value": false
+        },
+        {
+          "title": "Include Original Message",
+          "description": "If you select this check box, then the Web Service will include the original message in the response document retrieved from Symantec DLP.",
+          "tooltip": "Whether the Web Service should include the original message in the response document.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "includeOriginalMessage",
+          "value": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ns5:incidentBinariesResponse": {
+          "@xmlns:ns2": "",
+          "@xmlns:ns3": "",
+          "@xmlns:ns4": "",
+          "@xmlns:ns5": "",
+          "@xmlns:ns6": "",
+          "ns5:Component": [
+            {
+              "id": "",
+              "@id": "",
+              "file": {
+                "id": "",
+                "@id": "",
+                "file": [],
+                "size": "",
+                "@type": "",
+                "@context": "",
+                "filename": "",
+                "mimeType": "",
+                "uploadDate": ""
+              },
+              "name": "",
+              "type": "",
+              "@type": "",
+              "@context": "",
+              "createDate": "",
+              "createUser": {
+                "id": "",
+                "@id": "",
+                "name": "",
+                "@type": "",
+                "avatar": "",
+                "userId": "",
+                "userType": "",
+                "@settings": "",
+                "createDate": "",
+                "createUser": "",
+                "modifyDate": "",
+                "modifyUser": ""
+              },
+              "modifyDate": "",
+              "modifyUser": {
+                "id": "",
+                "@id": "",
+                "name": "",
+                "@type": "",
+                "avatar": "",
+                "userId": "",
+                "userType": "",
+                "@settings": "",
+                "createDate": "",
+                "createUser": "",
+                "modifyDate": "",
+                "modifyUser": ""
+              },
+              "recordTags": "",
+              "description": ""
+            }
+          ],
+          "ns5:incidentId": "",
+          "ns5:incidentLongId": "",
+          "ns5:originalMessage": ""
+        }
+      }
+    },
+    {
+      "operation": "get_incidents_ids",
+      "title": "Get Incidents IDs",
+      "description": "Retrieves a list of all available incidents IDs stored in the Report ID that you have specified.",
+      "category": "investigation",
+      "annotation": "list_records",
+      "parameters": [
+        {
+          "title": "Incident Report ID",
+          "description": "ID of the saved report that you want to execute on the Enforce Server. You must have created this report using the Enforce Server administration console before executing the Web Service call.The incidents are retrieved using this Report ID.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "report_id",
+          "value": ""
+        },
+        {
+          "title": "Report Creation Date",
+          "description": "Constrains the list of returned incident IDs to include only those Symantec DLP incidents that were created after the date you specify, in the YYYY-MM-DD format, in this parameter.If you do not specify any date then this operation will not retrieve any reports.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "datetime",
+          "name": "creation_date_greater_then",
+          "value": ""
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ns5:incidentListResponse": {
+          "ns5:incidentId": [],
+          "ns5:incidentLongId": []
+        }
+      }
+    },
+    {
+      "operation": "get_incident_details",
+      "title": "Get Incident Details",
+      "description": "Retrieves details of a single Symantec DLP incident, based on the Symantec DLP incident ID that you have specified",
+      "category": "investigation",
+      "annotation": "get_record",
+      "parameters": [
+        {
+          "title": "Incident Long ID",
+          "description": "Unique ID of the Symantec DLP incident for which you want to retrieve details.",
+          "tooltip": "Comma Separated List of IDs",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incident_long_id",
+          "value": ""
+        },
+        {
+          "title": "Include Violations",
+          "description": "(Optional) Select this parameter to include policy violation data, for the incident you have specified using the Incident ID, along with the basic incident details.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "include_violations",
+          "value": false
+        },
+        {
+          "title": "Include History",
+          "description": "(Optional) Select this parameter to include historical information, for the incident you have specified using the Incident ID, along with the basic incident details.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "include_history",
+          "value": false
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ns5:incidentDetailResponse": {
+          "ns5:response": [
+            {
+              "ns5:incidentId": "",
+              "ns5:statusCode": "",
+              "ns5:incident": {
+                "ns5:machineIP": "",
+                "ns5:machineName": "",
+                "ns5:eventDate": "",
+                "ns5:severity": "",
+                "ns5:incidentCreationDate": "",
+                "ns5:userName": "",
+                "ns5:applicationName": "",
+                "ns5:incidentLongId": "",
+                "ns5:status": "",
+                "ns5:policy": {},
+                "ns5:detectionDate": "",
+                "ns5:incidentHistory": []
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "operation": "get_custom_attributes",
+      "title": "Get Custom Attributes",
+      "description": "Retrieves details of custom attribute values available on the Symantec DLP server.",
+      "category": "investigation",
+      "annotation": "list_attribute",
+      "parameters": [
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ns5:customAttributeList": {
+          "customAttributeName": []
+        }
+      }
+    },
+    {
+      "operation": "get_incident_violations",
+      "title": "Get Incident Violations",
+      "description": "Retrieves details of violations associated with the specified incident ID, based on the Symantec DLP incident ID that you have specified.",
+      "category": "investigation",
+      "annotation": "incident_violations",
+      "parameters": [
+        {
+          "title": "Incident Long ID",
+          "description": "Unique ID of the Symantec DLP incident for which you want to retrieve violation details.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incident_long_id",
+          "value": ""
+        },
+        {
+          "title": "Include Image Violations",
+          "description": "(Optional) Select this parameter to include image violation data, for the incident you have specified using the Incident ID, along with the basic incident details.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "include_image_violations",
+          "value": false
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ns5:incidentViolationsResponse": {
+          "ns5:incidentViolation": {
+          }
+        }
+      }
+    },
+    {
+      "operation": "update_incident",
+      "title": "Update Incident",
+      "description": "Updates an incident record on the Symantec DLP server, based on the incident ID and other parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_record",
+      "parameters": [
+        {
+          "title": "Incident Long ID",
+          "description": "Unique ID of the Symantec DLP incident that you want to update.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incident_long_id",
+          "value": ""
+        },
+        {
+          "title": "Incident Severity",
+          "description": "(Optional) Severity of the incident that you want to update.Choose between High, Medium, Low, and Info.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "severity",
+          "value": "LOW",
+          "options": [
+            "HIGH",
+            "MEDIUM",
+            "LOW",
+            "INFO"
+          ]
+        },
+        {
+          "title": "Incident Status",
+          "description": "(Optional) Status Value of the incident that you want to update.Incident status values are defined using the Enforce Server administration console.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "status",
+          "value": ""
+        },
+        {
+          "title": "Add Notes",
+          "description": "(Optional)Select this opton if you want to add notes to incident",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "add_notes",
+          "value": "",
+          "onchange": {
+            "true": [
+              {
+                "title": "Note Creation Date",
+                "description": "Time the note was added to the incident that you want to update.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "datetime",
+                "name": "note_creation_date",
+                "value": ""
+              },
+              {
+                "title": "Note Text",
+                "description": "Content of the note that you want to add to the incident that you want to update.",
+                "tooltip": "Note creation date must be mentioned for adding Note",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "note",
+                "value": ""
+              }
+            ]
+          }
+        },
+        {
+          "title": "Remediation Status",
+          "description": "(Optional) Remediation status of the incident that you want to update.Remediation status is a static list that is present in Symantec DLP and its values are such as Blocked, Passed, Content_Removed, etc.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "remediation_status",
+          "value": "PASSED",
+          "options": [
+            "BLOCKED",
+            "CONTENT_REMOVED",
+            "CUSTOM_ACTION_ON_EMAIL",
+            "EMAIL_APPROVED",
+            "EMAIL_BLOCKED",
+            "EMAIL_MESSAGE_EXPUNGED",
+            "EMAIL_QUARANTINED",
+            "ENDPOINT_BLOCK",
+            "ENDPOINT_NOTIFY",
+            "ENDPOINT_FILE_QUARANTINED",
+            "ENDPOINT_FILE_QUARANTINE_FAILED",
+            "ENDPOINT_NOTIFY_CANCEL_ALLOW",
+            "ENDPOINT_NOTIFY_CANCEL_BLOCK",
+            "ENDPOINT_NOTIFY_CANCEL_TIMEOUT_ALLOW",
+            "ENDPOINT_NOTIFY_CANCEL_TIMEOUT_BLOCK",
+            "FLEX_RESPONSE_ERROR",
+            "FLEX_RESPONSE_EXECUTED",
+            "FLEX_RESPONSE_REQUESTED",
+            "MESSAGE_MODIFIED",
+            "PASSED",
+            "PLACE_HOLDER_DO_NOT_USE",
+            "PROTECT_FILE_COPIED",
+            "PROTECT_FILE_DELETED",
+            "PROTECT_FILE_QUARANTINED",
+            "PROTECT_REMEDIATION_ERROR",
+            "REST_ENCRYTPED",
+            "REST_PERFORMED_DRM",
+            "REST_PERFORMED_BREAK_LINKS",
+            "REST_PERFORMED_CUSTOM_ACTION"
+          ]
+        },
+        {
+          "title": "Remediation Location",
+          "description": "(Optional) Remediation location of the incident that you want to update.You can define the values of the Remediation location.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "remediation_location",
+          "value": ""
+        },
+        {
+          "title": "Custom Attributes",
+          "description": "(Optional)Name, Value of custom attribute(s) associated with the incident that you want to update.. E.g {\"attributename1\": \"value1\", \"attributename2\": \"value2\"}",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "custom_attrib_value",
+          "placeholder": "e.g {\"custom_attribute_name\": \"custom_attribute_value\"}",
+          "value": "{\"custom_attribute_name\": \"custom_attribute_value\"}"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "ns5:incidentUpdateResponse": {
+        }
+      }
+    },
+    {
+      "operation": "download_eml",
+      "title": "Download EML File",
+      "description": "Downloads an eml file from the Symantec DLP server, based on the Symantec DLP incident ID that you have specified.",
+      "category": "investigation",
+      "annotation": "download_eml",
+      "parameters": [
+        {
+          "title": "Incident Long ID",
+          "description": "Unique Symantec DLP incident ID whose associated eml file you want to retrieve from Symantec DLP.",
+          "tooltip": "Incident ID to get its original msg eml",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "incident_long_id",
+          "value": ""
+        },
+        {
+          "title": "Save File",
+          "tooltip": "Save the email as a file in the Attachment module.",
+          "description": "Select this option, i.e., set it to True(default) to save the downloaded eml file as a file in the \"Attachment\" module in FortiSOAR™.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "save_as_attachment",
+          "value": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "id": "",
+        "@id": "",
+        "file": [],
+        "size": "",
+        "@type": "",
+        "@context": "",
+        "filename": "",
+        "mimeType": "",
+        "uploadDate": ""
+      }
+    },
+    {
+      "operation": "get_sender_recipient_pattern",
+      "title": "Get Sender/Recipient Pattern",
+      "description": "Get the sender/recipient pattern's details of specified pattern.",
+      "category": "investigation",
+      "annotation": "get_sender_recipient_pattern",
+      "parameters": [
+        {
+          "title": "Sender/Recipient Pattern",
+          "description": "Select the rule type from the Sender or Recipient.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Sender",
+            "Recipient"
+          ],
+          "name": "rule_type",
+          "value": "Recipient"
+        },
+        {
+          "title": "Pattern Name",
+          "description": "Specify the pattern name which needs to be fetched.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "pattern_name",
+          "placeholder": "The name that you specify here must match exactly."
+        }
+      ],
+      "enabled": true,
+      "output_schema": {
+        "result": {
+          "ips": "",
+          "emails": "",
+          "urls_domains": ""
+        }
+      }
+    },
+    {
+      "operation": "update_sender_recipient_pattern",
+      "title": "Update Sender/Recipient Pattern",
+      "description": "Updates the recipient pattern with specified email address, IP address, URL domains.",
+      "category": "investigation",
+      "annotation": "update_sender_recipient_pattern",
+      "parameters": [
+        {
+          "title": "Sender/Recipient Pattern",
+          "description": "Select the rule type form the Sender or Recipient.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Sender",
+            "Recipient"
+          ],
+          "name": "rule_type",
+          "value": "Recipient",
+          "onchange": {
+            "Recipient": [
+              {
+                "title": "Recipient Pattern Name",
+                "description": "Specify the recipient pattern name which needs to be updated.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "pattern_name",
+                "placeholder": "The name that you specify here must match exactly."
+              },
+              {
+                "title": "Email Addresses",
+                "description": "Specify the comma separated values of email addresses which needs to be add/delete in Recipient Pattern.",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "emails",
+                "placeholder": "e.g. company.com,john.smith@business.com"
+              },
+              {
+                "title": "IP Addresses",
+                "description": "Specify the comma separated values of IP addresses which needs to be add/delete in Recipient Pattern.",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "ips",
+                "placeholder": "e.g. 192.168.0.*,10.1.10.120,1:2:3:4:5:6:7:8,fdda:c450:e808:3:*:*:*:*"
+              },
+              {
+                "title": "URL Domains",
+                "description": "Specify the comma separated values of URL domains which needs to be add/delete in Recipient Pattern.",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "urls",
+                "placeholder": "e.g. company.com"
+              }
+            ],
+            "Sender": [
+              {
+                "title": "Sender Pattern Name",
+                "description": "Specify the name of the sender pattern which needs to be updated.",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "pattern_name",
+                "placeholder": "The name that you specify here must match exactly."
+              },
+              {
+                "title": "User Patterns",
+                "description": "Specify the comma separated values of email address which needs to be add/delete in Sender Pattern.",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "emails",
+                "placeholder": "e.g. company.com, john.smith@business.com, sample.company.com, jsmith, jsmith@company*"
+              },
+              {
+                "title": "IP Addresses",
+                "description": "Specify the comma separated values of IP addresses which needs to be add/delete in Sender Pattern.",
+                "required": false,
+                "editable": true,
+                "visible": true,
+                "type": "text",
+                "name": "ips",
+                "placeholder": "e.g. 192.168.0.*,10.1.10.120,1:2:3:4:5:6:7:8,fdda:c450:e808:3:*:*:*:*"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Add/Delete the Items",
+          "description": "Uncheck to delete the items from the sender/recipient pattern rule.By default set to true which will add the items in the pattern rule.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "add_items",
+          "tooltip": "Uncheck to delete the items from the pattern rule.",
+          "value": true
+        }
+      ],
+      "enabled": true,
+      "output_schema": {"result":""}
+    }
+
+
+  ]
+}

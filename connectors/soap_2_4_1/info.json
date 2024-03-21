@@ -1,0 +1,162 @@
+{
+  "name": "soap",
+  "version": "2.4.1",
+  "label": "SOAP",
+  "description": "Steps related to making SOAP requests",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "utilities",
+  "help_online":"https://docs.fortinet.com/document/fortisoar/2.4.1/soap-connector/394/soap-connector-v2-4-1",
+  "icon_small_name": "soap_small.png",
+  "icon_large_name": "soap_large.png",
+  "configuration": {
+    "fields": [
+      {
+        "title": "WSDL URL",
+        "name": "wsdl",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Username",
+        "name": "username",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": false
+      },
+      {
+        "title": "Password",
+        "name": "password",
+        "type": "password",
+        "visible": true,
+        "editable": true,
+        "required": false
+      },
+      {
+        "title": "Cert File",
+        "name": "cert_file",
+        "value": "",
+        "type": "file",
+        "visible": true,
+        "editable": true,
+        "required": false
+      },
+        {
+          "name": "verify_ssl",
+          "title": "Verify SSL",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "name": "raw_response",
+          "title": "Raw Response",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "soap_client",
+      "annotation": "soap_call",
+      "description": "Reads configuration WSDL and presents a SOAP Client with the list of actions and their input parameters",
+      "title": "SOAP Call",
+      "enabled": true,
+      "api_output_schema": "get_output_schema",
+      "parameters": [
+        {
+          "name": "service_name",
+          "title": "SOAP Service",
+          "value": "",
+          "type": "select",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "apiOperation": "get_wsdl_details",
+          "apiOnchange": true
+        },
+        {
+          "name": "extra_headers",
+          "title": "Additional SOAP Headers",
+          "value": "",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "placeholder": "{'header_name':{'param1':'value1', 'param2':'value2'}}",
+          "tooltip": "Headers to be added to the SOAP request"
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "soap_call",
+      "annotation": "soap_call",
+      "description": "Prepares a soap connector with defined configurations and makes a soap call",
+      "title": "SOAP Call (Generic)",
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "func_name",
+          "title": "SOAP Function",
+          "value": "",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "name": "func_params",
+          "title": "Params",
+          "value": "",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "name": "extra_headers",
+          "title": "Additional SOAP Headers",
+          "value": "",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "placeholder": "{'header_name':{'param1':'value1', 'param2':'value2'}}",
+          "tooltip": "Headers to be added to the SOAP request"
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_wsdl_details",
+      "annotation": "get_wsdl_details",
+      "description": "Prepares a soap connector with defined configurations and makes a soap call",
+      "title": "Get Function and Details",
+      "enabled": true,
+      "parameters": [],
+      "visible": false,
+      "output_schema": {}
+    },
+    {
+      "operation": "get_output_schema",
+      "annotation": "get_output_schema",
+      "description": "Gives the output schema based on the inputs",
+      "title": "Get Output Schema",
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": {}
+    }
+  ]
+}

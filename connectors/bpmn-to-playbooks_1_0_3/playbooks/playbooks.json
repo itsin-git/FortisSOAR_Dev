@@ -1,0 +1,185 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - BPMN to Playbooks - 1.0.0",
+      "description": "Convert BPMN XML to FortiSOAR Playbooks",
+      "visible": true,
+      "image": "bpmn_medium.png",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "BPMN XML to FortiSOAR Playbooks",
+          "description": "Convert BPMN XML to FortiSOAR Playbooks",
+          "collection": "/api/3/workflow_collections/06714d5a-e994-4436-ad29-548ba2574a95",
+          "tag": "#BPMN",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6354d189-2c04-48e6-b636-dc6f6dd71d74",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "7307a7bf-eaf7-4c15-ad30-766b41db5d7b",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "6354d189-2c04-48e6-b636-dc6f6dd71d74"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Collection IRI",
+              "description": null,
+              "arguments": {
+                "collectionIRI": "06714d5a-e994-4436-ad29-548ba2574a95"
+              },
+              "status": null,
+              "left": "14",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "f5bfa5db-b45f-4c16-9076-3736b65fce3a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "BPMN XML to FortiSOAR Playbook JSON",
+              "description": null,
+              "arguments": {
+                "name": "BPMN To FortiSOAR Playbooks",
+                "params": {
+                  "bpmnTool": "Flowable",
+                  "bpmnFormat": "xml",
+                  "bpmnOutput": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<definitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:flowable=\"http://flowable.org/bpmn\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" typeLanguage=\"http://www.w3.org/2001/XMLSchema\" expressionLanguage=\"http://www.w3.org/1999/XPath\" targetNamespace=\"http://www.flowable.org/processdef\">\n  <process id=\"a05IACD_Email_Phish\" name=\"05 IACD_Email_Phish\" isExecutable=\"true\">\n    <documentation>IACD IC Email Phish example</documentation>\n    <dataObject id=\"IOC_Type\" name=\"IOC Type\" itemSubjectRef=\"xsd:string\">\n      <extensionElements>\n        <flowable:value></flowable:value>\n      </extensionElements>\n    </dataObject>\n    <dataObject id=\"IOC_Value\" name=\"IOC Value\" itemSubjectRef=\"xsd:string\">\n      <extensionElements>\n        <flowable:value></flowable:value>\n      </extensionElements>\n    </dataObject>\n    <dataObject id=\"IOC_Whitelisted\" name=\"IOC Whitelisted\" itemSubjectRef=\"xsd:string\">\n      <extensionElements>\n        <flowable:value></flowable:value>\n      </extensionElements>\n    </dataObject>\n    <dataObject id=\"IOC_Blacklisted\" name=\"IOC Blacklisted\" itemSubjectRef=\"xsd:string\">\n      <extensionElements>\n        <flowable:value></flowable:value>\n      </extensionElements>\n    </dataObject>\n    <dataObject id=\"OpenC2_Additional_Enrichment_String\" name=\"OpenC2 Additional Enrichment\" itemSubjectRef=\"xsd:string\">\n      <extensionElements>\n        <flowable:value></flowable:value>\n      </extensionElements>\n    </dataObject>\n    <dataObject id=\"OpenC2_Block_IOC\" name=\"OpenC2 Block IOC\" itemSubjectRef=\"xsd:string\">\n      <extensionElements>\n        <flowable:value></flowable:value>\n      </extensionElements>\n    </dataObject>\n    <startEvent id=\"ReceiveEmailIOC\" name=\"Receive Email IOC\"></startEvent>\n    <endEvent id=\"Stop\" name=\"Stop\"></endEvent>\n    <exclusiveGateway id=\"IOCWhitelisted\" name=\"IOC Whitelisted\"></exclusiveGateway>\n    <exclusiveGateway id=\"sid-2DC01F9A-5153-4280-9399-C9E1B3F9FE17\" name=\"IOC Already Whitelisted\"></exclusiveGateway>\n    <exclusiveGateway id=\"sid-973E8264-8119-47A0-8E24-4B8B6F2F7A26\" name=\"Meets Action Criteria\"></exclusiveGateway>\n    <sequenceFlow id=\"sid-7D48771A-0AAE-4767-9FD9-EA3E66950568\" sourceRef=\"ConductAdditionalEnrichment\" targetRef=\"sid-973E8264-8119-47A0-8E24-4B8B6F2F7A26\"></sequenceFlow>\n    <userTask id=\"Analystenactsmitigations\" name=\"Analyst enacts mitigations\"></userTask>\n    <userTask id=\"AnalystClosesTicket\" name=\"Analyst Closes Ticket\"></userTask>\n    <userTask id=\"CreateTicketforIOC\" name=\"Create Ticket for IOC\"></userTask>\n    <serviceTask id=\"ConductAdditionalEnrichment\" name=\"Conduct Additional Enrichment\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"UpdateTicketIOCIgnoredduetoWhitelist\" name=\"Update Ticket IOC Ignored due to Whitelist\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"UpdateTicketIOCalreadyblocked\" name=\"Update Ticket, IOC already blocked\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"UpdateTicketIOCNotValid\" name=\"Update Ticket IOC Not Valid\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"CloseTicket\" name=\"Close Ticket\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"UpdateBlocklistandBlockIOC\" name=\"Update Blocklist and Block IOC\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"QueryforRecipients\" name=\"Query for Recipients\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"UpdateTicketwithAffectedAccountsandCOA\" name=\"Update Ticket with Affected Accounts and COA\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <serviceTask id=\"EmailAnalyst\" name=\"Email Analyst\" flowable:class=\"sharedworkflow\"></serviceTask>\n    <sequenceFlow id=\"L1\" name=\"L1\" sourceRef=\"ReceiveEmailIOC\" targetRef=\"CreateTicketforIOC\"></sequenceFlow>\n    <sequenceFlow id=\"L2\" name=\"L2\" sourceRef=\"CreateTicketforIOC\" targetRef=\"IOCWhitelisted\"></sequenceFlow>\n    <sequenceFlow id=\"Yes1\" name=\"Yes1\" sourceRef=\"IOCWhitelisted\" targetRef=\"UpdateTicketIOCIgnoredduetoWhitelist\">\n      <conditionExpression xsi:type=\"tFormalExpression\"><![CDATA[$IOCWhitelisted=Yes]]></conditionExpression>\n    </sequenceFlow>\n    <sequenceFlow id=\"No1\" name=\"No1\" sourceRef=\"IOCWhitelisted\" targetRef=\"sid-2DC01F9A-5153-4280-9399-C9E1B3F9FE17\">\n      <conditionExpression xsi:type=\"tFormalExpression\"><![CDATA[$IOCWhitelisted=No]]></conditionExpression>\n    </sequenceFlow>\n    <sequenceFlow id=\"L4\" name=\"L4\" sourceRef=\"UpdateTicketIOCalreadyblocked\" targetRef=\"CloseTicket\"></sequenceFlow>\n    <sequenceFlow id=\"Yes2\" name=\"Yes2\" sourceRef=\"sid-2DC01F9A-5153-4280-9399-C9E1B3F9FE17\" targetRef=\"UpdateTicketIOCalreadyblocked\">\n      <conditionExpression xsi:type=\"tFormalExpression\"><![CDATA[$IOCAlreadyWhitelisted=Yes]]></conditionExpression>\n    </sequenceFlow>\n    <sequenceFlow id=\"No2\" name=\"No2\" sourceRef=\"sid-2DC01F9A-5153-4280-9399-C9E1B3F9FE17\" targetRef=\"ConductAdditionalEnrichment\">\n      <conditionExpression xsi:type=\"tFormalExpression\"><![CDATA[$IOCAlreadyWhitelisted=Yes]]></conditionExpression>\n    </sequenceFlow>\n    <sequenceFlow id=\"L3\" name=\"L3\" sourceRef=\"UpdateTicketIOCIgnoredduetoWhitelist\" targetRef=\"CloseTicket\"></sequenceFlow>\n    <sequenceFlow id=\"Yes3\" name=\"Yes3\" sourceRef=\"sid-973E8264-8119-47A0-8E24-4B8B6F2F7A26\" targetRef=\"UpdateBlocklistandBlockIOC\">\n      <conditionExpression xsi:type=\"tFormalExpression\"><![CDATA[$MeetsActionCriteria=Yes]]></conditionExpression>\n    </sequenceFlow>\n    <sequenceFlow id=\"No3\" name=\"No3\" sourceRef=\"sid-973E8264-8119-47A0-8E24-4B8B6F2F7A26\" targetRef=\"UpdateTicketIOCNotValid\">\n      <conditionExpression xsi:type=\"tFormalExpression\"><![CDATA[$MeetsActionCriteria=No]]></conditionExpression>\n    </sequenceFlow>\n    <sequenceFlow id=\"L5\" name=\"L5\" sourceRef=\"UpdateTicketIOCNotValid\" targetRef=\"CloseTicket\"></sequenceFlow>\n    <sequenceFlow id=\"L7\" name=\"L7\" sourceRef=\"UpdateBlocklistandBlockIOC\" targetRef=\"QueryforRecipients\"></sequenceFlow>\n    <sequenceFlow id=\"L8\" name=\"L8\" sourceRef=\"QueryforRecipients\" targetRef=\"UpdateTicketwithAffectedAccountsandCOA\"></sequenceFlow>\n    <sequenceFlow id=\"L9\" name=\"L9\" sourceRef=\"UpdateTicketwithAffectedAccountsandCOA\" targetRef=\"EmailAnalyst\"></sequenceFlow>\n    <sequenceFlow id=\"L10\" name=\"L10\" sourceRef=\"EmailAnalyst\" targetRef=\"Analystenactsmitigations\"></sequenceFlow>\n    <sequenceFlow id=\"L11\" name=\"L11\" sourceRef=\"Analystenactsmitigations\" targetRef=\"AnalystClosesTicket\"></sequenceFlow>\n    <sequenceFlow id=\"L6\" name=\"L6\" sourceRef=\"CloseTicket\" targetRef=\"Stop\"></sequenceFlow>\n    <sequenceFlow id=\"L12\" name=\"L12\" sourceRef=\"AnalystClosesTicket\" targetRef=\"Stop\"></sequenceFlow>\n  </process>\n  <bpmndi:BPMNDiagram id=\"BPMNDiagram_a05IACD_Email_Phish\">\n    <bpmndi:BPMNPlane bpmnElement=\"a05IACD_Email_Phish\" id=\"BPMNPlane_a05IACD_Email_Phish\">\n      <bpmndi:BPMNShape bpmnElement=\"ReceiveEmailIOC\" id=\"BPMNShape_ReceiveEmailIOC\">\n        <omgdc:Bounds height=\"30.0\" width=\"30.0\" x=\"45.0\" y=\"45.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"Stop\" id=\"BPMNShape_Stop\">\n        <omgdc:Bounds height=\"28.0\" width=\"28.0\" x=\"1071.0\" y=\"371.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"IOCWhitelisted\" id=\"BPMNShape_IOCWhitelisted\">\n        <omgdc:Bounds height=\"40.0\" width=\"40.0\" x=\"390.0\" y=\"40.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"sid-2DC01F9A-5153-4280-9399-C9E1B3F9FE17\" id=\"BPMNShape_sid-2DC01F9A-5153-4280-9399-C9E1B3F9FE17\">\n        <omgdc:Bounds height=\"40.0\" width=\"40.0\" x=\"390.0\" y=\"166.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"sid-973E8264-8119-47A0-8E24-4B8B6F2F7A26\" id=\"BPMNShape_sid-973E8264-8119-47A0-8E24-4B8B6F2F7A26\">\n        <omgdc:Bounds height=\"40.0\" width=\"40.0\" x=\"390.0\" y=\"365.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"Analystenactsmitigations\" id=\"BPMNShape_Analystenactsmitigations\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"855.0\" y=\"495.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"AnalystClosesTicket\" id=\"BPMNShape_AnalystClosesTicket\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"1035.0\" y=\"495.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"CreateTicketforIOC\" id=\"BPMNShape_CreateTicketforIOC\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"165.0\" y=\"20.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"ConductAdditionalEnrichment\" id=\"BPMNShape_ConductAdditionalEnrichment\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"360.0\" y=\"255.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"UpdateTicketIOCIgnoredduetoWhitelist\" id=\"BPMNShape_UpdateTicketIOCIgnoredduetoWhitelist\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"855.0\" y=\"20.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"UpdateTicketIOCalreadyblocked\" id=\"BPMNShape_UpdateTicketIOCalreadyblocked\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"615.0\" y=\"146.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"UpdateTicketIOCNotValid\" id=\"BPMNShape_UpdateTicketIOCNotValid\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"600.0\" y=\"345.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"CloseTicket\" id=\"BPMNShape_CloseTicket\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"855.0\" y=\"345.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"UpdateBlocklistandBlockIOC\" id=\"BPMNShape_UpdateBlocklistandBlockIOC\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"150.0\" y=\"495.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"QueryforRecipients\" id=\"BPMNShape_QueryforRecipients\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"300.0\" y=\"495.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"UpdateTicketwithAffectedAccountsandCOA\" id=\"BPMNShape_UpdateTicketwithAffectedAccountsandCOA\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"450.0\" y=\"495.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNShape bpmnElement=\"EmailAnalyst\" id=\"BPMNShape_EmailAnalyst\">\n        <omgdc:Bounds height=\"80.0\" width=\"100.0\" x=\"600.0\" y=\"495.0\"></omgdc:Bounds>\n      </bpmndi:BPMNShape>\n      <bpmndi:BPMNEdge bpmnElement=\"Yes2\" id=\"BPMNEdge_Yes2\">\n        <omgdi:waypoint x=\"429.94608976871217\" y=\"186.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"614.9999999998755\" y=\"186.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"Yes1\" id=\"BPMNEdge_Yes1\">\n        <omgdi:waypoint x=\"429.9479852555039\" y=\"60.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"854.9999999998755\" y=\"60.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L1\" id=\"BPMNEdge_L1\">\n        <omgdi:waypoint x=\"74.94999923927439\" y=\"60.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"164.99999999999824\" y=\"60.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"Yes3\" id=\"BPMNEdge_Yes3\">\n        <omgdi:waypoint x=\"390.0\" y=\"385.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"200.0\" y=\"385.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"200.0\" y=\"495.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L2\" id=\"BPMNEdge_L2\">\n        <omgdi:waypoint x=\"264.9499999999944\" y=\"60.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"390.0\" y=\"60.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L3\" id=\"BPMNEdge_L3\">\n        <omgdi:waypoint x=\"905.0\" y=\"99.95\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"905.0\" y=\"345.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L4\" id=\"BPMNEdge_L4\">\n        <omgdi:waypoint x=\"714.9499999999294\" y=\"186.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"869.0\" y=\"186.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"897.7638190954774\" y=\"345.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L5\" id=\"BPMNEdge_L5\">\n        <omgdi:waypoint x=\"699.9499999999563\" y=\"385.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"855.0\" y=\"385.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L10\" id=\"BPMNEdge_L10\">\n        <omgdi:waypoint x=\"699.9499999997231\" y=\"535.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"855.0\" y=\"535.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L6\" id=\"BPMNEdge_L6\">\n        <omgdi:waypoint x=\"954.9499999999999\" y=\"385.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"1071.0\" y=\"385.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"sid-7D48771A-0AAE-4767-9FD9-EA3E66950568\" id=\"BPMNEdge_sid-7D48771A-0AAE-4767-9FD9-EA3E66950568\">\n        <omgdi:waypoint x=\"410.0\" y=\"334.95000000000005\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"410.0\" y=\"365.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L7\" id=\"BPMNEdge_L7\">\n        <omgdi:waypoint x=\"249.94999999975897\" y=\"535.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"300.0\" y=\"535.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L8\" id=\"BPMNEdge_L8\">\n        <omgdi:waypoint x=\"399.949999999759\" y=\"535.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"450.0\" y=\"535.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L12\" id=\"BPMNEdge_L12\">\n        <omgdi:waypoint x=\"1085.0\" y=\"495.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"1085.0\" y=\"398.9499278014256\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L9\" id=\"BPMNEdge_L9\">\n        <omgdi:waypoint x=\"549.9499999997589\" y=\"535.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"600.0\" y=\"535.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"L11\" id=\"BPMNEdge_L11\">\n        <omgdi:waypoint x=\"954.9499999999998\" y=\"535.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"1035.0\" y=\"535.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"No2\" id=\"BPMNEdge_No2\">\n        <omgdi:waypoint x=\"410.0\" y=\"205.9408570119157\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"410.0\" y=\"255.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"No1\" id=\"BPMNEdge_No1\">\n        <omgdi:waypoint x=\"410.0\" y=\"79.94208961141948\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"410.0\" y=\"166.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n      <bpmndi:BPMNEdge bpmnElement=\"No3\" id=\"BPMNEdge_No3\">\n        <omgdi:waypoint x=\"429.9458454807325\" y=\"385.0\"></omgdi:waypoint>\n        <omgdi:waypoint x=\"600.0\" y=\"385.0\"></omgdi:waypoint>\n      </bpmndi:BPMNEdge>\n    </bpmndi:BPMNPlane>\n  </bpmndi:BPMNDiagram>\n</definitions>"
+                },
+                "version": "1.0.2",
+                "connector": "bpmn-to-playbooks",
+                "operation": "bpmntoplaybooks",
+                "operationTitle": "BPMN To Playbooks",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "269",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "65dfa850-bba2-4b38-aaef-0fa37d0c84cb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Collection IRI",
+              "description": null,
+              "arguments": {
+                "name": "Code Snippet",
+                "config": "677f7729-f4d1-4941-88f3-0bac70b73d55",
+                "params": {
+                  "python_function": "import json\n\ndata = {{vars.steps.BPMN_XML_to_FortiSOAR_Playbook_JSON.data}}\n\ndata['data'][0]['workflows'][0]['collection']=\"/api/3/workflow_collections/{{vars.collectionIRI}}\"\n\nprint (json.dumps(data))"
+                },
+                "version": "1.2.0",
+                "connector": "code-snippet",
+                "operation": "python_inline",
+                "operationTitle": "Execute Python Code",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "0b2f65bf-3b62-4ffc-9912-bf4ff3cf474a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Upload Playbook to Collection",
+              "description": null,
+              "arguments": {
+                "name": "Utilities",
+                "params": {
+                  "iri": "/api/3/?$relationships=true",
+                  "body": "{{vars.steps.Update_Collection_IRI.data['code_output']['data'][0]['workflows']}}",
+                  "method": "POST"
+                },
+                "version": "3.0.1",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make API Call",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "380",
+              "top": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "63ffa6e6-73c0-4aa7-bd81-abdf29eca26c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "79aab302-174d-4a67-8a91-a8e0ad376d51",
+              "name": "Start -> Set Collection IRI",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f5bfa5db-b45f-4c16-9076-3736b65fce3a",
+              "sourceStep": "/api/3/workflow_steps/6354d189-2c04-48e6-b636-dc6f6dd71d74"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "37b96e24-30bb-4105-b647-7f9a36af9804",
+              "name": "Set Collection IRI -> BPMN XML to FortiSOAR Playbook JSON",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/65dfa850-bba2-4b38-aaef-0fa37d0c84cb",
+              "sourceStep": "/api/3/workflow_steps/f5bfa5db-b45f-4c16-9076-3736b65fce3a"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c44b2378-5343-4b87-a883-6c6bd7e18407",
+              "name": "BPMN XML to FortiSOAR Playbook JSON -> Update Collection IRI",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/0b2f65bf-3b62-4ffc-9912-bf4ff3cf474a",
+              "sourceStep": "/api/3/workflow_steps/65dfa850-bba2-4b38-aaef-0fa37d0c84cb"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8ae81710-bf7a-4a52-8493-6de01a9003bf",
+              "name": "Update Collection IRI -> Upload Playbook to Collection",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/63ffa6e6-73c0-4aa7-bd81-abdf29eca26c",
+              "sourceStep": "/api/3/workflow_steps/0b2f65bf-3b62-4ffc-9912-bf4ff3cf474a"
+            }
+          ],
+          "versions": null,
+          "uuid": "acd64d5a-d697-41d8-b694-d919b6da2ee2"
+        }
+      ],
+      "uuid": "06714d5a-e994-4436-ad29-548ba2574a95"
+    }
+  ]
+}

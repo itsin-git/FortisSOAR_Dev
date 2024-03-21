@@ -1,0 +1,235 @@
+{
+  "name": "fortisoar-ml-engine",
+  "label": "FortiSOAR ML Engine",
+  "description": "Leverage Machine Learning as your bot assistant in identifying record similarity, classification etc.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.2.3",
+  "category": "Machine Learning",
+  "tags": ["mlengine"],
+  "icon_small_name": "machine_learning_small.png",
+  "icon_large_name": "machine_learning_large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.2.3/fortisoar-ml-engine-connector/519/fortisoar-ml-engine-connector-v1-2-3",
+  "ingestion_modes": ["notification"],
+  "configuration": {
+    "fields": [
+      {
+        "title": "Module to train for",
+        "name": "fsr_module",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "value": "Alerts",
+        "apiOperation": "get_modules"
+      },
+      {
+        "title": "Feature Set",
+        "name": "feature_set",
+        "type": "multiselect",
+        "apiOperation": "get_feature_set",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "tooltip": "Fields(multiselect) to be included in training the prediction model"
+      },
+      {
+        "title": "Verdict",
+        "name": "verdict",
+        "type": "multiselect",
+        "apiOperation": "get_verdict_set",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "tooltip": "Fields for which prediction should be made"
+      },
+      {
+        "title": "Date Range",
+        "name": "date_range",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "tooltip": "Timeframe of records to populate the training set",
+        "options": [
+          "Last month",
+          "Last 6 months",
+          "Last year",
+          "Last 2 years",
+          "Last 5 years",
+          "Custom"
+        ],
+        "onchange": {
+          "Custom": [
+            {
+              "title": "Last X Days",
+              "name": "custom_value",
+              "type": "integer",
+              "visible": true,
+              "editable": true,
+              "required": true,
+              "placeholder": 365
+            }
+          ]
+        }
+      },
+      {
+        "title": "Training Set Size",
+        "name": "train_size",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "tooltip": "Size of the training set. Date range will take precedence",
+        "placeholder": 1000
+      },
+      {
+        "title": "Algorithm",
+        "name": "algo",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "value": "K-Nearest Neighbors",
+        "options": [
+          "Decision Tree",
+          "K-Nearest Neighbors"
+        ]
+      },
+      {
+        "title": "Listener Port",
+        "name": "listener_port",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "placeholder": 10443,
+        "value": 10443,
+        "tooltip": "The connector will load the ML models into a socket based on this port for efficient storage and delivery"
+      },
+      {
+        "title": "module_config_translated",
+        "name": "module_data_translated",
+        "required": false,
+        "editable": true,
+        "visible": false,
+        "type": "json"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "predict",
+      "response_from_primary": true,
+      "title": "Predict",
+      "description": "Provide verdict for the specified record",
+      "parameters": [
+        {
+          "title": "Record(s)",
+          "name": "records",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "placeholder": "record IRI /api/3/alerts/546129b1-abcd-4447-b1c0-2a9683752424 or records JSON",
+          "tooltip": "record data list or record iri list"
+        },
+        {
+          "title": "Module",
+          "name": "module",
+          "required": false,
+          "editable": true,
+          "visible": false,
+          "type": "text",
+          "placeholder": "alerts",
+          "tooltip": "module"
+        }
+      ],
+      "enabled": true,
+      "annotation": "predict",
+      "category": "investigation",
+      "output_schema": {}
+    },
+    {
+      "operation": "similar",
+      "title": "Fetch Similar Record(s)",
+      "response_from_primary": true,
+      "description": "Provide similar record(s) for a specified record",
+      "parameters": [
+        {
+          "title": "Record(s)",
+          "name": "records",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "placeholder": "/api/3/alerts/546129b1-abcd-4447-b1c0-2a9683752424",
+          "tooltip": "record data list or record iri list"
+        }
+      ],
+      "enabled": true,
+      "annotation": "similarity",
+      "category": "investigation",
+      "output_schema": {}
+    },
+    {
+      "operation": "train",
+      "response_from_primary": true,
+      "title": "Train",
+      "description": "Train the dataset with specified parameters from connector config",
+      "parameters": [],
+      "enabled": true,
+      "annotation": "ml_train",
+      "category": "investigation",
+      "output_schema": ""
+    },
+    {
+      "operation": "get_modules",
+      "title": "Get Modules",
+      "description": "Get available modules",
+      "enabled": true,
+      "visible": false,
+      "annotation": "get_modules",
+      "category": "investigation",
+      "parameters": [],
+      "output_schema": {},
+      "is_config_required": false
+    },
+    {
+      "operation": "get_feature_set",
+      "title": "Get Feature Set",
+      "description": "Get available fields of a module",
+      "enabled": true,
+      "visible": false,
+      "annotation": "get_feature_set",
+      "category": "investigation",
+      "parameters": [],
+      "output_schema": {},
+      "is_config_required": false
+    },
+    {
+      "operation": "get_verdict_set",
+      "title": "Get Verdict Set",
+      "description": "Get available fields of a module (only picklists and lookups for verdict)",
+      "enabled": true,
+      "visible": false,
+      "annotation": "get_verdict_set",
+      "category": "investigation",
+      "parameters": [],
+      "output_schema": {},
+      "is_config_required": false
+    },
+    {
+      "operation": "get_output_schema",
+      "annotation": "get_output_schema",
+      "description": "Gives the output schema based on the inputs",
+      "title": "Get Output Schema",
+      "enabled": true,
+      "visible": false,
+      "parameters": [],
+      "output_schema": {},
+      "is_config_required": false
+    }
+  ]
+}

@@ -1,0 +1,1224 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Slack - 2.1.0",
+      "description": "Sample playbooks for \"Slack\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "/api/3/images/456a66ce-fa9a-4967-b7a8-3d9bd4f59da2",
+      "uuid": "b8b1a7e7-29e8-493c-b944-748750c01293",
+      "id": 754,
+      "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "createDate": 1637646704,
+      "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "modifyDate": 1637646704,
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Message: Send Message",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Send Message",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637650015,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a5c0a88a-07b8-42ce-b323-4bddda1b2290",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "20e4635f-7d7f-4570-af9f-c6b898ee2c84",
+                "title": "Slack: Send Message",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "a5c0a88a-07b8-42ce-b323-4bddda1b2290",
+              "id": 20324
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Send Message",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "channel": "U6UDXTD8B",
+                  "message": "Hello !  testing api",
+                  "attachments": "[         {             \"fallback\": \"ReferenceError - UI is not defined\",             \"text\": \"ReferenceError - UI is not defined\",             \"fields\": [                 {                     \"title\": \"Project\",                     \"value\": \"Awesome Project\",                     \"short\": true                 },                 {                     \"title\": \"Environment\",                     \"value\": \"production\",                     \"short\": true                 }             ],             \"color\": \"#F35A00\"         }     ]"
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "send_message",
+                "operationTitle": "Send Message",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "131",
+              "left": "173",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b8473062-6cf9-4564-bb2f-ce987813bd40",
+              "id": 20325
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alert -> Send Message",
+              "targetStep": "/api/3/workflow_steps/b8473062-6cf9-4564-bb2f-ce987813bd40",
+              "sourceStep": "/api/3/workflow_steps/a5c0a88a-07b8-42ce-b323-4bddda1b2290",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ae738e61-2d85-48b0-b134-f2a848a130bc"
+            }
+          ],
+          "priority": null,
+          "uuid": "234b7098-2a9c-4a28-bd0b-710e2d6374b0",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7064,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650646,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Channel: Get Channels List",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Lists all channels in a Slack team",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637646950,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d89ce24b-4afe-422d-bba6-735b50add7de",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Channels List",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "b1f7c847-9c08-4b4b-9e24-8d05130115f7",
+                "params": {
+                  "limit": "",
+                  "types": [
+                    "Public Channel",
+                    "Private Channel",
+                    "Group messaging",
+                    "Direct Messages"
+                  ],
+                  "cursor": "",
+                  "exclude_archived": true
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "list_channels",
+                "operationTitle": "Get Channels List",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "c5a9c7e4-2ebc-4573-b3e6-09ce4ed4e99a",
+              "id": 20331
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "46b613a6-3eb7-4be7-8b43-7787c07dab80",
+                "title": "Slack: Get Channels List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "d89ce24b-4afe-422d-bba6-735b50add7de",
+              "id": 20332
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alert -> Get Channels List",
+              "targetStep": "/api/3/workflow_steps/c5a9c7e4-2ebc-4573-b3e6-09ce4ed4e99a",
+              "sourceStep": "/api/3/workflow_steps/d89ce24b-4afe-422d-bba6-735b50add7de",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7929a9bd-e831-4c4e-a782-7ca0c0ce128e"
+            }
+          ],
+          "priority": null,
+          "uuid": "279167bd-ab54-4f07-bcf3-996441642e43",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7066,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650645,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Channel: Rename Channel",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "This method renames a conversation(channel). Some types of conversations cannot be renamed.",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637650294,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/cceab0d8-2ea5-476a-81a3-64322a747c4d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Rename Channel",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "name": "slack-rename1-playbook",
+                  "channel": "C02N3E15BK7"
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "rename_channel",
+                "operationTitle": "Rename Channel",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "200",
+              "left": "232",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "5d023da2-af4c-46bd-8721-129b06064a25",
+              "id": 20333
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "86e0243c-d125-4398-b020-019c77b65538",
+                "title": "Slack: Rename Channel",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "cceab0d8-2ea5-476a-81a3-64322a747c4d",
+              "id": 20334
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Rename Channel",
+              "targetStep": "/api/3/workflow_steps/5d023da2-af4c-46bd-8721-129b06064a25",
+              "sourceStep": "/api/3/workflow_steps/cceab0d8-2ea5-476a-81a3-64322a747c4d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2bbfe531-7591-48b3-8213-cc63ecb3af26"
+            }
+          ],
+          "priority": null,
+          "uuid": "377790b5-e54a-4149-ac40-49ca88834047",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7067,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650645,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "User: Invite Users To Channel",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "This method invites users to a channel.",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637649924,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/70951897-6aec-4a4d-b0a8-4b821bfa77c1",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "182948cf-77d8-4d32-bad5-c460cbe3a3b4",
+                "title": "Slack: Invite Users To Channel",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "70951897-6aec-4a4d-b0a8-4b821bfa77c1",
+              "id": 20322
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Invite Users To Channel",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "users": "U6UDXTD8B",
+                  "channel": "C02NAFQ0J1H"
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "invite_user_to_channel",
+                "operationTitle": "Invite User To Channel",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "160",
+              "left": "360",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "c2477935-7feb-463e-aca1-f6dd6aed7e56",
+              "id": 20323
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Invite Users To Channel",
+              "targetStep": "/api/3/workflow_steps/c2477935-7feb-463e-aca1-f6dd6aed7e56",
+              "sourceStep": "/api/3/workflow_steps/70951897-6aec-4a4d-b0a8-4b821bfa77c1",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "894f784f-f62b-42e2-8484-cbafcf0b96a5"
+            }
+          ],
+          "priority": null,
+          "uuid": "4f1baa3d-67f1-4394-9366-86c0758334ef",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7063,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650648,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Channel: Search Channel",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Search channels in a Slack team",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637647715,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/2360af7a-dca0-48a5-8cb6-2ab98865bad8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "fe65f39e-1e69-46c9-8ab4-a6522e736a0c",
+                "title": "Slack: Search Channel",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "2360af7a-dca0-48a5-8cb6-2ab98865bad8",
+              "id": 20337
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Channel",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "search_name": "random",
+                  "search_type": "Exact"
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "search_channel",
+                "operationTitle": "Search Channel",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "133",
+              "left": "173",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "90c042b4-51a6-4b4a-8e7a-81d9451a14b1",
+              "id": 20338
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alert -> Get Channels List",
+              "targetStep": "/api/3/workflow_steps/90c042b4-51a6-4b4a-8e7a-81d9451a14b1",
+              "sourceStep": "/api/3/workflow_steps/2360af7a-dca0-48a5-8cb6-2ab98865bad8",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "6247aa33-1ff0-4c72-92c5-5aa809662dde"
+            }
+          ],
+          "priority": null,
+          "uuid": "53419cd4-5047-4433-99cf-f72a9d23ccd6",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7069,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650646,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "User: Get User List",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Lists all users in a Slack team",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637649890,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/37308f73-89ee-4dae-ab44-80eb6e5b18f2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "3803f685-3640-4a6c-98e0-e4e5daa292e4",
+                "title": "Slack: Get User List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "37308f73-89ee-4dae-ab44-80eb6e5b18f2",
+              "id": 20320
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get User List",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "limit": 50,
+                  "cursor": ""
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "list_users",
+                "operationTitle": "Get Users List",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b178fd3b-862a-475e-a9bd-a8f06c8cc598",
+              "id": 20321
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alert -> Get User List",
+              "targetStep": "/api/3/workflow_steps/b178fd3b-862a-475e-a9bd-a8f06c8cc598",
+              "sourceStep": "/api/3/workflow_steps/37308f73-89ee-4dae-ab44-80eb6e5b18f2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3defb5de-0dd6-47aa-a6a5-2c8761f8561d"
+            }
+          ],
+          "priority": null,
+          "uuid": "59bf4c95-8f68-48f8-a678-f77e3f642ba6",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7062,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650648,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Channel: Get Channel Information",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Retrieve information about a conversation.",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637647671,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/85a761fd-2993-4119-8109-6304ebc79ceb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "c907290b-0022-4de0-8242-838acf16150d",
+                "title": "Slack: Get Channel Information",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "85a761fd-2993-4119-8109-6304ebc79ceb",
+              "id": 20335
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Channel Information",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "39def14a-4754-4727-9ff0-d97dff385825",
+                "params": {
+                  "channel": "C6U0HFJEM",
+                  "include_locale": true,
+                  "include_num_members": true
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "get_channel_info",
+                "operationTitle": "Get Channel Information",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "112",
+              "left": "380",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "d895336b-2ac4-4473-881c-cb3c56d9cbe4",
+              "id": 20336
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Channel Information",
+              "targetStep": "/api/3/workflow_steps/d895336b-2ac4-4473-881c-cb3c56d9cbe4",
+              "sourceStep": "/api/3/workflow_steps/85a761fd-2993-4119-8109-6304ebc79ceb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c7fc1ebc-9b13-4296-b67a-c831cfad7e4f"
+            }
+          ],
+          "priority": null,
+          "uuid": "74028a53-7ac3-40d6-9643-244ed04b6570",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7068,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650645,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Message: Get Message History",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Fetches a conversation's history of messages and events configured on your Slack cloud, based on the Channel ID and other input parameters that you have specified.",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637650169,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/b699285e-4e67-4387-82ba-e9f872b53ec6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Message History",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "a625c8d6-5b22-4049-a522-d4ccc3973164",
+                "params": {
+                  "limit": 100,
+                  "cursor": "",
+                  "latest": false,
+                  "oldest": false,
+                  "channel": "U6UDXTD8B",
+                  "inclusive": ""
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "get_message_history",
+                "operationTitle": "Get Message History",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "125",
+              "left": "341",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "4363f59a-3761-4df7-be95-02d2b8981d79",
+              "id": 20340
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "f3a3c4c4-7115-44bb-9b72-ec326a4a97bc",
+                "title": "Slack: Get Message History",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "b699285e-4e67-4387-82ba-e9f872b53ec6",
+              "id": 20341
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Message History",
+              "targetStep": "/api/3/workflow_steps/4363f59a-3761-4df7-be95-02d2b8981d79",
+              "sourceStep": "/api/3/workflow_steps/b699285e-4e67-4387-82ba-e9f872b53ec6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "81f7e227-1216-4e65-a051-60b231f85dce"
+            }
+          ],
+          "priority": null,
+          "uuid": "a0474a83-09ce-4852-9c72-273514187054",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7070,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650646,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Upload File",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Uploads a file to a channel",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637650070,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3f6c9562-dbf8-421b-99f5-40f494c006a5",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "b523458a-d4fc-4345-aa47-091a72b68066",
+                "title": "Slack: Upload File",
+                "resources": [
+                  "attachments"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  },
+                  "attachments": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "3f6c9562-dbf8-421b-99f5-40f494c006a5",
+              "id": 20328
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Upload File",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "path": "File IRI",
+                  "title": "info.json",
+                  "value": "{{vars.input.records[0].file['@id']}}",
+                  "channel": "U6UDXTD8B",
+                  "comment": "testing slack api",
+                  "file_name": "info.json",
+                  "file_type": "json"
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "upload_file",
+                "operationTitle": "Upload File",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "166",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "8c6527ba-7139-4565-b8b5-c2434e571981",
+              "id": 20329
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alert -> Upload File",
+              "targetStep": "/api/3/workflow_steps/8c6527ba-7139-4565-b8b5-c2434e571981",
+              "sourceStep": "/api/3/workflow_steps/3f6c9562-dbf8-421b-99f5-40f494c006a5",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d95c6401-a5a3-4ac6-9e8c-d1a8898a932a"
+            }
+          ],
+          "priority": null,
+          "uuid": "b0971942-a64c-409f-a8a5-c869c5d1e514",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7065,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650647,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Channel: Create Channel",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Create new channel in slack",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637649771,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/008fbac8-67d4-4365-bf4b-d712aaa181a2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "7fb048f0-e0f5-4aa2-9af5-7ddfacaeb6b0",
+                "title": "Slack: Create Channel",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "008fbac8-67d4-4365-bf4b-d712aaa181a2",
+              "id": 20344
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Channel",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "name": "slack-test-playbook1",
+                  "is_private": false
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "create_channel",
+                "operationTitle": "Create Channel",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "353",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "43f9eec5-a18f-4ad5-83d7-4bd13a7f7799",
+              "id": 20345
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Create Channel",
+              "targetStep": "/api/3/workflow_steps/43f9eec5-a18f-4ad5-83d7-4bd13a7f7799",
+              "sourceStep": "/api/3/workflow_steps/008fbac8-67d4-4365-bf4b-d712aaa181a2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2b0467be-5fb6-4121-9c39-5251915cec38"
+            }
+          ],
+          "priority": null,
+          "uuid": "b2f4ef1c-dbd5-4cd4-9c64-61a666c58cc1",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7072,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650645,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "User: Get User Information",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "Get information about a user",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637649967,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/25652633-c60d-426d-a997-1fcbedf22ad1",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "f2e7dae3-d4f3-47d8-bff6-5d64f5fcd4c6",
+                "title": "Slack: Get User Information",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "25652633-c60d-426d-a997-1fcbedf22ad1",
+              "id": 20346
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get User Information",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "value": "U6UDXTD8B",
+                  "search_by": "User ID",
+                  "include_locale": true
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "get_user",
+                "operationTitle": "Get User Information",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "160",
+              "left": "173",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "66923627-5854-4ed0-9471-a81de14280bd",
+              "id": 20347
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alert -> Get User Information",
+              "targetStep": "/api/3/workflow_steps/66923627-5854-4ed0-9471-a81de14280bd",
+              "sourceStep": "/api/3/workflow_steps/25652633-c60d-426d-a997-1fcbedf22ad1",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "47242179-a8cd-4cd2-ac75-cc1dd4238f25"
+            }
+          ],
+          "priority": null,
+          "uuid": "e0680e64-a3c0-4ba6-8f00-3085d931f9ce",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7073,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650647,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Channel: Close Channel",
+          "aliasName": null,
+          "tag": "#slack",
+          "description": "This method closes a direct message or multi-person direct message.",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1637650562,
+          "collection": "/api/3/workflow_collections/b8b1a7e7-29e8-493c-b944-748750c01293",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/050f0194-e4ff-412f-9d19-e975fd2f85a5",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "87b45a94-2ef4-4f26-97c7-bc1e9e083a77",
+                "title": "Slack: Close Channel",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "050f0194-e4ff-412f-9d19-e975fd2f85a5",
+              "id": 20342
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Close Channel",
+              "description": null,
+              "arguments": {
+                "name": "Slack",
+                "config": "ae6fb72a-bb78-4472-a501-1feb6976ecac",
+                "params": {
+                  "channel": "D02NJ5S982V"
+                },
+                "version": "2.1.0",
+                "connector": "slack",
+                "operation": "close_channel",
+                "operationTitle": "Close Channel",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "360",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "7b05d5d7-a50c-40f3-ba8c-653991208a83",
+              "id": 20343
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Close Channel",
+              "targetStep": "/api/3/workflow_steps/7b05d5d7-a50c-40f3-ba8c-653991208a83",
+              "sourceStep": "/api/3/workflow_steps/050f0194-e4ff-412f-9d19-e975fd2f85a5",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7f1885fa-7ce1-42c7-b0f8-8e25313485ef"
+            }
+          ],
+          "priority": null,
+          "uuid": "fc8cb339-b80c-41b9-bb8f-9f5e5c6db549",
+          "recordTags": [
+            "slack"
+          ],
+          "id": 7071,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1637646704,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1637650645,
+          "owners": [],
+          "isPrivate": false
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "slack"
+  ]
+}

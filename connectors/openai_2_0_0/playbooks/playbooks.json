@@ -1,0 +1,377 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "033c380b-3d36-4289-b05c-a4e27a9ba0e8",
+      "@type": "WorkflowCollection",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "ce310b1e-2e0f-4b28-90c6-7876a4ad7101",
+          "collection": "/api/3/workflow_collections/033c380b-3d36-4289-b05c-a4e27a9ba0e8",
+          "steps": [
+            {
+              "uuid": "87f25b25-f202-4d15-91e0-e416240c27af",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "857852c6-4ff2-4bd8-abc9-ffe11c97aa05",
+              "@type": "WorkflowStep",
+              "name": "Ask a Question",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "message": "",
+                  "model": "gpt-3.5-turbo",
+                  "temperature": "",
+                  "top_p": "",
+                  "max_tokens": "",
+                  "timeout": 600
+                },
+                "version": "2.0.0",
+                "connector": "openai",
+                "operation": "chat_completions",
+                "operationTitle": "Ask a Question"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Generates a contextually relevant response to a given question using a pre-trained deep learning model.",
+          "name": "Ask a Question",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "OpenAI",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/87f25b25-f202-4d15-91e0-e416240c27af",
+          "routes": [
+            {
+              "uuid": "05e0f272-7d91-4778-b74a-6decad31471c",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Ask a Question",
+              "sourceStep": "/api/3/workflow_steps/87f25b25-f202-4d15-91e0-e416240c27af",
+              "targetStep": "/api/3/workflow_steps/857852c6-4ff2-4bd8-abc9-ffe11c97aa05"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "0ab054a6-b7f2-4f20-aa24-df16e42719ba",
+          "collection": "/api/3/workflow_collections/033c380b-3d36-4289-b05c-a4e27a9ba0e8",
+          "steps": [
+            {
+              "uuid": "cf83ceb1-1d37-44bc-aa7b-bbe339795c2f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "8cfddd86-7fc6-46e1-a4fb-0dce042dcb21",
+              "@type": "WorkflowStep",
+              "name": "Converse With OpenAI",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "messages": "[{\"role\": \"user\", \"content\": \"when was stuxnet first seen\"},{\"role\": \"assistant\", \"content\": \"Stuxnet was first identified by the infosec community in 2010, but development on it probably began in 20051. I hope this helps!\"},{\"role\": \"user\", \"content\": \"who discovered it\"}]",
+                  "model": "gpt-3.5-turbo",
+                  "temperature": "",
+                  "top_p": "",
+                  "max_tokens": "",
+                  "timeout": 600
+                },
+                "version": "2.0.0",
+                "connector": "openai",
+                "operation": "chat_conversation",
+                "operationTitle": "Converse With OpenAI"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Allows users to converse with OpenAI, i.e., users can ask a question and get the answer from OpenAI based on the previous discussions.",
+          "name": "Converse With OpenAI",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "OpenAI",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/cf83ceb1-1d37-44bc-aa7b-bbe339795c2f",
+          "routes": [
+            {
+              "uuid": "6c08ccb2-8640-4c7d-9c6c-4baf2bc8eec6",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Converse With OpenAI",
+              "sourceStep": "/api/3/workflow_steps/cf83ceb1-1d37-44bc-aa7b-bbe339795c2f",
+              "targetStep": "/api/3/workflow_steps/8cfddd86-7fc6-46e1-a4fb-0dce042dcb21"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "a57c9326-a662-466e-8bf9-6ab932acae6f",
+          "collection": "/api/3/workflow_collections/033c380b-3d36-4289-b05c-a4e27a9ba0e8",
+          "steps": [
+            {
+              "uuid": "dbc84b38-4538-45d7-8701-adb66bb3ed68",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "23b1235e-6288-41a2-96e0-b202cbf0a269",
+              "@type": "WorkflowStep",
+              "name": "List Available Models",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "openai",
+                "operation": "list_models",
+                "operationTitle": "List Available Models"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list and descriptions of all models available in the OpenAI API.",
+          "name": "List Available Models",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "OpenAI",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/dbc84b38-4538-45d7-8701-adb66bb3ed68",
+          "routes": [
+            {
+              "uuid": "cebb6c4e-adaa-4f1a-b895-ec094c3dc3c7",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List Available Models",
+              "sourceStep": "/api/3/workflow_steps/dbc84b38-4538-45d7-8701-adb66bb3ed68",
+              "targetStep": "/api/3/workflow_steps/23b1235e-6288-41a2-96e0-b202cbf0a269"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "08d10af7-dded-46a6-ad65-5154e635afa0",
+          "collection": "/api/3/workflow_collections/033c380b-3d36-4289-b05c-a4e27a9ba0e8",
+          "steps": [
+            {
+              "uuid": "74d1aee7-41bb-4685-b379-c9bb6ebf5f2e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "6b82d68f-a37b-4875-a223-ec94d6cf0f67",
+              "@type": "WorkflowStep",
+              "name": "Get Tokens Usage",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "date": ""
+                },
+                "version": "2.0.0",
+                "connector": "openai",
+                "operation": "get_usage",
+                "operationTitle": "Get Tokens Usage"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves the usage details for each OpenAI API call for the specified date.",
+          "name": "Get Tokens Usage",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "OpenAI",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/74d1aee7-41bb-4685-b379-c9bb6ebf5f2e",
+          "routes": [
+            {
+              "uuid": "95b8449b-d8da-4158-b84b-d80ecdffe62b",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Tokens Usage",
+              "sourceStep": "/api/3/workflow_steps/74d1aee7-41bb-4685-b379-c9bb6ebf5f2e",
+              "targetStep": "/api/3/workflow_steps/6b82d68f-a37b-4875-a223-ec94d6cf0f67"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1b0faeb2-16ec-4a71-a6e2-995dd364c9c4",
+          "collection": "/api/3/workflow_collections/033c380b-3d36-4289-b05c-a4e27a9ba0e8",
+          "steps": [
+            {
+              "uuid": "5ea76c33-e60b-4cb0-83d5-e84dce81fd7d",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "345a6325-183a-429e-bbfb-979af97e0f3d",
+              "@type": "WorkflowStep",
+              "name": "Get Token Count",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "input_text": "",
+                  "model": "gpt-4"
+                },
+                "version": "2.0.0",
+                "connector": "openai",
+                "operation": "count_tokens",
+                "operationTitle": "Get Token Count"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Counts the number of tokens in the specified string and OpenAI model.",
+          "name": "Get Token Count",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "OpenAI",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/5ea76c33-e60b-4cb0-83d5-e84dce81fd7d",
+          "routes": [
+            {
+              "uuid": "06e4beaa-2a9e-4ebe-bb9d-20cf285fcd87",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Token Count",
+              "sourceStep": "/api/3/workflow_steps/5ea76c33-e60b-4cb0-83d5-e84dce81fd7d",
+              "targetStep": "/api/3/workflow_steps/345a6325-183a-429e-bbfb-979af97e0f3d"
+            }
+          ]
+        }
+      ],
+      "name": "Sample - OpenAI - 2.0.0",
+      "description": "This integration supports interacting with OpenAI's powerful language model, ChatGPT from FortiSOAR workflows",
+      "visible": true,
+      "recordTags": [
+        "OpenAI",
+        "openai"
+      ]
+    }
+  ]
+}

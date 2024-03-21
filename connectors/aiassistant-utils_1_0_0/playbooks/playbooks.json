@@ -1,0 +1,212 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - AI Assistant Utils - 1.0.0",
+      "description": "Sample playbooks for \"AI Assistant Utils\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": null,
+      "uuid": "a0ae8dff-09c9-44a8-9ce9-5158081c5148",
+      "id": 43,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [
+        "aiassistant-utils"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Find playbook steps for query",
+          "aliasName": null,
+          "tag": "#AI Assistant",
+          "description": "Finds documents from the training database that match the user query",
+          "isActive": false,
+          "debug": true,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1697786892,
+          "collection": "/api/3/workflow_collections/a0ae8dff-09c9-44a8-9ce9-5158081c5148",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/55ccac63-7e35-4086-be27-7e2a756a2967",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Find playbook steps for query",
+              "description": null,
+              "arguments": {
+                "name": "AI Assistant Utils",
+                "config": "''",
+                "params": {
+                  "task": "Create an Indicator",
+                  "n_results": 10,
+                  "task_type": "Action"
+                },
+                "version": "1.0.0",
+                "connector": "aiassistant-utils",
+                "operation": "get_similar_documents",
+                "operationTitle": "Find Similar Documents",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e1438afc-804c-49a2-99b5-f7e10bf37b3e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "98cb21ff-e1f3-49c4-b2ea-dfe0ece94d9f",
+                "title": "AI Assistant: Find playbook steps for query",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "55ccac63-7e35-4086-be27-7e2a756a2967"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Find playbook steps for query",
+              "targetStep": "/api/3/workflow_steps/e1438afc-804c-49a2-99b5-f7e10bf37b3e",
+              "sourceStep": "/api/3/workflow_steps/55ccac63-7e35-4086-be27-7e2a756a2967",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "80298673-97eb-49f1-91fe-19c0bcae49e3"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1ef667d8-abd4-4922-b514-e7aa9d623bd0",
+          "id": 468,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "aiassistant-utils"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Refresh Training Data",
+          "aliasName": null,
+          "tag": "#AI Assistant",
+          "description": "Use this function to fine tune the playbook steps model with data from your own playbook collections",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1697785296,
+          "collection": "/api/3/workflow_collections/a0ae8dff-09c9-44a8-9ce9-5158081c5148",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/62579df1-39e3-48b9-a571-6e487ed66d15",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Refresh Training Data",
+              "description": null,
+              "arguments": {
+                "name": "AI Assistant Utils",
+                "config": "''",
+                "params": {
+                  "export_file_iri": "/api/3/files/620b0833-173e-4155-b06c-4025b3841df7"
+                },
+                "version": "1.0.0",
+                "connector": "aiassistant-utils",
+                "operation": "refresh_collection",
+                "operationTitle": "Refresh Training Data",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ff6d1382-c27d-495a-886b-67a2ea8947a7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6ba5a719-0909-43f6-aa32-a3d6ebb72fad",
+                "title": "AI Assistant: Refresh Training Data",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "62579df1-39e3-48b9-a571-6e487ed66d15"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Refresh Training Data",
+              "targetStep": "/api/3/workflow_steps/ff6d1382-c27d-495a-886b-67a2ea8947a7",
+              "sourceStep": "/api/3/workflow_steps/62579df1-39e3-48b9-a571-6e487ed66d15",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "e93aaa15-beb9-4123-8a81-316c056efd86"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "ab8f6cf1-d47a-46bb-a49b-a5bc33b087fd",
+          "id": 469,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "aiassistant-utils"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "aiassistant-utils"
+  ]
+}

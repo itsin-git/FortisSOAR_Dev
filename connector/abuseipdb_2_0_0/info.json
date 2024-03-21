@@ -1,0 +1,202 @@
+{
+  "name": "abuseipdb",
+  "label": "AbuseIPDB",
+  "version": "2.0.0",
+  "description": "AbuseIPDB Connector helps to report and identify IP addresses that have been associated with malicious activity online",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "information",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/abuseipdb/61/abuseipdb-v2-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "name": "server_url",
+        "description": "URL of the AbuseIPDB API server to which you will connect and perform automated operations. For example, https://api.abuseipdb.com.",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": "https://api.abuseipdb.com"
+      },
+      {
+        "title": "API Token",
+        "description": "API key to access the AbuseIPDB API.",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "token"
+      },
+      {
+        "title": "Verify SSL",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.\nBy default, this option is set as True.",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "ip_lookup",
+      "title": "IP Lookup",
+      "category": "investigation",
+      "annotation": "ip_lookup",
+      "description": "Performs IP lookup in AbuseIPDB based on the IP address you have specified.",
+      "enabled": true,
+      "output_schema": {
+        "ipAddress": "",
+        "isPublic": "",
+        "ipVersion": "",
+        "isWhitelisted": "",
+        "abuseConfidenceScore": "",
+        "countryCode": "",
+        "usageType": "",
+        "isp": "",
+        "domain": "",
+        "hostnames": [],
+        "totalReports": "",
+        "numDistinctUsers": "",
+        "lastReportedAt": ""
+      },
+      "parameters": [
+        {
+          "title": "IP",
+          "description": "IP address for which you want to perform a search and identify malicious activities online.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip",
+          "value": ""
+        },
+        {
+          "title": "Reports Within X Days",
+          "description": "Number of days within which you want to check reports for the specified IP address in AbuseIPDB.\nValid values are between 1 to 365 days. By default, this is set to 10 days.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "days",
+          "tooltip": "Value should be between 1 to 365"
+        }
+      ]
+    },
+    {
+      "operation": "report_ip",
+      "title": "Report IP",
+      "category": "miscellaneous",
+      "annotation": "report_ip",
+      "description": "Reports a specific IP address that has been identified with malicious activities online to AbuseIPDB based on the IP address and malware category you have specified.",
+      "enabled": true,
+      "output_schema": {
+        "ipAddress": "",
+        "abuseConfidenceScore": ""
+      },
+      "parameters": [
+        {
+          "title": "IP",
+          "description": "IP address that you want to report to AbuseIPDB that has been identified with malicious activities.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "ip",
+          "tooltip": "A valid IPv4 or IPv6 address."
+        },
+        {
+          "title": "Categories",
+          "description": "Categories of malware in which you want to categorize the specified IP address in AbuseIPDB. You can choose from categories such as, Bad Web Bot, Blog Spam, Brute-Force, DDos Attack, DNS Compromise, etc.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "Bad Web Bot",
+            "Blog Spam",
+            "Brute-Force",
+            "DDoS Attack",
+            "DNS Compromise",
+            "DNS Poisoning",
+            "Email Spam",
+            "Exploited Host",
+            "Fraud Orders",
+            "Fraud VoIP",
+            "FTP Brute-Force",
+            "Hacking",
+            "IoT Targeted",
+            "Open Proxy",
+            "Phishing",
+            "Ping of Death",
+            "Port Scan",
+            "Spoofing",
+            "SQL Injection",
+            "SSH",
+            "VPN IP",
+            "Web App Attack",
+            "Web Spam"
+          ],
+          "name": "categories"
+        },
+        {
+          "title": "Comment",
+          "description": "(Optional) Comment that you want to add with the reported IP.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "comment"
+        }
+      ]
+    },
+    {
+      "operation": "get_ip_blacklist",
+      "title": "Get IP Blacklist",
+      "category": "investigation",
+      "annotation": "get_ip_blacklist",
+      "description": "Retrieves a list of all reported IP addresses from AbuseIPDB or a list of specific IP addresses from AbuseIPDB based on the input parameters you have specified.",
+      "enabled": true,
+      "output_schema": {
+        "meta": {
+          "generatedAt": ""
+        },
+        "data": [
+          {
+            "ipAddress": "",
+            "abuseConfidenceScore": ""
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "title": "Confidence Minimum",
+          "description": "Minimum confidence level that has been specified by users who have reported the malicious IP addresses to AbuseIPDB. If you specify this parameter, then this operation will retrieve the list of only those IP addresses that have their confidence level more than the value specified. \nValid values are between 25 to 100.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "confidenceMinimum",
+          "tooltip": "Value should be between 25 to 100"
+        },
+        {
+          "title": "Limit",
+          "description": "Maximum number of results, per page, that this operation should return. By default, this value is set as 10000.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 10000,
+          "tooltip": "Limit number of returned items (1-10000).Default is 10000"
+        }
+      ]
+    }
+  ]
+}

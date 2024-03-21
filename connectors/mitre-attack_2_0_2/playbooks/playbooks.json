@@ -1,0 +1,530 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@context": "/api/3/contexts/WorkflowCollection",
+      "@type": "WorkflowCollection",
+      "name": "Sample - MITRE ATT&CK - 2.0.1",
+      "description": "Sample playbooks for \"MITRE ATT&CK\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "attack_small.png",
+      "id": 21,
+      "createDate": 1628754526,
+      "modifyDate": 1628754526,
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> MITRE ATT&CK > Fetch",
+          "aliasName": null,
+          "tag": "#mitre-attack #fetch #dataingestion",
+          "description": "Fetches sample data from MITRE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1628756937,
+          "collection": "/api/3/workflow_collections/d780531c-50cf-49c0-b4aa-f2864f1988ee",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/868895c3-5af5-4278-9dbe-fef49fc74643",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "data": "{{ vars.result.data }}"
+              },
+              "status": null,
+              "top": "240",
+              "left": "480",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "212151d8-b5a6-45f4-9a34-d801f6a4748e",
+              "id": 334
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  },
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Matrices to pull\",\n    \"name\": \"matrices\",\n    \"type\": \"multiselect\",\n    \"tooltip\": \"Select one or more matrices\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"options\": [\n      \"Enterprise\",\n      \"Mobile\",\n      \"ICS\"\n    ],\n    \"options\": [\"Enterprise\", \"Mobile\", \"ICS\"],\n    \"value\": [\"Enterprise\"]\n  }\n]"
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "868895c3-5af5-4278-9dbe-fef49fc74643",
+              "id": 335
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Sample Data",
+              "description": null,
+              "arguments": {
+                "name": "MITRE ATT&CK",
+                "config": "3e40e5e5-08e5-4b7e-a8a2-b98f5ad53b5c",
+                "params": [],
+                "version": "2.0.1",
+                "connector": "mitre-attack",
+                "operation": "get_mitre_data_sample",
+                "operationTitle": "Get MITRE Sample Data",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e58bc50d-cd5d-4f6c-a962-4b55fd7a0246",
+              "id": 352
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Fetch Sample Data",
+              "targetStep": "/api/3/workflow_steps/e58bc50d-cd5d-4f6c-a962-4b55fd7a0246",
+              "sourceStep": "/api/3/workflow_steps/868895c3-5af5-4278-9dbe-fef49fc74643",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "8aae654c-1a60-4fa9-a3c0-f5b471bc4e25"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Sample Data -> Configuration",
+              "targetStep": "/api/3/workflow_steps/212151d8-b5a6-45f4-9a34-d801f6a4748e",
+              "sourceStep": "/api/3/workflow_steps/e58bc50d-cd5d-4f6c-a962-4b55fd7a0246",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "80fd924e-10ae-476d-8124-1e0301fd14ef"
+            }
+          ],
+          "priority": null,
+          "uuid": "3a6f8644-6c4e-4eb6-8f65-c80f5f61361d",
+          "recordTags": [
+            "dataingestion",
+            "fetch",
+            "mitre-attack"
+          ],
+          "id": 89,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1628755460,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1628756937,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "MITRE ATT&CK > Create",
+          "aliasName": null,
+          "tag": "#dataingestion #mitre-attack",
+          "description": "Creates a sample MITRE record",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1628755460,
+          "collection": "/api/3/workflow_collections/d780531c-50cf-49c0-b4aa-f2864f1988ee",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a383ea90-d406-4bf3-8125-a9c28e5769f6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "a383ea90-d406-4bf3-8125-a9c28e5769f6",
+              "id": 336
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "url": "{{vars.sourcedata[\"external_references\"][0][\"url\"]}}",
+                  "name": "{{vars.sourcedata[\"name\"]}}",
+                  "created": "{{vars.sourcedata[\"created\"]}}",
+                  "mitreId": "<System Mapping. Do not modify>",
+                  "version": "{{vars.sourcedata[\"x_mitre_version\"]}}",
+                  "__replace": "",
+                  "description": "{{vars.sourcedata[\"description\"]}}",
+                  "lastModified": "{{vars.sourcedata[\"modified\"]}}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/mitre_groups",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "120",
+              "left": "320",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "uuid": "499bfc91-b9f9-47ba-8ea5-03ccf9867e0a",
+              "id": 337
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Create Record",
+              "targetStep": "/api/3/workflow_steps/499bfc91-b9f9-47ba-8ea5-03ccf9867e0a",
+              "sourceStep": "/api/3/workflow_steps/a383ea90-d406-4bf3-8125-a9c28e5769f6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "4a21d563-0ca8-406f-8817-a4e8200c0197"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "5c677eb7-1681-40ba-b94d-8cb03704634b",
+          "recordTags": [
+            "dataingestion",
+            "create",
+            "mitre-attack"
+          ],
+          "id": 90,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1628755460,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1628755460,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "MITRE ATT&CK > Fetch Latest Data",
+          "aliasName": null,
+          "tag": "#mitre-attack",
+          "description": "Manually fetches the latest data from MITRE",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1628755475,
+          "collection": "/api/3/workflow_collections/d780531c-50cf-49c0-b4aa-f2864f1988ee",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7415a259-9f93-48d4-ad50-629ac400ad2c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch and Create",
+              "description": null,
+              "arguments": {
+                "name": "MITRE ATT&CK",
+                "config": "d35763f3-7312-4f65-b32f-432fbfad88aa",
+                "params": {
+                  "modules": [
+                    "Tactics",
+                    "Groups",
+                    "Techniques",
+                    "Subtechniques",
+                    "Mitigations",
+                    "Software"
+                  ],
+                  "matrices": "{{ vars.input.params.matricesToPull | json_query('[*][\"itemValue\"][]')}}",
+                  "upload_json": false,
+                  "force_ingestion": ""
+                },
+                "version": "2.0.1",
+                "connector": "mitre-attack",
+                "operation": "get_mitre_data",
+                "operationTitle": "Get MITRE Data",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "d6aaea14-5e4d-402c-8c71-e8be9ec3715d",
+              "id": 338
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "70fe0a8e-b0d0-44fa-bcfa-946a8fdb9c58",
+                "resources": [
+                  "mitre_groups",
+                  "mitre_tactics",
+                  "mitre_techniques"
+                ],
+                "inputVariables": [
+                  {
+                    "name": "matricesToPull",
+                    "type": "picklists",
+                    "label": "Matrices To Pull",
+                    "title": "Multiselect Picklist",
+                    "usable": true,
+                    "tooltip": "",
+                    "dataType": "multiselectpicklist",
+                    "formType": "multiselectpicklist",
+                    "required": false,
+                    "_expanded": true,
+                    "mmdUpdate": true,
+                    "bulkAction": [],
+                    "collection": true,
+                    "dataSource": {
+                      "model": "picklists",
+                      "query": {
+                        "sort": [
+                          {
+                            "field": "orderIndex",
+                            "direction": "ASC"
+                          }
+                        ],
+                        "logic": "AND",
+                        "filters": [
+                          {
+                            "field": "listName__name",
+                            "value": "Mitre ATT&CK Matrics",
+                            "operator": "eq"
+                          }
+                        ]
+                      },
+                      "displayConditions": {
+                        "1eca922e-85ff-46a7-af26-cafa7c334883": {
+                          "conditions": null,
+                          "visibility": "visible"
+                        },
+                        "6bf383dc-f042-4bf5-8ba6-0dedcdf0aa87": {
+                          "conditions": null,
+                          "visibility": "visible"
+                        },
+                        "e617e1bd-070b-4218-8e31-9e54e3f64c81": {
+                          "conditions": null,
+                          "visibility": "visible"
+                        }
+                      }
+                    },
+                    "searchable": false,
+                    "templateUrl": "app/components/form/fields/typeahead.multiselect.html",
+                    "defaultValue": [
+                      {
+                        "id": 287,
+                        "@id": "/api/3/picklists/1eca922e-85ff-46a7-af26-cafa7c334883",
+                        "icon": null,
+                        "uuid": "1eca922e-85ff-46a7-af26-cafa7c334883",
+                        "@type": "Picklist",
+                        "color": null,
+                        "display": "Enterprise",
+                        "listName": "/api/3/picklist_names/a20e1090-349b-4f73-bf19-6ea768b804d6",
+                        "itemValue": "Enterprise",
+                        "orderIndex": 0
+                      }
+                    ],
+                    "_previousName": "matricesTo",
+                    "inversedField": null,
+                    "displayTemplate": "%7B%7B%20itemValue%20%7D%7D",
+                    "lengthConstraint": false,
+                    "ownsRelationship": false,
+                    "allowedEncryption": false,
+                    "allowedGridColumn": true,
+                    "useRecordFieldDefault": false
+                  }
+                ],
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "matricesToPull": "{{vars.request.data[\"matricesToPull\"]}}"
+                    },
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "_promptexpanded": true,
+                "executeButtonText": "Fetch",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "7415a259-9f93-48d4-ad50-629ac400ad2c",
+              "id": 339
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Fetch and Create",
+              "targetStep": "/api/3/workflow_steps/d6aaea14-5e4d-402c-8c71-e8be9ec3715d",
+              "sourceStep": "/api/3/workflow_steps/7415a259-9f93-48d4-ad50-629ac400ad2c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "815b3cf3-477b-470f-aedd-f94b3654d25f"
+            }
+          ],
+          "priority": null,
+          "uuid": "76ddfb33-80c6-45ea-9ea5-b1ef504701c5",
+          "recordTags": [
+            "mitre-attack"
+          ],
+          "id": 91,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1628755460,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1628755475,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "MITRE ATT&CK > Ingest",
+          "aliasName": null,
+          "tag": "#mitre-attack #dataingestion",
+          "description": "Ingests latest data from MITRE as part of the ingestion wizard process",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1628755460,
+          "collection": "/api/3/workflow_collections/d780531c-50cf-49c0-b4aa-f2864f1988ee",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/504e54f6-ba6a-4380-8efb-3bd1d7ab71ba",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch",
+              "description": null,
+              "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/3a6f8644-6c4e-4eb6-8f65-c80f5f61361d"
+              },
+              "status": null,
+              "top": "140",
+              "left": "240",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "uuid": "e1ccd864-e151-44ca-b60e-4ff52980ba2b",
+              "id": 340
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "504e54f6-ba6a-4380-8efb-3bd1d7ab71ba",
+              "id": 341
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch And Create",
+              "description": null,
+              "arguments": {
+                "name": "MITRE ATT&CK",
+                "config": "d35763f3-7312-4f65-b32f-432fbfad88aa",
+                "params": {
+                  "modules": [
+                    "Tactics",
+                    "Groups",
+                    "Techniques",
+                    "Subtechniques",
+                    "Mitigations",
+                    "Software"
+                  ],
+                  "matrices": "{{ vars.result.matrices }}",
+                  "upload_json": false,
+                  "force_ingestion": ""
+                },
+                "version": "2.0.1",
+                "connector": "mitre-attack",
+                "operation": "get_mitre_data",
+                "operationTitle": "Get MITRE Data",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "280",
+              "left": "440",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b522f631-cab6-49ee-a096-20cf082e4825",
+              "id": 342
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch -> Fetch And Create",
+              "targetStep": "/api/3/workflow_steps/b522f631-cab6-49ee-a096-20cf082e4825",
+              "sourceStep": "/api/3/workflow_steps/e1ccd864-e151-44ca-b60e-4ff52980ba2b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "18bec6e6-b1f0-429b-820d-39fc83ddb1a6"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Fetch",
+              "targetStep": "/api/3/workflow_steps/e1ccd864-e151-44ca-b60e-4ff52980ba2b",
+              "sourceStep": "/api/3/workflow_steps/504e54f6-ba6a-4380-8efb-3bd1d7ab71ba",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ee93d0ad-85d9-4dc8-87d8-1306a7b6499a"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "b6b9a452-4b4f-4ea1-a7c9-9827705656da",
+          "recordTags": [
+            "dataingestion",
+            "mitre-attack",
+            "ingest"
+          ],
+          "id": 92,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1628755460,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1628755460,
+          "owners": [],
+          "isPrivate": false
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "dataingestion",
+    "fetch",
+    "mitre-attack",
+    "create",
+    "ingest"
+  ]
+}

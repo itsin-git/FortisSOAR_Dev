@@ -1,0 +1,3406 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - Qualys - 1.0.1",
+      "description": "Sample playbook collection for Qualys to perform operations like launch vulnerability scan, launch patch/map/remediation/compliance report, manage policy compliance scan, manage virtual host etc.",
+      "visible": true,
+      "image": "/api/3/images/5b311102097df189058b4567",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Report Template List",
+          "description": "Retrieves the list and details of all report templates present in the user's account on the Qualys cloud.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ed00d3c1-e445-4f09-863e-07cbf9fce9be",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Report Template List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": [],
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_report_template",
+                "operationTitle": "Report Template List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "189",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "6f746290-345c-4454-8f77-cd438a4c7f52"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "report_template_list": "{{vars.steps.Get_Report_Template_List.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "247",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "80190ad1-0b70-4e85-9126-b77ca86668ad"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "57f7dcd9-e74c-4b14-a803-7e7965c1d3de",
+                "title": "Qualys: Get Report Template List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ed00d3c1-e445-4f09-863e-07cbf9fce9be"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "22827ec0-3868-4671-b28d-7708ad5defaf",
+              "name": "Alert -> Get Report Template List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6f746290-345c-4454-8f77-cd438a4c7f52",
+              "sourceStep": "/api/3/workflow_steps/ed00d3c1-e445-4f09-863e-07cbf9fce9be"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3e9d0b38-0479-4215-a9ad-dcb874531c17",
+              "name": "Get Report Template List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/80190ad1-0b70-4e85-9126-b77ca86668ad",
+              "sourceStep": "/api/3/workflow_steps/6f746290-345c-4454-8f77-cd438a4c7f52"
+            }
+          ],
+          "uuid": "1813b533-fa97-4001-bb4f-418c6d11a83a"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Host Detection List",
+          "description": "Retrieves the list of and details hosts including the hosts latest vulnerability data from Qualys, based on the automatic data available in user's account and other input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e547a5cf-8aa7-4374-82e7-335a68239f9a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "host_detection_list": "{{vars.steps.Get_Host_Detection_List.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "1c30b9a2-31ce-490f-a5e6-71fe892aa1b4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Host Detection List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "672874dc-d24e-4199-99ed-80a5ce72ce5e",
+                "params": {
+                  "ip": "",
+                  "ids": "",
+                  "qids": "",
+                  "id_max": "",
+                  "id_min": "",
+                  "status": "",
+                  "show_igs": "",
+                  "use_tags": "False",
+                  "os_pattern": "^$",
+                  "severities": "",
+                  "network_ids": "",
+                  "search_list": "",
+                  "asset_groups": "",
+                  "show_results": true,
+                  "output_format": "XML(default)",
+                  "vm_scan_since": "",
+                  "asset_group_ids": "",
+                  "no_vm_scan_since": "",
+                  "truncation_limit": "",
+                  "arf_config_filter": "",
+                  "arf_kernel_filter": "",
+                  "arf_service_filter": "",
+                  "compliance_enabled": "",
+                  "show_reopened_info": false,
+                  "vm_processed_after": "",
+                  "vm_scan_date_after": "",
+                  "vm_processed_before": "",
+                  "vm_scan_date_before": "",
+                  "add_vuln_as_attachment": false,
+                  "detection_updated_since": "",
+                  "vm_auth_scan_date_after": "",
+                  "detection_updated_before": "",
+                  "vm_auth_scan_date_before": "",
+                  "dectection_processed_after": "",
+                  "dectection_processed_before": "",
+                  "max_days_since_last_vm_scan": "",
+                  "max_days_since_detection_updated": "",
+                  "suppress_duplicated_data_from_csv": false
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_host_detection",
+                "operationTitle": "Get Host Detection List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "ad22111c-3157-4330-bb79-97428b251c7e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "58584bec-adbb-43a1-9939-9da01f54d20e",
+                "title": "Qualys: Get Host Detection List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e547a5cf-8aa7-4374-82e7-335a68239f9a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0862c4aa-91ab-496c-a96f-8f32bb9f8183",
+              "name": "Get Host Detection List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/1c30b9a2-31ce-490f-a5e6-71fe892aa1b4",
+              "sourceStep": "/api/3/workflow_steps/ad22111c-3157-4330-bb79-97428b251c7e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "cd97a257-fce7-422a-8c10-d85ba3863620",
+              "name": "Alert -> Get Host Detection List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ad22111c-3157-4330-bb79-97428b251c7e",
+              "sourceStep": "/api/3/workflow_steps/e547a5cf-8aa7-4374-82e7-335a68239f9a"
+            }
+          ],
+          "uuid": "31037a37-8fe5-41e7-9241-6e19962081b5"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Asset Group List",
+          "description": "Retrieves the list and details of asset groups from Qualys based on the input parameters (filters) you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c2b835ac-f812-40b8-af24-5463403224fb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "asset_group_list": "{{vars.steps.Get_Asset_Group_List.data}}"
+              },
+              "status": null,
+              "left": "349",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "9c13ed00-6355-42fd-88f4-76f9bea981db"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Asset Group List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "672874dc-d24e-4199-99ed-80a5ce72ce5e",
+                "params": {
+                  "ids": "",
+                  "title": "",
+                  "id_max": "",
+                  "id_min": "",
+                  "unit_id": "",
+                  "user_id": "",
+                  "network_ids": "",
+                  "show_attributes": "None",
+                  "truncation_limit": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_group",
+                "operationTitle": "Get Asset Group List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "131",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "9c32f382-23b0-498e-9207-69a5861c2968"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "d31b5c72-d04b-4661-a31d-ad825e21004c",
+                "title": "Qualys: Get Asset Group List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "c2b835ac-f812-40b8-af24-5463403224fb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c341f8c0-ee97-4dec-ba09-6b9192a4a734",
+              "name": "Get Asset Group List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/9c13ed00-6355-42fd-88f4-76f9bea981db",
+              "sourceStep": "/api/3/workflow_steps/9c32f382-23b0-498e-9207-69a5861c2968"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ea8674d0-cff4-4c8c-970c-5637e3e34f4a",
+              "name": "Alert -> Get Asset Group List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/9c32f382-23b0-498e-9207-69a5861c2968",
+              "sourceStep": "/api/3/workflow_steps/c2b835ac-f812-40b8-af24-5463403224fb"
+            }
+          ],
+          "uuid": "97a82030-98b5-4fdc-bd50-6ed21feedc1e"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Report List",
+          "description": "Retrieves a list of reports from the user's report share on the Qualys cloud.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/224c5a0b-0344-4f99-8abd-e5773e256071",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "cd626460-f50b-49eb-b9bc-018c855efc18",
+                "title": "Qualys: Get Report List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "224c5a0b-0344-4f99-8abd-e5773e256071"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "get_report_list": "{{vars.steps.Get_Report_List.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "226",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "6feb25f5-46e8-4750-9d06-a58a9510f590"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Report List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "b112ba8f-ea2a-4d19-af23-81835952b13a",
+                "params": {
+                  "id": "",
+                  "state": "Finished",
+                  "user_login": "",
+                  "expires_before_datetime": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_report",
+                "operationTitle": "List Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "128",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "9a3f5d45-5db2-4839-ada5-fdcbe8d0e286"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a983f641-78e3-42e5-8829-5460280ef691",
+              "name": "Alert -> Get Report List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/9a3f5d45-5db2-4839-ada5-fdcbe8d0e286",
+              "sourceStep": "/api/3/workflow_steps/224c5a0b-0344-4f99-8abd-e5773e256071"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b55682aa-b0c3-49e3-b0aa-9751053c31b1",
+              "name": "Get Report List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6feb25f5-46e8-4750-9d06-a58a9510f590",
+              "sourceStep": "/api/3/workflow_steps/9a3f5d45-5db2-4839-ada5-fdcbe8d0e286"
+            }
+          ],
+          "uuid": "e1d1358c-ba2a-479b-99d5-45da26942752"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Delete Report",
+          "description": "Deletes a saved report from the user's account on the Qualys cloud, based on the report ID you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/04cc537c-ed88-41da-8b90-e6a3302704e1",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "8c8ac904-68e7-4e51-b3ed-318fc56480bd",
+                "title": "Qualys: Delete Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "04cc537c-ed88-41da-8b90-e6a3302704e1"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Delete Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "id": 1588136
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "delete_report",
+                "operationTitle": "Delete Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "131",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "5236d91b-f3af-435f-8eec-bb03823dec9d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Repsonse",
+              "description": null,
+              "arguments": {
+                "delete_report": "{{vars.steps.Delete_Report.data}}"
+              },
+              "status": null,
+              "left": "348",
+              "top": "227",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "b9934b27-3491-4efc-a860-b5af044167d1"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3fe83127-a5ee-4307-b99f-29fd2c5cd5ec",
+              "name": "Delete Report -> Save Repsonse",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b9934b27-3491-4efc-a860-b5af044167d1",
+              "sourceStep": "/api/3/workflow_steps/5236d91b-f3af-435f-8eec-bb03823dec9d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "705e2ca6-dcab-48d5-b2c6-174ada41ef72",
+              "name": "Alert -> Delete Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/5236d91b-f3af-435f-8eec-bb03823dec9d",
+              "sourceStep": "/api/3/workflow_steps/04cc537c-ed88-41da-8b90-e6a3302704e1"
+            }
+          ],
+          "uuid": "c884fb84-2c3e-4223-b988-5bbab04fcf41"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Download Saved Report",
+          "description": "Download a saved report in the user’s account",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c7f7b370-1db6-4007-b9ec-270bbb3d03d2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Download Saved Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "1a19f2d8-9151-42ba-8822-5bddd27c1081",
+                "params": {
+                  "id": 14071341
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "fetch_report",
+                "operationTitle": "Download Saved Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "93494db3-854f-42a8-abff-85ed78b60279"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Repsonse",
+              "description": null,
+              "arguments": {
+                "fetch_report": "{{vars.steps.Download_Saved_Report.data}}"
+              },
+              "status": null,
+              "left": "349",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "a4ba8aa4-4830-4085-801e-0b21e04b7b54"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "0615785a-ea43-467d-a7c7-83f31707c705",
+                "title": "Qualys: Download Saved Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "c7f7b370-1db6-4007-b9ec-270bbb3d03d2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "936cfc05-1bd1-47f9-8cee-928e226c1bf1",
+              "name": "Download Saved Report -> Save Repsonse",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/a4ba8aa4-4830-4085-801e-0b21e04b7b54",
+              "sourceStep": "/api/3/workflow_steps/93494db3-854f-42a8-abff-85ed78b60279"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "aee6ff22-d4d5-489c-8071-ab3e9fe3a972",
+              "name": "Alert -> Download Saved Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/93494db3-854f-42a8-abff-85ed78b60279",
+              "sourceStep": "/api/3/workflow_steps/c7f7b370-1db6-4007-b9ec-270bbb3d03d2"
+            }
+          ],
+          "uuid": "50ed63b9-4cf2-4973-96c0-faa1132492d8"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Scheduled Report",
+          "description": "Launch a scheduled report with given ID",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/7b97f411-8f7b-4fb5-9dd9-ce0ae723c54c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "scheduled_report": "{{vars.steps.Launch_Scheduled_Report.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "232",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "0b667a39-e278-465e-8d6b-5dc0e3e55e6c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Scheduled Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "b112ba8f-ea2a-4d19-af23-81835952b13a",
+                "params": {
+                  "id": 1101119
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_scheduled_report",
+                "operationTitle": "Launch Scheduled Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "76b9bf92-bc65-4ca8-a1aa-962a27754316"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "d0ef82ae-a887-4e36-abf2-55cdbb7bde26",
+                "title": "Qualys: Launch Scheduled Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "7b97f411-8f7b-4fb5-9dd9-ce0ae723c54c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2861c87f-2815-42cd-985a-c4fef3cc2249",
+              "name": "Launch Scheduled Report -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/0b667a39-e278-465e-8d6b-5dc0e3e55e6c",
+              "sourceStep": "/api/3/workflow_steps/76b9bf92-bc65-4ca8-a1aa-962a27754316"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7a5a838a-0a0e-44c6-ae59-349b42e2b87c",
+              "name": "Alert -> Launch Scheduled Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/76b9bf92-bc65-4ca8-a1aa-962a27754316",
+              "sourceStep": "/api/3/workflow_steps/7b97f411-8f7b-4fb5-9dd9-ce0ae723c54c"
+            }
+          ],
+          "uuid": "39c27863-5ad9-433f-a199-37cd2d8ed8e4"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Scan Based Findings Report",
+          "description": "Launch scan based finding reports in user's account",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/73de2589-c274-41f6-abc2-f10ae9892608",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "f2d754fb-1a06-44fe-a864-841167e674db",
+                "title": "Qualys: Launch Scan Based Findings Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "73de2589-c274-41f6-abc2-f10ae9892608"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "scan_based_finding_report": "{{vars.steps.Launch_Scan_Based_Findings_Report.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "228",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "af7cc992-67b1-4ffd-9d4b-4fa05e8e9472"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Scan Based Findings Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "1a19f2d8-9151-42ba-8822-5bddd27c1081",
+                "params": {
+                  "use_tags": "False",
+                  "report_refs": "scan/1532543415.81997",
+                  "template_id": "641297",
+                  "pdf_password": "",
+                  "report_title": "Test Scan Based report Api",
+                  "output_format": "XML",
+                  "ip_restriction": "",
+                  "recipient_group": "",
+                  "recipient_group_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_scan_based_findings_report",
+                "operationTitle": "Launch Scan Based Findings Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "134",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b2ba8e8b-86c3-423a-81c9-cb11e61e3858"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "6bb9efba-e188-4574-b3d9-c337ee93f4b4",
+              "name": "Launch Scan Based Findings Report -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/af7cc992-67b1-4ffd-9d4b-4fa05e8e9472",
+              "sourceStep": "/api/3/workflow_steps/b2ba8e8b-86c3-423a-81c9-cb11e61e3858"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ce4b8cae-4c88-44d0-9b17-02b0bf4732bf",
+              "name": "Alert -> Launch Scan Based Findings Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b2ba8e8b-86c3-423a-81c9-cb11e61e3858",
+              "sourceStep": "/api/3/workflow_steps/73de2589-c274-41f6-abc2-f10ae9892608"
+            }
+          ],
+          "uuid": "c7e92204-4ca2-435e-a85f-34aedb9de51e"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Host Based Findings Report",
+          "description": "Launch Host Based Findings reports in user's account",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e9eab006-fc08-46d6-a22c-aaada44f8f38",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "host_based_fonfings_report": "{{vars.steps.Launch_Host_Based_Findings_Report.data}}"
+              },
+              "status": null,
+              "left": "330",
+              "top": "243",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "2dffb2fb-1a9c-4199-88b5-62e62eba5268"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "1ee53c1a-2c92-4d34-9bea-5f03b05eb56f",
+                "title": "Qualys: Launch Host Based Findings Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e9eab006-fc08-46d6-a22c-aaada44f8f38"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Host Based Findings Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "192.168.50.231",
+                  "use_tags": "False",
+                  "template_id": "641296",
+                  "pdf_password": "",
+                  "report_title": "Report Test -Cyops",
+                  "output_format": "HTML",
+                  "ips_network_id": "",
+                  "asset_group_ids": "",
+                  "recipient_group": "",
+                  "recipient_group_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_host_based_findings_report",
+                "operationTitle": "Launch Host Based Findings Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "132",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "eb9ddf7b-aba3-45c5-b41f-0a64ff695f5e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "17a08131-9486-4625-97a1-3ef8e1cf672d",
+              "name": "Launch Host Based Findings Report -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/2dffb2fb-1a9c-4199-88b5-62e62eba5268",
+              "sourceStep": "/api/3/workflow_steps/eb9ddf7b-aba3-45c5-b41f-0a64ff695f5e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "f951b929-3cba-441a-b9db-d48e73b6b3ae",
+              "name": "Alerts -> Launch Host Based Findings Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/eb9ddf7b-aba3-45c5-b41f-0a64ff695f5e",
+              "sourceStep": "/api/3/workflow_steps/e9eab006-fc08-46d6-a22c-aaada44f8f38"
+            }
+          ],
+          "uuid": "751f2f38-35a0-4797-a700-29dccbe531ae"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Virtual Host List",
+          "description": "Retrieves the list of virtual hosts in the user account based on the filter",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/68607b35-5a9d-464d-b5d3-74a34c0d1848",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "4b5bb04e-b7ca-4b5d-970f-e29ff1de54ba",
+                "title": "Qualys: Get Virtual Host List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "68607b35-5a9d-464d-b5d3-74a34c0d1848"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "virtual_host_list": "{{vars.steps.Get_Virtual_Host_List.data}}"
+              },
+              "status": null,
+              "left": "354",
+              "top": "230",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "c17f2d5c-08b5-4612-b36d-f4d4250802d5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Virtual Host List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ip": "",
+                  "port": "443"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_virtual_host",
+                "operationTitle": "Get Virtual Host List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "ee32c052-b8c5-4234-ae7c-44510c7b94e3"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5562471a-c621-407d-9c03-2ee93d87590a",
+              "name": "Get Virtual Host List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c17f2d5c-08b5-4612-b36d-f4d4250802d5",
+              "sourceStep": "/api/3/workflow_steps/ee32c052-b8c5-4234-ae7c-44510c7b94e3"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "f395664b-d4f6-4ec2-ba50-e5b4e5b72f84",
+              "name": "Alerts -> Get Virtual Host List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ee32c052-b8c5-4234-ae7c-44510c7b94e3",
+              "sourceStep": "/api/3/workflow_steps/68607b35-5a9d-464d-b5d3-74a34c0d1848"
+            }
+          ],
+          "uuid": "47faf603-94fb-4767-a358-2676b57bd4ca"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Manage Virtual Host",
+          "description": "Manages a virtual host on the Qualys cloud, based on the IP addresses, actions, and other input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/44524078-d739-4baf-be4b-85289ade4bca",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Manage Virtual Host",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ip": "192.168.60.105",
+                  "fqdn": "",
+                  "port": "443",
+                  "action": "Delete"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "manage_virtual_host",
+                "operationTitle": "Actions on Virtual Host",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "167",
+              "top": "171",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "12ffcda6-7267-426e-af8f-c093cd3d009a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "manage_virtual_host": "{{vars.steps.Manage_Virtual_Host.data}}"
+              },
+              "status": null,
+              "left": "327",
+              "top": "275",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "15966e03-9bd0-46d7-9589-da3e390ee7f4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "0137ed63-6ab3-441c-8344-c35e670a9371",
+                "title": "Qualys: Manage Virtual Host",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "44524078-d739-4baf-be4b-85289ade4bca"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "9907666a-16b3-443f-8705-e4f171619576",
+              "name": "Manage Virtual Host -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/15966e03-9bd0-46d7-9589-da3e390ee7f4",
+              "sourceStep": "/api/3/workflow_steps/12ffcda6-7267-426e-af8f-c093cd3d009a"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "f1b67cb3-2170-4756-b869-ac79e2d3d3de",
+              "name": "Alerts -> Manage Virtual Host",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/12ffcda6-7267-426e-af8f-c093cd3d009a",
+              "sourceStep": "/api/3/workflow_steps/44524078-d739-4baf-be4b-85289ade4bca"
+            }
+          ],
+          "uuid": "d3ffca0a-f8ab-41fc-ae55-f9614d35153b"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Manage Excluded Host",
+          "description": "Manages an excluded host on the Qualys cloud, based on the IP addresses, actions, and other input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d5067201-31af-46b9-a0b3-8d0832595428",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "manage_excluded_host": "{{vars.steps.Manage_Excluded_Host.data}}"
+              },
+              "status": null,
+              "left": "320",
+              "top": "220",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "12a58c3e-0362-4b87-aa4b-522c67c22f9f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Manage Excluded Host",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "192.168.50.81",
+                  "action": "Remove",
+                  "comment": "Testing API",
+                  "network_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "manage_excluded_host",
+                "operationTitle": "Manage Excluded Host",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "167",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "30b0d1ab-1b83-40ba-9206-a778c2ee10a3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "0f2704a7-b6d2-48d4-bfb0-240cc50ae4bb",
+                "title": "Qualys: Manage Excluded Host",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "d5067201-31af-46b9-a0b3-8d0832595428"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3c2ad3ba-6c37-4faa-8d1e-5476ae46aa8b",
+              "name": "Manage Excluded Host -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/12a58c3e-0362-4b87-aa4b-522c67c22f9f",
+              "sourceStep": "/api/3/workflow_steps/30b0d1ab-1b83-40ba-9206-a778c2ee10a3"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e3d74f2a-557e-41a3-97c9-4c020ef44da6",
+              "name": "Alerts -> Manage Excluded Host",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/30b0d1ab-1b83-40ba-9206-a778c2ee10a3",
+              "sourceStep": "/api/3/workflow_steps/d5067201-31af-46b9-a0b3-8d0832595428"
+            }
+          ],
+          "uuid": "9f47bc48-0adb-46bb-b177-0b4aa063c821"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Scheduled Report List",
+          "description": "Retrieves a list of scheduled reports from the user's report share on the Qualys cloud.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/137d463a-ce1f-4ecf-acc8-a1830f56fa4b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "ff70a8b7-f0c6-4e84-8a44-75165faef4a2",
+                "title": "Qualys: Get Scheduled Report List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "137d463a-ce1f-4ecf-acc8-a1830f56fa4b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Repsonse",
+              "description": null,
+              "arguments": {
+                "scheduled_report_list": "{{vars.steps.Get_Scheduled_Report_List.data}}"
+              },
+              "status": null,
+              "left": "323",
+              "top": "277",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "3e0f7072-652c-4331-8403-e8a1043d5212"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Scheduled Report List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "id": "",
+                  "is_active": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_scheduled_report",
+                "operationTitle": "Get Scheduled Report List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "173",
+              "top": "130",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "6c3bd602-a32b-4572-a2c7-3be1c254c8f2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8f47aedb-dd56-4d47-953f-c4b182cf39cc",
+              "name": "Alert -> Get Scheduled Report List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6c3bd602-a32b-4572-a2c7-3be1c254c8f2",
+              "sourceStep": "/api/3/workflow_steps/137d463a-ce1f-4ecf-acc8-a1830f56fa4b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ad9d1cab-7b56-4f5a-a231-8520bb32cd27",
+              "name": "Get Scheduled Report List -> Save Repsonse",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/3e0f7072-652c-4331-8403-e8a1043d5212",
+              "sourceStep": "/api/3/workflow_steps/6c3bd602-a32b-4572-a2c7-3be1c254c8f2"
+            }
+          ],
+          "uuid": "4d0bd25a-2a1a-46c4-8398-269c53da2771"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Schedule Scan List",
+          "description": "Retrieves the list and details of all scheduled scans present in the user's account on the Qualys cloud, or specific scheduled scans based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/689d32e3-230e-4149-b25e-0393f50072a0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "3427c4a9-4ef6-4e2e-bdce-b5998c235771",
+                "title": "Qualys: Get Schedule Scan List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "689d32e3-230e-4149-b25e-0393f50072a0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Schedule Scan List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "id": "",
+                  "active": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_schedule_scan",
+                "operationTitle": "Get Schedule Scan List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "211",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e5181474-b5ab-4027-a931-48c68a60aba4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "schedule_scan_list": "{{vars.steps.Get_Schedule_Scan_List.data}}"
+              },
+              "status": null,
+              "left": "387",
+              "top": "220",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "ea13be97-a722-4867-b734-88ec617878bb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0d5681ef-3deb-4600-8873-3f2b7245b892",
+              "name": "Alert -> Get Schedule Scan List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e5181474-b5ab-4027-a931-48c68a60aba4",
+              "sourceStep": "/api/3/workflow_steps/689d32e3-230e-4149-b25e-0393f50072a0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c0d418d9-480d-4bef-8744-8215c35ed998",
+              "name": "Get Schedule Scan List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ea13be97-a722-4867-b734-88ec617878bb",
+              "sourceStep": "/api/3/workflow_steps/e5181474-b5ab-4027-a931-48c68a60aba4"
+            }
+          ],
+          "uuid": "33e1ad9e-3b3d-4424-a810-8d8e4624a089"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Remediation Report",
+          "description": "Launch remediation report in user's account",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2cf36343-f3a1-4837-8454-c1166afd9a94",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "5cfa3fac-b73d-4fe4-8adf-25ed9d4e7e47",
+                "title": "Qualys: Launch Remediation Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "2cf36343-f3a1-4837-8454-c1166afd9a94"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "launch_remediation_report": "{{vars.steps.Launch_Remediation_Report.data}}"
+              },
+              "status": null,
+              "left": "331",
+              "top": "233",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "46f88754-7cc0-42f1-bb61-2e5847122e8d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Remediation Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "412c1ce0-a415-452b-a970-98996fc97e24",
+                "params": {
+                  "ips": "192.168.50.243",
+                  "use_tags": "False",
+                  "template_id": "641304",
+                  "pdf_password": "",
+                  "report_title": "Remediation Report API",
+                  "assignee_type": "All",
+                  "output_format": "PDF",
+                  "asset_group_ids": "",
+                  "recipient_group": "",
+                  "recipient_group_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_remediation_report",
+                "operationTitle": "Launch Remediation Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "173",
+              "top": "129",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b1c7878d-d174-4663-83f6-b5ec29f6419b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "07dacf10-d207-41ef-8849-061b055f8177",
+              "name": "Launch Remediation Report -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/46f88754-7cc0-42f1-bb61-2e5847122e8d",
+              "sourceStep": "/api/3/workflow_steps/b1c7878d-d174-4663-83f6-b5ec29f6419b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d8637346-a7ba-4552-a296-94058302e216",
+              "name": "Alert -> Launch Remediation Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b1c7878d-d174-4663-83f6-b5ec29f6419b",
+              "sourceStep": "/api/3/workflow_steps/2cf36343-f3a1-4837-8454-c1166afd9a94"
+            }
+          ],
+          "uuid": "a0993e5d-aa39-4810-bce9-36d38b844886"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Compliance Report",
+          "description": "Launch compliance report in user's account",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/62460195-8328-4a4e-8131-c63b39fcda68",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Compliance Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "192.168.50.243",
+                  "use_tags": "False",
+                  "report_refs": "compliance/1533856126.10001",
+                  "template_id": "641301",
+                  "pdf_password": "",
+                  "report_title": "Cyops Test report",
+                  "output_format": "PDF",
+                  "asset_group_ids": "",
+                  "recipient_group": "",
+                  "recipient_group_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_compliance_report",
+                "operationTitle": "Launch Compliance Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "128",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "3f697d3d-6fbe-4a2b-8a94-0e1336047f23"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "310d2dca-6fa7-4315-b7aa-29836fa5e821",
+                "title": "Qualys: Launch Compliance Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "62460195-8328-4a4e-8131-c63b39fcda68"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "launch_compliance_report": "{{vars.steps.Launch_Compliance_Report.data}}"
+              },
+              "status": null,
+              "left": "351",
+              "top": "220",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "b211aae9-6cac-45fc-8844-c2113457e877"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "405da1c6-99b5-447d-a6ac-d4e8a9534f40",
+              "name": "Alert -> Launch Compliance Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/3f697d3d-6fbe-4a2b-8a94-0e1336047f23",
+              "sourceStep": "/api/3/workflow_steps/62460195-8328-4a4e-8131-c63b39fcda68"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d64c3bc3-0bed-4306-80ea-de8514803289",
+              "name": "Launch Compliance Report -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b211aae9-6cac-45fc-8844-c2113457e877",
+              "sourceStep": "/api/3/workflow_steps/3f697d3d-6fbe-4a2b-8a94-0e1336047f23"
+            }
+          ],
+          "uuid": "93ef68a5-77d2-42ee-a215-d73e80aaa19a"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Patch Report",
+          "description": "Launch patch report in user's account",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f1d204c6-1e83-43e3-b9b8-ad798d332b5c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "launch_patch_report": "{{vars.steps.Launch_Patch_Report.data}}"
+              },
+              "status": null,
+              "left": "335",
+              "top": "219",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "0a927922-f698-4c5c-97fc-ac15c59d84aa"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Patch Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "192.168.50.231",
+                  "use_tags": "False",
+                  "template_id": "641298",
+                  "pdf_password": "testapi123",
+                  "report_title": "Cyops test patch report",
+                  "output_format": "PDF",
+                  "asset_group_ids": "",
+                  "recipient_group": "",
+                  "recipient_group_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_patch_report",
+                "operationTitle": "Launch Patch Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "a4e474b5-3952-43f5-8664-b60309d62df3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "19b983a8-0398-43f6-87f9-3bba22ccfa5d",
+                "title": "Qualys: Launch Patch Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "f1d204c6-1e83-43e3-b9b8-ad798d332b5c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8023f1c8-c67d-40a5-8387-6fafa8af7fde",
+              "name": "Launch Patch Report -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/0a927922-f698-4c5c-97fc-ac15c59d84aa",
+              "sourceStep": "/api/3/workflow_steps/a4e474b5-3952-43f5-8664-b60309d62df3"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a7e6a0a4-18a3-41db-b30b-4d86a6b1cc8e",
+              "name": "Alert -> Launch Patch Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/a4e474b5-3952-43f5-8664-b60309d62df3",
+              "sourceStep": "/api/3/workflow_steps/f1d204c6-1e83-43e3-b9b8-ad798d332b5c"
+            }
+          ],
+          "uuid": "482373a8-edab-49d6-b830-4822e2692d05"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "PC - Manage Scan",
+          "description": "Manages a vulnerability management scan on the Qualys cloud, based on the scan reference and actions you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/00e88c86-64a4-48bc-a4bf-3bd98c0e142e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "6d8204c0-10d0-4ce6-ac36-bc5040550116",
+                "title": "Qualys: Manage PC Scan",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "00e88c86-64a4-48bc-a4bf-3bd98c0e142e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "manage_pc_scan": "{{vars.steps.Manage_PC_Scan.data}}"
+              },
+              "status": null,
+              "left": "320",
+              "top": "248",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "ca48df23-abd5-49e3-85ce-02e37f88313f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Manage PC Scan",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "action": "Delete",
+                  "scan_ref": "compliance/1533884415.16001"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "manage_pc_scan",
+                "operationTitle": "PC Scan Actions",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "171",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e7329d32-71f7-49d2-9bda-438ea91c5a08"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "193260d1-bb5c-47b0-afbe-36799f6c6299",
+              "name": "Alert -> Manage PC Scan",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e7329d32-71f7-49d2-9bda-438ea91c5a08",
+              "sourceStep": "/api/3/workflow_steps/00e88c86-64a4-48bc-a4bf-3bd98c0e142e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a7c200b4-4a0f-4d88-acc8-cc0a76be98b9",
+              "name": "Manage PC Scan -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ca48df23-abd5-49e3-85ce-02e37f88313f",
+              "sourceStep": "/api/3/workflow_steps/e7329d32-71f7-49d2-9bda-438ea91c5a08"
+            }
+          ],
+          "uuid": "213ea461-cda8-47d9-8dd1-8a1f3f490259"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "PC - Launch Scan",
+          "description": "Launches compliance scans in the user’s account on the Qualys cloud, based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/fea04dea-0361-47be-8340-5015a168d5fa",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "PC Launch Scan",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ip": "192.168.50.102",
+                  "opt_pro": "Option Title",
+                  "scan_app": "Scanner Name",
+                  "scan_title": "Cyops PC scan",
+                  "target_from": "Assets",
+                  "asset_groups": "",
+                  "option_title": "Initial PC Options",
+                  "ip_network_id": "",
+                  "iscanner_name": "devops",
+                  "scanners_in_ag": "",
+                  "asset_group_ids": "",
+                  "default_scanner": false,
+                  "exclude_ip_per_scan": "",
+                  "runtime_http_header": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_pc_scan",
+                "operationTitle": "Launch PC Scans",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "151",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "5d7781fb-90a1-4c2a-9c7b-991fd337f8df"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "launch_pc_scan": "{{vars.steps.PC_Launch_Scan.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "d8cb142c-5370-4ad9-8380-c5f7ffb079ae"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "79f2d6d2-bd9a-4e76-93a7-fc4d44866119",
+                "title": "Qualys: PC - Launch Scan",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "fea04dea-0361-47be-8340-5015a168d5fa"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b8008b05-501f-4b03-85e7-dba4c7b66cc3",
+              "name": "Alerts -> Launch PC Scan",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/5d7781fb-90a1-4c2a-9c7b-991fd337f8df",
+              "sourceStep": "/api/3/workflow_steps/fea04dea-0361-47be-8340-5015a168d5fa"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e68b3494-981a-491b-a533-247d5fb2ec56",
+              "name": "Launch PC Scan -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/d8cb142c-5370-4ad9-8380-c5f7ffb079ae",
+              "sourceStep": "/api/3/workflow_steps/5d7781fb-90a1-4c2a-9c7b-991fd337f8df"
+            }
+          ],
+          "uuid": "173c0bbf-3c8f-4c98-8d10-f64019b449d5"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "VM - Fetch Scan",
+          "description": "Downloads all the vulnerability management scan results from the Qualys cloud, or specific vulnerability management scan results based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/42e9aeb9-985e-444b-9530-9498765f3968",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "77e14f4b-8ed7-4fe4-a585-72a9011951d3",
+                "title": "Qualys: Fetch VM Scan",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "42e9aeb9-985e-444b-9530-9498765f3968"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch VM Scan",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "412c1ce0-a415-452b-a970-98996fc97e24",
+                "params": {
+                  "ips": "",
+                  "mode": "Brief",
+                  "scan_ref": "scan/1531203491.12998"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "fetch_vm_scan",
+                "operationTitle": "Fetch VM Scan",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "4ed6df55-d458-462b-af9d-13a667623bbe"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "fetch_vm_scan": "{{vars.steps.Fetch_VM_Scan.data}}"
+              },
+              "status": null,
+              "left": "360",
+              "top": "213",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "9d67845f-f2aa-4883-b503-c866e23b6d14"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "24ec8d91-040a-40ca-b40a-e501b7047490",
+              "name": "Alert -> Fetch VM Scan",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/4ed6df55-d458-462b-af9d-13a667623bbe",
+              "sourceStep": "/api/3/workflow_steps/42e9aeb9-985e-444b-9530-9498765f3968"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ca75859f-dfa2-4123-8d12-5ada419bb559",
+              "name": "Fetch VM Scan -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/9d67845f-f2aa-4883-b503-c866e23b6d14",
+              "sourceStep": "/api/3/workflow_steps/4ed6df55-d458-462b-af9d-13a667623bbe"
+            }
+          ],
+          "uuid": "3e12a534-c180-4a02-84b8-2434267f65a5"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Add Assets",
+          "description": "Adds assets, i.e., IP addresses, to the subscription on the Qualys cloud, based on the IP addresses and other input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/65f45b57-31a7-4fb1-a79b-4255f5591c1e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "3ecef954-fe5e-4c35-b3b3-6ddbcde0c589",
+                "title": "Qualys: Add Assets",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "65f45b57-31a7-4fb1-a79b-4255f5591c1e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Add Assets",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "192.168.50.231",
+                  "ud1": "attribute 1",
+                  "ud2": "attribute 2",
+                  "ud3": "attribute 3",
+                  "owner": "",
+                  "comment": "CyberSponse Inc.",
+                  "ag_title": "",
+                  "enable_pc": true,
+                  "enable_vm": true,
+                  "tracking_method": "IP"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "add_ip",
+                "operationTitle": "Add IPs",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "8de8b0ef-ed3e-4ed8-9a02-331a7a79817f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "add_assets": "{{vars.steps.Add_Assets.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "d8dc9e3e-358d-4d2d-9f3e-d55ce7e4bc02"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d13321b7-5177-4d1d-996b-a646f963f0a6",
+              "name": "Alert -> Add IPs",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/8de8b0ef-ed3e-4ed8-9a02-331a7a79817f",
+              "sourceStep": "/api/3/workflow_steps/65f45b57-31a7-4fb1-a79b-4255f5591c1e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ead4e995-4044-4113-9fc5-6949b958c206",
+              "name": "Add IPs -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/d8dc9e3e-358d-4d2d-9f3e-d55ce7e4bc02",
+              "sourceStep": "/api/3/workflow_steps/8de8b0ef-ed3e-4ed8-9a02-331a7a79817f"
+            }
+          ],
+          "uuid": "3f5d070e-b16b-4846-bf8d-c6e8db7b5b40"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Asset List",
+          "description": "Retrieves the list of all IP addresses that are present in the user's account on the Qualys cloud, or specific IP addresses based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/38632342-dd11-4f68-9a4c-b94773c8bc16",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "3bd73ccf-937f-4c10-be31-a7408642d013",
+                "title": "Qualys: Get Asset List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "38632342-dd11-4f68-9a4c-b94773c8bc16"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "list_assets": "{{vars.steps.Get_Asset_List.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "228",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "94c1e199-b24a-4bd3-831f-7b887c1b7de5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Asset List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "",
+                  "network_id": "",
+                  "tracking_method": "IP",
+                  "compliance_enabled": false
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_ip",
+                "operationTitle": "List IP Addresses",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "127",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "c053708d-f692-4c13-a15e-4fcfcaa8b9b9"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1f2dd3e6-85bc-451d-84eb-e3795b664b4a",
+              "name": "Get IP List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/94c1e199-b24a-4bd3-831f-7b887c1b7de5",
+              "sourceStep": "/api/3/workflow_steps/c053708d-f692-4c13-a15e-4fcfcaa8b9b9"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "52db0c9a-c380-49b1-ba67-4a7c0cf2e9bf",
+              "name": "Alert -> Get IP List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c053708d-f692-4c13-a15e-4fcfcaa8b9b9",
+              "sourceStep": "/api/3/workflow_steps/38632342-dd11-4f68-9a4c-b94773c8bc16"
+            }
+          ],
+          "uuid": "6e2f51f8-dca4-4d90-a41a-7d1a9bd67cc4"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "VM - Launch Scan",
+          "description": "Launches vulnerability scans in the user’s account on the Qualys cloud, based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1d79c1a9-4a7a-430a-a71c-9ad06f01dd6d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch VM Scan",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "8485a3f1-5670-47b2-abe9-0f69c6c9fc9f",
+                "params": {
+                  "ip": "192.168.60.105-192.168.60.106",
+                  "opt_pro": "Option Title",
+                  "priority": "6 - Standard",
+                  "scan_app": "Scanner Name",
+                  "scan_title": "CyOps VM Scan",
+                  "target_from": "Assets",
+                  "asset_groups": "",
+                  "option_title": "Initial Options",
+                  "ip_network_id": "",
+                  "iscanner_name": "devops",
+                  "scanners_in_ag": false,
+                  "asset_group_ids": "",
+                  "default_scanner": "",
+                  "exclude_ip_per_scan": "",
+                  "runtime_http_header": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_vm_scan",
+                "operationTitle": "Launch VM Scan",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "166",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "10b2b8c7-304f-4e9c-aade-7f6e8b387db4"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "ALert",
+              "description": null,
+              "arguments": {
+                "route": "ccab3a5b-2077-46a6-9506-a4f6adbf1c87",
+                "title": "Qualys: Launch VM Scan",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "1d79c1a9-4a7a-430a-a71c-9ad06f01dd6d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "launch_vm_scan": "{{vars.steps.Launch_VM_Scan.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "228",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "6b4065ec-70d2-4560-9866-b0a08d323886"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "76f0a0e5-a5e7-4d2c-89c0-c3ec9d76e78f",
+              "name": "Launch VM Scan -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6b4065ec-70d2-4560-9866-b0a08d323886",
+              "sourceStep": "/api/3/workflow_steps/10b2b8c7-304f-4e9c-aade-7f6e8b387db4"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7a4532cc-15a9-4dc0-90ff-e5c43c3a861a",
+              "name": "ALert -> Launch VM Scan",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/10b2b8c7-304f-4e9c-aade-7f6e8b387db4",
+              "sourceStep": "/api/3/workflow_steps/1d79c1a9-4a7a-430a-a71c-9ad06f01dd6d"
+            }
+          ],
+          "uuid": "017680c2-c19f-4c9c-a4d2-930ca5cc8bc3"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Option Profiles",
+          "description": "Retrieves the list and details of available option profiles from the user's account on the Qualys cloud.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/97e67e17-8cdb-4fc0-9bba-a8f9674ca80a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "get_option_profiles": "{{vars.steps.Get_Option_Profiles.data}}"
+              },
+              "status": null,
+              "left": "320",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "31d803e8-d8a4-4c0c-91b9-6b2c205f8bb0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "f0f52d0b-6fd9-41b6-84d6-109f1aa83224",
+                "title": "Qualys: Get Option Profiles",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "97e67e17-8cdb-4fc0-9bba-a8f9674ca80a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Option Profiles",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "2a4476d0-cf34-4731-aee8-365bc6e94c7e",
+                "params": [],
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_option_profile",
+                "operationTitle": "Get Option Profile",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "172",
+              "top": "133",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "b290ede2-b016-439e-8a26-da79df50ba88"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "79e8b53c-c814-499c-ac0b-fa168120e8cb",
+              "name": "Get Option Profiles -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/31d803e8-d8a4-4c0c-91b9-6b2c205f8bb0",
+              "sourceStep": "/api/3/workflow_steps/b290ede2-b016-439e-8a26-da79df50ba88"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7e5db023-2a15-4e06-8099-84c50fac2cc4",
+              "name": "Alert -> Get Option Profiles",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b290ede2-b016-439e-8a26-da79df50ba88",
+              "sourceStep": "/api/3/workflow_steps/97e67e17-8cdb-4fc0-9bba-a8f9674ca80a"
+            }
+          ],
+          "uuid": "93f2e82a-2bac-46b3-a757-dd4ddfa96011"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Excluded Host List",
+          "description": "Retrieves the list and details of all excluded hosts that are present in the user's account on the Qualys cloud, or specific excluded hosts based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f72f5db9-9090-4ffc-871b-81e67c56b224",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "excluded_host_list": "{{vars.steps.Get_Excluded_Host_List.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "230",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "6f9abaa0-2b06-4efb-ae27-fb48153e860d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Excluded Host List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "",
+                  "network_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_excluded_host",
+                "operationTitle": "Get Excluded Hosts List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "128",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "aa51d8c8-bf8b-49a7-98b9-5ea3e921e5f1"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "50faa8ea-5d54-4de1-b1f3-8892f8272f8f",
+                "title": "Qualys: Get Excluded Host List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "f72f5db9-9090-4ffc-871b-81e67c56b224"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5914a97f-dd46-41e1-9510-d1956398b246",
+              "name": "Alerts -> Get Excluded Hosts List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/aa51d8c8-bf8b-49a7-98b9-5ea3e921e5f1",
+              "sourceStep": "/api/3/workflow_steps/f72f5db9-9090-4ffc-871b-81e67c56b224"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5affeb7e-baad-4ee5-b61a-e480c0d1d285",
+              "name": "Get Excluded Hosts List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/6f9abaa0-2b06-4efb-ae27-fb48153e860d",
+              "sourceStep": "/api/3/workflow_steps/aa51d8c8-bf8b-49a7-98b9-5ea3e921e5f1"
+            }
+          ],
+          "uuid": "e0c9762d-4e3c-4dc1-ac64-b7daacc8e64d"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Scorecard",
+          "description": "Launch a vulnerability score card report in the user’s Report Share",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e4fc6ee5-fc48-4c44-aebb-0a769ccc9f7c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "launch_scorecard": "{{vars.steps.Launch_Scorecard.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "246",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "555819ba-9007-4dd9-9524-91489bd62fdf"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Scorecard",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "b112ba8f-ea2a-4d19-af23-81835952b13a",
+                "params": {
+                  "name": "Most Vulnerable Hosts Report",
+                  "source": "Asset Groups",
+                  "sc_type": "Service Provided Scorecard",
+                  "patch_qids": "",
+                  "asset_groups": "",
+                  "missing_qids": "",
+                  "report_title": "Scorcard test report",
+                  "output_format": "HTML",
+                  "all_asset_groups": true
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_score_card",
+                "operationTitle": "Launch Scorecard",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "7a95a005-10cb-47d5-9461-de3a8810fcab"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "ac2be4dc-9803-496c-a2f7-5821ebe542b8",
+                "title": "Qualys: Launch Scorecard",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e4fc6ee5-fc48-4c44-aebb-0a769ccc9f7c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "2531535d-fafd-43e2-87a7-315be452f3cb",
+              "name": "Alert -> Launch Scorecard",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/7a95a005-10cb-47d5-9461-de3a8810fcab",
+              "sourceStep": "/api/3/workflow_steps/e4fc6ee5-fc48-4c44-aebb-0a769ccc9f7c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c028dcf9-319f-4bd8-9a43-a88c2cb6ea42",
+              "name": "Launch Scorecard -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/555819ba-9007-4dd9-9524-91489bd62fdf",
+              "sourceStep": "/api/3/workflow_steps/7a95a005-10cb-47d5-9461-de3a8810fcab"
+            }
+          ],
+          "uuid": "e7112df1-97ce-403f-9c1e-ece00e253258"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Launch Compliance  Policy Report",
+          "description": "Launch policy compliance report in user's account",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/de39f1ec-be7c-4cac-b368-197a9ffedb86",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save  Response",
+              "description": null,
+              "arguments": {
+                "launch_policy_report": "{{vars.steps.Launch_Compliance_Policy_Report.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "220",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "879b94ab-fd02-482f-8bfc-17c14bd46fc8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "5bbe31d1-8005-4097-ae5d-61b19d931de9",
+                "title": "Qualys: Launch Compliance  Policy Report",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "de39f1ec-be7c-4cac-b368-197a9ffedb86"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Launch Compliance Policy Report",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ips": "192.168.50.102",
+                  "host_id": "",
+                  "use_tags": "False",
+                  "policy_id": "557432",
+                  "template_id": "641309",
+                  "pdf_password": "",
+                  "report_title": "Cyops test policy report",
+                  "output_format": "PDF",
+                  "asset_group_ids": "",
+                  "instance_string": "",
+                  "recipient_group": "",
+                  "recipient_group_id": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "launch_compliance_policy_report",
+                "operationTitle": "Launch Compliance Policy Report",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "169",
+              "top": "128",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "f8903f24-0f02-4ec5-aeb8-a995d06809fa"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "007e0c09-9875-420d-9e07-d98bcf187ce1",
+              "name": "Alert -> Launch Policy Report",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f8903f24-0f02-4ec5-aeb8-a995d06809fa",
+              "sourceStep": "/api/3/workflow_steps/de39f1ec-be7c-4cac-b368-197a9ffedb86"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ad60103c-148f-4f57-bc3a-2c15bbdf939f",
+              "name": "Launch Policy Report -> Save  Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/879b94ab-fd02-482f-8bfc-17c14bd46fc8",
+              "sourceStep": "/api/3/workflow_steps/f8903f24-0f02-4ec5-aeb8-a995d06809fa"
+            }
+          ],
+          "uuid": "46689db3-e7c4-4a0b-8817-821c1176cd1f"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Scanned Host List",
+          "description": "Retrieves the list and details of all scanned hosts that are present in the user's account on the Qualys cloud, or specific scanned hosts based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/557675b7-7e6c-46bb-9e8e-d943d1321691",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "get_scanned_host_list": "{{vars.steps.Get_Scanned_Host_List.data}}"
+              },
+              "status": null,
+              "left": "342",
+              "top": "226",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "02bb937c-76f7-4fd7-a046-0b9b204c8e5c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "5f6e91e2-a8cd-43a7-907f-c5edb4980410",
+                "title": "Qualys: Get Scanned Host List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "557675b7-7e6c-46bb-9e8e-d943d1321691"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Scanned Host List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "ids": "",
+                  "ips": "",
+                  "ag_ids": "",
+                  "id_max": "",
+                  "id_min": "",
+                  "details": "All",
+                  "ag_titles": "",
+                  "os_pattern": "^$",
+                  "network_ids": "",
+                  "vm_scan_since": "2018-06-20T09:38:28.474Z",
+                  "no_vm_scan_since": "",
+                  "truncation_limit": "",
+                  "vm_processed_after": "",
+                  "vm_scan_date_after": "",
+                  "vm_processed_before": "",
+                  "vm_scan_date_before": "",
+                  "compliance_scan_since": "",
+                  "no_compliance_scan_since": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_host",
+                "operationTitle": "Get Host List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "186",
+              "top": "134",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "f7975428-302e-43cc-94ea-b5aea2ea1f33"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "142fa9e6-6b6c-4261-842e-0aa53e3455db",
+              "name": "Alerts -> Get Host List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f7975428-302e-43cc-94ea-b5aea2ea1f33",
+              "sourceStep": "/api/3/workflow_steps/557675b7-7e6c-46bb-9e8e-d943d1321691"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "86c1a304-a886-410c-abe5-88dec04cc4b2",
+              "name": "Get Host List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/02bb937c-76f7-4fd7-a046-0b9b204c8e5c",
+              "sourceStep": "/api/3/workflow_steps/f7975428-302e-43cc-94ea-b5aea2ea1f33"
+            }
+          ],
+          "uuid": "9c7fe544-f855-4d27-9758-4c28e5a317fc"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Scanner Appliance",
+          "description": "Retrieves the list and details of available scanner appliances from the user's account on the Qualys cloud.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e8fa15d1-e546-4fe3-a8e8-b506ee135b12",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "get_scanner_appliance": "{{vars.steps.Get_Scanner_Appliance.data}}"
+              },
+              "status": null,
+              "left": "326",
+              "top": "255",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "462a4249-b163-4539-a8ef-0ee437479441"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Scanner Appliance",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "6df6f070-3e07-460b-922a-bbf543d846c5",
+                "params": {
+                  "ids": "",
+                  "busy": false,
+                  "name": "",
+                  "type": "",
+                  "scan_ref": "",
+                  "show_tags": true,
+                  "output_mode": "Full",
+                  "scan_detail": false,
+                  "include_cloud_info": false,
+                  "include_license_info": false
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_scanner_appliance",
+                "operationTitle": "Get Scanner Appliance",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "160",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "8cd17148-022b-47b6-b190-14a725a4bb03"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "3aeccb09-0a5a-421e-8ce7-caf121b3947f",
+                "title": "Qualys: Get Scanner Appliance",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "e8fa15d1-e546-4fe3-a8e8-b506ee135b12"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "69207790-b81b-454f-ae62-f907774cc20a",
+              "name": "Alert -> Get Scanner Appliance",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/8cd17148-022b-47b6-b190-14a725a4bb03",
+              "sourceStep": "/api/3/workflow_steps/e8fa15d1-e546-4fe3-a8e8-b506ee135b12"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "eb06017b-33cd-49e8-90f4-efbbb8ceb10f",
+              "name": "Get Scanner Appliance -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/462a4249-b163-4539-a8ef-0ee437479441",
+              "sourceStep": "/api/3/workflow_steps/8cd17148-022b-47b6-b190-14a725a4bb03"
+            }
+          ],
+          "uuid": "80e13bbe-6a02-4d50-9872-6fc2758671a8"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Vulnerability List",
+          "description": "Retrieves the list and details of vulnerabilities from KnowledgeBase on the Qualys cloud, based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/a53811c7-4709-4667-9658-328b326626f5",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Vulnerability List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e071e7d5-78a8-4943-b6c6-2904c848395e",
+                "params": {
+                  "ids": "",
+                  "id_max": "",
+                  "id_min": "",
+                  "details": "Basic",
+                  "is_patchable": "Show Vulnerabilities that are Patchable",
+                  "published_after": "",
+                  "discovery_method": "",
+                  "published_before": "",
+                  "show_pci_reasons": false,
+                  "show_disabled_flag": false,
+                  "last_modified_after": "",
+                  "show_qid_change_log": true,
+                  "discovery_auth_types": [
+                    "Windows"
+                  ],
+                  "last_modified_before": "",
+                  "add_vuln_as_attachment": false,
+                  "last_modified_by_user_after": "",
+                  "show_supported_modules_info": false,
+                  "last_modified_by_user_before": "",
+                  "last_modified_by_service_after": "",
+                  "last_modified_by_service_before": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_vulnerability",
+                "operationTitle": "Get Vulnerability List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "171",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "392bb145-783a-4299-9fac-ea8cb9c989c8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "e3e1d98f-7104-4242-a502-8dfe00d838bc",
+                "title": "Qualys: Get Vulnerability List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "a53811c7-4709-4667-9658-328b326626f5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "get_vulnerability_list": "{{vars.steps.Get_Vulnerability_List.data}}"
+              },
+              "status": null,
+              "left": "329",
+              "top": "212",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "f82571be-28ba-4516-a297-02399ddb67e0"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "1d976575-826e-4c3a-b739-4394353c7ab4",
+              "name": "Alerts -> Get Vulnerability List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/392bb145-783a-4299-9fac-ea8cb9c989c8",
+              "sourceStep": "/api/3/workflow_steps/a53811c7-4709-4667-9658-328b326626f5"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "79fe9978-8609-4173-be57-d4f413af890e",
+              "name": "Get Vulnerability List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f82571be-28ba-4516-a297-02399ddb67e0",
+              "sourceStep": "/api/3/workflow_steps/392bb145-783a-4299-9fac-ea8cb9c989c8"
+            }
+          ],
+          "uuid": "4a802791-5868-4db2-a771-c0904c3eb004"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "PC - Fetch Scan",
+          "description": "Downloads all the compliance management scan results from the Qualys cloud, or specific compliance management scan results based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/422910a6-1471-4cca-a5e7-1ede71a7e1ad",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "d64f3b98-798d-4988-a44b-04e2d6b0cf01",
+                "title": "Qualys: Fetch PC Scan",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "422910a6-1471-4cca-a5e7-1ede71a7e1ad"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "fetch_pc_scan": "{{vars.steps.Fetch_PC_Scan.data}}"
+              },
+              "status": null,
+              "left": "380",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "5bc28dee-a263-468d-83d1-9fe1151b26e6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch PC Scan",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "412c1ce0-a415-452b-a970-98996fc97e24",
+                "params": {
+                  "scan_ref": "compliance/1533856126.10001"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "fetch_pc_scan",
+                "operationTitle": "Fetch PC Scan",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "220",
+              "top": "149",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e456b222-0319-460f-be2e-8e729f5751b2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "13f14d96-6dd9-45e5-9ccd-fcbddacd26b5",
+              "name": "Alerts -> Fetch PC Scan",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e456b222-0319-460f-be2e-8e729f5751b2",
+              "sourceStep": "/api/3/workflow_steps/422910a6-1471-4cca-a5e7-1ede71a7e1ad"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5f8b154c-6db3-49fa-9c2c-4ad8cd9508c4",
+              "name": "Fetch PC Scan -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/5bc28dee-a263-468d-83d1-9fe1151b26e6",
+              "sourceStep": "/api/3/workflow_steps/e456b222-0319-460f-be2e-8e729f5751b2"
+            }
+          ],
+          "uuid": "4c257586-b0ff-40ea-a00d-f5fc747d2bac"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "PC - Get Scan List",
+          "description": "Retrieves the list and details of all policy compliance scans that are present in the user's account on the Qualys cloud, or specific policy compliance scans based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/21426fcb-384f-467b-914f-3b78d85730ef",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "e9a844e2-5aed-49a0-95db-5ce9f3c773b3",
+                "title": "Qualys: PC - Get Scan List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "21426fcb-384f-467b-914f-3b78d85730ef"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "PC Get Scan List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "type": "",
+                  "state": [
+                    "Finished"
+                  ],
+                  "target": "",
+                  "scan_id": "",
+                  "show_op": true,
+                  "scan_ref": "",
+                  "show_ags": true,
+                  "processed": "None",
+                  "show_last": false,
+                  "user_login": "",
+                  "show_status": true,
+                  "launched_after_datetime": "",
+                  "launched_before_datetime": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_pc_scan",
+                "operationTitle": "Get PC Scan List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "208",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "ac85ed8c-2b21-45aa-8963-88830d1d0daf"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "pc_scan_list": "{{vars.steps.PC_Get_Scan_List.data}}"
+              },
+              "status": null,
+              "left": "367",
+              "top": "269",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "fe0dbbdd-f153-435b-9f1c-fbf602c3b62c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "399fb8b1-4bb2-4d38-9669-4b02bd9c3064",
+              "name": "Get PC Scan List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/fe0dbbdd-f153-435b-9f1c-fbf602c3b62c",
+              "sourceStep": "/api/3/workflow_steps/ac85ed8c-2b21-45aa-8963-88830d1d0daf"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "96ece82d-a58a-441b-bf4a-5749aff36f8a",
+              "name": "Alert -> Get PC Scan List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/ac85ed8c-2b21-45aa-8963-88830d1d0daf",
+              "sourceStep": "/api/3/workflow_steps/21426fcb-384f-467b-914f-3b78d85730ef"
+            }
+          ],
+          "uuid": "1ab57685-6e00-4007-a923-fb5d1c49f07f"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Asset",
+          "description": "Updates assets, i.e., existing IP addresses, in the subscription on the Qualys cloud, based on the IP addresses and other input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/545bd516-515a-4db1-8bd3-b462052401d0",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "e9f7a747-3cf0-4f89-be41-ab31bb2d8066",
+                "title": "Qualys: Update Asset",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "545bd516-515a-4db1-8bd3-b462052401d0"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Asset",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "c681c17f-7620-43a2-b7ca-38a072f93383",
+                "params": {
+                  "ips": "192.168.50.231",
+                  "ud1": "test cyops attribute 1",
+                  "ud2": "test cyops attribute 2",
+                  "ud3": "",
+                  "owner": "",
+                  "comment": "update ip",
+                  "host_dns": "",
+                  "host_netbios": "",
+                  "tracking_method": "IP"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "update_ip",
+                "operationTitle": "Update IPs",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "170",
+              "top": "160",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "57a7d31c-b07c-490f-ae68-bf04ea80607e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "update_asset": "{{vars.steps.Update_Asset.data}}"
+              },
+              "status": null,
+              "left": "320",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "64836cc8-1661-443d-8fc7-ac320241568e"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "94507d1d-fe09-4884-81e4-08d949c795f8",
+              "name": "Alert -> Update IPs",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/57a7d31c-b07c-490f-ae68-bf04ea80607e",
+              "sourceStep": "/api/3/workflow_steps/545bd516-515a-4db1-8bd3-b462052401d0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "f970bf5c-22a0-4eb5-9063-23618d169993",
+              "name": "Update IPs -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/64836cc8-1661-443d-8fc7-ac320241568e",
+              "sourceStep": "/api/3/workflow_steps/57a7d31c-b07c-490f-ae68-bf04ea80607e"
+            }
+          ],
+          "uuid": "9537e809-bbcf-485e-9511-88fcd22d8d4b"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "VM - Get Scan List",
+          "description": "Retrieves the list and details of all vulnerability scans that are present in the user's account on the Qualys cloud, or specific vulnerability scans based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0b4a3666-5ade-4936-ba54-1f473676f6c2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "51cd162d-76a3-4154-86c6-ed5aa2b92ddf",
+                "title": "Qualys: VM - Get Scan List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "0b4a3666-5ade-4936-ba54-1f473676f6c2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "vulnerability_scan_list": "{{vars.steps.VM__Get_Scan_List.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "232",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "cd822d81-43b7-4c60-bf8d-5a1e069ad77d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "VM  Get Scan List",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "type": "On-Demand",
+                  "state": [
+                    "Finished"
+                  ],
+                  "target": "",
+                  "show_op": true,
+                  "scan_ref": "",
+                  "show_ags": true,
+                  "processed": "",
+                  "show_last": "",
+                  "user_login": "",
+                  "show_status": true,
+                  "launched_after_datetime": "",
+                  "launched_before_datetime": ""
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "list_vm_scan",
+                "operationTitle": "Get Vulnerability Scan List",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "127",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e3490b74-3fd0-458b-889e-9e9bf1a28169"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "19e615ff-0293-4917-ac54-31de872d070a",
+              "name": "Alerts -> Get Vulnerability Scan List",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e3490b74-3fd0-458b-889e-9e9bf1a28169",
+              "sourceStep": "/api/3/workflow_steps/0b4a3666-5ade-4936-ba54-1f473676f6c2"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "9511ed1e-2d00-4402-bf10-6263588d4ecd",
+              "name": "Get Vulnerability Scan List -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/cd822d81-43b7-4c60-bf8d-5a1e069ad77d",
+              "sourceStep": "/api/3/workflow_steps/e3490b74-3fd0-458b-889e-9e9bf1a28169"
+            }
+          ],
+          "uuid": "522fe25b-b8b9-4c14-9661-18a4e7adf743"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "VM - Manage Scan",
+          "description": "Manages a vulnerability management scan on the Qualys cloud, based on the scan reference and actions you have specified.",
+          "collection": "/api/3/workflow_collections/8652c41a-74fe-446e-8886-f470a2d17fcf",
+          "tag": "#Qualys",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/6ebffb0e-6e0a-4f61-866f-968cc47d470f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alert",
+              "description": null,
+              "arguments": {
+                "route": "f7851878-524b-4fde-ad90-0c90e7f1c6ba",
+                "title": "Qualys: Manage VM Scan",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": []
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "6ebffb0e-6e0a-4f61-866f-968cc47d470f"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "manage_vm_scan": "{{vars.steps.Manage_VM_Scan.data}}"
+              },
+              "status": null,
+              "left": "340",
+              "top": "231",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "78998696-dce8-4d42-9621-f67fb06553e5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Manage VM Scan",
+              "description": null,
+              "arguments": {
+                "name": "Qualys",
+                "config": "e5997f03-136e-4dd3-9083-3698c8ae01a3",
+                "params": {
+                  "action": "Delete",
+                  "scan_ref": "scan/1531991000.72998"
+                },
+                "version": "1.0.1",
+                "connector": "qualys",
+                "operation": "vm_scan_action",
+                "operationTitle": "VM Scan Actions",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "180",
+              "top": "151",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "bd48372b-a172-4a79-a655-cde1819d6858"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "594e84b7-35d5-40c8-9acf-29b242816fdb",
+              "name": "Manage VM Scan -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/78998696-dce8-4d42-9621-f67fb06553e5",
+              "sourceStep": "/api/3/workflow_steps/bd48372b-a172-4a79-a655-cde1819d6858"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b8942f35-a92d-4d3a-9dcb-42a14944c2be",
+              "name": "Alert -> Manage VM Scan",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/bd48372b-a172-4a79-a655-cde1819d6858",
+              "sourceStep": "/api/3/workflow_steps/6ebffb0e-6e0a-4f61-866f-968cc47d470f"
+            }
+          ],
+          "uuid": "a759f57d-da36-4add-ae5d-5b77519da302"
+        }
+      ],
+      "uuid": "8652c41a-74fe-446e-8886-f470a2d17fcf"
+    }
+  ]
+}

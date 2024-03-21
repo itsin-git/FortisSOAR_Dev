@@ -1,0 +1,65 @@
+{
+  "name": "nmap-scanner",
+  "label": "NMAP Scanner",
+  "version": "1.0.1",
+  "description": "Nmap is a security scanner provide detailed network information",
+  "publisher": "CyberSponse Community",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "category": "investigation",
+  "icon_small_name": "small-nmap.png",
+  "icon_large_name": "large-nmap.png",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000072816-nmap-scanner-v1-0-0",
+  "configuration": {
+     "fields": []
+  },
+  "operations": [
+    {
+      "operation": "scan_network",
+      "title": "Scan Network",
+      "description": "Execute NMAP scan for provided host or IP address",
+      "category": "investigation",
+      "annotation": "scan_network",
+      "output_schema": {
+      },
+      "parameters": [
+        {
+          "title": "Hostname/FQDN/IP Address",
+          "name": "hostname",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "tooltip": "Hostname/IP Address (CIDR notation supported)",
+          "description":"Provide hostname or FQDN or IP Address on which NMAP query needs to execute.",
+          "placeholder": "Provide IP/URL/Hostname",
+          "value": ""
+        },
+        {
+          "title": "Port",
+          "name": "port",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "description":"Port number of host to run NMAP query. e.g. 22,80,443,1000-1024",
+          "tooltip": "Provide list of ports",
+          "placeholder": "Provide ports e.g. 22,80,443,1000-1024",
+          "value": ""
+        },
+        {
+          "title": "Command Arguments",
+          "name": "args",
+          "type": "text",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "description":"Provide various NMAP command arguments. e.g. -n -sP -PE -PA21",
+          "tooltip": "Provide command arguments e.g. -n -sP -PE -PA21",
+          "value": ""
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

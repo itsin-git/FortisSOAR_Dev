@@ -1,0 +1,729 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - PRTG - 1.1.0",
+      "description": "Sample playbooks for \"PRTG\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "/api/3/images/5c8b4f2d0d9fd718800e7c42",
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Run Auto Discovery",
+          "description": "Runs auto discovery on an existing object in PRTG based on the Device ID or Group ID you have specified. or Runs auto discovery with template on an existing object in PRTG based on the device template(s) and Device ID or Group ID you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/607551cf-5897-4837-952f-ece74b96c526",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "a38d7ea4-11bb-462f-92db-21e9a4339053",
+                "title": "PRTG: Run Auto Discovery",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "607551cf-5897-4837-952f-ece74b96c526"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Run Auto Discovery",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "id": "3735",
+                  "template": "Cisco ADSL.odt",
+                  "discovery": "Run Auto-Discovery with Template"
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "run_auto_discovery",
+                "operationTitle": "Run Auto Discovery",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "189",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "4ccb9657-4bc0-417b-80dc-960e5db544cb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "c9505a42-406e-4103-8bae-fc237835809d",
+              "name": "Alerts -> Run Auto Discovery",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/4ccb9657-4bc0-417b-80dc-960e5db544cb",
+              "sourceStep": "/api/3/workflow_steps/607551cf-5897-4837-952f-ece74b96c526"
+            }
+          ],
+          "versions": null,
+          "uuid": "86753ecc-61e5-4720-967e-ae1f089e1b8c"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Scan Sensor",
+          "description": "Scans a sensor on PRTG based on the sensor ID you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/606814d0-c8db-4d33-9a10-d831f9d5bb79",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "eba07dbd-f2c2-4d60-af7c-689af88d9732",
+                "title": "PRTG: Scan Sensor",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "606814d0-c8db-4d33-9a10-d831f9d5bb79"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Scan Sensor",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "id": "2072"
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "scan_sensor",
+                "operationTitle": "Scan Sensor",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "31a679e6-0d19-420a-8c4a-c973343307a7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "ea3a0fcc-4360-4bb9-a1a0-2437fa68ea1a",
+              "name": "Alerts -> Scan Sensor",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/31a679e6-0d19-420a-8c4a-c973343307a7",
+              "sourceStep": "/api/3/workflow_steps/606814d0-c8db-4d33-9a10-d831f9d5bb79"
+            }
+          ],
+          "versions": null,
+          "uuid": "b73ea3b7-3706-4e76-81e3-791969e71471"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Sensor Status",
+          "description": "Retrieves the status of a sensor from PRTG, based on the sensor ID you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b5424e93-44f5-4786-bb42-0edc020b3692",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Sensors Status",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "id": "2336"
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "get_sensor_status",
+                "operationTitle": "Get Sensor Status",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e1ee18f8-1f78-4c07-85ba-0b3954849648"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "f9174b1f-6237-4fe3-9493-fa4d96d8b8e4",
+                "title": "PRTG: Get sensor status",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "b5424e93-44f5-4786-bb42-0edc020b3692"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "06640db0-ed43-41e9-8f7e-e0c04ad58728",
+              "name": "Alerts -> Get sensor status",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e1ee18f8-1f78-4c07-85ba-0b3954849648",
+              "sourceStep": "/api/3/workflow_steps/b5424e93-44f5-4786-bb42-0edc020b3692"
+            }
+          ],
+          "versions": null,
+          "uuid": "f9c95c20-736b-46b2-98aa-1f7afc8b0516"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Pause Sensor",
+          "description": "Pauses a sensor on PRTG based on the sensor ID and other input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ce68371e-253d-4c35-85c1-7004febda6f3",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "a6150c33-523d-43ff-9f5e-2771675132e8",
+                "title": "PRTG: Pause Sensor",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ce68371e-253d-4c35-85c1-7004febda6f3"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Pause Sensor",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "id": "1002",
+                  "duration": 20,
+                  "pausemsg": "Pause running sensor using playbook"
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "pause_sensor",
+                "operationTitle": "Pause Sensor",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "25fd25eb-3297-486a-b6b3-17ba2a572e9e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "save response",
+              "description": null,
+              "arguments": {
+                "var1": "{{vars.steps.Pause_Sensor.data.status}}",
+                "var2": "{{vars.steps.Pause_Sensor.data.message}}"
+              },
+              "status": null,
+              "left": "332",
+              "top": "256",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "fd553b4e-5e64-41dd-88d0-02971ff972c5"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5673ab5d-7cd9-46df-b89c-199e7047e5f9",
+              "name": "Pause Sensor -> save response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/fd553b4e-5e64-41dd-88d0-02971ff972c5",
+              "sourceStep": "/api/3/workflow_steps/25fd25eb-3297-486a-b6b3-17ba2a572e9e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "aa88699b-7c32-43ba-9f67-edc51e68695b",
+              "name": "Alerts -> Pause Sensor",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/25fd25eb-3297-486a-b6b3-17ba2a572e9e",
+              "sourceStep": "/api/3/workflow_steps/ce68371e-253d-4c35-85c1-7004febda6f3"
+            }
+          ],
+          "versions": null,
+          "uuid": "6cd776d7-bfc6-4a2a-aa08-92de599fd9e7"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Acknowledge Alarm",
+          "description": "Marks a sensor as acknowledged on PRTG for the duration (optionally) you have specified based on the sensor ID you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1831f80f-14e1-44b8-8c1b-15e920cac412",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "b1e1c1c9-5c7a-4a08-ac8c-1e1176e701dc",
+                "title": "PRTG: Acknowledge Alarm",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "1831f80f-14e1-44b8-8c1b-15e920cac412"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Acknowledge Alarm",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "id": "3577",
+                  "until": "2019-03-03T07:34:34.224Z",
+                  "ackmsg": "Acknowledged sensor using playbook",
+                  "duration": "Until"
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "acknowledge_alarm",
+                "operationTitle": "Acknowledge Alarm",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "35a7b84d-b422-4edf-97d2-84547722587d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0a43d655-4d91-4d6a-a9df-f772f93a2d76",
+              "name": "Alerts -> Acknowledge Alarm",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/35a7b84d-b422-4edf-97d2-84547722587d",
+              "sourceStep": "/api/3/workflow_steps/1831f80f-14e1-44b8-8c1b-15e920cac412"
+            }
+          ],
+          "versions": null,
+          "uuid": "e43ef25a-14ca-45f5-94dc-c4f7261e7272"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Object Details",
+          "description": "Retrieves detailed information for a selected content type such as device or sensor from PRTG, based on the input parameters you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/70871186-fe6b-4b9b-b1df-b75c61ac373e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "afd52d54-cfbd-4784-8673-2c48e3887a1e",
+                "title": "PRTG: List Object Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "70871186-fe6b-4b9b-b1df-b75c61ac373e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "List Object Details",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "count": 100,
+                  "start": 0,
+                  "sortby": "",
+                  "content": "Devices",
+                  "open_filter": "filter_type=ping&filter_status=@neq(3)",
+                  "response_fields": [
+                    "Object ID",
+                    "Type",
+                    "Name",
+                    "Status",
+                    "Message",
+                    "Priority",
+                    "Last Up",
+                    "Last Down",
+                    "Sensor Name",
+                    "Device Name",
+                    "Group Name",
+                    "Probe Name",
+                    "Size",
+                    "Comments",
+                    "Host",
+                    "Content",
+                    "Tags",
+                    "Active",
+                    "Downtime in Percentage",
+                    "Downtime",
+                    "Downtime Since",
+                    "Uptime in Percentage",
+                    "Uptime",
+                    "Uptime Since",
+                    "Knowntime",
+                    "Cumsince",
+                    "Interval",
+                    "Last Check",
+                    "Group Device",
+                    "Trigger Type",
+                    "Dependency",
+                    "Probe Group Device",
+                    "Downtime",
+                    "Last Value",
+                    "Up Sensor State",
+                    "Down Sensor State",
+                    "Down Acknowledged Sensor State",
+                    "Partial Down Sensor State",
+                    "Warnning Sensor State",
+                    "Paused Sensor State",
+                    "Unusual Sensor State",
+                    "Undefined Sensor State",
+                    "Total Sensor",
+                    "Number of Groups",
+                    "Number of Devices",
+                    "Group Device",
+                    "Value",
+                    "Coverage",
+                    "Favorite",
+                    "User",
+                    "Parent",
+                    "Datetime",
+                    "Date Only",
+                    "time Only",
+                    "Schedule",
+                    "Period",
+                    "Last Run",
+                    "Base Type",
+                    "Base Link",
+                    "Parent ID",
+                    "Location",
+                    "Fold",
+                    "Ticket Type",
+                    "Modified By",
+                    "Actions"
+                  ]
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "list_object_detail",
+                "operationTitle": "List Object Details",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "150",
+              "top": "169",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "c8ff2c1d-ece7-4d71-851c-12ef8c3bfafb"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "bbf43202-32d7-4630-a7ae-e7b535a1f85d",
+              "name": "Alerts -> List Sensor",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c8ff2c1d-ece7-4d71-851c-12ef8c3bfafb",
+              "sourceStep": "/api/3/workflow_steps/70871186-fe6b-4b9b-b1df-b75c61ac373e"
+            }
+          ],
+          "versions": null,
+          "uuid": "dd6a2e57-d5c1-4f0e-a53d-4925fa8d4636"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Delete Object",
+          "description": "Deletes an object from PRTG based on the object ID and type you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2e0d20c4-3443-4e71-9258-819cb0213935",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "2905ba3c-a951-43dc-9679-392be2ee2686",
+                "title": "PRTG: Delete Object",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "2e0d20c4-3443-4e71-9258-819cb0213935"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Delete Object",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "id": "3112",
+                  "object": "Sensor"
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "delete_object",
+                "operationTitle": "Delete Object",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e5ca02de-67af-47ec-9d4c-e95c12b491b9"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "32549dfc-aadf-4b90-b0ea-271434802b9e",
+              "name": "Alerts -> Scan Sensor",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e5ca02de-67af-47ec-9d4c-e95c12b491b9",
+              "sourceStep": "/api/3/workflow_steps/2e0d20c4-3443-4e71-9258-819cb0213935"
+            }
+          ],
+          "versions": null,
+          "uuid": "76cd770e-d40e-4f83-a127-2e7ca0696c2f"
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Resume Sensor",
+          "description": "Resumes a sensor on PRTG based on the sensor ID you have specified.",
+          "collection": "/api/3/workflow_collections/75bc3bf8-108f-40d7-9375-538676b3db0a",
+          "tag": "#PRTG",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0a76befa-1df8-4211-aaf8-7a4f59bfb12a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Alerts",
+              "description": null,
+              "arguments": {
+                "route": "d6adfc77-8367-40c8-98ce-7ca8f05d18a1",
+                "title": "PRTG: Resume Sensor",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "253",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "0a76befa-1df8-4211-aaf8-7a4f59bfb12a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Resume Sensor",
+              "description": null,
+              "arguments": {
+                "name": "PRTG",
+                "config": "''",
+                "params": {
+                  "id": "1002"
+                },
+                "version": "1.1.0",
+                "connector": "prtg",
+                "operation": "resume_sensor",
+                "operationTitle": "Resume Sensor",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "252",
+              "top": "180",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e44fbcf2-f4ba-42e7-a1c8-9f5086593186"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3722bcaa-5126-474f-b183-6ca5086108f5",
+              "name": "Alerts -> Resume Sensor",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e44fbcf2-f4ba-42e7-a1c8-9f5086593186",
+              "sourceStep": "/api/3/workflow_steps/0a76befa-1df8-4211-aaf8-7a4f59bfb12a"
+            }
+          ],
+          "versions": null,
+          "uuid": "777942d3-51e9-442a-924f-fe9d9970145d"
+        }
+      ],
+      "uuid": "75bc3bf8-108f-40d7-9375-538676b3db0a"
+    }
+  ]
+}

@@ -1,0 +1,558 @@
+{
+	"name": "xforce",
+	"label": "IBM XForce",
+	"description": "IBM XForce connector",
+	"publisher": "Fortinet",
+	"cs_approved": true,
+	"cs_compatible": true,
+	"version": "1.0.2",
+	"category": "Threat Intelligence",
+	"icon_small_name": "small_icon.png",
+	"icon_large_name": "large_icon.png",
+	"tags": [
+		"Enrichment",
+		"IP_Enrichment",
+		"FileHash_Enrichment"
+	],
+	"help_online": "https://docs.fortinet.com/document/fortisoar/1.0.2/ibm-x-force/366/ibm-x-force-v1-0-2",
+	"configuration": {
+		"fields": [
+			{
+				"title": "Hostname",
+				"required": true,
+				"editable": true,
+				"visible": true,
+				"type": "text",
+				"name": "host_name",
+				"value": "api.xforce.ibmcloud.com"
+			},
+			{
+				"title": "API Key",
+				"required": true,
+				"editable": true,
+				"visible": true,
+				"type": "text",
+				"name": "api_key"
+			},
+			{
+				"title": "API Password",
+				"required": true,
+				"editable": true,
+				"visible": true,
+				"type": "password",
+				"name": "api_password"
+			},
+			{
+				"title": "Verify SSL",
+				"required": false,
+				"editable": true,
+				"visible": true,
+				"type": "checkbox",
+				"name": "verify_ssl",
+				"value": true
+			}
+		]
+	},
+	"operations": [
+		{
+			"operation": "get_ip_reputation",
+			"title": "Get IP Reputation",
+			"description": "Returns the IP reputation report for the entered IP address.",
+			"category": "investigation",
+			"annotation": "ip_reputation",
+			"parameters": [
+				{
+					"title": "IP Address",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "ip",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"ip": "",
+				"history": []
+			}
+		},
+		{
+			"operation": "get_ip_behaviour",
+			"title": "Get IP Behaviour",
+			"description": "Get possible malware content in provided IP Address",
+			"category": "investigation",
+			"annotation": "malware_content",
+			"parameters": [
+				{
+					"title": "IP Address",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "ip",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"malware": [
+					{
+						"family": [
+							""
+						],
+						"first": "",
+						"last": "",
+						"md5": "",
+						"origin": "",
+						"uri": ""
+					}
+				]
+			}
+		},
+		{
+			"operation": "get_ip_report",
+			"title": "Get IP Report",
+			"description": "Get report of a given IP Address",
+			"category": "investigation",
+			"annotation": "get_report",
+			"parameters": [
+				{
+					"title": "IP Address",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "ip",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"ip": "",
+				"subnets": [],
+				"cats": {},
+				"geo": {
+					"country": "",
+					"countrycode": ""
+				},
+				"score": 0,
+				"tags": []
+			}
+		},
+		{
+			"operation": "get_url_report",
+			"title": "Get URL Report",
+			"description": "Get report of a given URL",
+			"category": "investigation",
+			"annotation": "get_report",
+			"parameters": [
+				{
+					"title": "URL",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "url",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"result": {
+					"url": "",
+					"cats": {},
+					"categoryDescriptions": {},
+					"score": 0
+				},
+				"associated": [],
+				"tags": []
+			}
+		},
+		{
+			"operation": "get_url_behaviour",
+			"title": "Get URL Behaviour",
+			"description": "Get possible malware content in given URL",
+			"category": "investigation",
+			"annotation": "malware_content",
+			"parameters": [
+				{
+					"title": "URL",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "url",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"count": 0,
+				"malware": []
+			}
+		},
+		{
+			"operation": "get_relative_malware",
+			"title": "Get Relative Malware",
+			"description": "Get malware by family name",
+			"category": "investigation",
+			"annotation": "malware_content",
+			"parameters": [
+				{
+					"title": "Malware Family Name",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "family",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"tags": [],
+				"count": 0,
+				"family": [],
+				"firstseen": "",
+				"lastseen": "",
+				"malware": []
+			}
+		},
+		{
+			"operation": "get_file_reputation_using_filehash",
+			"title": "Get File Reputation",
+			"description": "Get malware for given file hash (supported format: md5, sha1 and sha256)",
+			"category": "investigation",
+			"annotation": "file_reputation",
+			"parameters": [
+				{
+					"title": "Filehash(MD5, SHA1, SHA256)",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "filehash",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"malware": {
+					"created": "",
+					"type": "",
+					"family": [],
+					"familyMembers": {},
+					"md5": "",
+					"mimetype": "",
+					"origins": {
+						"CnCServers": {},
+						"downloadServers": {},
+						"emails": {},
+						"external": {},
+						"subjects": {}
+					},
+					"risk": ""
+				},
+				"tags": []
+			}
+		},
+		{
+			"operation": "get_ip_registrant",
+			"title": "Get IP Registrant",
+			"description": "Get IP Address owner details(Input: IP, URL, Host-Name)",
+			"category": "investigation",
+			"annotation": "whois_info",
+			"parameters": [
+				{
+					"title": "Host(IP/URL/Hostname)",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "host",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"createdDate": "",
+				"updatedDate": "",
+				"netRange": "",
+				"contact": [],
+				"extended": {}
+			}
+		},
+		{
+			"operation": "search_signature",
+			"title": "Search Signature",
+			"description": "Returns list of all signatures associated with the search term.",
+			"category": "investigation",
+			"annotation": "search_signature",
+			"parameters": [
+				{
+					"title": "Query String",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "query_string",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"total_rows": 0,
+				"bookmark": "",
+				"rows": []
+			}
+		},
+		{
+			"operation": "search_signature_by_xpu",
+			"title": "Search Signature by XPU",
+			"description": "Returns list of all signatures associated with the entered XPU.",
+			"category": "investigation",
+			"annotation": "search_signature",
+			"parameters": [
+				{
+					"title": "XPU",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "xpu",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"rows": [
+					{
+						"type": "PAM",
+						"priority": 0,
+						"pamid": "",
+						"releaseDate": "",
+						"shortDesc": "",
+						"pamName": ""
+					}
+				]
+			}
+		},
+		{
+			"operation": "search_signature_by_pamid",
+			"title": "Search Signature by PAMID",
+			"description": "Returns list of all signatures associated with the entered PAMID.",
+			"category": "investigation",
+			"annotation": "search_signature",
+			"parameters": [
+				{
+					"title": "PAMID",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "pamId",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"type": "PAM",
+				"pamid": "",
+				"updated": true,
+				"releaseDate": "",
+				"shortDesc": "",
+				"pamName": "",
+				"description": "",
+				"priority": 0,
+				"category": "",
+				"products_containing": [],
+				"protects_against": {},
+				"covers": {}
+			}
+		},
+		{
+			"operation": "get_dns_record",
+			"title": "Get DNS Record",
+			"description": "Returns live and passive DNS records.(supports ip or domain or url)",
+			"category": "investigation",
+			"annotation": "dns_details",
+			"parameters": [
+				{
+					"title": "Input(IP Address/Domain/URL)",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "query",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"A": [],
+				"AAAA": [],
+				"MX": {},
+				"TXT": [],
+				"RDNS": [],
+				"Passive": {}
+			}
+		},
+		{
+			"operation": "get_vulnerability_from_xfid",
+			"title": "Get Vulnerability from XFID",
+			"description": "Returns the vulnerability associated with the entered xfid.",
+			"category": "investigation",
+			"annotation": "search_vulnerability",
+			"parameters": [
+				{
+					"title": "XFID",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "xfid",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"tags": [],
+				"type": "",
+				"xfdbid": 0,
+				"updateid": 0,
+				"updated": true,
+				"variant": "",
+				"title": "",
+				"description": "",
+				"description_fmt": "",
+				"risk_level": 0,
+				"CVSS3_Version": "",
+				"CVSS3_PrivilegesRequired": "",
+				"CVSS3_UserInteraction": "",
+				"CVSS3_Scope": "",
+				"access_vector": "",
+				"access_complexity": "",
+				"confidentiality_impact": "",
+				"integrity_impact": "",
+				"availability_impact": "",
+				"temporal_score": 0,
+				"remediation_level": "",
+				"remedy": "",
+				"remedy_fmt": "",
+				"reported": "",
+				"tagname": "",
+				"stdcode": [],
+				"platforms_affected": [],
+				"exploitability": "",
+				"consequences": "",
+				"references": [],
+				"report_confidence": ""
+			}
+		},
+		{
+			"operation": "get_vulnerability_from_stdcode",
+			"title": "Get Vulnerability from STDCODE",
+			"description": "Returns the vulnerability associated with the entered STDCODE.",
+			"category": "investigation",
+			"annotation": "search_vulnerability",
+			"parameters": [
+				{
+					"title": "STDCODE",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "stdcode",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": [
+				{
+					"type": "",
+					"xfdbid": 0,
+					"updateid": 0,
+					"updated": true,
+					"variant": "",
+					"title": "",
+					"description": "",
+					"description_fmt": "",
+					"risk_level": 0,
+					"CVSS3_Version": "",
+					"CVSS3_PrivilegesRequired": "",
+					"CVSS3_UserInteraction": "",
+					"CVSS3_Scope": "",
+					"access_vector": "",
+					"access_complexity": "",
+					"confidentiality_impact": "",
+					"integrity_impact": "",
+					"availability_impact": "",
+					"temporal_score": 0,
+					"remediation_level": "",
+					"remedy": "",
+					"remedy_fmt": "",
+					"reported": "",
+					"tagname": "",
+					"stdcode": [],
+					"platforms_affected": [],
+					"exploitability": "",
+					"consequences": "",
+					"references": [],
+					"report_confidence": ""
+				}
+			]
+		},
+		{
+			"operation": "get_vulnerability",
+			"title": "Get Vulnerability",
+			"description": "Returns the vulnerability associated with the search team and entered date range",
+			"category": "investigation",
+			"annotation": "search_vulnerability",
+			"parameters": [
+				{
+					"title": "Query",
+					"required": true,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "query",
+					"value": ""
+				},
+				{
+					"title": "From Date",
+					"required": false,
+					"editable": true,
+					"visible": true,
+					"type": "datetime",
+					"name": "start_date",
+					"value": ""
+				},
+				{
+					"title": "To Date",
+					"required": false,
+					"editable": true,
+					"visible": true,
+					"type": "datetime",
+					"name": "end_date",
+					"value": ""
+				},
+				{
+					"title": "Bookmark",
+					"required": false,
+					"editable": true,
+					"visible": true,
+					"type": "text",
+					"name": "bookmark",
+					"value": ""
+				}
+			],
+			"enabled": true,
+			"output_schema": {
+				"total_rows": 0,
+				"bookmark": "",
+				"rows": []
+			}
+		}
+	]
+}

@@ -1,0 +1,261 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "543072fd-4e51-40ca-9a11-c875b139b525",
+      "@type": "WorkflowCollection",
+      "name": "Sample - Censys - 2.0.0",
+      "description": "Censys is a search engine that focuses on providing comprehensive information about devices and systems connected to the Internet. It is specifically designed to help researchers, security professionals, and organizations gain insights into various aspects of the global Internet infrastructure. Censys employs a variety of techniques to continuously scan and analyze the Internet, collecting data on IP addresses, websites, certificates, open ports, and other network-related information. This extensive dataset allows users to search for specific devices, services, or vulnerabilities, helping them understand the security posture of different entities on the Internet",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "Censys",
+        "censys"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "8a4e6ea6-7802-464b-9de2-22bec51e8ca5",
+          "collection": "/api/3/workflow_collections/543072fd-4e51-40ca-9a11-c875b139b525",
+          "triggerLimit": null,
+          "description": "Fetches the entire host entity by IP address and returns the most recent Censys view of the host and its services based on the IP address that you have specified",
+          "name": "Get Host Details Using IP Address",
+          "tag": "#Censys",
+          "recordTags": [
+            "Censys",
+            "censys"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/fffc7c68-9dc8-42e5-863a-779ab231f1ea",
+          "steps": [
+            {
+              "uuid": "fffc7c68-9dc8-42e5-863a-779ab231f1ea",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "bbf0557a-a7bc-46ef-a7c3-886d2b106553",
+                "title": "Censys: Get Host Details Using IP Address",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "19f272e0-0068-4e2f-a047-633016c15c4f",
+              "@type": "WorkflowStep",
+              "name": "Get Host Details Using IP Address",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Censys",
+                "config": "''",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "censys",
+                "operation": "get_host_details",
+                "operationTitle": "Get Host Details Using IP Address",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "840dc9ed-5cb7-4cc2-b119-84a8625a7952",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Host Details Using IP Address",
+              "sourceStep": "/api/3/workflow_steps/fffc7c68-9dc8-42e5-863a-779ab231f1ea",
+              "targetStep": "/api/3/workflow_steps/19f272e0-0068-4e2f-a047-633016c15c4f"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "b935cba7-64b3-4fd0-bc9a-b6c7da5520a1",
+          "collection": "/api/3/workflow_collections/543072fd-4e51-40ca-9a11-c875b139b525",
+          "triggerLimit": null,
+          "description": "Accepts queries for host or service attributes provided in the Censys Search Language and returns a list of matching hosts with some summary fields",
+          "name": "Search Hosts",
+          "tag": "#Censys",
+          "recordTags": [
+            "Censys",
+            "censys"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/3128455d-1b61-4727-9274-d537d20f893a",
+          "steps": [
+            {
+              "uuid": "3128455d-1b61-4727-9274-d537d20f893a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "b9fe9d00-3994-4b2d-bbb4-c9d8c1118664",
+                "title": "Censys: Search Hosts",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "85aaf357-005a-402a-a513-f2c46367d9f2",
+              "@type": "WorkflowStep",
+              "name": "Search Hosts",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Censys",
+                "config": "''",
+                "params": {
+                  "virtual_hosts": "EXCLUDE"
+                },
+                "version": "2.0.0",
+                "connector": "censys",
+                "operation": "search_hosts",
+                "operationTitle": "Search Hosts",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5fc79aa1-589f-450b-aaed-864ecac15882",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Search Hosts",
+              "sourceStep": "/api/3/workflow_steps/3128455d-1b61-4727-9274-d537d20f893a",
+              "targetStep": "/api/3/workflow_steps/85aaf357-005a-402a-a513-f2c46367d9f2"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "72bee0ac-fd2d-48f0-8535-dfe778fca686",
+          "collection": "/api/3/workflow_collections/543072fd-4e51-40ca-9a11-c875b139b525",
+          "triggerLimit": null,
+          "description": "Fetches the certificate record for the specified SHA-256 fingerprint, including parsed data, certificate transparency log information, root store trust information, zlint results, and Censys observation metadata",
+          "name": "Lookup Certificate",
+          "tag": "#Censys",
+          "recordTags": [
+            "Censys",
+            "censys"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ec73bfa8-c214-4288-9954-408effba73e2",
+          "steps": [
+            {
+              "uuid": "ec73bfa8-c214-4288-9954-408effba73e2",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "3de0e541-298b-46b9-a2b8-20be01473e2a",
+                "title": "Censys: Lookup Certificate",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "dd064d45-5ae3-46e6-a2d4-e507f69ebdf9",
+              "@type": "WorkflowStep",
+              "name": "Lookup Certificate",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "Censys",
+                "config": "''",
+                "params": [],
+                "version": "2.0.0",
+                "connector": "censys",
+                "operation": "lookup_certificate",
+                "operationTitle": "Lookup Certificate",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0b87fd78-9be3-44c9-bd27-2c2e891eaee1",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Lookup Certificate",
+              "sourceStep": "/api/3/workflow_steps/ec73bfa8-c214-4288-9954-408effba73e2",
+              "targetStep": "/api/3/workflow_steps/dd064d45-5ae3-46e6-a2d4-e507f69ebdf9"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

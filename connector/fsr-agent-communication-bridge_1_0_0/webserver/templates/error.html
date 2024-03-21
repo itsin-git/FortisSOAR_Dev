@@ -1,0 +1,34 @@
+$def with (error_heading, message)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>FortiSOAR</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/static/fortisoar-small-logo.png"/>
+    <link rel="stylesheet" href="/static/custom.css"/>
+</head>
+<body>
+<div class="form-container">
+    <img class="bg-img-primary" src='/static/background.png'/>
+    <div class="align-items-center">
+        <div class="link-input">
+            <div class="link-input-content">
+                <div class="logo-container">
+                    <div class="custom-logo">
+                    </div>
+                </div>
+                <div id="manual-input-title" class="minual-input-title-title"></div>
+                <div id="form-container" class="form-body">
+                    <div class="panel-body text-center error-container">
+                        <h1 class="beta margin-top-0 error-title">$error_heading</h1>
+                        <div class="error-body">
+                            <p>$message</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

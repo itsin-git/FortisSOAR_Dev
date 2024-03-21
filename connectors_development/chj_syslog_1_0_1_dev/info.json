@@ -1,0 +1,132 @@
+{
+    "name": "chj_syslog",
+    "version": "1.0.1",
+    "label": "chj_syslog",
+    "description": "chj test Syslog Connector",
+    "publisher": "",
+    "icon_small_name": "syslog_small.png",
+    "icon_large_name": "syslog_large.png",
+    "category": "SIEM",
+    "configuration": {
+        "fields": [
+            {
+                "title": "Listener Protocol",
+                "type": "select",
+                "name": "protocol",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "value": "UDP",
+                "options": [
+                    "TCP",
+                    "UDP"
+                ]
+            },
+            {
+                "title": "Listener Port",
+                "type": "integer",
+                "name": "port",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "value": 10519
+            },
+            {
+                "title": "CyberSponse Endpoint(/api/triggers/1/ will be prepended)",
+                "type": "text",
+                "name": "trigger",
+                "required": true,
+                "visible": true,
+                "editable": true,
+                "value": "chj_syslog"
+            },
+            {
+                "title": "Filter String (Only messages containing this text would be forwarded to CyOPs)",
+                "type": "text",
+                "name": "filter_str",
+                "required": false,
+                "visible": true,
+                "editable": true
+            }
+        ]
+    },
+    "operations": [
+        {
+            "operation": "start",
+            "title": "Start Listener",
+            "description": "Start Syslog Listener",
+            "parameters": [],
+            "enabled": true,
+            "output_schema": {
+                "status": 0,
+                "message": ""
+            },
+            "open": false
+        },
+        {
+            "operation": "stop",
+            "title": "Stop Listener",
+            "description": "Stop Syslog Listener",
+            "parameters": [],
+            "enabled": true,
+            "output_schema": {
+                "status": 0,
+                "message": ""
+            },
+            "open": false
+        },
+        {
+            "operation": "restart",
+            "title": "Restart Listener",
+            "description": "Restart Listener",
+            "parameters": [],
+            "enabled": true,
+            "output_schema": {
+                "status": 0,
+                "message": ""
+            },
+            "open": false
+        },
+        {
+            "operation": "parse",
+            "title": "Parse Message",
+            "description": "Parse Syslog message",
+            "enabled": true,
+            "output_schema": {
+                "header": "",
+                "message": ""
+            },
+            "parameters": [
+                {
+                    "title": "Message",
+                    "type": "text",
+                    "name": "message",
+                    "required": true,
+                    "visible": true,
+                    "editable": true
+                },
+                {
+                    "title": "RFC",
+                    "type": "select",
+                    "name": "rfc",
+                    "required": true,
+                    "visible": true,
+                    "editable": true,
+                    "options": [
+                        "3164",
+                        "5424"
+                    ]
+                }
+            ],
+            "open": false
+        }
+    ],
+    "forked_from": "syslog_1_1_1",
+    "cs_approved": false,
+    "cs_compatible": true,
+    "help_online": "https://help.cybersponse.com/support/solutions/articles/17000099956-syslog-v1-1-1",
+    "ingestion_supported": true,
+    "ingestion_modes": [
+        "notification"
+    ]
+}

@@ -1,0 +1,949 @@
+{
+  "name": "fortinet-fortisandbox",
+  "version": "1.0.4",
+  "label": "Fortinet FortiSandbox",
+  "description": "FortiSandbox utilizes advanced detection, dynamic antivirus scanning, and threat scanning technology to detect viruses and APTs. FortiSandbox executes suspicious files in the VM host module to determine if the file is High, Medium, or Low Risk based on the behaviour observed in the VM sandbox module. Implemented actions like submit file, get scan stats, get file verdict, get job behaviour and get pdf report etc.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Sandbox",
+  "tags": [
+    "Enrichment",
+    "URL_Enrichment",
+    "File_Enrichment"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.4/fortinet-fortisandbox/375/fortinet-fortisandbox-v1-0-4",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "description": "URL of the Fortinet FortiSandbox server to which you will connect and perform automated operations.",
+        "name": "server",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": ""
+      },
+      {
+        "title": "Username",
+        "description": "Username of the Fortinet FortiSandbox server to which you will connect and perform automated operations.",
+        "name": "username",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": ""
+      },
+      {
+        "title": "Password",
+        "description": "Password used to access the Fortinet FortiSandbox server to which you will connect and perform the automated operations.",
+        "name": "password",
+        "value": "",
+        "type": "password",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "submit_file",
+      "category": "investigation",
+      "annotation": "submit_file",
+      "description": "Submits a file to Fortinet FortiSandbox from the FortiSOAR \"Attachments\" module, i.e., based on the attachment IRI you have specified.",
+      "title": "Submit File",
+      "parameters": [
+        {
+          "name": "input_type",
+          "title": "Indicator IRI/Attachment ID",
+          "tooltip": "File type support: 32bit and 64bit executable file, applies to all the Portable Executables (PE) files. Any text based file, such as HTML,VBA,VBS, JS, PDF, BAT, SH, PHP, XML, power shell scripts, archive formats like .tar, .gz, .tar.gz, .tgz, .zip, .bz2, .rar,office documents, PDFs are also supported.",
+          "type": "select",
+          "description": "Select the method using which you want to submit the file present in FortiSOAR™ for analysis to FortiSandbox. You can choose between Attachment ID and Indicator IRI.If you choose the 'Attachment ID' option, then in the Attachment ID field, you must specify the Attachment ID of the FortiSOAR™ file that you want to submit for analysis to FortiSandbox.If you choose the 'Indicator IRI' option, then in the Indicator IRI field, you must specify the IRI of the FortiSOAR™ file that you want to submit for analysis to FortiSandbox.The supported file types are 32bit and 64bit executable files, which apply to all the Portable Executables (PE) files, any text-based files, such as HTML, VBA, VBS, JS, PDF, BAT, SH, PHP, XML, etc., power shell scripts, archive formats like .tar, .gz, .tar.gz, .tgz, .zip, .bz2, .rar, office documents, or PDF files. The maximum file size supported is 200 MB. ",
+          "options": [
+            "Attachment ID",
+            "Indicator IRI"
+          ],
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": "Attachment ID",
+          "onchange": {
+            "Attachment ID": [
+              {
+                "name": "attachment_iri",
+                "title": "Attachment IRI",
+                "type": "text",
+                "tooltip": "Provide the FortiSOAR attachment IRI.",
+                "description": "IRI of the attachment that you want to submit to Fortinet FortiSandbox.\n\t\t\tAttachment IRI that is used to access the file directly from the FortiSOAR \"Attachments\" module.",
+                "editable": true,
+                "visible": true,
+                "required": true,
+                "value": ""
+              }
+            ],
+            "Indicator IRI": [
+              {
+                "name": "indicator_iri",
+                "title": "Indicator IRI",
+                "description": "Indicator IRI of the FortiSOAR file that you want to submit for analysis to FortiSandbox",
+                "type": "text",
+                "editable": true,
+                "visible": true,
+                "required": true
+              }
+            ]
+          }
+        },
+        {
+          "name": "overwrite_vm_list",
+          "title": "VM Name",
+          "type": "text",
+          "tooltip": "Scan specified file through provided vm. If not specified, defaults one will be used.",
+          "description": "(Optional) Name of the VM that will scan the specified URL file.\n\t\t\tIf you do not specify a VM Name, then the VM Name will default to the one that will be used.",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "ver": "",
+        "id": "",
+        "result": {
+          "url": "",
+          "status": {
+            "message": "",
+            "code": ""
+          },
+          "data": {
+            "msg": "",
+            "sid": "",
+            "error": ""
+          }
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "submit_urlfile",
+      "category": "investigation",
+      "annotation": "submit_url",
+      "description": "Submits a URL(s) to Fortinet FortiSandbox.",
+      "title": "Submit URL",
+      "parameters": [
+        {
+          "name": "url",
+          "title": "URL",
+          "type": "text",
+          "tooltip": "Provide URL in list format or single value.",
+          "description": "URL that you want to submit to Fortinet FortiSandbox.\nNote: You can submit a single URL or multiple URLs in a list format.",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": ""
+        },
+        {
+          "name": "overwrite_vm_list",
+          "title": "VM Name",
+          "type": "text",
+          "tooltip": "Name of the VM that will scan the specified URL.",
+          "description": "(Optional) Name of the VM that will scan the specified URL.\n\t\t\tIf you do not specify a VM Name, then the VM Name will default to the one that will be used.",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": ""
+        },
+        {
+          "name": "timeout",
+          "title": "Timeout",
+          "type": "integer",
+          "tooltip": "How long the scan will be, in seconds.",
+          "description": "(Optional) Time after which the scan will timeout, i.e., the time in seconds of the length of the scan.\n\t\t\tBy default, the timeout value is set to 60 seconds.",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": 60
+        },
+        {
+          "name": "depth",
+          "title": "Depth",
+          "type": "checkbox",
+          "tooltip": "The depth of web links to scan.",
+          "description": "(Optional) This option specifies the depth of web links this operation should scan. Select this option, i.e., set to True, to crawl into the links of the specified URL for scanning purposes. Deselect this option, i.e., set to False, to scan only the specified URL and not any links within the URL.",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "value": true
+        }
+      ],
+      "output_schema": {
+        "ver": "",
+        "id": "",
+        "result": {
+          "url": "",
+          "status": {
+            "message": "",
+            "code": ""
+          },
+          "data": {
+            "msg": "",
+            "sid": "",
+            "error": ""
+          }
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_system_status",
+      "category": "investigation",
+      "annotation": "get_system_status",
+      "description": "Retrieves the status of the system from Fortinet FortiSandbox.",
+      "title": "Get System Status",
+      "parameters": [],
+      "output_schema": {
+        "result": {
+          "url": "",
+          "data": {
+            "Hostname": "",
+            "64-bit Applications": "",
+            "License Status": "",
+            "vm_network_access": "",
+            "Platform Type": "",
+            "Patch": "",
+            "wf_server_accessible": "",
+            "Current Time": "",
+            "Time Zone": "",
+            "win_lic_activated": "",
+            "Branch Point": "",
+            "FIPS Mode": "",
+            "Minor": "",
+            "Major": "",
+            "Build": "",
+            "Admin Domain Configuration": "",
+            "Version": "",
+            "Platform Full Name": "",
+            "fdn_server_accessible": "",
+            "Serial Number": "",
+            "cloud_server_accessible": "",
+            "Release Version Information": ""
+          },
+          "status": {
+            "message": "",
+            "code": ""
+          }
+        },
+        "ver": "",
+        "id": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_scan_stats",
+      "category": "investigation",
+      "annotation": "get_scan_stats",
+      "description": "Retrieves the scan stats for the last 7 days from Fortinet FortiSandbox.",
+      "title": "Get Scan Stats",
+      "parameters": [],
+      "output_schema": {
+        "result": {
+          "url": "",
+          "data": {
+            "processing": "",
+            "suspicious_medium": "",
+            "suspicious_high": "",
+            "suspicious_low": "",
+            "pending": ""
+          },
+          "status": {
+            "message": "",
+            "code": ""
+          }
+        },
+        "ver": "",
+        "id": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_submission_job_list",
+      "category": "investigation",
+      "annotation": "get_job_list",
+      "description": "Retrieves all job IDs associated with the submission ID you have specified from Fortinet FortiSandbox.",
+      "title": "Get Submission Job List",
+      "parameters": [
+        {
+          "name": "sid",
+          "tooltip": "The submission ID got from submit file.",
+          "description": "ID of the submission whose associated Job IDs you want to retrieve from Fortinet FortiSandbox.",
+          "title": "Submission ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "result": {
+          "url": "",
+          "data": {
+            "total_jids": "",
+            "jids": []
+          },
+          "status": {
+            "message": "",
+            "code": ""
+          }
+        },
+        "ver": "",
+        "id": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_scan_result_job",
+      "category": "investigation",
+      "annotation": "get_job_detail",
+      "description": "Retrieves job verdict detail for job ID you have specified from Fortinet FortiSandbox.",
+      "title": "Get Job Verdict Detail",
+      "parameters": [
+        {
+          "name": "jid",
+          "title": "Job ID",
+          "description": "ID of the job whose job verdict details you want to retrieve from Fortinet FortiSandbox.",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "ver": "",
+        "id": "",
+        "result": {
+          "url": "",
+          "status": {
+            "message": "",
+            "code": ""
+          },
+          "data": {
+            "category": "",
+            "rating": "",
+            "sha256": "",
+            "detection_os": "",
+            "vid": "",
+            "untrusted": "",
+            "start_ts": "",
+            "download_url": "",
+            "sha1": "",
+            "infected_os": "",
+            "score": "",
+            "finish_ts": "",
+            "detail_url": "",
+            "false_positive_negative": "",
+            "now": "",
+            "rating_source": "",
+            "malware_name": ""
+          }
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_file_rating",
+      "category": "investigation",
+      "annotation": "get_file_rating",
+      "description": "Retrieves file rating for the file type and filehash you have specified from Fortinet FortiSandbox.",
+      "title": "Get File Rating",
+      "parameters": [
+        {
+          "title": "Hash Type",
+          "name": "hash_type",
+          "type": "select",
+          "description": "Type of the filehash based on which you want to retrieve the file rating from Fortinet FortiSandbox.\n\t\t\tYou can choose from the following values: MD5, SHA1, or SHA256.",
+          "options": [
+            "MD5",
+            "SHA1",
+            "SHA256"
+          ],
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": "SHA1"
+        },
+        {
+          "title": "Filehash",
+          "name": "file_hash",
+          "tooltip": "Provide the value of filehash (considering the filehash type you have chosen from the Hash Type drop-down list)",
+          "description": "Value of the filehash (considering the filehash type you have chosen from the Hash Type drop-down list) based on which you want to retrieve the file rating from Fortinet FortiSandbox.",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "ver": "",
+        "id": "",
+        "result": {
+          "url": "",
+          "status": {
+            "message": "",
+            "code": 0
+          },
+          "data": {
+            "rating": [],
+            "untrusted": "",
+            "start_ts": "",
+            "score": "",
+            "finish_ts": "",
+            "now": ""
+          }
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_url_rating",
+      "category": "investigation",
+      "annotation": "get_url_rating",
+      "description": "Get rating details for the URL you have specified from Fortinet FortiSandbox.",
+      "title": "Get URL Rating",
+      "parameters": [
+        {
+          "title": "URL",
+          "name": "url",
+          "tooltip": "Provide the value in list format or single value.",
+          "description": "URL for which you want to retrieve the rating details from Fortinet FortiSandbox.",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "ver": "",
+        "id": "",
+        "result": {
+          "url": "",
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "data": [
+            {
+              "url": "",
+              "rating": [],
+              "start_ts": "",
+              "finish_ts": "",
+              "untrusted": "",
+              "now": "",
+              "behavior_info": ""
+            }
+          ]
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_file_verdict",
+      "category": "investigation",
+      "annotation": "get_file_verdict",
+      "description": "Retrieves the file verdict details for the file type and filehash you have specified from Fortinet FortiSandbox.",
+      "title": "Get File Verdict",
+      "parameters": [
+        {
+          "title": "Hash Type",
+          "name": "hash_type",
+          "type": "select",
+          "description": "Type of the filehash based on which you want to retrieve the file verdict details from Fortinet FortiSandbox.\n\t\t\tYou can choose from the following values: MD5, SHA1, or SHA256.",
+          "options": [
+            "MD5",
+            "SHA1",
+            "SHA256"
+          ],
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": "SHA1"
+        },
+        {
+          "title": "Filehash",
+          "name": "file_hash",
+          "tooltip": "Provide the value of filehash (considering the filehash type you have chosen from the Hash Type drop-down list)",
+          "description": "Value of the filehash (considering the filehash type you have chosen from the Hash Type drop-down list) based on which you want to retrieve the file verdict details from Fortinet FortiSandbox.",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "result": {
+          "status": {
+            "message": "",
+            "code": ""
+          },
+          "data": [
+            {
+              "job_list": [
+                {
+                  "finish_ts": "",
+                  "malware_name": "",
+                  "start_ts": "",
+                  "untrusted": "",
+                  "rating": "",
+                  "jid": "",
+                  "vid": "",
+                  "false_positive_negative": "",
+                  "score": "",
+                  "rsrcid": "",
+                  "behavior_info": ""
+                }
+              ],
+              "kidsum": "",
+              "now": "",
+              "sid": "",
+              "checksum": ""
+            }
+          ],
+          "url": ""
+        },
+        "id": "",
+        "ver": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_job_behaviour",
+      "category": "investigation",
+      "annotation": "get_job_details",
+      "description": "Retrieves job behavior details associated with the file type and filehash you have specified from Fortinet FortiSandbox.",
+      "title": "Get Job Behaviour",
+      "parameters": [
+        {
+          "title": "Hash Type",
+          "name": "hash_type",
+          "type": "select",
+          "description": "Type of the filehash whose associated job behaviour details you want to retrieve from Fortinet FortiSandbox.\n\t\t\tYou can choose from the following values: MD5, SHA1, or SHA256.",
+          "options": [
+            "MD5",
+            "SHA1",
+            "SHA256"
+          ],
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": "SHA1"
+        },
+        {
+          "title": "Filehash",
+          "name": "file_hash",
+          "tooltip": "Provide the value of filehash (considering the filehash type you have chosen from the Hash Type drop-down list)",
+          "description": "Value of the filehash (considering the filehash type you have chosen from the Hash Type drop-down list) whose associated job behaviour details you want to retrieve from Fortinet FortiSandbox.",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "result": {
+          "status": {
+            "message": "",
+            "code": ""
+          },
+          "data": {
+            "behavior_files": ""
+          },
+          "url": ""
+        },
+        "ver": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_avrescan",
+      "category": "investigation",
+      "annotation": "get_scan_result",
+      "description": "Retrieves AV-Rescan results for the time duration you have specified from Fortinet FortiSandbox.",
+      "title": "Get AV-Rescan Result",
+      "parameters": [
+        {
+          "title": "From",
+          "name": "stime",
+          "description": "Start datetime from when you want to retrieve the AV-Rescan results from Fortinet FortiSandbox.",
+          "tooltip": "Start datetime from when you want to retrieve the AV-Rescan results.",
+          "type": "datetime",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "To",
+          "name": "etime",
+          "description": "End datetime till when you want to retrieve the AV-Rescan results from Fortinet FortiSandbox.",
+          "tooltip": "End datetime till when you want to retrieve the AV-Rescan results.",
+          "type": "datetime",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Need AV Version",
+          "name": "need_av_ver",
+          "tooltip": "If true, only return AV version.",
+          "description": "(Optional) Select this option, i.e., set as True, if you want this operation to return only the AV version.\n\t\t\tBy default, this is deselected, i.e., set as False.",
+          "type": "checkbox",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "result": {
+          "url": "",
+          "status": {
+            "message": "",
+            "code": ""
+          },
+          "data": {
+            "rescan_list": [],
+            "avadb_ver": ""
+          }
+        },
+        "ver": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_installed_vm",
+      "category": "investigation",
+      "annotation": "get_installed_vm",
+      "description": "Retrieves the names and the clone numbers of all installed VMs on Fortinet FortiSandbox.",
+      "title": "Get All Installed VM",
+      "parameters": [],
+      "output_schema": {
+        "result": {
+          "data": {
+            "vm-list": [
+              {
+                "version": "",
+                "clonenum": "",
+                "status": "",
+                "name": "",
+                "id": ""
+              }
+            ]
+          },
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "url": ""
+        },
+        "ver": "",
+        "id": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_pdf_report",
+      "category": "investigation",
+      "annotation": "get_report",
+      "description": "Retrieves a PDF report from Fortinet FortiSandbox based on the query type and value parameter you have specified and creates an attachment in the FortiSOAR \"Attachment\" module if the report is found.",
+      "title": "Get PDF Report",
+      "parameters": [
+        {
+          "title": "Query Type",
+          "name": "qtype",
+          "description": "Type of query to be used to retrieve the PDF report from Fortinet FortiSandbox.\nNote: Query type only supports SHA256 filehash.",
+          "type": "text",
+          "required": true,
+          "editable": false,
+          "visible": true,
+          "value": "sha256"
+        },
+        {
+          "title": "Query Value",
+          "name": "qval",
+          "tooltip": "Provide the value of sha256 to fetch the report",
+          "description": "Value of the SHA256 filehash based on which you want to retrieve the PDF report from Fortinet FortiSandbox.",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    },
+    {
+      "operation": "download_hashes_url_from_mwpkg",
+      "category": "investigation",
+      "annotation": "list_filehash_url",
+      "description": "Retrieves a list of file hashes or URLs based on the type you have specified from the Malware Package or URL Package in Fortinet FortiSandbox.",
+      "title": "List Filehash or URL From Malware Package or URL Package",
+      "parameters": [
+        {
+          "title": "Type",
+          "name": "type",
+          "tooltip": "Select the type which you want to download from malware package or url package.",
+          "options": [
+            "MD5",
+            "SHA256",
+            "SHA1",
+            "URL"
+          ],
+          "description": "Type based on which you want to retrieve a list of file hashes or URLs from the Malware Package or URL Package in Fortinet FortiSandbox.\n\t\t\tYou can choose from the following values: MD5, SHA1, SHA256, or URL.",
+          "type": "select",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": "SHA1"
+        },
+        {
+          "title": "Lazy",
+          "name": "lazy",
+          "tooltip": "False: use specified major and minor number; True: get the latest version.",
+          "description": "Use this parameter to specify the major and minor number of the Malware Package or the URL Package.\n\t\t\tIf you clear this option, i.e., set it to False, then the list of file hashes or URLs is retrieved from the Malware Package or URL Package of the specified major and minor number.\n\t\t\tIf you select this option, i.e., set it to True, then the latest version of the Malware Package or URL Package is used to retrieve the list of file hashes or URLs.\n\t\t\tIf this parameter is set as False, then you must specify the following:\n\t\t\t\nMajor: Major number of the Malware Package or the URL Package to be used to retrieve the list of file hashes or URLs.\nMinor: Minor number of the Malware Package or the URL Package to be used to retrieve the list of file hashes or URLs.",
+          "type": "checkbox",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": false,
+          "onchange": {
+            "false": [
+              {
+                "title": "Major Number",
+                "name": "major",
+                "tooltip": "Provide the major number of package.",
+                "description": "Provide the major number of package.",
+                "type": "integer",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "value": ""
+              },
+              {
+                "title": "Minor Number",
+                "name": "minor",
+                "tooltip": "Provide the minor number of package.",
+                "description": "Provide the minor number of package.",
+                "type": "integer",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "value": ""
+              }
+            ]
+          }
+        }
+      ],
+      "output_schema": {
+        "result": {
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "url": "",
+          "data": {
+            "md5sum": "",
+            "major": "",
+            "download_file": "",
+            "minor": ""
+          }
+        },
+        "id": "",
+        "ver": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "mark_sample_fp_fn",
+      "category": "miscellaneous",
+      "annotation": "toggle_fpn_state",
+      "description": "Marks specified sample based on the Job ID you have specified as false negative or false positive in Fortinet FortiSandbox.",
+      "title": "Toggle FPN State",
+      "parameters": [
+        {
+          "title": "Job ID",
+          "name": "jid",
+          "description": "Job ID that you want to mark as false negative or false positive in Fortinet FortiSandbox.",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        },
+        {
+          "title": "Comments",
+          "name": "comments",
+          "description": "Comments that you want to provide for marking the specified job as false negative or false positive.",
+          "tooltip": "Comments for FN/FP.",
+          "type": "text",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": ""
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "ver": "",
+        "result": {
+          "data": {
+            "msg": ""
+          },
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "url": ""
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "handle_white_black_list",
+      "category": "miscellaneous",
+      "annotation": "update_white_black_list",
+      "description": "Updates an existing whitelist or an existing blacklist in Fortinet FortiSandbox, based on the input parameter such as indicator type and value, and action you have specified.",
+      "title": "Update White or Black List",
+      "parameters": [
+        {
+          "title": "List Type",
+          "name": "list_type",
+          "description": "Type of list on Fortinet FortiSandbox in which you want to add the indicator.\n\t\t\tYou can select from the following list types: White or Black.",
+          "type": "select",
+          "options": [
+            "WHITE",
+            "BLACK"
+          ],
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": "WHITE"
+        },
+        {
+          "title": "Indicator Type",
+          "name": "indicator_type",
+          "description": "Type of indicator that you want to add to the whitelist or blacklist in Fortinet FortiSandbox.\n\t\t\tYou can choose from the following values: MD5, SHA1, SHA256, Domain, URL, or URL Regex.",
+          "type": "select",
+          "options": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "DOMAIN",
+            "URL",
+            "URL REGEX"
+          ],
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": "SHA1"
+        },
+        {
+          "title": "Action",
+          "name": "action",
+          "type": "select",
+          "description": "Action that you want to apply on the whitelist or blacklist in Fortinet FortiSandbox, i.e., you can choose to append the specified indicator to the whitelist or blacklist in Fortinet FortiSandbox, or you can choose to delete the specified indicator from the whitelist or blacklist in Fortinet FortiSandbox.\n\t\t\tYou can choose from the following actions: Append, Replace, Clear, Download, or Delete.",
+          "tooltip": "If you select DOWNLOAD then attachment is created in CyOPs based on the other input parameters that you have specified.",
+          "options": [
+            "APPEND",
+            "REPLACE",
+            "CLEAR",
+            "DOWNLOAD",
+            "DELETE"
+          ],
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "value": "APPEND",
+          "onchange": {
+            "APPEND": [
+              {
+                "title": "Indicator Value",
+                "name": "indicator_value",
+                "tooltip": "Provide the value of indicator in list format or single value (considering the indicator type you have chosen from the Indicator Type drop-down list)",
+                "description": "Value of the indicator (considering the Indicator type you have chosen from the Indicator Type drop-down list) that you want to add to the whitelist or blacklist in Fortinet FortiSandbox.",
+                "type": "text",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "value": ""
+              }
+            ],
+            "REPLACE": [
+              {
+                "title": "Indicator Value",
+                "name": "indicator_value",
+                "tooltip": "Provide the value of indicator in list format or single value (considering the indicator type you have chosen from the Indicator Type drop-down list)",
+                "description": "Value of the indicator (considering the Indicator type you have chosen from the Indicator Type drop-down list) that you want to add to the whitelist or blacklist in Fortinet FortiSandbox.",
+                "type": "text",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "value": ""
+              }
+            ],
+            "DELETE": [
+              {
+                "title": "Indicator Value",
+                "name": "indicator_value",
+                "tooltip": "Provide the value of indicator in list format or single value (considering the indicator type you have chosen from the Indicator Type drop-down list)",
+                "description": "Value of the indicator (considering the Indicator type you have chosen from the Indicator Type drop-down list) that you want to add to the whitelist or blacklist in Fortinet FortiSandbox.",
+                "type": "text",
+                "required": true,
+                "editable": true,
+                "visible": true,
+                "value": ""
+              }
+            ]
+          }
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "ver": "",
+        "result": {
+          "data": {
+            "msg": ""
+          },
+          "status": {
+            "code": "",
+            "message": ""
+          },
+          "url": ""
+        }
+      },
+      "enabled": true
+    }
+  ]
+}

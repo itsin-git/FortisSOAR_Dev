@@ -1,0 +1,1099 @@
+{
+  "name": "carbonblack-response",
+  "label": "VMware Carbon Black EDR",
+  "version": "2.0.2",
+  "description": "VMware Carbon Black EDR is purpose-built for enterprise SOC and IR teams.This connector facilitates automated operation related to endpoint protection like isolate endpoint, unisolate endpoint, hunt file, terminate process etc. with VMware Carbon Black EDR server.",
+  "publisher": "Community",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "category": "Endpoint Protection",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.2/vmware-carbon-black-edr/436/vmware-carbon-black-edr-v2-0-2",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "server_url",
+        "placeholder": "Add server URL",
+        "description": "IP address or Hostname URL of the VMware Carbon Black EDR server to which you will connect and perform the automated operations.\nIf you do not specify the http or https protocol in this field, then by default the https protocol is used."
+      },
+      {
+        "title": "API Key",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "name": "api_key",
+        "description": "API key that is configured for your account to access the VMware Carbon Black EDR REST API."
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "value": true,
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_host_details",
+      "title": "Get Sensor(s) Information",
+      "description": "Retrieves details about all sensors (endpoints) or specific sensor(s) from the VMware Carbon Black EDR server, based on the input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_endpoint_info",
+      "output_schema": [
+        {
+          "sensor_health_message": "",
+          "uninstalled": "",
+          "cookie": "",
+          "sensor_uptime": "",
+          "display": "",
+          "systemvolume_free_size": "",
+          "last_update": "",
+          "notes": "",
+          "registration_time": "",
+          "node_id": "",
+          "emet_report_setting": "",
+          "license_expiration": "",
+          "emet_process_count": "",
+          "emet_dump_flags": "",
+          "uptime": "",
+          "os_type": "",
+          "is_isolating": "",
+          "build_version_string": "",
+          "sensor_health_status": "",
+          "id": "",
+          "computer_sid": "",
+          "emet_telemetry_path": "",
+          "physical_memory_size": "",
+          "num_storefiles_bytes": "",
+          "uninstall": "",
+          "parity_host_id": "",
+          "network_adapters": "",
+          "supports_cblr": "",
+          "last_checkin_time": "",
+          "restart_queued": "",
+          "build_id": "",
+          "emet_exploit_action": "",
+          "shard_id": "",
+          "network_isolation_enabled": "",
+          "os_environment_id": "",
+          "os_environment_display_string": "",
+          "computer_dns_name": "",
+          "supports_2nd_gen_modloads": "",
+          "status": "",
+          "computer_name": "",
+          "emet_version": "",
+          "boot_id": "",
+          "next_checkin_time": "",
+          "emet_is_gpo": "",
+          "group_id": "",
+          "supports_isolation": "",
+          "clock_delta": "",
+          "systemvolume_total_size": "",
+          "power_state": "",
+          "event_log_flush_time": "",
+          "num_eventlog_bytes": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filter Options",
+          "description": "Options based on which the results retrieved from the VMware Carbon Black EDR server will be filtered.\nYou can choose from the following options:\nAll: Retrieves a list along with the details of all the sensors from the VMware Carbon Black EDR server.\nHostname: Retrieves a list along with the details of all sensors from the VMware Carbon Black EDR server that match the hostname you specify.\nIP Address: Retrieves a list along with the details of all sensors from the VMware Carbon Black EDR server that match the IP address you specify.\nSensor ID: Retrieves a list along with the details of all sensors from the VMware Carbon Black EDR server that match the Sensor ID you specify.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "input_type",
+          "options": [
+            "All",
+            "Hostname",
+            "IP Address",
+            "Sensor ID"
+          ],
+          "value": "All"
+        },
+        {
+          "title": "Value",
+          "description": "Specify the value of the filter option you have selected. If you have selected All do not add any input to this field.\nFor example, if you select IP Address, then enter the IP address based on which you want to filter the sensor results retrieved from the VMware Carbon Black EDR servers.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "tooltip": "If Filter Option is [ALL] then this feild is not required"
+        }
+      ]
+    },
+    {
+      "operation": "isolate_sensor",
+      "title": "Isolate Sensor",
+      "description": "Isolates sensor(s) on the VMware Carbon Black EDR server based on Hostname, IP Address, Process Name or Filehash(MD5) you have specified.",
+      "category": "containment",
+      "annotation": "isolate_endpoint",
+      "output_schema": {
+        "isolated_hosts": []
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Input Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "input_type",
+          "options": [
+            "Hostname",
+            "IP Address",
+            "Process Name",
+            "Filehash (MD5)"
+          ],
+          "value": "Hostname",
+          "description": "Options based on which you want to isolate a sensor on the VMware Carbon Black EDR server.\nYou can choose from the following options:\nHostname: Name of the host that you want to isolate on the VMware Carbon Black EDR server.\nIP Address: Single IPv4 address of the host that you want to isolate on the VMware Carbon Black EDR server.\nProcess Name: Isolate all sensors on the VMware Carbon Black EDR server on which the specified process name exists.\nFilehash: Isolate all sensors on the VMware Carbon Black EDR server on which the specified filehash (MD5) exists."
+        },
+        {
+          "title": "Input Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "description": "Specify the value of the input type you have selected.\nFor example, if you select IP Address, then enter the IPv4 address of the host that you want to isolate on the VMware Carbon Black EDR server."
+        }
+      ]
+    },
+    {
+      "operation": "unisolate_sensor",
+      "title": "Remove Isolation",
+      "description": "Removes isolation on sensor(s) from the VMware Carbon Black EDR server based on Hostname, IP Address, Process Name or Filehash(MD5) you have specified.",
+      "category": "remediation",
+      "annotation": "unisolate_endpoint",
+      "output_schema": {
+        "unisolated_hosts": []
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Select Input Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "input_type",
+          "options": [
+            "Hostname",
+            "IP Address",
+            "Process Name",
+            "Filehash (MD5)"
+          ],
+          "value": "Hostname",
+          "description": "Options based on which you want to remove the isolation on sensor(s) from the VMware Carbon Black EDR server.\nYou can choose from the following options:\nHostname: Name of the host whose isolation you want to remove from the VMware Carbon Black EDR server.\nIP Address: Single IPv4 address of the host whose isolation you want to remove from the VMware Carbon Black EDR server.\nProcess Name: Remove isolation for all sensors on the VMware Carbon Black EDR server on which the specified process name exists.\nFilehash: Remove isolation for all sensors on the VMware Carbon Black EDR server on which the specified filehash (MD5) exists."
+        },
+        {
+          "title": "Input Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "description": "Specify the value of the input type you have selected.\nFor example, if you select IP Address, then enter the IPv4 address of the host whose isolation you want to remove from the VMware Carbon Black EDR server."
+        }
+      ]
+    },
+    {
+      "operation": "get_process_list",
+      "title": "Get All Processes",
+      "description": "Retrieves a list of all running processes along with its details from the VMware Carbon Black EDR server, based on the sensor details you have specified.",
+      "category": "investigation",
+      "annotation": "get_processes",
+      "output_schema": [
+        {
+          "parent_guid": "",
+          "parent": "",
+          "command_line": "",
+          "proc_guid": "",
+          "create_time": "",
+          "pid": "",
+          "username": "",
+          "sid": "",
+          "path": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sensor Details",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "input_type",
+          "options": [
+            "Hostname",
+            "IP Address",
+            "Sensor ID"
+          ],
+          "value": "Hostname",
+          "description": "Options based on which you want to retrieve running process information from the VMware Carbon Black EDR server.\nYou can choose from the following options:\nHostname: Name of the host for which you want to retrieve process information from the VMware Carbon Black EDR server.\nIP Address: Single IPv4 address of the host for which you want to retrieve process information from the VMware Carbon Black EDR server.\nSensor ID: ID of the sensor for which you want to retrieve process information from the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Input Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "description": "Specify the value of the sensor details you have selected.\nFor example, if you select IP Address, then enter the IPv4 address of the host for which you want to retrieve process information from the VMware Carbon Black EDR server."
+        }
+      ]
+    },
+    {
+      "operation": "list_connections",
+      "title": "Get Process Connections",
+      "description": "Retrieves a list of connections for a specific sensor and process from the VMware Carbon Black EDR server, based on the sensor and process details you have specified.",
+      "category": "investigation",
+      "annotation": "get_network_connections",
+      "output_schema": {
+        "connections": [
+          {
+            "ip_addr": "",
+            "direction": "",
+            "port": "",
+            "pid": "",
+            "carbonblack_process_id": "",
+            "event_time": "",
+            "domain": "",
+            "protocol": "",
+            "hostname": "",
+            "process_name": ""
+          }
+        ],
+        "hostname": "",
+        "message": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sensor Details",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "input_type",
+          "options": [
+            "Hostname",
+            "IP Address"
+          ],
+          "value": "Hostname",
+          "description": "Options based on which you want to specify the endpoint for which you want to retrieve process connection information from the VMware Carbon Black EDR server.\nYou can choose from the following options:\nHostname: Name of the host for which you want to retrieve process connections information from the VMware Carbon Black EDR server.\nIP Address: Single IPv4 address of the host for which you want to retrieve process connections information from the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "description": "Specify the value of the sensor details you have selected.\nFor example, if you select IP Address, then enter the IPv4 address of the host for which you want to retrieve process connections information from the VMware Carbon Black EDR server"
+        },
+        {
+          "title": "Process Details",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "pname_pid",
+          "options": [
+            "Process ID",
+            "Process Name"
+          ],
+          "value": "Process ID",
+          "tooltip": "Select Process Name or Process ID",
+          "description": "Options based on which you want to specify the process for which you want to retrieve process connection information from the VMware Carbon Black EDR server.\nYou can choose from the following options:\nProcess Name: Name of the process for which you want to retrieve process connections information from the VMware Carbon Black EDR server.\nProcess ID: ID of the process for which you want to retrieve process connections information from the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "proc_pid",
+          "value": "",
+          "description": "Specify the value of the process details you have selected.\nFor example, if you select Process Name, then enter the name of the process for which you want to get network connections from the VMware Carbon Black EDR server."
+        }
+      ]
+    },
+    {
+      "operation": "terminate_process",
+      "title": "Terminate Process",
+      "description": "Terminates a process running on an endpoint on the VMware Carbon Black EDR server, based on the sensor and process details you have specified.",
+      "category": "containment",
+      "annotation": "terminate_process",
+      "output_schema": {
+        "terminated_process": []
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sensor Details",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "input_type",
+          "options": [
+            "Hostname",
+            "IP Address",
+            "Sensor ID"
+          ],
+          "value": "Hostname",
+          "description": "Options based on which you want to specify the endpoint on which you want to terminate the process on the VMware Carbon Black EDR server.\nYou can choose from the following options:\nHostname: Name of the host for which you want to terminate the process on the VMware Carbon Black EDR server.\nIP Address: Single IPv4 address of the host for which you want to terminate the process on the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Input Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "description": "Specify the value of the sensor details you have selected.\nFor example, if you select IP Address, then enter the IPv4 address of the host for which you want to terminate the process on the VMware Carbon Black EDR server"
+        },
+        {
+          "title": "Process Details",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "select_type",
+          "options": [
+            "Process Name",
+            "Process ID"
+          ],
+          "value": "Process ID",
+          "description": "Options based on which you want to specify the which process you want to terminate on the VMware Carbon Black EDR server.\nYou can choose from the following options:\nProcess Name: Name of the process that you want to terminate on the VMware Carbon Black EDR server.\nProcess ID: ID of the process that you want to terminate on the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Input Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "process_value",
+          "value": "",
+          "description": "\tSpecify the value of the process details you have selected.\nFor example, if you select Process Name, then enter the name of the process that you want to terminate on the VMware Carbon Black EDR server"
+        }
+      ]
+    },
+    {
+      "operation": "get_file_info_md5",
+      "title": "Get File Information",
+      "description": "Retrieves information about a file from the VMware Carbon Black EDR server, based on the filehash you have specified.",
+      "category": "investigation",
+      "annotation": "get_file_info",
+      "output_schema": {
+        "icon": "",
+        "product_version": "",
+        "product_name": "",
+        "file_version": "",
+        "facet_id": "",
+        "digsig_result": "",
+        "orig_mod_len": "",
+        "observed_filename": [
+          ""
+        ],
+        "group": [
+          ""
+        ],
+        "os_type": "",
+        "digsig_subject": "",
+        "event_partition_id": [],
+        "endpoint": [
+          ""
+        ],
+        "digsig_prog_name": "",
+        "copied_mod_len": "",
+        "timestamp": "",
+        "cb_version": "",
+        "internal_name": "",
+        "md5": "",
+        "is_executable_image": "",
+        "last_seen": "",
+        "is_64bit": "",
+        "signed": "",
+        "digsig_issuer": "",
+        "company_name": "",
+        "server_added_timestamp": "",
+        "watchlists": [
+          {
+            "wid": "",
+            "value": ""
+          }
+        ],
+        "host_count": "",
+        "original_filename": "",
+        "file_desc": "",
+        "digsig_result_code": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filehash",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "md5",
+          "value": "",
+          "placeholder": "MD5",
+          "tooltip": "Only MD5 allowed",
+          "description": "Filehash value (MD5 hash value only) for the file for which you want to retrieve information from the VMware Carbon Black EDR server.\nNote: To get a result for this operation, you must provide inputs only in the form of process and binary MD5 hash values."
+        }
+      ]
+    },
+    {
+      "operation": "hunt_file",
+      "title": "Hunt file",
+      "description": "Hunts for a file and retrieves details for that file from the VMware Carbon Black EDR server, based on the file type and filehash you have specified.",
+      "category": "investigation",
+      "annotation": "hunt_file",
+      "output_schema": {
+        "total_results": "",
+        "filtered": {},
+        "highlights": [
+          {
+            "ids": [],
+            "name": ""
+          }
+        ],
+        "incomplete_results": "",
+        "results": [
+          {
+            "hostname": "",
+            "path": "",
+            "filtering_known_dlls": "",
+            "parent_name": "",
+            "crossproc_count": "",
+            "start": "",
+            "process_md5": "",
+            "host_type": "",
+            "processblock_count": "",
+            "emet_count": "",
+            "parent_id": "",
+            "id": "",
+            "modload_count": "",
+            "os_type": "",
+            "parent_md5": "",
+            "parent_unique_id": "",
+            "group": "",
+            "segment_id": "",
+            "emet_config": "",
+            "comms_ip": "",
+            "parent_pid": "",
+            "netconn_count": "",
+            "interface_ip": "",
+            "last_update": "",
+            "sensor_id": "",
+            "last_server_update": "",
+            "cmdline": "",
+            "terminated": "",
+            "unique_id": "",
+            "regmod_count": "",
+            "filemod_count": "",
+            "process_pid": "",
+            "childproc_count": "",
+            "username": "",
+            "process_name": ""
+          }
+        ],
+        "start": "",
+        "terms": [
+          ""
+        ],
+        "facets": {},
+        "tagged_pids": {},
+        "comprehensive_search": "",
+        "all_segments": "",
+        "elapsed": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "File Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Process",
+            "Binary"
+          ],
+          "name": "query_type",
+          "value": "Process",
+          "description": "Type of file you want to hunt for on the VMware Carbon Black EDR server.\nYou can choose from the following options: Process or Binary."
+        },
+        {
+          "title": "Filehash",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "md5",
+          "value": "",
+          "placeholder": "MD5",
+          "tooltip": "Only MD5 allowed",
+          "description": "Filehash value (MD5 hash value only) for the file for which you want to retrieve information from the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Start Record from",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "start",
+          "value": 0,
+          "tooltip": "Start at this row",
+          "description": "(Optional) Returns the result retrieved from the VMware Carbon Black EDR server from the specified number. The default is set to 0."
+        },
+        {
+          "title": "Number of Records ",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "rows",
+          "value": 10,
+          "tooltip": "Return this many rows",
+          "description": "(Optional) Number of records that you want this operation to return. The default is set to 10."
+        }
+      ]
+    },
+    {
+      "operation": "get_blacklisted_hash",
+      "title": "Get All Block Hashes",
+      "description": "Retrieves a list of all blacklisted filehashes and their details from the VMware Carbon Black EDR server.",
+      "category": "investigation",
+      "annotation": "get_hash_blacklist",
+      "output_schema": [
+        {
+          "username": "",
+          "audit": [
+            {
+              "username": "",
+              "timestamp": "",
+              "text": "",
+              "enabled": "",
+              "user_id": ""
+            }
+          ],
+          "text": "",
+          "md5hash": "",
+          "block_count": "",
+          "user_id": "",
+          "last_block_sensor_id": "",
+          "enabled": "",
+          "last_block_time": "",
+          "timestamp": "",
+          "last_block_hostname": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": []
+    },
+    {
+      "operation": "block_hash",
+      "title": "Block Hash",
+      "description": "Blocks a particular file on the VMware Carbon Black EDR server, based on the filehash (MD5 only) you have specified.",
+      "category": "containment",
+      "annotation": "block_hash",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filehash",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "md5",
+          "value": "",
+          "placeholder": "MD5",
+          "tooltip": "Only MD5 allowed",
+          "description": "Filehash value (MD5 hash value only) for the file that you want to block on the VMware Carbon Black EDR server."
+        }
+      ]
+    },
+    {
+      "operation": "unblock_hash",
+      "title": "Unblock Hash",
+      "description": "Unblocks a particular file on the VMware Carbon Black EDR server, based on the filehash (MD5 only) you have specified.",
+      "category": "remediation",
+      "annotation": "unblock_hash",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filehash",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "md5",
+          "value": "",
+          "placeholder": "MD5",
+          "tooltip": "Only MD5 allowed",
+          "description": "Filehash value (MD5 hash value only) for the file that you want to unblock on the VMware Carbon Black EDR server."
+        }
+      ]
+    },
+    {
+      "operation": "delete_file",
+      "title": "Delete file",
+      "description": "Deletes a particular file from the VMware Carbon Black EDR server, based on the sensor details and file path you have specified.",
+      "category": "containment",
+      "annotation": "delete_file",
+      "output_schema": {
+        "status": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sensor Details",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "name": "input_type",
+          "options": [
+            "Hostname",
+            "IP Address",
+            "Sensor ID"
+          ],
+          "value": "Hostname",
+          "description": "Options based on which you want to delete a file from the VMware Carbon Black EDR server.\nYou can choose from the following options:\nHostname: Name of the host on which you want to delete a file from the VMware Carbon Black EDR server.\nIP Address: Single IPv4 address of the host on which you want to delete a file from the VMware Carbon Black EDR server.\nSensor ID: ID of the sensor on which you want to delete a file from the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Input Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "value": "",
+          "description": "Specify the value of the input type you have selected. For example, if you select IP Address, then enter the IPv4 address of the host on which you want to delete a file from the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "File Path",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_name",
+          "value": "",
+          "description": "Full path of the file that you want to delete from the VMware Carbon Black EDR server."
+        }
+      ]
+    },
+    {
+      "operation": "run_query",
+      "title": "Run Query",
+      "description": "Runs a search query on the endpoint to retrieve the information of binary or process from the VMware Carbon Black EDR server.",
+      "category": "investigation",
+      "annotation": "run_advance_search",
+      "output_schema": {
+        "all_segments": "",
+        "filtered": {},
+        "tagged_pids": {},
+        "incomplete_results": "",
+        "comprehensive_search": "",
+        "total_results": "",
+        "start": "",
+        "terms": [
+        ],
+        "results": [
+          {
+            "sensor_id": "",
+            "process_md5": "",
+            "processblock_count": "",
+            "process_pid": "",
+            "parent_md5": "",
+            "emet_config": "",
+            "filtering_known_dlls": "",
+            "interface_ip": "",
+            "cmdline": "",
+            "path": "",
+            "regmod_count": "",
+            "username": "",
+            "parent_unique_id": "",
+            "crossproc_count": "",
+            "netconn_count": "",
+            "last_update": "",
+            "segment_id": "",
+            "host_type": "",
+            "filemod_count": "",
+            "unique_id": "",
+            "id": "",
+            "process_name": "",
+            "modload_count": "",
+            "start": "",
+            "terminated": "",
+            "hostname": "",
+            "childproc_count": "",
+            "parent_name": "",
+            "os_type": "",
+            "group": "",
+            "parent_pid": "",
+            "emet_count": "",
+            "comms_ip": "",
+            "parent_id": "",
+            "last_server_update": ""
+          }
+        ],
+        "highlights": [
+          {
+            "ids": [],
+            "name": ""
+          }
+        ],
+        "elapsed": "",
+        "facets": {}
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Query Type",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Process",
+            "Binary"
+          ],
+          "name": "query_type",
+          "value": "Process",
+          "description": "Type of query that you want to run on the VMware Carbon Black EDR server.\nYou can choose from the following options: Process or Binary."
+        },
+        {
+          "title": "CarbonBlack Query",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query",
+          "value": "",
+          "tooltip": "e.g:notepad.exe",
+          "description": "Query to be run on the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Start Record from",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "start",
+          "value": 0,
+          "tooltip": "Start at this row",
+          "description": "(Optional) Returns the result retrieved from the VMware Carbon Black EDR server from the specified number. The default is set to 0."
+        },
+        {
+          "title": "Number of Records ",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "rows",
+          "value": 10,
+          "tooltip": "Return this many rows",
+          "description": "(Optional) Number of records that you want this operation to return. The default is set to 10."
+        }
+      ]
+    },
+    {
+      "operation": "search_alert",
+      "title": "Search Alerts",
+      "description": "Searches for alerts on the VMware Carbon Black EDR server, based on the search query you have specified.",
+      "category": "investigation",
+      "annotation": "search_alert",
+      "output_schema": {
+        "total_results": "",
+        "filtered": {},
+        "start": "",
+        "comprehensive_search": "",
+        "terms": [
+          ""
+        ],
+        "results": [
+          {
+            "feed_name": "",
+            "netconn_count": "",
+            "os_type": "",
+            "_version_": "",
+            "modload_count": "",
+            "feed_rating": "",
+            "filemod_count": "",
+            "watchlist_id": "",
+            "sensor_id": "",
+            "ioc_attr": "",
+            "username": "",
+            "regmod_count": "",
+            "comms_ip": "",
+            "total_hosts": "",
+            "group": "",
+            "report_score": "",
+            "status": "",
+            "watchlist_name": "",
+            "process_unique_id": "",
+            "sensor_criticality": "",
+            "process_path": "",
+            "alert_type": "",
+            "process_name": "",
+            "unique_id": "",
+            "interface_ip": "",
+            "feed_id": "",
+            "observed_hosts": {
+              "accurateHostCount": "",
+              "processCount": "",
+              "hostnames": [
+                {
+                  "value": "",
+                  "name": ""
+                }
+              ],
+              "numDocs": "",
+              "numFound": "",
+              "hostCount": "",
+              "globalCount": "",
+              "processTotal": ""
+            },
+            "segment_id": "",
+            "md5": "",
+            "ioc_confidence": "",
+            "created_time": "",
+            "hostname": "",
+            "ioc_type": "",
+            "childproc_count": "",
+            "crossproc_count": "",
+            "alert_severity": "",
+            "process_id": ""
+          }
+        ],
+        "elapsed": "",
+        "highlights": [],
+        "facets": {},
+        "all_segments": "",
+        "incomplete_results": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "CarbonBlack Query",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "query",
+          "value": "",
+          "placeholder": "e.g. process_name:svchost.exe",
+          "tooltip": "Either CB Query or Status parameter is required.",
+          "description": "Custom search query to retrieve alerts from the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "options": [
+            "All",
+            "In Progress",
+            "Unresolved",
+            "Resolved",
+            "False Positive"
+          ],
+          "name": "status",
+          "value": "",
+          "tooltip": "Either CB Query or Status parameter is required.",
+          "description": "Status of the alert that you are searching for on the VMware Carbon Black EDR server.\nYou can select from the following options: All, In Progress, Unresolved, Resolved, and False Positive."
+        },
+        {
+          "title": "Sort By",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Severity",
+            "Most Recent",
+            "Least Recent",
+            "Alert Name Ascending",
+            "Alert Name Descending"
+          ],
+          "name": "sort_by",
+          "value": "Severity",
+          "description": "Sort the results retrieved from the VMware Carbon Black EDR server based on this option.\nYou can choose from the following options: Severity, Most Recent, Least Recent, Alert Name Ascending or Alert Name Descending."
+        },
+        {
+          "title": "Start Record from",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "start",
+          "value": 0,
+          "tooltip": "Start at this row",
+          "description": "(Optional) Returns the result retrieved from the VMware Carbon Black EDR server from the specified number. The default is set to 0."
+        },
+        {
+          "title": "Number of Records ",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "rows",
+          "value": 10,
+          "tooltip": "Return these many rows",
+          "description": "(Optional) Number of records that you want this operation to return. The default is set to 10."
+        }
+      ]
+    },
+    {
+      "operation": "update_alert",
+      "title": "Update Alert",
+      "description": "Updates the status of an alert on the VMware Carbon Black EDR server, based on the input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_alert",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Unique ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "unique_id",
+          "value": "",
+          "description": "Unique ID of the alert whose status you want to update on the VMware Carbon Black EDR server."
+        },
+        {
+          "title": "Status",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Resolved",
+            "In Progress",
+            "False Positive",
+            "Unresolved"
+          ],
+          "name": "status",
+          "value": "",
+          "description": "Status to which you want the specified alert to be updated on the VMware Carbon Black EDR server.\nYou can choose from the following options: Resolved, In Progress, False Positive, or Unresolved."
+        }
+      ]
+    },
+    {
+      "operation": "bulk_update_alert",
+      "title": "Bulk Update Alerts",
+      "description": "Updates the status of multiple alerts on the VMware Carbon Black EDR server, based on the input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_alert",
+      "output_schema": {
+        "result": ""
+      },
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Alert IDs",
+          "description": "Comma-separated list of unique IDs of alerts whose status you want to update on the VMware Carbon Black EDR server.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "alert_id",
+          "value": "",
+          "tooltip": "Unique IDs of the alert in CSV format"
+        },
+        {
+          "title": "Status",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "options": [
+            "Resolved",
+            "In Progress",
+            "False Positive",
+            "Unresolved"
+          ],
+          "name": "status",
+          "value": "",
+          "description": "Status to which you want the specified alerts to be updated on the VMware Carbon Black EDR server.\nYou can choose from the following options: Resolved, In Progress, False Positive, or Unresolved."
+        }
+      ]
+    },
+    {
+      "operation": "get_watchlist",
+      "title": "Get Watchlist",
+      "description": "Retrieves a list along with its details for all watchlists or specific watchlist (if you have specified the watchlist ID) from the VMware Carbon Black EDR server.",
+      "category": "investigation",
+      "annotation": "get_watchlist",
+      "output_schema": [
+        {
+          "description": "",
+          "readonly": "",
+          "search_query": "",
+          "enabled": "",
+          "date_added": "",
+          "total_tags": "",
+          "search_timestamp": "",
+          "total_hits": "",
+          "name": "",
+          "last_hit": "",
+          "last_hit_count": "",
+          "id": "",
+          "index_type": "",
+          "group_id": ""
+        }
+      ],
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Watchlist ID",
+          "description": "Unique ID of the watchlist whose details you want to retrieve from the VMware Carbon Black EDR server.\nNote: If you do not specify any watchlist ID, then this operation will retrieve a list of all available watchlists from the VMware Carbon Black EDR server.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "watchlist_id",
+          "value": "",
+          "tooltip": "If not specified then operation will return a list of watchlists."
+        }
+      ]
+    }
+  ]
+}

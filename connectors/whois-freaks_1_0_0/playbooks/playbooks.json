@@ -1,0 +1,264 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "uuid": "01f8b143-e188-4e29-a998-e61734361be4",
+      "@type": "WorkflowCollection",
+      "name": "Sample - WhoisFreaks - 1.0.0",
+      "description": "WhoisFreaks provide well-parsed and structured domain WHOIS data for all domain names, registrars, countries and TLDs since the birth of internet. The carefully crawled current and historical domain data is available in the form of REST APIs, lookup tools, and downloadable database",
+      "visible": true,
+      "image": null,
+      "recordTags": [
+        "Whois",
+        "whois-freaks"
+      ],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "uuid": "e655bdbd-20f6-4af5-8ea3-b23ef9b7b956",
+          "collection": "/api/3/workflow_collections/01f8b143-e188-4e29-a998-e61734361be4",
+          "triggerLimit": null,
+          "description": "Gives users access to complete historical WHOIS records, including domain ownership and registrar information over time",
+          "name": "Get Whois Lookup",
+          "tag": "#WhoisFreaks",
+          "recordTags": [
+            "Whois",
+            "whois-freaks"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0b7dfc91-c4f0-4414-bd79-487bf7c3cd19",
+          "steps": [
+            {
+              "uuid": "0b7dfc91-c4f0-4414-bd79-487bf7c3cd19",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "4248b9f2-78e2-48e0-a2a7-2c18c7a0633b",
+                "title": "WhoisFreaks: Get Whois Lookup",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "2fbf1419-72af-4901-a458-c76b262e41b0",
+              "@type": "WorkflowStep",
+              "name": "Get Whois Lookup",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "WhoisFreaks",
+                "config": "''",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "whois-freaks",
+                "operation": "whois_lookup",
+                "operationTitle": "Get Whois Lookup",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "7657e5c5-2150-408b-9534-894f03e0842b",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Whois Lookup",
+              "sourceStep": "/api/3/workflow_steps/0b7dfc91-c4f0-4414-bd79-487bf7c3cd19",
+              "targetStep": "/api/3/workflow_steps/2fbf1419-72af-4901-a458-c76b262e41b0"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "d1367add-621a-4549-bc1f-f49307f89fb4",
+          "collection": "/api/3/workflow_collections/01f8b143-e188-4e29-a998-e61734361be4",
+          "triggerLimit": null,
+          "description": "Retrieves DNS Lookup for a specified domain name from WhoisFreaks. A DNS lookup provides a domain's corresponding IP address from its 'A' record as well as the domain's mail server (MX record), NameServer (NS record), SPF (TXT record), and more records",
+          "name": "Get DNS Lookup",
+          "tag": "#WhoisFreaks",
+          "recordTags": [
+            "Whois",
+            "whois-freaks"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/528d2c92-eebb-4930-9484-c0c46685965a",
+          "steps": [
+            {
+              "uuid": "528d2c92-eebb-4930-9484-c0c46685965a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "d9a0bbe1-2d94-4884-832d-2ac5f47c5c35",
+                "title": "WhoisFreaks: Get DNS Lookup",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "a3a587dc-c440-4e33-8472-4ff0c46393ca",
+              "@type": "WorkflowStep",
+              "name": "Get DNS Lookup",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "WhoisFreaks",
+                "config": "''",
+                "params": {
+                  "type": "all"
+                },
+                "version": "1.0.0",
+                "connector": "whois-freaks",
+                "operation": "dns_lookup",
+                "operationTitle": "Get DNS Lookup",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "b56c1a78-5614-4515-a874-443de1160687",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get DNS Lookup",
+              "sourceStep": "/api/3/workflow_steps/528d2c92-eebb-4930-9484-c0c46685965a",
+              "targetStep": "/api/3/workflow_steps/a3a587dc-c440-4e33-8472-4ff0c46393ca"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "ccdf20ac-2fc5-480f-8f32-969854ef192a",
+          "collection": "/api/3/workflow_collections/01f8b143-e188-4e29-a998-e61734361be4",
+          "triggerLimit": null,
+          "description": "Obtains a domain name's Secure Sockets Layer (SSL) certificate and trace its complete SSL certificate chain to reveal potential inconsistencies and misconfigurations that may translate to exploitable vulnerabilities. A single SSL Certificate Chain API query provides details that can ease your security enrichment efforts, allowing you to know which domains are trustworthy and which are not",
+          "name": "Get SSL Certificates",
+          "tag": "#WhoisFreaks",
+          "recordTags": [
+            "Whois",
+            "whois-freaks"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/9520fe49-ea1d-48a6-9840-c2c5d5231ea1",
+          "steps": [
+            {
+              "uuid": "9520fe49-ea1d-48a6-9840-c2c5d5231ea1",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "route": "f064f467-e02d-4a18-b2fd-7f03344ed00a",
+                "title": "WhoisFreaks: Get SSL Certificates",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "singleRecordExecution": false,
+                "noRecordExecution": true,
+                "executeButtonText": "Execute"
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a"
+            },
+            {
+              "uuid": "b1787d5e-0bf3-4f93-b793-51df55a32e72",
+              "@type": "WorkflowStep",
+              "name": "Get SSL Certificates",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "WhoisFreaks",
+                "config": "''",
+                "params": {
+                  "chain": false,
+                  "SSLRaw": false
+                },
+                "version": "1.0.0",
+                "connector": "whois-freaks",
+                "operation": "ssl_certificates",
+                "operationTitle": "Get SSL Certificates",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "8a6d1ef6-5548-4c92-95f6-c405554f0506",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get SSL Certificates",
+              "sourceStep": "/api/3/workflow_steps/9520fe49-ea1d-48a6-9840-c2c5d5231ea1",
+              "targetStep": "/api/3/workflow_steps/b1787d5e-0bf3-4f93-b793-51df55a32e72"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

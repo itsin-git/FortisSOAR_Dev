@@ -1,0 +1,152 @@
+{
+  "name": "microsoft-sccm",
+  "label": "Microsoft SCCM",
+  "description": "Microsoft SCCM Connector",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "version": "1.0.0",
+  "category": "Windows Endpoint Management",
+  "icon_small_name": "icon_small.jpeg",
+  "icon_large_name": "icon_large.jpg",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000063465-sccm-v1-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Address",
+        "name": "address",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text"
+      },
+      {
+        "title": "Username",
+        "name": "user",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text"
+      },
+      {
+        "title": "Password",
+        "name": "password",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password"
+      },
+      {
+        "title": "WinRM Port",
+        "name": "port",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "integer",
+        "value": 5986
+      },
+      {
+        "title": "WinRM Protocol",
+        "name": "protocol",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "select",
+        "options": ["http", "https"],
+        "value": "https"
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "value": true
+      },
+      {
+        "title": "Do Not Fail on WinRM Command Failure",
+        "name": "do_not_fail",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "value": false
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "get_patches",
+      "annotation": "get_patches",
+      "category": "investigation",
+      "title": "Get All Software Updates",
+      "description": "List All Software Updates Available",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {"op_status": 0, "op_result":[{"IsDeployed": "", "DateRevised": "", "BulletinID": "", "DatePosted": "", "PercentCompliant": "", "ArticleID": "", "LocalizedDisplayName": "","IsSuperseded": "", "IsExpired": ""}]}
+    },
+    {
+      "operation": "get_device_collections",
+      "title": "Get All Device Collections",
+      "annotation": "get_devices",
+      "category": "investigation",
+      "description": "List All Device Collections",
+      "parameters": [],
+      "enabled": true,
+      "output_schema": {"op_status": 0, "op_result": [{"MemberClassName": "", "LastRefreshTime": "", "ISVDataSize": "", "PowerConfigsCount": "",
+        "LimitToCollectionName": "", "PSShowComputerName": "", "Name": "", "LastMemberChangeTime": "", "CollectionVariablesCount": "",
+        "LimitToCollectionID": "", "PSComputerName": "", "UseCluster": "", "HasProvisionedMember": "", "MonitoringFlags": "",
+        "ISVData": "", "OwnedByThisSite": "", "LocalMemberCount": "", "IsBuiltIn": "", "LastChangeTime": "", "MemberCount": "",
+        "IncludeExcludeCollectionsCount": "", "RefreshType": "", "CollectionRules": "", "ServiceWindowsCount": "", "RefreshSchedule": "",
+        "Comment": "", "CollectionType": "", "CollectionID": "", "ISVString": "", "SmsProviderObjectPath": "", "ObjectPath": "",
+        "CurrentStatus": "", "ReplicateToSubSites": "", "IsReferenceCollection": ""}]}
+    },
+    {
+      "operation": "deploy_patch",
+      "title": "Deploy Patch",
+      "annotation": "deploy_patch",
+      "category": "remediation",
+      "description": "Deploy the Specified Software Patch on All Clients Belonging to the Specified Device Collection",
+      "parameters": [
+        {
+          "title": "Software Patch Name",
+          "description": "Software Patch Name",
+          "name": "patch_name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text"
+        },
+        {
+          "name": "collection_name",
+          "title": "Device Collection Name",
+          "description": "Device Collection Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text"
+        },
+        {
+          "name": "additional_params",
+          "title": "Additional Deployment Parameters",
+          "description": "Additional Deployment Parameters",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "textarea",
+          "value": "-DeploymentType Required -DisableOperationsManagerAlert $True -GenerateOperationsManagerAlert $True -GenerateSuccessAlert $True -ProtectedType RemoteDistributionPoint -UnprotectedType UnprotectedDistributionPoint -UserNotification DisplaySoftwareCenterOnly -TimeBasedOn LocalTime -VerbosityLevel AllMessages -AcceptEula"
+        }
+      ],
+      "enabled": true,
+      "output_schema": {"op_status": 0, "op_result":{"SmsProviderObjectPath":  "", "ApplyToSubTargets":  "", "AssignedCIs":  "", "AssignmentAction":  "", "AssignmentDescription":  "",
+        "AssignmentID":  "", "AssignmentName":  "","AssignmentType":  "","AssignmentUniqueID":  "","ContainsExpiredUpdates":  "", "CreationTime":  "",
+        "DesiredConfigType":  "", "DisableMomAlerts":  "", "DPLocality":  "", "Enabled":  "", "EnforcementDeadline":  "", "EvaluationSchedule":  "",
+        "ExpirationTime":  "","LastModificationTime":  "", "LastModifiedBy":  "", "LimitStateMessageVerbosity":  "", "LocaleID":  "", "LogComplianceToWinEvent":  "",
+        "NonComplianceCriticality":  "", "NotifyUser":  "", "OverrideServiceWindows":  "", "PersistOnWriteFilterDevices":  "", "RaiseMomAlertsOnFailure":  "",
+        "RandomizationEnabled":  "", "RebootOutsideOfServiceWindows":  "", "RequirePostRebootFullScan":  "", "SendDetailedNonComplianceStatus":  "",
+        "SoftDeadlineEnabled":  "", "SourceSite":  "", "StartTime":  "", "StateMessagePriority":  "", "StateMessageVerbosity":  "", "SuppressReboot":  "",
+        "TargetCollectionID":  "", "UseBranchCache":  "", "UseGMTTimes":  "", "UserUIExperience":  "", "WoLEnabled":  "", "PSComputerName":  "", "PSShowComputerName":  ""}}
+    }
+    ]
+}

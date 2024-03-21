@@ -1,0 +1,126 @@
+{
+  "name": "fsr-agent-communication-bridge",
+  "label": "FSR Agent Communication Bridge",
+  "version": "1.0.0",
+  "description": "Establishes and enables a network communication bridge (web server on agent) that allows users to provide manual inputs from an unauthenticated page spun and hosted within the agent's network premises.",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/fsr-agent-communication-bridge/403/fsr-agent-communication-bridge-v1-0-0",
+  "cs_compatible": true,
+  "tags": ["webserver"],
+  "category": "Utilities",
+  "icon_small_name": "agent-communication-bridge_small.png",
+  "icon_large_name": "agent-communication-bridge_large.png",
+  "multi_configuration_allowed": false,
+  "configuration": {
+    "fields": [
+      {
+        "name": "hostname",
+        "title": "FQHN",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "FQHN for Agent",
+        "tooltip": "DNS resolvable address to the agent virtual machine"
+      },
+      {
+        "name": "port",
+        "title": "Port",
+        "type": "integer",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "value": 8443,
+        "description": "Port number that the Web Server will run on",
+        "tooltip": "The port at which the Web Server at the agent virtual machine should run. All input URLs would be constructed as https://<host>:<port>/<input_id>. Defaults to 8443. Ensure that this port is open in the firewall of the agent."
+      },
+      {
+        "name": "ssl_cert",
+        "title": "SSL Certificate for the Web Server",
+        "type": "certificate",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "SSL Certificate for the Web Server",
+        "tooltip": "Provide the certificate content in this field and not the path. The certificate should start with '-----BEGIN CERTIFICATE----- ' and end with '-----END CERTIFICATE-----'"
+      },
+      {
+        "name": "ssl_key",
+        "title": "SSL Certificate Key for the Web Server",
+        "type": "certificate",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "SSL Certificate Key for the Web Server (This should be PKCS#8 format.)",
+        "tooltip": "Provide the certificate key content in this field and not the path. The key should start with '-----BEGIN PRIVATE KEY----- ' and end with '-----END PRIVATE KEY-----'"
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "fetch_maunal_input_details",
+      "title": "Fetch Manual Input Details",
+      "annotation": "fetch_maunal_input_details",
+      "description": "Fetch manual input details from respective master instance.",
+      "category": "miscellaneous",
+      "is_config_required": false,
+      "visible": false,
+      "enabled": true,
+      "output_schema": {},
+      "parameters": [
+        {
+          "name": "manual_input_id",
+          "title": "Manual Input ID",
+          "type": "integer",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "placeholder": "1",
+          "value": 0,
+          "description": "ID of manual input to be fetched"
+        },
+        {
+        "name": "token",
+        "title": "Restricted Token",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "Restricted token for authenticating the manual input to prevent unauthorized use"
+        }
+      ]
+    },
+    {
+      "operation": "resume_playbook",
+      "title": "Resume Playbook",
+      "annotation": "resume_playbook",
+      "description": "Edit operation description",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": false,
+      "enabled": true,
+      "output_schema": {},
+      "parameters": [
+        {
+          "name": "web_data",
+          "title": "Resume Workflow Input",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "data required for resuming the playbook"
+        },
+        {
+        "name": "token",
+        "title": "Restricted Token",
+        "type": "text",
+        "editable": true,
+        "visible": true,
+        "required": true,
+        "description": "Restricted token for authenticating the manual input to prevent unauthorized use"
+        }
+      ]
+    }
+  ]
+}

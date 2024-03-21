@@ -1,0 +1,82 @@
+{
+  "name": "fortinet-web-filter-lookup",
+  "version": "2.0.0",
+  "label": "Fortinet Web Filter Lookup",
+  "description": "Fortinet Web Filter Lookup allows users to check category and classification for any Domain",
+  "publisher": "Fortinet",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "category": "Threat Intelligence",
+  "icon_small_name": "cyops_small.png",
+  "icon_large_name": "cyops_large.png",
+  "tags": [
+    "Enrichment",
+    "URL_Enrichment",
+    "Domain_Enrichment"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.0.0/fortinet-web-filter-lookup/560/fortinet-web-filter-lookup-v2-0-0",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "name": "base_url",
+        "description": "The URL of the Fortinet Web Filter Lookup endpoint that will be used to consume the premium API for FortiGuard. By default, it is set tohttps://premiumapi.fortinet.com. For more information on Premium Services offered by FortiGuard, see theFortiGuard Lab's Premium Services page.",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": "https://premiumapi.fortinet.com"
+      },
+      {
+        "title": "Token",
+        "name": "token",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "description": "The API access token used to connect to the premium API for FortiGuard and perform automated operations. For information on generating an access token, see theGenerating the Access Token topic.",
+        "tooltip": "The API access token that is required to connect to the Fortinet Web Filter Lookup server and perform automated operations."
+      },
+      {
+        "title": "Verify SSL",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set to True.",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "url_review",
+      "annotation": "url_review",
+      "description": "Checks the categorization of the domain or URL you have specified and retrieves the category and information about the specified domain or URL from Fortinet Web Filter Lookup.",
+      "category": "investigation",
+      "title": "Check Category of Domain or URL",
+      "parameters": [
+        {
+          "name": "sample_url",
+          "title": "Submit Domain/URL",
+          "description": "Valid Domain or URL that you want to submit to Fortinet Web Filter Lookup for the review process and whose categorization and information you want to retrieve from Fortinet Web Filter Lookup.",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": "",
+          "tooltip": "Specify a valid domain or url for the review process.",
+          "placeholder": "example.com or https://example.com"
+        }
+      ],
+      "output_schema": {
+        "url": "",
+        "category": "",
+        "info": ""
+      },
+      "enabled": true
+    }
+  ]
+}

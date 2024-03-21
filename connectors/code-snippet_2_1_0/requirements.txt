@@ -1,0 +1,3 @@
+PyYAML
+jsonpickle
+RestrictedPython==6.2

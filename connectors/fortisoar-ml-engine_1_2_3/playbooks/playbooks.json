@@ -1,0 +1,288 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - FortiSOAR ML Engine - 1.0.0",
+      "description": "Sample playbooks for \"FortiSOAR ML Engine\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "/api/3/images/f068fb2b-9ee0-493b-8e4d-f2cd5928df04",
+      "uuid": "58606cdc-ce0e-44d7-b3ec-6bb9bd368415",
+      "id": 11,
+      "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "createDate": 1614257215,
+      "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "modifyDate": 1614257215,
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Generate Training Set",
+          "aliasName": null,
+          "tag": null,
+          "description": "Sample playbook to generate training set",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1614339058,
+          "collection": "/api/3/workflow_collections/58606cdc-ce0e-44d7-b3ec-6bb9bd368415",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/6b0b2f57-c70c-4ce7-9dab-c4a5b0bda31a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Generate Training Set",
+              "description": null,
+              "arguments": {
+                "name": "FortiSOAR ML Engine",
+                "config": "6210669b-5794-46e9-98db-140abd41db53",
+                "params": [],
+                "version": "1.0.0",
+                "connector": "fortisoar-ml-engine",
+                "operation": "train",
+                "operationTitle": "Train",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "222",
+              "left": "430",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "34346bf9-1755-42ec-9566-1121f44f1ae9",
+              "id": 194
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a6c7a44e-f52e-45d8-89b3-691da9c6b0c6",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "6b0b2f57-c70c-4ce7-9dab-c4a5b0bda31a",
+              "id": 195
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Generate Training Set",
+              "targetStep": "/api/3/workflow_steps/34346bf9-1755-42ec-9566-1121f44f1ae9",
+              "sourceStep": "/api/3/workflow_steps/6b0b2f57-c70c-4ce7-9dab-c4a5b0bda31a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a01e98f8-0900-4c7b-99e0-811390c99a9a"
+            }
+          ],
+          "priority": null,
+          "uuid": "064192a6-80e0-4959-bdda-df371afcfc8a",
+          "recordTags": ["fortisoar-ml-engine", "mlengine", "train"],
+          "id": 52,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1614257215,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1614339058,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Predict",
+          "aliasName": null,
+          "tag": null,
+          "description": "Sample playbook to predict record's field(s)",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1608676368,
+          "collection": "/api/3/workflow_collections/58606cdc-ce0e-44d7-b3ec-6bb9bd368415",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3e5898a4-1a75-4d70-bafb-23ac48053bcb",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "c75c85bc-fc51-445c-9916-03888387a028",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "3e5898a4-1a75-4d70-bafb-23ac48053bcb",
+              "id": 196
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Predict",
+              "description": null,
+              "arguments": {
+                "name": "FortiSOAR ML Engine",
+                "config": "6210669b-5794-46e9-98db-140abd41db53",
+                "params": {
+                  "id": 10123
+                },
+                "version": "1.0.0",
+                "connector": "fortisoar-ml-engine",
+                "operation": "predict",
+                "operationTitle": "Predict",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "220",
+              "left": "400",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "a05c9682-1b0c-4934-9ed9-970060e050bd",
+              "id": 197
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Predict",
+              "targetStep": "/api/3/workflow_steps/a05c9682-1b0c-4934-9ed9-970060e050bd",
+              "sourceStep": "/api/3/workflow_steps/3e5898a4-1a75-4d70-bafb-23ac48053bcb",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2cba670a-e347-451f-a6ce-12fa3b05d9ee"
+            }
+          ],
+          "priority": null,
+          "uuid": "2e453bc6-0d7d-4bed-9b8b-74fc56322f3f",
+          "recordTags": ["fortisoar-ml-engine", "mlengine", "predict"],
+          "id": 53,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1614257215,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1614339032,
+          "owners": [],
+          "isPrivate": false
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Fetch Similar Records",
+          "aliasName": null,
+          "tag": null,
+          "description": "Sample playbook to fetch similar records",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1614339182,
+          "collection": "/api/3/workflow_collections/58606cdc-ce0e-44d7-b3ec-6bb9bd368415",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/cc77e7a8-a760-4e12-9841-e816cc1a9362",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8f9c6e3c-98f5-4892-a5d4-c5fda9f114ba",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "40",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "cc77e7a8-a760-4e12-9841-e816cc1a9362",
+              "id": 4352
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Similar Record",
+              "description": null,
+              "arguments": {
+                "name": "FortiSOAR ML Engine",
+                "config": "9963ab0a-9014-4bd1-a65b-37489c83a757",
+                "params": {
+                  "records": "/api/3/alerts/123"
+                },
+                "version": "1.0.0",
+                "connector": "fortisoar-ml-engine",
+                "operation": "similar",
+                "operationTitle": "Fetch similar record(s)",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "220",
+              "left": "40",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "1893b46c-61d3-4a36-9dea-7335dac2236e",
+              "id": 4353
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Fetch Similar Record",
+              "targetStep": "/api/3/workflow_steps/1893b46c-61d3-4a36-9dea-7335dac2236e",
+              "sourceStep": "/api/3/workflow_steps/cc77e7a8-a760-4e12-9841-e816cc1a9362",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "df9abe32-ea7e-43d3-9220-a9a8697771ce"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "a04288b0-3c86-4e9b-8b08-bca46af7e638",
+          "recordTags": ["fortisoar-ml-engine", "mlengine", "fetch"],
+          "id": 1036,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1614339117,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1614339182,
+          "owners": [],
+          "isPrivate": false
+        }
+      ]
+    }
+  ],
+  "exported_tags": ["fortisoar-ml-engine", "mlengine", "train"]
+}

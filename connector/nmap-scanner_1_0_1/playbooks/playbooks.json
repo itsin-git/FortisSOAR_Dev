@@ -1,0 +1,111 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - NAMP Scanner - 1.0.0",
+      "description": "Nmap is a security scanner provide detailed network information",
+      "visible": true,
+      "image": null,
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Scan Network",
+          "description": "Execute NMAP scan for provided host or IP address",
+          "collection": "/api/3/workflow_collections/c4df18dc-4f9a-4ef3-8e55-6235905c6e81",
+          "tag": "#nmap-scanner",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f15b7d3b-a1f7-4cbd-99a8-52d342b28f74",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Scan Network",
+              "description": null,
+              "arguments": {
+                "name": "NMAP Scanner",
+                "params": {
+                  "args": "",
+                  "port": "1000-1024",
+                  "hostname": "172.217.7.238"
+                },
+                "version": "1.0.0",
+                "connector": "nmap-scanner",
+                "operation": "scan_network",
+                "operationTitle": "Scan Network",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "280",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "37b66765-da10-4c1f-9bd0-5aeddc13eac6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Response",
+              "description": null,
+              "arguments": {
+                "response": "{{vars.result.data}}"
+              },
+              "status": null,
+              "left": "280",
+              "top": "248",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "d88437a3-341a-4671-98a6-73bfe26a60da"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "3efbf73e-a0eb-48f6-9899-39dc7a53f308",
+                "title": "NMAP: Scan Network",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.request.data.records}}"
+                  }
+                },
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "left": "280",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "f15b7d3b-a1f7-4cbd-99a8-52d342b28f74"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "56a61e28-a777-488b-9c7a-ffcc728bfe7a",
+              "name": "Start -> Scan Network",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/37b66765-da10-4c1f-9bd0-5aeddc13eac6",
+              "sourceStep": "/api/3/workflow_steps/f15b7d3b-a1f7-4cbd-99a8-52d342b28f74"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e5f6d174-f118-445f-abb8-91b3a7df2d38",
+              "name": "Scan Network -> Save Response",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/d88437a3-341a-4671-98a6-73bfe26a60da",
+              "sourceStep": "/api/3/workflow_steps/37b66765-da10-4c1f-9bd0-5aeddc13eac6"
+            }
+          ],
+          "uuid": "87ee6188-91df-4027-9290-e06713004192"
+        }
+      ],
+      "uuid": "c4df18dc-4f9a-4ef3-8e55-6235905c6e81"
+    }
+  ]
+}

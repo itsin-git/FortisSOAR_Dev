@@ -1,0 +1,1793 @@
+{
+  "name": "cyberark",
+  "version": "2.0.0",
+  "label": "CyberArk",
+  "description": "CyberArk provide secure and manage password and other credentials for applications. This connector facilitates automated crud operations for Account Group, User, Safe and Credentials.",
+  "publisher": "CyberSponse",
+  "cs_approved": true,
+  "cs_compatible": true,
+  "tags": [
+    "vault"
+  ],
+  "category": "Vault",
+  "help_online": "https://help.cybersponse.com/support/solutions/articles/17000097830-cyberark-v2-0-0",
+  "icon_small_name": "CyberArk_small.png",
+  "icon_large_name": "CyberArk_large.png",
+  "ingestion_supported": false,
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "name": "server_url",
+        "description": "URL of the CyberArk server to which you will connect and perform automated operations.",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true,
+        "value": ""
+      },
+      {
+        "title": "Username",
+        "name": "username",
+        "description": "Username used to access the CyberArk server to which you will connect and perform the automated operations.",
+        "value": "",
+        "type": "text",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Password",
+        "name": "password",
+        "description": "Password used to access the CyberArk server to which you will connect and perform the automated operations.",
+        "value": "",
+        "type": "password",
+        "visible": true,
+        "editable": true,
+        "required": true
+      },
+      {
+        "title": "Use As Vault",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "value": true,
+        "type": "checkbox",
+        "name": "vault",
+        "description": "CyberArk integration has other important actions apart from its usage as purely a vault. However, if you intend to use it as a vault in the system, check this option, i.e., set it to \"True\" and configure the following additional parameters that are required for the vault to work:Application ID: Application ID that has been issued to you by CyberArk, which is used for the password retrieval process.See the \"Creating an application in CyberArk\" section for the procedure on how to create an application in CyberArk.Safe Name: Name of the Safe that stores the credentials, including passwords.",
+        "tooltip": "CyberArk integration has multiple other important actions apart from its usage as purely a vault. However, if you intend to use it as a vault in the system, check this option and configure additional inputs needed for the vault to work.",
+        "onchange": {
+          "true": [
+            {
+              "title": "Application ID",
+              "name": "AppID",
+              "description": "Application ID that has been issued to you by CyberArk, which is used for the password retrieval process.See the \"Creating an application in CyberArk\" section for the procedure on how to create an application in CyberArk.",
+              "type": "text",
+              "visible": true,
+              "editable": true,
+              "required": true
+            },
+            {
+              "title": "Safe Name",
+              "name": "Safe",
+              "description": "Name of the Safe that stores the credentials, including passwords.",
+              "type": "text",
+              "visible": true,
+              "editable": true,
+              "required": true
+            }
+          ],
+          "false": []
+        }
+      },
+      {
+        "title": "Verify SSL",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.By default, this option is set as True.",
+        "name": "verify_ssl",
+        "type": "checkbox",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "add_safe",
+      "category": "miscellaneous",
+      "annotation": "add_safe",
+      "description": "Adds new safe to the vault based on the safe name and other input parameters you have specified.",
+      "title": "Add Safe",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "name": "SafeName",
+          "description": "Name of the safe that you want to add to the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Retention",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Defines the retention policy for the safe that you are adding to the vault. You can choose between retaining the safe in the vault for a number of versions or for a number of days.If you choose Number of Versions Retention, then you can specify the following parameter:Number of Versions Retention: (Optional) Number of versions of the safe that you want to retain in the vault. Valid values are 1 to 999.If you choose Number of Days Retention, then you can specify the following parameter:Number of Days Retention: (Optional) Number of days that you want to retain the safe in the vault. Valid values are 1 to 3650",
+          "name": "retention",
+          "options": [
+            "Number of Versions Retention",
+            "Number of Days Retention"
+          ],
+          "onchange": {
+            "Number of Versions Retention": [
+              {
+                "title": "Number of Versions Retention",
+                "name": "NumberofVersionsRetention",
+                "description": "(Optional) Number of versions of the safe you want to retain in the vault. Valid values are 1 to 999.",
+                "type": "integer",
+                "visible": true,
+                "editable": true,
+                "required": false,
+                "tooltip": "Valid values are 1 to 999."
+              }
+            ],
+            "Number of Days Retention": [
+              {
+                "title": "Number of Days Retention",
+                "name": "NumberofDaysRetention",
+                "description": "(Optional) Number of days you want to retain the safe in the vault. Valid values are 1 to 3650",
+                "type": "integer",
+                "visible": true,
+                "editable": true,
+                "required": false,
+                "tooltip": "Valid values are 1 to 3650."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Description",
+          "name": "Description",
+          "description": "(Optional) Description of the safe that you want to add to the Vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Description length upto 100 characters."
+        },
+        {
+          "title": "Managing CPM",
+          "name": "ManagingCPM",
+          "description": "(Optional) Name of the CPM that will manage the safe that you want to add to Vault.For example, PasswordManager.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "An existing CPM user or empty string to prevent the CPM from managing the Safe."
+        },
+        {
+          "title": "OLAC Enabled",
+          "name": "OLACEnabled",
+          "description": "Select this option, i.e., set it to true to enable Object Level Access Control (OLAC).",
+          "value": true,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+      ],
+      "output_schema": {
+        "NumberOfDaysRetention": "",
+        "NumberOfVersionsRetention": "",
+        "OLACEnabled": "",
+        "AutoPurgeEnabled": "",
+        "ManagingCPM": "",
+        "SafeName": "",
+        "Description": "",
+        "Location": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "list_safes",
+      "category": "investigation",
+      "annotation": "list_safes",
+      "description": "Retrieves information for all of the users safes in the Vault.",
+      "title": "List Safes",
+      "parameters": [
+        {
+          "title": "Limit",
+          "name": "limit",
+          "description": "Number of safes wants to fetch from CyberArk.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "validation": {
+            "pattern": "^[1-9][0-9]*$",
+            "patternError": "Value should be greater than 0.",
+            "maxlength": "",
+            "minlength": ""
+          }
+        }
+      ],
+      "output_schema": {
+        "Safes": [
+          {
+            "SafeUrlId": "",
+            "SafeName": "",
+            "Description": "",
+            "Location": ""
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_safe_details",
+      "category": "investigation",
+      "annotation": "safe_details",
+      "description": "Retrieves details about a specific safe in the vault based on the safe name you have specified.",
+      "title": "Get Safe Details",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "description": "Name of the safe for which you want to retrieve the details from the vault.",
+          "name": "Safe",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "NumberOfDaysRetention": "",
+        "NumberOfVersionsRetention": "",
+        "OLACEnabled": "",
+        "AutoPurgeEnabled": "",
+        "ManagingCPM": "",
+        "SafeName": "",
+        "Description": "",
+        "Location": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "search_safe",
+      "category": "investigation",
+      "annotation": "safe_details",
+      "description": "Retrieves information about the safes in the vault based on the criteria mentioned in the search query you have specified.",
+      "title": "Search Safe",
+      "parameters": [
+        {
+          "title": "Search Query",
+          "description": "Query using which you want to retrieve details about safes from the vault.",
+          "name": "query",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "Safes": [
+          {
+            "SafeUrlId": "",
+            "SafeName": "",
+            "Description": "",
+            "Location": ""
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_safe_account_groups",
+      "category": "investigation",
+      "annotation": "get_safe_account_groups",
+      "description": "Retrieves all the existing account groups that are associated with a specific safe in the vault based on the safe name you have specified.",
+      "title": "Get Safe Account Groups",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "name": "SafeName",
+          "description": "Name of the safe whose associated account group details you want to retrieve from the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": [
+        {
+          "GroupID": "",
+          "GroupName": "",
+          "GroupPlatformID": "",
+          "Safe": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "update_safe",
+      "category": "miscellaneous",
+      "annotation": "update_safe",
+      "description": "Updates an existing safe in the vault based on the safe name and other input parameters you have specified.",
+      "title": "Update Safe",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "name": "SafeName",
+          "description": "Name of the safe that you want to update in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Location",
+          "name": "Location",
+          "description": "Location of the safe that you want to update in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Valid location that you want to update safe in the vault is \\"
+        },
+        {
+          "title": "OLAC Enabled",
+          "name": "OLACEnabled",
+          "description": "Select this option, i.e., set it to true to enable Object Level Access Control (OLAC).",
+          "value": true,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Retention",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "select",
+          "description": "Defines the retention policy for the safe that you are adding to the vault. You can choose between retaining the safe in the vault for a number of versions or for a number of days.If you choose Number of Versions Retention, then you can specify the following parameter:Number of Versions Retention: (Optional) Number of versions of the safe that you want to retain in the vault. Valid values are 1 to 999.If you choose Number of Days Retention, then you can specify the following parameter:Number of Days Retention: (Optional) Number of days that you want to retain the safe in the vault. Valid values are 1 to 3650",
+          "name": "retention",
+          "options": [
+            "Number of Versions Retention",
+            "Number of Days Retention"
+          ],
+          "onchange": {
+            "Number of Versions Retention": [
+              {
+                "title": "Number of Versions Retention",
+                "name": "NumberofVersionsRetention",
+                "description": "(Optional) Number of versions of the safe you want to retain in the vault. Valid values are 1 to 999.",
+                "type": "integer",
+                "visible": true,
+                "editable": true,
+                "required": false,
+                "tooltip": "Valid values are 1 to 999."
+              }
+            ],
+            "Number of Days Retention": [
+              {
+                "title": "Number of Days Retention",
+                "name": "NumberofDaysRetention",
+                "description": "(Optional) Number of days you want to retain the safe in the vault. Valid values are 1 to 3650.",
+                "type": "integer",
+                "visible": true,
+                "editable": true,
+                "required": false,
+                "tooltip": "Valid values are 1 to 3650."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Description",
+          "name": "Description",
+          "description": "Description of the safe that you want to update in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Description length upto 100 characters."
+        },
+        {
+          "title": "Managing CPM",
+          "name": "ManagingCPM",
+          "description": "Name of the CPM that will manage the safe that you want to update in the vault.For example, PasswordManager.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "An existing CPM user or empty string to prevent the CPM from managing the Safe."
+        }
+      ],
+      "output_schema": {
+        "NumberOfDaysRetention": "",
+        "NumberOfVersionsRetention": "",
+        "OLACEnabled": "",
+        "AutoPurgeEnabled": "",
+        "ManagingCPM": "",
+        "SafeName": "",
+        "Description": "",
+        "Location": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "delete_safe",
+      "category": "miscellaneous",
+      "annotation": "delete_safe",
+      "description": "Deletes a specified safe from the vault based on the safe name you have specified.",
+      "title": "Delete Safe",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "description": "Name of the safe that you want to delete from the vault.",
+          "name": "SafeName",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "message": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "add_safe_member",
+      "category": "miscellaneous",
+      "annotation": "add_safe_member",
+      "description": "Adds an existing user as a safe member in the vault based on the safe name, member name, and other input parameters you have specified.Note: This operation also provides parameters that let the administrator define the type of permission that administrators want to assign to the user that they are adding as a safe member to the specific safe in the vault.",
+      "title": "Add Safe Member",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "name": "SafeName",
+          "description": "Name of the safe in which you want to add a specific member as a safe member.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Member Name",
+          "name": "MemberName",
+          "description": "Name of the member who you want to add as a safe member to the specific safe.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Member Name always a application name"
+        },
+        {
+          "title": "IsExpired Membership Enable",
+          "name": "IsExpiredMembershipEnable",
+          "description": "Select this option to assign permission to the safe member that you are adding to enable the expiration of safe members' membership.Note: This and the following parameters define the type of permission that the administrator wants to assign to the user that you want to add as a safe member to the specific safe in the vault.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Use Accounts",
+          "name": "UseAccounts",
+          "description": "Select this option to assign permission to the safe member that you are adding to add the safe members who can use this account but not able to view the passwords. This is applicable to the safe member.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Retrieve Accounts",
+          "name": "RetrieveAccounts",
+          "description": "Select this option to assign permission to the safe member that you are adding to have the ability to view and retrieve accounts associated with the user that you are adding as a safe member in the vault.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "List Accounts",
+          "name": "ListAccounts",
+          "description": "Select this option to assign permission to the safe member that you are adding to allow the safe member to view account lists.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Add Accounts",
+          "name": "AddAccounts",
+          "description": "Select this option to assign permission to the safe member that you are adding to add accounts in the safe. Users who are given Add Accounts authorization receive Update Account Properties as well.Users who are assigned this permission are automatically assigned the permission to Update Account Properties. Therefore, when Add Accounts=True then Update Account Properties should also be True.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Update Account Content",
+          "name": "UpdateAccountContent",
+          "description": "Select this option to assign permission to the safe member that you are adding to update the account content of a safe member.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Update Account Properties",
+          "name": "UpdateAccountProperties",
+          "description": "Select this option to assign permission to the safe member that you are adding to update the existing account properties of safe members. When you enable the Add Accounts permission, the Update Account Properties permission is automatically enabled.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Initiate CPM Account Management Operations",
+          "name": "InitiateCPMAccountManagementOperations",
+          "description": "Select this option to assign permission to the safe member that you are adding to initiate password management operations through CPM, such as changing passwords, verifying and reconciling passwords. When this parameter is cleared, i.e., set to false, then the Specify Next Account Content parameter is automatically set to false.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Specify Next Account Content",
+          "name": "SpecifyNextAccountContent",
+          "description": "Select this option to assign permission to the safe member that you are adding to specify the password that will be used when the CPM changes the password value. This parameter can only be specified when Initiate CPM Account Management Operations is set to true. If you clear the Initiate CPM Account Management Operations parameter, i.e., set to false, then this parameter is automatically set to false.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Rename Accounts",
+          "name": "RenameAccounts",
+          "description": "Select this option to assign permission to the safe member that you are adding to rename existing accounts in the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Delete Accounts",
+          "name": "DeleteAccounts",
+          "description": "Select this option to assign permission to the safe member that you are adding to delete existing accounts from the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Unlock Accounts",
+          "name": "UnlockAccounts",
+          "description": "Select this option to assign permission to the safe member that you are adding to unlock accounts that are locked by other users.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Manage Safe",
+          "name": "ManageSafe",
+          "description": "Select this option to assign permission to the safe member that you are adding to perform administrative tasks of the safe, such as, updating the safe properties, recovering the safe, deleting the safe, etc.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Manage Safe Members",
+          "name": "ManageSafeMembers",
+          "description": "Select this option to assign permission to the safe member that you are adding to add and remove safe members, and update their authorizations in the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Backup Safe",
+          "name": "BackupSafe",
+          "description": "Select this option to assign permission to the safe member that you are adding to create a backup of a safe and its contents, and store the contents in another location of the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "View Audit Log",
+          "name": "ViewAuditLog",
+          "description": "Select this option to assign permission to the safe member that you are adding to view account and user activity in the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "View Safe Members",
+          "name": "ViewSafeMembers",
+          "description": "Select this option to assign permission to the safe member that you are adding to view account permissions of the safe members.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Access Without Confirmation",
+          "name": "AccessWithoutConfirmation",
+          "description": "Select this option to assign permission to the safe member that you are adding to access the safe without confirmation from other authorized users. This overrides the \"Safe Properties\" that specify that safe members require confirmation to access the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Create Folders",
+          "name": "CreateFolders",
+          "description": "Select this option to assign permission to the safe member that you are adding to create folders in the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Delete Folders",
+          "name": "DeleteFolders",
+          "description": "Select this option to assign permission to the safe member that you are adding to delete folders from the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Move Accounts And Folders",
+          "name": "MoveAccountsAndFolders",
+          "description": "Select this option to assign permission to the safe member that you are adding to move accounts and folders of the safe to different folders and subfolders.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Requests Authorization Level1",
+          "name": "RequestsAuthorizationLevel1",
+          "description": "Select this option to assign permission to the safe member that you are adding to access the safe without confirmation from other authorized users. This overrides the \"Safe Properties\" that specify that safe members require confirmation to access the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Requests Authorization Level2",
+          "name": "RequestsAuthorizationLevel2",
+          "description": "Select this option to assign permission to the safe member that you are adding to access the safe without confirmation from other authorized users. This overrides the \"Safe Properties\" that specify that safe members require confirmation to access the safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "MemberType": "",
+        "IsPredefinedUser": "",
+        "MemberName": "",
+        "IsExpiredMembershipEnable": "",
+        "MembershipExpirationDate": "",
+        "Permissions": {
+          "UseAccounts": "",
+          "RetrieveAccounts": "",
+          "ListAccounts": "",
+          "AddAccounts": "",
+          "UpdateAccountContent": "",
+          "UpdateAccountProperties": "",
+          "InitiateCPMAccountManagementOperations": "",
+          "SpecifyNextAccountContent": "",
+          "RenameAccounts": "",
+          "DeleteAccounts": "",
+          "UnlockAccounts": "",
+          "ManageSafe": "",
+          "ManageSafeMembers": "",
+          "BackupSafe": "",
+          "ViewAuditLog": "",
+          "ViewSafeMembers": "",
+          "AccessWithoutConfirmation": "",
+          "CreateFolders": "",
+          "DeleteFolders": "",
+          "MoveAccountsAndFolders": "",
+          "RequestsAuthorizationLevel1": "",
+          "RequestsAuthorizationLevel2": ""
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "list_safe_members",
+      "category": "investigation",
+      "annotation": "list_safe_members",
+      "description": "Retrieves a list of members of the specified safe from the vault, based on the safe name you have specified.",
+      "title": "List Safe Members",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "description": "Name of the safe whose safe members you want to retrieve from the vault.",
+          "name": "SafeName",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "SafeMembers": [
+          {
+            "MemberType": "",
+            "IsPredefinedUser": "",
+            "MemberName": "",
+            "IsExpiredMembershipEnable": "",
+            "MembershipExpirationDate": "",
+            "Permissions": {
+              "UseAccounts": "",
+              "RetrieveAccounts": "",
+              "ListAccounts": "",
+              "AddAccounts": "",
+              "UpdateAccountContent": "",
+              "UpdateAccountProperties": "",
+              "InitiateCPMAccountManagementOperations": "",
+              "SpecifyNextAccountContent": "",
+              "RenameAccounts": "",
+              "DeleteAccounts": "",
+              "UnlockAccounts": "",
+              "ManageSafe": "",
+              "ManageSafeMembers": "",
+              "BackupSafe": "",
+              "ViewAuditLog": "",
+              "ViewSafeMembers": "",
+              "AccessWithoutConfirmation": "",
+              "CreateFolders": "",
+              "DeleteFolders": "",
+              "MoveAccountsAndFolders": "",
+              "RequestsAuthorizationLevel1": "",
+              "RequestsAuthorizationLevel2": ""
+            }
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "update_safe_member",
+      "category": "investigation",
+      "annotation": "update_safe_member",
+      "description": "Updates an existing safe member in the vault based on the safe name, member name, and other input parameters you have specified.Note: This operation also provides parameters that let the administrator define the type of permission that administrators want to assign to the user that they are updating as a safe member to the specific safe in the vault.",
+      "title": "Update Safe Member",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "name": "SafeName",
+          "description": "Name of the safe in which you want to update a specific member as a safe member.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Member Name",
+          "name": "MemberName",
+          "description": "Name of the member who you want to update as a safe member to the specific safe.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Member Name always a application name"
+        },
+        {
+          "title": "IsExpired Membership Enable",
+          "name": "IsExpiredMembershipEnable",
+          "description": "Select this option to assign permission to the safe member that you are updating to enable the expiration of safe members' membership.Note: This and the following parameters define the type of permission that the administrator wants to assign to the user that you want to add as a safe member to the specific safe in the vault.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Use Accounts",
+          "name": "UseAccounts",
+          "description": "Select this option to assign permission to the safe member that you are updating to add the safe members who can use this account but not able to view the passwords. This is applicable to the safe member.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Retrieve Accounts",
+          "name": "RetrieveAccounts",
+          "description": "Select this option to assign permission to the safe member that you are updating to have the ability to view and retrieve accounts associated with the user that you are adding as a safe member in the vault.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "ListAccounts",
+          "name": "ListAccounts",
+          "description": "Set permission of safe Member to view accounts list.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "AddAccounts",
+          "name": "AddAccounts",
+          "description": "Set permission of safe Member to add account in the Safe. Users who are given Add Accounts authorization receive Update Account Properties as well. Users who have this permission automatically. Have Update Account Properties as well.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "UpdateAccountContent",
+          "name": "UpdateAccountContent",
+          "description": "Set permission to update existing account content of safe member.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "UpdateAccountProperties",
+          "name": "UpdateAccountProperties",
+          "description": "Set permission to update existing account properties of safe member. When Add Accounts permission enabled,  automatically Update Account Properties permission enable.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "InitiateCPMAccountManagementOperations",
+          "name": "InitiateCPMAccountManagementOperations",
+          "description": "Enable permission of safe member to initiate password management operations through CPM, such as changing passwords, verifying and reconciling passwords. When this parameter is set to false, the Specify Next Account Content is automatically set to false.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "SpecifyNextAccountContent",
+          "name": "SpecifyNextAccountContent",
+          "description": "Set permission of safe member, to specify the password that will be used when the CPM changes the password value. This parameter can only be specified when Initiate CPM Account Management Operations is set to true. When Initiate CPM Account Management Operations is set to false this parameter is automatically set to false.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "RenameAccounts",
+          "name": "RenameAccounts",
+          "description": "Set permission of safe Member to Rename existing accounts in the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "DeleteAccounts",
+          "name": "DeleteAccounts",
+          "description": "Set permission of safe Member to Delete existing passwords in the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "UnlockAccounts",
+          "name": "UnlockAccounts",
+          "description": "Set permission of safe Member to Unlock accounts that are locked by other users.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "ManageSafe",
+          "name": "ManageSafe",
+          "description": "Set permission of safe Member to Perform administrative tasks in the Safe, including: Update Safe properties, Recover the Safe, Delete the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "ManageSafeMembers",
+          "name": "ManageSafeMembers",
+          "description": "Set permission of safe Member to Add and remove Safe members, and update their authorizations in the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "BackupSafe",
+          "name": "BackupSafe",
+          "description": "Set permission of safe Member, to create a backup of a Safe and its contents, and store in another location of safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "ViewAuditLog",
+          "name": "ViewAuditLog",
+          "description": "Set permission to View account and user activity in the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "ViewSafeMembers",
+          "name": "ViewSafeMembers",
+          "description": "Set permission to View Safe members permissions.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "AccessWithoutConfirmation",
+          "name": "AccessWithoutConfirmation",
+          "description": "Set permission to access the Safe without confirmation from authorized users. This overrides the Safe properties that specify that Safe members require confirmation to access the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "CreateFolders",
+          "name": "CreateFolders",
+          "description": "Set permission to safe member for create folders in the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "DeleteFolders",
+          "name": "DeleteFolders",
+          "description": "Set permission to safe member for delete folders in the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "MoveAccountsAndFolders",
+          "name": "MoveAccountsAndFolders",
+          "description": "Allow safe member to move accounts and folders in the Safe to different folders and subfolders.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "RequestsAuthorizationLevel1",
+          "name": "RequestsAuthorizationLevel1",
+          "description": "Set permission to safe member to access the Safe without confirmation from authorized users. This overrides the Safe properties that specify that Safe members require confirmation to access the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "RequestsAuthorizationLevel2",
+          "name": "RequestsAuthorizationLevel2",
+          "description": "Set permission to safe member to access the Safe without confirmation from authorized users. This overrides the Safe properties that specify that Safe members require confirmation to access the Safe.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "MemberType": "",
+        "IsPredefinedUser": "",
+        "MemberName": "",
+        "IsExpiredMembershipEnable": "",
+        "MembershipExpirationDate": "",
+        "Permissions": {
+          "UseAccounts": "",
+          "RetrieveAccounts": "",
+          "ListAccounts": "",
+          "AddAccounts": "",
+          "UpdateAccountContent": "",
+          "UpdateAccountProperties": "",
+          "InitiateCPMAccountManagementOperations": "",
+          "SpecifyNextAccountContent": "",
+          "RenameAccounts": "",
+          "DeleteAccounts": "",
+          "UnlockAccounts": "",
+          "ManageSafe": "",
+          "ManageSafeMembers": "",
+          "BackupSafe": "",
+          "ViewAuditLog": "",
+          "ViewSafeMembers": "",
+          "AccessWithoutConfirmation": "",
+          "CreateFolders": "",
+          "DeleteFolders": "",
+          "MoveAccountsAndFolders": "",
+          "RequestsAuthorizationLevel1": "",
+          "RequestsAuthorizationLevel2": ""
+        }
+      },
+      "enabled": true
+    },
+    {
+      "operation": "delete_safe_member",
+      "category": "investigation",
+      "annotation": "delete_safe_member",
+      "description": "Removes a specific member from a specific safe based on the safe name and member name you have specified.",
+      "title": "Delete Safe Member",
+      "parameters": [
+        {
+          "title": "Safe Name",
+          "name": "Safe",
+          "description": "Name of the safe from which you want to delete the specified safe member.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Member Name",
+          "name": "MemberName",
+          "description": "Name of the member that you want to delete from the specified safe.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Member Name always a application name"
+        }
+      ],
+      "output_schema": {
+        "message": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "add_user",
+      "visible": false,
+      "category": "miscellaneous",
+      "annotation": "add_user",
+      "description": "Adds a new user to the vault based on the username, initial password, email address. and other input parameters you have specified.",
+      "title": "Add User",
+      "parameters": [
+        {
+          "title": "Username",
+          "name": "UserName",
+          "description": "Username that you want to add to the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "First Name",
+          "name": "FirstName",
+          "description": "First name of the user that you want to add to the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Last Name",
+          "name": "LastName",
+          "description": "Last name of the user that you want to add to the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Initial Password",
+          "name": "InitialPassword",
+          "description": "Initial password of the user that you want to add to the vault.",
+          "type": "password",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Initial Password length should be greater than 6. Atleast one uppercase, lowercase, number and symbol should be mandatory. More than 3 same consecutive characters should not be allowed."
+        },
+        {
+          "title": "Email",
+          "name": "Email",
+          "description": "Email address of the user that you want to add to the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Enable User",
+          "name": "enableUser",
+          "description": "Select this option, i.e., set it to true (default) if you want the ability to enable the newly created user.",
+          "value": true,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Change Password On The Next Logon",
+          "name": "ChangePasswordOnTheNextLogon",
+          "description": "Select this option, i.e., set it to true, if you want the newly added user to change the initial password on their next logon. By default, this is set as false.",
+          "value": false,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Vault Authorization",
+          "name": "vaultAuthorization",
+          "description": "Apply permissions to specific authorizations to a user. Note: You can select multiple options to give user permission.",
+          "type": "multiselect",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "options": [
+            "AddUpdateUsers",
+            "AddSafes",
+            "AddNetworkAreas",
+            "ManageDirectoryMapping",
+            "ManageServerFileCategories",
+            "AuditUsers",
+            "BackupAllSafes",
+            "RestoreAllSafes",
+            "ResetUsersPasswords",
+            "ActivateUsers"
+          ]
+        },
+        {
+          "title": "Expiry Date",
+          "name": "expiryDate",
+          "description": "Date on which the user account that you want to update in the vault will expire.",
+          "type": "datetime",
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+      ],
+      "output_schema": {
+        "enableUser": "",
+        "changePassOnNextLogon": "",
+        "expiryDate": "",
+        "suspended": "",
+        "unAuthorizedInterfaces": [],
+        "authenticationMethod": [],
+        "passwordNeverExpires": "",
+        "distinguishedName": "",
+        "description": "",
+        "businessAddress": {
+          "workStreet": "",
+          "workCity": "",
+          "workState": "",
+          "workZip": "",
+          "workCountry": ""
+        },
+        "internet": {
+          "homePage": "",
+          "homeEmail": "",
+          "businessEmail": "",
+          "otherEmail": ""
+        },
+        "phones": {
+          "homeNumber": "",
+          "businessNumber": "",
+          "cellularNumber": "",
+          "faxNumber": "",
+          "pagerNumber": ""
+        },
+        "personalDetails": {
+          "street": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "title": "",
+          "organization": "",
+          "department": "",
+          "profession": "",
+          "firstName": "",
+          "middleName": "",
+          "lastName": ""
+        },
+        "id": "",
+        "username": "",
+        "source": "",
+        "userType": "",
+        "componentUser": "",
+        "vaultAuthorization": [],
+        "location": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "add_user_to_group",
+      "category": "miscellaneous",
+      "annotation": "update_group",
+      "description": "Adds a specific user to an existing user group in the vault based on the Member ID and Group ID you have specified.",
+      "title": "Add User to Group",
+      "parameters": [
+        {
+          "title": "Member ID",
+          "name": "memberId",
+          "description": "Member ID that you want to add to a specified existing group in the vault.",
+          "tooltip": "Member ID always a application name",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Group ID",
+          "name": "GroupID",
+          "description": "ID of the Group in CyberArk from which you want to delete a specific member.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Unique ID of the vault group."
+        }
+      ],
+      "output_schema": {
+        "memberId": "",
+        "memberType": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "reset_user_password",
+      "category": "investigation",
+      "annotation": "reset_user_password",
+      "description": "Resets the password for an existing vault user.Important: Only users who have \"audit users\" and \"reset users passwords\" permissions in the vault can reset the user passwords. Users who are resetting the password must be in the same location or higher as the user whose password is being reset.",
+      "title": "Reset User Password",
+      "parameters": [
+        {
+          "title": "User ID",
+          "name": "userID",
+          "description": "ID of the user whose password you want to reset using CyberArk.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "User ID should be positive integer value."
+        },
+        {
+          "title": "New Password",
+          "name": "newPassword",
+          "description": "New password that you want to set for the specified user in the vault.",
+          "type": "password",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Initial Password length should be greater than 6. Atleast one uppercase, lowercase, number and symbol should be mandatory. More than 3 same consecutive characters should not be allowed."
+        }
+      ],
+      "output_schema": {
+        "message": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "logged_on_user_details",
+      "category": "investigation",
+      "annotation": "user_details",
+      "description": "Retrieves the user information of the user who is logged on to CyberArk.",
+      "title": "Logged on User Details",
+      "parameters": [],
+      "output_schema": {
+        "Users": [
+          {
+            "id": "",
+            "username": "",
+            "source": "",
+            "userType": "",
+            "componentUser": "",
+            "vaultAuthorization": [],
+            "location": "",
+            "personalDetails": {
+              "firstName": "",
+              "middleName": "",
+              "lastName": ""
+            }
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_groups",
+      "category": "investigation",
+      "annotation": "get_groups",
+      "description": "Retrieves information of all the groups of the existing user.",
+      "title": "Get Groups",
+      "parameters": [],
+      "output_schema": {
+        "Users": [
+          {
+            "id": "",
+            "username": "",
+            "source": "",
+            "userType": "",
+            "componentUser": "",
+            "vaultAuthorization": [],
+            "location": "",
+            "personalDetails": {
+              "firstName": "",
+              "middleName": "",
+              "lastName": ""
+            }
+          }
+        ]
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_user_details",
+      "category": "investigation",
+      "annotation": "user_details",
+      "description": "Retrieves information for a specific user in the vault based on the user ID you have specified.",
+      "title": "Get User Details",
+      "parameters": [
+        {
+          "title": "User ID",
+          "name": "userID",
+          "description": "ID of the user whose details you want to retrieve from CyberArk.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "User ID should be positive integer value."
+        }
+      ],
+      "output_schema": {
+        "enableUser": "",
+        "changePassOnNextLogon": "",
+        "expiryDate": "",
+        "suspended": "",
+        "unAuthorizedInterfaces": [],
+        "authenticationMethod": [],
+        "passwordNeverExpires": "",
+        "distinguishedName": "",
+        "description": "",
+        "businessAddress": {
+          "workStreet": "",
+          "workCity": "",
+          "workState": "",
+          "workZip": "",
+          "workCountry": ""
+        },
+        "internet": {
+          "homePage": "",
+          "homeEmail": "",
+          "businessEmail": "",
+          "otherEmail": ""
+        },
+        "phones": {
+          "homeNumber": "",
+          "businessNumber": "",
+          "cellularNumber": "",
+          "faxNumber": "",
+          "pagerNumber": ""
+        },
+        "personalDetails": {
+          "street": "",
+          "city": "",
+          "state": "",
+          "zip": "",
+          "country": "",
+          "title": "",
+          "organization": "",
+          "department": "",
+          "profession": "",
+          "firstName": "",
+          "middleName": "",
+          "lastName": ""
+        },
+        "id": "",
+        "username": "",
+        "source": "",
+        "userType": "",
+        "componentUser": "",
+        "vaultAuthorization": [],
+        "location": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "activate_user",
+      "visible": false,
+      "category": "investigation",
+      "annotation": "activate_user",
+      "description": "Activates a specified vault user based on the user ID you have specified.",
+      "title": "Activate User",
+      "parameters": [
+        {
+          "title": "User ID",
+          "name": "userID",
+          "description": "ID of the user who you want to activate in the vault.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "User ID should be positive integer value."
+        }
+      ],
+      "output_schema": {
+        "message": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "update_user",
+      "visible": false,
+      "category": "miscellaneous",
+      "annotation": "update_user",
+      "description": "Updates an existing user in the vault based on the username, initial password, email address. and other input parameters you have specified.",
+      "title": "Update User",
+      "parameters": [
+        {
+          "title": "User ID",
+          "name": "UserID",
+          "description": "User ID of the user that you want to update in the Vault.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "User ID should be positive integer value."
+        },
+        {
+          "title": "First Name",
+          "name": "FirstName",
+          "description": "First name of the user that you want to update in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Last Name",
+          "name": "LastName",
+          "description": "Last name of the user that you want to update in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "New Password",
+          "name": "NewPassword",
+          "description": "New password that you want to set for the user that you want to update in the vault.",
+          "type": "password",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Email",
+          "name": "Email",
+          "description": "Email address of the user that you want to update in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Expiry Date",
+          "name": "ExpiryDate",
+          "description": "Date on which the user account that you want to update in the vault will expire.",
+          "type": "datetime",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "title": "Enable User",
+          "name": "enableUser",
+          "description": "Select this option, i.e., set it to false, if you want the ability to disable the updated user.",
+          "value": true,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false,
+          "tooltip": "Uncheck to disable the user."
+        },
+        {
+          "title": "Change Password On The Next Logon",
+          "name": "changePassOnNextLogon",
+          "description": "Select this option, i.e., set it to true, if you want the updated user to change the password on their next logon. By default, this is set as false.",
+          "value": true,
+          "type": "checkbox",
+          "visible": true,
+          "editable": true,
+          "required": false
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    },
+    {
+      "operation": "delete_user",
+      "visible": false,
+      "category": "miscellaneous",
+      "annotation": "delete_user",
+      "description": "Deletes a specified vault user based on the user ID you have specified.",
+      "title": "Delete User",
+      "parameters": [
+        {
+          "title": "User ID",
+          "name": "UserID",
+          "description": "User ID that you want to delete from the Vault.",
+          "type": "integer",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "User ID should be positive integer value."
+        }
+      ],
+      "output_schema": {},
+      "enabled": true
+    },
+    {
+      "operation": "add_account_group",
+      "category": "miscellaneous",
+      "annotation": "add_account_group",
+      "description": "Adds a new account group to the vault based on the account ID and group ID you have specified.",
+      "title": "Add Account Group",
+      "parameters": [
+        {
+          "title": "Account ID",
+          "name": "AccountID",
+          "description": "ID of the account that you want to add to the specified group in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Unique ID of Account.",
+          "placeholder": "e.g \"25_6\""
+        },
+        {
+          "title": "Group ID",
+          "name": "GroupID",
+          "description": "Group ID in which you want to add the specified account in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Unique ID of Safe account group.",
+          "placeholder": "e.g \"25_6\""
+        }
+      ],
+      "output_schema": {
+        "AccountId": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_account",
+      "category": "investigation",
+      "annotation": "get_account",
+      "description": "Retrieves details of all accounts from the vault.",
+      "title": "Get Account",
+      "parameters": [],
+      "output_schema": {
+        "id": "",
+        "name": "",
+        "address": "",
+        "userName": "",
+        "platformId": "",
+        "safeName": "",
+        "secretType": "",
+        "platformAccountProperties": {},
+        "secretManagement": {
+          "automaticManagementEnabled": "",
+          "manualManagementReason": "",
+          "status": "",
+          "lastModifiedTime": ""
+        },
+        "createdTime": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_account_group_members",
+      "category": "investigation",
+      "annotation": "get_account_group_info",
+      "description": "Retrieves all the members of an existing account group from CyberArk based on the group ID you have specified.",
+      "title": "Get Account Group Members",
+      "parameters": [
+        {
+          "title": "Group ID",
+          "name": "GroupID",
+          "description": "ID of the group whose members you want to retrieve from CyberArk.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Unique ID of Safe account group.",
+          "placeholder": "e.g \"25_6\""
+        }
+      ],
+      "output_schema": [
+        {
+          "AccountID": "",
+          "SafeName": "",
+          "PlatformID": "",
+          "Address": "",
+          "UserName": ""
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "operation": "delete_account_group_members",
+      "category": "investigation",
+      "annotation": "delete_account_group_members",
+      "description": "Removes a member from an account group in CyberArk based on the account ID and group ID you have specified.",
+      "title": "Delete Member from Account Group",
+      "parameters": [
+        {
+          "title": "Group ID",
+          "name": "GroupID",
+          "description": "ID of the group whose members you want to retrieve from CyberArk.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Unique ID of Safe account group.",
+          "placeholder": "e.g \"25_6\""
+        },
+        {
+          "title": "Account ID",
+          "name": "AccountID",
+          "description": "ID of the account that you want to add to the specified group in the vault.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true,
+          "tooltip": "Unique ID of the Account.",
+          "placeholder": "e.g \"25_7\""
+        }
+      ],
+      "output_schema": {
+        "message": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_credentials",
+      "visible": false,
+      "category": "investigation",
+      "annotation": "get_credentials",
+      "description": "Get a list of all the accounts in the Vault.",
+      "title": "Get Credentials",
+      "parameters": [],
+      "output_schema": {
+        "key": "",
+        "display_name": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_credentials_details",
+      "visible": false,
+      "category": "investigation",
+      "annotation": "get_credentials_details",
+      "description": "Get information about an account identified by its ID.",
+      "title": "Get Credentials Details",
+      "parameters": [
+        {
+          "title": "Secret ID",
+          "description": "ID for which you want to retrieves the details of account that you have specified from the Vault.",
+          "name": "secret_id",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        }
+      ],
+      "output_schema": {
+        "field_name": "",
+        "value": ""
+      },
+      "enabled": true
+    },
+    {
+      "operation": "get_credential",
+      "visible": false,
+      "category": "investigation",
+      "annotation": "get_credential",
+      "description": "It enables users to retrieve the password or SSH key of an existing account that is identified by its account ID.",
+      "title": "Get Credential",
+      "parameters": [
+        {
+          "title": "Secret ID",
+          "description": "ID for which you want to retrieves the password of account that you have specified from the Vault.",
+          "name": "secret_id",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Attribute Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "attribute_name",
+          "description": "An attribute name among the available params from account id for whose value needs to be retrieved"
+        }
+      ],
+      "output_schema": {
+        "password": ""
+      },
+      "enabled": true
+    }
+  ]
+}

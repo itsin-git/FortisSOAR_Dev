@@ -1,0 +1,426 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - File Content Extraction - 1.1.0",
+      "description": "Sample playbooks for \"File Content Extraction\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "/api/3/images/ffea24b7-a875-4f05-b321-b22cfe396856",
+      "uuid": "2ecf139d-2979-4658-a954-90f02bc9e93d",
+      "id": 53,
+      "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "createDate": 1653975786.06182,
+      "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+      "modifyDate": 1653975786.06182,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Backend Config Details",
+          "aliasName": null,
+          "tag": null,
+          "description": "Get the backend configuration attributes",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1653937068,
+          "collection": "/api/3/workflow_collections/2ecf139d-2979-4658-a954-90f02bc9e93d",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/4ec5928d-4f86-4e43-8642-ebadde48a281",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Compute Results",
+              "description": null,
+              "arguments": {
+                "backend_config": "{{vars.steps.Get_backend_Config_Details.data}}"
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "2980885a-595e-4847-aa36-020879a7b9f2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "b04fb0f4-5b2a-415b-a09b-d17f2a8ce431",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "4ec5928d-4f86-4e43-8642-ebadde48a281"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get backend Config Details",
+              "description": null,
+              "arguments": {
+                "name": "File Content Extraction",
+                "config": "1600b39c-a71b-4f63-a86e-908b10f14860",
+                "params": {
+                  "verbose_config": true
+                },
+                "version": "1.1.0",
+                "connector": "file-content-extraction",
+                "operation": "get_backend_config",
+                "operationTitle": "Get Backend Config",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "94da05b0-e89e-4436-b7ec-6a9dffcfc7ab"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Details",
+              "targetStep": "/api/3/workflow_steps/94da05b0-e89e-4436-b7ec-6a9dffcfc7ab",
+              "sourceStep": "/api/3/workflow_steps/4ec5928d-4f86-4e43-8642-ebadde48a281",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b913b4eb-6ecc-4177-8009-347c1422ca01"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Details -> Compute Results",
+              "targetStep": "/api/3/workflow_steps/2980885a-595e-4847-aa36-020879a7b9f2",
+              "sourceStep": "/api/3/workflow_steps/94da05b0-e89e-4436-b7ec-6a9dffcfc7ab",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e4a19a8f-9978-46c3-8e32-910b92a4b981"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "3c5a9190-3eaf-4000-babb-1d41a8a2236f",
+          "id": 513,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1653975786.062747,
+          "modifyUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "modifyDate": 1653975786.062747,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "file-content-extraction"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Extract Text From File",
+          "aliasName": null,
+          "tag": null,
+          "description": "Extracts text and Meta data from over 1500 file types",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1653975950,
+          "collection": "/api/3/workflow_collections/2ecf139d-2979-4658-a954-90f02bc9e93d",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/ea6affff-6836-4c4a-a77e-3e816de9317d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Extract text",
+              "description": null,
+              "arguments": {
+                "name": "File Content Extraction",
+                "config": "70616ece-f92a-459b-88e5-cbf1b07b37b2",
+                "params": {
+                  "file_iri": "{{vars.input.records[0].file['@id']}}",
+                  "html_output_format": false
+                },
+                "version": "1.1.0",
+                "connector": "file-content-extraction",
+                "operation": "extract_text",
+                "operationTitle": "Extract Text",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "1eec2a56-a5f9-46a6-a7c8-01e3bff2001a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "ad2fc42a-d566-443d-996e-5c7bc8062022",
+                "resources": [
+                  "indicators",
+                  "attachments"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "indicators": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                      {
+                        "type": "object",
+                        "field": "typeofindicator",
+                        "value": "/api/3/picklists/0162241b-f5bf-4917-a150-00e920be47bd",
+                        "_value": {
+                          "@id": "/api/3/picklists/0162241b-f5bf-4917-a150-00e920be47bd",
+                          "display": "File",
+                          "itemValue": "File"
+                        },
+                        "operator": "eq"
+                      }
+                    ]
+                  },
+                  "attachments": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "ea6affff-6836-4c4a-a77e-3e816de9317d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Compute results",
+              "description": null,
+              "arguments": {
+                "extraction_result": "{{vars.steps.Extract_text.data}}"
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "f11bd301-3bd2-4906-af12-1950d8c567ba"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Extract text -> Compute results",
+              "targetStep": "/api/3/workflow_steps/f11bd301-3bd2-4906-af12-1950d8c567ba",
+              "sourceStep": "/api/3/workflow_steps/1eec2a56-a5f9-46a6-a7c8-01e3bff2001a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "4b6e77a2-342c-4d80-93c0-714b66336478"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Extract text",
+              "targetStep": "/api/3/workflow_steps/1eec2a56-a5f9-46a6-a7c8-01e3bff2001a",
+              "sourceStep": "/api/3/workflow_steps/ea6affff-6836-4c4a-a77e-3e816de9317d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ab356a3c-9894-40be-9fd8-34bc74d84e38"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "4ad33531-45ee-498a-9158-574660803611",
+          "id": 514,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1653975786.063097,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1653975951.047693,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "file-content-extraction"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Extract Artifacts From File",
+          "aliasName": null,
+          "tag": null,
+          "description": "Returns a dictionary of extracted artifacts from file",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1654743076,
+          "collection": "/api/3/workflow_collections/2ecf139d-2979-4658-a954-90f02bc9e93d",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a0e42486-b942-49cb-943c-e0679b40e3e1",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Compute results",
+              "description": null,
+              "arguments": {
+                "extraction_result": "{{vars.steps.Extract_Artifacts.data}}"
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "7b1cb3bf-6967-4f98-b12c-577fbe7ea5b8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Extract Artifacts",
+              "description": null,
+              "arguments": {
+                "name": "File Content Extraction",
+                "config": "70616ece-f92a-459b-88e5-cbf1b07b37b2",
+                "params": {
+                  "file_iri": "{{vars.input.records[0].file['@id']}}"
+                },
+                "version": "1.1.0",
+                "connector": "file-content-extraction",
+                "operation": "extract_indicators",
+                "operationTitle": "Extract Artifacts",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "881516b0-0e0f-49ab-ba47-95c6fac0e910"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "8c3e93c0-e407-4ad3-83e4-a912a3964193",
+                "resources": [
+                  "indicators",
+                  "attachments"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "indicators": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": [
+                      {
+                        "type": "object",
+                        "field": "typeofindicator",
+                        "value": "/api/3/picklists/0162241b-f5bf-4917-a150-00e920be47bd",
+                        "_value": {
+                          "@id": "/api/3/picklists/0162241b-f5bf-4917-a150-00e920be47bd",
+                          "display": "File",
+                          "itemValue": "File"
+                        },
+                        "operator": "eq"
+                      }
+                    ]
+                  },
+                  "attachments": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": false,
+                "singleRecordExecution": true
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "uuid": "a0e42486-b942-49cb-943c-e0679b40e3e1"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Extract text",
+              "targetStep": "/api/3/workflow_steps/881516b0-0e0f-49ab-ba47-95c6fac0e910",
+              "sourceStep": "/api/3/workflow_steps/a0e42486-b942-49cb-943c-e0679b40e3e1",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c0ea5ca7-cf31-47f7-b4f0-886a35f21a86"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Extract text -> Compute results",
+              "targetStep": "/api/3/workflow_steps/7b1cb3bf-6967-4f98-b12c-577fbe7ea5b8",
+              "sourceStep": "/api/3/workflow_steps/881516b0-0e0f-49ab-ba47-95c6fac0e910",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "da1ec781-8613-4cc4-8b57-8ea3061f61e4"
+            }
+          ],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "84dfdba4-ce4b-451d-a29e-ede8d29c9a9c",
+          "id": 515,
+          "createUser": "/api/3/appliances/57545210-2adc-472b-a24f-2df6ee8dfe63",
+          "createDate": 1653975786.063365,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1654743076.781116,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "file-content-extraction"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "file-content-extraction"
+  ]
+}

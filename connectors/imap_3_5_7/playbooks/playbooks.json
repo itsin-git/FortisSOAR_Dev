@@ -1,0 +1,813 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@type": "WorkflowCollection",
+      "name": "Sample - IMAP - 3.5.6",
+      "description": "Sample playbooks for \"IMAP\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "imap_medium.png",
+      "uuid": "aeb40806-3531-487e-b567-15e3b130dec5",
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "IMAP > Ingest",
+          "aliasName": null,
+          "description": "Fetches Email from IMAP",
+          "collection": "/api/3/workflow_collections/aeb40806-3531-487e-b567-15e3b130dec5",
+          "tag": "#imap #dataingestion #ingest #create",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/ff54e698-3d97-4fd8-bbbc-891de63f7436",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": "Create Alert Records for the Emails received",
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Emails.data}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": "{{(vars.item[\"body\"][\"html\"] | regex_search('(?<=FSR)(.*?)(?=FSR)')) is none}}"
+                },
+                "resource": {
+                  "name": "{% if vars.item.headers.subject %} {{vars.item.headers.subject}} {% else %} None {% endif %}",
+                  "type": {
+                    "id": 121,
+                    "@id": "/api/3/picklists/0b3ef6f9-eb29-4ab9-ac98-98364bd1a3aa",
+                    "icon": null,
+                    "@type": "Picklist",
+                    "color": null,
+                    "display": "Phishing",
+                    "listName": "/api/3/picklist_names/a7087b9c-5660-495f-a8ac-c3b198ddb8c2",
+                    "itemValue": "Phishing",
+                    "orderIndex": 7
+                  },
+                  "source": "{% if  'reporterEmailAddress' in vars.item %}User Reported{% else %}Email Server{% endif %}",
+                  "emailTo": "{{vars.item.headers.to}}",
+                  "fileHash": "{% if vars.item.attachments | json_query(\"[*].metadata.md5\") | join(',') %}{{vars.item.attachments | json_query(\"[*].metadata.md5\") | join(', ')}}{%else%}NA{% endif%}",
+                  "reporter": "{% if 'reporterEmailAddress' in vars.item %}{{ vars.item.reporterEmailAddress }}{% endif %}",
+                  "severity": {
+                    "id": 65,
+                    "@id": "/api/3/picklists/0d609b08-45e0-469f-8910-41145c0b7c03",
+                    "icon": null,
+                    "@type": "Picklist",
+                    "color": "#157DD9",
+                    "display": "Minimal",
+                    "listName": "/api/3/picklist_names/4e80cba3-032f-48b4-ac03-17e3ec247aac",
+                    "itemValue": "Minimal",
+                    "orderIndex": 0
+                  },
+                  "sourceId": "{{ vars.item.headers['message-id'] | join }}",
+                  "__replace": "false",
+                  "emailBody": "{%if vars.item['body']['html'] %}{{vars.item['body']['html']}}{%else%}{{vars.item['body']['text']}}{% endif %}",
+                  "emailFrom": "{{vars.item.headers.from}}",
+                  "fileNames": "{% if vars.item.attachments | json_query(\"[*].metadata.filename\") | join(',') %}{{vars.item.attachments | json_query(\"[*].metadata.filename\") | join(', ')}}{%else%}NA{% endif%}",
+                  "returnPath": "{{ vars.item.headers['return-path'] }}",
+                  "sourcedata": "{{ vars.item | toJSON }}",
+                  "emailHeaders": "{{ vars.item.headers | toJSON }}",
+                  "emailSubject": "{{vars.item.headers.subject}}",
+                  "senderDomain": "{% if vars.item.headers.from %}{{(vars.item.headers.from.split('<')[-1] | replace(\">\",\"\")).split('@')[-1] | replace(\">\",\"\")}}{% endif %}",
+                  "reporterEmailBody": "<p>{% if 'reporterEmailBody' in vars.item %}{{ vars.item.reporterEmailBody.html }}{% endif %}</p>",
+                  "senderEmailAddress": "{% if vars.item.headers.from %}{{vars.item.headers.from.split('<')[-1] | replace(\">\",\"\")}}{% endif %}",
+                  "recipientEmailAddress": "{% if vars.item.headers['to'] is not string %}{{vars.item.headers['to'] | join(',') }}{%else%}{{vars.item.headers['to']}}{% endif%}"
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/upsert/alerts",
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "left": "774",
+              "top": "420",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "uuid": "b682d9bf-82fb-44a3-961b-74d7ccfdb892"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": [],
+              "status": null,
+              "left": "260",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "13363b4c-37b4-44c2-9564-a0e5b66bd9fc"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Extract and Link File Indicators",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{ vars.steps.Create_Record }}",
+                  "condition": "{{(vars.item.sourcedata | from_json).attachments and (vars.item.createDate == vars.item.modifyDate)}}"
+                },
+                "arguments": {
+                  "assetIRI": "",
+                  "attachments": "{{ (vars.item.sourcedata | from_json).attachments }}",
+                  "alertRecordIRI": "{{vars.item['@id']}}",
+                  "emailRecordIRI": "",
+                  "fileIndicatorType": "{{vars.fileIndicatorType}}",
+                  "incidentRecordIRI": ""
+                },
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/ec9a21d1-94c0-42af-8a9f-fcdb2e8c4663"
+              },
+              "status": null,
+              "left": "934",
+              "top": "520",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "uuid": "671f47ad-4f85-45f9-b15e-732c363ba54e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Emails",
+              "description": null,
+              "arguments": {
+                "arguments": [],
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/ad801770-b8cf-4369-8ce4-bf3ff1097daf"
+              },
+              "status": null,
+              "left": "446",
+              "top": "240",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "uuid": "f9f8271e-d9d0-473c-8b53-9bc7487673df"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "fetch_emails_imap",
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "api_body": "{{vars.request.data}}"
+                    }
+                  },
+                  "fileIndicatorType": "{{(\"IndicatorType\" | picklist(\"File\"))[\"@id\"]}}"
+                },
+                "authentication_methods": [
+                  ""
+                ]
+              },
+              "status": null,
+              "left": "60",
+              "top": "53",
+              "stepType": "/api/3/workflow_step_types/df26c7a2-4166-4ca5-91e5-548e24c01b5f",
+              "uuid": "ff54e698-3d97-4fd8-bbbc-891de63f7436"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Communications Record",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.steps.Fetch_Emails.use_communications}}",
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Emails.data}}",
+                  "__bulk": true,
+                  "condition": ""
+                },
+                "resource": {
+                  "to": "{{vars.item[\"headers\"][\"to\"]}}",
+                  "body": "<p>{{vars.item[\"body\"][\"html\"]}}</p>",
+                  "from": "{{vars.item[\"headers\"][\"from\"]}}",
+                  "type": {
+                    "id": 300,
+                    "@id": "/api/3/picklists/b8e7c917-5299-4a43-9c1a-fac1d9a5438f",
+                    "icon": null,
+                    "@type": "Picklist",
+                    "color": null,
+                    "display": "Email",
+                    "listName": "/api/3/picklist_names/57d30379-dbba-4684-b126-ec3ad8766f06",
+                    "itemValue": "Email",
+                    "orderIndex": 0
+                  },
+                  "alerts": "{%if vars.item[\"body\"][\"html\"] | regex_search('(?<=FSR)(.*?)(?=FSR)')%}{{vars.item[\"body\"][\"html\"] | regex_search('(?<=FSR)(.*?)(?=FSR)') | string | b64decode}}{%else%}[]{%endif%}",
+                  "subject": "{{vars.item[\"headers\"][\"subject\"]}}",
+                  "__replace": "",
+                  "emailRefId": "{{ vars.item.headers['message-id'] | join }}",
+                  "msgDirection": {
+                    "id": 302,
+                    "@id": "/api/3/picklists/c89f8eb7-0669-4535-9935-888ff46f544f",
+                    "icon": null,
+                    "@type": "Picklist",
+                    "color": null,
+                    "display": "Received",
+                    "listName": "/api/3/picklist_names/09b97c81-669a-4ac8-8668-920913f3329b",
+                    "itemValue": "Received",
+                    "orderIndex": 0
+                  }
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/communication",
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "left": "620",
+              "top": "320",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "uuid": "aed29d7c-67c8-447e-977f-21ee13ce1d99"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a05c75bb-66d1-48e0-9959-2bb6cf28f831",
+              "name": "Create Record -> Extract and Link File Indicators",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/671f47ad-4f85-45f9-b15e-732c363ba54e",
+              "sourceStep": "/api/3/workflow_steps/b682d9bf-82fb-44a3-961b-74d7ccfdb892"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "0239bc06-42d6-4f16-81c7-359003c25184",
+              "name": "Start -> Configuration",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/13363b4c-37b4-44c2-9564-a0e5b66bd9fc",
+              "sourceStep": "/api/3/workflow_steps/ff54e698-3d97-4fd8-bbbc-891de63f7436"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "87c2a057-50b7-4b7b-9feb-0ae307ec899b",
+              "name": "Configuration -> Fetch Emails",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/f9f8271e-d9d0-473c-8b53-9bc7487673df",
+              "sourceStep": "/api/3/workflow_steps/13363b4c-37b4-44c2-9564-a0e5b66bd9fc"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "46cd49db-6137-45f1-9b9a-4f670d7b5210",
+              "name": "Fetch Emails -> Create Communications Record",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/aed29d7c-67c8-447e-977f-21ee13ce1d99",
+              "sourceStep": "/api/3/workflow_steps/f9f8271e-d9d0-473c-8b53-9bc7487673df"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "21ba0866-0fd6-4d7e-b211-ff8154f53655",
+              "name": "Create Communications Record -> Create Record",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b682d9bf-82fb-44a3-961b-74d7ccfdb892",
+              "sourceStep": "/api/3/workflow_steps/aed29d7c-67c8-447e-977f-21ee13ce1d99"
+            }
+          ],
+          "versions": [],
+          "lastModifyDate": 1600772683,
+          "priority": null,
+          "uuid": "6ec03813-718a-43d5-be57-b93962c6b8dd",
+          "recordTags": [
+            "dataingestion",
+            "imap",
+            "create",
+            "ingest"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> IMAP > Fetch",
+          "aliasName": null,
+          "description": "Fetches Email from IMAP",
+          "collection": "/api/3/workflow_collections/aeb40806-3531-487e-b567-15e3b130dec5",
+          "tag": "#imap #dataingestion #fetch",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/42d7e031-25cc-4c8d-9fed-a35387bae49d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "_configuration_schema": "[\n{\n    \"title\": \"Use Unified Communication\",\n    \"name\": \"use_communications\",\n    \"type\": \"checkbox\",\n    \"tooltip\": \"Select this option to create a record of the retrieved email in the Communication Module.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": true\n  }\n]"
+                }
+              },
+              "status": null,
+              "left": "60",
+              "top": "52",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "42d7e031-25cc-4c8d-9fed-a35387bae49d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch emails",
+              "description": null,
+              "arguments": {
+                "name": "IMAP",
+                "config": "04126c67-b044-47cf-a7b8-953bce1a1c8b",
+                "params": {
+                  "parse_inline_image": true
+                },
+                "version": "3.5.6",
+                "connector": "imap",
+                "operation": "fetch_email_new",
+                "operationTitle": "Fetch Email(s)",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "386",
+              "top": "260",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "uuid": "e42c83bc-19b4-4f2d-bbdc-3defac25ed14"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Consolidated Result",
+              "description": null,
+              "arguments": {
+                "data": "{{ vars.steps.Process_emails | json_query('[].processed_email[]') }}",
+                "use_communications": "{{vars.use_communications}}"
+              },
+              "status": null,
+              "left": "700",
+              "top": "469",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "c62f5818-5083-41a4-84c2-92be3da76e84"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Process emails",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_emails.data}}",
+                  "parallel": true,
+                  "condition": ""
+                },
+                "arguments": {
+                  "email": "{{ vars.item }}"
+                },
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/eeaf0280-2085-4beb-808b-a9abda63cfad"
+              },
+              "status": null,
+              "left": "555",
+              "top": "360",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "uuid": "cbee4b5f-fb78-4fa5-840d-8c78aa259e08"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "use_communications": "true"
+              },
+              "status": null,
+              "left": "228",
+              "top": "140",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "b63a432c-29c8-44a0-9dd2-7dc36a13a9d6"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "9abd09d8-54b5-4fa4-8bcd-eafabb32d103",
+              "name": "Fetch emails -> Process Email",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/cbee4b5f-fb78-4fa5-840d-8c78aa259e08",
+              "sourceStep": "/api/3/workflow_steps/e42c83bc-19b4-4f2d-bbdc-3defac25ed14"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "9a315e34-49b3-4d93-9925-256acccafe9f",
+              "name": "Process Email -> Set Consolidated Result",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/c62f5818-5083-41a4-84c2-92be3da76e84",
+              "sourceStep": "/api/3/workflow_steps/cbee4b5f-fb78-4fa5-840d-8c78aa259e08"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "cdff1913-9bdb-4a41-a24d-9de3166e48a9",
+              "name": "Start -> Configuration",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/b63a432c-29c8-44a0-9dd2-7dc36a13a9d6",
+              "sourceStep": "/api/3/workflow_steps/42d7e031-25cc-4c8d-9fed-a35387bae49d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "596fe0e7-35a3-42d5-bbb9-3f8c430b86fb",
+              "name": "Configuration -> Fetch emails",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/e42c83bc-19b4-4f2d-bbdc-3defac25ed14",
+              "sourceStep": "/api/3/workflow_steps/b63a432c-29c8-44a0-9dd2-7dc36a13a9d6"
+            }
+          ],
+          "versions": [],
+          "lastModifyDate": 1600772757,
+          "priority": null,
+          "uuid": "ad801770-b8cf-4369-8ce4-bf3ff1097daf",
+          "recordTags": [
+            "dataingestion",
+            "imap",
+            "fetch"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> IMAP > Extract Indicators",
+          "aliasName": null,
+          "description": "Create an Alert from Ingested Email Record",
+          "collection": "/api/3/workflow_collections/aeb40806-3531-487e-b567-15e3b130dec5",
+          "tag": "#imap #dataingestion",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "attachments",
+            "fileIndicatorType",
+            "alertRecordIRI",
+            "emailRecordIRI",
+            "incidentRecordIRI",
+            "assetIRI"
+          ],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/4772c807-7fc2-4575-a278-1e43cdb4c851",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Upload File IOCs",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "filename": "{{vars.item.metadata.filename}}",
+                  "file_path": "{{vars.item.file}}",
+                  "create_attachment": false
+                },
+                "version": "3.0.0",
+                "for_each": {
+                  "item": "{{ vars.attachments }}",
+                  "__bulk": false,
+                  "parallel": false,
+                  "condition": ""
+                },
+                "connector": "cyops_utilities",
+                "operation": "upload_file_to_cyops",
+                "operationTitle": "File: Upload a file to CyOPs and Create an Attachment",
+                "step_variables": []
+              },
+              "status": null,
+              "left": "380",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "uuid": "5b050515-1c65-43f8-990f-2a01c2dbee18"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Indicators",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Upload_File_IOCs}}",
+                  "__bulk": true,
+                  "condition": ""
+                },
+                "resource": {
+                  "file": "{{ vars.item.data['@id'] or None }}",
+                  "value": "File -  {{vars.item.data.filename}}",
+                  "__replace": "false",
+                  "reputation": {
+                    "id": 198,
+                    "@id": "/api/3/picklists/ae98ebc6-beef-4882-9980-1d88fc6d87cd",
+                    "icon": null,
+                    "@type": "Picklist",
+                    "color": "#696969",
+                    "display": "TBD",
+                    "listName": "/api/3/picklist_names/e75ed3c3-9f23-4a43-832b-0daf236209ba",
+                    "itemValue": "TBD",
+                    "orderIndex": 3
+                  },
+                  "typeofindicator": "{{vars.input.params.fileIndicatorType}}"
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "/api/3/upsert/indicators",
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "left": "720",
+              "top": "210",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "uuid": "d7a81d72-9552-4321-8bb2-00160b603932"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "assetIRI": "{{ vars.assetIRI }}",
+                      "fileType": "{{ vars.fileType }}",
+                      "sourcedata": "{{ vars.sourcedata }}",
+                      "attachments": "{{ vars.attachments }}",
+                      "alertRecordIRI": "{{ vars.alertRecordIRI }}",
+                      "emailRecordIRI": "{{ vars.emailRecordIRI }}",
+                      "fileIndicatorType": "{{ vars.fileIndicatorType }}",
+                      "incidentRecordIRI": "{{ vars.incidentRecordIRI }}"
+                    }
+                  }
+                }
+              },
+              "status": null,
+              "left": "20",
+              "top": "26",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "4772c807-7fc2-4575-a278-1e43cdb4c851"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Link Indicators",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.Create_Indicators | json_query('[*][\"@id\"][]')}}",
+                  "__bulk": true,
+                  "parallel": false,
+                  "condition": ""
+                },
+                "resource": {
+                  "__link": {
+                    "alerts": "{% if vars.input.params.alertRecordIRI != \"\" %}['{{vars.input.params.alertRecordIRI}}']{% endif %}",
+                    "assets": "{% if vars.input.params.assetIRI != \"\" %}['{{vars.input.params.assetIRI}}']{% endif %}",
+                    "incidents": "{% if vars.input.params.incidentRecordIRI != \"\" %}['{{vars.input.params.incidentRecordIRI}}']{% endif %}"
+                  }
+                },
+                "_showJson": false,
+                "operation": "Append",
+                "collection": "{{ vars.item }}",
+                "collectionType": "/api/3/indicators",
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "left": "1013",
+              "top": "300",
+              "stepType": "/api/3/workflow_step_types/b593663d-7d13-40ce-a3a3-96dece928722",
+              "uuid": "60431ea2-fdce-4b8c-be96-7971a3bf362c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "3ce9dec3-64dd-4e5d-95eb-8e74cad8824c",
+              "name": "Upload File IOCs -> Create and Link File Indicators",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/d7a81d72-9552-4321-8bb2-00160b603932",
+              "sourceStep": "/api/3/workflow_steps/5b050515-1c65-43f8-990f-2a01c2dbee18"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "a41ca26a-9e84-4669-b841-daff37945e8a",
+              "name": "Create and Link File Indicators -> Link Indicators",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/60431ea2-fdce-4b8c-be96-7971a3bf362c",
+              "sourceStep": "/api/3/workflow_steps/d7a81d72-9552-4321-8bb2-00160b603932"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "e437fc87-4c2a-442b-aef8-e2db1e26c0ff",
+              "name": "Start -> Upload File IOCs",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/5b050515-1c65-43f8-990f-2a01c2dbee18",
+              "sourceStep": "/api/3/workflow_steps/4772c807-7fc2-4575-a278-1e43cdb4c851"
+            }
+          ],
+          "versions": [],
+          "lastModifyDate": 1579790520,
+          "priority": null,
+          "uuid": "ec9a21d1-94c0-42af-8a9f-fcdb2e8c4663",
+          "recordTags": [
+            "dataingestion",
+            "imap"
+          ],
+          "isPrivate": false,
+          "owners": []
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": ">> IMAP > Process Email",
+          "aliasName": null,
+          "description": "Extract IMAP Email and checks if msg/eml file is present",
+          "collection": "/api/3/workflow_collections/aeb40806-3531-487e-b567-15e3b130dec5",
+          "tag": "#imap #dataingestion",
+          "isActive": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "email"
+          ],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2f8ea211-977b-4077-8ccf-8380fccf6d09",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "email": "{{ vars.email }}"
+                    }
+                  }
+                }
+              },
+              "status": null,
+              "left": "60",
+              "top": "40",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "uuid": "2f8ea211-977b-4077-8ccf-8380fccf6d09"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Attachments as Processed Email",
+              "description": null,
+              "arguments": {
+                "processed_email": "{{vars.email.parsed_attachment_data}}"
+              },
+              "status": null,
+              "left": "871",
+              "top": "360",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "7c058837-282b-4eaa-99bb-eb502544cce9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Processed Email",
+              "description": null,
+              "arguments": {
+                "processed_email": "{{vars.input.params.email}}"
+              },
+              "status": null,
+              "left": "551",
+              "top": "207",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "0d5c18be-e795-40a3-b2c0-ae0444202685"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "emlAttachments": "{{vars.input.params.email.attachments  | json_query(\"[?contains(metadata.filename, '.eml')]\") }}",
+                "msgAttachments": "{{vars.input.params.email.attachments  | json_query(\"[?contains(metadata.filename, '.msg')]\") }}"
+              },
+              "status": null,
+              "left": "60",
+              "top": "160",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "7a61c93c-83e7-4378-9e45-33ebe8018a67"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Attachment is msg or eml",
+              "description": "Check attachments is msg or eml",
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "No",
+                    "step_iri": "/api/3/workflow_steps/0d5c18be-e795-40a3-b2c0-ae0444202685",
+                    "condition": "{{ vars.msgAttachments | length == 0 and vars.emlAttachments | length == 0 }}"
+                  },
+                  {
+                    "option": "Yes",
+                    "step_iri": "/api/3/workflow_steps/8820b8ee-f378-48ed-8c71-bca5a912cc1c",
+                    "condition": "{{ vars.msgAttachments | length > 0 or vars.emlAttachments | length > 0 }}"
+                  }
+                ]
+              },
+              "status": null,
+              "left": "240",
+              "top": "280",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "uuid": "7db55f32-7ba9-43eb-94b2-68d3836c0779"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update headers in parsed data",
+              "description": null,
+              "arguments": {
+                "_temp": "{% for item in vars.email.parsed_attachment_data %}{% set _dummy3=item.update({'reporterEmailBody': vars.email.body}) %}{% set _dummy4=item.update({'reporterEmailAddress': vars.email.headers.from}) %}{% endfor %}"
+              },
+              "status": null,
+              "left": "540",
+              "top": "360",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "uuid": "8820b8ee-f378-48ed-8c71-bca5a912cc1c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "4fbc899e-881c-49c6-b1b6-7c205cd08dc8",
+              "name": "Set attachment to variable -> Check attachments for msg or eml",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/7db55f32-7ba9-43eb-94b2-68d3836c0779",
+              "sourceStep": "/api/3/workflow_steps/7a61c93c-83e7-4378-9e45-33ebe8018a67"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "146289e2-282e-493e-88b2-d5b821084a97",
+              "name": "Start -> Set attachment to variable",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/7a61c93c-83e7-4378-9e45-33ebe8018a67",
+              "sourceStep": "/api/3/workflow_steps/2f8ea211-977b-4077-8ccf-8380fccf6d09"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "5bebb781-ec0c-4960-82c3-b200fb41369d",
+              "name": "Attachment is msg or eml -> Set Processed Email",
+              "label": "No",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/0d5c18be-e795-40a3-b2c0-ae0444202685",
+              "sourceStep": "/api/3/workflow_steps/7db55f32-7ba9-43eb-94b2-68d3836c0779"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "d3999c77-390c-4cf7-b298-8af98a5f94cb",
+              "name": "Attachment is msg or eml -> Update headers in parsed data",
+              "label": "Yes",
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/8820b8ee-f378-48ed-8c71-bca5a912cc1c",
+              "sourceStep": "/api/3/workflow_steps/7db55f32-7ba9-43eb-94b2-68d3836c0779"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "uuid": "58618b2d-ead8-4023-bad1-e89308cf6834",
+              "name": "Update headers in parsed data -> Set Attachments as Processed Email",
+              "label": null,
+              "isExecuted": false,
+              "targetStep": "/api/3/workflow_steps/7c058837-282b-4eaa-99bb-eb502544cce9",
+              "sourceStep": "/api/3/workflow_steps/8820b8ee-f378-48ed-8c71-bca5a912cc1c"
+            }
+          ],
+          "versions": [],
+          "lastModifyDate": 1579760420,
+          "priority": null,
+          "uuid": "eeaf0280-2085-4beb-808b-a9abda63cfad",
+          "recordTags": [
+            "dataingestion",
+            "imap"
+          ],
+          "isPrivate": false,
+          "owners": []
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "dataingestion",
+    "imap",
+    "create",
+    "ingest",
+    "fetch"
+  ]
+}
