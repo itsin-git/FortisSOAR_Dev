@@ -1565,6 +1565,18 @@
                     "placeholder": "e.g. phRecvTime DESC"
                 },
                 {
+                    "title": "Group By",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "tooltip": "",
+                    "description": "",
+                    "type": "text",
+                    "name": "groupby",
+                    "value": "",
+                    "placeholder": "Test"
+                },
+                {
                     "title": "Time Range",
                     "type": "select",
                     "name": "time_selection",
