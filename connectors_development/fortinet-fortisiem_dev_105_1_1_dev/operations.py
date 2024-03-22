@@ -348,7 +348,14 @@ def run_report(config, params):
                                                conditions=params.get('cond', ''), groupby=params.get('groupby', ''),
                                                time_duration=handle_time(params)
                                                )
+        
         xml_request_payload = xml_request_payload.replace('None', '')
+
+        with open('payload.xml', 'w') as f:
+            f.write(xml_request_payload)
+
+
+
         query_id, headers = get_event_query(fortisiem_obj, xml_request_payload)
         query_id = parse_query_progress(query_id)
         query_status = get_query_progress_status(fortisiem_obj, query_id, headers)
