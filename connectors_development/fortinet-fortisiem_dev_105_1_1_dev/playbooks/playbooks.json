@@ -45,6 +45,7 @@
                   "cond": "",
                   "start": "",
                   "orderby": "phRecvTime DESC",
+                  "groupby": "",
                   "perPage": 50,
                   "AttrList": "phRecvTime,reptDevIpAddr,eventType,eventName,srcIpAddr,destIpAddr,user,rawEventMsg",
                   "time_selection": "Relative Time"

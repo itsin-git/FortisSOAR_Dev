@@ -342,6 +342,7 @@ def get_associated_events(config, params):
 def run_report(config, params):
     try:
         fortisiem_obj = FortiSIEM(config)
+
         xml_request_payload = report_schema.format(AttrList=params.get('AttrList') if params.get('AttrList') else '',
                                                orderby=params.get('orderby') if params.get('orderby') else '',
                                                conditions=params.get('cond', ''), groupby=params.get('groupby', ''),

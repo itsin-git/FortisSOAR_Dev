@@ -259,6 +259,18 @@
                     "placeholder": "e.g. incidentLastSeen DESC"
                 },
                 {
+                    "title": "Group By",
+                    "required": false,
+                    "editable": true,
+                    "visible": true,
+                    "tooltip": "Specify the field using which to sort the incidents retrieved from the Fortinet FortiSIEM server. You can also specify the sort direction of the specified field. For example, incidentLastSeen DESC",
+                    "description": "(Optional) Specify the field using which to sort the incidents retrieved from the Fortinet FortiSIEM server. You can also specify the sort direction of the specified field. For example, incidentLastSeen DESC",
+                    "type": "text",
+                    "name": "groupby",
+                    "value": "Result Group by",
+                    "placeholder": "GRoup"
+                },
+                {
                     "title": "Event Fields To Show In Response",
                     "required": false,
                     "editable": true,
